@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SplashView: View {
-
+    
     @EnvironmentObject var store: CardAppStore
-
+    
     var body: some View {
         ZStack {
             Text("CREATIVE GAMES")

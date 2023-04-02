@@ -10,33 +10,38 @@ import SwiftUI
 struct GameView: View {
     @EnvironmentObject var store: CardAppStore
 
+    private var state: GameState? {
+        // TODO: extract game state
+        nil
+    }
+
     var body: some View {
-      VStack(alignment: .leading) {
-        Button {
-          withAnimation {
-              store.dispatch(.dismissScreen(.game))
-          }
-        } label: {
-          HStack {
-            Image(systemName: "hand.point.left.fill")
-            Text("Give Up")
-          }
-          .foregroundColor(.accentColor)
+        VStack(alignment: .leading) {
+            Button {
+                withAnimation {
+                    store.dispatch(.dismissScreen(.game))
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "hand.point.left.fill")
+                    Text("Give Up")
+                }
+                .foregroundColor(.accentColor)
+            }
+            .padding()
+            Spacer()
+            Text("Moves: \(state?.moves ?? 0)")
+                .font(.subheadline)
+                .foregroundColor(.accentColor)
+                .padding()
         }
-        .padding()
-        Spacer()
-        Text("Moves: 0")
-          .font(.subheadline)
-          .foregroundColor(.accentColor)
-          .padding()
-      }
-      .frame(
+        .frame(
             minWidth: 0,
             maxWidth: .infinity,
             minHeight: 0,
             maxHeight: .infinity,
             alignment: .topLeading
-          )
+        )
     }
 }
 

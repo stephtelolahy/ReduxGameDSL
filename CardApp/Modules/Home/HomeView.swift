@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
-
+    
     @EnvironmentObject var store: CardAppStore
-
+    
     var body: some View {
         VStack(alignment: .center, spacing: 32) {
             Spacer()
-
+            
             Image(systemName: "gamecontroller")
                 .font(.system(size: 120))
             Button("New Game") {
@@ -27,7 +27,7 @@ struct HomeView: View {
             .padding()
             .background(Color.accentColor)
             .cornerRadius(40)
-
+            
             Spacer()
         }
     }
