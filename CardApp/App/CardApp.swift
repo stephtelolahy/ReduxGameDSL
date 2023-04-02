@@ -7,11 +7,22 @@
 
 import SwiftUI
 
+let store = CardAppStore(
+    initial: AppState(),
+    reducer: AppState.reducer,
+    middlewares: [])
+
 @main
 struct CardApp: App {
     var body: some Scene {
-        WindowGroup {
+        UINavigationBar.appearance().tintColor = .systemYellow
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemYellow
+
+        return WindowGroup {
             ContentView()
+                .tint(.yellow)
+                .foregroundColor(.primary)
+                .environmentObject(store)
         }
     }
 }

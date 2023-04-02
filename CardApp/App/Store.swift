@@ -2,10 +2,10 @@ import Foundation
 import Combine
 import SwiftUI
 
-public typealias Reducer<State, Action> = (State, Action) -> State
-public typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
+typealias Reducer<State, Action> = (State, Action) -> State
+typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
-public final class Store<State, Action>: ObservableObject {
+final class Store<State, Action>: ObservableObject {
 
     @Published private(set) var state: State
     var isEnabled = true
@@ -15,7 +15,7 @@ public final class Store<State, Action>: ObservableObject {
     private let middlewares: [Middleware<State, Action>]
     private var subscriptions = Set<AnyCancellable>()
 
-    public init(
+    init(
         initial state: State,
         reducer: @escaping Reducer<State, Action>,
         middlewares: [Middleware<State, Action>]
@@ -25,11 +25,11 @@ public final class Store<State, Action>: ObservableObject {
         self.middlewares = middlewares
     }
 
-    public func restoreState(_ state: State) {
+    func restoreState(_ state: State) {
         self.state = state
     }
 
-    public func dispatch(_ action: Action) {
+    func dispatch(_ action: Action) {
         guard isEnabled else { return }
 
         queue.sync {

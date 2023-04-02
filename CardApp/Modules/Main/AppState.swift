@@ -1,17 +1,18 @@
 import Foundation
 
-public struct AppState: Codable {
+struct AppState: Codable {
     var game: GameState?
 
-    public init() {}
+    init() {}
 }
 
-public enum AppAction {
-    case startGame
+enum AppAction {
+    case showScreen(AppScreen)
+    case dismissScreen(AppScreen)
     case game(GameAction)
 }
 
-public extension AppState {
+extension AppState {
     static let reducer: Reducer<Self, AppAction> = { state, action in
             .init()
     }

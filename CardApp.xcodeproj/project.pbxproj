@@ -27,6 +27,9 @@
 		26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
+		26E4AAA229D9453700631D1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0229D93AD00030ACCD /* ContentView.swift */; };
+		26E4AAA429D945D300631D1F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA329D945D300631D1F /* SplashView.swift */; };
+		26E4AAA629D946AC00631D1F /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA529D946AC00631D1F /* AppScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,8 @@
 		2699EF3729D93ECF0030ACCD /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		26E4AA9929D9417000631D1F /* CardAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppStore.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		26E4AAA329D945D300631D1F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		26E4AAA529D946AC00631D1F /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,8 +142,10 @@
 		2699EF2D29D93E920030ACCD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF3229D93EC30030ACCD /* AppState.swift */,
-				2699EF3129D93EC30030ACCD /* GameState.swift */,
+				26E4AAA129D9451E00631D1F /* Main */,
+				26E4AA9E29D944E500631D1F /* Splash */,
+				26E4AA9F29D944EA00631D1F /* Home */,
+				26E4AAA029D944EF00631D1F /* Game */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -147,11 +154,43 @@
 			isa = PBXGroup;
 			children = (
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
-				2699EF0229D93AD00030ACCD /* ContentView.swift */,
-				2699EF2F29D93EB50030ACCD /* Store.swift */,
 				26E4AA9929D9417000631D1F /* CardAppStore.swift */,
+				2699EF2F29D93EB50030ACCD /* Store.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		26E4AA9E29D944E500631D1F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				26E4AAA329D945D300631D1F /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		26E4AA9F29D944EA00631D1F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		26E4AAA029D944EF00631D1F /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2699EF3129D93EC30030ACCD /* GameState.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		26E4AAA129D9451E00631D1F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2699EF3229D93EC30030ACCD /* AppState.swift */,
+				2699EF0229D93AD00030ACCD /* ContentView.swift */,
+				26E4AAA529D946AC00631D1F /* AppScreen.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,9 +320,11 @@
 				26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */,
 				2699EF3829D93ECF0030ACCD /* Card.swift in Sources */,
 				2699EF3429D93EC30030ACCD /* AppState.swift in Sources */,
+				26E4AAA629D946AC00631D1F /* AppScreen.swift in Sources */,
 				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
 				2699EF3929D93ECF0030ACCD /* Player.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* ContentView.swift in Sources */,
+				26E4AAA429D945D300631D1F /* SplashView.swift in Sources */,
 				2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */,
 				2699EF3A29D93ECF0030ACCD /* Game.swift in Sources */,
 			);
@@ -298,6 +339,7 @@
 				2699EF4029D940100030ACCD /* Game.swift in Sources */,
 				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
 				2699EF1329D93AD10030ACCD /* CardAppTests.swift in Sources */,
+				26E4AAA229D9453700631D1F /* ContentView.swift in Sources */,
 				26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */,
 				2699EF3E29D940100030ACCD /* Player.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
@@ -445,7 +487,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -481,7 +523,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -503,7 +545,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
@@ -523,7 +565,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
