@@ -13,10 +13,9 @@ struct SplashView: View {
 
     var body: some View {
         ZStack {
-            Image("logo")
-                .resizable()
-                .frame(width: 120.0, height: 120.0, alignment: .center)
-                .aspectRatio(contentMode: .fit)
+            Text("CREATIVE GAMES")
+                .font(.headline)
+                .foregroundColor(.accentColor)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         store.dispatch(.showScreen(.home))

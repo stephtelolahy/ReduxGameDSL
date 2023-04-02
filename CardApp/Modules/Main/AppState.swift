@@ -48,8 +48,11 @@ extension AppState {
 
     private static func reduceScreenState(_ state: AppScreenState, _ action: AppAction) -> AppScreenState {
         switch state {
-        case .home(let state):
-            return .home(HomeState.reducer(state, action))
+        case let .home(homeState):
+            guard case let .home(homeAction) = action else {
+                return state
+            }
+            return .home(HomeState.reducer(homeState, homeAction))
 
         default:
             return state
