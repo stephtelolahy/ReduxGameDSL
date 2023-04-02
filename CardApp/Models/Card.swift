@@ -6,7 +6,7 @@ import Foundation
 struct Card: Codable, Equatable {
     
     /// Unique identifier
-    var id: String = ""
+    var id: String = UUID().uuidString
     
     /// Name
     var name: String = ""

@@ -12,10 +12,12 @@ Since DSLs result in programs that are smaller and easier to understand, they al
 
 
 ### Key Features
+- [x] Game DSL
 - [x] Serializable game object
 - [x] Equatable game object
-- [ ] Composable game rules
-
+- [ ] Composable rules
+- [ ] Replay
+- [ ] Hot reload using JSON file 
 
 ### MetaModel
 

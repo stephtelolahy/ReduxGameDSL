@@ -5,11 +5,13 @@
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
+import Foundation
+
 /// Player who is playing in a game
 struct Player: Codable, Equatable {
 
     /// Unique identifier
-    var id: String = ""
+    var id: String = UUID().uuidString
 
     /// player name
     var name: String = ""
