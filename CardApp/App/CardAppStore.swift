@@ -6,3 +6,10 @@
 //
 
 typealias CardAppStore = Store<AppState, AppAction>
+
+extension CardAppStore {
+    static let preview = CardAppStore(
+        initial: AppState(screens: [.splash]),
+        reducer: AppState.reducer,
+        middlewares: [])
+}
