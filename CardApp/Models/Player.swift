@@ -26,7 +26,7 @@ struct Player: Codable, Equatable {
     var handLimit: Int = 0
 
     /// Weapon range
-    var weapon: Int = 0
+    var weapon: Int = 1
 
     /// Increment distance from others
     var mustang: Int = 0

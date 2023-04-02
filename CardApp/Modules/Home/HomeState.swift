@@ -10,7 +10,8 @@ import Foundation
 struct HomeState: Codable, Equatable {
 }
 
-enum HomeAction {
+enum HomeAction: Codable, Equatable {
+    case didAppear
 }
 
 extension HomeState {
