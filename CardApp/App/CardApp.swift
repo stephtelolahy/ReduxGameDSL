@@ -13,8 +13,6 @@ struct CardApp: App {
         let store = CardAppStore.create()
         return WindowGroup {
             AppView()
-                .tint(.yellow)
-                .accentColor(.yellow)
                 .foregroundColor(.primary)
                 .environmentObject(store)
         }
