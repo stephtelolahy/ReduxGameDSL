@@ -11,8 +11,14 @@ struct ContentView: View {
     @EnvironmentObject var store: CardAppStore
 
     var body: some View {
-        // TODO: display content according to store
-        SplashView()
+        if store.state.screenState(for: .home) as HomeState? != nil {
+            NavigationView {
+                HomeView()
+            }
+            .navigationViewStyle(.stack)
+        } else {
+            SplashView()
+        }
     }
 }
 
