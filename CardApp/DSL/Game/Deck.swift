@@ -9,6 +9,6 @@ struct Deck: Attribute {
     let value: CardStack
 
     init(@CardBuilder _ content: () -> [Card]) {
-        self.value = CardStack(content: content())
+        self.value = CardStack(cards: content())
     }
 }

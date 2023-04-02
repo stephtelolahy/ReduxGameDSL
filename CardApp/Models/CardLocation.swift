@@ -9,11 +9,11 @@
 struct CardLocation: Codable, Equatable {
 
     /// Number of cards in the location
-    var count: Int = 0
+    var count: Int { cards.count }
 
     /// If defined, specifies player who has access to content
     var visibility: String?
 
     /// Content
-    var content: [Card] = []
+    var cards: [Card] = []
 }

@@ -9,6 +9,6 @@ struct Choosable: Attribute {
     let value: CardLocation
 
     init(@CardBuilder _ content: () -> [Card]) {
-        self.value = CardLocation(content: content())
+        self.value = CardLocation(cards: content())
     }
 }

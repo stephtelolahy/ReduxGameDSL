@@ -1,14 +1,14 @@
 //
-//  Hand.swift
+//  InPlay.swift
 //  
 //
 //  Created by Hugues Telolahy on 26/03/2023.
 //
 
-struct Hand: Attribute {
+struct InPlay: Attribute {
     let value: CardLocation
 
     init(@CardBuilder _ content: () -> [Card]) {
-        self.value = CardLocation(content: content())
+        self.value = CardLocation(cards: content())
     }
 }

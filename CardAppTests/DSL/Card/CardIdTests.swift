@@ -20,7 +20,7 @@ final class CardIdTests: XCTestCase {
     func test_CardWithId() {
         // Given
         // When
-        let sut = Card(id: "c1")
+        let sut = Card("c1")
 
         // Assert
         XCTAssertEqual(sut.id, "c1")
