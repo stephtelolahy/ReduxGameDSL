@@ -9,11 +9,11 @@ import Foundation
 enum AppScreen: Equatable {
     case splash
     case home
-    case game(id: UUID)
+    case game(id: String)
 }
 
 enum AppScreenState: Codable {
-    case splashScreen
+    case splash
     case home
     case game(GameState)
 }

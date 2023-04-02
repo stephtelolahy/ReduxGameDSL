@@ -1,7 +1,7 @@
 import Foundation
 
 struct GameState: Codable {
-    var game: Game = .init()
+    var game: Game
     var controlled: String?
 }
 
@@ -13,6 +13,6 @@ enum GameAction {
 
 extension GameState {
     static let reducer: Reducer<Self, AppAction> = { state, action in
-            .init()
+            state
     }
 }

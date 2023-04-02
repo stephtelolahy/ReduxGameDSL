@@ -12,12 +12,12 @@ final class CardAppTests: XCTestCase {
     func test_FlowMain() {
         // Given
         // When
-        let initialState = AppState()
+        let initialState = AppState(screens: [.splash])
         let store = CardAppStore(initial: initialState,
                           reducer: AppState.reducer,
                           middlewares: [])
 
-        store.dispatch(.startGame)
+        store.dispatch(.showScreen(.game(id: "g1")))
         store.dispatch(.game(.playCard(id: "c1", actor: "p1")))
         store.dispatch(.game(.playCard(id: "c2", actor: "p1")))
         store.dispatch(.game(.endTurn(actor: "p1")))

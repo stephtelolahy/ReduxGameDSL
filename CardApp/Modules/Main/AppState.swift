@@ -1,9 +1,7 @@
 import Foundation
 
 struct AppState: Codable {
-    var game: GameState?
-
-    init() {}
+    let screens: [AppScreenState]
 }
 
 enum AppAction {
@@ -14,6 +12,6 @@ enum AppAction {
 
 extension AppState {
     static let reducer: Reducer<Self, AppAction> = { state, action in
-            .init()
+            state
     }
 }

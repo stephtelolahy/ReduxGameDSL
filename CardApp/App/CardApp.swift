@@ -8,7 +8,7 @@
 import SwiftUI
 
 let store = CardAppStore(
-    initial: AppState(),
+    initial: AppState(screens: [.splash]),
     reducer: AppState.reducer,
     middlewares: [])
 
