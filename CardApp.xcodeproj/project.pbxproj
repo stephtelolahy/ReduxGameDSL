@@ -29,8 +29,6 @@
 		26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 		26E4AAA429D945D300631D1F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA329D945D300631D1F /* SplashView.swift */; };
-		26E4AAA629D946AC00631D1F /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA529D946AC00631D1F /* AppScreen.swift */; };
-		26E4AAA729D94BAE00631D1F /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA529D946AC00631D1F /* AppScreen.swift */; };
 		26E4AAA929D94CFD00631D1F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA829D94CFD00631D1F /* HomeState.swift */; };
 		26E4AAAA29D94DD700631D1F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA829D94CFD00631D1F /* HomeState.swift */; };
 		26E4AAAC29D9516600631D1F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAAB29D9516600631D1F /* HomeView.swift */; };
@@ -65,7 +63,6 @@
 		26E4AA9929D9417000631D1F /* CardAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppStore.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26E4AAA329D945D300631D1F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		26E4AAA529D946AC00631D1F /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 		26E4AAA829D94CFD00631D1F /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		26E4AAAB29D9516600631D1F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				2699EF3229D93EC30030ACCD /* AppState.swift */,
-				26E4AAA529D946AC00631D1F /* AppScreen.swift */,
 				2699EF0229D93AD00030ACCD /* MainView.swift */,
 			);
 			path = Main;
@@ -333,7 +329,6 @@
 				2699EF3429D93EC30030ACCD /* AppState.swift in Sources */,
 				26E4AAA929D94CFD00631D1F /* HomeState.swift in Sources */,
 				260C537A29D9575E00FB08C3 /* GameView.swift in Sources */,
-				26E4AAA629D946AC00631D1F /* AppScreen.swift in Sources */,
 				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
 				2699EF3929D93ECF0030ACCD /* Player.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* MainView.swift in Sources */,
@@ -356,7 +351,6 @@
 				260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */,
 				2699EF3E29D940100030ACCD /* Player.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
-				26E4AAA729D94BAE00631D1F /* AppScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

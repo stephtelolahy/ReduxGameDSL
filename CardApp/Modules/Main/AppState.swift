@@ -13,7 +13,14 @@ enum AppScreenState: Codable, Equatable {
 enum AppAction {
     case showScreen(AppScreen)
     case dismissScreen(AppScreen)
+    case home(HomeAction)
     case game(GameAction)
+}
+
+enum AppScreen: Equatable {
+    case splash
+    case home
+    case game
 }
 
 extension AppState {

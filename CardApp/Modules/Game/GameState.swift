@@ -12,7 +12,7 @@ enum GameAction {
 }
 
 extension GameState {
-    static let reducer: Reducer<Self, AppAction> = { state, action in
+    static let reducer: Reducer<Self, GameAction> = { state, action in
             state
     }
 }

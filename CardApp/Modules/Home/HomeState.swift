@@ -14,7 +14,7 @@ enum HomeAction {
 }
 
 extension HomeState {
-    static let reducer: Reducer<Self, AppAction> = { state, action in
+    static let reducer: Reducer<Self, HomeAction> = { state, action in
         state
     }
 }
