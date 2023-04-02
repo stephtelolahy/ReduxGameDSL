@@ -1,13 +1,13 @@
 //
-//  ReduxGameDSLTests.swift
-//  ReduxGameDSLTests
+//  CardAppTests.swift
+//  CardAppTests
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
-@testable import ReduxGameDSL
+@testable import CardApp
 import XCTest
 
-final class ReduxGameDSLTests: XCTestCase {
+final class CardAppTests: XCTestCase {
 
     func test_FlowMain() {
         // Given

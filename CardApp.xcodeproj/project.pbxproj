@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2699EF0129D93AD00030ACCD /* ReduxGameDSLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* ReduxGameDSLApp.swift */; };
+		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0329D93AD00030ACCD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0229D93AD00030ACCD /* ContentView.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
-		2699EF1329D93AD10030ACCD /* ReduxGameDSLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */; };
+		2699EF1329D93AD10030ACCD /* CardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF1229D93AD10030ACCD /* CardAppTests.swift */; };
 		2699EF3029D93EB50030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
 		2699EF3329D93EC30030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
 		2699EF3429D93EC30030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
@@ -26,6 +26,7 @@
 		2699EF4029D940100030ACCD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3729D93ECF0030ACCD /* Game.swift */; };
 		26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
+		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,14 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2699EEFD29D93AD00030ACCD /* ReduxGameDSL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReduxGameDSL.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2699EF0029D93AD00030ACCD /* ReduxGameDSLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxGameDSLApp.swift; sourceTree = "<group>"; };
+		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0229D93AD00030ACCD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2699EF0429D93AD10030ACCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2699EF0629D93AD10030ACCD /* ReduxGameDSL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReduxGameDSL.entitlements; sourceTree = "<group>"; };
+		2699EF0629D93AD10030ACCD /* CardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardApp.entitlements; sourceTree = "<group>"; };
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReduxGameDSLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxGameDSLTests.swift; sourceTree = "<group>"; };
+		2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2699EF1229D93AD10030ACCD /* CardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppTests.swift; sourceTree = "<group>"; };
 		2699EF2F29D93EB50030ACCD /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2699EF3129D93EC30030ACCD /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		2699EF3229D93EC30030ACCD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		2699EF3629D93ECF0030ACCD /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2699EF3729D93ECF0030ACCD /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		26E4AA9929D9417000631D1F /* CardAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppStore.swift; sourceTree = "<group>"; };
+		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +79,9 @@
 		2699EEF429D93AD00030ACCD = {
 			isa = PBXGroup;
 			children = (
-				2699EEFF29D93AD00030ACCD /* ReduxGameDSL */,
-				2699EF1129D93AD10030ACCD /* ReduxGameDSLTests */,
+				26E4AA9C29D941ED00631D1F /* README.md */,
+				2699EEFF29D93AD00030ACCD /* CardApp */,
+				2699EF1129D93AD10030ACCD /* CardAppTests */,
 				2699EEFE29D93AD00030ACCD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,23 +89,23 @@
 		2699EEFE29D93AD00030ACCD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2699EEFD29D93AD00030ACCD /* ReduxGameDSL.app */,
-				2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */,
+				2699EEFD29D93AD00030ACCD /* CardApp.app */,
+				2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2699EEFF29D93AD00030ACCD /* ReduxGameDSL */ = {
+		2699EEFF29D93AD00030ACCD /* CardApp */ = {
 			isa = PBXGroup;
 			children = (
 				2699EF2E29D93E9C0030ACCD /* App */,
 				2699EF2D29D93E920030ACCD /* Modules */,
 				2699EF2C29D93E8B0030ACCD /* Models */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
-				2699EF0629D93AD10030ACCD /* ReduxGameDSL.entitlements */,
+				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
 				2699EF0729D93AD10030ACCD /* Preview Content */,
 			);
-			path = ReduxGameDSL;
+			path = CardApp;
 			sourceTree = "<group>";
 		};
 		2699EF0729D93AD10030ACCD /* Preview Content */ = {
@@ -113,12 +116,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		2699EF1129D93AD10030ACCD /* ReduxGameDSLTests */ = {
+		2699EF1129D93AD10030ACCD /* CardAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */,
+				2699EF1229D93AD10030ACCD /* CardAppTests.swift */,
 			);
-			path = ReduxGameDSLTests;
+			path = CardAppTests;
 			sourceTree = "<group>";
 		};
 		2699EF2C29D93E8B0030ACCD /* Models */ = {
@@ -143,7 +146,7 @@
 		2699EF2E29D93E9C0030ACCD /* App */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF0029D93AD00030ACCD /* ReduxGameDSLApp.swift */,
+				2699EF0029D93AD00030ACCD /* CardApp.swift */,
 				2699EF0229D93AD00030ACCD /* ContentView.swift */,
 				2699EF2F29D93EB50030ACCD /* Store.swift */,
 				26E4AA9929D9417000631D1F /* CardAppStore.swift */,
@@ -154,9 +157,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2699EEFC29D93AD00030ACCD /* ReduxGameDSL */ = {
+		2699EEFC29D93AD00030ACCD /* CardApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2699EF2229D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSL" */;
+			buildConfigurationList = 2699EF2229D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardApp" */;
 			buildPhases = (
 				2699EF2B29D93B4B0030ACCD /* Run SwiftLint */,
 				2699EEF929D93AD00030ACCD /* Sources */,
@@ -167,14 +170,14 @@
 			);
 			dependencies = (
 			);
-			name = ReduxGameDSL;
+			name = CardApp;
 			productName = ReduxGameDSL;
-			productReference = 2699EEFD29D93AD00030ACCD /* ReduxGameDSL.app */;
+			productReference = 2699EEFD29D93AD00030ACCD /* CardApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2699EF0D29D93AD10030ACCD /* ReduxGameDSLTests */ = {
+		2699EF0D29D93AD10030ACCD /* CardAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSLTests" */;
+			buildConfigurationList = 2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardAppTests" */;
 			buildPhases = (
 				2699EF0A29D93AD10030ACCD /* Sources */,
 				2699EF0B29D93AD10030ACCD /* Frameworks */,
@@ -185,9 +188,9 @@
 			dependencies = (
 				2699EF1029D93AD10030ACCD /* PBXTargetDependency */,
 			);
-			name = ReduxGameDSLTests;
+			name = CardAppTests;
 			productName = ReduxGameDSLTests;
-			productReference = 2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */;
+			productReference = 2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2699EEF829D93AD00030ACCD /* Build configuration list for PBXProject "ReduxGameDSL" */;
+			buildConfigurationList = 2699EEF829D93AD00030ACCD /* Build configuration list for PBXProject "CardApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -221,8 +224,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2699EEFC29D93AD00030ACCD /* ReduxGameDSL */,
-				2699EF0D29D93AD10030ACCD /* ReduxGameDSLTests */,
+				2699EEFC29D93AD00030ACCD /* CardApp */,
+				2699EF0D29D93AD10030ACCD /* CardAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E4AA9D29D941ED00631D1F /* README.md in Resources */,
 				2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */,
 				2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */,
 			);
@@ -280,7 +284,7 @@
 				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
 				2699EF3929D93ECF0030ACCD /* Player.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* ContentView.swift in Sources */,
-				2699EF0129D93AD00030ACCD /* ReduxGameDSLApp.swift in Sources */,
+				2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */,
 				2699EF3A29D93ECF0030ACCD /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +297,7 @@
 				2699EF3F29D940100030ACCD /* Card.swift in Sources */,
 				2699EF4029D940100030ACCD /* Game.swift in Sources */,
 				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
-				2699EF1329D93AD10030ACCD /* ReduxGameDSLTests.swift in Sources */,
+				2699EF1329D93AD10030ACCD /* CardAppTests.swift in Sources */,
 				26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */,
 				2699EF3E29D940100030ACCD /* Player.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
@@ -305,7 +309,7 @@
 /* Begin PBXTargetDependency section */
 		2699EF1029D93AD10030ACCD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2699EEFC29D93AD00030ACCD /* ReduxGameDSL */;
+			target = 2699EEFC29D93AD00030ACCD /* CardApp */;
 			targetProxy = 2699EF0F29D93AD10030ACCD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -425,10 +429,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ReduxGameDSL/ReduxGameDSL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CardApp/CardApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ReduxGameDSL/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CardApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -446,7 +450,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.cardApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -461,10 +465,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ReduxGameDSL/ReduxGameDSL.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CardApp/CardApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ReduxGameDSL/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CardApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -482,7 +486,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.cardApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -502,7 +506,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSLTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -522,7 +526,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSLTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -535,7 +539,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2699EEF829D93AD00030ACCD /* Build configuration list for PBXProject "ReduxGameDSL" */ = {
+		2699EEF829D93AD00030ACCD /* Build configuration list for PBXProject "CardApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2699EF2029D93AD10030ACCD /* Debug */,
@@ -544,7 +548,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2699EF2229D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSL" */ = {
+		2699EF2229D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2699EF2329D93AD10030ACCD /* Debug */,
@@ -553,7 +557,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSLTests" */ = {
+		2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2699EF2629D93AD10030ACCD /* Debug */,

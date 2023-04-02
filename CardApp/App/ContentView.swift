@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  ReduxGameDSL
+//  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
