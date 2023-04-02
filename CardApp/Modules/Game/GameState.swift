@@ -6,7 +6,6 @@ struct GameState: Codable {
 }
 
 enum GameAction {
-    case endGame
     case playCard(id: String, actor: String)
     case endTurn(actor: String)
 }

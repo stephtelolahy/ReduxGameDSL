@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var store: CardAppStore
-    
+
     var body: some View {
-        // TODO: display content according to store's current screen
+        // TODO: display content according to store
         SplashView()
     }
 }

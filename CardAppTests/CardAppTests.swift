@@ -19,9 +19,9 @@ final class CardAppTests: XCTestCase {
 
         store.dispatch(.showScreen(.game(id: "g1")))
         store.dispatch(.game(.playCard(id: "c1", actor: "p1")))
-        store.dispatch(.game(.playCard(id: "c2", actor: "p1")))
         store.dispatch(.game(.endTurn(actor: "p1")))
-        store.dispatch(.game(.endGame))
+        store.dispatch(.game(.playCard(id: "c2", actor: "p2")))
+        store.dispatch(.dismissScreen(.game(id: "g1")))
 
         // Assert
     }

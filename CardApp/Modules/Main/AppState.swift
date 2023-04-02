@@ -1,7 +1,13 @@
 import Foundation
 
 struct AppState: Codable {
-    let screens: [AppScreenState]
+    let screens: [ScreenState]
+
+    enum ScreenState: Codable {
+        case splash
+        case home(HomeState)
+        case game(GameState)
+    }
 }
 
 enum AppAction {
