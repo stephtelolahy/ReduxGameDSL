@@ -13,7 +13,7 @@ final class ReduxGameDSLTests: XCTestCase {
         // Given
         // When
         let initialState = AppState()
-        let store = MyAppStore(initial: initialState,
+        let store = CardAppStore(initial: initialState,
                           reducer: AppState.reducer,
                           middlewares: [])
 

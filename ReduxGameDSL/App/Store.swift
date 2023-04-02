@@ -2,8 +2,6 @@ import Foundation
 import Combine
 import SwiftUI
 
-typealias MyAppStore = Store<AppState, AppAction>
-
 public typealias Reducer<State, Action> = (State, Action) -> State
 public typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
