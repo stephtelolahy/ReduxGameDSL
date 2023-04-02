@@ -93,6 +93,8 @@
 		26D62D9329DA1803005A6CBA /* PlayerMustangTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D62D8729DA1803005A6CBA /* PlayerMustangTests.swift */; };
 		26D62D9429DA1803005A6CBA /* PlayerNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D62D8829DA1803005A6CBA /* PlayerNameTests.swift */; };
 		26D62D9529DA1803005A6CBA /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D62D8929DA1803005A6CBA /* PlayerTests.swift */; };
+		26D62D9729DA1A49005A6CBA /* GameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D62D9629DA1A49005A6CBA /* GameEvent.swift */; };
+		26D62D9829DA1A49005A6CBA /* GameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D62D9629DA1A49005A6CBA /* GameEvent.swift */; };
 		26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
@@ -176,6 +178,7 @@
 		26D62D8729DA1803005A6CBA /* PlayerMustangTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerMustangTests.swift; sourceTree = "<group>"; };
 		26D62D8829DA1803005A6CBA /* PlayerNameTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerNameTests.swift; sourceTree = "<group>"; };
 		26D62D8929DA1803005A6CBA /* PlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTests.swift; sourceTree = "<group>"; };
+		26D62D9629DA1A49005A6CBA /* GameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvent.swift; sourceTree = "<group>"; };
 		26E4AA9929D9417000631D1F /* CardAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppStore.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26E4AAA329D945D300631D1F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -404,6 +407,7 @@
 				2699EF3529D93ECF0030ACCD /* Card.swift */,
 				261D66BF29D9CCCE0018E8F4 /* CardStack.swift */,
 				261D66C129D9CCF00018E8F4 /* CardLocation.swift */,
+				26D62D9629DA1A49005A6CBA /* GameEvent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -622,6 +626,7 @@
 				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
 				261D66C029D9CCCE0018E8F4 /* CardStack.swift in Sources */,
 				261D66DA29D9D1A40018E8F4 /* Hand.swift in Sources */,
+				26D62D9729DA1A49005A6CBA /* GameEvent.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* MainView.swift in Sources */,
 				261D66C229D9CCF00018E8F4 /* CardLocation.swift in Sources */,
 				261D671629D9DFAB0018E8F4 /* CardLocation+Rules.swift in Sources */,
@@ -688,6 +693,7 @@
 				261D673429DA127A0018E8F4 /* Game+Modifiers.swift in Sources */,
 				261D672B29D9E2FB0018E8F4 /* GameOverTests.swift in Sources */,
 				26D62D8F29DA1803005A6CBA /* PlayerHealthTests.swift in Sources */,
+				26D62D9829DA1A49005A6CBA /* GameEvent.swift in Sources */,
 				261D672929D9E2FB0018E8F4 /* GameCodableTests.swift in Sources */,
 				261D66DB29D9D1E90018E8F4 /* Hand.swift in Sources */,
 				26D62D9029DA1803005A6CBA /* PlayerMaxHealthTests.swift in Sources */,

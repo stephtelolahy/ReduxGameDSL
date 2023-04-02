@@ -7,8 +7,7 @@ struct GameState: Codable, Equatable {
 }
 
 enum GameAction: Codable, Equatable {
-    case playCard(id: String, actor: String)
-    case endTurn(actor: String)
+    case didAppear
 }
 
 extension GameState {
