@@ -35,16 +35,22 @@ extension AppState {
         }
 
         // Reduce each screen state
-//        screens = screens.map {
-//            switch $0 {
-//            case .splashScreen: return .splashScreen
-//            case .home(let state): return .home(HomeState.reducer(state, action))
-//            case .episode(let state): return .episode(EpisodeDetailsState.reducer(state, action))
-//            case .userProfile(let state): return .userProfile(UserDetailsState.reducer(state, action))
-//            }
-//        }
+        screens = screens.map { reduceScreenState($0, action) }
 
         return .init(screens: screens)
+    }
+
+    private static func reduceScreenState(_ state: ScreenState, _ action: AppAction) -> ScreenState {
+        switch state {
+        case .splash:
+            return .splash
+
+        case .home(let state):
+            return .home(HomeState.reducer(state, action))
+
+        default:
+            return state
+        }
     }
 }
 
