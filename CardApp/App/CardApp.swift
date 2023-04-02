@@ -12,7 +12,7 @@ struct CardApp: App {
     var body: some Scene {
         let store = CardAppStore.create()
         return WindowGroup {
-            AppView()
+            MainView()
                 .foregroundColor(.primary)
                 .environmentObject(store)
         }

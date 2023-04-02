@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppView: View {
+struct MainView: View {
     @EnvironmentObject var store: CardAppStore
 
     var body: some View {
@@ -26,7 +26,7 @@ struct AppView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AppView()
+        MainView()
             .environmentObject(CardAppStore.preview)
     }
 }
