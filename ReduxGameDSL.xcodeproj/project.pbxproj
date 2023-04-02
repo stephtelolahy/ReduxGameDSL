@@ -12,6 +12,18 @@
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
 		2699EF1329D93AD10030ACCD /* ReduxGameDSLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */; };
+		2699EF3029D93EB50030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
+		2699EF3329D93EC30030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
+		2699EF3429D93EC30030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
+		2699EF3829D93ECF0030ACCD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3529D93ECF0030ACCD /* Card.swift */; };
+		2699EF3929D93ECF0030ACCD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3629D93ECF0030ACCD /* Player.swift */; };
+		2699EF3A29D93ECF0030ACCD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3729D93ECF0030ACCD /* Game.swift */; };
+		2699EF3B29D93FED0030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
+		2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
+		2699EF3D29D940010030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
+		2699EF3E29D940100030ACCD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3629D93ECF0030ACCD /* Player.swift */; };
+		2699EF3F29D940100030ACCD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3529D93ECF0030ACCD /* Card.swift */; };
+		2699EF4029D940100030ACCD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3729D93ECF0030ACCD /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +45,12 @@
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReduxGameDSLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxGameDSLTests.swift; sourceTree = "<group>"; };
+		2699EF2F29D93EB50030ACCD /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		2699EF3129D93EC30030ACCD /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		2699EF3229D93EC30030ACCD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		2699EF3529D93ECF0030ACCD /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		2699EF3629D93ECF0030ACCD /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		2699EF3729D93ECF0030ACCD /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +92,9 @@
 		2699EEFF29D93AD00030ACCD /* ReduxGameDSL */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF0029D93AD00030ACCD /* ReduxGameDSLApp.swift */,
-				2699EF0229D93AD00030ACCD /* ContentView.swift */,
+				2699EF2E29D93E9C0030ACCD /* App */,
+				2699EF2D29D93E920030ACCD /* Modules */,
+				2699EF2C29D93E8B0030ACCD /* Models */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
 				2699EF0629D93AD10030ACCD /* ReduxGameDSL.entitlements */,
 				2699EF0729D93AD10030ACCD /* Preview Content */,
@@ -97,6 +116,35 @@
 				2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */,
 			);
 			path = ReduxGameDSLTests;
+			sourceTree = "<group>";
+		};
+		2699EF2C29D93E8B0030ACCD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2699EF3529D93ECF0030ACCD /* Card.swift */,
+				2699EF3729D93ECF0030ACCD /* Game.swift */,
+				2699EF3629D93ECF0030ACCD /* Player.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2699EF2D29D93E920030ACCD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2699EF3229D93EC30030ACCD /* AppState.swift */,
+				2699EF3129D93EC30030ACCD /* GameState.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		2699EF2E29D93E9C0030ACCD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2699EF0029D93AD00030ACCD /* ReduxGameDSLApp.swift */,
+				2699EF0229D93AD00030ACCD /* ContentView.swift */,
+				2699EF2F29D93EB50030ACCD /* Store.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,8 +269,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2699EF3029D93EB50030ACCD /* Store.swift in Sources */,
+				2699EF3829D93ECF0030ACCD /* Card.swift in Sources */,
+				2699EF3429D93EC30030ACCD /* AppState.swift in Sources */,
+				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
+				2699EF3929D93ECF0030ACCD /* Player.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* ContentView.swift in Sources */,
 				2699EF0129D93AD00030ACCD /* ReduxGameDSLApp.swift in Sources */,
+				2699EF3A29D93ECF0030ACCD /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */,
+				2699EF3F29D940100030ACCD /* Card.swift in Sources */,
+				2699EF4029D940100030ACCD /* Game.swift in Sources */,
+				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
 				2699EF1329D93AD10030ACCD /* ReduxGameDSLTests.swift in Sources */,
+				2699EF3E29D940100030ACCD /* Player.swift in Sources */,
+				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
