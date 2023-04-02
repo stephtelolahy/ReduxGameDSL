@@ -1,23 +1,23 @@
 import Foundation
 
 struct AppState: Codable, Equatable {
-    let screens: [AppScreenState]
+    let screens: [ScreenState]
 }
 
-enum AppScreenState: Codable, Equatable {
+enum ScreenState: Codable, Equatable {
     case splash
     case home(HomeState)
     case game(GameState)
 }
 
 enum AppAction {
-    case showScreen(AppScreen)
-    case dismissScreen(AppScreen)
+    case showScreen(Screen)
+    case dismissScreen(Screen)
     case home(HomeAction)
     case game(GameAction)
 }
 
-enum AppScreen: Equatable {
+enum Screen: Equatable {
     case splash
     case home
     case game
@@ -41,12 +41,12 @@ extension AppState {
         }
 
         // Reduce each screen state
-        screens = screens.map { reduceScreenState($0, action) }
+        screens = screens.map { reduceScreen($0, action) }
 
         return .init(screens: screens)
     }
 
-    private static func reduceScreenState(_ state: AppScreenState, _ action: AppAction) -> AppScreenState {
+    private static func reduceScreen(_ state: ScreenState, _ action: AppAction) -> ScreenState {
         switch state {
         case let .home(homeState):
             guard case let .home(homeAction) = action else {

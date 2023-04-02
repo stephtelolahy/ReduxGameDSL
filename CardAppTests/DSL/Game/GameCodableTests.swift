@@ -12,36 +12,46 @@ final class GameCodableTests: XCTestCase {
         // Given
         let JSON = """
         {
-            "_isOver": true,
-            "_players": [
+            "isOver": true,
+            "players": [
                 {
-                    "_id": "p1"
-                },
-                {
-                    "_id": "p2"
+                    "id": "p1",
+                    "name": "p1",
+                    "maxHealth": 4,
+                    "health": 3,
+                    "handLimit": 3,
+                    "weapon": 1,
+                    "mustang": 0,
+                    "scope": 1,
+                    "abilities": [],
+                    "hand": {
+                        "visibility": "p1",
+                        "cards": []
+                    },
+                    "inPlay": {
+                        "cards": []
+                    }
                 }
             ],
-            "_turn": "p1",
-            "_deck": {
-                "_cards": [
+            "turn": "p1",
+            "deck": {
+                "cards": [
                     {
-                        "_id": "c1"
+                        "id": "c1",
+                        "name": "c1"
                     }
                 ]
             },
-            "_discard": {
-                "_cards": [
+            "discard": {
+                "cards": [
                     {
-                        "_id": "c1"
+                        "id": "c2",
+                        "name": "c2"
                     }
                 ]
             },
-            "_store": {
-                "_cards": [
-                    {
-                        "_id": "c3"
-                    }
-                ]
+            "choosable": {
+                "cards": []
             }
         }
         """
@@ -52,10 +62,10 @@ final class GameCodableTests: XCTestCase {
 
         // Assert
         XCTAssertTrue(sut.isOver)
-        XCTAssertEqual(sut.players.map(\.id), ["p1", "p2"])
+        XCTAssertEqual(sut.players.map(\.id), ["p1"])
         XCTAssertEqual(sut.turn, "p1")
         XCTAssertEqual(sut.deck.count, 1)
         XCTAssertEqual(sut.discard.count, 1)
-        XCTAssertEqual(sut.choosable.count, 1)
+        XCTAssertEqual(sut.choosable.count, 0)
     }
 }
