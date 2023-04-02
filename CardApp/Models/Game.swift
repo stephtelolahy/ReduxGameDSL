@@ -1,6 +1,6 @@
 import Foundation
 
-struct Game: Codable {
+struct Game: Codable, Equatable {
     var players: [Player] = []
     var turn: String?
 }

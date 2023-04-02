@@ -14,7 +14,7 @@ struct GameView: View {
       VStack(alignment: .leading) {
         Button {
           withAnimation {
-              store.dispatch(.showScreen(.home))
+              store.dispatch(.dismissScreen(.game))
           }
         } label: {
           HStack {
@@ -27,7 +27,7 @@ struct GameView: View {
         Spacer()
         Text("Moves: 0")
           .font(.subheadline)
-          .foregroundColor(.purple)
+          .foregroundColor(.accentColor)
           .padding()
       }
       .frame(

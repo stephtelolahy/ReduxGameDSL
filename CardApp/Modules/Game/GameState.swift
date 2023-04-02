@@ -1,7 +1,7 @@
 import Foundation
 
-struct GameState: Codable {
-    var game: Game
+struct GameState: Codable, Equatable {
+    var game: Game?
     var controlled: String?
     var moves: Int = 0
 }

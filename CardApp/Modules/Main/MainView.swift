@@ -11,19 +11,14 @@ struct MainView: View {
     @EnvironmentObject var store: CardAppStore
 
     var body: some View {
-        if store.state.screenState(for: .game(id: "")) != nil {
-            NavigationView {
-                GameView()
-            }
-            .navigationViewStyle(.stack)
-        }
-        else if store.state.screenState(for: .home) as HomeState? != nil {
-            NavigationView {
-                HomeView()
-            }
-            .navigationViewStyle(.stack)
-        }
-        else {
+        switch store.state.screens.last {
+        case .home:
+            HomeView()
+
+        case .game:
+            GameView()
+
+        default:
             SplashView()
         }
     }

@@ -1,10 +1,10 @@
 import Foundation
 
-struct AppState: Codable {
+struct AppState: Codable, Equatable {
     let screens: [AppScreenState]
 }
 
-enum AppScreenState: Codable {
+enum AppScreenState: Codable, Equatable {
     case splash
     case home(HomeState)
     case game(GameState)
@@ -22,16 +22,12 @@ extension AppState {
 
         // Update visible screens
         switch action {
-        case .showScreen(.splash),
-             .dismissScreen(.home),
-             .dismissScreen(.splash):
-            screens = [.splash]
-
-        case .showScreen(.home):
+        case .showScreen(.home),
+             .dismissScreen(.game):
             screens = [.home(.init())]
 
-        case .showScreen(.game(id: let id)):
-            screens += [.home(.init())]
+        case .showScreen(.game):
+            screens += [.game(.init())]
 
         default:
             break
@@ -51,23 +47,5 @@ extension AppState {
         default:
             return state
         }
-    }
-}
-
-extension AppState {
-    func screenState<State>(for screen: AppScreen) -> State? {
-        screens
-            .compactMap {
-                switch ($0, screen) {
-                case (.home(let state), .home):
-                    return state as? State
-
-                case (.game(let state), .game(id: let id)):
-                    return state as? State
-
-                default: return nil
-                }
-            }
-            .first
     }
 }

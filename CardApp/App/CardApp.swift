@@ -10,14 +10,11 @@ import SwiftUI
 @main
 struct CardApp: App {
     var body: some Scene {
-        let store = CardAppStore(
-            initial: AppState(screens: [.splash]),
-            reducer: AppState.reducer,
-            middlewares: [])
-
+        let store = CardAppStore.create()
         return WindowGroup {
             MainView()
                 .tint(.yellow)
+                .accentColor(.yellow)
                 .foregroundColor(.primary)
                 .environmentObject(store)
         }

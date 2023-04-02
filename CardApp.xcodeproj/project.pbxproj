@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		260C537A29D9575E00FB08C3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C537929D9575E00FB08C3 /* GameView.swift */; };
+		260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C537B29D9BF1B00FB08C3 /* AppState_FlowTests.swift */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0329D93AD00030ACCD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0229D93AD00030ACCD /* MainView.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
-		2699EF1329D93AD10030ACCD /* CardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF1229D93AD10030ACCD /* CardAppTests.swift */; };
 		2699EF3029D93EB50030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
 		2699EF3329D93EC30030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
 		2699EF3429D93EC30030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
@@ -48,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		260C537929D9575E00FB08C3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		260C537B29D9BF1B00FB08C3 /* AppState_FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState_FlowTests.swift; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0229D93AD00030ACCD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		2699EF0629D93AD10030ACCD /* CardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardApp.entitlements; sourceTree = "<group>"; };
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2699EF1229D93AD10030ACCD /* CardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppTests.swift; sourceTree = "<group>"; };
 		2699EF2F29D93EB50030ACCD /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2699EF3129D93EC30030ACCD /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		2699EF3229D93EC30030ACCD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		2699EF1129D93AD10030ACCD /* CardAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF1229D93AD10030ACCD /* CardAppTests.swift */,
+				260C537B29D9BF1B00FB08C3 /* AppState_FlowTests.swift */,
 			);
 			path = CardAppTests;
 			sourceTree = "<group>";
@@ -351,9 +351,9 @@
 				2699EF3F29D940100030ACCD /* Card.swift in Sources */,
 				2699EF4029D940100030ACCD /* Game.swift in Sources */,
 				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
-				2699EF1329D93AD10030ACCD /* CardAppTests.swift in Sources */,
 				26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */,
 				26E4AAAA29D94DD700631D1F /* HomeState.swift in Sources */,
+				260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */,
 				2699EF3E29D940100030ACCD /* Player.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
 				26E4AAA729D94BAE00631D1F /* AppScreen.swift in Sources */,

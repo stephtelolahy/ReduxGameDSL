@@ -1,5 +1,5 @@
 import Foundation
 
-struct Card: Codable {
+struct Card: Codable, Equatable {
     var name: String = ""
 }

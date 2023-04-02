@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HomeState: Codable {
+struct HomeState: Codable, Equatable {
 }
 
 enum HomeAction {

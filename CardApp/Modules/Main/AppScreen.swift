@@ -8,5 +8,5 @@
 enum AppScreen: Equatable {
     case splash
     case home
-    case game(id: String)
+    case game
 }

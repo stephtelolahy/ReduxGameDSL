@@ -19,7 +19,7 @@ struct HomeView: View {
                 .font(.system(size: 120))
             Button("New Game") {
                 withAnimation {
-                    store.dispatch(.showScreen(.game(id: "")))
+                    store.dispatch(.showScreen(.game))
                 }
             }
             .font(.headline)
