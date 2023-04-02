@@ -15,5 +15,5 @@ public struct CardStack: Codable, Equatable {
     public var top: Card? { cards.first }
     
     /// Content
-    var cards: [Card] = []
+    public var cards: [Card] = []
 }

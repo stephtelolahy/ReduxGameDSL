@@ -14,7 +14,7 @@ enum AppAction: Codable, Equatable {
     case showScreen(Screen)
     case dismissScreen(Screen)
     case home(HomeAction)
-    case game(GameEvent)
+    case game(GameAction)
 }
 
 enum Screen: Codable, Equatable {

@@ -1,19 +1,19 @@
+////
+////  CardStack+Rules.swift
+////  CardApp
+////
+////  Created by Hugues Telolahy on 02/04/2023.
+////
+//import Game
 //
-//  CardStack+Rules.swift
-//  CardApp
+//extension CardStack {
 //
-//  Created by Hugues Telolahy on 02/04/2023.
+//    @discardableResult
+//    mutating func pop() -> Card {
+//        cards.removeFirst()
+//    }
 //
-import Game
-
-extension CardStack {
-
-    @discardableResult
-    mutating func pop() -> Card {
-        cards.removeFirst()
-    }
-
-    mutating func push(_ card: Card) {
-        cards.insert(card, at: 0)
-    }
-}
+//    mutating func push(_ card: Card) {
+//        cards.insert(card, at: 0)
+//    }
+//}

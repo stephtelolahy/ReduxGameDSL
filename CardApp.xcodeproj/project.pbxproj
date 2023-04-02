@@ -51,7 +51,7 @@
 		261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLocationRulesTests.swift; sourceTree = "<group>"; };
 		261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackRulesTests.swift; sourceTree = "<group>"; };
 		261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardStack+Rules.swift"; sourceTree = "<group>"; };
-		267B4FFB29DA20C1003826E4 /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
+		26806ADA29DA2F4800A2D2EE /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0229D93AD00030ACCD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -121,14 +121,30 @@
 			path = Rules;
 			sourceTree = "<group>";
 		};
+		2653DAE829DA2ADD007EAE71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		26806AD929DA2F4800A2D2EE /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				26806ADA29DA2F4800A2D2EE /* Game */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		2699EEF429D93AD00030ACCD = {
 			isa = PBXGroup;
 			children = (
-				267B4FFB29DA20C1003826E4 /* Game */,
 				26E4AA9C29D941ED00631D1F /* README.md */,
+				26806AD929DA2F4800A2D2EE /* Packages */,
 				2699EEFF29D93AD00030ACCD /* CardApp */,
 				2699EF1129D93AD10030ACCD /* CardAppTests */,
 				2699EEFE29D93AD00030ACCD /* Products */,
+				2653DAE829DA2ADD007EAE71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,6 +260,8 @@
 			dependencies = (
 			);
 			name = CardApp;
+			packageProductDependencies = (
+			);
 			productName = ReduxGameDSL;
 			productReference = 2699EEFD29D93AD00030ACCD /* CardApp.app */;
 			productType = "com.apple.product-type.application";
