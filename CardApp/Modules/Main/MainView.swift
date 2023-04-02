@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
@@ -7,16 +7,23 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     @EnvironmentObject var store: CardAppStore
 
     var body: some View {
-        if store.state.screenState(for: .home) as HomeState? != nil {
+        if store.state.screenState(for: .game(id: "")) != nil {
+            NavigationView {
+                GameView()
+            }
+            .navigationViewStyle(.stack)
+        }
+        else if store.state.screenState(for: .home) as HomeState? != nil {
             NavigationView {
                 HomeView()
             }
             .navigationViewStyle(.stack)
-        } else {
+        }
+        else {
             SplashView()
         }
     }
@@ -24,7 +31,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
             .environmentObject(CardAppStore.preview)
     }
 }

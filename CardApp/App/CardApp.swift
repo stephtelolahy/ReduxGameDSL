@@ -16,7 +16,7 @@ struct CardApp: App {
             middlewares: [])
 
         return WindowGroup {
-            ContentView()
+            MainView()
                 .tint(.yellow)
                 .foregroundColor(.primary)
                 .environmentObject(store)

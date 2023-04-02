@@ -1,13 +1,13 @@
 import Foundation
 
 struct AppState: Codable {
-    let screens: [ScreenState]
+    let screens: [AppScreenState]
+}
 
-    enum ScreenState: Codable {
-        case splash
-        case home(HomeState)
-        case game(GameState)
-    }
+enum AppScreenState: Codable {
+    case splash
+    case home(HomeState)
+    case game(GameState)
 }
 
 enum AppAction {
@@ -30,6 +30,9 @@ extension AppState {
         case .showScreen(.home):
             screens = [.home(.init())]
 
+        case .showScreen(.game(id: let id)):
+            screens += [.home(.init())]
+
         default:
             break
         }
@@ -40,11 +43,8 @@ extension AppState {
         return .init(screens: screens)
     }
 
-    private static func reduceScreenState(_ state: ScreenState, _ action: AppAction) -> ScreenState {
+    private static func reduceScreenState(_ state: AppScreenState, _ action: AppAction) -> AppScreenState {
         switch state {
-        case .splash:
-            return .splash
-
         case .home(let state):
             return .home(HomeState.reducer(state, action))
 
@@ -59,7 +59,12 @@ extension AppState {
         screens
             .compactMap {
                 switch ($0, screen) {
-                case (.home(let state), .home): return state as? State
+                case (.home(let state), .home):
+                    return state as? State
+
+                case (.game(let state), .game(id: let id)):
+                    return state as? State
+
                 default: return nil
                 }
             }
