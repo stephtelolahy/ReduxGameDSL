@@ -1,6 +1,5 @@
 included:
-  - Sources
-  - Tests
+  - ReduxGameDSL
 analyzer_rules:
   - unused_declaration
   - unused_import
