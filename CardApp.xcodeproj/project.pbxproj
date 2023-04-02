@@ -51,6 +51,9 @@
 		261D671629D9DFAB0018E8F4 /* CardLocation+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */; };
 		261D671929D9E0060018E8F4 /* CardLocationRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */; };
 		261D671A29D9E0230018E8F4 /* CardLocation+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */; };
+		261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */; };
+		261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
+		261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0329D93AD00030ACCD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0229D93AD00030ACCD /* MainView.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
@@ -112,6 +115,8 @@
 		261D671029D9DD8C0018E8F4 /* CardStack+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardStack+Modifiers.swift"; sourceTree = "<group>"; };
 		261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardLocation+Rules.swift"; sourceTree = "<group>"; };
 		261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLocationRulesTests.swift; sourceTree = "<group>"; };
+		261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackRulesTests.swift; sourceTree = "<group>"; };
+		261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardStack+Rules.swift"; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0229D93AD00030ACCD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -259,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */,
+				261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */,
+				261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
@@ -534,6 +541,7 @@
 				261D66C229D9CCF00018E8F4 /* CardLocation.swift in Sources */,
 				261D671629D9DFAB0018E8F4 /* CardLocation+Rules.swift in Sources */,
 				261D66D029D9D0E30018E8F4 /* Attribute.swift in Sources */,
+				261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */,
 				261D66EC29D9D3700018E8F4 /* PlayerBuilder.swift in Sources */,
 				26E4AAA429D945D300631D1F /* SplashView.swift in Sources */,
 				2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */,
@@ -575,6 +583,7 @@
 				261D671929D9E0060018E8F4 /* CardLocationRulesTests.swift in Sources */,
 				261D670329D9D85C0018E8F4 /* CardLocationCodableTests.swift in Sources */,
 				261D670A29D9DC3C0018E8F4 /* CardLocation+Modifiers.swift in Sources */,
+				261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */,
 				261D66DB29D9D1E90018E8F4 /* Hand.swift in Sources */,
 				261D66FD29D9D5FB0018E8F4 /* CardIdTests.swift in Sources */,
 				261D66EF29D9D4200018E8F4 /* Players.swift in Sources */,
@@ -583,6 +592,7 @@
 				261D66C629D9CDD80018E8F4 /* CardStack.swift in Sources */,
 				261D66D229D9D17A0018E8F4 /* AttributeBuilder.swift in Sources */,
 				261D670F29D9DD2A0018E8F4 /* CardStackCodableTests.swift in Sources */,
+				261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //
 
 extension CardStack {
+    
     init(@CardBuilder _ content: () -> [Card] = { [] }) {
         cards = content()
     }
