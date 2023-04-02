@@ -1,12 +1,12 @@
 //
-//  CardStackTests.swift
+//  CardStackModifiersTests.swift
 //  
 //
 //  Created by Hugues Telolahy on 25/03/2023.
 //
 import XCTest
 
-final class CardStackTests: XCTestCase {
+final class CardStackModifiersTests: XCTestCase {
 
     func test_CardStackIsInitiallyEmpty() {
         // Given
