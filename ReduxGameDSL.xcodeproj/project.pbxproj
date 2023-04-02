@@ -22,13 +22,6 @@
 			remoteGlobalIDString = 2699EEFC29D93AD00030ACCD;
 			remoteInfo = ReduxGameDSL;
 		};
-		2699EF1929D93AD10030ACCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2699EEF529D93AD00030ACCD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2699EEFC29D93AD00030ACCD;
-			remoteInfo = ReduxGameDSL;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +33,6 @@
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReduxGameDSLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF1229D93AD10030ACCD /* ReduxGameDSLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxGameDSLTests.swift; sourceTree = "<group>"; };
-		2699EF1829D93AD10030ACCD /* ReduxGameDSLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReduxGameDSLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +44,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2699EF0B29D93AD10030ACCD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2699EF1529D93AD10030ACCD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -82,7 +67,6 @@
 			children = (
 				2699EEFD29D93AD00030ACCD /* ReduxGameDSL.app */,
 				2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */,
-				2699EF1829D93AD10030ACCD /* ReduxGameDSLUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +106,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2699EF2229D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSL" */;
 			buildPhases = (
+				2699EF2B29D93B4B0030ACCD /* Run SwiftLint */,
 				2699EEF929D93AD00030ACCD /* Sources */,
 				2699EEFA29D93AD00030ACCD /* Frameworks */,
 				2699EEFB29D93AD00030ACCD /* Resources */,
@@ -153,24 +138,6 @@
 			productReference = 2699EF0E29D93AD10030ACCD /* ReduxGameDSLTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2699EF1729D93AD10030ACCD /* ReduxGameDSLUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2699EF2829D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSLUITests" */;
-			buildPhases = (
-				2699EF1429D93AD10030ACCD /* Sources */,
-				2699EF1529D93AD10030ACCD /* Frameworks */,
-				2699EF1629D93AD10030ACCD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2699EF1A29D93AD10030ACCD /* PBXTargetDependency */,
-			);
-			name = ReduxGameDSLUITests;
-			productName = ReduxGameDSLUITests;
-			productReference = 2699EF1829D93AD10030ACCD /* ReduxGameDSLUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -186,11 +153,6 @@
 					};
 					2699EF0D29D93AD10030ACCD = {
 						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 2699EEFC29D93AD00030ACCD;
-					};
-					2699EF1729D93AD10030ACCD = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 2699EEFC29D93AD00030ACCD;
 					};
 				};
 			};
@@ -209,7 +171,6 @@
 			targets = (
 				2699EEFC29D93AD00030ACCD /* ReduxGameDSL */,
 				2699EF0D29D93AD10030ACCD /* ReduxGameDSLTests */,
-				2699EF1729D93AD10030ACCD /* ReduxGameDSLUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -231,14 +192,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2699EF1629D93AD10030ACCD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2699EF2B29D93B4B0030ACCD /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#export PATH=\"$PATH:/opt/homebrew/bin\"\n#if which swiftlint > /dev/null; then\n#  swiftlint\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2699EEF929D93AD00030ACCD /* Sources */ = {
@@ -258,13 +233,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2699EF1429D93AD10030ACCD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -272,11 +240,6 @@
 			isa = PBXTargetDependency;
 			target = 2699EEFC29D93AD00030ACCD /* ReduxGameDSL */;
 			targetProxy = 2699EF0F29D93AD10030ACCD /* PBXContainerItemProxy */;
-		};
-		2699EF1A29D93AD10030ACCD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2699EEFC29D93AD00030ACCD /* ReduxGameDSL */;
-			targetProxy = 2699EF1929D93AD10030ACCD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -466,7 +429,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -480,7 +442,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReduxGameDSL.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ReduxGameDSL";
 			};
 			name = Debug;
 		};
@@ -488,7 +449,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -502,49 +462,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReduxGameDSL.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ReduxGameDSL";
-			};
-			name = Release;
-		};
-		2699EF2929D93AD10030ACCD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSLUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReduxGameDSL;
-			};
-			name = Debug;
-		};
-		2699EF2A29D93AD10030ACCD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.ReduxGameDSLUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReduxGameDSL;
 			};
 			name = Release;
 		};
@@ -574,15 +491,6 @@
 			buildConfigurations = (
 				2699EF2629D93AD10030ACCD /* Debug */,
 				2699EF2729D93AD10030ACCD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2699EF2829D93AD10030ACCD /* Build configuration list for PBXNativeTarget "ReduxGameDSLUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2699EF2929D93AD10030ACCD /* Debug */,
-				2699EF2A29D93AD10030ACCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
