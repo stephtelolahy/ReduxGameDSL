@@ -15,6 +15,7 @@
 		261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */; };
 		261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
 		261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
+		26806ADE29DA303700A2D2EE /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 26806ADD29DA303700A2D2EE /* Game */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0329D93AD00030ACCD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0229D93AD00030ACCD /* MainView.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26806ADE29DA303700A2D2EE /* Game in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +263,7 @@
 			);
 			name = CardApp;
 			packageProductDependencies = (
+				26806ADD29DA303700A2D2EE /* Game */,
 			);
 			productName = ReduxGameDSL;
 			productReference = 2699EEFD29D93AD00030ACCD /* CardApp.app */;
@@ -667,6 +670,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		26806ADD29DA303700A2D2EE /* Game */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Game;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2699EEF529D93AD00030ACCD /* Project object */;
 }

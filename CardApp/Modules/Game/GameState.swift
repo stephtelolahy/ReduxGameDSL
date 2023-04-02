@@ -1,5 +1,5 @@
 import Foundation
-//import Game
+import Game
 
 struct GameState: Codable, Equatable {
 //    var game: Game?
