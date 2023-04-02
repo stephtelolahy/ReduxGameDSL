@@ -157,6 +157,7 @@
 		261D673229DA108B0018E8F4 /* Game+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+Modifiers.swift"; sourceTree = "<group>"; };
 		261D673529DA12940018E8F4 /* Player+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+Modifiers.swift"; sourceTree = "<group>"; };
 		267B4FF829DA1F52003826E4 /* LastEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastEvent.swift; sourceTree = "<group>"; };
+		267B4FFB29DA20C1003826E4 /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0229D93AD00030ACCD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -354,6 +355,7 @@
 		2699EEF429D93AD00030ACCD = {
 			isa = PBXGroup;
 			children = (
+				267B4FFB29DA20C1003826E4 /* Game */,
 				26E4AA9C29D941ED00631D1F /* README.md */,
 				2699EEFF29D93AD00030ACCD /* CardApp */,
 				2699EF1129D93AD10030ACCD /* CardAppTests */,
