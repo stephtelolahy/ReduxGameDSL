@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct CardApp: App {
     var body: some Scene {
-        let store = CardAppStore.create()
+        let store = AppStore.create()
         return WindowGroup {
             MainView()
                 .foregroundColor(.primary)

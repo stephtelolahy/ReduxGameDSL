@@ -1,16 +1,16 @@
 //
-//  CardAppStore.swift
+//  AppStore.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
-typealias CardAppStore = Store<AppState, AppAction>
+typealias AppStore = Store<AppState, AppAction>
 
-extension CardAppStore {
+extension AppStore {
     
-    static func create(initial: AppState = AppState(screens: [.splash])) -> CardAppStore {
-        CardAppStore(
+    static func create(initial: AppState = AppState(screens: [.splash])) -> AppStore {
+        AppStore(
             initial: initial,
             reducer: AppState.reducer,
             middlewares: [])

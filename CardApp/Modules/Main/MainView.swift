@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var store: CardAppStore
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         switch store.state.screens.last {
@@ -27,6 +27,6 @@ struct MainView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(CardAppStore.preview)
+            .environmentObject(AppStore.preview)
     }
 }

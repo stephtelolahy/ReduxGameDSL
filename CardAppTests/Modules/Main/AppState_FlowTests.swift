@@ -11,7 +11,7 @@ final class AppState_FlowTests: XCTestCase {
 
     func test_ShowSplash_AsInitialScreen() {
         // Given
-        let sut = CardAppStore.create()
+        let sut = AppStore.create()
 
         // When
         // Assert
@@ -20,7 +20,7 @@ final class AppState_FlowTests: XCTestCase {
 
     func test_ShowHome_IfDispatchedCompleteSplash() {
         // Given
-        let sut = CardAppStore.create()
+        let sut = AppStore.create()
 
         // When
         sut.dispatch(.showScreen(.home))
@@ -31,7 +31,7 @@ final class AppState_FlowTests: XCTestCase {
 
     func test_ShowGame_IfDispatchedStartGame() {
         // Given
-        let sut = CardAppStore.create(initial: AppState(screens: [.home(HomeState())]))
+        let sut = AppStore.create(initial: AppState(screens: [.home(HomeState())]))
 
         // When
         sut.dispatch(.showScreen(.game))
@@ -43,7 +43,7 @@ final class AppState_FlowTests: XCTestCase {
 
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
-        let sut = CardAppStore.create(initial: AppState(screens: [.home(HomeState()),
+        let sut = AppStore.create(initial: AppState(screens: [.home(HomeState()),
                                                                   .game(GameState())]))
 
         // When
