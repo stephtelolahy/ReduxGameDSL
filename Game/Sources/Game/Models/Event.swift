@@ -9,10 +9,10 @@
 public enum Event: Codable, Equatable {
 
     /// Performing a action with a specific card
-    case action(CardActionType, card: String, actor: String)
+    case action(CardAction, card: String, actor: String)
 
     /// Choosing between some options
-    case choose(id: String, actor: String)
+    case choose(option: String, actor: String)
 
     /// Applying some card side effects
     case effect(CardEffect)
