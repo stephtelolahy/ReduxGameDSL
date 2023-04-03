@@ -5,6 +5,8 @@
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
+import Game
+
 extension CardLocation {
 
     func search(byId id: String) -> Card? {

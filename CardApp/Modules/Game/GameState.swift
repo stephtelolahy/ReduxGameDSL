@@ -1,4 +1,5 @@
 import Foundation
+import Game
 
 struct GameState: Codable, Equatable {
     var game: Game?
@@ -7,7 +8,7 @@ struct GameState: Codable, Equatable {
 }
 
 enum GameAction: Codable, Equatable {
-    case didAppear
+    case onAppear
 }
 
 extension GameState {
