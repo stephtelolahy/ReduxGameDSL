@@ -39,7 +39,8 @@ final class GameCodableTests: XCTestCase {
                 "cards": [
                     {
                         "id": "c1",
-                        "name": "c1"
+                        "name": "c1",
+                        "actions": []
                     }
                 ]
             },
@@ -47,7 +48,8 @@ final class GameCodableTests: XCTestCase {
                 "cards": [
                     {
                         "id": "c2",
-                        "name": "c2"
+                        "name": "c2",
+                        "actions": []
                     }
                 ]
             },

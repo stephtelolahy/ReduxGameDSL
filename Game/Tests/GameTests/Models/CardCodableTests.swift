@@ -14,7 +14,8 @@ final class CardCodableTests: XCTestCase {
         let JSON = """
         {
             "id": "c1",
-            "name": ""
+            "name": "",
+            "actions": []
         }
         """
         let jsonData = JSON.data(using: .utf8)!

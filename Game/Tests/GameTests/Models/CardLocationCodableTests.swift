@@ -17,11 +17,13 @@ final class CardLocationCodableTests: XCTestCase {
             "cards": [
                 {
                     "id": "c1",
-                    "name": ""
+                    "name": "",
+                    "actions": []
                 },
                 {
                     "id": "c2",
-                    "name": ""
+                    "name": "",
+                    "actions": []
                 }
             ]
         }

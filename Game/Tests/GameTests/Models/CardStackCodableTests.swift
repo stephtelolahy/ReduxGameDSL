@@ -16,11 +16,13 @@ final class CardStackCodableTests: XCTestCase {
             "cards": [
                 {
                     "id": "c1",
-                    "name": ""
+                    "name": "",
+                    "actions": []
                 },
                 {
                     "id": "c2",
-                    "name": ""
+                    "name": "",
+                    "actions": []
                 }
             ]
         }
