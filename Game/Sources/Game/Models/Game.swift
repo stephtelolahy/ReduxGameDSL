@@ -24,5 +24,5 @@ public struct Game: Codable, Equatable {
     public var isOver: Bool = false
 
     /// last occurred event
-    public var event: GameEvent?
+    public var event: Event?
 }

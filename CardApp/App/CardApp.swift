@@ -10,11 +10,10 @@ import SwiftUI
 @main
 struct CardApp: App {
     var body: some Scene {
-        let store = AppStore.create()
-        return WindowGroup {
+        WindowGroup {
             MainView()
                 .foregroundColor(.primary)
-                .environmentObject(store)
+                .environmentObject(AppStore.create())
         }
     }
 }
