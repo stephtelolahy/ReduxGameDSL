@@ -11,7 +11,7 @@ struct HomeState: Codable, Equatable {
 }
 
 enum HomeAction: Codable, Equatable {
-    case didAppear
+    case onAppear
 }
 
 extension HomeState {

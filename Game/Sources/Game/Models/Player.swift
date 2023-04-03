@@ -11,7 +11,7 @@ import Foundation
 public struct Player: Codable, Equatable {
 
     /// Unique identifier
-    public var id: String
+    public let id: String
 
     /// player name
     public var name: String = ""

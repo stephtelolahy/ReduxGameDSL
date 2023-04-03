@@ -2,13 +2,13 @@ import Foundation
 import Game
 
 struct GameState: Codable, Equatable {
-//    var game: Game?
+    var game: Game?
     var controlled: String?
     var moves: Int = 0
 }
 
 enum GameAction: Codable, Equatable {
-    case didAppear
+    case onAppear
 }
 
 extension GameState {
