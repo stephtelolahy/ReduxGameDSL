@@ -8,9 +8,8 @@ typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Ne
 final class Store<State, Action>: ObservableObject {
 
     @Published private(set) var state: State
-    var isEnabled = true
 
-    private let queue = DispatchQueue(label: "store", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "card.app.queue", qos: .userInitiated)
     private let reducer: Reducer<State, Action>
     private let middlewares: [Middleware<State, Action>]
     private var subscriptions = Set<AnyCancellable>()
@@ -25,13 +24,7 @@ final class Store<State, Action>: ObservableObject {
         self.middlewares = middlewares
     }
 
-    func restoreState(_ state: State) {
-        self.state = state
-    }
-
     func dispatch(_ action: Action) {
-        guard isEnabled else { return }
-
         queue.sync {
             self.dispatch(self.state, action)
         }
