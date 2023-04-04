@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     
-    @EnvironmentObject var store: CardAppStore
+    @EnvironmentObject var store: AppStore
     
     var body: some View {
         ZStack {
@@ -31,9 +31,11 @@ struct SplashView: View {
     }
 }
 
+#if DEBUG
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
         SplashView()
-            .environmentObject(CardAppStore.preview)
+            .environmentObject(AppStore.preview)
     }
 }
+#endif

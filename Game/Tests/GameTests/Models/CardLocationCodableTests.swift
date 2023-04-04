@@ -15,14 +15,8 @@ final class CardLocationCodableTests: XCTestCase {
         {
             "visibility": "p1",
             "cards": [
-                {
-                    "id": "c1",
-                    "name": ""
-                },
-                {
-                    "id": "c2",
-                    "name": ""
-                }
+                "c1",
+                "c2"
             ]
         }
         """
@@ -33,6 +27,6 @@ final class CardLocationCodableTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(sut.visibility, "p1")
-        XCTAssertEqual(sut.cards.map(\.id), ["c1", "c2"])
+        XCTAssertEqual(sut.cards, ["c1", "c2"])
     }
 }

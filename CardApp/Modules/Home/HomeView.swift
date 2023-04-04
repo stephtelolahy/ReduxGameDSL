@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var store: CardAppStore
+    @EnvironmentObject var store: AppStore
     
     var body: some View {
         VStack(alignment: .center, spacing: 32) {
@@ -33,9 +33,11 @@ struct HomeView: View {
     }
 }
 
+#if DEBUG
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(CardAppStore.preview)
+            .environmentObject(AppStore.preview)
     }
 }
+#endif

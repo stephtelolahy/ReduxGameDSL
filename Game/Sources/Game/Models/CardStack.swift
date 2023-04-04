@@ -12,8 +12,8 @@ public struct CardStack: Codable, Equatable {
     public var count: Int { cards.count }
     
     /// Looks at the card at the top of this stack without removing it from the stack.
-    public var top: Card? { cards.first }
+    public var top: String? { cards.first }
     
     /// Content
-    public var cards: [Card] = []
+    var cards: [String] = []
 }

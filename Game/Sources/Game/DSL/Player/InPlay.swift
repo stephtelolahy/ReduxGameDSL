@@ -8,7 +8,7 @@
 public struct InPlay: Attribute {
     public let value: CardLocation
 
-    public init(@CardBuilder _ content: () -> [Card]) {
+    public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardLocation(cards: content())
     }
 }

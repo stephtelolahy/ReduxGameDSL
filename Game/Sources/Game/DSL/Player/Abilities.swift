@@ -6,9 +6,9 @@
 //
 
 public struct Abilities: Attribute {
-    public let value: [Card]
+    public let value: [String]
 
-    public init(@CardBuilder _ content: () -> [Card]) {
+    public init(@StringBuilder _ content: () -> [String]) {
         self.value = content()
     }
 }

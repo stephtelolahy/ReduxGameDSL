@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
-    @EnvironmentObject var store: CardAppStore
+    @EnvironmentObject var store: AppStore
 
     private var state: GameState? {
         // TODO: extract game state
@@ -45,9 +45,11 @@ struct GameView: View {
     }
 }
 
+#if DEBUG
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
-            .environmentObject(CardAppStore.preview)
+            .environmentObject(AppStore.preview)
     }
 }
+#endif

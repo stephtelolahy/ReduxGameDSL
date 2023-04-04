@@ -29,6 +29,6 @@ final class PlayerHandTests: XCTestCase {
 
         // When
         // Assert
-        XCTAssertEqual(sut.hand.cards.map(\.id), ["c1", "c2"])
+        XCTAssertEqual(sut.hand.cards, ["c1", "c2"])
     }
 }

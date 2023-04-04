@@ -7,14 +7,28 @@
 
 import SwiftUI
 
+typealias AppStore = Store<AppState, AppAction>
+
+let store = AppStore(
+    initial: AppState(screens: [.splash]),
+    reducer: AppState.reducer,
+    middlewares: [LoggerMiddleware().middleware])
+
 @main
 struct CardApp: App {
     var body: some Scene {
-        let store = CardAppStore.create()
-        return WindowGroup {
+        WindowGroup {
             MainView()
                 .foregroundColor(.primary)
                 .environmentObject(store)
         }
     }
 }
+
+#if DEBUG
+extension AppStore {
+    static let preview = AppStore(initial: AppState(screens: [.splash]),
+                                  reducer: { state, _ in state },
+                                  middlewares: [])
+}
+#endif

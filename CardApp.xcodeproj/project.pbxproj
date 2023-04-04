@@ -15,6 +15,8 @@
 		261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */; };
 		261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
 		261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
+		261FEB4529DB687700FB7517 /* LoggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */; };
+		261FEB4629DB687700FB7517 /* LoggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */; };
 		264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 264CD1CD29DA31BA00D0BC21 /* Game */; };
 		2666D35E29DB5BEC00B29BAA /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 2666D35D29DB5BEC00B29BAA /* Game */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
@@ -27,8 +29,6 @@
 		2699EF3B29D93FED0030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
 		2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
 		2699EF3D29D940010030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
-		26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
-		26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* CardAppStore.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 		26E4AAA429D945D300631D1F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA329D945D300631D1F /* SplashView.swift */; };
 		26E4AAA929D94CFD00631D1F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA829D94CFD00631D1F /* HomeState.swift */; };
@@ -53,6 +53,7 @@
 		261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLocationRulesTests.swift; sourceTree = "<group>"; };
 		261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackRulesTests.swift; sourceTree = "<group>"; };
 		261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardStack+Rules.swift"; sourceTree = "<group>"; };
+		261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMiddleware.swift; sourceTree = "<group>"; };
 		26806ADA29DA2F4800A2D2EE /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		2699EF2F29D93EB50030ACCD /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2699EF3129D93EC30030ACCD /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		2699EF3229D93EC30030ACCD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		26E4AA9929D9417000631D1F /* CardAppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppStore.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26E4AAA329D945D300631D1F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		26E4AAA829D94CFD00631D1F /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
@@ -107,13 +107,12 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		261D671329D9DF900018E8F4 /* Rules */ = {
+		261D671329D9DF900018E8F4 /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
-				261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */,
-				261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */,
+				261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */,
 			);
-			path = Rules;
+			path = Middlewares;
 			sourceTree = "<group>";
 		};
 		261D671729D9DFCF0018E8F4 /* Rules */ = {
@@ -121,6 +120,15 @@
 			children = (
 				261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */,
 				261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
+		2646FB6829DC7D9D00F312FE /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */,
+				261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
@@ -166,7 +174,8 @@
 			children = (
 				2699EF2E29D93E9C0030ACCD /* App */,
 				2699EF2D29D93E920030ACCD /* Modules */,
-				261D671329D9DF900018E8F4 /* Rules */,
+				2646FB6829DC7D9D00F312FE /* Rules */,
+				261D671329D9DF900018E8F4 /* Middlewares */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
 				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
 				2699EF0729D93AD10030ACCD /* Preview Content */,
@@ -206,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
-				26E4AA9929D9417000631D1F /* CardAppStore.swift */,
 				2699EF2F29D93EB50030ACCD /* Store.swift */,
 			);
 			path = App;
@@ -377,7 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2699EF3029D93EB50030ACCD /* Store.swift in Sources */,
-				26E4AA9A29D9417000631D1F /* CardAppStore.swift in Sources */,
+				261FEB4529DB687700FB7517 /* LoggerMiddleware.swift in Sources */,
 				26E4AAAC29D9516600631D1F /* HomeView.swift in Sources */,
 				2699EF3429D93EC30030ACCD /* AppState.swift in Sources */,
 				26E4AAA929D94CFD00631D1F /* HomeState.swift in Sources */,
@@ -397,7 +405,7 @@
 			files = (
 				2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */,
 				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
-				26E4AA9B29D9419F00631D1F /* CardAppStore.swift in Sources */,
+				261FEB4629DB687700FB7517 /* LoggerMiddleware.swift in Sources */,
 				26E4AAAA29D94DD700631D1F /* HomeState.swift in Sources */,
 				260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,

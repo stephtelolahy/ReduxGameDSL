@@ -21,7 +21,7 @@ final class CardLocationModifiersTests: XCTestCase {
     func test_CardsCountIsOne_WhenInitializedWithOneCard() {
         // Given
         let sut = CardLocation {
-            Card()
+            "c1"
         }
 
         // When
@@ -32,14 +32,14 @@ final class CardLocationModifiersTests: XCTestCase {
     func test_CardsContent() {
         // Given
         let sut = CardLocation {
-            Card("c1")
+            "c1"
             "c2"
             "c3"
         }
 
         // When
         // Assert
-        XCTAssertEqual(sut.cards.map(\.id), ["c1", "c2", "c3"])
+        XCTAssertEqual(sut.cards, ["c1", "c2", "c3"])
     }
 
     func test_VisibilityIsPublic_ByDefault() {

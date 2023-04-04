@@ -13,8 +13,8 @@ final class CardCodableTests: XCTestCase {
         // Given
         let JSON = """
         {
-            "id": "c1",
-            "name": ""
+            "name": "c1",
+            "actions": []
         }
         """
         let jsonData = JSON.data(using: .utf8)!
@@ -23,6 +23,6 @@ final class CardCodableTests: XCTestCase {
         let sut = try JSONDecoder().decode(Card.self, from: jsonData)
 
         // Assert
-        XCTAssertEqual(sut.id, "c1")
+        XCTAssertEqual(sut.name, "c1")
     }
 }

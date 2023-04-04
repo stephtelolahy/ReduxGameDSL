@@ -29,6 +29,6 @@ final class PlayerInPlayTests: XCTestCase {
 
         // When
         // Assert
-        XCTAssertEqual(sut.inPlay.cards.map(\.id), ["c1", "c2"])
+        XCTAssertEqual(sut.inPlay.cards, ["c1", "c2"])
     }
 }

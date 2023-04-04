@@ -7,7 +7,7 @@
 
 public extension CardStack {
 
-    init(@CardBuilder content: () -> [Card] = { [] }) {
+    init(@StringBuilder content: () -> [String] = { [] }) {
         cards = content()
     }
 }
