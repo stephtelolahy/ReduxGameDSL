@@ -103,7 +103,7 @@
 		2699EEFF29D93AD00030ACCD /* CardApp */ = {
 			isa = PBXGroup;
 			children = (
-				2699EF2E29D93E9C0030ACCD /* App */,
+				2699EF0029D93AD00030ACCD /* CardApp.swift */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
 				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
 				2699EF0729D93AD10030ACCD /* Preview Content */,
@@ -125,14 +125,6 @@
 				26D4D90629DCE1BA004656C8 /* CardAppTests.swift */,
 			);
 			path = CardAppTests;
-			sourceTree = "<group>";
-		};
-		2699EF2E29D93E9C0030ACCD /* App */ = {
-			isa = PBXGroup;
-			children = (
-				2699EF0029D93AD00030ACCD /* CardApp.swift */,
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
