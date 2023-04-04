@@ -1,8 +1,8 @@
-// swiftlint:disable file_name
-//  CardNames.swift
+//
+//  String+CardName.swift
 //  
 //
-//  Created by Hugues Telolahy on 04/04/2023.
+//  Created by Hugues Telolahy on 05/04/2023.
 //
 
 public extension String {
