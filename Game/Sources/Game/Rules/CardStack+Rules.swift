@@ -4,16 +4,15 @@
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
-import Game
 
 extension CardStack {
 
     @discardableResult
-    mutating func pop() -> Card {
+    mutating func pop() -> String {
         cards.removeFirst()
     }
 
-    mutating func push(_ card: Card) {
+    mutating func push(_ card: String) {
         cards.insert(card, at: 0)
     }
 }

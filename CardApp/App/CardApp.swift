@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-typealias AppStore = Store<AppState, AppAction>
-
 let store = AppStore(
     initial: AppState(screens: [.splash]),
     reducer: AppState.reducer,
@@ -24,11 +22,3 @@ struct CardApp: App {
         }
     }
 }
-
-#if DEBUG
-extension AppStore {
-    static let preview = AppStore(initial: AppState(screens: [.splash]),
-                                  reducer: { state, _ in state },
-                                  middlewares: [])
-}
-#endif
