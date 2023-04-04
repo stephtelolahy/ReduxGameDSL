@@ -29,8 +29,6 @@
 		2699EF3B29D93FED0030ACCD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF2F29D93EB50030ACCD /* Store.swift */; };
 		2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3229D93EC30030ACCD /* AppState.swift */; };
 		2699EF3D29D940010030ACCD /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF3129D93EC30030ACCD /* GameState.swift */; };
-		26E4AA9A29D9417000631D1F /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* AppStore.swift */; };
-		26E4AA9B29D9419F00631D1F /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AA9929D9417000631D1F /* AppStore.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 		26E4AAA429D945D300631D1F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA329D945D300631D1F /* SplashView.swift */; };
 		26E4AAA929D94CFD00631D1F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4AAA829D94CFD00631D1F /* HomeState.swift */; };
@@ -67,7 +65,6 @@
 		2699EF2F29D93EB50030ACCD /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2699EF3129D93EC30030ACCD /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		2699EF3229D93EC30030ACCD /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		26E4AA9929D9417000631D1F /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26E4AAA329D945D300631D1F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		26E4AAA829D94CFD00631D1F /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
@@ -218,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
-				26E4AA9929D9417000631D1F /* AppStore.swift */,
 				2699EF2F29D93EB50030ACCD /* Store.swift */,
 			);
 			path = App;
@@ -389,7 +385,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2699EF3029D93EB50030ACCD /* Store.swift in Sources */,
-				26E4AA9A29D9417000631D1F /* AppStore.swift in Sources */,
 				261FEB4529DB687700FB7517 /* LoggerMiddleware.swift in Sources */,
 				26E4AAAC29D9516600631D1F /* HomeView.swift in Sources */,
 				2699EF3429D93EC30030ACCD /* AppState.swift in Sources */,
@@ -410,7 +405,6 @@
 			files = (
 				2699EF3C29D93FFE0030ACCD /* AppState.swift in Sources */,
 				2699EF3D29D940010030ACCD /* GameState.swift in Sources */,
-				26E4AA9B29D9419F00631D1F /* AppStore.swift in Sources */,
 				261FEB4629DB687700FB7517 /* LoggerMiddleware.swift in Sources */,
 				26E4AAAA29D94DD700631D1F /* HomeState.swift in Sources */,
 				260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */,

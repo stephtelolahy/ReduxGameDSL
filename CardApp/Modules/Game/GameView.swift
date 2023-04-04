@@ -45,9 +45,11 @@ struct GameView: View {
     }
 }
 
+#if DEBUG
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView()
             .environmentObject(AppStore.preview)
     }
 }
+#endif
