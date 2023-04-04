@@ -13,8 +13,7 @@ extension AppStore {
         AppStore(
             initial: initial,
             reducer: AppState.reducer,
-            middlewares: [EngineMiddleware().middleware,
-                          LoggerMiddleware().middleware])
+            middlewares: [LoggerMiddleware().middleware])
     }
     
     static let preview = create()
