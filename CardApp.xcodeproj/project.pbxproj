@@ -9,14 +9,10 @@
 /* Begin PBXBuildFile section */
 		260C537A29D9575E00FB08C3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C537929D9575E00FB08C3 /* GameView.swift */; };
 		260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C537B29D9BF1B00FB08C3 /* AppState_FlowTests.swift */; };
-		261D671629D9DFAB0018E8F4 /* CardLocation+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */; };
-		261D671929D9E0060018E8F4 /* CardLocationRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */; };
-		261D671A29D9E0230018E8F4 /* CardLocation+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */; };
-		261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */; };
-		261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
-		261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */; };
 		261FEB4529DB687700FB7517 /* LoggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */; };
 		261FEB4629DB687700FB7517 /* LoggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */; };
+		263B2F1229DCD53D0090FED0 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B2F1129DCD53D0090FED0 /* AppStore.swift */; };
+		263B2F1329DCD53D0090FED0 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B2F1129DCD53D0090FED0 /* AppStore.swift */; };
 		264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 264CD1CD29DA31BA00D0BC21 /* Game */; };
 		2666D35E29DB5BEC00B29BAA /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 2666D35D29DB5BEC00B29BAA /* Game */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
@@ -49,11 +45,8 @@
 /* Begin PBXFileReference section */
 		260C537929D9575E00FB08C3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		260C537B29D9BF1B00FB08C3 /* AppState_FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState_FlowTests.swift; sourceTree = "<group>"; };
-		261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardLocation+Rules.swift"; sourceTree = "<group>"; };
-		261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLocationRulesTests.swift; sourceTree = "<group>"; };
-		261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackRulesTests.swift; sourceTree = "<group>"; };
-		261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardStack+Rules.swift"; sourceTree = "<group>"; };
 		261FEB4429DB687700FB7517 /* LoggerMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMiddleware.swift; sourceTree = "<group>"; };
+		263B2F1129DCD53D0090FED0 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		26806ADA29DA2F4800A2D2EE /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
@@ -115,24 +108,6 @@
 			path = Middlewares;
 			sourceTree = "<group>";
 		};
-		261D671729D9DFCF0018E8F4 /* Rules */ = {
-			isa = PBXGroup;
-			children = (
-				261D671829D9E0060018E8F4 /* CardLocationRulesTests.swift */,
-				261D671B29D9E0DE0018E8F4 /* CardStackRulesTests.swift */,
-			);
-			path = Rules;
-			sourceTree = "<group>";
-		};
-		2646FB6829DC7D9D00F312FE /* Rules */ = {
-			isa = PBXGroup;
-			children = (
-				261D671529D9DFAB0018E8F4 /* CardLocation+Rules.swift */,
-				261D671D29D9E10D0018E8F4 /* CardStack+Rules.swift */,
-			);
-			path = Rules;
-			sourceTree = "<group>";
-		};
 		2653DAE829DA2ADD007EAE71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +149,6 @@
 			children = (
 				2699EF2E29D93E9C0030ACCD /* App */,
 				2699EF2D29D93E920030ACCD /* Modules */,
-				2646FB6829DC7D9D00F312FE /* Rules */,
 				261D671329D9DF900018E8F4 /* Middlewares */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
 				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
@@ -195,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				261D66FE29D9D77E0018E8F4 /* Modules */,
-				261D671729D9DFCF0018E8F4 /* Rules */,
 			);
 			path = CardAppTests;
 			sourceTree = "<group>";
@@ -216,6 +189,7 @@
 			children = (
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
 				2699EF2F29D93EB50030ACCD /* Store.swift */,
+				263B2F1129DCD53D0090FED0 /* AppStore.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -392,9 +366,8 @@
 				260C537A29D9575E00FB08C3 /* GameView.swift in Sources */,
 				2699EF3329D93EC30030ACCD /* GameState.swift in Sources */,
 				2699EF0329D93AD00030ACCD /* MainView.swift in Sources */,
-				261D671629D9DFAB0018E8F4 /* CardLocation+Rules.swift in Sources */,
-				261D671E29D9E10D0018E8F4 /* CardStack+Rules.swift in Sources */,
 				26E4AAA429D945D300631D1F /* SplashView.swift in Sources */,
+				263B2F1229DCD53D0090FED0 /* AppStore.swift in Sources */,
 				2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,11 +381,8 @@
 				261FEB4629DB687700FB7517 /* LoggerMiddleware.swift in Sources */,
 				26E4AAAA29D94DD700631D1F /* HomeState.swift in Sources */,
 				260C537C29D9BF1B00FB08C3 /* AppState_FlowTests.swift in Sources */,
+				263B2F1329DCD53D0090FED0 /* AppStore.swift in Sources */,
 				2699EF3B29D93FED0030ACCD /* Store.swift in Sources */,
-				261D671929D9E0060018E8F4 /* CardLocationRulesTests.swift in Sources */,
-				261D671F29D9E27E0018E8F4 /* CardStack+Rules.swift in Sources */,
-				261D671A29D9E0230018E8F4 /* CardLocation+Rules.swift in Sources */,
-				261D671C29D9E0DE0018E8F4 /* CardStackRulesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
