@@ -15,6 +15,5 @@ public struct CardStack: Codable, Equatable {
     public var top: String? { cards.first }
     
     /// Content
-    // TODO: make private
-    public var cards: [String] = []
+    var cards: [String] = []
 }
