@@ -38,5 +38,4 @@ final class InventoryTests: XCTestCase {
 //        XCTAssertTrue(cards[.stagecoach] != nil)
 //        XCTAssertTrue(cards[.wellsFargo] != nil)
     }
-
 }

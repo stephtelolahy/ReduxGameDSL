@@ -17,11 +17,11 @@ Since DSLs result in programs that are smaller and easier to understand, they al
 - [x] Equatable game object
 - [ ] Composable rules
 - [ ] Replay
-- [ ] Hot reload using JSON file 
+- [ ] Hot reload with JSON file 
 
 ### MetaModel
 
-![](docs/architecture.png)
+![](Docs/architecture.png)
 
 - **Game**: Global metaclass which contains all elements in a game.
 - **Player**: Players who are participating in a game.
@@ -33,7 +33,7 @@ Since DSLs result in programs that are smaller and easier to understand, they al
 
 Redux architecture is meant to protect changes in an application’s state. It forces you to define clearly what state should be set when a specific action is dispatched.
 
-![](docs/redux.png)
+![](Docs/redux.png)
 
 - There is a single global state kept in store.
 - State is immutable.

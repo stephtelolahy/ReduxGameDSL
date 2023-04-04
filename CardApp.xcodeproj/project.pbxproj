@@ -7,26 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2619822929DCDCC200B229B0 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 2619822829DCDCC200B229B0 /* UI */; };
 		2619822B29DCDCCA00B229B0 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 2619822A29DCDCCA00B229B0 /* UI */; };
 		264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 264CD1CD29DA31BA00D0BC21 /* Game */; };
-		2666D35E29DB5BEC00B29BAA /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 2666D35D29DB5BEC00B29BAA /* Game */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
-		26D4D90729DCE1BA004656C8 /* CardAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D4D90629DCE1BA004656C8 /* CardAppTests.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		2699EF0F29D93AD10030ACCD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2699EEF529D93AD00030ACCD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2699EEFC29D93AD00030ACCD;
-			remoteInfo = ReduxGameDSL;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2619822729DCDBBB00B229B0 /* UI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UI; sourceTree = "<group>"; };
@@ -36,8 +23,6 @@
 		2699EF0429D93AD10030ACCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2699EF0629D93AD10030ACCD /* CardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardApp.entitlements; sourceTree = "<group>"; };
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		26D4D90629DCE1BA004656C8 /* CardAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAppTests.swift; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,15 +33,6 @@
 			files = (
 				2619822B29DCDCCA00B229B0 /* UI in Frameworks */,
 				264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2699EF0B29D93AD10030ACCD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2619822929DCDCC200B229B0 /* UI in Frameworks */,
-				2666D35E29DB5BEC00B29BAA /* Game in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +61,6 @@
 				26E4AA9C29D941ED00631D1F /* README.md */,
 				26806AD929DA2F4800A2D2EE /* Packages */,
 				2699EEFF29D93AD00030ACCD /* CardApp */,
-				2699EF1129D93AD10030ACCD /* CardAppTests */,
 				2699EEFE29D93AD00030ACCD /* Products */,
 				2653DAE829DA2ADD007EAE71 /* Frameworks */,
 			);
@@ -95,7 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				2699EEFD29D93AD00030ACCD /* CardApp.app */,
-				2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,14 +91,6 @@
 				2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2699EF1129D93AD10030ACCD /* CardAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				26D4D90629DCE1BA004656C8 /* CardAppTests.swift */,
-			);
-			path = CardAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,28 +118,6 @@
 			productReference = 2699EEFD29D93AD00030ACCD /* CardApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2699EF0D29D93AD10030ACCD /* CardAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardAppTests" */;
-			buildPhases = (
-				2699EF0A29D93AD10030ACCD /* Sources */,
-				2699EF0B29D93AD10030ACCD /* Frameworks */,
-				2699EF0C29D93AD10030ACCD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2699EF1029D93AD10030ACCD /* PBXTargetDependency */,
-			);
-			name = CardAppTests;
-			packageProductDependencies = (
-				2666D35D29DB5BEC00B29BAA /* Game */,
-				2619822829DCDCC200B229B0 /* UI */,
-			);
-			productName = ReduxGameDSLTests;
-			productReference = 2699EF0E29D93AD10030ACCD /* CardAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -186,10 +130,6 @@
 				TargetAttributes = {
 					2699EEFC29D93AD00030ACCD = {
 						CreatedOnToolsVersion = 14.2;
-					};
-					2699EF0D29D93AD10030ACCD = {
-						CreatedOnToolsVersion = 14.2;
-						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -207,7 +147,6 @@
 			projectRoot = "";
 			targets = (
 				2699EEFC29D93AD00030ACCD /* CardApp */,
-				2699EF0D29D93AD10030ACCD /* CardAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,13 +159,6 @@
 				26E4AA9D29D941ED00631D1F /* README.md in Resources */,
 				2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */,
 				2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2699EF0C29D93AD10030ACCD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,23 +195,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2699EF0A29D93AD10030ACCD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				26D4D90729DCE1BA004656C8 /* CardAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2699EF1029D93AD10030ACCD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2699EEFC29D93AD00030ACCD /* CardApp */;
-			targetProxy = 2699EF0F29D93AD10030ACCD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2699EF2029D93AD10030ACCD /* Debug */ = {
@@ -467,59 +383,6 @@
 			};
 			name = Release;
 		};
-		2699EF2629D93AD10030ACCD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2699EF2729D93AD10030ACCD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.creativegames.CardAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -541,31 +404,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2699EF2529D93AD10030ACCD /* Build configuration list for PBXNativeTarget "CardAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2699EF2629D93AD10030ACCD /* Debug */,
-				2699EF2729D93AD10030ACCD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2619822829DCDCC200B229B0 /* UI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UI;
-		};
 		2619822A29DCDCCA00B229B0 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
 		};
 		264CD1CD29DA31BA00D0BC21 /* Game */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Game;
-		};
-		2666D35D29DB5BEC00B29BAA /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
 		};
