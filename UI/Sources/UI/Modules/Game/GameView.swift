@@ -11,7 +11,6 @@ struct GameView: View {
     @EnvironmentObject var store: AppStore
 
     private var state: GameState? {
-        // TODO: extract game state
         nil
     }
 

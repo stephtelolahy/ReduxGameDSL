@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct HomeState: Codable, Equatable {
+public struct HomeState: Codable, Equatable {
 }
 
-enum HomeAction: Codable, Equatable {
+public enum HomeAction: Codable, Equatable {
     case onAppear
 }
 
 extension HomeState {
-    static let reducer: Reducer<Self, HomeAction> = { state, action in
+    static let reducer: Reducer<Self, HomeAction> = { state, _ in
         state
     }
 }

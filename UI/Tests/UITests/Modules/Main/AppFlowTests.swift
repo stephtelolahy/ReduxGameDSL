@@ -1,13 +1,13 @@
 //
-//  AppState_FlowTests.swift
+//  AppFlowTests.swift
 //  CardAppTests
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
-@testable import CardApp
+@testable import UI
 import XCTest
 
-final class AppState_FlowTests: XCTestCase {
+final class AppFlowTests: XCTestCase {
     
     func test_ShowSplash_AsInitialScreen() {
         // Given
@@ -52,5 +52,4 @@ final class AppState_FlowTests: XCTestCase {
         // Assert
         XCTAssertEqual(sut.state.screens, [.home(HomeState())])
     }
-    
 }

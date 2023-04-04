@@ -1,23 +1,27 @@
 import Foundation
 
-struct AppState: Codable, Equatable {
+public struct AppState: Codable, Equatable {
     let screens: [ScreenState]
+
+    public init(screens: [ScreenState]) {
+        self.screens = screens
+    }
 }
 
-enum ScreenState: Codable, Equatable {
+public enum ScreenState: Codable, Equatable {
     case splash
     case home(HomeState)
     case game(GameState)
 }
 
-enum AppAction: Codable, Equatable {
+public enum AppAction: Codable, Equatable {
     case showScreen(Screen)
     case dismissScreen(Screen)
     case home(HomeAction)
     case game(GameAction)
 }
 
-enum Screen: Codable, Equatable {
+public enum Screen: Codable, Equatable {
     case splash
     case home
     case game

@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct MainView: View {
+public struct MainView: View {
     @EnvironmentObject var store: AppStore
 
-    var body: some View {
+    public init() {}
+
+    public var body: some View {
         switch store.state.screens.last {
         case .home:
             HomeView()

@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
+import UI
 
-let store = AppStore(
-    initial: AppState(screens: [.splash]),
-    reducer: AppState.reducer,
-    middlewares: [LoggerMiddleware().middleware])
+let store = AppStore.create(AppState(screens: [.splash]))
 
 @main
 struct CardApp: App {

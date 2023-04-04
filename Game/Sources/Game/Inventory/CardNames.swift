@@ -1,4 +1,4 @@
-//
+// swiftlint:disable file_name
 //  CardNames.swift
 //  
 //
