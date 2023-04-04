@@ -5,11 +5,8 @@ import Foundation
 /// have actions that can be played and have side effects that happen when they are being played.
 public struct Card: Codable, Equatable {
     
-    /// Unique identifier
-    public let id: String
-    
     /// Name
-    public var name: String = ""
+    public let name: String
     
     /// Actions that can be performed with the card
     public var actions: [CardActionInfo] = []

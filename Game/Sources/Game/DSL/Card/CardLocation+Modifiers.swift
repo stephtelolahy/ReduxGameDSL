@@ -7,11 +7,11 @@
 
 public extension CardLocation {
 
-    init(cards: [Card] = []) {
+    init(cards: [String] = []) {
         self.cards = cards
     }
 
-    init(visibility: String? = nil, @CardBuilder content: () -> [Card] = { [] }) {
+    init(visibility: String? = nil, @StringBuilder content: () -> [String] = { [] }) {
         self.visibility = visibility
         self.cards = content()
     }

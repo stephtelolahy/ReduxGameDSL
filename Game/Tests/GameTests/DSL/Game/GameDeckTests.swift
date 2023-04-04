@@ -23,7 +23,7 @@ final class GameDeckTests: XCTestCase {
         // When
         let sut = Game {
             Deck {
-                Card()
+                "c1"
             }
         }
 
@@ -36,13 +36,13 @@ final class GameDeckTests: XCTestCase {
         // When
         let sut = Game {
             Deck {
-                Card("c1")
-                Card("c2")
+                "c1"
+                "c2"
             }
         }
 
         // Assert
         XCTAssertEqual(sut.deck.count, 2)
-        XCTAssertEqual(sut.deck.top?.id, "c1")
+        XCTAssertEqual(sut.deck.top, "c1")
     }
 }

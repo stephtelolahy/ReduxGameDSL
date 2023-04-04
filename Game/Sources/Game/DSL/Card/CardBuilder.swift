@@ -16,7 +16,7 @@ public struct CardBuilder {
         card
     }
 
-    public static func buildExpression(_ id: String) -> Card {
-        Card(id: id)
+    public static func buildExpression(_ name: String) -> Card {
+        Card(name)
     }
 }

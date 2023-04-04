@@ -6,7 +6,7 @@
 //
 
 public struct CardList {
-    let cards: [String: Card]
+    public let cards: [String: Card]
 
     public init(@CardBuilder _ content: () -> [Card]) {
         self.cards = content().toDictionary()

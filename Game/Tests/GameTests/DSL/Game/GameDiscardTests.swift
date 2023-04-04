@@ -23,13 +23,13 @@ final class GameDiscardTests: XCTestCase {
         // When
         let sut = Game {
             DiscardPile {
-                Card("c1")
-                Card("c2")
+                "c1"
+                "c2"
             }
         }
 
         // Assert
         XCTAssertEqual(sut.discard.count, 2)
-        XCTAssertEqual(sut.discard.top?.id, "c1")
+        XCTAssertEqual(sut.discard.top, "c1")
     }
 }

@@ -37,20 +37,12 @@ final class GameCodableTests: XCTestCase {
             "turn": "p1",
             "deck": {
                 "cards": [
-                    {
-                        "id": "c1",
-                        "name": "c1",
-                        "actions": []
-                    }
+                    "c1"
                 ]
             },
             "discard": {
                 "cards": [
-                    {
-                        "id": "c2",
-                        "name": "c2",
-                        "actions": []
-                    }
+                    "c2"
                 ]
             },
             "choosable": {

@@ -29,6 +29,6 @@ final class PlayerAbilitiesTests: XCTestCase {
 
         // When
         // Assert
-        XCTAssertEqual(sut.abilities.map(\.id), ["a1", "a2"])
+        XCTAssertEqual(sut.abilities, ["a1", "a2"])
     }
 }

@@ -15,5 +15,5 @@ public struct CardLocation: Codable, Equatable {
     public var visibility: String?
 
     /// Content
-    public var cards: [Card] = []
+    public var cards: [String] = []
 }

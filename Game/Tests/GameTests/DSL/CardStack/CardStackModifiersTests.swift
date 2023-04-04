@@ -21,7 +21,7 @@ final class CardStackModifiersTests: XCTestCase {
     func test_CardStackContainsOneCard() {
         // Given
         let sut = CardStack {
-            Card()
+            "c1"
         }
 
         // When
@@ -32,23 +32,11 @@ final class CardStackModifiersTests: XCTestCase {
     func test_CardStackContainsTwoCards() {
         // Given
         let sut = CardStack {
-            Card()
-            Card()
-        }
-
-        // When
-        // Assert
-        XCTAssertEqual(sut.count, 2)
-    }
-
-    func test_CardStackContainsTwoStringCards() {
-        // Given
-        // When
-        let sut = CardStack {
             "c1"
             "c2"
         }
 
+        // When
         // Assert
         XCTAssertEqual(sut.count, 2)
     }
@@ -65,12 +53,12 @@ final class CardStackModifiersTests: XCTestCase {
     func test_ReturnFirstCard_IfGettingTop() {
         // Given
         let sut = CardStack {
-            Card("c1")
-            Card("c2")
+            "c1"
+            "c2"
         }
 
         // When
         // Assert
-        XCTAssertEqual(sut.top?.id, "c1")
+        XCTAssertEqual(sut.top, "c1")
     }
 }

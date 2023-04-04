@@ -14,16 +14,8 @@ final class CardStackCodableTests: XCTestCase {
         let JSON = """
         {
             "cards": [
-                {
-                    "id": "c1",
-                    "name": "",
-                    "actions": []
-                },
-                {
-                    "id": "c2",
-                    "name": "",
-                    "actions": []
-                }
+                "c1",
+                "c2"
             ]
         }
         """
@@ -34,6 +26,6 @@ final class CardStackCodableTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(sut.count, 2)
-        XCTAssertEqual(sut.top?.id, "c1")
+        XCTAssertEqual(sut.top, "c1")
     }
 }

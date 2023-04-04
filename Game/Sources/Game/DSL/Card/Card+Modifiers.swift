@@ -8,13 +8,9 @@
 import Foundation
 
 public extension Card {
-
-    init(_ id: String = UUID().uuidString) {
-        self.id = id
-    }
-
-    init(_ id: String = UUID().uuidString, @CardActionInfoBuilder content: () -> [CardActionInfo]) {
-        self.id = id
+    
+    init(_ name: String, @CardActionInfoBuilder content: () -> [CardActionInfo] = { [] }) {
+        self.name = name
         self.actions = content()
     }
 }

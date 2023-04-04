@@ -35,7 +35,7 @@ public struct Player: Codable, Equatable {
     public var scope: Int = 0
 
     /// abilities
-    public var abilities: [Card] = []
+    public var abilities: [String] = []
 
     /// hand cards
     public var hand: CardLocation = .init()

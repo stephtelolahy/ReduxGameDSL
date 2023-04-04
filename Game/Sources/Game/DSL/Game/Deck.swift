@@ -8,7 +8,7 @@
 public struct Deck: Attribute {
     public let value: CardStack
 
-    public init(@CardBuilder _ content: () -> [Card]) {
+    public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardStack(content: content)
     }
 }

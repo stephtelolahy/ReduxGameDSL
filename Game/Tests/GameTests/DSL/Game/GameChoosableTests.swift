@@ -23,12 +23,12 @@ final class GameChoosableTests: XCTestCase {
         // When
         let sut = Game {
             Choosable {
-                Card("c1")
-                Card("c2")
+                "c1"
+                "c2"
             }
         }
 
         // Assert
-        XCTAssertEqual(sut.choosable.cards.map(\.id), ["c1", "c2"])
+        XCTAssertEqual(sut.choosable.cards, ["c1", "c2"])
     }
 }
