@@ -39,10 +39,4 @@ final class InventoryTests: XCTestCase {
 //        XCTAssertTrue(cards[.wellsFargo] != nil)
     }
 
-    func test_() {
-        // Given
-        // When
-        // Assert
-    }
-
 }
