@@ -9,7 +9,7 @@ public final class Store<State, Action>: ObservableObject {
 
     @Published private(set) var state: State
 
-    private let queue = DispatchQueue(label: "card.app.queue", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "store.queue", qos: .userInitiated)
     private let reducer: Reducer<State, Action>
     private let middlewares: [Middleware<State, Action>]
     private var subscriptions = Set<AnyCancellable>()
