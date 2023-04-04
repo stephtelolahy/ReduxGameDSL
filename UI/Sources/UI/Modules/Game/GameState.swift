@@ -1,13 +1,13 @@
 import Foundation
 import Game
 
-struct GameState: Codable, Equatable {
+public struct GameState: Codable, Equatable {
     var game: Game?
     var controlled: String?
     var moves: Int = 0
 }
 
-enum GameAction: Codable, Equatable {
+public enum GameAction: Codable, Equatable {
     case onAppear
 }
 

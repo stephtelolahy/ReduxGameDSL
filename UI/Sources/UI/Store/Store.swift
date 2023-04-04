@@ -5,7 +5,7 @@ import SwiftUI
 typealias Reducer<State, Action> = (State, Action) -> State
 typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
-final class Store<State, Action>: ObservableObject {
+public final class Store<State, Action>: ObservableObject {
 
     @Published private(set) var state: State
 

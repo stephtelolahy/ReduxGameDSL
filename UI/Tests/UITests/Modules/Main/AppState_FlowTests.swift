@@ -4,7 +4,7 @@
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
-@testable import CardApp
+@testable import UI
 import XCTest
 
 final class AppState_FlowTests: XCTestCase {
