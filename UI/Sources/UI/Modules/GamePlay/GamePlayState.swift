@@ -1,17 +1,17 @@
 import Foundation
 import Game
 
-public struct GameState: Codable, Equatable {
+public struct GamePlayState: Codable, Equatable {
     var game: Game?
     var controlled: String?
     var message: String = ""
 }
 
-public enum GameAction: Codable, Equatable {
+public enum GamePlayAction: Codable, Equatable {
     case onAppear
 }
 
-extension GameState {
+extension GamePlayState {
     static let reducer: Reducer<Self, AppAction> = { state, _ in
         state
     }

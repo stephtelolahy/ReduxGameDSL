@@ -38,13 +38,13 @@ final class AppFlowTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(sut.state.screens, [.home(HomeState()),
-                                           .game(GameState())])
+                                           .game(GamePlayState())])
     }
     
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
         let sut = AppStore.create(AppState(screens: [.home(HomeState()),
-                                                     .game(GameState())]))
+                                                     .game(GamePlayState())]))
         
         // When
         sut.dispatch(.dismissScreen(.game))
