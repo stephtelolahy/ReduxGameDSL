@@ -10,8 +10,9 @@ import SwiftUI
 struct GamePlayView: View {
     @EnvironmentObject var store: AppStore
 
-    private var state: GamePlayState? {
-        nil
+    private var state: GamePlayState {
+        // TODO: get substate from appState
+        GamePlayState()
     }
 
     var body: some View {
@@ -29,7 +30,7 @@ struct GamePlayView: View {
             }
             .padding()
             Spacer()
-            Text("Message: \(state?.message ?? "")")
+            Text("Message: \(state.message)")
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
                 .padding()

@@ -9,7 +9,7 @@ extension GameState {
     
     mutating func updatePlayer(_ id: String, closure: (inout Player) -> Void) {
         guard let index = players.firstIndex(where: { $0.id == id }) else {
-            fatalError("Playe not found")
+            fatalError(InternalError.missingPlayer(id))
         }
 
         var player = players[index]
