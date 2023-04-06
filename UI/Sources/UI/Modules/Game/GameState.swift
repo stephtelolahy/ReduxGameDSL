@@ -12,7 +12,7 @@ public enum GameAction: Codable, Equatable {
 }
 
 extension GameState {
-    static let reducer: Reducer<Self, GameAction> = { state, _ in
+    static let reducer: Reducer<Self, AppAction> = { state, _ in
         state
     }
 }
