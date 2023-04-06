@@ -29,7 +29,7 @@ struct GameView: View {
             }
             .padding()
             Spacer()
-            Text("Moves: \(state?.moves ?? 0)")
+            Text("Message: \(state?.message ?? "")")
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
                 .padding()

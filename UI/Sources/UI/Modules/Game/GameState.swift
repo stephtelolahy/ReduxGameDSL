@@ -4,7 +4,7 @@ import Game
 public struct GameState: Codable, Equatable {
     var game: Game?
     var controlled: String?
-    var moves: Int = 0
+    var message: String = ""
 }
 
 public enum GameAction: Codable, Equatable {
