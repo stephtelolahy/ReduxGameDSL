@@ -14,7 +14,7 @@ public struct Player: Codable, Equatable, Attribute {
     public let id: String
 
     /// player name
-    public var name: String = ""
+    public var name: String = String()
 
     /// max health
     public var maxHealth: Int = 0
