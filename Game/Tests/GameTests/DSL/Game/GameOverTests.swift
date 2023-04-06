@@ -12,7 +12,7 @@ final class GameOverTests: XCTestCase {
     func test_GameIsNotOver_ByDefault() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertFalse(sut.isOver)
@@ -21,7 +21,7 @@ final class GameOverTests: XCTestCase {
     func test_GameIsOver() {
         // Given
         // When
-        let sut = Game().isOver(true)
+        let sut = GameState().isOver(true)
 
         // Assert
         XCTAssertTrue(sut.isOver)

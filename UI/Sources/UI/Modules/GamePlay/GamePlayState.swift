@@ -2,7 +2,7 @@ import Foundation
 import Game
 
 public struct GamePlayState: Codable, Equatable {
-    var game: Game?
+    var game: GameState?
     var controlled: String?
     var message: String = ""
 }

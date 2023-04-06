@@ -12,7 +12,7 @@ final class GameChoosableTests: XCTestCase {
     func test_ChoosableEmpty() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertEqual(sut.choosable.count, 0)
@@ -21,7 +21,7 @@ final class GameChoosableTests: XCTestCase {
     func test_ChoosableContainsTwoCards() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Choosable {
                 "c1"
                 "c2"

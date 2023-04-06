@@ -1,36 +1,12 @@
 //
-//  Event.swift
-//  CardApp
+//  CardEffect.swift
+//  
 //
-//  Created by Hugues Telolahy on 02/04/2023.
+//  Created by Hugues Telolahy on 06/04/2023.
 //
-
-/// Function that causes any change in the game state
-public enum Event: Codable, Equatable {
-
-    /// Performing a action with a specific card
-    case doAction(CardAction)
-
-    /// Applying some card side effects
-    case applyEffect(CardEffect)
-}
-
-public enum CardAction: Codable, Equatable {
-    case play
-    case equip
-    case handicap
-    case choose(ChooseOption)
-}
-
-public struct ChooseOption: Codable, Equatable {
-    let label: String
-    let actor: String
-}
 
 /// Function defining card side effects
 public enum CardEffect: Codable, Equatable {
-
-    case trigger
 
     /// Draw top deck card
     case draw(player: ArgPlayer)
@@ -68,4 +44,7 @@ public enum CardEffect: Codable, Equatable {
 
     /// Do nothing
     case dummy
+
+    /// Trigger card effects
+    case trigger
 }

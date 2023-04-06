@@ -1,11 +1,11 @@
 //
-//  Game+Modifiers.swift
+//  GameState+Modifiers.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
-public extension Game {
+public extension GameState {
 
     init(@AttributeBuilder components: () -> [any Attribute] = { [] }) {
         for attr in components() {
@@ -32,7 +32,7 @@ public extension Game {
     }
 }
 
-private extension Game {
+private extension GameState {
     func copy(closure: (inout Self) -> Void) -> Self {
         var copy = self
         closure(&copy)

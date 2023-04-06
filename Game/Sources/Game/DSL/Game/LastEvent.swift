@@ -6,9 +6,9 @@
 //
 
 public struct LastEvent: Attribute {
-    public let value: Event
+    public let value: GameEvent
 
-    public init(_ value: Event) {
+    public init(_ value: GameEvent) {
         self.value = value
     }
 }

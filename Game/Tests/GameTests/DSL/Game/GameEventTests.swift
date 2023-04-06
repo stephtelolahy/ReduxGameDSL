@@ -11,7 +11,7 @@ final class GameEventTests: XCTestCase {
 
     func test_InitialEventIsNil() {
         // Given
-        let sut = Game()
+        let sut = GameState()
 
         // When
         // Assert
@@ -20,7 +20,7 @@ final class GameEventTests: XCTestCase {
 
     func test_GetLastEvent() {
         // Given
-        let sut = Game {
+        let sut = GameState {
             LastEvent(.doAction(.play))
         }
 

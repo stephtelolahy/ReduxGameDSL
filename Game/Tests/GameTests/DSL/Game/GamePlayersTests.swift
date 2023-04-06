@@ -12,7 +12,7 @@ final class GamePlayersTests: XCTestCase {
     func testGameWithoutPlayers() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertTrue(sut.players.isEmpty)
@@ -21,7 +21,7 @@ final class GamePlayersTests: XCTestCase {
     func test_GameWithOnePlayer() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Players {
                 Player("p1")
             }
@@ -34,7 +34,7 @@ final class GamePlayersTests: XCTestCase {
     func test_GameWithTwoPlayers() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Players {
                 Player("p1")
                 Player("p2")
@@ -48,7 +48,7 @@ final class GamePlayersTests: XCTestCase {
     func testGameWithStringPlayers() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Players {
                 "p1"
                 "p2"
