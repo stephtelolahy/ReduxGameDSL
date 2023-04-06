@@ -7,7 +7,20 @@
 
 public extension GameState {
 
-    static let reducer: (GameState, GameAction) -> GameState = { state, _ in
-        state
+    static let reducer: (GameState, GameAction) -> GameState = { state, action in
+        var state = state
+
+        switch action {
+        case let .play(actor, card):
+            state.updatePlayer(actor) { player in
+                player.hand.remove(card)
+            }
+            state.discard.push(card)
+
+        default:
+            break
+        }
+
+        return state
     }
 }

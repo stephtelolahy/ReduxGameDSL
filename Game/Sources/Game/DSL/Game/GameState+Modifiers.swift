@@ -30,13 +30,6 @@ public extension GameState {
     }
 }
 
-public extension GameState {
-
-    func player(_ id: String) -> Player {
-        players.first(where: { $0.id == id }).unsafelyUnwrapped
-    }
-}
-
 private extension GameState {
     func copy(closure: (inout Self) -> Void) -> Self {
         var copy = self

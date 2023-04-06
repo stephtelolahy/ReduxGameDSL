@@ -22,4 +22,12 @@ public struct GameState: Codable, Equatable {
 
     /// is Game over
     public var isOver: Bool = false
+
+    /// Getting player with given identifier
+    public func player(_ id: String) -> Player {
+        guard let player = players.first(where: { $0.id == id }) else {
+            fatalError("Missing player")
+        }
+        return player
+    }
 }
