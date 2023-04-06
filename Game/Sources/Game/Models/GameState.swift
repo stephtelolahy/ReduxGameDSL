@@ -22,7 +22,4 @@ public struct GameState: Codable, Equatable {
 
     /// is Game over
     public var isOver: Bool = false
-
-    /// last occurred event
-    public var event: GameEvent?
 }

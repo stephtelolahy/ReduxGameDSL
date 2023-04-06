@@ -14,7 +14,7 @@ public struct Card: Codable, Equatable {
 
 public struct CardActionInfo: Codable, Equatable {
     
-    /// The manner an action is dispatched
+    /// The action type that triggers the effect
     public let actionType: CardActionType
     
     /// Side effect on dispatching action
