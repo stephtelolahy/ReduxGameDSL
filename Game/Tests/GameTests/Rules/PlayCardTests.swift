@@ -12,12 +12,10 @@ final class PlayCardTests: XCTestCase {
     func test_DiscardHandCard_IfPlayingIt() {
         // Given
         let ctx = GameState {
-            Players {
-                Player("p1") {
-                    Hand {
-                        "c1"
-                        "c2"
-                    }
+            Player("p1") {
+                Hand {
+                    "c1"
+                    "c2"
                 }
             }
         }
@@ -26,6 +24,7 @@ final class PlayCardTests: XCTestCase {
         let result = GameState.reducer(ctx, .play(actor: "p1", card: "c1"))
 
         // Assert
-        XCTAssertEqual(result.players[0].hand.cards, [])
+        XCTAssertEqual(result.player("p1").hand.cards, ["c2"])
+        XCTAssertEqual(result.discard.top, "c1")
     }
 }

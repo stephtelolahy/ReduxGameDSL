@@ -6,7 +6,7 @@
 //
 
 public struct InPlay: Attribute {
-    public let value: CardLocation
+    let value: CardLocation
 
     public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardLocation(cards: content())

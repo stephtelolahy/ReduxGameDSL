@@ -22,9 +22,7 @@ final class GamePlayersTests: XCTestCase {
         // Given
         // When
         let sut = GameState {
-            Players {
-                Player("p1")
-            }
+            Player("p1")
         }
 
         // Assert
@@ -35,24 +33,8 @@ final class GamePlayersTests: XCTestCase {
         // Given
         // When
         let sut = GameState {
-            Players {
-                Player("p1")
-                Player("p2")
-            }
-        }
-
-        // Assert
-        XCTAssertEqual(sut.players.map(\.id), ["p1", "p2"])
-    }
-
-    func testGameWithStringPlayers() {
-        // Given
-        // When
-        let sut = GameState {
-            Players {
-                "p1"
-                "p2"
-            }
+            Player("p1")
+            Player("p2")
         }
 
         // Assert

@@ -7,10 +7,10 @@
 
 public extension GameState {
 
-    init(@AttributeBuilder components: () -> [any Attribute] = { [] }) {
+    init(@AttributeBuilder components: () -> [Attribute] = { [] }) {
         for attr in components() {
-            if let players = attr as? Players {
-                self.players = players.value
+            if let player = attr as? Player {
+                self.players.append(player)
             } else if let deck = attr as? Deck {
                 self.deck = deck.value
             } else if let discard = attr as? DiscardPile {
@@ -27,6 +27,13 @@ public extension GameState {
 
     func turn(_ value: String) -> Self {
         copy { $0.turn = value }
+    }
+}
+
+public extension GameState {
+
+    func player(_ id: String) -> Player {
+        players.first(where: { $0.id == id }).unsafelyUnwrapped
     }
 }
 
