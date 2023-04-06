@@ -2,7 +2,7 @@
 //  CardEffect.swift
 //  
 //
-//  Created by Hugues Telolahy on 03/04/2023.
+//  Created by Hugues Telolahy on 06/04/2023.
 //
 
 /// Function defining card side effects
@@ -44,4 +44,7 @@ public enum CardEffect: Codable, Equatable {
 
     /// Do nothing
     case dummy
+
+    /// Trigger card effects
+    case trigger
 }

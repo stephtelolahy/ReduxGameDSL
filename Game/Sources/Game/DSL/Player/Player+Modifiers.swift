@@ -9,7 +9,7 @@ import Foundation
 
 public extension Player {
 
-    init(_ id: String = UUID().uuidString, @AttributeBuilder components: () -> [any Attribute] = { [] }) {
+    init(_ id: String = UUID().uuidString, @AttributeBuilder components: () -> [Attribute] = { [] }) {
         self.id = id
         for attr in components() {
             if let hand = attr as? Hand {

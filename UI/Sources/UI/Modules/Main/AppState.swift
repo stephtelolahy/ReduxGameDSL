@@ -11,14 +11,14 @@ public struct AppState: Codable, Equatable {
 public enum ScreenState: Codable, Equatable {
     case splash
     case home(HomeState)
-    case game(GameState)
+    case game(GamePlayState)
 }
 
 public enum AppAction: Codable, Equatable {
     case showScreen(Screen)
     case dismissScreen(Screen)
     case home(HomeAction)
-    case game(GameAction)
+    case game(GamePlayAction)
 }
 
 public enum Screen: Codable, Equatable {
@@ -34,7 +34,7 @@ extension AppState {
         // Update visible screens
         switch action {
         case .showScreen(.home),
-                .dismissScreen(.game):
+             .dismissScreen(.game):
             screens = [.home(.init())]
 
         case .showScreen(.game):
@@ -53,10 +53,10 @@ extension AppState {
     private static func reduceScreen(_ state: ScreenState, _ action: AppAction) -> ScreenState {
         switch state {
         case let .home(homeState):
-            guard case let .home(homeAction) = action else {
-                return state
-            }
-            return .home(HomeState.reducer(homeState, homeAction))
+            return .home(HomeState.reducer(homeState, action))
+
+        case let .game(gameState):
+            return .game(GamePlayState.reducer(gameState, action))
 
         default:
             return state

@@ -12,7 +12,7 @@ final class GameDeckTests: XCTestCase {
     func test_DeckEmpty() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertEqual(sut.deck.count, 0)
@@ -21,7 +21,7 @@ final class GameDeckTests: XCTestCase {
     func test_DeckContainsOneCard() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Deck {
                 "c1"
             }
@@ -34,7 +34,7 @@ final class GameDeckTests: XCTestCase {
     func test_DeckContainsTwoCards() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             Deck {
                 "c1"
                 "c2"

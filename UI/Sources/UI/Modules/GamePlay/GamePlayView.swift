@@ -1,5 +1,5 @@
 //
-//  GameView.swift
+//  GamePlayView.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct GameView: View {
+struct GamePlayView: View {
     @EnvironmentObject var store: AppStore
 
-    private var state: GameState? {
-        nil
+    private var state: GamePlayState {
+        // TODO: get substate from appState
+        GamePlayState()
     }
 
     var body: some View {
@@ -29,7 +30,7 @@ struct GameView: View {
             }
             .padding()
             Spacer()
-            Text("Moves: \(state?.moves ?? 0)")
+            Text("Message: \(state.message)")
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
                 .padding()
@@ -47,7 +48,7 @@ struct GameView: View {
 #if DEBUG
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GamePlayView()
             .environmentObject(AppStore.preview)
     }
 }

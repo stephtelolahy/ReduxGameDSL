@@ -12,7 +12,7 @@ final class GameTurnTests: XCTestCase {
     func test_GameWithoutTurn() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertNil(sut.turn)
@@ -21,7 +21,7 @@ final class GameTurnTests: XCTestCase {
     func test_GameWithTurn() {
         // Given
         // When
-        let sut = Game().turn("p1")
+        let sut = GameState().turn("p1")
 
         // Assert
         XCTAssertEqual(sut.turn, "p1")

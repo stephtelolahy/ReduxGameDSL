@@ -7,6 +7,4 @@
 
 /// Temporary structure allowing element initizalization using DSL
 public protocol Attribute {
-    associatedtype Value
-    var value: Value { get }
 }

@@ -1,24 +1,22 @@
 //
-//  Game+Modifiers.swift
+//  GameState+Modifiers.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
-public extension Game {
+public extension GameState {
 
-    init(@AttributeBuilder components: () -> [any Attribute] = { [] }) {
+    init(@AttributeBuilder components: () -> [Attribute] = { [] }) {
         for attr in components() {
-            if let players = attr as? Players {
-                self.players = players.value
+            if let player = attr as? Player {
+                self.players.append(player)
             } else if let deck = attr as? Deck {
                 self.deck = deck.value
             } else if let discard = attr as? DiscardPile {
                 self.discard = discard.value
             } else if let choosable = attr as? Choosable {
                 self.choosable = choosable.value
-            } else if let lastEvent = attr as? LastEvent {
-                self.event = lastEvent.value
             }
         }
     }
@@ -32,7 +30,7 @@ public extension Game {
     }
 }
 
-private extension Game {
+private extension GameState {
     func copy(closure: (inout Self) -> Void) -> Self {
         var copy = self
         closure(&copy)

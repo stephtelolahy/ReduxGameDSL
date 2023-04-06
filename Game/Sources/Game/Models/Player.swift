@@ -8,13 +8,13 @@
 import Foundation
 
 /// Player who is playing in a game
-public struct Player: Codable, Equatable {
+public struct Player: Codable, Equatable, Attribute {
 
     /// Unique identifier
     public let id: String
 
     /// player name
-    public var name: String = ""
+    public var name: String = String()
 
     /// max health
     public var maxHealth: Int = 0

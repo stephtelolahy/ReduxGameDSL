@@ -14,8 +14,8 @@ public struct Card: Codable, Equatable {
 
 public struct CardActionInfo: Codable, Equatable {
     
-    /// The manner an action is dispatched
-    public let action: CardAction
+    /// The action type that triggers the effect
+    public let actionType: CardActionType
     
     /// Side effect on dispatching action
     public let effect: CardEffect
@@ -24,7 +24,7 @@ public struct CardActionInfo: Codable, Equatable {
     public var playReqs: [PlayReq] = []
 }
 
-public enum CardAction: Codable, Equatable {
+public enum CardActionType: Codable, Equatable {
     
     /// card is playable when your turn and requirments are met
     case play

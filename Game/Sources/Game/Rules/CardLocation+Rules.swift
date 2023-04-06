@@ -17,7 +17,7 @@ extension CardLocation {
     
     mutating func remove(_ card: String) {
         guard let index = cards.firstIndex(where: { $0 == card }) else {
-            fatalError("Card \(card) not found")
+            fatalError(InternalError.missingCard(card))
         }
 
         cards.remove(at: index)

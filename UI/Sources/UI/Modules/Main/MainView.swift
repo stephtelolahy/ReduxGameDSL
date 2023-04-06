@@ -18,7 +18,7 @@ public struct MainView: View {
             HomeView()
 
         case .game:
-            GameView()
+            GamePlayView()
 
         default:
             SplashView()

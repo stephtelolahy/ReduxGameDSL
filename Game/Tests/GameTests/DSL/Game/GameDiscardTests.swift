@@ -12,7 +12,7 @@ final class GameDiscardTests: XCTestCase {
     func test_DiscardPileIsEmpty() {
         // Given
         // When
-        let sut = Game()
+        let sut = GameState()
 
         // Assert
         XCTAssertEqual(sut.discard.count, 0)
@@ -21,7 +21,7 @@ final class GameDiscardTests: XCTestCase {
     func test_DeckContainsTwoCards() {
         // Given
         // When
-        let sut = Game {
+        let sut = GameState {
             DiscardPile {
                 "c1"
                 "c2"

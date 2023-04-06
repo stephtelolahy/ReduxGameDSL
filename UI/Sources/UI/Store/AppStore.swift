@@ -7,7 +7,6 @@
 
 public typealias AppStore = Store<AppState, AppAction>
 
-#if DEBUG
 public extension AppStore {
 
     static func create(_ initial: AppState = AppState(screens: [.splash])) -> AppStore {
@@ -17,8 +16,9 @@ public extension AppStore {
             middlewares: [LoggerMiddleware().middleware])
     }
 
+#if DEBUG
     static let preview = AppStore(initial: AppState(screens: [.splash]),
                                   reducer: { state, _ in state },
                                   middlewares: [])
-}
 #endif
+}

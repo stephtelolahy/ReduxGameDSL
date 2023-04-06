@@ -53,7 +53,7 @@ final class GameCodableTests: XCTestCase {
         let jsonData = JSON.data(using: .utf8)!
 
         // When
-        let sut = try JSONDecoder().decode(Game.self, from: jsonData)
+        let sut = try JSONDecoder().decode(GameState.self, from: jsonData)
 
         // Assert
         XCTAssertTrue(sut.isOver)
