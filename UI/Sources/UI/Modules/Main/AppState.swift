@@ -34,7 +34,7 @@ extension AppState {
         // Update visible screens
         switch action {
         case .showScreen(.home),
-                .dismissScreen(.game):
+             .dismissScreen(.game):
             screens = [.home(.init())]
 
         case .showScreen(.game):
@@ -45,18 +45,24 @@ extension AppState {
         }
 
         // Reduce each screen state
-        screens = screens.map { reduceScreen($0, action) }
+        screens = screens.map { reduceScreenState($0, action) }
 
         return .init(screens: screens)
     }
 
-    private static func reduceScreen(_ state: ScreenState, _ action: AppAction) -> ScreenState {
+    private static func reduceScreenState(_ state: ScreenState, _ action: AppAction) -> ScreenState {
         switch state {
         case let .home(homeState):
             guard case let .home(homeAction) = action else {
                 return state
             }
             return .home(HomeState.reducer(homeState, homeAction))
+
+        case let .game(gameState):
+            guard case let .game(gameAction) = action else {
+                return state
+            }
+            return .game(GameState.reducer(gameState, gameAction))
 
         default:
             return state
