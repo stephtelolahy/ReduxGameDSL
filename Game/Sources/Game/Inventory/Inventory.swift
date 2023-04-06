@@ -16,7 +16,7 @@ public enum Inventory {
         }
     }
 
-    static let cardSets: [String: [String]] = [
+    public static let cardSets: [String: [String]] = [
         .barrel: ["Q♠️", "K♠️"],
         .dynamite: ["2♥️"],
         .jail: ["J♠️", "10♠️", "4♥️"],

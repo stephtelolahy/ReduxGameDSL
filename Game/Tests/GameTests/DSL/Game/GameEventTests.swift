@@ -21,12 +21,12 @@ final class GameEventTests: XCTestCase {
     func test_GetLastEvent() {
         // Given
         let sut = Game {
-            LastEvent(.effect(.draw(player: .actor)))
+            LastEvent(.doAction(.play))
         }
 
         // When
         // Assert
-        XCTAssertEqual(sut.event, .effect(.draw(player: .actor)))
+        XCTAssertEqual(sut.event, .doAction(.play))
     }
 }
 
