@@ -1,12 +1,12 @@
 //
-//  InternalError.swift
+//  GameError.swift
 //  
 //
 //  Created by Hugues Telolahy on 07/04/2023.
 //
 
 /// Fatal game errors
-enum InternalError: Error {
+public enum GameError: Error, Equatable {
     case missingPlayer(String)
     case missingCard(String)
 }

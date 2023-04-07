@@ -31,7 +31,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players.first(where: { $0.id == id }) else {
-            fatalError(InternalError.missingPlayer(id))
+            fatalError(GameError.missingPlayer(id))
         }
         return player
     }
