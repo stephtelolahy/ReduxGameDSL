@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct MainView: View {
-    @EnvironmentObject var store: AppStore
+    @EnvironmentObject private var store: AppStore
 
     public init() {}
 

@@ -15,7 +15,7 @@ public enum HomeAction: Codable, Equatable {
 }
 
 extension HomeState {
-    static let reducer: Reducer<Self, AppAction> = { state, _ in
+    static let reducer: Reducer<Self, Action> = { state, _ in
         state
     }
 }

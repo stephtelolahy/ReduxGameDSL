@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var store: AppStore
+    @EnvironmentObject private var store: AppStore
     
     var body: some View {
         VStack(alignment: .center, spacing: 32) {

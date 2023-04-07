@@ -14,7 +14,7 @@ public enum ScreenState: Codable, Equatable {
     case game(GamePlayState)
 }
 
-public enum AppAction: Codable, Equatable {
+public enum Action: Codable, Equatable {
     case showScreen(Screen)
     case dismissScreen(Screen)
     case home(HomeAction)
@@ -28,7 +28,7 @@ public enum Screen: Codable, Equatable {
 }
 
 extension AppState {
-    static let reducer: Reducer<Self, AppAction> = { state, action in
+    static let reducer: Reducer<Self, Action> = { state, action in
         var screens = state.screens
 
         // Update visible screens
@@ -50,7 +50,7 @@ extension AppState {
         return .init(screens: screens)
     }
 
-    private static func reduceScreen(_ state: ScreenState, _ action: AppAction) -> ScreenState {
+    private static func reduceScreen(_ state: ScreenState, _ action: Action) -> ScreenState {
         switch state {
         case let .home(homeState):
             return .home(HomeState.reducer(homeState, action))

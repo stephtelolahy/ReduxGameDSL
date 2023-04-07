@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 04/04/2023.
 //
 
-public typealias AppStore = Store<AppState, AppAction>
+public typealias AppStore = Store<AppState, Action>
 
 public extension AppStore {
 

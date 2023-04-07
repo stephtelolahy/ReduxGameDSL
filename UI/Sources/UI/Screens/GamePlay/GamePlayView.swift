@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GamePlayView: View {
-    @EnvironmentObject var store: AppStore
+    @EnvironmentObject private var store: AppStore
 
     private var state: GamePlayState {
         // TODO: get substate from appState
