@@ -9,7 +9,7 @@ extension GameState {
     
     mutating func updatePlayer(_ id: String, closure: (inout Player) throws -> Void) throws {
         guard let index = players.firstIndex(where: { $0.id == id }) else {
-            fatalError(GameError.missingPlayer(id))
+            throw GameError.missingPlayer(id)
         }
 
         var player = players[index]
