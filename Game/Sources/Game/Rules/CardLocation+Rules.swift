@@ -15,9 +15,9 @@ extension CardLocation {
         cards.append(card)
     }
     
-    mutating func remove(_ card: String) {
+    mutating func remove(_ card: String) throws {
         guard let index = cards.firstIndex(where: { $0 == card }) else {
-            fatalError(InternalError.missingCard(card))
+            throw GameError.missingCard(card)
         }
 
         cards.remove(at: index)

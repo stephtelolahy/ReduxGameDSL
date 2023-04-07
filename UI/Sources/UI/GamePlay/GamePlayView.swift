@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
+import Redux
 
 struct GamePlayView: View {
-    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var store: Store<AppState, Action>
 
     private var state: GamePlayState {
-        // TODO: get substate from appState
         GamePlayState()
     }
 
@@ -49,7 +49,7 @@ struct GamePlayView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GamePlayView()
-            .environmentObject(AppStore.preview)
+            .environmentObject(previewStore)
     }
 }
 #endif

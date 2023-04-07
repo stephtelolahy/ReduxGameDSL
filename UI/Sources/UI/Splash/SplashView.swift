@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Redux
 
 struct SplashView: View {
     
-    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var store: Store<AppState, Action>
     
     var body: some View {
         ZStack {
@@ -35,7 +36,7 @@ struct SplashView: View {
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
         SplashView()
-            .environmentObject(AppStore.preview)
+            .environmentObject(previewStore)
     }
 }
 #endif

@@ -5,13 +5,14 @@
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 @testable import UI
+import Redux
 import XCTest
 
 final class AppFlowTests: XCTestCase {
     
     func test_ShowSplash_AsInitialScreen() {
         // Given
-        let sut = AppStore.create()
+        let sut = createStore(initial: AppState(screens: [.splash]))
         
         // When
         // Assert
@@ -20,7 +21,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowHome_IfDispatchedCompleteSplash() {
         // Given
-        let sut = AppStore.create()
+        let sut = createStore(initial: AppState(screens: [.splash]))
         
         // When
         sut.dispatch(.showScreen(.home))
@@ -31,7 +32,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowGame_IfDispatchedStartGame() {
         // Given
-        let sut = AppStore.create(AppState(screens: [.home(HomeState())]))
+        let sut = createStore(initial: AppState(screens: [.home(HomeState())]))
         
         // When
         sut.dispatch(.showScreen(.game))
@@ -43,8 +44,8 @@ final class AppFlowTests: XCTestCase {
     
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
-        let sut = AppStore.create(AppState(screens: [.home(HomeState()),
-                                                     .game(GamePlayState())]))
+        let sut = createStore(initial: AppState(screens: [.home(HomeState()),
+                                                          .game(GamePlayState())]))
         
         // When
         sut.dispatch(.dismissScreen(.game))

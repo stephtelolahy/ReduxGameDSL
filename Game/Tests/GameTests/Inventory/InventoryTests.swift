@@ -9,7 +9,7 @@ import XCTest
 
 final class InventoryTests: XCTestCase {
 
-    func test_CollectibleCards() throws {
+    func test_CollectibleCards() {
         // Given
         // When
         let cards = Inventory.cardList.cards

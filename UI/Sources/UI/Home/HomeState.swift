@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Redux
 
 public struct HomeState: Codable, Equatable {
 }

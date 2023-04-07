@@ -47,7 +47,7 @@ final class CardLocationRulesTests: XCTestCase {
         XCTAssertTrue(sut.contains("c2"))
     }
 
-    func test_RemoveById() {
+    func test_RemoveById() throws {
         // Given
         var sut = CardLocation {
             "c1"
@@ -55,7 +55,7 @@ final class CardLocationRulesTests: XCTestCase {
         }
 
         // When
-        sut.remove("c1")
+        try sut.remove("c1")
 
         // Assert
         XCTAssertEqual(sut.count, 1)

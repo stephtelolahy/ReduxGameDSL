@@ -7,13 +7,13 @@
 
 extension GameState {
     
-    mutating func updatePlayer(_ id: String, closure: (inout Player) -> Void) {
+    mutating func updatePlayer(_ id: String, closure: (inout Player) throws -> Void) throws {
         guard let index = players.firstIndex(where: { $0.id == id }) else {
-            fatalError(InternalError.missingPlayer(id))
+            throw GameError.missingPlayer(id)
         }
 
         var player = players[index]
-        closure(&player)
+        try closure(&player)
         players[index] = player
     }
 }

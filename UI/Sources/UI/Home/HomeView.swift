@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Redux
 
 struct HomeView: View {
     
-    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var store: Store<AppState, Action>
     
     var body: some View {
         VStack(alignment: .center, spacing: 32) {
@@ -37,7 +38,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(AppStore.preview)
+            .environmentObject(previewStore)
     }
 }
 #endif

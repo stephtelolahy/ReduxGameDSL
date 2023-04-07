@@ -51,6 +51,13 @@
             BlueprintName = "UI"
             ReferencedContainer = "container:UI">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Redux"
+            BuildableName = "Redux"
+            BlueprintName = "Redux"
+            ReferencedContainer = "container:Redux">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -71,6 +78,16 @@
                BuildableName = "UITests"
                BlueprintName = "UITests"
                ReferencedContainer = "container:UI">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ReduxTests"
+               BuildableName = "ReduxTests"
+               BlueprintName = "ReduxTests"
+               ReferencedContainer = "container:Redux">
             </BuildableReference>
          </TestableReference>
       </Testables>

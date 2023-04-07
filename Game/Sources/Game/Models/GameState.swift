@@ -22,6 +22,12 @@ public struct GameState: Codable, Equatable {
 
     /// is Game over
     public var isOver: Bool = false
+
+    /// last completed action
+    public var completedAction: GameAction?
+
+    /// last occured error
+    public var thrownError: GameError?
 }
 
 // MARK: - Convenience
@@ -31,7 +37,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players.first(where: { $0.id == id }) else {
-            fatalError(InternalError.missingPlayer(id))
+            fatalError(GameError.missingPlayer(id))
         }
         return player
     }

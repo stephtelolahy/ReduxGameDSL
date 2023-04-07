@@ -1,4 +1,5 @@
 import Foundation
+import Redux
 
 public struct AppState: Codable, Equatable {
     let screens: [ScreenState]
@@ -27,7 +28,7 @@ public enum Screen: Codable, Equatable {
     case game
 }
 
-extension AppState {
+public extension AppState {
     static let reducer: Reducer<Self, Action> = { state, action in
         var screens = state.screens
 

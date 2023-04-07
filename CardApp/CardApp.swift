@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Redux
 import UI
 
-let store = AppStore.create(AppState(screens: [.splash]))
+let store = Store<AppState, Action>(
+    initial: AppState(screens: [.splash]),
+    reducer: AppState.reducer,
+    middlewares: [loggerMiddleware]
+)
 
 @main
 struct CardApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
                 .foregroundColor(.primary)
                 .environmentObject(store)
         }
