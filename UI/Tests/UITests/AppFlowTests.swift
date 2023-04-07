@@ -54,9 +54,3 @@ final class AppFlowTests: XCTestCase {
         XCTAssertEqual(sut.state.screens, [.home(HomeState())])
     }
 }
-
-private func createStore(initial: AppState) -> Store<AppState, Action> {
-    Store(initial: initial,
-          reducer: AppState.reducer,
-          middlewares: [])
-}
