@@ -9,10 +9,11 @@ import Redux
 import Combine
 
 /// Apply card side effects
-class CardEffectMiddleware {
-
-    let middleware: Middleware<GameState, GameAction> = { _, _ in
-        Empty()
-            .eraseToAnyPublisher()
+public let cardEffectMiddleware: Middleware<GameState, GameAction> = { _, action in
+    guard case let .play(actor, card) = action else {
+        return Empty().eraseToAnyPublisher()
     }
+
+    return Just(GameAction.apply(.heal(1, player: .id(actor))))
+        .eraseToAnyPublisher()
 }

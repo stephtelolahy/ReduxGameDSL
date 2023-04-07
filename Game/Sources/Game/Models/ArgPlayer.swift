@@ -6,5 +6,6 @@
 //
 
 public enum ArgPlayer: Codable, Equatable {
+    case id(String)
     case actor
 }
