@@ -1,5 +1,5 @@
 //
-//  PlayBeerTests.swift
+//  SequenceBeerTests.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@ import XCTest
 import Redux
 import Game
 
-final class PlayBeerTests: XCTestCase {
+final class SequenceBeerTests: XCTestCase {
 
     func test_ApplyEffectGainHealth_OnPlayingBeer() {
         // Given

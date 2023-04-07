@@ -1,5 +1,5 @@
 //
-//  BeerTests.swift
+//  EffectBeerTests.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -8,7 +8,7 @@
 import XCTest
 import Game
 
-final class BeerTests: XCTestCase {
+final class EffectBeerTests: XCTestCase {
 
     private let sut = cardEffectMiddleware
 
