@@ -35,7 +35,7 @@ public extension AppState {
         // Update visible screens
         switch action {
         case .showScreen(.home),
-                .dismissScreen(.game):
+             .dismissScreen(.game):
             screens = [.home(.init())]
 
         case .showScreen(.game):
