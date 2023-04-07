@@ -9,6 +9,8 @@ import XCTest
 
 final class PlayCardTests: XCTestCase {
 
+    private let sut = GameState.reducer
+
     func test_DiscardHandCard_IfPlayingIt() throws {
         // Given
         let ctx = GameState {
@@ -21,7 +23,7 @@ final class PlayCardTests: XCTestCase {
         }
 
         // When
-        let result = try GameState.reducer(ctx, .play(actor: "p1", card: "c1"))
+        let result = try sut(ctx, .play(actor: "p1", card: "c1"))
 
         // Assert
         XCTAssertEqual(result.player("p1").hand.cards, ["c2"])
@@ -36,7 +38,7 @@ final class PlayCardTests: XCTestCase {
 
         // When
         // Assert
-        assert(try GameState.reducer(ctx, .play(actor: "p1", card: "c1")), throws: GameError.missingCard("c1"))
+        assert(try sut(ctx, .play(actor: "p1", card: "c1")), throws: GameError.missingCard("c1"))
     }
 
     func test_FailToPlayCard_IfMissingPlayer() {
@@ -45,6 +47,6 @@ final class PlayCardTests: XCTestCase {
 
         // When
         // Assert
-        assert(try GameState.reducer(ctx, .play(actor: "p1", card: "c1")), throws: GameError.missingPlayer("p1"))
+        assert(try sut(ctx, .play(actor: "p1", card: "c1")), throws: GameError.missingPlayer("p1"))
     }
 }
