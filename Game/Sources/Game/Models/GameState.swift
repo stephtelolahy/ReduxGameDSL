@@ -25,6 +25,9 @@ public struct GameState: Codable, Equatable {
 
     /// last completed action
     public var completedAction: GameAction?
+
+    /// last occured error
+    public var thrownError: GameError?
 }
 
 // MARK: - Convenience

@@ -11,7 +11,7 @@ final class PlayCardTests: XCTestCase {
 
     private let sut = GameState.reducer
 
-    func test_DiscardHandCard_IfPlayingIt() throws {
+    func test_DiscardHandCard_IfPlayingIt() {
         // Given
         let ctx = GameState {
             Player("p1") {
@@ -24,7 +24,7 @@ final class PlayCardTests: XCTestCase {
 
         // When
         let action = GameAction.play(actor: "p1", card: "c1")
-        let result = try sut(ctx, action)
+        let result = sut(ctx, action)
 
         // Assert
         XCTAssertEqual(result.player("p1").hand.cards, ["c2"])
@@ -39,9 +39,11 @@ final class PlayCardTests: XCTestCase {
         }
 
         // When
-        // Assert
         let action = GameAction.play(actor: "p1", card: "c1")
-        assert(try sut(ctx, action), throws: GameError.missingCard("c1"))
+        let result = sut(ctx, action)
+
+        // Assert
+        XCTAssertEqual(result.thrownError, .missingCard("c1"))
     }
 
     func test_FailToPlayCard_IfMissingPlayer() {
@@ -49,8 +51,10 @@ final class PlayCardTests: XCTestCase {
         let ctx = GameState()
 
         // When
-        // Assert
         let action = GameAction.play(actor: "p1", card: "c1")
-        assert(try sut(ctx, action), throws: GameError.missingPlayer("p1"))
+        let result = sut(ctx, action)
+
+        // Assert
+        XCTAssertEqual(result.thrownError, .missingPlayer("p1"))
     }
 }
