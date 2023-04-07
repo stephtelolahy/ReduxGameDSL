@@ -17,6 +17,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
+        .package(path: "../Redux"),
         .package(url: "https://github.com/lukepistrol/SwiftLintPlugin", from: "0.2.2")
     ],
     targets: [
@@ -24,7 +25,9 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Game",
-            dependencies: [],
+            dependencies: [
+                "Redux",
+            ],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]),

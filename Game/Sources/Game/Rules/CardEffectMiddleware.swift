@@ -1,5 +1,5 @@
 //
-//  GameSuccessfulActionMiddleware.swift
+//  CardEffectMiddleware.swift
 //  
 //
 //  Created by Hugues Telolahy on 07/04/2023.
@@ -8,11 +8,10 @@
 import Redux
 import Combine
 
-/// Apply card side effects when played
+/// Apply card side effects
 class CardEffectMiddleware {
 
     let middleware: Middleware<GameState, GameAction> = { _, _ in
-        // TODO: implement
         Empty()
             .eraseToAnyPublisher()
     }
