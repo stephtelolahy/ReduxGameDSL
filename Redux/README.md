@@ -1,3 +1,3 @@
 # Redux
 
-A description of this package.
+Lightweight Redux state container
