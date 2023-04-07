@@ -22,6 +22,9 @@ public struct GameState: Codable, Equatable {
 
     /// is Game over
     public var isOver: Bool = false
+
+    /// last completed action
+    public var completedAction: GameAction?
 }
 
 // MARK: - Convenience

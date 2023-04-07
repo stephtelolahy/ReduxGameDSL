@@ -21,6 +21,8 @@ public extension GameState {
             break
         }
 
+        state.completedAction = action
+
         return state
     }
 }
