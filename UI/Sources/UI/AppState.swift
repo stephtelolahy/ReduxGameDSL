@@ -27,14 +27,14 @@ public enum Screen: Codable, Equatable {
     case game
 }
 
-extension AppState {
+public extension AppState {
     static let reducer: Reducer<Self, Action> = { state, action in
         var screens = state.screens
 
         // Update visible screens
         switch action {
         case .showScreen(.home),
-             .dismissScreen(.game):
+                .dismissScreen(.game):
             screens = [.home(.init())]
 
         case .showScreen(.game):

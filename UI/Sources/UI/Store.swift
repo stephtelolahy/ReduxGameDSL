@@ -2,8 +2,8 @@ import Foundation
 import Combine
 import SwiftUI
 
-typealias Reducer<State, Action> = (State, Action) -> State
-typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
+public typealias Reducer<State, Action> = (State, Action) -> State
+public typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
 public final class Store<State, Action>: ObservableObject {
 
@@ -14,7 +14,7 @@ public final class Store<State, Action>: ObservableObject {
     private let middlewares: [Middleware<State, Action>]
     private var subscriptions = Set<AnyCancellable>()
 
-    init(
+    public init(
         initial state: State,
         reducer: @escaping Reducer<State, Action>,
         middlewares: [Middleware<State, Action>]

@@ -1,5 +1,5 @@
 //
-//  AppView.swift
+//  ContentView.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct MainView: View {
-    @EnvironmentObject private var store: AppStore
+public struct ContentView: View {
+    @EnvironmentObject private var store: Store<AppState, Action>
 
     public init() {}
 
@@ -29,8 +29,16 @@ public struct MainView: View {
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
-            .environmentObject(AppStore.preview)
+        ContentView()
+            .environmentObject(previewStore)
     }
 }
+#endif
+
+#if DEBUG
+let previewStore = Store<AppState, Action>(
+    initial: AppState(screens: [.splash]),
+    reducer: { state, _ in state },
+    middlewares: []
+)
 #endif
