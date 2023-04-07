@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Redux
 
 struct SplashView: View {
     

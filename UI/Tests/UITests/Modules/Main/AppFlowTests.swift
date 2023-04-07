@@ -5,6 +5,7 @@
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 @testable import UI
+import Redux
 import XCTest
 
 final class AppFlowTests: XCTestCase {

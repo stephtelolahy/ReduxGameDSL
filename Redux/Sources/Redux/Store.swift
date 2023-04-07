@@ -7,7 +7,7 @@ public typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Act
 
 public final class Store<State, Action>: ObservableObject {
 
-    @Published private(set) var state: State
+    @Published public var state: State
 
     private let queue = DispatchQueue(label: "store.queue", qos: .userInitiated)
     private let reducer: Reducer<State, Action>
@@ -24,7 +24,7 @@ public final class Store<State, Action>: ObservableObject {
         self.middlewares = middlewares
     }
 
-    func dispatch(_ action: Action) {
+    public func dispatch(_ action: Action) {
         queue.sync {
             self.dispatch(self.state, action)
         }

@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
+import Redux
 
 struct GamePlayView: View {
     @EnvironmentObject private var store: Store<AppState, Action>
 
     private var state: GamePlayState {
-        // TODO: get substate from appState
         GamePlayState()
     }
 

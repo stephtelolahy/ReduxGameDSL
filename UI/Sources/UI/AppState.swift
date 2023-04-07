@@ -1,4 +1,5 @@
 import Foundation
+import Redux
 
 public struct AppState: Codable, Equatable {
     let screens: [ScreenState]
