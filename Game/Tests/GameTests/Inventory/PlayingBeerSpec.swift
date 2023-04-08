@@ -12,7 +12,7 @@ import Game
 final class PlayingBeerSpec: QuickSpec {
     override func spec() {
         describe("playing beer") {
-            context("damaged") {
+            context("being damaged") {
                 it("should heal one life point") {
                     // Given
                     let ctx = GameState {
