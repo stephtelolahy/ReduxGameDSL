@@ -12,7 +12,7 @@ final class PlayerSpec: QuickSpec {
     override func spec() {
         describe("a Player") {
             var sut: Player!
-            context("default") {
+            context("by default") {
                 beforeEach {
                     sut = Player()
                 }
@@ -30,7 +30,7 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified") {
+            context("initialized with abilities") {
                 it("should have abilities") {
                     // Given
                     // When
@@ -44,7 +44,9 @@ final class PlayerSpec: QuickSpec {
                     // Then
                     expect(sut.abilities) == ["a1", "a2"]
                 }
+            }
 
+            context("modified hand limit") {
                 it("should have hand limit") {
                     // Given
                     // When
@@ -53,7 +55,9 @@ final class PlayerSpec: QuickSpec {
                     // Then
                     expect(sut.handLimit) == 10
                 }
+            }
 
+            context("initialized with hand") {
                 it("should have hand cards") {
                     // Given
                     // When
