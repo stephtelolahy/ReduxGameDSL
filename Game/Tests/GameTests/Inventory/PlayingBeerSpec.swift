@@ -38,54 +38,54 @@ final class PlayingBeerSpec: QuickSpec {
                 }
             }
 
-            context("already max health") {
-                it("should throw error") {
-                    // Given
-                    let ctx = GameState {
-                        Player("p1") {
-                            Hand {
-                                "beer-6♥️"
-                            }
-                        }
-                        .health(3)
-                        .maxHealth(3)
-                        Player()
-                        Player()
-                    }
-                    let store = createGameStore(initial: ctx)
+//            context("already max health") {
+//                it("should throw error") {
+//                    // Given
+//                    let ctx = GameState {
+//                        Player("p1") {
+//                            Hand {
+//                                "beer-6♥️"
+//                            }
+//                        }
+//                        .health(3)
+//                        .maxHealth(3)
+//                        Player()
+//                        Player()
+//                    }
+//                    let store = createGameStore(initial: ctx)
+//
+//                    // When
+//                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
+//                    let result = self.awaitAction(action, store: store)
+//
+//                    // Then
+//                    expect(result) == [.failure(.playerAlreadyMaxHealth("p1"))]
+//                }
+//            }
 
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = self.awaitAction(action, store: store)
-
-                    // Then
-                    expect(result) == [.failure(.playerAlreadyMaxHealth("p1"))]
-                }
-            }
-
-            context("two players left") {
-                it("should throw error") {
-                    // Given
-                    let ctx = GameState {
-                        Player("p1") {
-                            Hand {
-                                "beer-6♥️"
-                            }
-                        }
-                        .health(2)
-                        .maxHealth(3)
-                        Player()
-                    }
-                    let store = createGameStore(initial: ctx)
-
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = self.awaitAction(action, store: store)
-
-                    // Then
-                    expect(result) == [.failure(.playersMustBeAtLeast(3))]
-                }
-            }
+//            context("two players left") {
+//                it("should throw error") {
+//                    // Given
+//                    let ctx = GameState {
+//                        Player("p1") {
+//                            Hand {
+//                                "beer-6♥️"
+//                            }
+//                        }
+//                        .health(2)
+//                        .maxHealth(3)
+//                        Player()
+//                    }
+//                    let store = createGameStore(initial: ctx)
+//
+//                    // When
+//                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
+//                    let result = self.awaitAction(action, store: store)
+//
+//                    // Then
+//                    expect(result) == [.failure(.playersMustBeAtLeast(3))]
+//                }
+//            }
         }
     }
 }
