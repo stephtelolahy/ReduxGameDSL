@@ -26,7 +26,7 @@ final class BeerTests: XCTestCase {
         let action = GameAction.play(actor: "p1", card: "beer-6♥️")
         let result = awaitAction(action, store: store)
 
-        // Assert
+        // Then
         XCTAssertEqual(result, [
             .success(.play(actor: "p1", card: "beer-6♥️")),
             .success(.apply(.heal(1, player: .id("p1"))))

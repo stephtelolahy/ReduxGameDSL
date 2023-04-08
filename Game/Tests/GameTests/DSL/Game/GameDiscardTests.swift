@@ -14,7 +14,7 @@ final class GameDiscardTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.discard.count, 0)
     }
 
@@ -28,7 +28,7 @@ final class GameDiscardTests: XCTestCase {
             }
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.discard.count, 2)
         XCTAssertEqual(sut.discard.top, "c1")
     }

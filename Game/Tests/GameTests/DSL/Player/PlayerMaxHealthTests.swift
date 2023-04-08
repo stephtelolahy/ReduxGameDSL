@@ -11,19 +11,19 @@ final class PlayerMaxHealthTests: XCTestCase {
 
     func test_InitialMaxHealthIsZero() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.maxHealth, 0)
     }
 
     func test_GetMaxHealth() {
         // Given
+        // When
         let sut = Player().maxHealth(4)
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.maxHealth, 4)
     }
 }

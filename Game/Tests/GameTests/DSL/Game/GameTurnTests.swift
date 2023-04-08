@@ -14,7 +14,7 @@ final class GameTurnTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertNil(sut.turn)
     }
 
@@ -23,7 +23,7 @@ final class GameTurnTests: XCTestCase {
         // When
         let sut = GameState().turn("p1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.turn, "p1")
     }
 }

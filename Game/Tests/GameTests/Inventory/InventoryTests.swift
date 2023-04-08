@@ -14,7 +14,7 @@ final class InventoryTests: XCTestCase {
         // When
         let cards = Inventory.cardList.cards
 
-        // Assert
+        // Then
 //        XCTAssertTrue(cards[.barrel] != nil)
 //        XCTAssertTrue(cards[.dynamite] != nil)
 //        XCTAssertTrue(cards[.jail] != nil)

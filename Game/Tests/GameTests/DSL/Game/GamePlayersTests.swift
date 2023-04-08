@@ -14,7 +14,7 @@ final class GamePlayersTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertTrue(sut.players.isEmpty)
     }
 
@@ -25,7 +25,7 @@ final class GamePlayersTests: XCTestCase {
             Player("p1")
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.players.map(\.id), ["p1"])
     }
 
@@ -37,7 +37,7 @@ final class GamePlayersTests: XCTestCase {
             Player("p2")
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.players.map(\.id), ["p1", "p2"])
     }
 }

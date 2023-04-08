@@ -11,15 +11,16 @@ final class PlayerAbilitiesTests: XCTestCase {
 
     func test_InitialAbilitiesIsEmpty() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.abilities.count, 0)
     }
 
     func test_GetAbilities() {
         // Given
+        // When
         let sut = Player {
             Abilities {
                 "a1"
@@ -27,8 +28,7 @@ final class PlayerAbilitiesTests: XCTestCase {
             }
         }
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.abilities, ["a1", "a2"])
     }
 }

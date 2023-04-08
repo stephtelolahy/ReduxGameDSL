@@ -19,7 +19,7 @@ final class CardStackRulesTests: XCTestCase {
         // When
         let card = sut.pop()
 
-        // Assert
+        // Then
         XCTAssertEqual(card, "c1")
         XCTAssertEqual(sut.count, 1)
         XCTAssertEqual(sut.top, "c2")
@@ -32,7 +32,7 @@ final class CardStackRulesTests: XCTestCase {
         // When
         sut.push("c1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.count, 1)
         XCTAssertEqual(sut.top, "c1")
     }
@@ -46,7 +46,7 @@ final class CardStackRulesTests: XCTestCase {
         // When
         sut.push("c1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.count, 2)
         XCTAssertEqual(sut.top, "c1")
     }
@@ -61,7 +61,7 @@ final class CardStackRulesTests: XCTestCase {
         sut.push("c3")
         sut.pop()
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.top, "c2")
     }
 }

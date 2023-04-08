@@ -14,7 +14,7 @@ final class CardNameTests: XCTestCase {
         // When
         let sut = Card("c1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.name, "c1")
     }
 }

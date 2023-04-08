@@ -55,7 +55,7 @@ final class GameCodableTests: XCTestCase {
         // When
         let sut = try JSONDecoder().decode(GameState.self, from: jsonData)
 
-        // Assert
+        // Then
         XCTAssertTrue(sut.isOver)
         XCTAssertEqual(sut.players.map(\.id), ["p1"])
         XCTAssertEqual(sut.turn, "p1")

@@ -25,7 +25,7 @@ final class CardLocationCodableTests: XCTestCase {
         // When
         let sut = try JSONDecoder().decode(CardLocation.self, from: jsonData)
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.visibility, "p1")
         XCTAssertEqual(sut.cards, ["c1", "c2"])
     }
