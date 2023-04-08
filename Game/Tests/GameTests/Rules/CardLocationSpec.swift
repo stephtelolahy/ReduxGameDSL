@@ -75,7 +75,7 @@ final class CardLocationSpec: QuickSpec {
         }
 
         describe("removing") {
-            context("card found") {
+            context("an existing card") {
                 it("should remove") {
                     // Given
                     var sut = CardLocation {
@@ -91,7 +91,7 @@ final class CardLocationSpec: QuickSpec {
                 }
             }
 
-            context("card not found") {
+            context("missing card") {
                 it("should throw error") {
                     // Given
                     var sut = CardLocation()
