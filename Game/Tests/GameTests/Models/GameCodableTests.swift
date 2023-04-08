@@ -61,6 +61,6 @@ final class GameCodableTests: XCTestCase {
         XCTAssertEqual(sut.turn, "p1")
         XCTAssertEqual(sut.deck.count, 1)
         XCTAssertEqual(sut.discard.count, 1)
-        XCTAssertEqual(sut.choosable.count, 0)
+        XCTAssertEqual(sut.choosable?.count, 0)
     }
 }
