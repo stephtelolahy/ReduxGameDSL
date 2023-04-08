@@ -17,16 +17,16 @@ final class CardStackSpec: QuickSpec {
                 beforeEach {
                     sut = CardStack()
                 }
-
+                
                 it("should be empty") {
                     expect(sut.count) == 0
                 }
-
+                
                 it("should not have top") {
                     expect(sut.top) == nil
                 }
             }
-
+            
             context("initialized with cards") {
                 it("should have correct count") {
                     // Given
@@ -35,11 +35,11 @@ final class CardStackSpec: QuickSpec {
                         "c1"
                         "c2"
                     }
-
+                    
                     // Then
                     expect(sut.count) == 2
                 }
-
+                
                 it("should return first card as top") {
                     // Given
                     // When
@@ -47,7 +47,7 @@ final class CardStackSpec: QuickSpec {
                         "c1"
                         "c2"
                     }
-
+                    
                     // Then
                     expect(sut.top) == "c1"
                 }
