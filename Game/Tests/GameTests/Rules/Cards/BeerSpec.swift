@@ -28,7 +28,7 @@ final class BeerSpec: QuickSpec {
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = await self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: store)
 
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: "beer-6♥️")),
