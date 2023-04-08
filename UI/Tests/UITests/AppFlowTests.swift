@@ -45,7 +45,7 @@ final class AppFlowTests: XCTestCase {
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
         let sut = createAppStore(initial: AppState(screens: [.home(HomeState()),
-                                                          .game(GamePlayState())]))
+                                                             .game(GamePlayState())]))
         
         // When
         sut.dispatch(.dismissScreen(.game))

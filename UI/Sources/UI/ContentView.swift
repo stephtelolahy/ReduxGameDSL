@@ -8,12 +8,28 @@
 import SwiftUI
 import Redux
 
+let store = Store<AppState, Action>(
+    initial: AppState(screens: [.splash]),
+    reducer: AppState.reducer,
+    middlewares: [loggerMiddleware]
+)
+
 public struct ContentView: View {
-    @EnvironmentObject private var store: Store<AppState, Action>
 
     public init() {}
 
     public var body: some View {
+        MainView()
+            .foregroundColor(.primary)
+            .environmentObject(store)
+    }
+}
+
+struct MainView: View {
+
+    @EnvironmentObject private var store: Store<AppState, Action>
+
+    var body: some View {
         switch store.state.screens.last {
         case .home:
             HomeView()
@@ -28,9 +44,9 @@ public struct ContentView: View {
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
             .environmentObject(previewStore)
     }
 }

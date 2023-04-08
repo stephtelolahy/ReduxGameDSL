@@ -14,7 +14,6 @@ final class SequenceBeerTests: XCTestCase {
 
     func test_ApplyEffectGainHealth_OnPlayingBeer() {
         // Given
-        var completedActions: [GameAction] = []
         let ctx = GameState {
             Player("p1") {
                 Hand {
@@ -24,18 +23,24 @@ final class SequenceBeerTests: XCTestCase {
             .health(2)
         }
         let store = createGameStore(initial: ctx)
-        var cancellables = Set<AnyCancellable>()
-        store.$state.sink { state in
+
+        let expectation = self.expectation(description: "Awaiting publisher")
+        expectation.isInverted = true
+        var completedActions: [GameAction] = []
+        let cancellable = store.$state.sink { state in
             if let action = state.completedAction {
                 completedActions.append(action)
             }
-        }.store(in: &cancellables)
+        }
 
         // When
         let action = GameAction.play(actor: "p1", card: "beer-6♥️")
         store.dispatch(action)
 
         // Assert
+        waitForExpectations(timeout: 0.1)
+        cancellable.cancel()
+
         XCTAssertEqual(completedActions, [.play(actor: "p1", card: "beer-6♥️"),
                                           .apply(.heal(1, player: .id("p1")))])
     }
