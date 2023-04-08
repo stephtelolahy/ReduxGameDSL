@@ -18,6 +18,14 @@ final class PlayerSpec: QuickSpec {
                     sut = Player()
                 }
 
+                it("should have default identifier") {
+                    expect(sut.id).toNot(beEmpty())
+                }
+
+                it("should have empty name") {
+                    expect(sut.name).to(beEmpty())
+                }
+
                 it("should have no abilities") {
                     expect(sut.abilities).to(beEmpty())
                 }
@@ -45,6 +53,25 @@ final class PlayerSpec: QuickSpec {
                 it("should have mustang == 0") {
                     expect(sut.mustang) == 0
                 }
+
+                it("should have scope == 0") {
+                    expect(sut.scope) == 0
+                }
+
+                it("should have weapon == 1") {
+                    expect(sut.weapon) == 1
+                }
+            }
+
+            context("initialized with identifier") {
+                it("should have identifier") {
+                    // Given
+                    // When
+                    let sut = Player("p1")
+
+                    // Then
+                    expect(sut.id) == "p1"
+                }
             }
 
             context("initialized with abilities") {
@@ -60,6 +87,17 @@ final class PlayerSpec: QuickSpec {
 
                     // Then
                     expect(sut.abilities) == ["a1", "a2"]
+                }
+            }
+
+            context("modified name") {
+                it("should have name") {
+                    // Given
+                    // When
+                    let sut = Player().name("p1")
+
+                    // Then
+                    expect(sut.name) == "p1"
                 }
             }
 
@@ -136,6 +174,28 @@ final class PlayerSpec: QuickSpec {
 
                     // Then
                     expect(sut.mustang) == 1
+                }
+            }
+
+            context("modified scope") {
+                it("should have scope") {
+                    // Given
+                    // When
+                    let sut = Player().scope(1)
+
+                    // Then
+                    expect(sut.scope) == 1
+                }
+            }
+
+            context("modified weapon") {
+                it("should have weapon") {
+                    // Given
+                    // When
+                    let sut = Player().weapon(4)
+
+                    // Then
+                    expect(sut.weapon) == 4
                 }
             }
         }
