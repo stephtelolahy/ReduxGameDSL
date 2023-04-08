@@ -8,35 +8,35 @@
 import XCTest
 import Redux
 import Game
+import Combine
 
 final class SequenceBeerTests: XCTestCase {
 
     func test_ApplyEffectGainHealth_OnPlayingBeer() {
         // Given
-        var actions: [GameAction] = []
+        var completedActions: [GameAction] = []
         let ctx = GameState {
             Player("p1") {
                 Hand {
-                    "c1"
-                    "c2"
+                    "beer-6♥️"
                 }
             }
             .health(2)
         }
-        let store = createStore(initial: ctx)
+        let store = createGameStore(initial: ctx)
+        var cancellables = Set<AnyCancellable>()
+        store.$state.sink { state in
+            if let action = state.completedAction {
+                completedActions.append(action)
+            }
+        }.store(in: &cancellables)
 
         // When
-        let action = GameAction.play(actor: "p1", card: "c1")
+        let action = GameAction.play(actor: "p1", card: "beer-6♥️")
         store.dispatch(action)
 
         // Assert
-        XCTAssertEqual(actions, [.play(actor: "p1", card: "beer-6♥️"),
-                                 .apply(.heal(1, player: .id("p1")))])
+        XCTAssertEqual(completedActions, [.play(actor: "p1", card: "beer-6♥️"),
+                                          .apply(.heal(1, player: .id("p1")))])
     }
-}
-
-func createStore(initial: GameState) -> Store<GameState, GameAction> {
-    Store(initial: initial,
-          reducer: GameState.reducer,
-          middlewares: [cardEffectMiddleware])
 }

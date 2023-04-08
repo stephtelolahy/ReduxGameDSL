@@ -12,7 +12,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowSplash_AsInitialScreen() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.splash]))
+        let sut = createAppStore(initial: AppState(screens: [.splash]))
         
         // When
         // Assert
@@ -21,7 +21,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowHome_IfDispatchedCompleteSplash() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.splash]))
+        let sut = createAppStore(initial: AppState(screens: [.splash]))
         
         // When
         sut.dispatch(.showScreen(.home))
@@ -32,7 +32,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowGame_IfDispatchedStartGame() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.home(HomeState())]))
+        let sut = createAppStore(initial: AppState(screens: [.home(HomeState())]))
         
         // When
         sut.dispatch(.showScreen(.game))
@@ -44,7 +44,7 @@ final class AppFlowTests: XCTestCase {
     
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.home(HomeState()),
+        let sut = createAppStore(initial: AppState(screens: [.home(HomeState()),
                                                           .game(GamePlayState())]))
         
         // When
