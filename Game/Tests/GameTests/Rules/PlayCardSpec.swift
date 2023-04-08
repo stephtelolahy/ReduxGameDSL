@@ -5,7 +5,6 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
-import XCTest
 import Quick
 import Nimble
 import Game
@@ -13,6 +12,7 @@ import Redux
 
 final class PlayCardSpec: QuickSpec {
     override func spec() {
+        // Given
         let sut = GameState.reducer
         let ctx = GameState {
             Player("p1") {
@@ -28,7 +28,6 @@ final class PlayCardSpec: QuickSpec {
             context("hand card") {
 
                 it("should discard immediately") {
-                    // Given
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
                     let result = sut(ctx, action)
@@ -39,7 +38,6 @@ final class PlayCardSpec: QuickSpec {
                 }
 
                 it("should emit completed action") {
-                    // Given
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
                     let result = sut(ctx, action)
@@ -51,7 +49,6 @@ final class PlayCardSpec: QuickSpec {
 
             context("missing card") {
                 it("should throw error") {
-                    // Given
                     // When
                     let action = GameAction.play(actor: "p1", card: "c3")
                     let result = sut(ctx, action)
