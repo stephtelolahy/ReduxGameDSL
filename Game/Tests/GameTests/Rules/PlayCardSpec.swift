@@ -24,7 +24,6 @@ final class PlayCardSpec: QuickSpec {
 
         describe("playing") {
             context("hand card") {
-
                 it("should discard immediately") {
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
