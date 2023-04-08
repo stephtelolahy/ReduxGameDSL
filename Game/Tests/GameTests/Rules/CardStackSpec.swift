@@ -12,7 +12,7 @@ import Nimble
 final class CardStackSpec: QuickSpec {
 
     override func spec() {
-        describe("card popping") {
+        describe("popping") {
             context("non empty stack") {
                 it("should remove top card") {
                     // Given
@@ -44,7 +44,7 @@ final class CardStackSpec: QuickSpec {
             }
         }
 
-        describe("card pushing") {
+        describe("pushing") {
             context("empty stack") {
                 it("should push on top") {
                     // Given
