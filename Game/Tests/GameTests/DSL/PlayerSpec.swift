@@ -41,6 +41,10 @@ final class PlayerSpec: QuickSpec {
                 it("should have empty inPlay") {
                     expect(sut.inPlay.cards).to(beEmpty())
                 }
+
+                it("should have mustang == 0") {
+                    expect(sut.mustang) == 0
+                }
             }
 
             context("initialized with abilities") {
@@ -104,7 +108,7 @@ final class PlayerSpec: QuickSpec {
                     let sut = Player().maxHealth(3)
 
                     // Then
-                    expect(sut.maxHealth) == 2
+                    expect(sut.maxHealth) == 3
                 }
             }
 
@@ -121,6 +125,17 @@ final class PlayerSpec: QuickSpec {
 
                     // Then
                     expect(sut.inPlay.cards) == ["c1", "c2"]
+                }
+            }
+
+            context("modified mustang") {
+                it("should have mustang") {
+                    // Given
+                    // When
+                    let sut = Player().mustang(1)
+
+                    // Then
+                    expect(sut.mustang) == 1
                 }
             }
         }
