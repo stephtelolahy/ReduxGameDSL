@@ -24,7 +24,6 @@ final class PlayCardSpec: QuickSpec {
         }
 
         describe("playing") {
-
             context("hand card") {
 
                 it("should discard immediately") {

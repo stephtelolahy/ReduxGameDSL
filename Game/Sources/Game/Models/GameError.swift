@@ -9,4 +9,5 @@
 public enum GameError: Error, Codable, Equatable {
     case missingPlayer(String)
     case missingCard(String)
+    case stackIsEmpty
 }

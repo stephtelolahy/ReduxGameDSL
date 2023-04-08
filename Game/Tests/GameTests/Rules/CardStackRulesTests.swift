@@ -9,7 +9,7 @@ import XCTest
 
 final class CardStackRulesTests: XCTestCase {
 
-    func test_ReturnFirstCard_IfPopStack() {
+    func test_ReturnFirstCard_IfPopStack() throws {
         // Given
         var sut = CardStack {
             "c1"
@@ -17,7 +17,7 @@ final class CardStackRulesTests: XCTestCase {
         }
 
         // When
-        let card = sut.pop()
+        let card = try sut.pop()
 
         // Then
         XCTAssertEqual(card, "c1")
@@ -51,7 +51,7 @@ final class CardStackRulesTests: XCTestCase {
         XCTAssertEqual(sut.top, "c1")
     }
 
-    func test_PushAndPop() {
+    func test_PushAndPop() throws {
         // Given
         var sut = CardStack()
 
@@ -59,7 +59,7 @@ final class CardStackRulesTests: XCTestCase {
         sut.push("c1")
         sut.push("c2")
         sut.push("c3")
-        sut.pop()
+        try sut.pop()
 
         // Then
         XCTAssertEqual(sut.top, "c2")
