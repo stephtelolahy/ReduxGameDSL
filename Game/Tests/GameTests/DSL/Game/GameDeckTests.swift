@@ -14,7 +14,7 @@ final class GameDeckTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.deck.count, 0)
     }
 
@@ -27,7 +27,7 @@ final class GameDeckTests: XCTestCase {
             }
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.deck.count, 1)
     }
 
@@ -41,7 +41,7 @@ final class GameDeckTests: XCTestCase {
             }
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.deck.count, 2)
         XCTAssertEqual(sut.deck.top, "c1")
     }

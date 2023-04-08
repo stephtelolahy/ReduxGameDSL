@@ -8,33 +8,22 @@
 import SwiftUI
 import Redux
 
+private let store = Store<AppState, Action>(
+    initial: AppState(screens: [.splash]),
+    reducer: AppState.reducer,
+    middlewares: [loggerMiddleware]
+)
+
 public struct ContentView: View {
-    @EnvironmentObject private var store: Store<AppState, Action>
 
     public init() {}
 
     public var body: some View {
-        switch store.state.screens.last {
-        case .home:
-            HomeView()
-
-        case .game:
-            GamePlayView()
-
-        default:
-            SplashView()
-        }
+        MainView()
+            .foregroundColor(.primary)
+            .environmentObject(store)
     }
 }
-
-#if DEBUG
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(previewStore)
-    }
-}
-#endif
 
 #if DEBUG
 let previewStore = Store<AppState, Action>(

@@ -1,34 +1,34 @@
 import Foundation
 import Redux
 
-public struct AppState: Codable, Equatable {
+struct AppState: Codable, Equatable {
     let screens: [ScreenState]
 
-    public init(screens: [ScreenState]) {
+    init(screens: [ScreenState]) {
         self.screens = screens
     }
 }
 
-public enum ScreenState: Codable, Equatable {
+enum ScreenState: Codable, Equatable {
     case splash
     case home(HomeState)
     case game(GamePlayState)
 }
 
-public enum Action: Codable, Equatable {
+enum Action: Codable, Equatable {
     case showScreen(Screen)
     case dismissScreen(Screen)
     case home(HomeAction)
     case game(GamePlayAction)
 }
 
-public enum Screen: Codable, Equatable {
+enum Screen: Codable, Equatable {
     case splash
     case home
     case game
 }
 
-public extension AppState {
+extension AppState {
     static let reducer: Reducer<Self, Action> = { state, action in
         var screens = state.screens
 

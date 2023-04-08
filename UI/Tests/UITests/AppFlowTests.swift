@@ -12,45 +12,45 @@ final class AppFlowTests: XCTestCase {
     
     func test_ShowSplash_AsInitialScreen() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.splash]))
-        
         // When
-        // Assert
+        let sut = createAppStore(initial: AppState(screens: [.splash]))
+
+        // Then
         XCTAssertEqual(sut.state.screens, [.splash])
     }
     
     func test_ShowHome_IfDispatchedCompleteSplash() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.splash]))
+        let sut = createAppStore(initial: AppState(screens: [.splash]))
         
         // When
         sut.dispatch(.showScreen(.home))
         
-        // Assert
+        // Then
         XCTAssertEqual(sut.state.screens, [.home(HomeState())])
     }
     
     func test_ShowGame_IfDispatchedStartGame() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.home(HomeState())]))
+        let sut = createAppStore(initial: AppState(screens: [.home(HomeState())]))
         
         // When
         sut.dispatch(.showScreen(.game))
         
-        // Assert
+        // Then
         XCTAssertEqual(sut.state.screens, [.home(HomeState()),
                                            .game(GamePlayState())])
     }
     
     func test_BackToHome_IfDispatchedQuitGame() {
         // Given
-        let sut = createStore(initial: AppState(screens: [.home(HomeState()),
-                                                          .game(GamePlayState())]))
+        let sut = createAppStore(initial: AppState(screens: [.home(HomeState()),
+                                                             .game(GamePlayState())]))
         
         // When
         sut.dispatch(.dismissScreen(.game))
         
-        // Assert
+        // Then
         XCTAssertEqual(sut.state.screens, [.home(HomeState())])
     }
 }

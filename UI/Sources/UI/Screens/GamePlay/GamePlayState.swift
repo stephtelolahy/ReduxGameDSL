@@ -2,13 +2,13 @@ import Foundation
 import Redux
 import Game
 
-public struct GamePlayState: Codable, Equatable {
+struct GamePlayState: Codable, Equatable {
     var game: GameState?
     var controlled: String?
     var message: String = String()
 }
 
-public enum GamePlayAction: Codable, Equatable {
+enum GamePlayAction: Codable, Equatable {
     case onAppear
 }
 

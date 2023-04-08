@@ -24,7 +24,7 @@ final class CardStackCodableTests: XCTestCase {
         // When
         let sut = try JSONDecoder().decode(CardStack.self, from: jsonData)
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.count, 2)
         XCTAssertEqual(sut.top, "c1")
     }

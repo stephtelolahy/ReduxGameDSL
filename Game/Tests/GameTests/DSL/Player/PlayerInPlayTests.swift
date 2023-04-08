@@ -11,15 +11,16 @@ final class PlayerInPlayTests: XCTestCase {
 
     func test_InitialInPlayIsEmpty() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.inPlay.count, 0)
     }
 
     func test_GetHand() {
         // Given
+        // When
         let sut = Player {
             InPlay {
                 "c1"
@@ -27,8 +28,7 @@ final class PlayerInPlayTests: XCTestCase {
             }
         }
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.inPlay.cards, ["c1", "c2"])
     }
 }

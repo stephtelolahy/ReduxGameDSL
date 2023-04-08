@@ -11,19 +11,19 @@ final class PlayerHandLimitTests: XCTestCase {
 
     func test_InitialHandLimitIsZero() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.handLimit, 0)
     }
 
     func test_GetHandLimit() {
         // Given
+        // When
         let sut = Player().handLimit(10)
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.handLimit, 10)
     }
 }

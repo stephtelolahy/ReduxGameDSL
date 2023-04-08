@@ -14,7 +14,7 @@ final class GameChoosableTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.choosable.count, 0)
     }
 
@@ -28,7 +28,7 @@ final class GameChoosableTests: XCTestCase {
             }
         }
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.choosable.cards, ["c1", "c2"])
     }
 }

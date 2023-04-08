@@ -14,7 +14,7 @@ final class PlayerTests: XCTestCase {
         // When
         let sut = Player()
 
-        // Assert
+        // Then
         XCTAssertFalse(sut.id.isEmpty)
     }
 
@@ -23,7 +23,7 @@ final class PlayerTests: XCTestCase {
         // When
         let sut = Player("p1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.id, "p1")
     }
 }

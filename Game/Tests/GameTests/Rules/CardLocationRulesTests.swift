@@ -16,7 +16,7 @@ final class CardLocationRulesTests: XCTestCase {
         // When
         sut.add("c1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.cards, ["c1"])
     }
 
@@ -29,19 +29,19 @@ final class CardLocationRulesTests: XCTestCase {
         // When
         sut.add("c2")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.cards, ["c1", "c2"])
     }
 
     func test_SearchById() {
         // Given
+        // When
         let sut = CardLocation {
             "c1"
             "c2"
         }
 
-        // When
-        // Assert
+        // Then
         XCTAssertFalse(sut.contains("c3"))
         XCTAssertTrue(sut.contains("c1"))
         XCTAssertTrue(sut.contains("c2"))
@@ -57,7 +57,7 @@ final class CardLocationRulesTests: XCTestCase {
         // When
         try sut.remove("c1")
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.count, 1)
         XCTAssertEqual(sut.cards, ["c2"])
     }

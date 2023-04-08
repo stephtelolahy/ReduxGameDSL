@@ -14,7 +14,7 @@ final class GameOverTests: XCTestCase {
         // When
         let sut = GameState()
 
-        // Assert
+        // Then
         XCTAssertFalse(sut.isOver)
     }
 
@@ -23,7 +23,7 @@ final class GameOverTests: XCTestCase {
         // When
         let sut = GameState().isOver(true)
 
-        // Assert
+        // Then
         XCTAssertTrue(sut.isOver)
     }
 }

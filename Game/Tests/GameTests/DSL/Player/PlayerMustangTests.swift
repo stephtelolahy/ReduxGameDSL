@@ -11,19 +11,19 @@ final class PlayerMustangTests: XCTestCase {
 
     func test_InitialMustangIsZero() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.mustang, 0)
     }
 
     func test_GetMustang() {
         // Given
+        // When
         let sut = Player().mustang(1)
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.mustang, 1)
     }
 }

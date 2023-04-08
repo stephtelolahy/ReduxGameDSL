@@ -11,19 +11,19 @@ final class PlayerHealthTests: XCTestCase {
 
     func test_InitialHealthIsZero() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.health, 0)
     }
 
     func test_GetHealth() {
         // Given
+        // When
         let sut = Player().health(2)
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.health, 2)
     }
 }

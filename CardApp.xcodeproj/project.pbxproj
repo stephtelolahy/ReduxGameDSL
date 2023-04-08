@@ -12,7 +12,6 @@
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
-		26DFC34329E0B65A00C7E991 /* LoggerMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DFC34229E0B57900C7E991 /* LoggerMiddleware.swift */; };
 		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +23,6 @@
 		2699EF0429D93AD10030ACCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2699EF0629D93AD10030ACCD /* CardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardApp.entitlements; sourceTree = "<group>"; };
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		26DFC34229E0B57900C7E991 /* LoggerMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerMiddleware.swift; sourceTree = "<group>"; };
 		26DFC34429E0BC2300C7E991 /* Redux */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Redux; sourceTree = "<group>"; };
 		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +79,6 @@
 		2699EEFF29D93AD00030ACCD /* CardApp */ = {
 			isa = PBXGroup;
 			children = (
-				26DFC34129E0B57900C7E991 /* Middlewares */,
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
 				2699EF0429D93AD10030ACCD /* Assets.xcassets */,
 				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
@@ -96,14 +93,6 @@
 				2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		26DFC34129E0B57900C7E991 /* Middlewares */ = {
-			isa = PBXGroup;
-			children = (
-				26DFC34229E0B57900C7E991 /* LoggerMiddleware.swift */,
-			);
-			path = Middlewares;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */,
-				26DFC34329E0B65A00C7E991 /* LoggerMiddleware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

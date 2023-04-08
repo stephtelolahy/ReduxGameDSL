@@ -26,7 +26,7 @@ final class PlayCardTests: XCTestCase {
         let action = GameAction.play(actor: "p1", card: "c1")
         let result = sut(ctx, action)
 
-        // Assert
+        // Then
         XCTAssertEqual(result.player("p1").hand.cards, ["c2"])
         XCTAssertEqual(result.discard.top, "c1")
         XCTAssertEqual(result.completedAction, action)
@@ -42,7 +42,7 @@ final class PlayCardTests: XCTestCase {
         let action = GameAction.play(actor: "p1", card: "c1")
         let result = sut(ctx, action)
 
-        // Assert
+        // Then
         XCTAssertEqual(result.thrownError, .missingCard("c1"))
     }
 
@@ -54,7 +54,7 @@ final class PlayCardTests: XCTestCase {
         let action = GameAction.play(actor: "p1", card: "c1")
         let result = sut(ctx, action)
 
-        // Assert
+        // Then
         XCTAssertEqual(result.thrownError, .missingPlayer("p1"))
     }
 }

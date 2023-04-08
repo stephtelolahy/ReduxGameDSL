@@ -36,7 +36,7 @@ final class PlayerCodableTests: XCTestCase {
         // When
         let sut = try JSONDecoder().decode(Player.self, from: jsonData)
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.id, "p1")
         XCTAssertEqual(sut.name, "n1")
         XCTAssertEqual(sut.maxHealth, 4)

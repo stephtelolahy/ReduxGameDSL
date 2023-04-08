@@ -22,7 +22,7 @@ final class CardCodableTests: XCTestCase {
         // When
         let sut = try JSONDecoder().decode(Card.self, from: jsonData)
 
-        // Assert
+        // Then
         XCTAssertEqual(sut.name, "c1")
     }
 }

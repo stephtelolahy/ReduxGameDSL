@@ -8,10 +8,10 @@
 import Foundation
 import Redux
 
-public struct HomeState: Codable, Equatable {
+struct HomeState: Codable, Equatable {
 }
 
-public enum HomeAction: Codable, Equatable {
+enum HomeAction: Codable, Equatable {
     case onAppear
 }
 

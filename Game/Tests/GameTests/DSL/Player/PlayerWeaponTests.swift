@@ -11,19 +11,19 @@ final class PlayerWeaponTests: XCTestCase {
 
     func test_InitialWeaponIsOne() {
         // Given
+        // When
         let sut = Player()
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.weapon, 1)
     }
 
     func test_GetWeapon() {
         // Given
+        // When
         let sut = Player().weapon(4)
 
-        // When
-        // Assert
+        // Then
         XCTAssertEqual(sut.weapon, 4)
     }
 }
