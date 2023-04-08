@@ -29,7 +29,7 @@ final class SerializingCardStackSpec: QuickSpec {
                     let sut = try JSONDecoder().decode(CardStack.self, from: jsonData)
 
                     // Then
-                    expect(sut.count) ==  2
+                    expect(sut.count) == 2
                     expect(sut.top) == "c1"
                 }
             }
