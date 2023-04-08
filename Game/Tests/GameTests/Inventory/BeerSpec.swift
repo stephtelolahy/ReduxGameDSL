@@ -10,7 +10,6 @@ import Nimble
 import Game
 
 final class BeerSpec: QuickSpec {
-
     override func spec() {
         describe("playing beer") {
             context("damaged") {

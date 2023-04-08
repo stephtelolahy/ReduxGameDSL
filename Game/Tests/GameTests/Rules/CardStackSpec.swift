@@ -10,7 +10,6 @@ import Quick
 import Nimble
 
 final class CardStackSpec: QuickSpec {
-
     override func spec() {
         describe("popping") {
             context("non empty stack") {

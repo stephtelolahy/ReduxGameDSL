@@ -10,7 +10,6 @@ import Quick
 import Nimble
 
 final class CardLocationSpec: QuickSpec {
-
     override func spec() {
         describe("adding") {
             context("location empty") {
