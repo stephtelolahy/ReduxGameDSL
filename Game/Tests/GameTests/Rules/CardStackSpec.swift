@@ -13,7 +13,7 @@ final class CardStackSpec: QuickSpec {
 
     override func spec() {
         describe("card popping") {
-            context("valid") {
+            context("non empty stack") {
                 it("should remove top card") {
                     // Given
                     var sut = CardStack {
@@ -26,8 +26,8 @@ final class CardStackSpec: QuickSpec {
 
                     // Then
                     expect(card) == "c1"
-                    expect(sut.count) == 1
                     expect(sut.top) == "c2"
+                    expect(sut.count) == 1
                 }
             }
 
@@ -40,6 +40,38 @@ final class CardStackSpec: QuickSpec {
                     // Then
                     expect { try sut.pop() }
                         .to(throwError(GameError.stackIsEmpty))
+                }
+            }
+        }
+
+        describe("card pushing") {
+            context("empty stack") {
+                it("should push on top") {
+                    // Given
+                    var sut = CardStack()
+
+                    // When
+                    sut.push("c1")
+
+                    // Then
+                    expect(sut.top) == "c1"
+                    expect(sut.count) == 1
+                }
+            }
+
+            context("non empty stack") {
+                it("should push on top") {
+                    // Given
+                    var sut = CardStack {
+                        "c2"
+                    }
+
+                    // When
+                    sut.push("c1")
+
+                    // Then
+                    expect(sut.top) == "c1"
+                    expect(sut.count) == 2
                 }
             }
         }

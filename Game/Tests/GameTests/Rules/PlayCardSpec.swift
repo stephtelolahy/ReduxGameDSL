@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Redux
 
 final class PlayCardSpec: QuickSpec {
     override func spec() {
