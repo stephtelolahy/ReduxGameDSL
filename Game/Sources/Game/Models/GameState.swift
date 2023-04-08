@@ -18,7 +18,7 @@ public struct GameState: Codable, Equatable {
     public var discard: CardStack = .init()
 
     /// choosable zone
-    public var choosable: CardLocation = .init()
+    public var choosable: CardLocation?
 
     /// is Game over
     public var isOver: Bool = false

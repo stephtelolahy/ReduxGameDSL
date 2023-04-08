@@ -19,7 +19,7 @@ extension XCTestCase {
     ) -> [Result<GameAction, GameError>] {
 
         var result: [Result<GameAction, GameError>] = []
-        let expectation = self.expectation(description: "Awaiting publisher")
+        let expectation = XCTestExpectation(description: "Awaiting publisher")
         expectation.isInverted = true
         let cancellable = store.$state.sink { state in
             if let action = state.completedAction {
@@ -32,7 +32,7 @@ extension XCTestCase {
 
         store.dispatch(action)
 
-        waitForExpectations(timeout: timeout)
+        wait(for: [expectation], timeout: timeout)
         cancellable.cancel()
 
         return result

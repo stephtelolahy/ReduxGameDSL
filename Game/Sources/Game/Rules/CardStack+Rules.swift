@@ -8,8 +8,12 @@
 extension CardStack {
 
     @discardableResult
-    mutating func pop() -> String {
-        cards.removeFirst()
+    mutating func pop() throws -> String {
+        guard !cards.isEmpty else {
+            throw GameError.stackIsEmpty
+        }
+
+        return cards.removeFirst()
     }
 
     mutating func push(_ card: String) {
