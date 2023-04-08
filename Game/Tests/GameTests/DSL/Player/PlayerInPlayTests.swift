@@ -9,15 +9,6 @@ import XCTest
 
 final class PlayerInPlayTests: XCTestCase {
 
-    func test_InitialInPlayIsEmpty() {
-        // Given
-        // When
-        let sut = Player()
-
-        // Then
-        XCTAssertEqual(sut.inPlay.count, 0)
-    }
-
     func test_GetHand() {
         // Given
         // When

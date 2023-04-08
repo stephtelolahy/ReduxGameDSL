@@ -28,6 +28,14 @@ final class PlayerSpec: QuickSpec {
                 it("should have empty hand") {
                     expect(sut.hand.cards).to(beEmpty())
                 }
+
+                it("should have health == 0") {
+                    expect(sut.health) == 0
+                }
+
+                it("should have empty inPlay") {
+                    expect(sut.inPlay.cards).to(beEmpty())
+                }
             }
 
             context("initialized with abilities") {
@@ -70,6 +78,17 @@ final class PlayerSpec: QuickSpec {
 
                     // Then
                     expect(sut.hand.cards) == ["c1", "c2"]
+                }
+            }
+
+            context("modified health") {
+                it("should have health") {
+                    // Given
+                    // When
+                    let sut = Player().health(2)
+
+                    // Then
+                    expect(sut.health) == 2
                 }
             }
         }
