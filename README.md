@@ -1,6 +1,6 @@
 # A Domain Specific Language For Trading Card Games
 
-[![Swift](https://github.com/stephtelolahy/GameDSL/actions/workflows/swift.yml/badge.svg?branch=main)](https://github.com/stephtelolahy/GameDSL/actions/workflows/swift.yml)
+[![iOS starter workflow](https://github.com/stephtelolahy/ReduxGameDSL/actions/workflows/ios.yml/badge.svg)](https://github.com/stephtelolahy/ReduxGameDSL/actions/workflows/ios.yml)
 
 **Game**: a form of competitive activity played according to rules.
 
