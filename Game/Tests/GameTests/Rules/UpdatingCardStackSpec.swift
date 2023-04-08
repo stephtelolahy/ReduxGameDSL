@@ -1,5 +1,5 @@
 //
-//  CardStackSpec.swift
+//  UpdatingCardStackSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 
-final class CardStackSpec: QuickSpec {
+final class UpdatingCardStackSpec: QuickSpec {
     override func spec() {
         describe("popping") {
             context("non empty stack") {

@@ -10,7 +10,6 @@ import Redux
 import Game
 
 extension XCTestCase {
-
     func awaitAction(
         _ action: GameAction,
         store: Store<GameState, GameAction>,

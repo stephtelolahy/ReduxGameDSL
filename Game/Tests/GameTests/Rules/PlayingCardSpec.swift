@@ -1,5 +1,5 @@
 //
-//  PlayCardSpec.swift
+//  PlayingCardSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class PlayCardSpec: QuickSpec {
+final class PlayingCardSpec: QuickSpec {
     override func spec() {
         // Given
         let sut = GameState.reducer

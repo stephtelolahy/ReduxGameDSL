@@ -1,5 +1,5 @@
 //
-//  CardLocationSpec.swift
+//  UpdatingCardLocationSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 
-final class CardLocationSpec: QuickSpec {
+final class UpdatingCardLocationSpec: QuickSpec {
     override func spec() {
         describe("adding") {
             context("location empty") {

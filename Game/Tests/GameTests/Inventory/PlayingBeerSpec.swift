@@ -1,5 +1,5 @@
 //
-//  BeerSpec.swift
+//  PlayingBeerSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class BeerSpec: QuickSpec {
+final class PlayingBeerSpec: QuickSpec {
     override func spec() {
         describe("playing beer") {
             context("damaged") {
