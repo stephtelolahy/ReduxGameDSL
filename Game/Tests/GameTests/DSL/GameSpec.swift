@@ -12,7 +12,7 @@ import Game
 final class GameSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        describe("a Game") {
+        describe("a game") {
             var sut: GameState!
             context("by default") {
                 beforeEach {

@@ -12,7 +12,7 @@ import Nimble
 final class UpdatingCardLocationSpec: QuickSpec {
     override func spec() {
         describe("adding") {
-            context("location empty") {
+            context("empty location") {
                 it("should set first card") {
                     // Given
                     var sut = CardLocation()
@@ -25,7 +25,7 @@ final class UpdatingCardLocationSpec: QuickSpec {
                 }
             }
 
-            context("location not empty") {
+            context("non empty location") {
                 it("should append last card") {
                     // Given
                     var sut = CardLocation {

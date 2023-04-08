@@ -11,7 +11,7 @@ import Nimble
 final class PlayerSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        describe("a Player") {
+        describe("a player") {
             var sut: Player!
             context("by default") {
                 beforeEach {
