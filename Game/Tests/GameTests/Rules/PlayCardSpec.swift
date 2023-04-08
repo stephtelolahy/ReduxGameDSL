@@ -7,6 +7,7 @@
 
 import XCTest
 import Quick
+import Nimble
 import Game
 import Redux
 
@@ -33,8 +34,8 @@ final class PlayCardSpec: QuickSpec {
                     let result = sut(ctx, action)
 
                     // Then
-                    XCTAssertEqual(result.player("p1").hand.cards, ["c2"])
-                    XCTAssertEqual(result.discard.top, "c1")
+                    expect(result.player("p1").hand.cards) == ["c2"]
+                    expect(result.discard.top) == "c1"
                 }
 
                 it("should emit completed action") {
@@ -44,7 +45,7 @@ final class PlayCardSpec: QuickSpec {
                     let result = sut(ctx, action)
 
                     // Then
-                    XCTAssertEqual(result.completedAction, action)
+                    expect(result.completedAction) == action
                 }
             }
 
@@ -56,7 +57,7 @@ final class PlayCardSpec: QuickSpec {
                     let result = sut(ctx, action)
 
                     // Then
-                    XCTAssertEqual(result.thrownError, .missingCard("c3"))
+                    expect(result.thrownError) == .missingCard("c3")
                 }
             }
 
@@ -67,7 +68,7 @@ final class PlayCardSpec: QuickSpec {
                     let result = sut(ctx, action)
 
                     // Then
-                    XCTAssertEqual(result.thrownError, .missingPlayer("p2"))
+                    expect(result.thrownError) == .missingPlayer("p2")
                 }
             }
         }
