@@ -20,6 +20,8 @@ final class PlayingCardSpec: QuickSpec {
                     "c2"
                 }
             }
+            Player()
+            Player()
         }
 
         describe("playing") {

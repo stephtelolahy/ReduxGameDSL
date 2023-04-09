@@ -28,7 +28,12 @@ let playReducer: Reducer<GameState, GameAction>
             throw GameError.cardNotPlayable(card)
         }
 
-        // TODO: verify requirement
+        // verify requirements
+        for playReq in playAction.playReqs {
+            if case let .failure(error) = matchPlayReq(playReq, state) {
+                throw error
+            }
+        }
 
         state.queue.append(playAction.effect)
 

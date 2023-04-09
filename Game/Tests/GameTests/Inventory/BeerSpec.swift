@@ -63,7 +63,7 @@ final class BeerSpec: QuickSpec {
                 }
             }
 
-            xcontext("two players left") {
+            context("two players left") {
                 it("should throw error") {
                     // Given
                     let ctx = GameState {
