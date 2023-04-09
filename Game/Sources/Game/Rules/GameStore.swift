@@ -14,8 +14,8 @@ public func createGameStore(initial: GameState) -> Store<GameState, GameAction> 
           middlewares: [gameLoopMiddleware])
 }
 
-/// Dispatching queued side effects if any
-private let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
+/// Dispatching queued side effects
+let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
     guard !state.queue.isEmpty else {
         return Empty()
             .eraseToAnyPublisher()

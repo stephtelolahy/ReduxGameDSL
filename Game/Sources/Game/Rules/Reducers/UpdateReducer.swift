@@ -7,7 +7,7 @@
 
 import Redux
 
-let updateReducer: Reducer<GameState, GameAction>
+let updateReducer: GameReducer
 = { state, _ in
     guard !state.queue.isEmpty else {
         return state

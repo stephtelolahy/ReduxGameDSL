@@ -7,7 +7,7 @@
 
 import Redux
 
-let effectReducer: Reducer<GameState, GameAction>
+let effectReducer: GameReducer
 = { state, action in
     guard case let .apply(effect) = action else {
         fatalError(GameError.unexpected)

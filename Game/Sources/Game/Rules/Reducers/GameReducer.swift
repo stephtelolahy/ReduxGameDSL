@@ -7,7 +7,9 @@
 
 import Redux
 
-public let gameReducer: Reducer<GameState, GameAction>
+typealias GameReducer = Reducer<GameState, GameAction>
+
+let gameReducer: GameReducer
 = { state, action in
     var state = state
     state.completedAction = nil

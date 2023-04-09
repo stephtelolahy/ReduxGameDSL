@@ -7,7 +7,7 @@
 
 import Redux
 
-let healReducer: Reducer<GameState, GameAction>
+let healReducer: GameReducer
 = { state, action in
     guard case let .apply(effect) = action,
           case let .heal(value, player) = effect else {
