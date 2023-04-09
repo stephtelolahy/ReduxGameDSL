@@ -5,18 +5,21 @@
 //  Created by Hugues Telolahy on 04/04/2023.
 //
 
-public enum Inventory {
+enum Inventory {
 
-    public static let cardList = CardList {
+    /// Describing all cards
+    static let cardRef: [String: Card] = createCards {
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .onPlay {
+                    PlayReq.isActorDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
     }
 
-    public static let cardSets: [String: [String]] = [
+    /// Describing card sets
+    static let cardSets: [String: [String]] = [
         .barrel: ["Q♠️", "K♠️"],
         .dynamite: ["2♥️"],
         .jail: ["J♠️", "10♠️", "4♥️"],
@@ -88,4 +91,16 @@ public extension String {
     static let kitCarlson = "kitCarlson"
     static let jesseJones = "jesseJones"
     static let pedroRamirez = "pedroRamirez"
+}
+
+private func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
+    content().toDictionary()
+}
+
+private extension Array where Element == Card {
+    func toDictionary() -> [String: Card] {
+        reduce(into: [String: Card]()) {
+            $0[$1.name] = $1
+        }
+    }
 }

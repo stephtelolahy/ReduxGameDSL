@@ -21,5 +21,8 @@ public enum GameAction: Codable, Equatable {
     case choose
 
     /// Applying some card side effects
-    case apply(CardEffect)
+    case apply(CardEffect, ctx: PlayContext)
+
+    /// Process queued event
+    case update
 }

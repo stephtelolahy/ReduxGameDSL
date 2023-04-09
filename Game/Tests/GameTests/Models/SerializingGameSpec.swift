@@ -48,7 +48,8 @@ final class SerializingGameSpec: QuickSpec {
                             "cards": [
                                 "c2"
                             ]
-                        }
+                        },
+                        "queue": []
                     }
                     """
                     let jsonData = JSON.data(using: .utf8)!

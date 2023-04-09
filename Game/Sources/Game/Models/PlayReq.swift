@@ -14,6 +14,9 @@ public enum PlayReq: Codable, Equatable {
     /// The minimum number of active players is X
     case isPlayersAtLeast(Int)
 
+    /// Actor must be damaged
+    case isActorDamaged
+
     /// When just eliminated
     case onEliminated
 }

@@ -33,8 +33,10 @@ public enum GameError: Error, Codable, Equatable {
     case playerHasNoMatchingCard(String)
 
     /// Expected card to have onPlay effect
-    case cardHasNoPlayingEffect
+    case cardNotPlayable(String)
 
     /// Expected some player damaged
     case noPlayerDamaged
+
+    case unexpected
 }

@@ -14,13 +14,13 @@ public struct Card: Codable, Equatable {
 
 public struct CardActionInfo: Codable, Equatable {
     
-    /// The action type that triggers the effect
+    /// The action type
     public let actionType: CardActionType
     
-    /// Side effect on dispatching action
+    /// Side effect
     public let effect: CardEffect
     
-    /// requirements for playing this card
+    /// requirements
     public var playReqs: [PlayReq] = []
 }
 

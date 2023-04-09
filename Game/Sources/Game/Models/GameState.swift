@@ -28,6 +28,14 @@ public struct GameState: Codable, Equatable {
 
     /// last occured error
     public var thrownError: GameError?
+
+    /// queued effects
+    var queue: [CardEffectWithContext] = []
+
+    /// all cards reference
+    public var cardRef: [String: Card] {
+        Inventory.cardRef
+    }
 }
 
 // MARK: - Convenience
@@ -41,4 +49,9 @@ public extension GameState {
         }
         return player
     }
+}
+
+public struct CardEffectWithContext: Codable, Equatable {
+    let effect: CardEffect
+    let ctx: PlayContext
 }
