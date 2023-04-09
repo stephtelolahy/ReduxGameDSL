@@ -5,16 +5,16 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-typealias PlayReqMatcher = (PlayReq, GameState) -> Result<Void, GameError>
+typealias PlayReqMatcher = (PlayReq, GameState, PlayContext) -> Result<Void, GameError>
 
 let matchPlayReq: PlayReqMatcher
-= { playReq, state in
+= { playReq, state, ctx in
     switch playReq {
     case .isPlayersAtLeast:
-        return isPlayersAtLeast(playReq, state)
+        return isPlayersAtLeast(playReq, state, ctx)
 
     case .isActorDamaged:
-        return isActorDamaged(playReq, state)
+        return isActorDamaged(playReq, state, ctx)
 
     default:
         fatalError(GameError.unexpected)

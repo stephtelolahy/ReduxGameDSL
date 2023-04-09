@@ -20,6 +20,8 @@ final class PlayingCardSpec: QuickSpec {
                     "c2"
                 }
             }
+            .health(2)
+            .maxHealth(4)
             Player()
             Player()
         }

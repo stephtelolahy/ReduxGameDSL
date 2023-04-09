@@ -29,8 +29,9 @@ let playReducer: GameReducer
         }
 
         // verify requirements
+        let ctx = PlayContext(actor: actor, card: card)
         for playReq in playAction.playReqs {
-            if case let .failure(error) = matchPlayReq(playReq, state) {
+            if case let .failure(error) = matchPlayReq(playReq, state, ctx) {
                 throw error
             }
         }
