@@ -1,5 +1,5 @@
 //
-//  String+Card.swift
+//  String+CardId.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
