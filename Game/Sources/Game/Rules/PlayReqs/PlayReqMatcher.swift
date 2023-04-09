@@ -7,6 +7,16 @@
 
 typealias PlayReqMatcher = (PlayReq, GameState, PlayContext) -> Result<Void, GameError>
 
+/// Context data associated to an effect
+struct PlayContext {
+
+    /// the actor playing card
+    let actor: String
+
+    /// played card
+    let card: String
+}
+
 let matchPlayReq: PlayReqMatcher
 = { playReq, state, ctx in
     switch playReq {
