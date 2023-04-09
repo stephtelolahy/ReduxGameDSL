@@ -12,7 +12,6 @@ import Nimble
 final class PlayingCardSpec: QuickSpec {
     override func spec() {
         // Given
-        // TODO: use dummy card
         let sut = gameReducer
         let state = GameState {
             Player("p1") {
