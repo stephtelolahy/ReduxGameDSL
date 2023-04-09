@@ -13,6 +13,9 @@ let matchPlayReq: PlayReqMatcher
     case .isPlayersAtLeast:
         return isPlayersAtLeast(playReq, state)
 
+    case .isActorDamaged:
+        return isActorDamaged(playReq, state)
+
     default:
         fatalError(GameError.unexpected)
     }

@@ -38,7 +38,7 @@ final class BeerSpec: QuickSpec {
                 }
             }
 
-            xcontext("already max health") {
+            context("already max health") {
                 it("should throw error") {
                     // Given
                     let ctx = GameState {

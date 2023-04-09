@@ -12,6 +12,7 @@ enum Inventory {
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .onPlay {
+                    PlayReq.isActorDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
