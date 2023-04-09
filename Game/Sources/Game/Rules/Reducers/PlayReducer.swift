@@ -23,8 +23,8 @@ let playReducer: GameReducer
 
         // queue side effects
         guard let cardName: String = card.split(separator: "-").first.map(String.init),
-           let cardObj: Card = state.cardRef[cardName],
-           let playAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) else {
+              let cardObj: Card = state.cardRef[cardName],
+              let playAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) else {
             throw GameError.cardNotPlayable(card)
         }
 
@@ -36,7 +36,8 @@ let playReducer: GameReducer
             }
         }
 
-        state.queue.append(playAction.effect)
+        let element = CardEffectWithContext(effect: playAction.effect, ctx: ctx)
+        state.queue.append(element)
 
         state.completedAction = action
     } catch {

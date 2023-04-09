@@ -22,8 +22,8 @@ let gameReducer: GameReducer
     case .update:
         return updateReducer(state, action)
 
-    case .apply:
-        return effectReducer(state, action)
+    case let .apply(effect, ctx):
+        return effectReducer(state, effect, ctx)
 
     default:
         fatalError(GameError.unexpected)

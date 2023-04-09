@@ -7,15 +7,13 @@
 
 import Redux
 
-let effectReducer: GameReducer
-= { state, action in
-    guard case let .apply(effect) = action else {
-        fatalError(GameError.unexpected)
-    }
+typealias EffectReducer = (GameState, CardEffect, PlayContext) -> GameState
 
+let effectReducer: EffectReducer
+= { state, effect, ctx in
     switch effect {
     case .heal:
-        return healReducer(state, action)
+        return healReducer(state, effect, ctx)
         
     default:
         fatalError(GameError.unexpected)

@@ -7,18 +7,25 @@
 
 import Redux
 
-let healReducer: GameReducer
-= { state, action in
-    guard case let .apply(effect) = action,
-          case let .heal(value, player) = effect else {
+let healReducer: EffectReducer
+= { state, effect, ctx in
+    guard case let .heal(value, player) = effect else {
         fatalError(GameError.unexpected)
     }
 
     var state = state
     guard case let .id(pId) = player else {
-        // TODO: resolve player
-        let pId = "p1"
-        state.queue.insert(.heal(value, player: .id(pId)), at: 0)
+        // resolve player
+        let resolved = argPlayerResolver(player, state, ctx)
+        switch resolved {
+        case let .identified(pIds):
+            let children = pIds.map { CardEffect.heal(value, player: .id($0)) }
+            state.queue.insert(children, at: 0)
+
+        default:
+            fatalError(GameError.unexpected)
+        }
+
         return state
     }
 
@@ -28,7 +35,7 @@ let healReducer: GameReducer
             try playerObj.gainHealth(value)
         }
         
-        state.completedAction = action
+        state.completedAction = .apply(effect)
     } catch {
         state.thrownError = (error as? GameError).unsafelyUnwrapped
     }

@@ -30,7 +30,7 @@ public struct GameState: Codable, Equatable {
     public var thrownError: GameError?
 
     /// queued effects
-    var queue: [CardEffect] = []
+    var queue: [CardEffectWithContext] = []
 
     /// all cards reference
     public var cardRef: [String: Card] {
@@ -49,4 +49,9 @@ public extension GameState {
         }
         return player
     }
+}
+
+public struct CardEffectWithContext: Codable, Equatable {
+    let effect: CardEffect
+    let ctx: PlayContext
 }
