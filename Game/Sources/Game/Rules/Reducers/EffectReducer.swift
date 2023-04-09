@@ -7,13 +7,13 @@
 
 import Redux
 
-typealias EffectReducer = (GameState, CardEffect, PlayContext) -> GameState
+typealias EffectReducer = (GameState, CardEffect, PlayContext) throws -> GameState
 
 let effectReducer: EffectReducer
 = { state, effect, ctx in
     switch effect {
     case .heal:
-        return healReducer(state, effect, ctx)
+        return try healReducer(state, effect, ctx)
         
     default:
         fatalError(GameError.unexpected)

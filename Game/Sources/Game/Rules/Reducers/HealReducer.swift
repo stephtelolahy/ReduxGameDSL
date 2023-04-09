@@ -16,14 +16,23 @@ let healReducer: EffectReducer
     var state = state
     guard case let .id(pId) = player else {
         // resolve player
-        let resolved = argPlayerResolver(player, state, ctx)
-        switch resolved {
-        case let .identified(pIds):
-            let children = pIds.map { CardEffect.heal(value, player: .id($0)) }
-            state.queue.insert(children, at: 0)
+        let result: Result<ArgOutput, GameError> = argPlayerResolver(player, state, ctx)
+        switch result {
+        case let .success(output):
+            switch output {
+            case let .identified(pIds):
+                let children = pIds.map {
+                    CardEffectWithContext(effect: .heal(value, player: .id($0)),
+                                          ctx: ctx)
+                }
+                state.queue.insert(contentsOf: children, at: 0)
 
-        default:
-            fatalError(GameError.unexpected)
+            case .selectable:
+                fatalError(GameError.unexpected)
+            }
+
+        case let .failure(error):
+            throw error
         }
 
         return state
@@ -34,8 +43,8 @@ let healReducer: EffectReducer
         try state.updatePlayer(pId) { playerObj in
             try playerObj.gainHealth(value)
         }
-        
-        state.completedAction = .apply(effect)
+
+        state.completedAction = .apply(effect, ctx: ctx)
     } catch {
         state.thrownError = (error as? GameError).unsafelyUnwrapped
     }

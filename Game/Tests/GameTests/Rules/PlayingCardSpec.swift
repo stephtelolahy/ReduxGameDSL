@@ -14,7 +14,7 @@ final class PlayingCardSpec: QuickSpec {
         // Given
         // TODO: use dummy card
         let sut = gameReducer
-        let ctx = GameState {
+        let state = GameState {
             Player("p1") {
                 Hand {
                     "beer-6♥️"
@@ -32,7 +32,7 @@ final class PlayingCardSpec: QuickSpec {
                 it("should discard immediately") {
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = sut(ctx, action)
+                    let result = sut(state, action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c2"]
@@ -42,7 +42,7 @@ final class PlayingCardSpec: QuickSpec {
                 it("should emit completed action") {
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = sut(ctx, action)
+                    let result = sut(state, action)
 
                     // Then
                     expect(result.completedAction) == action
@@ -53,7 +53,7 @@ final class PlayingCardSpec: QuickSpec {
                 it("should throw error") {
                     // When
                     let action = GameAction.play(actor: "p1", card: "c3")
-                    let result = sut(ctx, action)
+                    let result = sut(state, action)
 
                     // Then
                     expect(result.thrownError) == .missingCard("c3")
@@ -64,7 +64,7 @@ final class PlayingCardSpec: QuickSpec {
                 it("should throw error") {
                     // When
                     let action = GameAction.play(actor: "p2", card: "c1")
-                    let result = sut(ctx, action)
+                    let result = sut(state, action)
 
                     // Then
                     expect(result.thrownError) == .missingPlayer("p2")
@@ -75,7 +75,7 @@ final class PlayingCardSpec: QuickSpec {
                 it("should throw error") {
                     // When
                     let action = GameAction.play(actor: "p1", card: "c2")
-                    let result = sut(ctx, action)
+                    let result = sut(state, action)
 
                     // Then
                     expect(result.thrownError) == .cardNotPlayable("c2")

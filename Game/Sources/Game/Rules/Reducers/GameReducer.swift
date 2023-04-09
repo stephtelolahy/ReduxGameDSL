@@ -15,17 +15,22 @@ let gameReducer: GameReducer
     state.completedAction = nil
     state.thrownError = nil
 
-    switch action {
-    case .play:
-        return playReducer(state, action)
+    do {
+        switch action {
+        case .play:
+            return playReducer(state, action)
 
-    case .update:
-        return updateReducer(state, action)
+        case .update:
+            return updateReducer(state, action)
 
-    case let .apply(effect, ctx):
-        return effectReducer(state, effect, ctx)
+        case let .apply(effect, ctx):
+            return try effectReducer(state, effect, ctx)
 
-    default:
-        fatalError(GameError.unexpected)
+        default:
+            fatalError(GameError.unexpected)
+        }
+    } catch {
+        state.thrownError = (error as? GameError).unsafelyUnwrapped
+        return state
     }
 }

@@ -13,4 +13,9 @@ public struct PlayContext: Codable, Equatable {
 
     /// played card
     let card: String
+
+    public init(actor: String, card: String) {
+        self.actor = actor
+        self.card = card
+    }
 }
