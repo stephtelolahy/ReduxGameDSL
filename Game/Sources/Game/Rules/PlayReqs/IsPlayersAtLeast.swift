@@ -11,9 +11,7 @@ let isPlayersAtLeast: PlayReqMatcher
         fatalError(GameError.unexpected)
     }
 
-    guard state.players.count >= count else {
-        return .failure(GameError.playersMustBeAtLeast(count))
+    if state.players.count < count {
+        throw GameError.playersMustBeAtLeast(count)
     }
-
-    return .success
 }

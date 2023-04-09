@@ -32,16 +32,12 @@ let healReducer: EffectReducer
         return state
     }
 
-    do {
-        // update health
-        try state.updatePlayer(pId) { playerObj in
-            try playerObj.gainHealth(value)
-        }
-
-        state.completedAction = .apply(effect, ctx: ctx)
-    } catch {
-        state.thrownError = (error as? GameError).unsafelyUnwrapped
+    // update health
+    try state.updatePlayer(pId) { playerObj in
+        try playerObj.gainHealth(value)
     }
+
+    state.completedAction = .apply(effect, ctx: ctx)
 
     return state
 }

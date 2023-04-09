@@ -31,9 +31,7 @@ let playReducer: GameReducer
     // verify requirements
     let ctx = PlayContext(actor: actor, card: card)
     for playReq in playAction.playReqs {
-        if case let .failure(error) = matchPlayReq(playReq, state, ctx) {
-            throw error
-        }
+        try matchPlayReq(playReq, state, ctx)
     }
 
     let element = CardEffectWithContext(effect: playAction.effect, ctx: ctx)

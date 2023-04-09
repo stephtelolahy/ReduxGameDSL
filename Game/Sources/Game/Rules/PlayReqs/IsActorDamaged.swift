@@ -12,9 +12,7 @@ let isActorDamaged: PlayReqMatcher
     }
 
     let actorObj = state.player(ctx.actor)
-    guard actorObj.health < actorObj.maxHealth else {
-        return .failure(GameError.playerAlreadyMaxHealth(ctx.actor))
+    if actorObj.health >= actorObj.maxHealth {
+        throw GameError.playerAlreadyMaxHealth(ctx.actor)
     }
-
-    return .success
 }
