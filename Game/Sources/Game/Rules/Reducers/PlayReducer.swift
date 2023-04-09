@@ -23,7 +23,7 @@ let playReducer: Reducer<GameState, GameAction>
 
         // queue side effects
         if let cardName: String = card.split(separator: "-").first.map(String.init),
-           let cardObj: Card = Inventory.cardList.cards[cardName],
+           let cardObj: Card = Inventory.cardRef[cardName],
            let cardAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) {
 
             // TODO: match all requirements or throw error

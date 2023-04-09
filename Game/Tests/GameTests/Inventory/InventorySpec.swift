@@ -16,7 +16,7 @@ final class InventorySpec: QuickSpec {
                 it("should contain all collectible cards") {
                     // Given
                     // When
-                    let cards = Inventory.cardList.cards
+                    let cards = Inventory.cardRef
                     // Then
 //                    expect(cards[.barrel]) != nil
 //                    expect(cards[.dynamite]) != nil
