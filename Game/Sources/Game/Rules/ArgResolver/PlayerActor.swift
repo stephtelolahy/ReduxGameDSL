@@ -7,5 +7,5 @@
 
 let playerActor: ArgPlayerResolver
 = { _, _, ctx in
-    .success(.identified([ctx.actor]))
+    .identified([ctx.actor])
 }

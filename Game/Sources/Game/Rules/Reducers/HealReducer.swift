@@ -16,23 +16,17 @@ let healReducer: EffectReducer
     var state = state
     guard case let .id(pId) = player else {
         // resolve player
-        let result: Result<ArgOutput, GameError> = argPlayerResolver(player, state, ctx)
-        switch result {
-        case let .success(output):
-            switch output {
-            case let .identified(pIds):
-                let children = pIds.map {
-                    CardEffectWithContext(effect: .heal(value, player: .id($0)),
-                                          ctx: ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            case .selectable:
-                fatalError(GameError.unexpected)
+        let resolved = try argPlayerResolver(player, state, ctx)
+        switch resolved {
+        case let .identified(pIds):
+            let children = pIds.map {
+                CardEffectWithContext(effect: .heal(value, player: .id($0)),
+                                      ctx: ctx)
             }
+            state.queue.insert(contentsOf: children, at: 0)
 
-        case let .failure(error):
-            throw error
+        case .selectable:
+            fatalError(GameError.unexpected)
         }
 
         return state
