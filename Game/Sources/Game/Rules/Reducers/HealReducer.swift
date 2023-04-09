@@ -24,13 +24,13 @@ let healReducer: Reducer<GameState, GameAction>
     do {
         // update health
         try state.updatePlayer(pId) { playerObj in
-            playerObj.health += value
+            try playerObj.gainHealth(value)
         }
-
+        
         state.completedAction = action
     } catch {
         state.thrownError = (error as? GameError).unsafelyUnwrapped
     }
-    
+
     return state
 }

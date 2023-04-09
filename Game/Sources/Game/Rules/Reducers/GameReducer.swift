@@ -21,7 +21,7 @@ public let gameReducer: Reducer<GameState, GameAction>
         return updateReducer(state, action)
 
     case .apply:
-        return applyEffectReducer(state, action)
+        return effectReducer(state, action)
 
     default:
         fatalError(GameError.unexpected)
