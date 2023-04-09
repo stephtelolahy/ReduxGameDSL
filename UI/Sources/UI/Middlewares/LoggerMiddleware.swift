@@ -7,7 +7,6 @@
 
 import Combine
 import Redux
-import UI
 
 let loggerMiddleware: Middleware<AppState, Action> = { state, action in
     let stateDescription = "\(state)".replacingOccurrences(of: "CardApp.", with: "")
