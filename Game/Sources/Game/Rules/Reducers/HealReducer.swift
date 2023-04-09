@@ -17,7 +17,8 @@ let healReducer: Reducer<GameState, GameAction>
     var state = state
     guard case let .id(pId) = player else {
         // TODO: resolve player
-        state.queue.insert(.heal(value, player: .id("p1")), at: 0)
+        let pId = "p1"
+        state.queue.insert(.heal(value, player: .id(pId)), at: 0)
         return state
     }
 

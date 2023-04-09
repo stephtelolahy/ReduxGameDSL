@@ -25,6 +25,9 @@ let playReducer: Reducer<GameState, GameAction>
         if let cardName: String = card.split(separator: "-").first.map(String.init),
            let cardObj: Card = Inventory.cardList.cards[cardName],
            let cardAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) {
+
+            // TODO: match all requirements or throw error
+
             state.queue.append(cardAction.effect)
         }
 

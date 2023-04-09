@@ -7,6 +7,11 @@
 
 extension Player {
     mutating func gainHealth(_ value: Int) throws {
-        health += value
+        guard health < maxHealth else {
+            throw GameError.playerAlreadyMaxHealth(id)
+        }
+
+        let newHealth = min(health + value, maxHealth)
+        health = newHealth
     }
 }
