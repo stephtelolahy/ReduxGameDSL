@@ -22,7 +22,7 @@ let playReducer: GameReducer
     state.discard.push(card)
 
     // queue side effects
-    guard let cardName: String = card.split(separator: "-").first.map(String.init),
+    guard let cardName: String = card.extractName(),
           let cardObj: Card = state.cardRef[cardName],
           let playAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) else {
         throw GameError.cardNotPlayable(card)
