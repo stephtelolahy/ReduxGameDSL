@@ -30,7 +30,7 @@ let gameReducer: Reducer<GameState, GameAction>
             fatalError(GameError.unexpected)
         }
     } catch {
-        state.thrownError = (error as? GameError).unsafelyUnwrapped
+        state.thrownError = error as? GameError
         return state
     }
 }
