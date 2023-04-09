@@ -1,12 +1,11 @@
 //
-//  CardLocation+Rules.swift
+//  CardLocation+Updating.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
 extension CardLocation {
-
     func contains(_ card: String) -> Bool {
         cards.contains(where: { $0 == card })
     }

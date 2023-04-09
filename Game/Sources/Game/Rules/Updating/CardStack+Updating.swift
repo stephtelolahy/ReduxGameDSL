@@ -1,12 +1,11 @@
 //
-//  CardStack+Rules.swift
+//  CardStack+Updating.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
 extension CardStack {
-
     @discardableResult
     mutating func pop() throws -> String {
         guard !cards.isEmpty else {
