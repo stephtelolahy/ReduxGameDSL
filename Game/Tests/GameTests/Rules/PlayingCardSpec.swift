@@ -16,7 +16,7 @@ final class PlayingCardSpec: QuickSpec {
         let ctx = GameState {
             Player("p1") {
                 Hand {
-                    "c1"
+                    "beer-6♥️"
                     "c2"
                 }
             }
@@ -26,17 +26,17 @@ final class PlayingCardSpec: QuickSpec {
             context("hand card") {
                 it("should discard immediately") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: "c1")
+                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
                     let result = sut(ctx, action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c2"]
-                    expect(result.discard.top) == "c1"
+                    expect(result.discard.top) == "beer-6♥️"
                 }
 
                 it("should emit completed action") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: "c1")
+                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
                     let result = sut(ctx, action)
 
                     // Then
@@ -63,6 +63,17 @@ final class PlayingCardSpec: QuickSpec {
 
                     // Then
                     expect(result.thrownError) == .missingPlayer("p2")
+                }
+            }
+
+            context("not playable card") {
+                it("should throw error") {
+                    // When
+                    let action = GameAction.play(actor: "p1", card: "c2")
+                    let result = sut(ctx, action)
+
+                    // Then
+                    expect(result.thrownError) == .cardNotPlayable("c2")
                 }
             }
         }

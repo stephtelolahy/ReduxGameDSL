@@ -5,10 +5,10 @@
 //  Created by Hugues Telolahy on 04/04/2023.
 //
 
-public enum Inventory {
+enum Inventory {
 
     /// Describing all cards
-    public static let cardRef: [String: Card] = createCards {
+    static let cardRef: [String: Card] = createCards {
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .onPlay {
@@ -18,7 +18,7 @@ public enum Inventory {
     }
 
     /// Describing card sets
-    public static let cardSets: [String: [String]] = [
+    static let cardSets: [String: [String]] = [
         .barrel: ["Q♠️", "K♠️"],
         .dynamite: ["2♥️"],
         .jail: ["J♠️", "10♠️", "4♥️"],

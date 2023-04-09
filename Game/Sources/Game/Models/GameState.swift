@@ -31,6 +31,11 @@ public struct GameState: Codable, Equatable {
 
     /// queued effects
     var queue: [CardEffect] = []
+
+    /// all cards reference
+    public var cardRef: [String: Card] {
+        Inventory.cardRef
+    }
 }
 
 // MARK: - Convenience

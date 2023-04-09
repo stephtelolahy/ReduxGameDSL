@@ -22,14 +22,15 @@ let playReducer: Reducer<GameState, GameAction>
         state.discard.push(card)
 
         // queue side effects
-        if let cardName: String = card.split(separator: "-").first.map(String.init),
-           let cardObj: Card = Inventory.cardRef[cardName],
-           let cardAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) {
-
-            // TODO: match all requirements or throw error
-
-            state.queue.append(cardAction.effect)
+        guard let cardName: String = card.split(separator: "-").first.map(String.init),
+           let cardObj: Card = state.cardRef[cardName],
+           let playAction: CardActionInfo = cardObj.actions.first(where: { $0.actionType == .play }) else {
+            throw GameError.cardNotPlayable(card)
         }
+
+        // TODO: verify requirement
+
+        state.queue.append(playAction.effect)
 
         state.completedAction = action
     } catch {
