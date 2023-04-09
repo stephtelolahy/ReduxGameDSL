@@ -22,4 +22,7 @@ public enum GameAction: Codable, Equatable {
 
     /// Applying some card side effects
     case apply(CardEffect)
+
+    /// Process queued event
+    case update
 }

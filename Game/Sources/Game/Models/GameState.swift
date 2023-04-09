@@ -28,6 +28,9 @@ public struct GameState: Codable, Equatable {
 
     /// last occured error
     public var thrownError: GameError?
+
+    /// queued effects
+    var queue: [CardEffect] = []
 }
 
 // MARK: - Convenience

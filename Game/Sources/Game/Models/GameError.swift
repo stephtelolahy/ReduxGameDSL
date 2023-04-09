@@ -37,4 +37,6 @@ public enum GameError: Error, Codable, Equatable {
 
     /// Expected some player damaged
     case noPlayerDamaged
+
+    case unexpected
 }

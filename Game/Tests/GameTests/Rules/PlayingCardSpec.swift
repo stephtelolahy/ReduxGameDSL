@@ -5,14 +5,14 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
+import Game
 import Quick
 import Nimble
-import Game
 
 final class PlayingCardSpec: QuickSpec {
     override func spec() {
         // Given
-        let sut = GameState.reducer
+        let sut = gameReducer
         let ctx = GameState {
             Player("p1") {
                 Hand {
