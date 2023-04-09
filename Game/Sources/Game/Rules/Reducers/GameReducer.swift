@@ -7,9 +7,9 @@
 
 import Redux
 
-typealias GameReducer = Reducer<GameState, GameAction>
+typealias GameReducer = (GameState, GameAction) throws -> GameState
 
-let gameReducer: GameReducer
+let gameReducer: Reducer<GameState, GameAction>
 = { state, action in
     var state = state
     state.completedAction = nil
@@ -18,10 +18,10 @@ let gameReducer: GameReducer
     do {
         switch action {
         case .play:
-            return playReducer(state, action)
+            return try playReducer(state, action)
 
         case .update:
-            return updateReducer(state, action)
+            return try updateReducer(state, action)
 
         case let .apply(effect, ctx):
             return try effectReducer(state, effect, ctx)
