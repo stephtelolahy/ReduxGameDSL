@@ -163,8 +163,37 @@ final class CatBalouSpec: QuickSpec {
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    "catBalou-9♦️"
+                                }
+                            }
+                            Player("p2") {
+                                Hand {
+                                    "c21"
+                                }
+                                InPlay {
+                                    "c22"
+                                    "c23"
+                                }
+                            }
+                        }
+                        let store = createGameStore(initial: state)
+
                         // When
+                        let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        let result = self.awaitAction(action, store: store)
+
                         // Then
+                        expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
+                        let ctx = action.ctx()
+                        let currState = store.state
+                        expect(currState.chooseOne) == [
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                        ]
                     }
                 }
             }
