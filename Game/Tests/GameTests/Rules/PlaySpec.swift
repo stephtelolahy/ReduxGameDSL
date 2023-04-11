@@ -17,7 +17,7 @@ final class PlaySpec: QuickSpec {
         var action: GameAction!
         var result: GameState!
 
-        describe("playing") {
+        describe("play") {
             context("hand card") {
                 beforeEach {
                     // Given

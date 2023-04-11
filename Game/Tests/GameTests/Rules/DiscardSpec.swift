@@ -13,7 +13,7 @@ final class DiscardSpec: QuickSpec {
         let sut: EffectReducer = discardReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
-        describe("discarding") {
+        describe("discard") {
             context("hand card") {
                 it("should remove card from hand") {
                     // Given

@@ -14,7 +14,7 @@ final class DrawDeckSpec: QuickSpec {
         let sut: EffectReducer = drawDeckReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
-        describe("drawing deck") {
+        describe("draw deck") {
             context("containing cards") {
                 it("should remove top card") {
                     // Given
