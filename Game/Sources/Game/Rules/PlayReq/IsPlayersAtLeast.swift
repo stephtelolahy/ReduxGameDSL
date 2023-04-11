@@ -8,7 +8,7 @@
 let isPlayersAtLeast: PlayReqMatcher
 = { playReq, state, _ in
     guard case let .isPlayersAtLeast(count) = playReq else {
-        fatalError(GameError.unexpected)
+        fatalError(.unexpected)
     }
 
     if state.players.count < count {

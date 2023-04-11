@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Foundation
 
 final class CardStackSpec: QuickSpec {
     override func spec() {
@@ -51,6 +52,26 @@ final class CardStackSpec: QuickSpec {
                     // Then
                     expect(sut.top) == "c1"
                 }
+            }
+
+            it("should be serializable") {
+                // Given
+                let JSON = """
+                {
+                    "cards": [
+                        "c1",
+                        "c2"
+                    ]
+                }
+                """
+                let jsonData = JSON.data(using: .utf8)!
+
+                // When
+                let sut = try JSONDecoder().decode(CardStack.self, from: jsonData)
+
+                // Then
+                expect(sut.count) == 2
+                expect(sut.top) == "c1"
             }
         }
     }

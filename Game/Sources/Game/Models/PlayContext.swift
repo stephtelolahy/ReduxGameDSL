@@ -14,8 +14,12 @@ public struct PlayContext: Codable, Equatable {
     /// played card
     let card: String
 
-    public init(actor: String, card: String) {
+    /// targeted player
+    var target: String?
+
+    public init(actor: String, card: String, target: String? = nil) {
         self.actor = actor
         self.card = card
+        self.target = target
     }
 }

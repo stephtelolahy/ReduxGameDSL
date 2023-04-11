@@ -1,19 +1,21 @@
 //
-//  PlayingCardSpec.swift
+//  PlaySpec.swift
 //
 //
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
-import Game
+@testable import Game
 import Quick
 import Nimble
 import Redux
 
-final class PlayingCardSpec: QuickSpec {
+final class PlaySpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        var sut: Store<GameState, GameAction>!
+        let sut: Reducer<GameState, GameAction> = gameReducer
+        var action: GameAction!
+        var result: GameState!
 
         describe("playing") {
             context("hand card") {
@@ -30,28 +32,26 @@ final class PlayingCardSpec: QuickSpec {
                         Player()
                         Player()
                     }
-                    sut = createGameStore(initial: state)
+                    // When
+                    action = GameAction.play(actor: "p1", card: "beer-6♥️")
+                    result = sut(state, action)
                 }
 
                 it("should discard immediately") {
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    sut.dispatch(action)
-
                     // Then
-                    let result = sut.state
                     expect(result.player("p1").hand.cards).to(beEmpty())
                     expect(result.discard.top) == "beer-6♥️"
                 }
 
                 it("should emit completed action") {
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    sut.dispatch(action)
-
                     // Then
-                    let result = sut.state
                     expect(result.completedAction) == action
+                }
+
+                it("should queue side effects") {
+                    // Then
+                    let ctx = PlayContext(actor: "p1", card: "beer-6♥️")
+                    expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
                 }
             }
 
@@ -61,15 +61,13 @@ final class PlayingCardSpec: QuickSpec {
                     let state = GameState {
                         Player("p1")
                     }
-                    sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "c1")
-                    sut.dispatch(action)
+                    let action = GameAction.play(actor: "p1", card: "stagecoach-9♠️")
+                    let result = sut(state, action)
 
                     // Then
-                    let result = sut.state
-                    expect(result.thrownError) == .missingCard("c1")
+                    expect(result.thrownError) == .missingCard("stagecoach-9♠️")
                 }
             }
 
@@ -77,14 +75,12 @@ final class PlayingCardSpec: QuickSpec {
                 it("should throw error") {
                     // Given
                     let state = GameState()
-                    sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
-                    sut.dispatch(action)
+                    let result = sut(state, action)
 
                     // Then
-                    let result = sut.state
                     expect(result.thrownError) == .missingPlayer("p1")
                 }
             }
@@ -99,14 +95,12 @@ final class PlayingCardSpec: QuickSpec {
                             }
                         }
                     }
-                    sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
-                    sut.dispatch(action)
+                    let result = sut(state, action)
 
                     // Then
-                    let result = sut.state
                     expect(result.thrownError) == .cardNotPlayable("c1")
                 }
             }

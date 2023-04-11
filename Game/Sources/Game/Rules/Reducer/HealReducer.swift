@@ -8,25 +8,25 @@
 import Redux
 
 let healReducer: EffectReducer
-= { state, effect, ctx in
+= { effect, state, ctx in
     guard case let .heal(value, player) = effect else {
-        fatalError(GameError.unexpected)
+        fatalError(.unexpected)
     }
 
     var state = state
+
+    // resolve player
     guard case let .id(pId) = player else {
-        // resolve player
         let resolved = try argPlayerResolver(player, state, ctx)
         switch resolved {
         case let .identified(pIds):
             let children = pIds.map {
-                CardEffectWithContext(effect: .heal(value, player: .id($0)),
-                                      ctx: ctx)
+                CardEffect.heal(value, player: .id($0)).withCtx(ctx)
             }
             state.queue.insert(contentsOf: children, at: 0)
 
-        case .selectable:
-            fatalError(GameError.unexpected)
+        default:
+            fatalError(.unexpected)
         }
 
         return state

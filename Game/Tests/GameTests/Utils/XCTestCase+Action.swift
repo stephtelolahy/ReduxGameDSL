@@ -28,6 +28,10 @@ extension XCTestCase {
             if let error = state.thrownError {
                 result.append(.failure(error))
             }
+
+            if state.queue.isEmpty {
+                expectation.fulfill()
+            }
         }
 
         store.dispatch(action)

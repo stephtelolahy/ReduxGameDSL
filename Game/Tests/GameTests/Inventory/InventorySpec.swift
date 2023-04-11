@@ -19,6 +19,10 @@ final class InventorySpec: QuickSpec {
 
                 // Then
                 expect(cards[.beer]) != nil
+                expect(cards[.saloon]) != nil
+                expect(cards[.stagecoach]) != nil
+                expect(cards[.wellsFargo]) != nil
+                expect(cards[.catBalou]) != nil
 //                expect(cards[.barrel]) != nil
 //                expect(cards[.dynamite]) != nil
 //                expect(cards[.jail]) != nil
@@ -30,16 +34,12 @@ final class InventorySpec: QuickSpec {
 //                expect(cards[.volcanic]) != nil
 //                expect(cards[.winchester]) != nil
 //                expect(cards[.bang]) != nil
-//                expect(cards[.catBalou]) != nil
 //                expect(cards[.duel]) != nil
 //                expect(cards[.gatling]) != nil
 //                expect(cards[.generalStore]) != nil
 //                expect(cards[.indians]) != nil
 //                expect(cards[.missed]) != nil
 //                expect(cards[.panic]) != nil
-//                expect(cards[.saloon]) != nil
-//                expect(cards[.stagecoach]) != nil
-//                expect(cards[.wellsFargo]) != nil
             }
         }
     }
