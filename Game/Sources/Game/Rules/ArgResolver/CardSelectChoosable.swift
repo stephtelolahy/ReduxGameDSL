@@ -8,7 +8,7 @@
 let cardSelectChoosable: ArgCardResolver
 = { _, state, _, _, _ in
     guard let cards = state.choosable?.cards else {
-        throw GameError.noCardChoosable
+        throw GameError.noChoosableCard
     }
 
     let options = cards.toOptions()

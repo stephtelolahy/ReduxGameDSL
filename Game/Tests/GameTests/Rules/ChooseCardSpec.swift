@@ -31,7 +31,10 @@ final class ChooseCardSpec: QuickSpec {
 
                         // Then
                         expect(result.completedAction) == nil
-                        expect(result.chooseOne) != nil
+                        expect(result.chooseOne) == [
+                            .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
+                            .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx),
+                        ]
                     }
                 }
 
@@ -43,11 +46,16 @@ final class ChooseCardSpec: QuickSpec {
                     }
                 }
 
-                context("no card avaiable") {
+                context("no card available") {
                     it("should throw error") {
                         // Given
+                        let state = GameState()
+
                         // When
                         // Then
+                        let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
+                        expect(try sut(effect, state, ctx))
+                            .to(throwError(GameError.noChoosableCard))
                     }
                 }
             }

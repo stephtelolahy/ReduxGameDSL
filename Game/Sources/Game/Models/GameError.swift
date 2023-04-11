@@ -45,7 +45,7 @@ public enum GameError: Error, Codable, Equatable {
     case missingTarget
 
     /// Expected to get some choosable cards
-    case noCardChoosable
+    case noChoosableCard
 
     case unexpected
 }
