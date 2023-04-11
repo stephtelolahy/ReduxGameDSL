@@ -5,13 +5,13 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class HealSpec: QuickSpec {
     override func spec() {
-        let sut: EffectReducer = healReducer
+        let sut: EffectReducer = effectReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
         describe("heal") {

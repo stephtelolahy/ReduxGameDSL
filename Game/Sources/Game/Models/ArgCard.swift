@@ -13,4 +13,7 @@ public enum ArgCard: Codable, Equatable {
 
     /// select any player's hand or inPlay card
     case selectAny
+
+    /// select any choosable card
+    case selectChoosable
 }

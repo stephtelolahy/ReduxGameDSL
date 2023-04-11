@@ -7,9 +7,9 @@
 
 import Redux
 
-typealias EffectReducer = (CardEffect, GameState, PlayContext) throws -> GameState
+public typealias EffectReducer = (CardEffect, GameState, PlayContext) throws -> GameState
 
-let effectReducer: EffectReducer
+public let effectReducer: EffectReducer
 = { effect, state, ctx in
     switch effect {
     case .heal:
@@ -23,6 +23,9 @@ let effectReducer: EffectReducer
 
     case .discard:
         return try discardReducer(effect, state, ctx)
+
+    case .chooseCard:
+        return try chooseCardReducer(effect, state, ctx)
         
     default:
         fatalError(.unexpected)

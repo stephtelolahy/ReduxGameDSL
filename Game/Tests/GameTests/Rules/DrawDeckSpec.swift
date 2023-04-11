@@ -5,13 +5,13 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class DrawDeckSpec: QuickSpec {
     override func spec() {
-        let sut: EffectReducer = drawDeckReducer
+        let sut: EffectReducer = effectReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
         describe("draw deck") {
@@ -32,7 +32,7 @@ final class DrawDeckSpec: QuickSpec {
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c1"]
-                    expect(result.deck.cards) == ["c2"]
+                    expect(result.deck.top) == "c2"
                 }
             }
 
@@ -53,8 +53,8 @@ final class DrawDeckSpec: QuickSpec {
                         let result = try sut(effect, state, ctx)
 
                         // Then
-                        expect(result.deck.cards).to(beEmpty())
-                        expect(result.discard.cards) == ["c1"]
+                        expect(result.deck.top) == nil
+                        expect(result.discard.top) == "c1"
                         expect(result.player("p1").hand.cards) == ["c2"]
                     }
                 }
