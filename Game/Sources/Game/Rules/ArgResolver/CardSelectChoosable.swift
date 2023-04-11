@@ -7,10 +7,14 @@
 
 let cardSelectChoosable: ArgCardResolver
 = { _, state, _, _, _ in
-    guard let cards = state.choosable?.cards else {
+    guard let cards = state.choosable?.cards,
+          !cards.isEmpty else {
         throw GameError.noChoosableCard
     }
 
-    let options = cards.toOptions()
-    return .selectable(options)
+    if cards.count == 1 {
+        return .identified([cards[0]])
+    } else {
+        return .selectable(cards.toOptions())
+    }
 }

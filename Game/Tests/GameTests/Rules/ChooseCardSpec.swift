@@ -33,16 +33,29 @@ final class ChooseCardSpec: QuickSpec {
                         expect(result.completedAction) == nil
                         expect(result.chooseOne) == [
                             .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
-                            .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx),
+                            .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
                         ]
                     }
                 }
 
                 context("single card remaining") {
-                    it("should draw card immediately") {
+                    it("should not ask a choice") {
                         // Given
+                        let state = GameState {
+                            Choosable {
+                                "c1"
+                            }
+                        }
+
                         // When
+                        let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
+                        let result = try sut(effect, state, ctx)
+
                         // Then
+                        expect(result.completedAction) == nil
+                        expect(result.queue) == [
+                            .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                        ]
                     }
                 }
 
