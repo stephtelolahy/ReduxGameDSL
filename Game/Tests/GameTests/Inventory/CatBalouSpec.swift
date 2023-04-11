@@ -122,13 +122,12 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let currState = store.state
-
+                        expect(currState.chooseOne?.count) == 1
+                        let choice: GameAction = currState.chooseOne![0]
                         let randomOptions: [GameAction] = [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: action.ctx()),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: action.ctx())
                         ]
-                        expect(currState.chooseOne?.count) == 1
-                        let choice: GameAction = currState.chooseOne![0]
                         expect(randomOptions).to(contain(choice))
                     }
                 }
