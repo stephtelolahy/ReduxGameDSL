@@ -10,6 +10,7 @@ import Nimble
 import Game
 
 final class ChooseCardSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         let sut: EffectReducer = effectReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
@@ -74,10 +75,26 @@ final class ChooseCardSpec: QuickSpec {
             }
 
             context("specified id") {
-                it("should draw card immediately") {
+                it("should draw that card") {
                     // Given
+                    let state = GameState {
+                        Player("p1")
+                        Choosable {
+                            "c1"
+                            "c2"
+                        }
+                    }
+
                     // When
+                    let effect = CardEffect.chooseCard(player: .id("p1"), card: .id("c1"))
+                    let result = try sut(effect, state, ctx)
+
                     // Then
+                    expect(result.completedAction) == .apply(effect, ctx: ctx)
+                    expect(result.player("p1").hand.cards) == ["c1"]
+                    expect(result.choosable?.cards) == ["c2"]
+                    expect(result.queue).to(beEmpty())
+                    expect(result.chooseOne) == nil
                 }
             }
         }
