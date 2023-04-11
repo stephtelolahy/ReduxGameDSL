@@ -63,8 +63,7 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result).to(beEmpty())
-                        let currState = store.state
-                        expect(currState.chooseOne) == [
+                        expect(store.state.chooseOne) == [
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p2"),
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p3")
                         ]
@@ -121,9 +120,8 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        let currState = store.state
-                        expect(currState.chooseOne?.count) == 1
-                        let choice: GameAction = currState.chooseOne![0]
+                        expect(store.state.chooseOne?.count) == 1
+                        let choice: GameAction = store.state.chooseOne![0]
                         let randomOptions: [GameAction] = [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: action.ctx()),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: action.ctx())
@@ -157,8 +155,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = action.ctx()
-                        let currState = store.state
-                        expect(currState.chooseOne) == [
+                        expect(store.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
@@ -193,8 +190,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = action.ctx()
-                        let currState = store.state
-                        expect(currState.chooseOne) == [
+                        expect(store.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)

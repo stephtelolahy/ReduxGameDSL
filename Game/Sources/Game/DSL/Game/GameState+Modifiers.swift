@@ -17,6 +17,8 @@ public extension GameState {
                 self.discard = discard.value
             } else if let choosable = attr as? Choosable {
                 self.choosable = choosable.value
+            } else if let chooseOne = attr as? ChooseOne {
+                self.chooseOne = chooseOne.value
             }
         }
     }
