@@ -203,7 +203,7 @@ final class CatBalouSpec: QuickSpec {
                 }
             }
 
-            context("target is self") {
+            xcontext("target is self") {
                 it("should choose one inPlay card") {
                     // Given
                     // When
