@@ -98,6 +98,7 @@ final class CatBalouSpec: QuickSpec {
 
                 context("having hand cards") {
                     it("should choose one random hand card") {
+                        // TODO: random hand should be hidden as a choice
                         // Given
                         let state = GameState {
                             Player("p1") {
@@ -129,8 +130,33 @@ final class CatBalouSpec: QuickSpec {
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    "catBalou-9♦️"
+                                }
+                            }
+                            Player("p2") {
+                                InPlay {
+                                    "c21"
+                                    "c22"
+                                }
+                            }
+                        }
+                        let store = createGameStore(initial: state)
+
                         // When
+                        let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        let result = self.awaitAction(action, store: store)
+
                         // Then
+                        expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
+                        let ctx = action.ctx()
+                        let currState = store.state
+                        expect(currState.chooseOne) == [
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                        ]
                     }
                 }
 
