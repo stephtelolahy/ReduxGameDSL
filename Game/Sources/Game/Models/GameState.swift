@@ -17,12 +17,15 @@ public struct GameState: Codable, Equatable {
     /// discard pile
     public var discard: CardStack = .init()
 
-    /// choosable zone
+    /// choosable cards
     public var choosable: CardLocation?
 
     /// is Game over
     public var isOver: Bool = false
 
+    /// Choose one of pending actions to proceed effect resolving
+    public var chooseOne: [GameAction]?
+    
     /// last completed action
     public var completedAction: GameAction?
 
@@ -30,7 +33,7 @@ public struct GameState: Codable, Equatable {
     public var thrownError: GameError?
 
     /// queued effects
-    var queue: [CardEffectWithContext] = []
+    public var queue: [CardEffectWithContext] = []
 
     /// all cards reference
     public var cardRef: [String: Card] {
@@ -45,7 +48,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players.first(where: { $0.id == id }) else {
-            fatalError(GameError.missingPlayer(id))
+            fatalError(.missingPlayer(id))
         }
         return player
     }

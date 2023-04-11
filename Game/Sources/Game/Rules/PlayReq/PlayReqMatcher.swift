@@ -16,7 +16,10 @@ let matchPlayReq: PlayReqMatcher
     case .isActorDamaged:
         try isActorDamaged(playReq, state, ctx)
 
+    case .isAnyDamaged:
+        try isAnyDamaged(playReq, state, ctx)
+
     default:
-        fatalError(GameError.unexpected)
+        fatalError(.unexpected)
     }
 }

@@ -17,6 +17,9 @@ public enum PlayReq: Codable, Equatable {
     /// Actor must be damaged
     case isActorDamaged
 
+    /// At least one player must be damaged
+    case isAnyDamaged
+
     /// When just eliminated
     case onEliminated
 }

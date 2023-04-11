@@ -16,6 +16,28 @@ enum Inventory {
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
+        Card(.saloon) {
+            CardEffect.heal(1, player: .damaged)
+                .onPlay {
+                    PlayReq.isAnyDamaged
+                }
+        }
+        Card(.stagecoach) {
+            CardEffect.replay(2) {
+                CardEffect.drawDeck(player: .actor)
+            }
+            .onPlay()
+        }
+        Card(.wellsFargo) {
+            CardEffect.replay(3) {
+                CardEffect.drawDeck(player: .actor)
+            }
+            .onPlay()
+        }
+        Card(.catBalou) {
+            CardEffect.discard(player: .target, card: .selectAny)
+                .onPlay(target: .selectAnyWithCard)
+        }
     }
 
     /// Describing card sets

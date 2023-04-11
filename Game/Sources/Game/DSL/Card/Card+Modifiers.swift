@@ -16,25 +16,27 @@ public extension Card {
 }
 
 public extension CardEffect {
-
-    func onPlay(@PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
+    
+    func onPlay(target: ArgPlayer? = nil, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
         .init(actionType: .play,
+              target: target,
               effect: self,
               playReqs: playReqs())
     }
-
+    
     func onEquip(@PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
         .init(actionType: .equip,
               effect: self,
               playReqs: playReqs())
     }
-
-    func onHandicap(@PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
+    
+    func onHandicap(target: ArgPlayer, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
         .init(actionType: .handicap,
+              target: target,
               effect: self,
               playReqs: playReqs())
     }
-
+    
     func onEvent(@PlayReqBuilder playReqs: () -> [PlayReq]) -> CardActionInfo {
         .init(actionType: .triggered,
               effect: self,

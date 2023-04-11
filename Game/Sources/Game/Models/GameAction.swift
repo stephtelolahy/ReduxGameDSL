@@ -7,22 +7,19 @@
 
 /// Function that causes any change in the game state
 public enum GameAction: Codable, Equatable {
-
+    
     /// play a hand card
-    case play(actor: String, card: String)
-
+    case play(actor: String, card: String, target: String?)
+    
     /// equip a hand card
     case equip
-
+    
     /// play handicap card
     case handicap
 
-    /// choose an option
-    case choose
-
-    /// Applying some card side effects
+    /// apply a card side effect
     case apply(CardEffect, ctx: PlayContext)
-
-    /// Process queued event
+    
+    /// process queued event
     case update
 }

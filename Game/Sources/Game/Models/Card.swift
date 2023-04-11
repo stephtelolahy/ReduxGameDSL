@@ -16,6 +16,9 @@ public struct CardActionInfo: Codable, Equatable {
     
     /// The action type
     public let actionType: CardActionType
+
+    /// The target of the action
+    public var target: ArgPlayer?
     
     /// Side effect
     public let effect: CardEffect

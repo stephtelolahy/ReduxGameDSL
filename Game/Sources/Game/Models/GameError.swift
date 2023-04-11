@@ -23,6 +23,9 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected player to be damaged
     case playerAlreadyMaxHealth(String)
 
+    /// No player allowed to apply effect
+    case noPlayerAllowed
+
     /// Expected player to have cards
     case playerHasNoCard(String)
 
@@ -37,6 +40,9 @@ public enum GameError: Error, Codable, Equatable {
 
     /// Expected some player damaged
     case noPlayerDamaged
+
+    /// Expected a target player
+    case missingTarget
 
     case unexpected
 }

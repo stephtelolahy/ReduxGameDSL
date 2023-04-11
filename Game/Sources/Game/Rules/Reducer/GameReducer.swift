@@ -24,10 +24,10 @@ let gameReducer: Reducer<GameState, GameAction>
             return try updateReducer(state, action)
 
         case let .apply(effect, ctx):
-            return try effectReducer(state, effect, ctx)
+            return try effectReducer(effect, state, ctx)
 
         default:
-            fatalError(GameError.unexpected)
+            fatalError(.unexpected)
         }
     } catch {
         state.thrownError = error as? GameError
