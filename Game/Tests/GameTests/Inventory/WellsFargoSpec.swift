@@ -33,7 +33,7 @@ final class WellsFargoSpec: QuickSpec {
                 let result = self.awaitAction(action, store: store)
 
                 // Then
-                let ctx = PlayContext(actor: "p1", card: "wellsFargo-3♥️")
+                let ctx = action.ctx()
                 expect(result) == [.success(.play(actor: "p1", card: "wellsFargo-3♥️")),
                                    .success(.apply(.drawDeck(player: .id("p1")), ctx: ctx)),
                                    .success(.apply(.drawDeck(player: .id("p1")), ctx: ctx)),

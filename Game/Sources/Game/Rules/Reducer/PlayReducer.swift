@@ -14,7 +14,7 @@ let playReducer: GameReducer
     }
 
     var state = state
-    let ctx = action.playCtx()
+    let ctx = action.ctx()
 
     // discard immediately
     try state.updatePlayer(actor) { player in
@@ -58,7 +58,7 @@ let playReducer: GameReducer
 }
 
 public extension GameAction {
-    func playCtx() -> PlayContext {
+    func ctx() -> PlayContext {
         switch self {
         case let .play(actor, card, target):
             return PlayContext(actor: actor, card: card, target: target)

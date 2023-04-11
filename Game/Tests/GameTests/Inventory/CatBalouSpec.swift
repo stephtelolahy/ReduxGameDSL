@@ -120,9 +120,8 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let currState = store.state
-                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         expect(currState.chooseOne) == [
-                            .apply(.discard(player: .id("p2"), card: .id("c2")), ctx: ctx)
+                            .apply(.discard(player: .id("p2"), card: .id("c2")), ctx: action.ctx())
                         ]
                     }
                 }
