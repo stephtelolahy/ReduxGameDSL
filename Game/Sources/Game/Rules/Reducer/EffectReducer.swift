@@ -15,14 +15,17 @@ let effectReducer: EffectReducer
     case .heal:
         return try healReducer(effect, state, ctx)
 
-    case .drawDeck:
-        return try drawDeckReducer(effect, state, ctx)
+    case .draw:
+        return try drawReducer(effect, state, ctx)
 
     case .replayEffect:
         return try replayEffectReducer(effect, state, ctx)
 
     case .discard:
         return try discardReducer(effect, state, ctx)
+
+    case .chooseCard:
+        return try chooseCardReducer(effect, state, ctx)
         
     default:
         fatalError(.unexpected)

@@ -22,9 +22,6 @@ public struct GameState: Codable, Equatable {
 
     /// is Game over
     public var isOver: Bool = false
-
-    /// Choose one of pending actions to proceed effect resolving
-    public var chooseOne: [GameAction]?
     
     /// last completed action
     public var completedAction: GameAction?
@@ -32,12 +29,15 @@ public struct GameState: Codable, Equatable {
     /// last occured error
     public var thrownError: GameError?
 
-    /// queued effects
-    public var queue: [CardEffectWithContext] = []
+    /// queued actions
+    public var queue: [GameAction] = []
+
+    /// Choose one of pending actions to proceed effect resolving
+    public var chooseOne: [GameAction]?
 
     /// all cards reference
     public var cardRef: [String: Card] {
-        Inventory.cardRef
+        CardList.cardRef
     }
 }
 
@@ -52,9 +52,4 @@ public extension GameState {
         }
         return player
     }
-}
-
-public struct CardEffectWithContext: Codable, Equatable {
-    let effect: CardEffect
-    let ctx: PlayContext
 }

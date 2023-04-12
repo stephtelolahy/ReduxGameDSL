@@ -9,11 +9,19 @@ import Redux
 
 typealias GameReducer = (GameState, GameAction) throws -> GameState
 
-let gameReducer: Reducer<GameState, GameAction>
+public let gameReducer: Reducer<GameState, GameAction>
 = { state, action in
+
+    if let expected = state.chooseOne {
+        guard expected.contains(action) else {
+            return state
+        }
+    }
+
     var state = state
     state.completedAction = nil
     state.thrownError = nil
+    state.chooseOne = nil
 
     do {
         switch action {

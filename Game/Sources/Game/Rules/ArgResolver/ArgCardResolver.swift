@@ -14,6 +14,9 @@ let argCardResolver: ArgCardResolver
     case .selectAny:
         return try cardSelectAny(arg, state, ctx, chooser, owner)
 
+    case .selectChoosable:
+        return try cardSelectChoosable(arg, state, ctx, chooser, owner)
+
     default:
         fatalError(.unexpected)
     }

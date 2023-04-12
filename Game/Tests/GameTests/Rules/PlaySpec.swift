@@ -5,10 +5,10 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
 import Redux
+import Game
 
 final class PlaySpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -17,7 +17,7 @@ final class PlaySpec: QuickSpec {
         var action: GameAction!
         var result: GameState!
 
-        describe("playing") {
+        describe("play") {
             context("hand card") {
                 beforeEach {
                     // Given

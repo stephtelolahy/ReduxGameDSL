@@ -23,21 +23,21 @@ public struct CardActionInfo: Codable, Equatable {
     /// Side effect
     public let effect: CardEffect
     
-    /// requirements
+    /// Requirements
     public var playReqs: [PlayReq] = []
 }
 
 public enum CardActionType: Codable, Equatable {
     
-    /// card is playable when your turn and requirments are met
+    /// Card is playable when your turn and requirments are met
     case play
     
-    /// card is equipement when your turn and requirments are met
+    /// Card is equipement when your turn and requirments are met
     case equip
     
-    /// card is handicap when your turn and requirments are met
+    /// Card is handicap when your turn and requirments are met
     case handicap
     
-    /// some side effects are applyed as soon as requirements are met
+    /// Some side effects are applyed as soon as requirements are met
     case triggered
 }

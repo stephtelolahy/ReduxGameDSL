@@ -24,11 +24,11 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.failure(GameError.noPlayerAllowed)]
@@ -55,16 +55,15 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result).to(beEmpty())
-                        let currState = store.state
-                        expect(currState.chooseOne) == [
+                        expect(sut.state.chooseOne) == [
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p2"),
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p3")
                         ]
@@ -84,11 +83,11 @@ final class CatBalouSpec: QuickSpec {
                             }
                             Player("p2")
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2")),
@@ -98,6 +97,7 @@ final class CatBalouSpec: QuickSpec {
 
                 context("having hand cards") {
                     it("should choose one random hand card") {
+                        // TODO: random hand should be hidden as a choice
                         // Given
                         let state = GameState {
                             Player("p1") {
@@ -107,44 +107,100 @@ final class CatBalouSpec: QuickSpec {
                             }
                             Player("p2") {
                                 Hand {
-                                    "c2"
+                                    "c21"
+                                    "c22"
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        let currState = store.state
+                        expect(sut.state.chooseOne?.count) == 1
+                        let choice: GameAction = sut.state.chooseOne![0]
                         let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        expect(currState.chooseOne) == [
-                            .apply(.discard(player: .id("p2"), card: .id("c2")), ctx: ctx)
+                        let randomOptions: [GameAction] = [
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
+                        expect(randomOptions).to(contain(choice))
                     }
                 }
 
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    "catBalou-9♦️"
+                                }
+                            }
+                            Player("p2") {
+                                InPlay {
+                                    "c21"
+                                    "c22"
+                                }
+                            }
+                        }
+                        let sut = createGameStore(initial: state)
+
                         // When
+                        let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        let result = self.awaitAction(action, store: sut)
+
                         // Then
+                        expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
+                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        expect(sut.state.chooseOne) == [
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                        ]
                     }
                 }
 
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    "catBalou-9♦️"
+                                }
+                            }
+                            Player("p2") {
+                                Hand {
+                                    "c21"
+                                }
+                                InPlay {
+                                    "c22"
+                                    "c23"
+                                }
+                            }
+                        }
+                        let sut = createGameStore(initial: state)
+
                         // When
+                        let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        let result = self.awaitAction(action, store: sut)
+
                         // Then
+                        expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
+                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
+                        expect(sut.state.chooseOne) == [
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                        ]
                     }
                 }
             }
 
-            context("target is self") {
+            xcontext("target is self") {
                 it("should choose one inPlay card") {
                     // Given
                     // When

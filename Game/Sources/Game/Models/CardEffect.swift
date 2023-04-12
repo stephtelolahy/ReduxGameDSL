@@ -12,7 +12,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case heal(Int, player: ArgPlayer)
 
     /// Draw top deck card
-    case drawDeck(player: ArgPlayer)
+    case draw(player: ArgPlayer)
 
     /// Discard a player's card to discard pile
     /// Actor is the card chooser
@@ -20,4 +20,7 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Repeat an effect
     case replayEffect(Int, CardEffect)
+
+    /// Draw some cards from choosable zone
+    case chooseCard(player: ArgPlayer, card: ArgCard)
 }

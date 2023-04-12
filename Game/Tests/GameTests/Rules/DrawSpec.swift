@@ -1,21 +1,22 @@
 //
-//  DrawDeckSpec.swift
+//  DrawSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Redux
+import Game
 
-final class DrawDeckSpec: QuickSpec {
+final class DrawSpec: QuickSpec {
     override func spec() {
-        let sut: EffectReducer = drawDeckReducer
+        let sut: Reducer<GameState, GameAction> = gameReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
-        describe("drawing deck") {
-            context("containing cards") {
+        describe("draw") {
+            context("deck containing cards") {
                 it("should remove top card") {
                     // Given
                     let state = GameState {
@@ -27,16 +28,16 @@ final class DrawDeckSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.drawDeck(player: .id("p1"))
-                    let result = try sut(effect, state, ctx)
+                    let effect = CardEffect.draw(player: .id("p1"))
+                    let result = sut(state, .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c1"]
-                    expect(result.deck.cards) == ["c2"]
+                    expect(result.deck.top) == "c2"
                 }
             }
 
-            context("empty") {
+            context("deck empty") {
                 context("enough discard pile") {
                     it("should reset deck") {
                         // Given
@@ -49,12 +50,12 @@ final class DrawDeckSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.drawDeck(player: .id("p1"))
-                        let result = try sut(effect, state, ctx)
+                        let effect = CardEffect.draw(player: .id("p1"))
+                        let result = sut(state, .apply(effect, ctx: ctx))
 
                         // Then
-                        expect(result.deck.cards).to(beEmpty())
-                        expect(result.discard.cards) == ["c1"]
+                        expect(result.deck.top) == nil
+                        expect(result.discard.top) == "c1"
                         expect(result.player("p1").hand.cards) == ["c2"]
                     }
                 }
@@ -67,10 +68,11 @@ final class DrawDeckSpec: QuickSpec {
                         }
 
                         // When
+                        let effect = CardEffect.draw(player: .id("p1"))
+                        let result = sut(state, .apply(effect, ctx: ctx))
+
                         // Then
-                        let effect = CardEffect.drawDeck(player: .id("p1"))
-                        expect { try sut(effect, state, ctx) }
-                            .to(throwError(GameError.stackIsEmpty))
+                        expect(result.thrownError) == GameError.stackIsEmpty
                     }
                 }
             }

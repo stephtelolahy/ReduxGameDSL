@@ -26,18 +26,18 @@ final class WellsFargoSpec: QuickSpec {
                         "c3"
                     }
                 }
-                let store = createGameStore(initial: state)
+                let sut = createGameStore(initial: state)
 
                 // When
                 let action = GameAction.play(actor: "p1", card: "wellsFargo-3♥️")
-                let result = self.awaitAction(action, store: store)
+                let result = self.awaitAction(action, store: sut)
 
                 // Then
                 let ctx = PlayContext(actor: "p1", card: "wellsFargo-3♥️")
                 expect(result) == [.success(.play(actor: "p1", card: "wellsFargo-3♥️")),
-                                   .success(.apply(.drawDeck(player: .id("p1")), ctx: ctx)),
-                                   .success(.apply(.drawDeck(player: .id("p1")), ctx: ctx)),
-                                   .success(.apply(.drawDeck(player: .id("p1")), ctx: ctx))]
+                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
+                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
+                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx))]
             }
         }
     }

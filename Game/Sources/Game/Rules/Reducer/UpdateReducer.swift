@@ -14,6 +14,6 @@ let updateReducer: GameReducer
     }
 
     var state = state
-    let element = state.queue.remove(at: 0)
-    return gameReducer(state, .apply(element.effect, ctx: element.ctx))
+    let action = state.queue.remove(at: 0)
+    return gameReducer(state, action)
 }
