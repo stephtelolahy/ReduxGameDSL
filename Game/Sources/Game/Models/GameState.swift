@@ -37,7 +37,7 @@ public struct GameState: Codable, Equatable {
 
     /// all cards reference
     public var cardRef: [String: Card] {
-        Inventory.cardRef
+        CardList.cardRef
     }
 }
 
