@@ -12,7 +12,7 @@ let isAnyDamaged: PlayReqMatcher
         fatalError(.unexpected)
     }
 
-    if state.players.allSatisfy({ $0.health >= $0.maxHealth }) {
+    if state.playOrder.allSatisfy({ state.player($0).health >= state.player($0).maxHealth }) {
         throw GameError.noPlayerDamaged
     }
 }

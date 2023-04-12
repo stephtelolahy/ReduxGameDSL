@@ -7,10 +7,10 @@
 
 let playerSelectAnyWithCard: ArgPlayerResolver
  = { _, state, ctx in
-     let others = state.players
-         .filter { !($0.hand.cards + $0.inPlay.cards).isEmpty }
-         .map(\.id)
+     let others = state.playOrder
          .filter { $0 != ctx.actor }
+         .filter { !(state.player($0).hand.cards + state.player($0).inPlay.cards).isEmpty }
+     
      guard !others.isEmpty else {
          throw GameError.noPlayerAllowed
      }

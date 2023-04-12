@@ -13,13 +13,16 @@ let playReducer: GameReducer
         fatalError(.unexpected)
     }
 
+    guard let player = state.players[actor] else {
+        throw GameError.missingPlayer(actor)
+    }
+
     var state = state
     let ctx = action.ctx()
 
     // discard immediately
-    try state.updatePlayer(actor) { player in
-        try player.hand.remove(card)
-    }
+    try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
+
     state.discard.push(card)
 
     // verify play action
@@ -57,7 +60,7 @@ let playReducer: GameReducer
     return state
 }
 
-extension GameAction {
+private extension GameAction {
     func ctx() -> PlayContext {
         switch self {
         case let .play(actor, card, target):

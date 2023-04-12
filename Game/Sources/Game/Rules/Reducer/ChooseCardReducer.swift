@@ -51,9 +51,7 @@ let chooseCardReducer: EffectReducer
     }
 
     try state.choosable?.remove(cId)
-    try state.updatePlayer(pId) { player in
-        player.hand.add(cId)
-    }
+    state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
     state.completedAction = .apply(effect, ctx: ctx)
 

@@ -33,9 +33,7 @@ let healReducer: EffectReducer
     }
 
     // update health
-    try state.updatePlayer(pId) { playerObj in
-        try playerObj.gainHealth(value)
-    }
+    try state[keyPath: \GameState.players[pId]]?.gainHealth(value)
 
     state.completedAction = .apply(effect, ctx: ctx)
 
