@@ -57,7 +57,7 @@ let playReducer: GameReducer
     return state
 }
 
-public extension GameAction {
+extension GameAction {
     func ctx() -> PlayContext {
         switch self {
         case let .play(actor, card, target):

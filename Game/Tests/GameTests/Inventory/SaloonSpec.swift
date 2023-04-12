@@ -37,7 +37,7 @@ final class SaloonSpec: QuickSpec {
                     let result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = action.ctx()
+                    let ctx = PlayContext(actor: "p1", card: "saloon-5♥️")
                     expect(result) == [.success(.play(actor: "p1", card: "saloon-5♥️")),
                                        .success(.apply(.heal(1, player: .id("p2")), ctx: ctx)),
                                        .success(.apply(.heal(1, player: .id("p3")), ctx: ctx))]

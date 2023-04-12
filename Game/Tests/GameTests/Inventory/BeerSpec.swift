@@ -33,8 +33,9 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, store: sut)
 
                     // Then
+                    let ctx = PlayContext(actor: "p1", card: "beer-6♥️")
                     expect(result) == [.success(.play(actor: "p1", card: "beer-6♥️")),
-                                       .success(.apply(.heal(1, player: .id("p1")), ctx: action.ctx()))]
+                                       .success(.apply(.heal(1, player: .id("p1")), ctx: ctx))]
                 }
             }
 

@@ -47,5 +47,6 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected to get some choosable cards
     case noChoosableCard
 
+    /// Any unexpected error
     case unexpected
 }
