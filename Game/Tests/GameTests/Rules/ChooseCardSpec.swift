@@ -7,12 +7,13 @@
 
 import Quick
 import Nimble
+import Redux
 import Game
 
 final class ChooseCardSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        let sut: EffectReducer = effectReducer
+        let sut: Reducer<GameState, GameAction> = gameReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
         describe("choose a card") {
             context("unspecified") {
@@ -28,7 +29,7 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        let result = try sut(effect, state, ctx)
+                        let result = sut(state, .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.completedAction) == nil
@@ -50,7 +51,7 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        let result = try sut(effect, state, ctx)
+                        let result = sut(state, .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.completedAction) == nil
@@ -66,10 +67,12 @@ final class ChooseCardSpec: QuickSpec {
                         let state = GameState()
 
                         // When
-                        // Then
+
                         let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        expect(try sut(effect, state, ctx))
-                            .to(throwError(GameError.noChoosableCard))
+                        let result = sut(state, .apply(effect, ctx: ctx))
+
+                        // Then
+                        expect(result.thrownError) == GameError.noChoosableCard
                     }
                 }
             }
@@ -87,7 +90,7 @@ final class ChooseCardSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.chooseCard(player: .id("p1"), card: .id("c1"))
-                    let result = try sut(effect, state, ctx)
+                    let result = sut(state, .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.completedAction) == .apply(effect, ctx: ctx)

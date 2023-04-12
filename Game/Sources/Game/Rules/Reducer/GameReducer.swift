@@ -7,7 +7,7 @@
 
 import Redux
 
-public typealias GameReducer = (GameState, GameAction) throws -> GameState
+typealias GameReducer = (GameState, GameAction) throws -> GameState
 
 public let gameReducer: Reducer<GameState, GameAction>
 = { state, action in

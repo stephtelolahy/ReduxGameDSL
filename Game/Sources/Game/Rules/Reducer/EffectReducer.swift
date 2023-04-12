@@ -7,9 +7,9 @@
 
 import Redux
 
-public typealias EffectReducer = (CardEffect, GameState, PlayContext) throws -> GameState
+typealias EffectReducer = (CardEffect, GameState, PlayContext) throws -> GameState
 
-public let effectReducer: EffectReducer
+let effectReducer: EffectReducer
 = { effect, state, ctx in
     switch effect {
     case .heal:
