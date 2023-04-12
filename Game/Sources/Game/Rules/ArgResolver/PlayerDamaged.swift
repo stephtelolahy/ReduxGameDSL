@@ -7,7 +7,7 @@
 
 let playerDamaged: ArgPlayerResolver
 = { _, state, ctx in
-    let damaged = state.players.map(\.id)
+    let damaged = state.playOrder
         .starting(with: ctx.actor)
         .filter { state.player($0).health < state.player($0).maxHealth }
 

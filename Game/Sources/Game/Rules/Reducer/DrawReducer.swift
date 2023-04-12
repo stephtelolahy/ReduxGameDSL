@@ -32,19 +32,16 @@ let drawReducer: EffectReducer
 
     // draw card
     let card = try state.popDeck()
-    try state.updatePlayer(pId) { playerObj in
-        playerObj.hand.add(card)
-    }
+
+    state[keyPath: \GameState.players[pId]]?.hand.add(card)
 
     state.completedAction = .apply(effect, ctx: ctx)
 
     return state
 }
 
-
 private extension GameState {
-    /// Remove top deck card
-    /// reseting deck if empty
+    /// Remove top deck card by reseting deck if empty
     mutating func popDeck() throws -> String {
         // swiftlint:disable:next empty_count
         if deck.count == 0,

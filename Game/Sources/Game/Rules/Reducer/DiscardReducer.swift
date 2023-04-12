@@ -49,19 +49,23 @@ let discardReducer: EffectReducer
         return state
     }
 
-    try state.updatePlayer(pId) { playerObj in
-        if playerObj.hand.contains(cId) {
-            try playerObj.hand.remove(cId)
-        } else if playerObj.inPlay.contains(cId) {
-            try playerObj.inPlay.remove(cId)
-        } else {
-            throw GameError.missingCard(cId)
-        }
-    }
+    try state[keyPath: \GameState.players[pId]]?.removeCard(cId)
 
     state.discard.push(cId)
 
     state.completedAction = .apply(effect, ctx: ctx)
 
     return state
+}
+
+private extension Player {
+    mutating func removeCard(_ card: String) throws {
+        if hand.contains(card) {
+            try hand.remove(card)
+        } else if inPlay.contains(card) {
+            try inPlay.remove(card)
+        } else {
+            throw GameError.missingCard(card)
+        }
+    }
 }
