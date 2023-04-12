@@ -6,6 +6,7 @@
 //
 
 extension CardLocation {
+
     func contains(_ card: String) -> Bool {
         cards.contains(where: { $0 == card })
     }

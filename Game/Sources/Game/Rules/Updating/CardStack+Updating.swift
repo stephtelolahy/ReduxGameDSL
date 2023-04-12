@@ -6,6 +6,7 @@
 //
 
 extension CardStack {
+
     @discardableResult
     mutating func pop() throws -> String {
         guard !cards.isEmpty else {

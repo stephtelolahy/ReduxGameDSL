@@ -41,3 +41,14 @@ let healReducer: EffectReducer
 
     return state
 }
+
+private extension Player {
+    mutating func gainHealth(_ value: Int) throws {
+        guard health < maxHealth else {
+            throw GameError.playerAlreadyMaxHealth(id)
+        }
+
+        let newHealth = min(health + value, maxHealth)
+        health = newHealth
+    }
+}
