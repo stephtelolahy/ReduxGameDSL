@@ -32,7 +32,7 @@ final class StagecoachSpec: QuickSpec {
                 let result = self.awaitAction(action, store: sut)
 
                 // Then
-                let ctx = action.ctx()
+                let ctx = PlayContext(actor: "p1", card: "stagecoach-9♠️")
                 expect(result) == [.success(.play(actor: "p1", card: "stagecoach-9♠️")),
                                    .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
                                    .success(.apply(.draw(player: .id("p1")), ctx: ctx))]

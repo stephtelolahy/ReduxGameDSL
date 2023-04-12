@@ -122,9 +122,10 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         expect(sut.state.chooseOne?.count) == 1
                         let choice: GameAction = sut.state.chooseOne![0]
+                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         let randomOptions: [GameAction] = [
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: action.ctx()),
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: action.ctx())
+                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
+                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
                         expect(randomOptions).to(contain(choice))
                     }
@@ -154,7 +155,7 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        let ctx = action.ctx()
+                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         expect(sut.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
@@ -189,7 +190,7 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        let ctx = action.ctx()
+                        let ctx = PlayContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         expect(sut.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
