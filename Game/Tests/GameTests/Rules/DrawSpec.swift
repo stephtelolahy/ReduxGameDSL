@@ -1,5 +1,5 @@
 //
-//  DrawDeckSpec.swift
+//  DrawSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
@@ -9,13 +9,13 @@ import Quick
 import Nimble
 import Game
 
-final class DrawDeckSpec: QuickSpec {
+final class DrawSpec: QuickSpec {
     override func spec() {
         let sut: EffectReducer = effectReducer
         let ctx = PlayContext(actor: "p1", card: "cx")
 
-        describe("draw deck") {
-            context("containing cards") {
+        describe("draw") {
+            context("deck containing cards") {
                 it("should remove top card") {
                     // Given
                     let state = GameState {
@@ -27,7 +27,7 @@ final class DrawDeckSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.drawDeck(player: .id("p1"))
+                    let effect = CardEffect.draw(player: .id("p1"))
                     let result = try sut(effect, state, ctx)
 
                     // Then
@@ -36,7 +36,7 @@ final class DrawDeckSpec: QuickSpec {
                 }
             }
 
-            context("empty") {
+            context("deck empty") {
                 context("enough discard pile") {
                     it("should reset deck") {
                         // Given
@@ -49,7 +49,7 @@ final class DrawDeckSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.drawDeck(player: .id("p1"))
+                        let effect = CardEffect.draw(player: .id("p1"))
                         let result = try sut(effect, state, ctx)
 
                         // Then
@@ -68,7 +68,7 @@ final class DrawDeckSpec: QuickSpec {
 
                         // When
                         // Then
-                        let effect = CardEffect.drawDeck(player: .id("p1"))
+                        let effect = CardEffect.draw(player: .id("p1"))
                         expect { try sut(effect, state, ctx) }
                             .to(throwError(GameError.stackIsEmpty))
                     }

@@ -15,8 +15,8 @@ public let effectReducer: EffectReducer
     case .heal:
         return try healReducer(effect, state, ctx)
 
-    case .drawDeck:
-        return try drawDeckReducer(effect, state, ctx)
+    case .draw:
+        return try drawReducer(effect, state, ctx)
 
     case .replayEffect:
         return try replayEffectReducer(effect, state, ctx)

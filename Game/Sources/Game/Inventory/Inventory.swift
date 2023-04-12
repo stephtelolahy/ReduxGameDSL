@@ -24,13 +24,13 @@ enum Inventory {
         }
         Card(.stagecoach) {
             CardEffect.replay(2) {
-                CardEffect.drawDeck(player: .actor)
+                CardEffect.draw(player: .actor)
             }
             .onPlay()
         }
         Card(.wellsFargo) {
             CardEffect.replay(3) {
-                CardEffect.drawDeck(player: .actor)
+                CardEffect.draw(player: .actor)
             }
             .onPlay()
         }
