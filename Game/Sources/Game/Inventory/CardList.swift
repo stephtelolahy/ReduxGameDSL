@@ -6,7 +6,7 @@
 //
 
 enum CardList {
-    /// Describing all cards
+
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
@@ -38,7 +38,7 @@ enum CardList {
                 .onPlay(target: .selectAnyWithCard)
         }
     }
-    
+
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
         content().toDictionary()
     }

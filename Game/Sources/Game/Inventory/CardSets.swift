@@ -6,7 +6,7 @@
 //
 
 enum CardSets {
-
+    
     static let bang: [String: [String]] = [
         .barrel: ["Q♠️", "K♠️"],
         .dynamite: ["2♥️"],
