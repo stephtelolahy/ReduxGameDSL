@@ -24,11 +24,11 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.failure(GameError.noPlayerAllowed)]
@@ -55,15 +55,15 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result).to(beEmpty())
-                        expect(store.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == [
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p2"),
                             .play(actor: "p1", card: "catBalou-9♦️", target: "p3")
                         ]
@@ -83,11 +83,11 @@ final class CatBalouSpec: QuickSpec {
                             }
                             Player("p2")
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2")),
@@ -112,16 +112,16 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        expect(store.state.chooseOne?.count) == 1
-                        let choice: GameAction = store.state.chooseOne![0]
+                        expect(sut.state.chooseOne?.count) == 1
+                        let choice: GameAction = sut.state.chooseOne![0]
                         let randomOptions: [GameAction] = [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: action.ctx()),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: action.ctx())
@@ -146,16 +146,16 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = action.ctx()
-                        expect(store.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
@@ -181,16 +181,16 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let store = createGameStore(initial: state)
+                        let sut = createGameStore(initial: state)
 
                         // When
                         let action = GameAction.play(actor: "p1", card: "catBalou-9♦️", target: "p2")
-                        let result = self.awaitAction(action, store: store)
+                        let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = action.ctx()
-                        expect(store.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == [
                             .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)

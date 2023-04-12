@@ -26,11 +26,11 @@ final class BeerSpec: QuickSpec {
                         Player()
                         Player()
                     }
-                    let store = createGameStore(initial: state)
+                    let sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: "beer-6♥️")),
@@ -52,11 +52,11 @@ final class BeerSpec: QuickSpec {
                         Player()
                         Player()
                     }
-                    let store = createGameStore(initial: state)
+                    let sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [.failure(.playerAlreadyMaxHealth("p1"))]
@@ -76,11 +76,11 @@ final class BeerSpec: QuickSpec {
                         .maxHealth(3)
                         Player()
                     }
-                    let store = createGameStore(initial: state)
+                    let sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    let result = self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [.failure(.playersMustBeAtLeast(3))]

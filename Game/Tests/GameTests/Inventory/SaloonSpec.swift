@@ -30,11 +30,11 @@ final class SaloonSpec: QuickSpec {
                             .health(3)
                             .maxHealth(4)
                     }
-                    let store = createGameStore(initial: state)
+                    let sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "saloon-5♥️")
-                    let result = self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: sut)
 
                     // Then
                     let ctx = action.ctx()
@@ -59,11 +59,11 @@ final class SaloonSpec: QuickSpec {
                             .health(3)
                             .maxHealth(3)
                     }
-                    let store = createGameStore(initial: state)
+                    let sut = createGameStore(initial: state)
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "saloon-5♥️")
-                    let result = self.awaitAction(action, store: store)
+                    let result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [.failure(.noPlayerDamaged)]

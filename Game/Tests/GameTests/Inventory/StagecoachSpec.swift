@@ -25,11 +25,11 @@ final class StagecoachSpec: QuickSpec {
                         "c2"
                     }
                 }
-                let store = createGameStore(initial: state)
+                let sut = createGameStore(initial: state)
 
                 // When
                 let action = GameAction.play(actor: "p1", card: "stagecoach-9♠️")
-                let result = self.awaitAction(action, store: store)
+                let result = self.awaitAction(action, store: sut)
 
                 // Then
                 let ctx = action.ctx()
