@@ -41,7 +41,7 @@ public let gameReducer: Reducer<GameState, GameAction>
                 return try ReplayEffectReducer().reduce(state: state, action: action)
 
             case .discard:
-                return try discardReducer(effect, state, ctx)
+                return try DiscardReducer().reduce(state: state, action: action)
 
             case .chooseCard:
                 return try chooseCardReducer(effect, state, ctx)
