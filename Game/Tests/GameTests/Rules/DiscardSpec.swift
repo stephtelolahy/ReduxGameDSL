@@ -6,12 +6,11 @@
 //
 import Quick
 import Nimble
-import Redux
 import Game
 
 final class DiscardSpec: QuickSpec {
     override func spec() {
-        let sut: Reducer<GameState, GameAction> = gameReducer
+        let sut = GameReducer()
         let ctx = PlayContext(actor: "p1", card: "cx")
 
         describe("discard") {
@@ -29,7 +28,7 @@ final class DiscardSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut(state, .apply(effect, ctx: ctx))
+                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c2"]
@@ -51,7 +50,7 @@ final class DiscardSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut(state, .apply(effect, ctx: ctx))
+                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.player("p1").inPlay.cards) == ["c2"]
@@ -67,7 +66,7 @@ final class DiscardSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut(state, .apply(effect, ctx: ctx))
+                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.thrownError) == GameError.missingCard("c1")

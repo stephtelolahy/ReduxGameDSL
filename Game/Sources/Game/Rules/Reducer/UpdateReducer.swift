@@ -14,6 +14,6 @@ struct UpdateReducer: ThrowableReducerProtocol {
 
         var state = state
         let action = state.queue.remove(at: 0)
-        return gameReducer(state, action)
+        return GameReducer().reduce(state: state, action: action)
     }
 }
