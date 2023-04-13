@@ -7,7 +7,7 @@
 import Redux
 
 struct ChooseCardReducer: GameReducerProtocol {
-    let effect: CardEffect
+    let action: GameAction
     let player: ArgPlayer
     let card: ArgCard
     let ctx: PlayContext
@@ -54,7 +54,7 @@ struct ChooseCardReducer: GameReducerProtocol {
         try state.choosable?.remove(cId)
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
-        state.completedAction = .apply(effect, ctx: ctx)
+        state.completedAction = action
 
         return state
     }

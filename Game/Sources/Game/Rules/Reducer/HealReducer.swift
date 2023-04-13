@@ -7,7 +7,7 @@
 import Redux
 
 struct HealReducer: GameReducerProtocol {
-    let effect: CardEffect
+    let action: GameAction
     let player: ArgPlayer
     let value: Int
     let ctx: PlayContext
@@ -35,7 +35,7 @@ struct HealReducer: GameReducerProtocol {
         // update health
         try state[keyPath: \GameState.players[pId]]?.gainHealth(value)
         
-        state.completedAction = .apply(effect, ctx: ctx)
+        state.completedAction = action
 
         return state
     }

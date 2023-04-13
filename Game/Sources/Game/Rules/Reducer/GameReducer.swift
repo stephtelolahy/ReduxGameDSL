@@ -25,8 +25,8 @@ public struct GameReducer: ReducerProtocol {
 
         do {
             switch action {
-            case .play:
-                return try PlayReducer().reduce(state: state, action: action)
+            case let .play(actor, card, target):
+                return try PlayReducer(action: action, actor: actor, card: card, target: target).reduce(state)
 
             case .update:
                 return try UpdateReducer().reduce(state: state, action: action)
@@ -34,7 +34,7 @@ public struct GameReducer: ReducerProtocol {
             case let .apply(effect, ctx):
                 switch effect {
                 case let .heal(value, player):
-                    return try HealReducer(effect: effect, player: player, value: value, ctx: ctx).reduce(state)
+                    return try HealReducer(action: action, player: player, value: value, ctx: ctx).reduce(state)
 
                 case .draw:
                     return try DrawReducer().reduce(state: state, action: action)
@@ -46,7 +46,7 @@ public struct GameReducer: ReducerProtocol {
                     return try DiscardReducer().reduce(state: state, action: action)
 
                 case let .chooseCard(player, card):
-                    return try ChooseCardReducer(effect: effect, player: player, card: card, ctx: ctx).reduce(state)
+                    return try ChooseCardReducer(action: action, player: player, card: card, ctx: ctx).reduce(state)
                 }
             }
         } catch {

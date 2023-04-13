@@ -6,18 +6,19 @@
 //
 import Redux
 
-struct PlayReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .play(actor, card, target) = action else {
-            fatalError(.unexpected)
-        }
+struct PlayReducer: GameReducerProtocol {
+    let action: GameAction
+    let actor: String
+    let card: String
+    let target: String?
 
+    func reduce(_ state: GameState) throws -> GameState {
         guard state.players[actor] != nil else {
             throw GameError.missingPlayer(actor)
         }
 
         var state = state
-        let ctx = action.ctx()
+        let ctx = PlayContext(actor: actor, card: card, target: target)
 
         // discard immediately
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
@@ -57,17 +58,5 @@ struct PlayReducer: ThrowableReducerProtocol {
         state.completedAction = action
 
         return state
-    }
-}
-
-private extension GameAction {
-    func ctx() -> PlayContext {
-        switch self {
-        case let .play(actor, card, target):
-            return PlayContext(actor: actor, card: card, target: target)
-
-        default:
-            fatalError(.unexpected)
-        }
     }
 }
