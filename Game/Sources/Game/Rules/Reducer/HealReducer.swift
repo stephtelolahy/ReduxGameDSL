@@ -6,13 +6,13 @@
 //
 import Redux
 
-struct HealReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .apply(effect, ctx) = action,
-              case let .heal(value, player) = effect else {
-            fatalError(.unexpected)
-        }
+struct HealReducer: GameReducerProtocol {
+    let effect: CardEffect
+    let player: ArgPlayer
+    let value: Int
+    let ctx: PlayContext
 
+    func reduce(_ state: GameState) throws -> GameState {
         var state = state
 
         // resolve player

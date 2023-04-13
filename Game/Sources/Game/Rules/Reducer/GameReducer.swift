@@ -33,8 +33,8 @@ public struct GameReducer: ReducerProtocol {
 
             case let .apply(effect, ctx):
                 switch effect {
-                case .heal:
-                    return try HealReducer().reduce(state: state, action: action)
+                case let .heal(value, player):
+                    return try HealReducer(effect: effect, player: player, value: value, ctx: ctx).reduce(state)
 
                 case .draw:
                     return try DrawReducer().reduce(state: state, action: action)
