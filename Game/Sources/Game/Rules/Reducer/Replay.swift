@@ -8,7 +8,7 @@
 struct Replay: GameReducerProtocol {
     let effect: CardEffect
     let times: Int
-    let ctx: PlayContext
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         guard times > 0 else {

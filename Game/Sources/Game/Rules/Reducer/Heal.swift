@@ -7,9 +7,9 @@
 
 struct Heal: GameReducerProtocol {
     let action: GameAction
-    let player: ArgPlayer
+    let player: PlayerArg
     let value: Int
-    let ctx: PlayContext
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         var state = state

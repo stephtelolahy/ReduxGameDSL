@@ -7,8 +7,8 @@
 
 struct Draw: GameReducerProtocol {
     let action: GameAction
-    let player: ArgPlayer
-    let ctx: PlayContext
+    let player: PlayerArg
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         var state = state

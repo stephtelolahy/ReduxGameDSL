@@ -12,7 +12,7 @@ import Game
 final class DrawSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = PlayContext(actor: "p1", card: "cx")
+        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("draw") {
             context("deck containing cards") {

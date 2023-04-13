@@ -32,3 +32,9 @@ enum Label {
     /// Choose to pass when asked to do an action
     static let pass = "pass"
 }
+
+extension Array where Element == String {
+    func toOptions() -> [ArgOption] {
+        map { ArgOption(id: $0, label: $0) }
+    }
+}

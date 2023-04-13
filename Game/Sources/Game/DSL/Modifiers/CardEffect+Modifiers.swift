@@ -12,7 +12,7 @@ extension CardEffect {
 }
 
 public extension CardEffect {
-    func withCtx(_ ctx: PlayContext) -> GameAction {
+    func withCtx(_ ctx: EffectContext) -> GameAction {
         .apply(self, ctx: ctx)
     }
 }

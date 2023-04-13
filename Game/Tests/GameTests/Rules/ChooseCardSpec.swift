@@ -13,7 +13,7 @@ final class ChooseCardSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
         let sut = GameReducer()
-        let ctx = PlayContext(actor: "p1", card: "cx")
+        let ctx = EffectContext(actor: "p1", card: "cx")
         describe("choose a card") {
             context("unspecified") {
                 context("multiple cards available") {

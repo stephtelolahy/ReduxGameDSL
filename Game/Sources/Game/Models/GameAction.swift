@@ -12,7 +12,7 @@ public enum GameAction: Codable, Equatable {
     case play(actor: String, card: String, target: String?)
 
     /// apply a card side effect
-    case apply(CardEffect, ctx: PlayContext)
+    case apply(CardEffect, ctx: EffectContext)
     
     /// process queued event
     case update

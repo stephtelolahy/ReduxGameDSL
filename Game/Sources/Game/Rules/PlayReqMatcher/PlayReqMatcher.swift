@@ -6,11 +6,11 @@
 //
 
 protocol PlayReqMatcherProtocol {
-    func match(state: GameState, ctx: PlayContext) throws
+    func match(state: GameState, ctx: EffectContext) throws
 }
 
 struct PlayReqMatcher {
-    func match(playReq: PlayReq, state: GameState, ctx: PlayContext) throws {
+    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
         try playReq.matcher().match(state: state, ctx: ctx)
     }
 }

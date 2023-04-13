@@ -7,9 +7,9 @@
 
 struct Discard: GameReducerProtocol {
     let action: GameAction
-    let player: ArgPlayer
-    let card: ArgCard
-    let ctx: PlayContext
+    let player: PlayerArg
+    let card: CardArg
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
@@ -33,7 +33,8 @@ struct Discard: GameReducerProtocol {
 
         // resolve card
         guard case let .id(cId) = card else {
-            let resolved = try argCardResolver(card, state, ctx, ctx.actor, pId)
+            let resolved = try CardArgResolver()
+                .resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId)
             switch resolved {
             case let .identified(cIds):
                 let children = cIds.map {

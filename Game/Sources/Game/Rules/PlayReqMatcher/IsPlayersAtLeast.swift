@@ -8,7 +8,7 @@
 struct IsPlayersAtLeast: PlayReqMatcherProtocol {
     let count: Int
 
-    func match(state: GameState, ctx: PlayContext) throws {
+    func match(state: GameState, ctx: EffectContext) throws {
         if state.players.count < count {
             throw GameError.playersMustBeAtLeast(count)
         }

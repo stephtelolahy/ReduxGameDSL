@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-typealias ArgPlayerResolver = (ArgPlayer, GameState, PlayContext) throws -> ArgOutput
+typealias ArgPlayerResolver = (PlayerArg, GameState, EffectContext) throws -> ArgOutput
 
 let argPlayerResolver: ArgPlayerResolver
 = { arg, state, ctx in

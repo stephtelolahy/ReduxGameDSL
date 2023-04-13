@@ -49,7 +49,7 @@ final class PlaySpec: QuickSpec {
 
                 it("should queue side effects") {
                     // Then
-                    let ctx = PlayContext(actor: "p1", card: "beer-6♥️")
+                    let ctx = EffectContext(actor: "p1", card: "beer-6♥️")
                     expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
                 }
             }

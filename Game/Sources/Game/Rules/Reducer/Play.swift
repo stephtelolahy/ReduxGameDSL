@@ -17,7 +17,7 @@ struct Play: GameReducerProtocol {
         }
 
         var state = state
-        let ctx = PlayContext(actor: actor, card: card, target: target)
+        let ctx = EffectContext(actor: actor, card: card, target: target)
 
         // discard immediately
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
