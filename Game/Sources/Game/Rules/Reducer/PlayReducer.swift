@@ -48,7 +48,7 @@ struct PlayReducer: ThrowableReducerProtocol {
 
         // verify requirements
         for playReq in playAction.playReqs {
-            try matchPlayReq(playReq, state, ctx)
+            try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
         }
 
         // queue side effects
