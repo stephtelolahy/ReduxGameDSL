@@ -6,14 +6,12 @@
 //
 
 /// Actor is damaged
-let isActorDamaged: PlayReqMatcher
-= { playReq, state, ctx in
-    guard case .isActorDamaged = playReq else {
-        fatalError(.unexpected)
-    }
+struct IsActorDamaged: PlayReqMatcherProtocol {
 
-    let actorObj = state.player(ctx.actor)
-    if actorObj.health >= actorObj.maxHealth {
-        throw GameError.playerAlreadyMaxHealth(ctx.actor)
+    func match(state: GameState, ctx: PlayContext) throws {
+        let actorObj = state.player(ctx.actor)
+        if actorObj.health >= actorObj.maxHealth {
+            throw GameError.playerAlreadyMaxHealth(ctx.actor)
+        }
     }
 }

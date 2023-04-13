@@ -5,13 +5,12 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-let isPlayersAtLeast: PlayReqMatcher
-= { playReq, state, _ in
-    guard case let .isPlayersAtLeast(count) = playReq else {
-        fatalError(.unexpected)
-    }
+struct IsPlayersAtLeast: PlayReqMatcherProtocol {
+    let count: Int
 
-    if state.players.count < count {
-        throw GameError.playersMustBeAtLeast(count)
+    func match(state: GameState, ctx: PlayContext) throws {
+        if state.players.count < count {
+            throw GameError.playersMustBeAtLeast(count)
+        }
     }
 }

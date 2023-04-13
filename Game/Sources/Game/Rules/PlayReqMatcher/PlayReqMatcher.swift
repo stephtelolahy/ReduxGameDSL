@@ -10,11 +10,11 @@ typealias PlayReqMatcher = (PlayReq, GameState, PlayContext) throws -> Void
 let matchPlayReq: PlayReqMatcher
 = { playReq, state, ctx in
     switch playReq {
-    case .isPlayersAtLeast:
-        try isPlayersAtLeast(playReq, state, ctx)
+    case let .isPlayersAtLeast(count):
+        try IsPlayersAtLeast(count: count).match(state: state, ctx: ctx)
 
     case .isActorDamaged:
-        try isActorDamaged(playReq, state, ctx)
+        try IsActorDamaged().match(state: state, ctx: ctx)
 
     case .isAnyDamaged:
         try isAnyDamaged(playReq, state, ctx)

@@ -8,7 +8,6 @@
 import Redux
 
 public struct GameReducer: ReducerProtocol {
-
     public init() {}
 
     // swiftlint:disable:next cyclomatic_complexity
