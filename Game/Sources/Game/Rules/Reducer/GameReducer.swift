@@ -27,7 +27,7 @@ public let gameReducer: Reducer<GameState, GameAction>
     do {
         switch action {
         case .play:
-            return try playReducer(state, action)
+            return try PlayReducer().reduce(state: state, action: action)
 
         case .update:
             return try UpdateReducer().reduce(state: state, action: action)
