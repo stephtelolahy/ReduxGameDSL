@@ -7,6 +7,7 @@
 
 import Redux
 
+#warning("remove")
 typealias GameReducer = (GameState, GameAction) throws -> GameState
 
 public let gameReducer: Reducer<GameState, GameAction>
@@ -29,7 +30,7 @@ public let gameReducer: Reducer<GameState, GameAction>
             return try playReducer(state, action)
 
         case .update:
-            return try updateReducer(state, action)
+            return try UpdateReducer().reduce(state: state, action: action)
 
         case let .apply(effect, ctx):
             return try effectReducer(effect, state, ctx)
