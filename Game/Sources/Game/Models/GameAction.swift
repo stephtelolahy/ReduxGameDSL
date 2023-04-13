@@ -10,12 +10,6 @@ public enum GameAction: Codable, Equatable {
     
     /// play a hand card
     case play(actor: String, card: String, target: String?)
-    
-    /// equip a hand card
-    case equip
-    
-    /// play handicap card
-    case handicap
 
     /// apply a card side effect
     case apply(CardEffect, ctx: PlayContext)

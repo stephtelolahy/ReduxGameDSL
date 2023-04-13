@@ -44,14 +44,8 @@ public let gameReducer: Reducer<GameState, GameAction>
                 return try DiscardReducer().reduce(state: state, action: action)
 
             case .chooseCard:
-                return try chooseCardReducer(effect, state, ctx)
-
-            default:
-                fatalError(.unexpected)
+                return try ChooseCardReducer().reduce(state: state, action: action)
             }
-
-        default:
-            fatalError(.unexpected)
         }
     } catch {
         state.thrownError = error as? GameError
