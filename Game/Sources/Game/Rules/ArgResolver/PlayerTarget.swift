@@ -5,11 +5,12 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-let playerTarget: ArgPlayerResolver
-= { _, _, ctx in
-    guard let target = ctx.target else {
-        throw GameError.missingTarget
-    }
+struct PlayerTarget: PlayerArgResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> ArgOutput {
+        guard let target = ctx.target else {
+            throw GameError.missingTarget
+        }
 
-    return .identified([target])
+        return .identified([target])
+    }
 }

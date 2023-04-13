@@ -34,7 +34,7 @@ struct Play: GameReducerProtocol {
         // resolve target
         if let requiredTarget = playAction.target,
            target == nil {
-            let resolved = try argPlayerResolver(requiredTarget, state, ctx)
+            let resolved = try PlayerArgResolver().resolve(arg: requiredTarget, state: state, ctx: ctx)
             switch resolved {
             case let .selectable(pIdOptions):
                 state.chooseOne = pIdOptions.map { .play(actor: actor, card: card, target: $0.id) }
