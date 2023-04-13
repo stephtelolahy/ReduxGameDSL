@@ -5,8 +5,6 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-import Redux
-
 struct PlayReducer: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         guard case let .play(actor, card, target) = action else {

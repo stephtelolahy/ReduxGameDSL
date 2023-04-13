@@ -7,9 +7,6 @@
 
 import Redux
 
-#warning("remove")
-typealias GameReducer = (GameState, GameAction) throws -> GameState
-
 public let gameReducer: Reducer<GameState, GameAction>
 = { state, action in
 
@@ -33,7 +30,25 @@ public let gameReducer: Reducer<GameState, GameAction>
             return try UpdateReducer().reduce(state: state, action: action)
 
         case let .apply(effect, ctx):
-            return try effectReducer(effect, state, ctx)
+            switch effect {
+            case .heal:
+                return try HealReducer().reduce(state: state, action: action)
+
+            case .draw:
+                return try drawReducer(effect, state, ctx)
+
+            case .replayEffect:
+                return try replayEffectReducer(effect, state, ctx)
+
+            case .discard:
+                return try discardReducer(effect, state, ctx)
+
+            case .chooseCard:
+                return try chooseCardReducer(effect, state, ctx)
+
+            default:
+                fatalError(.unexpected)
+            }
 
         default:
             fatalError(.unexpected)
