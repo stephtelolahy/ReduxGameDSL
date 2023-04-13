@@ -7,15 +7,21 @@
 
 struct PlayReqMatcher {
     func match(playReq: PlayReq, state: GameState, ctx: PlayContext) throws {
-        switch playReq {
+        try playReq.matcher().match(state: state, ctx: ctx)
+    }
+}
+
+private extension PlayReq {
+    func matcher() -> PlayReqMatcherProtocol {
+        switch self {
         case let .isPlayersAtLeast(count):
-            try IsPlayersAtLeast(count: count).match(state: state, ctx: ctx)
+            return IsPlayersAtLeast(count: count)
 
         case .isActorDamaged:
-            try IsActorDamaged().match(state: state, ctx: ctx)
+            return IsActorDamaged()
 
         case .isAnyDamaged:
-            try IsAnyDamaged().match(state: state, ctx: ctx)
+            return IsAnyDamaged()
 
         default:
             fatalError(.unexpected)
