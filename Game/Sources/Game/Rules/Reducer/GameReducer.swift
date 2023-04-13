@@ -38,7 +38,7 @@ public let gameReducer: Reducer<GameState, GameAction>
                 return try drawReducer(effect, state, ctx)
 
             case .replayEffect:
-                return try replayEffectReducer(effect, state, ctx)
+                return try ReplayEffectReducer().reduce(state: state, action: action)
 
             case .discard:
                 return try discardReducer(effect, state, ctx)
