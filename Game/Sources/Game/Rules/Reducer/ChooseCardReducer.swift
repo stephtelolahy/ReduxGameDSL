@@ -12,7 +12,7 @@ struct ChooseCardReducer: GameReducerProtocol {
     let card: ArgCard
     let ctx: PlayContext
 
-    func reduce(_ state: GameState) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         var state = state
 
         // resolve player

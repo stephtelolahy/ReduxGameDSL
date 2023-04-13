@@ -23,7 +23,7 @@ public struct GameReducer: ReducerProtocol {
         state.chooseOne = nil
 
         do {
-            return try action.reducer().reduce(state)
+            return try action.reducer().reduce(state: state)
         } catch {
             state.thrownError = error as? GameError
             return state

@@ -6,5 +6,5 @@
 //
 
 protocol GameReducerProtocol {
-    func reduce(_ state: GameState) throws -> GameState
+    func reduce(state: GameState) throws -> GameState
 }

@@ -10,7 +10,7 @@ struct ReplayEffectReducer: GameReducerProtocol {
     let times: Int
     let ctx: PlayContext
 
-    func reduce(_ state: GameState) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         guard times > 0 else {
             return state
         }

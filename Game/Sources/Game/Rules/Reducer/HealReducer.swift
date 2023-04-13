@@ -11,7 +11,7 @@ struct HealReducer: GameReducerProtocol {
     let value: Int
     let ctx: PlayContext
 
-    func reduce(_ state: GameState) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         var state = state
 
         // resolve player

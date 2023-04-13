@@ -11,7 +11,7 @@ struct PlayReducer: GameReducerProtocol {
     let card: String
     let target: String?
 
-    func reduce(_ state: GameState) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         guard state.players[actor] != nil else {
             throw GameError.missingPlayer(actor)
         }
