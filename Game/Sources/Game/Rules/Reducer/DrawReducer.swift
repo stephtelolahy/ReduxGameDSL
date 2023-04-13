@@ -4,8 +4,9 @@
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
+import Redux
 
-struct DrawReducer: GameReducerProtocol {
+struct DrawReducer: ThrowableReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         guard case let .apply(effect, ctx) = action,
               case let .draw(player) = effect else {

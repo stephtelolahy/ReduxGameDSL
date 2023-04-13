@@ -4,8 +4,9 @@
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
+import Redux
 
-struct UpdateReducer: GameReducerProtocol {
+struct UpdateReducer: ThrowableReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         guard !state.queue.isEmpty else {
             return state

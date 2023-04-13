@@ -4,8 +4,9 @@
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
+import Redux
 
-struct ReplayEffectReducer: GameReducerProtocol {
+struct ReplayEffectReducer: ThrowableReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         guard case let .apply(effect, ctx) = action,
               case let .replayEffect(times, childEffect) = effect else {
