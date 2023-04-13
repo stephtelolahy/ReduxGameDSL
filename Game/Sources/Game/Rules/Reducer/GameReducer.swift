@@ -10,7 +10,7 @@ import Redux
 public struct GameReducer: ReducerProtocol {
     public init() {}
 
-    // swiftlint:disable:next cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity line_length
     public func reduce(state: GameState, action: GameAction) -> GameState {
         if let expected = state.chooseOne {
             guard expected.contains(action) else {
@@ -31,7 +31,7 @@ public struct GameReducer: ReducerProtocol {
             case .update:
                 return try UpdateReducer().reduce(state: state, action: action)
 
-            case let .apply(effect, _):
+            case let .apply(effect, ctx):
                 switch effect {
                 case .heal:
                     return try HealReducer().reduce(state: state, action: action)
@@ -45,8 +45,8 @@ public struct GameReducer: ReducerProtocol {
                 case .discard:
                     return try DiscardReducer().reduce(state: state, action: action)
 
-                case .chooseCard:
-                    return try ChooseCardReducer().reduce(state: state, action: action)
+                case let .chooseCard(player, card):
+                    return try ChooseCardReducer(effect: effect, player: player, card: card, ctx: ctx).reduce(state)
                 }
             }
         } catch {

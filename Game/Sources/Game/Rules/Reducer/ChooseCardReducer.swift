@@ -6,13 +6,13 @@
 //
 import Redux
 
-struct ChooseCardReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .apply(effect, ctx) = action,
-              case let .chooseCard(player, card) = effect else {
-            fatalError(.unexpected)
-        }
+struct ChooseCardReducer: GameReducerProtocol {
+    let effect: CardEffect
+    let player: ArgPlayer
+    let card: ArgCard
+    let ctx: PlayContext
 
+    func reduce(_ state: GameState) throws -> GameState {
         var state = state
 
         // resolve player
