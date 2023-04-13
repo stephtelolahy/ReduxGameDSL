@@ -1,11 +1,11 @@
 //
-//  UpdateReducer.swift
+//  Update.swift
 //  
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-struct UpdateReducer: GameReducerProtocol {
+struct Update: GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState {
         guard !state.queue.isEmpty else {
             return state

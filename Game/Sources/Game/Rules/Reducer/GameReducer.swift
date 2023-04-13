@@ -7,6 +7,10 @@
 
 import Redux
 
+protocol GameReducerProtocol {
+    func reduce(state: GameState) throws -> GameState
+}
+
 public struct GameReducer: ReducerProtocol {
     public init() {}
 
@@ -35,27 +39,27 @@ private extension GameAction {
     func reducer() -> GameReducerProtocol {
         switch self {
         case let .play(actor, card, target):
-            return PlayReducer(action: self, actor: actor, card: card, target: target)
+            return Play(action: self, actor: actor, card: card, target: target)
 
         case .update:
-            return UpdateReducer()
+            return Update()
 
         case let .apply(effect, ctx):
             switch effect {
             case let .heal(value, player):
-                return HealReducer(action: self, player: player, value: value, ctx: ctx)
+                return Heal(action: self, player: player, value: value, ctx: ctx)
 
             case let .draw(player):
-                return DrawReducer(action: self, player: player, ctx: ctx)
+                return Draw(action: self, player: player, ctx: ctx)
 
             case let .replayEffect(times, effectToRepeat):
-                return ReplayEffectReducer(effect: effectToRepeat, times: times, ctx: ctx)
+                return Replay(effect: effectToRepeat, times: times, ctx: ctx)
 
             case let .discard(player, card):
-                return DiscardReducer(action: self, player: player, card: card, ctx: ctx)
+                return Discard(action: self, player: player, card: card, ctx: ctx)
 
             case let .chooseCard(player, card):
-                return ChooseCardReducer(action: self, player: player, card: card, ctx: ctx)
+                return ChooseCard(action: self, player: player, card: card, ctx: ctx)
             }
         }
     }

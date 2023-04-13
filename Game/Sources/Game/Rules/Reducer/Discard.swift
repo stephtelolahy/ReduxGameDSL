@@ -1,12 +1,11 @@
 //
-//  ChooseCardReducer.swift
+//  Discard.swift
 //  
 //
-//  Created by Hugues Telolahy on 11/04/2023.
+//  Created by Hugues Telolahy on 10/04/2023.
 //
-import Redux
 
-struct ChooseCardReducer: GameReducerProtocol {
+struct Discard: GameReducerProtocol {
     let action: GameAction
     let player: ArgPlayer
     let card: ArgCard
@@ -21,7 +20,7 @@ struct ChooseCardReducer: GameReducerProtocol {
             switch resolved {
             case let .identified(pIds):
                 let children = pIds.map {
-                    CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
+                    CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
                 }
                 state.queue.insert(contentsOf: children, at: 0)
 
@@ -32,30 +31,43 @@ struct ChooseCardReducer: GameReducerProtocol {
             return state
         }
 
-        // choose card
+        // resolve card
         guard case let .id(cId) = card else {
             let resolved = try argCardResolver(card, state, ctx, ctx.actor, pId)
             switch resolved {
             case let .identified(cIds):
                 let children = cIds.map {
-                    CardEffect.chooseCard(player: player, card: .id($0)).withCtx(ctx)
+                    CardEffect.discard(player: .id(pId), card: .id($0)).withCtx(ctx)
                 }
                 state.queue.insert(contentsOf: children, at: 0)
 
             case let .selectable(cIdOptions):
                 state.chooseOne = cIdOptions.map {
-                    .apply(.chooseCard(player: player, card: .id($0.id)), ctx: ctx)
+                    .apply(.discard(player: .id(pId), card: .id($0.id)), ctx: ctx)
                 }
             }
 
             return state
         }
 
-        try state.choosable?.remove(cId)
-        state[keyPath: \GameState.players[pId]]?.hand.add(cId)
+        try state[keyPath: \GameState.players[pId]]?.removeCard(cId)
+
+        state.discard.push(cId)
 
         state.completedAction = action
 
         return state
+    }
+}
+
+private extension Player {
+    mutating func removeCard(_ card: String) throws {
+        if hand.contains(card) {
+            try hand.remove(card)
+        } else if inPlay.contains(card) {
+            try inPlay.remove(card)
+        } else {
+            throw GameError.missingCard(card)
+        }
     }
 }

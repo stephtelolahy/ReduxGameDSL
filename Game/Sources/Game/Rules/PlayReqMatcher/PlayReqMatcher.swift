@@ -5,6 +5,10 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
+protocol PlayReqMatcherProtocol {
+    func match(state: GameState, ctx: PlayContext) throws
+}
+
 struct PlayReqMatcher {
     func match(playReq: PlayReq, state: GameState, ctx: PlayContext) throws {
         try playReq.matcher().match(state: state, ctx: ctx)

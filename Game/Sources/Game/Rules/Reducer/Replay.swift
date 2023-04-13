@@ -1,11 +1,11 @@
 //
-//  ReplayEffectReducer.swift
+//  Replay.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct ReplayEffectReducer: GameReducerProtocol {
+struct Replay: GameReducerProtocol {
     let effect: CardEffect
     let times: Int
     let ctx: PlayContext

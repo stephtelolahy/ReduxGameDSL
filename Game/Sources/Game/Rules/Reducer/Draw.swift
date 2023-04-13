@@ -1,11 +1,11 @@
 //
-//  DrawReducer.swift
+//  Draw.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct DrawReducer: GameReducerProtocol {
+struct Draw: GameReducerProtocol {
     let action: GameAction
     let player: ArgPlayer
     let ctx: PlayContext

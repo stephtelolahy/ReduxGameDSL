@@ -1,11 +1,11 @@
 //
-//  HealReducer.swift
+//  Heal.swift
 //  
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-struct HealReducer: GameReducerProtocol {
+struct Heal: GameReducerProtocol {
     let action: GameAction
     let player: ArgPlayer
     let value: Int
