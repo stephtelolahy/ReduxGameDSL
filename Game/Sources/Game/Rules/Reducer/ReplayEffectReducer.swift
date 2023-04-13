@@ -4,21 +4,19 @@
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
-import Redux
 
-struct ReplayEffectReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .apply(effect, ctx) = action,
-              case let .replayEffect(times, childEffect) = effect else {
-            fatalError(.unexpected)
-        }
+struct ReplayEffectReducer: GameReducerProtocol {
+    let effect: CardEffect
+    let times: Int
+    let ctx: PlayContext
 
+    func reduce(_ state: GameState) throws -> GameState {
         guard times > 0 else {
             return state
         }
 
         let children = (0..<times).map { _ in
-            childEffect.withCtx(ctx)
+            effect.withCtx(ctx)
         }
 
         var state = state

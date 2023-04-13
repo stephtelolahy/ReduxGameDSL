@@ -4,17 +4,15 @@
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
-import Redux
 
-struct DrawReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .apply(effect, ctx) = action,
-              case let .draw(player) = effect else {
-            fatalError(.unexpected)
-        }
-        
+struct DrawReducer: GameReducerProtocol {
+    let action: GameAction
+    let player: ArgPlayer
+    let ctx: PlayContext
+
+    func reduce(_ state: GameState) throws -> GameState {
         var state = state
-        
+
         // resolve player
         guard case let .id(pId) = player else {
             let resolved = try argPlayerResolver(player, state, ctx)
@@ -24,21 +22,21 @@ struct DrawReducer: ThrowableReducerProtocol {
                     CardEffect.draw(player: .id($0)).withCtx(ctx)
                 }
                 state.queue.insert(contentsOf: children, at: 0)
-                
+
             default:
                 fatalError(.unexpected)
             }
-            
+
             return state
         }
-        
+
         // draw card
         let card = try state.popDeck()
-        
+
         state[keyPath: \GameState.players[pId]]?.hand.add(card)
-        
-        state.completedAction = .apply(effect, ctx: ctx)
-        
+
+        state.completedAction = action
+
         return state
     }
 }

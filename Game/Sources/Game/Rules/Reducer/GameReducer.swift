@@ -10,7 +10,6 @@ import Redux
 public struct GameReducer: ReducerProtocol {
     public init() {}
 
-    // swiftlint:disable:next cyclomatic_complexity line_length
     public func reduce(state: GameState, action: GameAction) -> GameState {
         if let expected = state.chooseOne {
             guard expected.contains(action) else {
@@ -24,34 +23,40 @@ public struct GameReducer: ReducerProtocol {
         state.chooseOne = nil
 
         do {
-            switch action {
-            case let .play(actor, card, target):
-                return try PlayReducer(action: action, actor: actor, card: card, target: target).reduce(state)
-
-            case .update:
-                return try UpdateReducer().reduce(state: state, action: action)
-
-            case let .apply(effect, ctx):
-                switch effect {
-                case let .heal(value, player):
-                    return try HealReducer(action: action, player: player, value: value, ctx: ctx).reduce(state)
-
-                case .draw:
-                    return try DrawReducer().reduce(state: state, action: action)
-
-                case .replayEffect:
-                    return try ReplayEffectReducer().reduce(state: state, action: action)
-
-                case .discard:
-                    return try DiscardReducer().reduce(state: state, action: action)
-
-                case let .chooseCard(player, card):
-                    return try ChooseCardReducer(action: action, player: player, card: card, ctx: ctx).reduce(state)
-                }
-            }
+            return try action.reducer().reduce(state)
         } catch {
             state.thrownError = error as? GameError
             return state
+        }
+    }
+}
+
+private extension GameAction {
+    func reducer() -> GameReducerProtocol {
+        switch self {
+        case let .play(actor, card, target):
+            return PlayReducer(action: self, actor: actor, card: card, target: target)
+
+        case .update:
+            return UpdateReducer()
+
+        case let .apply(effect, ctx):
+            switch effect {
+            case let .heal(value, player):
+                return HealReducer(action: self, player: player, value: value, ctx: ctx)
+
+            case let .draw(player):
+                return DrawReducer(action: self, player: player, ctx: ctx)
+
+            case let .replayEffect(times, effectToRepeat):
+                return ReplayEffectReducer(effect: effectToRepeat, times: times, ctx: ctx)
+
+            case let .discard(player, card):
+                return DiscardReducer(action: self, player: player, card: card, ctx: ctx)
+
+            case let .chooseCard(player, card):
+                return ChooseCardReducer(action: self, player: player, card: card, ctx: ctx)
+            }
         }
     }
 }

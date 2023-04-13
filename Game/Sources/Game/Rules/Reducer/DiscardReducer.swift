@@ -4,15 +4,14 @@
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
-import Redux
 
-struct DiscardReducer: ThrowableReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .apply(effect, ctx) = action,
-              case let .discard(player, card) = effect else {
-            fatalError(.unexpected)
-        }
+struct DiscardReducer: GameReducerProtocol {
+    let action: GameAction
+    let player: ArgPlayer
+    let card: ArgCard
+    let ctx: PlayContext
 
+    func reduce(_ state: GameState) throws -> GameState {
         var state = state
 
         // resolve player
@@ -55,7 +54,7 @@ struct DiscardReducer: ThrowableReducerProtocol {
 
         state.discard.push(cId)
 
-        state.completedAction = .apply(effect, ctx: ctx)
+        state.completedAction = action
 
         return state
     }
