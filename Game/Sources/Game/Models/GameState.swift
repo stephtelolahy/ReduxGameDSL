@@ -6,7 +6,10 @@ import Foundation
 public struct GameState: Codable, Equatable {
 
     /// all players
-    public var players: [Player] = []
+    public var players: [String: Player] = [:]
+
+    /// active players, playing order
+    public var playOrder: [String] = []
 
     /// current player
     public var turn: String?
@@ -32,7 +35,7 @@ public struct GameState: Codable, Equatable {
     /// queued actions
     public var queue: [GameAction] = []
 
-    /// Choose one of pending actions to proceed effect resolving
+    /// Pending actions to choose before continuing effect resolving
     public var chooseOne: [GameAction]?
 
     /// all cards reference
@@ -47,7 +50,7 @@ public extension GameState {
 
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
-        guard let player = players.first(where: { $0.id == id }) else {
+        guard let player = players[id] else {
             fatalError(.missingPlayer(id))
         }
         return player

@@ -7,38 +7,60 @@
 
 import Redux
 
-typealias GameReducer = (GameState, GameAction) throws -> GameState
+protocol GameReducerProtocol {
+    func reduce(state: GameState) throws -> GameState
+}
 
-public let gameReducer: Reducer<GameState, GameAction>
-= { state, action in
+public struct GameReducer: ReducerProtocol {
+    public init() {}
 
-    if let expected = state.chooseOne {
-        guard expected.contains(action) else {
+    public func reduce(state: GameState, action: GameAction) -> GameState {
+        if let expected = state.chooseOne {
+            guard expected.contains(action) else {
+                return state
+            }
+        }
+
+        var state = state
+        state.completedAction = nil
+        state.thrownError = nil
+        state.chooseOne = nil
+
+        do {
+            return try action.reducer().reduce(state: state)
+        } catch {
+            state.thrownError = error as? GameError
             return state
         }
     }
+}
 
-    var state = state
-    state.completedAction = nil
-    state.thrownError = nil
-    state.chooseOne = nil
-
-    do {
-        switch action {
-        case .play:
-            return try playReducer(state, action)
+private extension GameAction {
+    func reducer() -> GameReducerProtocol {
+        switch self {
+        case let .play(actor, card, target):
+            return Play(action: self, actor: actor, card: card, target: target)
 
         case .update:
-            return try updateReducer(state, action)
+            return Update()
 
         case let .apply(effect, ctx):
-            return try effectReducer(effect, state, ctx)
+            switch effect {
+            case let .heal(value, player):
+                return Heal(action: self, player: player, value: value, ctx: ctx)
 
-        default:
-            fatalError(.unexpected)
+            case let .draw(player):
+                return Draw(action: self, player: player, ctx: ctx)
+
+            case let .replayEffect(times, effectToRepeat):
+                return Replay(effect: effectToRepeat, times: times, ctx: ctx)
+
+            case let .discard(player, card):
+                return Discard(action: self, player: player, card: card, ctx: ctx)
+
+            case let .chooseCard(player, card):
+                return ChooseCard(action: self, player: player, card: card, ctx: ctx)
+            }
         }
-    } catch {
-        state.thrownError = error as? GameError
-        return state
     }
 }

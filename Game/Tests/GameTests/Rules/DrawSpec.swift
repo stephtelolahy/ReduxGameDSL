@@ -7,13 +7,12 @@
 
 import Quick
 import Nimble
-import Redux
 import Game
 
 final class DrawSpec: QuickSpec {
     override func spec() {
-        let sut: Reducer<GameState, GameAction> = gameReducer
-        let ctx = PlayContext(actor: "p1", card: "cx")
+        let sut = GameReducer()
+        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("draw") {
             context("deck containing cards") {
@@ -29,7 +28,7 @@ final class DrawSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.draw(player: .id("p1"))
-                    let result = sut(state, .apply(effect, ctx: ctx))
+                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c1"]
@@ -51,7 +50,7 @@ final class DrawSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.draw(player: .id("p1"))
-                        let result = sut(state, .apply(effect, ctx: ctx))
+                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.deck.top) == nil
@@ -69,7 +68,7 @@ final class DrawSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.draw(player: .id("p1"))
-                        let result = sut(state, .apply(effect, ctx: ctx))
+                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.thrownError) == GameError.stackIsEmpty

@@ -7,13 +7,12 @@
 
 import Quick
 import Nimble
-import Redux
 import Game
 
 final class PlaySpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        let sut: Reducer<GameState, GameAction> = gameReducer
+        let sut = GameReducer()
         var action: GameAction!
         var result: GameState!
 
@@ -34,7 +33,7 @@ final class PlaySpec: QuickSpec {
                     }
                     // When
                     action = GameAction.play(actor: "p1", card: "beer-6♥️")
-                    result = sut(state, action)
+                    result = sut.reduce(state: state, action: action)
                 }
 
                 it("should discard immediately") {
@@ -50,7 +49,7 @@ final class PlaySpec: QuickSpec {
 
                 it("should queue side effects") {
                     // Then
-                    let ctx = PlayContext(actor: "p1", card: "beer-6♥️")
+                    let ctx = EffectContext(actor: "p1", card: "beer-6♥️")
                     expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
                 }
             }
@@ -64,7 +63,7 @@ final class PlaySpec: QuickSpec {
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "stagecoach-9♠️")
-                    let result = sut(state, action)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.thrownError) == .missingCard("stagecoach-9♠️")
@@ -78,7 +77,7 @@ final class PlaySpec: QuickSpec {
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
-                    let result = sut(state, action)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.thrownError) == .missingPlayer("p1")
@@ -98,7 +97,7 @@ final class PlaySpec: QuickSpec {
 
                     // When
                     let action = GameAction.play(actor: "p1", card: "c1")
-                    let result = sut(state, action)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.thrownError) == .cardNotPlayable("c1")

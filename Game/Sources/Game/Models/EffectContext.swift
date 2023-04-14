@@ -1,12 +1,12 @@
 //
-//  PlayContext.swift
+//  EffectContext.swift
 //  
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
 /// Context data associated to an effect
-public struct PlayContext: Codable, Equatable {
+public struct EffectContext: Codable, Equatable {
 
     /// the actor playing card
     let actor: String

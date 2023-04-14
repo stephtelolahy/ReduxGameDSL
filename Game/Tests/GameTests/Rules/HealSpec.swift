@@ -7,13 +7,12 @@
 
 import Quick
 import Nimble
-import Redux
 import Game
 
 final class HealSpec: QuickSpec {
     override func spec() {
-        let sut: Reducer<GameState, GameAction> = gameReducer
-        let ctx = PlayContext(actor: "p1", card: "cx")
+        let sut = GameReducer()
+        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("heal") {
             context("being damaged") {
@@ -28,7 +27,7 @@ final class HealSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.heal(1, player: .id("p1"))
-                        let result = sut(state, .apply(effect, ctx: ctx))
+                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.player("p1").health) == 3
@@ -46,7 +45,7 @@ final class HealSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.heal(2, player: .id("p1"))
-                        let result = sut(state, .apply(effect, ctx: ctx))
+                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.player("p1").health) == 4
@@ -64,7 +63,7 @@ final class HealSpec: QuickSpec {
 
                         // When
                         let effect = CardEffect.heal(2, player: .id("p1"))
-                        let result = sut(state, .apply(effect, ctx: ctx))
+                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                         // Then
                         expect(result.player("p1").health) == 4
@@ -83,7 +82,7 @@ final class HealSpec: QuickSpec {
 
                     // When
                     let effect = CardEffect.heal(1, player: .id("p1"))
-                    let result = sut(state, .apply(effect, ctx: ctx))
+                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
 
                     // Then
                     expect(result.thrownError) == GameError.playerAlreadyMaxHealth("p1")
