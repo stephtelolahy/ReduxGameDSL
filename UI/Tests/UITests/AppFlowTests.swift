@@ -27,30 +27,30 @@ final class AppFlowTests: XCTestCase {
         sut.dispatch(.showScreen(.home))
         
         // Then
-        XCTAssertEqual(sut.state.screens, [.home(HomeState())])
+        XCTAssertEqual(sut.state.screens, [.home(.init())])
     }
     
     func test_App_WhenStartedGame_ShouldShowGameScreen() {
         // Given
-        let sut = createAppStore(initial: AppState(screens: [.home(HomeState())]))
+        let sut = createAppStore(initial: AppState(screens: [.home(.init())]))
         
         // When
         sut.dispatch(.showScreen(.game))
         
         // Then
-        XCTAssertEqual(sut.state.screens, [.home(HomeState()),
-                                           .game(GamePlayState())])
+        XCTAssertEqual(sut.state.screens, [.home(.init()),
+                                           .game(.init())])
     }
     
     func test_App_WhenFinishedGame_ShouldBackToHomeScreen() {
         // Given
-        let sut = createAppStore(initial: AppState(screens: [.home(HomeState()),
-                                                             .game(GamePlayState())]))
+        let sut = createAppStore(initial: AppState(screens: [.home(.init()),
+                                                             .game(.init())]))
         
         // When
         sut.dispatch(.dismissScreen(.game))
         
         // Then
-        XCTAssertEqual(sut.state.screens, [.home(HomeState())])
+        XCTAssertEqual(sut.state.screens, [.home(.init())])
     }
 }
