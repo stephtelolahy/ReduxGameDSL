@@ -13,22 +13,11 @@ struct Discard: GameReducerProtocol {
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
-
-        // resolve player
+        
         guard case let .id(pId) = player else {
-            let resolved = try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx)
-            switch resolved {
-            case let .identified(pIds):
-                let children = pIds.map {
-                    CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            default:
-                fatalError(.unexpected)
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+                CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
             }
-
-            return state
         }
 
         // resolve card

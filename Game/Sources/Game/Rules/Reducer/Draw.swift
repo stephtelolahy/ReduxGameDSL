@@ -12,22 +12,11 @@ struct Draw: GameReducerProtocol {
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
-
-        // resolve player
+        
         guard case let .id(pId) = player else {
-            let resolved = try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx)
-            switch resolved {
-            case let .identified(pIds):
-                let children = pIds.map {
-                    CardEffect.draw(player: .id($0)).withCtx(ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            default:
-                fatalError(.unexpected)
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+                CardEffect.draw(player: .id($0)).withCtx(ctx)
             }
-
-            return state
         }
 
         // draw card

@@ -4,7 +4,6 @@
 //
 //  Created by Hugues Telolahy on 11/04/2023.
 //
-import Redux
 
 struct ChooseCard: GameReducerProtocol {
     let action: GameAction
@@ -14,28 +13,17 @@ struct ChooseCard: GameReducerProtocol {
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
-
-        // resolve player
+        
         guard case let .id(pId) = player else {
-            let resolved = try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx)
-            switch resolved {
-            case let .identified(pIds):
-                let children = pIds.map {
-                    CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            default:
-                fatalError(.unexpected)
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+                CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
             }
-
-            return state
         }
 
         // choose card
         guard case let .id(cId) = card else {
             let resolved = try CardArgResolver()
-                .resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId)
+                .resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil)
             switch resolved {
             case let .identified(cIds):
                 let children = cIds.map {
