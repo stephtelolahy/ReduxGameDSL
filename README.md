@@ -46,7 +46,10 @@ Redux architecture is meant to protect changes in an application’s state. It f
 ### Code duplication
 Detect code duplication with [Periphery](https://github.com/kucherenko/jscpd/tree/master/packages/jscpd#html)
 
-Run the following command on terminal
+Run the following command on terminal from the project root
+
 ```
 npx jscpd --reporters html ./Game/Sources/Game/
+
+open ./report/html/index.html
 ```

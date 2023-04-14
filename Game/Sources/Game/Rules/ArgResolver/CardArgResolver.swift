@@ -10,7 +10,7 @@ protocol CardArgResolverProtocol {
 }
 
 struct CardArgResolver {
-    func resolve(
+    private func resolve(
         arg: CardArg,
         state: GameState,
         ctx: EffectContext,
@@ -18,6 +18,28 @@ struct CardArgResolver {
         owner: String?
     ) throws -> ArgOutput {
         try arg.resolver().resolve(state: state, ctx: ctx, chooser: chooser, owner: owner)
+    }
+
+    // swiftlint:disable:next function_parameter_count
+    func resolve(
+        arg: CardArg,
+        state: GameState,
+        ctx: EffectContext,
+        chooser: String,
+        owner: String?,
+        copy: @escaping (String) -> GameAction
+    ) throws -> GameState {
+        var state = state
+        let resolved = try resolve(arg: arg, state: state, ctx: ctx, chooser: chooser, owner: owner)
+        switch resolved {
+        case let .identified(pIds):
+            let children = pIds.map { copy($0) }
+            state.queue.insert(contentsOf: children, at: 0)
+
+        case let .selectable(pIdOptions):
+            state.chooseOne = pIdOptions.map { copy($0.id) }
+        }
+        return state
     }
 }
 

@@ -20,24 +20,10 @@ struct ChooseCard: GameReducerProtocol {
             }
         }
 
-        // choose card
         guard case let .id(cId) = card else {
-            let resolved = try CardArgResolver()
-                .resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil)
-            switch resolved {
-            case let .identified(cIds):
-                let children = cIds.map {
-                    CardEffect.chooseCard(player: player, card: .id($0)).withCtx(ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            case let .selectable(cIdOptions):
-                state.chooseOne = cIdOptions.map {
-                    .apply(.chooseCard(player: player, card: .id($0.id)), ctx: ctx)
-                }
+            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil) {
+                CardEffect.chooseCard(player: player, card: .id($0)).withCtx(ctx)
             }
-
-            return state
         }
 
         try state.choosable?.remove(cId)

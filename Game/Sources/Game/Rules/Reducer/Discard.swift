@@ -20,24 +20,10 @@ struct Discard: GameReducerProtocol {
             }
         }
 
-        // resolve card
         guard case let .id(cId) = card else {
-            let resolved = try CardArgResolver()
-                .resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId)
-            switch resolved {
-            case let .identified(cIds):
-                let children = cIds.map {
-                    CardEffect.discard(player: .id(pId), card: .id($0)).withCtx(ctx)
-                }
-                state.queue.insert(contentsOf: children, at: 0)
-
-            case let .selectable(cIdOptions):
-                state.chooseOne = cIdOptions.map {
-                    .apply(.discard(player: .id(pId), card: .id($0.id)), ctx: ctx)
-                }
+            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
+                CardEffect.discard(player: .id(pId), card: .id($0)).withCtx(ctx)
             }
-
-            return state
         }
 
         try state[keyPath: \GameState.players[pId]]?.removeCard(cId)
