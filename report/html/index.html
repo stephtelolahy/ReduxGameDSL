@@ -2,7 +2,7 @@
                        // <!--
                        window.initialData = {
   "statistics": {
-    "detectionDate": "2023-04-14T23:17:26.939Z",
+    "detectionDate": "2023-04-14T23:29:07.559Z",
     "formats": {
       "swift": {
         "sources": {
@@ -103,26 +103,26 @@
             "newClones": 0
           },
           "./Game/Sources/Game/Rules/Reducer/Discard.swift": {
-            "lines": 62,
-            "tokens": 563,
+            "lines": 48,
+            "tokens": 430,
             "sources": 1,
             "clones": 3,
-            "duplicatedLines": 24,
-            "duplicatedTokens": 290,
-            "percentage": 38.71,
-            "percentageTokens": 51.51,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 310,
+            "percentage": 47.92,
+            "percentageTokens": 72.09,
             "newDuplicatedLines": 0,
             "newClones": 0
           },
           "./Game/Sources/Game/Rules/Reducer/ChooseCard.swift": {
-            "lines": 49,
-            "tokens": 456,
+            "lines": 35,
+            "tokens": 327,
             "sources": 1,
             "clones": 2,
-            "duplicatedLines": 17,
-            "duplicatedTokens": 196,
-            "percentage": 34.69,
-            "percentageTokens": 42.98,
+            "duplicatedLines": 16,
+            "duplicatedTokens": 216,
+            "percentage": 45.71,
+            "percentageTokens": 66.06,
             "newDuplicatedLines": 0,
             "newClones": 0
           },
@@ -214,11 +214,11 @@
             "lines": 56,
             "tokens": 429,
             "sources": 1,
-            "clones": 0,
-            "duplicatedLines": 0,
-            "duplicatedTokens": 0,
-            "percentage": 0,
-            "percentageTokens": 0,
+            "clones": 1,
+            "duplicatedLines": 13,
+            "duplicatedTokens": 115,
+            "percentage": 23.21,
+            "percentageTokens": 26.81,
             "newDuplicatedLines": 0,
             "newClones": 0
           },
@@ -259,14 +259,14 @@
             "newClones": 0
           },
           "./Game/Sources/Game/Rules/ArgResolver/CardArgResolver.swift": {
-            "lines": 36,
-            "tokens": 235,
+            "lines": 58,
+            "tokens": 467,
             "sources": 1,
-            "clones": 0,
-            "duplicatedLines": 0,
-            "duplicatedTokens": 0,
-            "percentage": 0,
-            "percentageTokens": 0,
+            "clones": 1,
+            "duplicatedLines": 13,
+            "duplicatedTokens": 115,
+            "percentage": 22.41,
+            "percentageTokens": 24.63,
             "newDuplicatedLines": 0,
             "newClones": 0
           },
@@ -788,28 +788,28 @@
           }
         },
         "total": {
-          "lines": 1746,
-          "tokens": 11907,
+          "lines": 1740,
+          "tokens": 11877,
           "sources": 65,
-          "clones": 4,
-          "duplicatedLines": 31,
-          "duplicatedTokens": 384,
-          "percentage": 1.78,
-          "percentageTokens": 3.22,
+          "clones": 5,
+          "duplicatedLines": 43,
+          "duplicatedTokens": 519,
+          "percentage": 2.47,
+          "percentageTokens": 4.37,
           "newDuplicatedLines": 0,
           "newClones": 0
         }
       }
     },
     "total": {
-      "lines": 1746,
-      "tokens": 11907,
+      "lines": 1740,
+      "tokens": 11877,
       "sources": 65,
-      "clones": 4,
-      "duplicatedLines": 31,
-      "duplicatedTokens": 384,
-      "percentage": 1.78,
-      "percentageTokens": 3.22,
+      "clones": 5,
+      "duplicatedLines": 43,
+      "duplicatedTokens": 519,
+      "percentage": 2.47,
+      "percentageTokens": 4.37,
       "newDuplicatedLines": 0,
       "newClones": 0
     }
@@ -925,37 +925,73 @@
     },
     {
       "format": "swift",
-      "lines": 7,
-      "fragment": ", card: .id($0)).withCtx(ctx)\n                }\n                state.queue.insert(contentsOf: children, at: 0)\n\n            case let .selectable(cIdOptions):\n                state.chooseOne = cIdOptions.map {\n                    .apply(.chooseCard",
+      "lines": 6,
+      "fragment": "(player: .id($0), card: card).withCtx(ctx)\n            }\n        }\n\n        guard case let .id(cId) = card else {\n            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil",
       "tokens": 0,
       "firstFile": {
         "name": "Game/Sources/Game/Rules/Reducer/ChooseCard.swift",
-        "start": 30,
-        "end": 36,
+        "start": 19,
+        "end": 24,
         "startLoc": {
-          "line": 30,
-          "column": 7,
-          "position": 286
+          "line": 19,
+          "column": 11,
+          "position": 142
         },
         "endLoc": {
-          "line": 36,
-          "column": 11,
-          "position": 357
+          "line": 24,
+          "column": 4,
+          "position": 233
         }
       },
       "secondFile": {
         "name": "Game/Sources/Game/Rules/Reducer/Discard.swift",
-        "start": 30,
-        "end": 36,
+        "start": 19,
+        "end": 24,
         "startLoc": {
-          "line": 30,
-          "column": 2,
-          "position": 290
+          "line": 19,
+          "column": 8,
+          "position": 142
         },
         "endLoc": {
-          "line": 36,
+          "line": 24,
+          "column": 4,
+          "position": 233
+        }
+      }
+    },
+    {
+      "format": "swift",
+      "lines": 14,
+      "fragment": ")\n        switch resolved {\n        case let .identified(pIds):\n            let children = pIds.map { copy($0) }\n            state.queue.insert(contentsOf: children, at: 0)\n\n        case let .selectable(pIdOptions):\n            state.chooseOne = pIdOptions.map { copy($0.id) }\n        }\n        return state\n    }\n}\n\nprivate extension CardArg",
+      "tokens": 0,
+      "firstFile": {
+        "name": "Game/Sources/Game/Rules/ArgResolver/CardArgResolver.swift",
+        "start": 33,
+        "end": 46,
+        "startLoc": {
+          "line": 33,
+          "column": 6,
+          "position": 280
+        },
+        "endLoc": {
+          "line": 46,
           "column": 8,
-          "position": 361
+          "position": 395
+        }
+      },
+      "secondFile": {
+        "name": "Game/Sources/Game/Rules/ArgResolver/PlayerArgResolver.swift",
+        "start": 24,
+        "end": 38,
+        "startLoc": {
+          "line": 24,
+          "column": 4,
+          "position": 205
+        },
+        "endLoc": {
+          "line": 38,
+          "column": 10,
+          "position": 323
         }
       }
     }

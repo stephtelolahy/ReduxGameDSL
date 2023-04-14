@@ -21,3 +21,9 @@ extension Array where Element: Equatable {
         starting(with: element).dropFirst().first
     }
 }
+
+extension Collection {
+    var isNotEmpty: Bool {
+        !isEmpty
+    }
+}

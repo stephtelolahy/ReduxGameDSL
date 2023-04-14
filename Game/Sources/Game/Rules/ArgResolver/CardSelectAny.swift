@@ -14,12 +14,12 @@ struct CardSelectAny: CardArgResolverProtocol {
         let playerObj = state.player(owner)
         var options: [ArgOption] = []
 
-        if !playerObj.inPlay.cards.isEmpty {
+        if playerObj.inPlay.cards.isNotEmpty {
             let inPlayOptions = playerObj.inPlay.cards.toOptions()
             options.append(contentsOf: inPlayOptions)
         }
 
-        if !playerObj.hand.cards.isEmpty {
+        if playerObj.hand.cards.isNotEmpty {
             if chooser != owner {
                 // swiftlint:disable:next force_unwrapping
                 let randomId = playerObj.hand.cards.randomElement()!
@@ -31,7 +31,7 @@ struct CardSelectAny: CardArgResolverProtocol {
             }
         }
 
-        if options.isEmpty {
+        guard options.isNotEmpty else {
             throw GameError.playerHasNoCard(owner)
         }
 

@@ -11,7 +11,7 @@ struct PlayerDamaged: PlayerArgResolverProtocol {
             .starting(with: ctx.actor)
             .filter { state.player($0).health < state.player($0).maxHealth }
 
-        if damaged.isEmpty {
+        guard damaged.isNotEmpty else {
             throw GameError.noPlayerDamaged
         }
 

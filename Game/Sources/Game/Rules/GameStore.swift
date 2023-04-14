@@ -16,7 +16,7 @@ public func createGameStore(initial: GameState) -> Store<GameState, GameAction> 
 
 /// Dispatching queued side effects
 let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
-    guard !state.queue.isEmpty,
+    guard state.queue.isNotEmpty,
           state.chooseOne == nil else {
         return Empty()
             .eraseToAnyPublisher()
