@@ -27,8 +27,8 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                    let action = GameAction.apply(.discard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c2"]
@@ -49,8 +49,8 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                    let action = GameAction.apply(.discard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").inPlay.cards) == ["c2"]
@@ -65,8 +65,8 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.discard(player: .id("p1"), card: .id("c1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                    let action = GameAction.apply(.discard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.thrownError) == GameError.missingCard("c1")

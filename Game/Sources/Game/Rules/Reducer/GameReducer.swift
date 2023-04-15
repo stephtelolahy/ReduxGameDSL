@@ -53,7 +53,7 @@ private extension GameAction {
                 return Draw(action: self, player: player, ctx: ctx)
 
             case let .replayEffect(times, effectToRepeat):
-                return Replay(effect: effectToRepeat, times: times, ctx: ctx)
+                return Replay(times: times, effect: effectToRepeat, ctx: ctx)
 
             case let .discard(player, card):
                 return Discard(action: self, player: player, card: card, ctx: ctx)
@@ -62,7 +62,7 @@ private extension GameAction {
                 return ChooseCard(action: self, player: player, card: card, ctx: ctx)
 
             case .reveal:
-                return Reveal()
+                return Reveal(action: self)
             }
         }
     }

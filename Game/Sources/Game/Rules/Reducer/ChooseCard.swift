@@ -27,6 +27,10 @@ struct ChooseCard: GameReducerProtocol {
         }
 
         try state.choosable?.remove(cId)
+        if state.choosable?.cards.isEmpty == true {
+            state.choosable = nil
+        }
+
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
         state.completedAction = action
