@@ -23,4 +23,7 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Draw some cards from choosable zone
     case chooseCard(player: PlayerArg, card: CardArg)
+
+    /// Draw some card from discard and put to choosable
+    case reveal(count: Int)
 }

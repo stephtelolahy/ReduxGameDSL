@@ -60,6 +60,9 @@ private extension GameAction {
 
             case let .chooseCard(player, card):
                 return ChooseCard(action: self, player: player, card: card, ctx: ctx)
+
+            case let .reveal(count):
+                return Reveal(count: count)
             }
         }
     }
