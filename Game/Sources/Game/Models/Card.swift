@@ -12,6 +12,7 @@ public struct Card: Codable, Equatable {
     public var actions: [CardActionInfo] = []
 }
 
+/// Describing card action
 public struct CardActionInfo: Codable, Equatable {
     
     /// The action type

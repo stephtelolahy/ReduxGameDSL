@@ -26,12 +26,12 @@ final class RevealSpec: QuickSpec {
                 }
 
                 // When
-                let action = GameAction.apply(.reveal(count: 2), ctx: ctx)
+                let action = GameAction.apply(.reveal, ctx: ctx)
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
-                expect(result.choosable?.cards) == ["c1", "c2"]
-                expect(result.deck.top) == "c3"
+                expect(result.choosable?.cards) == ["c1"]
+                expect(result.deck.top) == "c2"
             }
         }
     }

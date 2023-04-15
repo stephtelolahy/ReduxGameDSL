@@ -6,10 +6,13 @@
 //
 
 struct Reveal: GameReducerProtocol {
-    let count: Int
-
     func reduce(state: GameState) throws -> GameState {
-        state
+        var state = state
+        if state.choosable == nil {
+            state.choosable = .init()
+        }
+        let card = try state.popDeck()
+        state.choosable?.add(card)
+        return state
     }
-
 }
