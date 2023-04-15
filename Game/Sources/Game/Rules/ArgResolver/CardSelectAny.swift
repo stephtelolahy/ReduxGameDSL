@@ -21,8 +21,7 @@ struct CardSelectAny: CardArgResolverProtocol {
 
         if playerObj.hand.cards.isNotEmpty {
             if chooser != owner {
-                // swiftlint:disable:next force_unwrapping
-                let randomId = playerObj.hand.cards.randomElement()!
+                let randomId = playerObj.hand.cards.randomElement().unsafelyUnwrapped
                 let randomOption = ArgOption(id: randomId, label: Label.randomHand)
                 options.append(randomOption)
             } else {

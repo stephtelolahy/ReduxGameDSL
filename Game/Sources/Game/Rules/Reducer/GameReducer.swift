@@ -36,6 +36,7 @@ public struct GameReducer: ReducerProtocol {
 }
 
 private extension GameAction {
+    // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
         case let .play(actor, card, target):
@@ -57,6 +58,9 @@ private extension GameAction {
 
             case let .discard(player, card):
                 return Discard(action: self, player: player, card: card, ctx: ctx)
+
+            case let .steal(player, target, card):
+                return Steal(action: self, player: player, target: target, card: card, ctx: ctx)
 
             case let .chooseCard(player, card):
                 return ChooseCard(action: self, player: player, card: card, ctx: ctx)
