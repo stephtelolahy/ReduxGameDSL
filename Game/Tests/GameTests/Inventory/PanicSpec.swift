@@ -136,7 +136,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                xcontext("having inPlay cards") {
+                context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
                         let state = GameState {
@@ -162,13 +162,13 @@ final class PanicSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         expect(sut.state.chooseOne) == [
-                            "c21": .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            "c21": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
+                            "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
                     }
                 }
 
-                xcontext("having hand and inPlay cards") {
+                context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
                         let state = GameState {
@@ -197,9 +197,10 @@ final class PanicSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         expect(sut.state.chooseOne) == [
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
-                            "c23": .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
-                            Label.randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                            "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx),
+                            "c23": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c23")), ctx: ctx),
+                            Label.randomHand: .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")),
+                                                     ctx: ctx)
                         ]
                     }
                 }
