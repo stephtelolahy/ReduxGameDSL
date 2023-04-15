@@ -12,7 +12,7 @@ import Game
 final class PanicSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        xdescribe("playing Panic") {
+        describe("playing Panic") {
             context("without target") {
                 context("no player allowed") {
                     it("should throw error") {

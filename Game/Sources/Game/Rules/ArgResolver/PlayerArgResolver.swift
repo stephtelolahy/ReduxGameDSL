@@ -56,7 +56,7 @@ private extension PlayerArg {
             return PlayerAll()
 
         case let .selectAtRangeWithCard(distance):
-            fatalError(.unexpected)
+            return PlayerSelectAtRangeWithCard(distance: distance)
             
         default:
             fatalError(.unexpected)
