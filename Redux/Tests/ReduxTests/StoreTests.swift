@@ -6,6 +6,18 @@
 //
 
 import XCTest
+import Redux
 
 final class StoreTests: XCTestCase {
+
+    func test_CreatingAStore() {
+        // Given
+        // When
+        let store: Store<String, String> = Store(initial: "",
+                                                 reducer: { state, _ in state },
+                                                 middlewares: [])
+
+        // Then
+        XCTAssertNotNil(store)
+    }
 }
