@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 15/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 
 final class StealSpec: QuickSpec {
     override func spec() {

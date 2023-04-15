@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 
 final class ChooseCardSpec: QuickSpec {
     // swiftlint:disable:next function_body_length

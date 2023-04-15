@@ -40,4 +40,5 @@ extension GameState {
         distance -= self.player(player).scope
         distance += self.player(other).mustang
         return distance
-    }}
+    }
+}

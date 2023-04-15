@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 12/04/2023.
 //
 
-enum CardList {
+public enum CardList {
 
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {

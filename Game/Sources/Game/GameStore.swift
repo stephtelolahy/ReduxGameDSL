@@ -11,7 +11,7 @@ import Combine
 public func createGameStore(initial: GameState) -> Store<GameState, GameAction> {
     Store(initial: initial,
           reducer: GameReducer().reduce,
-          middlewares: [gameLoopMiddleware])
+          middlewares: [GameLoopMiddleware().middleware])
 }
 
 /// Dispatching queued side effects
