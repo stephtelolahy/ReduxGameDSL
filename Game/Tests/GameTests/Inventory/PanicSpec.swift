@@ -124,9 +124,14 @@ final class PanicSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
-                        let chooseOne = sut.state.chooseOne.unsafelyUnwrapped
-                        expect(chooseOne.count) == 1
-                        let choice: GameAction = chooseOne[Label.randomHand].unsafelyUnwrapped
+
+                        guard let chooseOne = sut.state.chooseOne,
+                              chooseOne.count == 1,
+                              let choice = chooseOne[Label.randomHand] else {
+                            fail("Missing choice")  
+                            return
+                        }
+
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         let randomOptions: [GameAction] = [
                             .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),

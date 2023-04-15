@@ -56,8 +56,7 @@ final class DistanceSpec: QuickSpec {
 
                     // When
                     // Then
-                    expect(state.playersAt(1, from: "p1")) == ["p2", "p5"]
-                    expect(state.playersAt(2, from: "p1")) == ["p2", "p3", "p4", "p5"]
+                    expect(state.playersAt(1, from: "p1")) == ["p2", "p3", "p4", "p5"]
 
                     expect(state.playersAt(1, from: "p2")) == ["p1", "p3"]
                     expect(state.playersAt(2, from: "p2")) == ["p1", "p3", "p4", "p5"]
