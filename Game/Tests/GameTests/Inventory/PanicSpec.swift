@@ -35,7 +35,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                xcontext("some player allowed") {
+                context("some player allowed") {
                     it("should choose a target that is at range 1") {
                         // Given
                         let state = GameState {
@@ -45,13 +45,18 @@ final class PanicSpec: QuickSpec {
                                 }
                             }
                             Player("p2") {
-                                Hand {
+                                InPlay {
                                     "c2"
                                 }
                             }
                             Player("p3") {
                                 InPlay {
                                     "c3"
+                                }
+                            }
+                            Player("p4") {
+                                InPlay {
+                                    "c4"
                                 }
                             }
                         }
@@ -65,7 +70,7 @@ final class PanicSpec: QuickSpec {
                         expect(result).to(beEmpty())
                         expect(sut.state.chooseOne) == [
                             "p2": .play(actor: "p1", card: .panic, target: "p2"),
-                            "p3": .play(actor: "p1", card: .panic, target: "p3")
+                            "p4": .play(actor: "p1", card: .panic, target: "p4")
                         ]
                     }
                 }

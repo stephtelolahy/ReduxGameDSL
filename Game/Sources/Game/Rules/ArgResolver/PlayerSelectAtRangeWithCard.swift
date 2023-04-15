@@ -9,8 +9,7 @@ struct PlayerSelectAtRangeWithCard: PlayerArgResolverProtocol {
     let distance: Int
 
     func resolve(state: GameState, ctx: EffectContext) throws -> ArgOutput {
-        let others = state.playOrder
-            .filter { $0 != ctx.actor }
+        let others = state.playersAt(distance, from: ctx.actor)
             .filter { (state.player($0).hand.cards + state.player($0).inPlay.cards).isNotEmpty }
 
         guard others.isNotEmpty else {
