@@ -11,8 +11,8 @@ import Redux
 struct GamePlayView: View {
     @EnvironmentObject private var store: Store<AppState, Action>
 
-    private var state: GamePlayState {
-        GamePlayState()
+    private var state: GamePlay.State {
+        .init()
     }
 
     var body: some View {
