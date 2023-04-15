@@ -77,7 +77,7 @@ final class PanicSpec: QuickSpec {
             }
 
             context("target is other") {
-                xcontext("without cards") {
+                context("without cards") {
                     it("should throw error") {
                         // Given
                         let state = GameState {
@@ -100,7 +100,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                xcontext("having hand cards") {
+                context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
                         let state = GameState {
@@ -129,8 +129,8 @@ final class PanicSpec: QuickSpec {
                         let choice: GameAction = chooseOne[Label.randomHand].unsafelyUnwrapped
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         let randomOptions: [GameAction] = [
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
+                            .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
                         expect(randomOptions).to(contain(choice))
                     }
