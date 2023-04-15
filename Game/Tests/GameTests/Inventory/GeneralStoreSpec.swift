@@ -19,7 +19,7 @@ final class GeneralStoreSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "generalStore-9♣️"
+                                .generalStore
                             }
                         }
                         Player("p2")
@@ -33,12 +33,12 @@ final class GeneralStoreSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    var action = GameAction.play(actor: "p1", card: "generalStore-9♣️")
+                    var action = GameAction.play(actor: "p1", card: .generalStore)
                     var result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "generalStore-9♣️")
-                    expect(result) == [.success(.play(actor: "p1", card: "generalStore-9♣️")),
+                    let ctx = EffectContext(actor: "p1", card: .generalStore)
+                    expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx))]
@@ -80,7 +80,7 @@ final class GeneralStoreSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "generalStore-9♣️"
+                                .generalStore
                             }
                         }
                         Player("p2")
@@ -92,12 +92,12 @@ final class GeneralStoreSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    var action = GameAction.play(actor: "p1", card: "generalStore-9♣️")
+                    var action = GameAction.play(actor: "p1", card: .generalStore)
                     var result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "generalStore-9♣️")
-                    expect(result) == [.success(.play(actor: "p1", card: "generalStore-9♣️")),
+                    let ctx = EffectContext(actor: "p1", card: .generalStore)
+                    expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx))]
                     expect(sut.state.chooseOne) == [

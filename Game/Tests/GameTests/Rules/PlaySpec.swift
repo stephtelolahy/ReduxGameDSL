@@ -23,7 +23,7 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "beer-6♥️"
+                                .beer
                             }
                         }
                         .health(2)
@@ -32,14 +32,14 @@ final class PlaySpec: QuickSpec {
                         Player()
                     }
                     // When
-                    action = GameAction.play(actor: "p1", card: "beer-6♥️")
+                    action = GameAction.play(actor: "p1", card: .beer)
                     result = sut.reduce(state: state, action: action)
                 }
 
                 it("should discard immediately") {
                     // Then
                     expect(result.player("p1").hand.cards).to(beEmpty())
-                    expect(result.discard.top) == "beer-6♥️"
+                    expect(result.discard.top) == .beer
                 }
 
                 it("should emit completed action") {
@@ -49,7 +49,7 @@ final class PlaySpec: QuickSpec {
 
                 it("should queue side effects") {
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "beer-6♥️")
+                    let ctx = EffectContext(actor: "p1", card: .beer)
                     expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
                 }
             }
@@ -62,11 +62,11 @@ final class PlaySpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "stagecoach-9♠️")
+                    let action = GameAction.play(actor: "p1", card: .stagecoach)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .missingCard("stagecoach-9♠️")
+                    expect(result.thrownError) == .missingCard(.stagecoach)
                 }
             }
 
