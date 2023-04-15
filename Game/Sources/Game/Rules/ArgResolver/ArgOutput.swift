@@ -7,20 +7,20 @@
 
 /// Resolved argument
 enum ArgOutput {
-    /// appply effect to well known object identifiers
+    /// Appply effect to well known object identifiers
     case identified([String])
     
-    /// must choose one of given object identifiers
+    /// Must choose one of given object identifiers
     case selectable([ArgOption])
 }
 
 /// Selectable argument option
 struct ArgOption {
     
-    /// identifier
+    /// Identifier
     let id: String
     
-    /// displayed label
+    /// Displayed label
     let label: String
 }
 
