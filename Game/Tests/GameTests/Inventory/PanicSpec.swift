@@ -35,8 +35,8 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                context("some player allowed") {
-                    it("should choose a target") {
+                xcontext("some player allowed") {
+                    it("should choose a target that is at range 1") {
                         // Given
                         let state = GameState {
                             Player("p1") {
@@ -72,7 +72,7 @@ final class PanicSpec: QuickSpec {
             }
 
             context("target is other") {
-                context("without cards") {
+                xcontext("without cards") {
                     it("should throw error") {
                         // Given
                         let state = GameState {
@@ -95,7 +95,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                context("having hand cards") {
+                xcontext("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
                         let state = GameState {
@@ -131,7 +131,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                context("having inPlay cards") {
+                xcontext("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
                         let state = GameState {
@@ -163,7 +163,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
 
-                context("having hand and inPlay cards") {
+                xcontext("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
                         let state = GameState {

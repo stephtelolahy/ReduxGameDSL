@@ -12,16 +12,14 @@ struct Play: GameReducerProtocol {
     let target: String?
 
     func reduce(state: GameState) throws -> GameState {
-        guard state.players[actor] != nil else {
-            throw GameError.missingPlayer(actor)
-        }
-
         var state = state
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
         // discard immediately
+        guard state.players[actor] != nil else {
+            throw GameError.missingPlayer(actor)
+        }
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
-
         state.discard.push(card)
 
         // verify play action
@@ -31,17 +29,17 @@ struct Play: GameReducerProtocol {
             throw GameError.cardNotPlayable(card)
         }
 
+        // verify requirements
+        for playReq in playAction.playReqs {
+            try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
+        }
+
         // resolve target
         if let requiredTarget = playAction.target,
            target == nil {
             return try PlayerArgResolver().resolve(arg: requiredTarget, state: state, ctx: ctx) {
                 .play(actor: actor, card: card, target: $0)
             }
-        }
-
-        // verify requirements
-        for playReq in playAction.playReqs {
-            try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
         }
 
         // queue side effects

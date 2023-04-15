@@ -37,6 +37,10 @@ enum CardList {
             CardEffect.discard(player: .target, card: .selectAny)
                 .onPlay(target: .selectAnyWithCard)
         }
+        Card(.panic) {
+            CardEffect.steal(player: .actor, target: .target, card: .selectAny)
+                .onPlay(target: .selectAtRangeWithCard(1))
+        }
         Card(.generalStore) {
             CardEffect.group {
                 CardEffect.replay(.numPlayers) {
