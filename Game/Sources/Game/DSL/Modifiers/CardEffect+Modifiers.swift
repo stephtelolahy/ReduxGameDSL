@@ -9,6 +9,10 @@ extension CardEffect {
     static func replay(_ times: Int, @EffectBuilder content: () -> Self) -> Self {
         .replayEffect(times, content())
     }
+
+    static func group(@EffectsBuilder content: () -> [Self]) -> Self {
+        .groupEffects(content())
+    }
 }
 
 public extension CardEffect {

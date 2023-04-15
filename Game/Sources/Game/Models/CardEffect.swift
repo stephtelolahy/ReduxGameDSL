@@ -26,4 +26,7 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Draw a card from discard and put to choosable
     case reveal
+
+    /// Dispatch effects sequentially
+    case groupEffects([CardEffect])
 }

@@ -22,4 +22,7 @@ public enum PlayerArg: Codable, Equatable {
 
     /// select any other player with card
     case selectAnyWithCard
+
+    /// all players
+    case all
 }

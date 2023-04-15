@@ -37,6 +37,16 @@ enum CardList {
             CardEffect.discard(player: .target, card: .selectAny)
                 .onPlay(target: .selectAnyWithCard)
         }
+        Card(.generalStore) {
+            CardEffect.group {
+                // TODO: use numberArg
+                CardEffect.replay(3) {
+                    CardEffect.reveal
+                }
+                CardEffect.chooseCard(player: .all, card: .selectChoosable)
+            }
+            .onPlay()
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

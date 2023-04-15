@@ -63,6 +63,9 @@ private extension GameAction {
 
             case .reveal:
                 return Reveal(action: self)
+
+            case let .groupEffects(effects):
+                return GroupEffects(effects: effects, ctx: ctx)
             }
         }
     }

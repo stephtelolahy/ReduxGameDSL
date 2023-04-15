@@ -51,6 +51,9 @@ private extension PlayerArg {
             
         case .selectAnyWithCard:
             return PlayerSelectAnyWithCard()
+
+        case .all:
+            return PlayerAll()
             
         default:
             fatalError(.unexpected)
