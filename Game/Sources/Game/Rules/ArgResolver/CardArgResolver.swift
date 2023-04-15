@@ -32,12 +32,14 @@ struct CardArgResolver {
         var state = state
         let resolved = try resolve(arg: arg, state: state, ctx: ctx, chooser: chooser, owner: owner)
         switch resolved {
-        case let .identified(pIds):
-            let children = pIds.map { copy($0) }
+        case let .identified(cIds):
+            let children = cIds.map { copy($0) }
             state.queue.insert(contentsOf: children, at: 0)
 
-        case let .selectable(pIdOptions):
-            state.chooseOne = pIdOptions.map { copy($0.id) }
+        case let .selectable(cIdOptions):
+            state.chooseOne = cIdOptions.reduce(into: [String: GameAction]()) {
+                $0[$1.label] = copy($1.id)
+            }
         }
         return state
     }

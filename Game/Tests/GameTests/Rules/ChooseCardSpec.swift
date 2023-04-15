@@ -33,8 +33,8 @@ final class ChooseCardSpec: QuickSpec {
                         // Then
                         expect(result.completedAction) == nil
                         expect(result.chooseOne) == [
-                            .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
-                            .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
+                            "c1": .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
+                            "c2": .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
                         ]
                     }
                 }

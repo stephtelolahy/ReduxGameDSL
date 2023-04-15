@@ -18,8 +18,8 @@ final class ChooseOneSpec: QuickSpec {
             beforeEach {
                 let state = GameState {
                     ChooseOne {
-                        GameAction.play(actor: "p1", card: "c1")
-                        GameAction.play(actor: "p1", card: "c2")
+                        ["c1": GameAction.play(actor: "p1", card: "c1"),
+                         "c2": GameAction.play(actor: "p1", card: "c2")]
                     }
                 }
                 sut = createGameStore(initial: state)

@@ -64,8 +64,8 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result).to(beEmpty())
                         expect(sut.state.chooseOne) == [
-                            .play(actor: "p1", card: "catBalou-9♦️", target: "p2"),
-                            .play(actor: "p1", card: "catBalou-9♦️", target: "p3")
+                            "p2": .play(actor: "p1", card: "catBalou-9♦️", target: "p2"),
+                            "p3": .play(actor: "p1", card: "catBalou-9♦️", target: "p3")
                         ]
                     }
                 }
@@ -97,7 +97,6 @@ final class CatBalouSpec: QuickSpec {
 
                 context("having hand cards") {
                     it("should choose one random hand card") {
-                        // TODO: random hand should be hidden as a choice
                         // Given
                         let state = GameState {
                             Player("p1") {
@@ -120,8 +119,9 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
-                        expect(sut.state.chooseOne?.count) == 1
-                        let choice: GameAction = sut.state.chooseOne![0]
+                        let chooseOne = sut.state.chooseOne.unsafelyUnwrapped
+                        expect(chooseOne.count) == 1
+                        let choice: GameAction = chooseOne[Label.randomHand].unsafelyUnwrapped
                         let ctx = EffectContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         let randomOptions: [GameAction] = [
                             .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
@@ -157,8 +157,8 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         expect(sut.state.chooseOne) == [
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            "c21": .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
+                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
                         ]
                     }
                 }
@@ -192,9 +192,9 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: "catBalou-9♦️", target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: "catBalou-9♦️", target: "p2")
                         expect(sut.state.chooseOne) == [
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
+                            "c23": .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
+                            Label.randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
                         ]
                     }
                 }

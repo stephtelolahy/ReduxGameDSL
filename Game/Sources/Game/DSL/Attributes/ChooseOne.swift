@@ -6,9 +6,9 @@
 //
 
 public struct ChooseOne: Attribute {
-    let value: [GameAction]
+    let value: [String: GameAction]
 
-    public init(@GameActionBuilder _ content: () -> [GameAction]) {
+    public init(_ content: () -> [String: GameAction]) {
         self.value = content()
     }
 }

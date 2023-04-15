@@ -24,15 +24,6 @@ struct ArgOption {
     let label: String
 }
 
-enum Label {
-    /// Random hand card label
-    /// displayed when choosing random hand card
-    static let randomHand = "randomHand"
-
-    /// Choose to pass when asked to do an action
-    static let pass = "pass"
-}
-
 extension Array where Element == String {
     func toOptions() -> [ArgOption] {
         map { ArgOption(id: $0, label: $0) }
