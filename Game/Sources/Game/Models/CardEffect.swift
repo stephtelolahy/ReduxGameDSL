@@ -19,7 +19,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case discard(player: PlayerArg, card: CardArg)
 
     /// Repeat an effect
-    case replayEffect(Int, CardEffect)
+    case replayEffect(NumArg, CardEffect)
 
     /// Draw some cards from choosable zone
     case chooseCard(player: PlayerArg, card: CardArg)

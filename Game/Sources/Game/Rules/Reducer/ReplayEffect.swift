@@ -1,21 +1,22 @@
 //
-//  Replay.swift
+//  ReplayEffect.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct Replay: GameReducerProtocol {
-    let times: Int
+struct ReplayEffect: GameReducerProtocol {
+    let times: NumArg
     let effect: CardEffect
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        guard times > 0 else {
+        let number = try NumArgResolver().resolve(arg: times, state: state, ctx: ctx)
+        guard number > 0 else {
             return state
         }
 
-        let children = (0..<times).map { _ in
+        let children = (0..<number).map { _ in
             effect.withCtx(ctx)
         }
 

@@ -39,8 +39,7 @@ enum CardList {
         }
         Card(.generalStore) {
             CardEffect.group {
-                // TODO: use numberArg
-                CardEffect.replay(3) {
+                CardEffect.replay(.numPlayers) {
                     CardEffect.reveal
                 }
                 CardEffect.chooseCard(player: .all, card: .selectChoosable)

@@ -6,5 +6,11 @@
 //
 
 /// Number argument
-public enum NumArg {
+public enum NumArg: Codable, Equatable {
+
+    /// Exact number
+    case numExact(Int)
+
+    /// Number of active players
+    case numPlayers
 }
