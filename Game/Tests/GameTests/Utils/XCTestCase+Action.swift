@@ -29,7 +29,7 @@ extension XCTestCase {
                 result.append(.failure(error))
             }
 
-            if state.queue.isEmpty {
+            if state.queue.isEmpty || state.chooseOne != nil {
                 expectation.fulfill()
             }
         }

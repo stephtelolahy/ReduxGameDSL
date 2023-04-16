@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 
 final class DrawSpec: QuickSpec {
     override func spec() {
@@ -27,8 +27,8 @@ final class DrawSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.draw(player: .id("p1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                    let action = GameAction.apply(.draw(player: .id("p1")), ctx: ctx)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c1"]
@@ -49,8 +49,8 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.draw(player: .id("p1"))
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.draw(player: .id("p1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.deck.top) == nil
@@ -67,8 +67,8 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.draw(player: .id("p1"))
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.draw(player: .id("p1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.thrownError) == GameError.stackIsEmpty

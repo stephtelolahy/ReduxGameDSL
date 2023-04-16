@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 
 final class HealSpec: QuickSpec {
     override func spec() {
@@ -26,8 +26,8 @@ final class HealSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.heal(1, player: .id("p1"))
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.heal(1, player: .id("p1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").health) == 3
@@ -44,8 +44,8 @@ final class HealSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.heal(2, player: .id("p1"))
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.heal(2, player: .id("p1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").health) == 4
@@ -62,8 +62,8 @@ final class HealSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.heal(2, player: .id("p1"))
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.heal(2, player: .id("p1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").health) == 4
@@ -81,8 +81,8 @@ final class HealSpec: QuickSpec {
                     }
 
                     // When
-                    let effect = CardEffect.heal(1, player: .id("p1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                    let action = GameAction.apply(.heal(1, player: .id("p1")), ctx: ctx)
+                    let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.thrownError) == GameError.playerAlreadyMaxHealth("p1")

@@ -18,9 +18,18 @@ public indirect enum CardEffect: Codable, Equatable {
     /// Actor is the card chooser
     case discard(player: PlayerArg, card: CardArg)
 
+    /// Draw card from other player
+    case steal(player: PlayerArg, target: PlayerArg, card: CardArg)
+
     /// Repeat an effect
-    case replayEffect(Int, CardEffect)
+    case replayEffect(NumArg, CardEffect)
 
     /// Draw some cards from choosable zone
     case chooseCard(player: PlayerArg, card: CardArg)
+
+    /// Draw a card from discard and put to choosable
+    case reveal
+
+    /// Dispatch effects sequentially
+    case groupEffects([CardEffect])
 }

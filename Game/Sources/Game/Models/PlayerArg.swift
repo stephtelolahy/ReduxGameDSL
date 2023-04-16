@@ -8,18 +8,24 @@
 /// Player argument
 public enum PlayerArg: Codable, Equatable {
 
-    /// player identified by
+    /// The player identified by
     case id(String)
 
-    /// who is playing the card
+    /// Who is playing the card
     case actor
 
-    /// all damaged players
+    /// All damaged players
     case damaged
 
-    /// target player
+    /// Target player that was previously selected
     case target
 
-    /// select any other player with card
+    /// Select any other player, having card
     case selectAnyWithCard
+
+    /// Select any other player at distance of X , having card
+    case selectAtRangeWithCard(Int)
+
+    /// All players
+    case all
 }

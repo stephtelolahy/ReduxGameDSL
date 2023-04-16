@@ -17,7 +17,7 @@ final class StagecoachSpec: QuickSpec {
                 let state = GameState {
                     Player("p1") {
                         Hand {
-                            "stagecoach-9♠️"
+                            .stagecoach
                         }
                     }
                     Deck {
@@ -28,12 +28,12 @@ final class StagecoachSpec: QuickSpec {
                 let sut = createGameStore(initial: state)
 
                 // When
-                let action = GameAction.play(actor: "p1", card: "stagecoach-9♠️")
+                let action = GameAction.play(actor: "p1", card: .stagecoach)
                 let result = self.awaitAction(action, store: sut)
 
                 // Then
-                let ctx = EffectContext(actor: "p1", card: "stagecoach-9♠️")
-                expect(result) == [.success(.play(actor: "p1", card: "stagecoach-9♠️")),
+                let ctx = EffectContext(actor: "p1", card: .stagecoach)
+                expect(result) == [.success(.play(actor: "p1", card: .stagecoach)),
                                    .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
                                    .success(.apply(.draw(player: .id("p1")), ctx: ctx))]
             }

@@ -41,3 +41,15 @@ Redux architecture is meant to protect changes in an application’s state. It f
 - New state can be calculated only by reducer which is a pure function.
 - Store notifies subscribers by broadcasting new state.
 - It is best to separate each responsibility into different middleware. You can then easily enable or disable some features.
+
+
+### Code duplication
+Detect code duplication with [Periphery](https://github.com/kucherenko/jscpd/tree/master/packages/jscpd#html)
+
+Run the following command on terminal from the project root
+
+```
+npx jscpd --reporters html ./Game/Sources/Game/
+
+open ./report/html/index.html
+```

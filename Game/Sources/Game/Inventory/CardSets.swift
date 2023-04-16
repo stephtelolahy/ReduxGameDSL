@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 12/04/2023.
 //
 
-enum CardSets {
+public enum CardSets {
     
     static let bang: [String: [String]] = [
         .barrel: ["Q♠️", "K♠️"],

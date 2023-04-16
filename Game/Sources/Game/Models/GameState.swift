@@ -36,7 +36,7 @@ public struct GameState: Codable, Equatable {
     public var queue: [GameAction] = []
 
     /// Pending actions to choose before continuing effect resolving
-    public var chooseOne: [GameAction]?
+    public var chooseOne: [String: GameAction]?
 
     /// all cards reference
     public var cardRef: [String: Card] {

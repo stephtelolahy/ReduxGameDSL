@@ -18,7 +18,7 @@ final class SaloonSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "saloon-5♥️"
+                                .saloon
                             }
                         }
                         .health(4)
@@ -33,12 +33,12 @@ final class SaloonSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "saloon-5♥️")
+                    let action = GameAction.play(actor: "p1", card: .saloon)
                     let result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "saloon-5♥️")
-                    expect(result) == [.success(.play(actor: "p1", card: "saloon-5♥️")),
+                    let ctx = EffectContext(actor: "p1", card: .saloon)
+                    expect(result) == [.success(.play(actor: "p1", card: .saloon)),
                                        .success(.apply(.heal(1, player: .id("p2")), ctx: ctx)),
                                        .success(.apply(.heal(1, player: .id("p3")), ctx: ctx))]
                 }
@@ -50,7 +50,7 @@ final class SaloonSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "saloon-5♥️"
+                                .saloon
                             }
                         }
                         .health(4)
@@ -62,7 +62,7 @@ final class SaloonSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "saloon-5♥️")
+                    let action = GameAction.play(actor: "p1", card: .saloon)
                     let result = self.awaitAction(action, store: sut)
 
                     // Then

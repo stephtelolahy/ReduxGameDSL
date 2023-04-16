@@ -18,7 +18,7 @@ final class BeerSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "beer-6♥️"
+                                .beer
                             }
                         }
                         .health(2)
@@ -29,12 +29,12 @@ final class BeerSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
+                    let action = GameAction.play(actor: "p1", card: .beer)
                     let result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "beer-6♥️")
-                    expect(result) == [.success(.play(actor: "p1", card: "beer-6♥️")),
+                    let ctx = EffectContext(actor: "p1", card: .beer)
+                    expect(result) == [.success(.play(actor: "p1", card: .beer)),
                                        .success(.apply(.heal(1, player: .id("p1")), ctx: ctx))]
                 }
             }
@@ -45,7 +45,7 @@ final class BeerSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "beer-6♥️"
+                                .beer
                             }
                         }
                         .health(3)
@@ -56,7 +56,7 @@ final class BeerSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
+                    let action = GameAction.play(actor: "p1", card: .beer)
                     let result = self.awaitAction(action, store: sut)
 
                     // Then
@@ -70,7 +70,7 @@ final class BeerSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "beer-6♥️"
+                                .beer
                             }
                         }
                         .health(2)
@@ -80,7 +80,7 @@ final class BeerSpec: QuickSpec {
                     let sut = createGameStore(initial: state)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "beer-6♥️")
+                    let action = GameAction.play(actor: "p1", card: .beer)
                     let result = self.awaitAction(action, store: sut)
 
                     // Then

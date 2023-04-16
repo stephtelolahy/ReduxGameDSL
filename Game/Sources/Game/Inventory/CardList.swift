@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 12/04/2023.
 //
 
-enum CardList {
+public enum CardList {
 
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
@@ -36,6 +36,19 @@ enum CardList {
         Card(.catBalou) {
             CardEffect.discard(player: .target, card: .selectAny)
                 .onPlay(target: .selectAnyWithCard)
+        }
+        Card(.panic) {
+            CardEffect.steal(player: .actor, target: .target, card: .selectAny)
+                .onPlay(target: .selectAtRangeWithCard(1))
+        }
+        Card(.generalStore) {
+            CardEffect.group {
+                CardEffect.replay(.numPlayers) {
+                    CardEffect.reveal
+                }
+                CardEffect.chooseCard(player: .all, card: .selectChoosable)
+            }
+            .onPlay()
         }
     }
 

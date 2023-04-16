@@ -12,32 +12,34 @@ public struct Card: Codable, Equatable {
     public var actions: [CardActionInfo] = []
 }
 
+/// Describing card action
 public struct CardActionInfo: Codable, Equatable {
     
     /// The action type
     public let actionType: CardActionType
 
-    /// The target of the action
+    /// The requirements to match before activating the action
+    public var playReqs: [PlayReq] = []
+
+    /// The target to choose before performing the action
     public var target: PlayerArg?
     
-    /// Side effect
+    /// The side effect after performing the action
     public let effect: CardEffect
-    
-    /// Requirements
-    public var playReqs: [PlayReq] = []
 }
 
+/// Describing how to apply card action
 public enum CardActionType: Codable, Equatable {
     
-    /// Card is playable when your turn and requirments are met
+    /// Discard immediately and apply side effect
     case play
     
-    /// Card is equipement when your turn and requirments are met
+    /// Use card as self equipment
     case equip
     
-    /// Card is handicap when your turn and requirments are met
+    /// Use card as handicap againts another player
     case handicap
     
-    /// Some side effects are applyed as soon as requirements are met
+    /// Apply side effects immediately, when an event occurred
     case triggered
 }

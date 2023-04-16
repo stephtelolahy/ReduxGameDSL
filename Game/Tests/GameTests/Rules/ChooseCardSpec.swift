@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 
 final class ChooseCardSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -27,14 +27,14 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.chooseCard(player: .id("p1"), card: .selectChoosable), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.completedAction) == nil
                         expect(result.chooseOne) == [
-                            .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
-                            .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
+                            "c1": .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
+                            "c2": .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
                         ]
                     }
                 }
@@ -49,8 +49,8 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.chooseCard(player: .id("p1"), card: .selectChoosable), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.completedAction) == nil
@@ -67,8 +67,8 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
 
-                        let effect = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable)
-                        let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                        let action = GameAction.apply(.chooseCard(player: .id("p1"), card: .selectChoosable), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.thrownError) == GameError.noChoosableCard
@@ -76,27 +76,48 @@ final class ChooseCardSpec: QuickSpec {
                 }
             }
 
-            context("specified id") {
-                it("should draw that card") {
-                    // Given
-                    let state = GameState {
-                        Player("p1")
-                        Choosable {
-                            "c1"
-                            "c2"
+            context("specified") {
+                context("multiple cards remaining") {
+                    it("should draw that card") {
+                        // Given
+                        let state = GameState {
+                            Player("p1")
+                            Choosable {
+                                "c1"
+                                "c2"
+                            }
                         }
+
+                        // When
+                        let action = GameAction.apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
+
+                        // Then
+                        expect(result.completedAction) == action
+                        expect(result.player("p1").hand.cards) == ["c1"]
+                        expect(result.choosable?.cards) == ["c2"]
                     }
+                }
 
-                    // When
-                    let effect = CardEffect.chooseCard(player: .id("p1"), card: .id("c1"))
-                    let result = sut.reduce(state: state, action: .apply(effect, ctx: ctx))
+                context("last card") {
+                    it("should draw that card and delete card location") {
+                        // Given
+                        let state = GameState {
+                            Player("p1")
+                            Choosable {
+                                "c1"
+                            }
+                        }
 
-                    // Then
-                    expect(result.completedAction) == .apply(effect, ctx: ctx)
-                    expect(result.player("p1").hand.cards) == ["c1"]
-                    expect(result.choosable?.cards) == ["c2"]
-                    expect(result.queue).to(beEmpty())
-                    expect(result.chooseOne) == nil
+                        // When
+                        let action = GameAction.apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx)
+                        let result = sut.reduce(state: state, action: action)
+
+                        // Then
+                        expect(result.completedAction) == action
+                        expect(result.player("p1").hand.cards) == ["c1"]
+                        expect(result.choosable) == nil
+                    }
                 }
             }
         }
