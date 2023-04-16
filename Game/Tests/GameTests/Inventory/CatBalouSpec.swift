@@ -209,6 +209,12 @@ final class CatBalouSpec: QuickSpec {
                     // When
                     // Then
                 }
+
+                it("should not choose hand cards") {
+                    // Given
+                    // When
+                    // Then
+                }
             }
         }
     }
