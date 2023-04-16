@@ -69,6 +69,9 @@ private extension GameAction {
             case .reveal:
                 return Reveal(action: self)
 
+            case let .forceDiscard(player, card, otherwise):
+                return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx)
+
             case let .groupEffects(effects):
                 return GroupEffects(effects: effects, ctx: ctx)
             }

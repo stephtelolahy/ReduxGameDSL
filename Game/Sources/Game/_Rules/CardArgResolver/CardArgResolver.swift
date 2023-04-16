@@ -6,17 +6,17 @@
 //
 
 protocol CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> ArgOutput
+    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput
 }
 
 struct CardArgResolver {
-    private func resolve(
+    func resolve(
         arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
         owner: String?
-    ) throws -> ArgOutput {
+    ) throws -> CardArgOutput {
         try arg.resolver().resolve(state: state, ctx: ctx, chooser: chooser, owner: owner)
     }
 
@@ -53,6 +53,9 @@ private extension CardArg {
 
         case .selectChoosable:
             return CardSelectChoosable()
+
+        case let .selectHandNamed(name):
+            return CardSelectHandNamed(name: name)
 
         default:
             fatalError(.unexpected)

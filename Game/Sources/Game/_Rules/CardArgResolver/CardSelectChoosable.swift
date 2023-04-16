@@ -6,7 +6,7 @@
 //
 
 struct CardSelectChoosable: CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> ArgOutput {
+    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput {
         guard let cards = state.choosable?.cards,
               cards.isNotEmpty else {
             throw GameError.noChoosableCard
@@ -15,7 +15,7 @@ struct CardSelectChoosable: CardArgResolverProtocol {
         if cards.count == 1 {
             return .identified([cards[0]])
         } else {
-            return .selectable(cards.toOptions())
+            return .selectable(cards.toCardOptions())
         }
     }
 }

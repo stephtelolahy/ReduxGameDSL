@@ -18,7 +18,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case draw(player: PlayerArg)
 
     /// Discard a player's card to discard pile
-    /// Actor is the card chooser
+    /// The card chooser is current actor
     case discard(player: PlayerArg, card: CardArg)
 
     /// Draw card from other player
@@ -29,6 +29,10 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Draw a card from discard and put to choosable
     case reveal
+
+    /// Player must choose to discard one of his card.
+    /// If cannot, then apply some effect
+    case forceDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect)
 
     /// Repeat an effect
     case replayEffect(NumArg, CardEffect)
