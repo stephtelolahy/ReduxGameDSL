@@ -9,7 +9,7 @@ struct CardSelectChoosable: CardArgResolverProtocol {
     func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput {
         guard let cards = state.choosable?.cards,
               cards.isNotEmpty else {
-            throw GameError.noChoosableCard
+            throw GameError.choosableIsEmpty
         }
 
         if cards.count == 1 {

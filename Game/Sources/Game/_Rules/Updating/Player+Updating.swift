@@ -12,7 +12,7 @@ extension Player {
         } else if inPlay.contains(card) {
             try inPlay.remove(card)
         } else {
-            throw GameError.missingCard(card)
+            throw GameError.cardNotFound(card)
         }
     }
 }

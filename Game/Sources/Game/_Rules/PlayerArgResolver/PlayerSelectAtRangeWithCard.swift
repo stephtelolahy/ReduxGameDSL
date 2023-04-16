@@ -13,7 +13,7 @@ struct PlayerSelectAtRangeWithCard: PlayerArgResolverProtocol {
             .filter { (state.player($0).hand.cards + state.player($0).inPlay.cards).isNotEmpty }
 
         guard others.isNotEmpty else {
-            throw GameError.noPlayerAllowed
+            throw GameError.noPlayerWithCard
         }
 
         return .selectable(others)

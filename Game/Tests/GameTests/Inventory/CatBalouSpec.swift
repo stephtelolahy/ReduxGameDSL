@@ -31,7 +31,7 @@ final class CatBalouSpec: QuickSpec {
                         let result = self.awaitAction(action, store: sut)
 
                         // Then
-                        expect(result) == [.failure(GameError.noPlayerAllowed)]
+                        expect(result) == [.failure(GameError.noPlayerWithCard)]
                     }
                 }
 

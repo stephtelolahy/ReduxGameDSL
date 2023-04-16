@@ -71,7 +71,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.thrownError) == GameError.noChoosableCard
+                        expect(result.thrownError) == GameError.choosableIsEmpty
                     }
                 }
             }

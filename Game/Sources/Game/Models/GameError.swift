@@ -8,45 +8,50 @@
 /// Game errors
 public enum GameError: Error, Codable, Equatable {
 
+    // MARK: - Player error
+
     /// Expected a player with given identifier
-    case missingPlayer(String)
-
-    /// Expected a card with given identifier
-    case missingCard(String)
-
-    /// Expected cardStack not empty
-    case stackIsEmpty
-
-    /// Expected players count to be leat X
-    case playersMustBeAtLeast(Int)
+    case playerNotFound(String)
 
     /// Expected player to be damaged
     case playerAlreadyMaxHealth(String)
 
-    /// No player allowed to apply effect
-    case noPlayerAllowed
-
     /// Expected player to have cards
     case playerHasNoCard(String)
 
-    /// Expected player to have hand cards
-    case playerHasNoHandCard(String)
+    // MARK: - Card error
 
-    /// Expected player to have cards matching pattern
-    case playerHasNoMatchingCard(String)
+    /// Expected a card with given identifier
+    case cardNotFound(String)
 
     /// Expected card to have onPlay effect
-    case cardNotPlayable(String)
+    case cardIsNotPlayable(String)
+
+    // MARK: - Game error
+
+    /// Expected players count to be leat X
+    case playersMustBeAtLeast(Int)
+
+    /// Expected to get some choosable cards
+    case choosableIsEmpty
+
+    /// No player having card
+    case noPlayerWithCard
 
     /// Expected some player damaged
     case noPlayerDamaged
 
-    /// Expected a target player
+    /// Expected a target player in effect context
     case missingTarget
 
-    /// Expected to get some choosable cards
-    case noChoosableCard
+    /// Expected to play below limit per turn
+    case reachedBangLimitPerTurn
+
+    /// Expected cardStack not empty
+    // TODO: remove
+    case stackIsEmpty
 
     /// Any unexpected error
+    // TODO: rename
     case unexpected
 }

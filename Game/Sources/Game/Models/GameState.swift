@@ -38,6 +38,9 @@ public struct GameState: Codable, Equatable {
     /// Pending actions to choose before continuing effect resolving
     public var chooseOne: [String: GameAction]?
 
+    /// Number of times playing bang during a turn
+    public var counterBang: Int = 0
+
     /// all cards reference
     public var cardRef: [String: Card] {
         CardList.cardRef
@@ -51,7 +54,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players[id] else {
-            fatalError(.missingPlayer(id))
+            fatalError(.playerNotFound(id))
         }
         return player
     }

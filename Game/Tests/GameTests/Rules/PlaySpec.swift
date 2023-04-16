@@ -66,7 +66,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .missingCard(.stagecoach)
+                    expect(result.thrownError) == .cardNotFound(.stagecoach)
                 }
             }
 
@@ -80,7 +80,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .missingPlayer("p1")
+                    expect(result.thrownError) == .playerNotFound("p1")
                 }
             }
 
@@ -100,7 +100,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardNotPlayable(.missed)
+                    expect(result.thrownError) == .cardIsNotPlayable(.missed)
                 }
             }
         }
