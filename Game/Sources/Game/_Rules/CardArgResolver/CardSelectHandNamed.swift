@@ -10,7 +10,7 @@ struct CardSelectHandNamed: CardArgResolverProtocol {
 
     func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput {
         guard let owner else {
-            fatalError(.unexpected)
+            fatalError(.missingCardOwner)
         }
 
         let playerObj = state.player(owner)

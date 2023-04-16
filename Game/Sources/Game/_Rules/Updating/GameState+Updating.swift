@@ -8,8 +8,7 @@
 extension GameState {
     /// Remove top deck card by reseting deck if empty
     mutating func popDeck() throws -> String {
-        // swiftlint:disable:next empty_count
-        if deck.count == 0 {
+        if deck.cards.isEmpty {
             guard discard.count >= 2 else {
                 throw GameError.deckIsEmpty
             }
@@ -18,8 +17,8 @@ extension GameState {
             discard = CardStack(cards: Array(cards.prefix(1)))
             deck = CardStack(cards: Array(cards.dropFirst()).shuffled())
         }
-        
-        return deck.cards.removeFirst()
+
+        return deck.pop()
     }
 
     /// Getting distance between players

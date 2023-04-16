@@ -29,8 +29,11 @@ public enum GameError: Error, Codable, Equatable {
 
     // MARK: - Context error
 
-    /// Expected a target player in effect context
+    /// Expected a targeted player
     case missingTarget
+
+    /// Expected a card owner
+    case missingCardOwner
 
     // MARK: - Game error
 
