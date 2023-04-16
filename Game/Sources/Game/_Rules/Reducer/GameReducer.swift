@@ -48,6 +48,9 @@ private extension GameAction {
             case let .heal(value, player):
                 return Heal(action: self, player: player, value: value, ctx: ctx)
 
+            case let .damage(value, player):
+                return Damage(action: self, player: player, value: value, ctx: ctx)
+
             case let .draw(player):
                 return Draw(action: self, player: player, ctx: ctx)
 
