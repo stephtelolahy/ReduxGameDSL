@@ -10,18 +10,18 @@ import Quick
 import Nimble
 
 final class BangSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing bang") {
             context("reached limit per turn") {
-                // Given
                 it("should throw error") {
+                    // Given
                     let state = GameState {
                         Player("p1") {
                             Hand {
                                 .bang
                             }
                         }
-
                     }.counterBang(1)
 
                     let sut = createGameStore(initial: state)
@@ -49,7 +49,7 @@ final class BangSpec: QuickSpec {
                         let sut = createGameStore(initial: state)
 
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, store: sut)
 
                         // Then
@@ -73,20 +73,20 @@ final class BangSpec: QuickSpec {
                         let sut = createGameStore(initial: state)
 
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, store: sut)
 
                         // Then
                         expect(result).to(beEmpty())
                         expect(sut.state.chooseOne) == [
-                            "p2": .play(actor: "p1", card: .catBalou, target: "p2"),
-                            "p4": .play(actor: "p1", card: .catBalou, target: "p4")
+                            "p2": .play(actor: "p1", card: .bang, target: "p2"),
+                            "p4": .play(actor: "p1", card: .bang, target: "p4")
                         ]
                     }
                 }
             }
 
-            context("with target") {
+            xcontext("with target") {
                 context("having missed") {
                     it("should ask to counter") {
                     }

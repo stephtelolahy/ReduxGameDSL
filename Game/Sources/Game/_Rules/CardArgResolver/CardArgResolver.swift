@@ -48,6 +48,9 @@ struct CardArgResolver {
 private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
+        case .id:
+            fatalError(.unexpected)
+
         case .selectAny:
             return CardSelectAny()
 
@@ -56,9 +59,6 @@ private extension CardArg {
 
         case let .selectHandNamed(name):
             return CardSelectHandNamed(name: name)
-
-        default:
-            fatalError(.unexpected)
         }
     }
 }

@@ -47,11 +47,9 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected to play below limit per turn
     case reachedBangLimitPerTurn
 
-    /// Expected cardStack not empty
-    // TODO: remove
-    case stackIsEmpty
+    /// Expected non empty deck
+    case deckIsEmpty
 
     /// Any unexpected error
-    // TODO: rename
     case unexpected
 }

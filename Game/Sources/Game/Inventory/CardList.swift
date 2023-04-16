@@ -11,7 +11,7 @@ public enum CardList {
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .onPlay {
-                    PlayReq.isActorDamaged
+                    PlayReq.isDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }

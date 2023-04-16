@@ -40,6 +40,9 @@ struct PlayerArgResolver {
 private extension PlayerArg {
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
+        case .id:
+            fatalError(.unexpected)
+
         case .actor:
             return PlayerActor()
             
@@ -57,9 +60,6 @@ private extension PlayerArg {
 
         case let .selectAtRangeWithCard(distance):
             return PlayerSelectAtRangeWithCard(distance: distance)
-            
-        default:
-            fatalError(.unexpected)
         }
     }
 }
