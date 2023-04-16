@@ -27,6 +27,11 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected card to have onPlay effect
     case cardIsNotPlayable(String)
 
+    // MARK: - Context error
+
+    /// Expected a target player in effect context
+    case missingTarget
+
     // MARK: - Game error
 
     /// Expected players count to be leat X
@@ -40,9 +45,6 @@ public enum GameError: Error, Codable, Equatable {
 
     /// Expected some player damaged
     case noPlayerDamaged
-
-    /// Expected a target player in effect context
-    case missingTarget
 
     /// Expected to play below limit per turn
     case reachedBangLimitPerTurn
