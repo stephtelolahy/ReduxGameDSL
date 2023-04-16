@@ -90,17 +90,17 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "c1"
+                                .missed
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "c1")
+                    let action = GameAction.play(actor: "p1", card: .missed)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardNotPlayable("c1")
+                    expect(result.thrownError) == .cardNotPlayable(.missed)
                 }
             }
         }
