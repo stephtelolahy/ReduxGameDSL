@@ -8,7 +8,7 @@
 extension String {
 
     /// Extract card name from cardId
-    func extractName() -> String? {
-        split(separator: "-").first.map(String.init)
+    func extractName() -> String {
+        split(separator: "-").first.map(String.init) ?? self
     }
 }
