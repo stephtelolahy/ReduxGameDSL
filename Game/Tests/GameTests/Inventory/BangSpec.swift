@@ -22,7 +22,7 @@ final class BangSpec: QuickSpec {
                                 .bang
                             }
                         }
-                    }.counterBang(1)
+                    }.counters([.bang: 1])
 
                     let sut = createGameStore(initial: state)
 

@@ -171,7 +171,7 @@ final class GameSpec: QuickSpec {
                     ]
                   },
                   "queue": [],
-                  "counterBang": 0
+                  "counters": {}
                 }
                 """
                 let jsonData = JSON.data(using: .utf8)!

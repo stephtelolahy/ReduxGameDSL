@@ -32,8 +32,8 @@ public extension GameState {
         copy { $0.turn = value }
     }
 
-    func counterBang(_ value: Int) -> Self {
-        copy { $0.counterBang = value }
+    func counters(_ value: [String: Int]) -> Self {
+        copy { $0.counters = value }
     }
 }
 

@@ -26,6 +26,9 @@ private extension PlayReq {
 
         case .isAnyDamaged:
             return IsAnyDamaged()
+
+        case let .isTimesPerTurn(max):
+            return IsTimesPerTurn(max: max)
         }
     }
 }

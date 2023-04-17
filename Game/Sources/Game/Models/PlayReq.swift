@@ -16,4 +16,7 @@ public enum PlayReq: Codable, Equatable {
 
     /// At least one player must be damaged
     case isAnyDamaged
+
+    /// The maximum times per turn a card may be played is X
+    case isTimesPerTurn(Int)
 }
