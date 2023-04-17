@@ -45,6 +45,9 @@ final class BangSpec: QuickSpec {
                                     .bang
                                 }
                             }
+                            Player("p2").mustang(1)
+                            Player("p3")
+                            Player("p4").mustang(1)
                         }
                         let sut = createGameStore(initial: state)
 
@@ -53,7 +56,7 @@ final class BangSpec: QuickSpec {
                         let result = self.awaitAction(action, store: sut)
 
                         // Then
-                        expect(result) == [.failure(GameError.noPlayerWithCard)]
+                        expect(result) == [.failure(GameError.noPlayerAtRange(1))]
                     }
                 }
 

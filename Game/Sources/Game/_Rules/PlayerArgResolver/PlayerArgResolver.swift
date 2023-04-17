@@ -62,7 +62,10 @@ private extension PlayerArg {
             return PlayerSelectAtRangeWithCard(distance: distance)
 
         case .selectReachable:
-            return SelectReachable()
+            return PlayerSelectReachable()
+
+        case let .selectAt(distance):
+            return PlayerSelectAt(distance: distance)
         }
     }
 }

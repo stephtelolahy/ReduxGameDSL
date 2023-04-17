@@ -49,6 +49,9 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected some player damaged
     case noPlayerDamaged
 
+    /// Expected some player at range X
+    case noPlayerAtRange(Int)
+
     /// Expected to play a card below limit per turn
     case reachedLimitPerTurn(Int)
 

@@ -29,6 +29,9 @@ public enum PlayerArg: Codable, Equatable {
     /// Select any reachable player
     case selectReachable
 
+    /// Select any reachable at range
+    case selectAt(Int)
+
     /// All players
     case all
 }
