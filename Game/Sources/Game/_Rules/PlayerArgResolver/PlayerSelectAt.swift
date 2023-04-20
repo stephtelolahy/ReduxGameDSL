@@ -9,6 +9,11 @@ struct PlayerSelectAt: PlayerArgResolverProtocol {
     let distance: Int
 
     func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        .identified([])
+        let others = state.playersAt(distance, from: ctx.actor)
+        guard others.isNotEmpty else {
+            throw GameError.noPlayerAtRange(distance)
+        }
+
+        return .selectable(others)
     }
 }

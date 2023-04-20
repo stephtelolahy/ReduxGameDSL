@@ -23,18 +23,18 @@ final class BangSpec: QuickSpec {
                             }
                         }
                     }.counters([.bang: 1])
-
+                    
                     let sut = createGameStore(initial: state)
-
+                    
                     // When
                     let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, store: sut)
-
+                    
                     // Assert
                     expect(result) == [.failure(.reachedLimitPerTurn(1))]
                 }
             }
-
+            
             context("without target") {
                 context("no player reachable") {
                     it("should throw error") {
@@ -50,16 +50,16 @@ final class BangSpec: QuickSpec {
                             Player("p4").mustang(1)
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.failure(GameError.noPlayerAtRange(1))]
                     }
                 }
-
+                
                 context("some player reachable") {
                     it("should choose a target") {
                         // Given
@@ -74,11 +74,11 @@ final class BangSpec: QuickSpec {
                             Player("p4")
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result).to(beEmpty())
                         expect(sut.state.chooseOne) == [
@@ -88,15 +88,62 @@ final class BangSpec: QuickSpec {
                     }
                 }
             }
-
-            xcontext("with target") {
+            
+            context("with target") {
                 context("having missed") {
                     it("should ask to counter") {
+                        // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    .bang
+                                }
+                            }
+                            Player("p2") {
+                                Hand {
+                                    .missed
+                                }
+                            }
+                        }
+                        let sut = createGameStore(initial: state)
+                        
+                        // When
+                        let action = GameAction.play(actor: "p1", card: .bang, target: "p2")
+                        let result = self.awaitAction(action, store: sut)
+                        
+                        // Then
+                        expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
+                        let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
+                        expect(sut.state.chooseOne) == [
+                            .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx),
+                            Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
+                        ]
                     }
                 }
-
+                
                 context("not having missed") {
                     it("should deal damage") {
+                        // Given
+                        let state = GameState {
+                            Player("p1") {
+                                Hand {
+                                    .bang
+                                }
+                            }
+                            Player("p2")
+                        }
+                        let sut = createGameStore(initial: state)
+                        
+                        // When
+                        let action = GameAction.play(actor: "p1", card: .bang, target: "p2")
+                        let result = self.awaitAction(action, store: sut)
+                        
+                        // Then
+                        expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
+                        let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
+                        expect(sut.state.chooseOne) == [
+                            Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
+                        ]
                     }
                 }
             }
