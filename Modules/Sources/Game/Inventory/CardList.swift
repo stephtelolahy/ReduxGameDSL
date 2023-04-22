@@ -59,6 +59,14 @@ public enum CardList {
             }
         }
         Card(.missed)
+        Card(.gatling) {
+            CardEffect.apply(.others) {
+                CardEffect.forceDiscard(player: .target,
+                                        card: .selectHandNamed(.missed),
+                                        otherwise: .damage(1, player: .target))
+            }
+            .onPlay()
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

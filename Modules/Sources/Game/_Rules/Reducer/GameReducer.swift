@@ -74,6 +74,9 @@ private extension GameAction {
 
             case let .groupEffects(effects):
                 return GroupEffects(effects: effects, ctx: ctx)
+
+            case let .applyEffect(target, effects):
+                return ApplyEffect(target: target, effect: effects, ctx: ctx)
             }
         }
     }

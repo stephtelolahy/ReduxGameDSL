@@ -10,7 +10,7 @@ protocol PlayerArgResolverProtocol {
 }
 
 struct PlayerArgResolver {
-    private func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         try arg.resolver().resolve(state: state, ctx: ctx)
     }
     
@@ -58,6 +58,9 @@ private extension PlayerArg {
 
         case .all:
             return PlayerAll()
+
+        case .others:
+            return PlayerOthers()
 
         case let .selectAtRangeWithCard(distance):
             return PlayerSelectAtRangeWithCard(distance: distance)

@@ -34,4 +34,7 @@ public enum PlayerArg: Codable, Equatable {
 
     /// All players
     case all
+
+    /// Other players
+    case others
 }

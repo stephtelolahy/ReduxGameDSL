@@ -39,4 +39,7 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Dispatch effects sequentially
     case groupEffects([CardEffect])
+
+    /// Apply an effect to a group of players
+    case applyEffect(PlayerArg, CardEffect)
 }

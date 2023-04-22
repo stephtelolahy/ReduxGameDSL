@@ -16,7 +16,7 @@ struct Damage: GameReducerProtocol {
 
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.heal(value, player: .id($0)).withCtx(ctx)
+                CardEffect.damage(value, player: .id($0)).withCtx(ctx)
             }
         }
 
@@ -26,16 +26,5 @@ struct Damage: GameReducerProtocol {
         state.completedAction = action
 
         return state
-    }
-}
-
-private extension Player {
-    mutating func gainHealth(_ value: Int) throws {
-        guard health < maxHealth else {
-            throw GameError.playerAlreadyMaxHealth(id)
-        }
-
-        let newHealth = min(health + value, maxHealth)
-        health = newHealth
     }
 }
