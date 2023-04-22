@@ -67,17 +67,7 @@
                BlueprintIdentifier = "GameTests"
                BuildableName = "GameTests"
                BlueprintName = "GameTests"
-               ReferencedContainer = "container:Game">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "UITests"
-               BuildableName = "UITests"
-               BlueprintName = "UITests"
-               ReferencedContainer = "container:UI">
+               ReferencedContainer = "container:Modules">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -87,7 +77,17 @@
                BlueprintIdentifier = "ReduxTests"
                BuildableName = "ReduxTests"
                BlueprintName = "ReduxTests"
-               ReferencedContainer = "container:Redux">
+               ReferencedContainer = "container:Modules">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "UITests"
+               BuildableName = "UITests"
+               BlueprintName = "UITests"
+               ReferencedContainer = "container:Modules">
             </BuildableReference>
          </TestableReference>
       </Testables>
