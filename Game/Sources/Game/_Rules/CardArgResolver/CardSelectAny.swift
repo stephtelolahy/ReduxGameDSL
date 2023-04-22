@@ -6,26 +6,26 @@
 //
 
 struct CardSelectAny: CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> ArgOutput {
+    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput {
         guard let owner else {
-            fatalError(.unexpected)
+            fatalError(.missingCardOwner)
         }
 
         let playerObj = state.player(owner)
-        var options: [ArgOption] = []
+        var options: [CardArgOption] = []
 
         if playerObj.inPlay.cards.isNotEmpty {
-            let inPlayOptions = playerObj.inPlay.cards.toOptions()
+            let inPlayOptions = playerObj.inPlay.cards.toCardOptions()
             options.append(contentsOf: inPlayOptions)
         }
 
         if playerObj.hand.cards.isNotEmpty {
             if chooser != owner {
                 let randomId = playerObj.hand.cards.randomElement().unsafelyUnwrapped
-                let randomOption = ArgOption(id: randomId, label: Label.randomHand)
+                let randomOption = CardArgOption(id: randomId, label: Label.randomHand)
                 options.append(randomOption)
             } else {
-                let handOptions = playerObj.hand.cards.toOptions()
+                let handOptions = playerObj.hand.cards.toCardOptions()
                 options.append(contentsOf: handOptions)
             }
         }

@@ -6,17 +6,17 @@
 //
 
 protocol CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> ArgOutput
+    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput
 }
 
 struct CardArgResolver {
-    private func resolve(
+    func resolve(
         arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
         owner: String?
-    ) throws -> ArgOutput {
+    ) throws -> CardArgOutput {
         try arg.resolver().resolve(state: state, ctx: ctx, chooser: chooser, owner: owner)
     }
 
@@ -37,9 +37,10 @@ struct CardArgResolver {
             state.queue.insert(contentsOf: children, at: 0)
 
         case let .selectable(cIdOptions):
-            state.chooseOne = cIdOptions.reduce(into: [String: GameAction]()) {
+            let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
+            state.chooseOne = ChooseOne(chooser: chooser, options: options)
         }
         return state
     }
@@ -48,14 +49,17 @@ struct CardArgResolver {
 private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
+        case .id:
+            fatalError(.unexpected)
+
         case .selectAny:
             return CardSelectAny()
 
         case .selectChoosable:
             return CardSelectChoosable()
 
-        default:
-            fatalError(.unexpected)
+        case let .selectHandNamed(name):
+            return CardSelectHandNamed(name: name)
         }
     }
 }

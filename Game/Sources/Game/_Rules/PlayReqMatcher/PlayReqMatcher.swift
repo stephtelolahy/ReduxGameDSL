@@ -21,14 +21,14 @@ private extension PlayReq {
         case let .isPlayersAtLeast(count):
             return IsPlayersAtLeast(count: count)
 
-        case .isActorDamaged:
-            return IsActorDamaged()
+        case .isDamaged:
+            return IsDamaged()
 
         case .isAnyDamaged:
             return IsAnyDamaged()
 
-        default:
-            fatalError(.unexpected)
+        case let .isTimesPerTurn(count):
+            return IsTimesPerTurn(maxTimes: count)
         }
     }
 }

@@ -26,6 +26,12 @@ public enum PlayerArg: Codable, Equatable {
     /// Select any other player at distance of X , having card
     case selectAtRangeWithCard(Int)
 
+    /// Select any reachable player
+    case selectReachable
+
+    /// Select any reachable at range
+    case selectAt(Int)
+
     /// All players
     case all
 }

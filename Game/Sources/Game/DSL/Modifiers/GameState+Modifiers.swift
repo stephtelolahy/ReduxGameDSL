@@ -18,7 +18,7 @@ public extension GameState {
                 self.discard = discard.value
             } else if let choosable = attr as? Choosable {
                 self.choosable = choosable.value
-            } else if let chooseOne = attr as? ChooseOne {
+            } else if let chooseOne = attr as? MustChooseOne {
                 self.chooseOne = chooseOne.value
             }
         }
@@ -30,6 +30,10 @@ public extension GameState {
 
     func turn(_ value: String) -> Self {
         copy { $0.turn = value }
+    }
+
+    func counters(_ value: [String: Int]) -> Self {
+        copy { $0.counters = value }
     }
 }
 

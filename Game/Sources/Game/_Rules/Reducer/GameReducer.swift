@@ -14,7 +14,7 @@ protocol GameReducerProtocol {
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
         if let chooseOne = state.chooseOne {
-            guard chooseOne.values.contains(action) else {
+            guard chooseOne.options.values.contains(action) else {
                 return state
             }
         }
@@ -48,6 +48,9 @@ private extension GameAction {
             case let .heal(value, player):
                 return Heal(action: self, player: player, value: value, ctx: ctx)
 
+            case let .damage(value, player):
+                return Damage(action: self, player: player, value: value, ctx: ctx)
+
             case let .draw(player):
                 return Draw(action: self, player: player, ctx: ctx)
 
@@ -65,6 +68,9 @@ private extension GameAction {
 
             case .reveal:
                 return Reveal(action: self)
+
+            case let .forceDiscard(player, card, otherwise):
+                return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx)
 
             case let .groupEffects(effects):
                 return GroupEffects(effects: effects, ctx: ctx)

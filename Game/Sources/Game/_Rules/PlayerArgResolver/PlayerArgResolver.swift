@@ -6,11 +6,11 @@
 //
 
 protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> ArgOutput
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
 }
 
 struct PlayerArgResolver {
-    private func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> ArgOutput {
+    private func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         try arg.resolver().resolve(state: state, ctx: ctx)
     }
     
@@ -27,10 +27,11 @@ struct PlayerArgResolver {
             let children = pIds.map { copy($0) }
             state.queue.insert(contentsOf: children, at: 0)
             
-        case let .selectable(pIdOptions):
-            state.chooseOne = pIdOptions.reduce(into: [String: GameAction]()) {
-                $0[$1.label] = copy($1.id)
+        case let .selectable(pIds):
+            let options = pIds.reduce(into: [String: GameAction]()) {
+                $0[$1] = copy($1)
             }
+            state.chooseOne = ChooseOne(chooser: ctx.actor, options: options)
         }
         
         return state
@@ -40,6 +41,9 @@ struct PlayerArgResolver {
 private extension PlayerArg {
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
+        case .id:
+            fatalError(.unexpected)
+
         case .actor:
             return PlayerActor()
             
@@ -57,9 +61,12 @@ private extension PlayerArg {
 
         case let .selectAtRangeWithCard(distance):
             return PlayerSelectAtRangeWithCard(distance: distance)
-            
-        default:
-            fatalError(.unexpected)
+
+        case .selectReachable:
+            return PlayerSelectReachable()
+
+        case let .selectAt(distance):
+            return PlayerSelectAt(distance: distance)
         }
     }
 }

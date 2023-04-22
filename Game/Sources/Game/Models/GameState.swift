@@ -5,40 +5,43 @@ import Foundation
 /// These state objects are passed around everywhere and maintained on both client and server seamlessly
 public struct GameState: Codable, Equatable {
 
-    /// all players
+    /// All players
     public var players: [String: Player] = [:]
 
-    /// active players, playing order
+    /// Playing order
     public var playOrder: [String] = []
 
-    /// current player
+    /// Current turn's player
     public var turn: String?
 
-    /// deck
+    /// Current turn's number of times a card was played
+    public var counters: [String: Int] = [:]
+
+    /// Deck
     public var deck: CardStack = .init()
 
-    /// discard pile
+    /// Discard pile
     public var discard: CardStack = .init()
 
-    /// choosable cards
+    /// Choosable cards
     public var choosable: CardLocation?
 
-    /// is Game over
+    /// Is Game over
     public var isOver: Bool = false
     
-    /// last completed action
+    /// Last completed action
     public var completedAction: GameAction?
 
-    /// last occured error
+    /// Last occured error
     public var thrownError: GameError?
 
-    /// queued actions
+    /// Queued effects
     public var queue: [GameAction] = []
 
     /// Pending actions to choose before continuing effect resolving
-    public var chooseOne: [String: GameAction]?
+    public var chooseOne: ChooseOne?
 
-    /// all cards reference
+    /// All cards reference
     public var cardRef: [String: Card] {
         CardList.cardRef
     }
@@ -51,7 +54,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players[id] else {
-            fatalError(.missingPlayer(id))
+            fatalError(.playerNotFound(id))
         }
         return player
     }

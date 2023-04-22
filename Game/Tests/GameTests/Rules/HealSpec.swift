@@ -13,18 +13,22 @@ final class HealSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         let ctx = EffectContext(actor: "p1", card: "cx")
+        var state: GameState!
 
         describe("heal") {
             context("being damaged") {
+
+                beforeEach {
+                    // Given
+                    state = GameState {
+                        Player("p1")
+                            .health(2)
+                            .maxHealth(4)
+                    }
+                }
+
                 context("value less than damage") {
                     it("should gain life points") {
-                        // Given
-                        let state = GameState {
-                            Player("p1")
-                                .health(2)
-                                .maxHealth(4)
-                        }
-
                         // When
                         let action = GameAction.apply(.heal(1, player: .id("p1")), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
@@ -36,13 +40,6 @@ final class HealSpec: QuickSpec {
 
                 context("value equal to damage") {
                     it("should gain life points") {
-                        // Given
-                        let state = GameState {
-                            Player("p1")
-                                .health(2)
-                                .maxHealth(4)
-                        }
-
                         // When
                         let action = GameAction.apply(.heal(2, player: .id("p1")), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
@@ -54,15 +51,8 @@ final class HealSpec: QuickSpec {
 
                 context("value more than damage") {
                     it("should gain life points limited to max health") {
-                        // Given
-                        let state = GameState {
-                            Player("p1")
-                                .health(3)
-                                .maxHealth(4)
-                        }
-
                         // When
-                        let action = GameAction.apply(.heal(2, player: .id("p1")), ctx: ctx)
+                        let action = GameAction.apply(.heal(3, player: .id("p1")), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then

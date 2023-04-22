@@ -6,7 +6,7 @@
 //
 
 struct PlayerDamaged: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> ArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         let damaged = state.playOrder
             .starting(with: ctx.actor)
             .filter { state.player($0).health < state.player($0).maxHealth }

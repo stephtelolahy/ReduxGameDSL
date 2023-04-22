@@ -8,12 +8,15 @@
 /// Card argument
 public enum CardArg: Codable, Equatable {
 
-    /// card identified by
+    /// Card identified by
     case id(String)
 
-    /// select any player's hand or inPlay card
+    /// Select any player's hand or inPlay card
     case selectAny
 
-    /// select any choosable card
+    /// Select any choosable card
     case selectChoosable
+
+    /// Select any self's hand card matching given name
+    case selectHandNamed(String)
 }

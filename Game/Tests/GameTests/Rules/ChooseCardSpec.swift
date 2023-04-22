@@ -32,10 +32,10 @@ final class ChooseCardSpec: QuickSpec {
 
                         // Then
                         expect(result.completedAction) == nil
-                        expect(result.chooseOne) == [
+                        expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "c1": .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
                             "c2": .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
-                        ]
+                        ])
                     }
                 }
 
@@ -71,7 +71,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.thrownError) == GameError.noChoosableCard
+                        expect(result.thrownError) == GameError.choosableIsEmpty
                     }
                 }
             }

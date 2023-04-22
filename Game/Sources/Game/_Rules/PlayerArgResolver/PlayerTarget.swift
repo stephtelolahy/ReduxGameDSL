@@ -6,7 +6,7 @@
 //
 
 struct PlayerTarget: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> ArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         guard let target = ctx.target else {
             throw GameError.missingTarget
         }

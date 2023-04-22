@@ -17,16 +17,16 @@ struct Play: GameReducerProtocol {
 
         // discard immediately
         guard state.players[actor] != nil else {
-            throw GameError.missingPlayer(actor)
+            throw GameError.playerNotFound(actor)
         }
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
         state.discard.push(card)
 
         // verify play action
-        guard let cardName = card.extractName(),
-              let cardObj = state.cardRef[cardName],
+        let cardName = card.extractName()
+        guard let cardObj = state.cardRef[cardName],
               let playAction = cardObj.actions.first(where: { $0.actionType == .play }) else {
-            throw GameError.cardNotPlayable(card)
+            throw GameError.cardIsNotPlayable(card)
         }
 
         // verify requirements

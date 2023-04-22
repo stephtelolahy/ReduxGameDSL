@@ -31,7 +31,7 @@ final class PanicSpec: QuickSpec {
                         let result = self.awaitAction(action, store: sut)
 
                         // Then
-                        expect(result) == [.failure(GameError.noPlayerAllowed)]
+                        expect(result) == [.failure(GameError.noPlayerWithCard)]
                     }
                 }
 
@@ -68,10 +68,10 @@ final class PanicSpec: QuickSpec {
 
                         // Then
                         expect(result).to(beEmpty())
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "p2": .play(actor: "p1", card: .panic, target: "p2"),
                             "p4": .play(actor: "p1", card: .panic, target: "p4")
-                        ]
+                        ])
                     }
                 }
             }
@@ -126,8 +126,9 @@ final class PanicSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
 
                         guard let chooseOne = sut.state.chooseOne,
-                              chooseOne.count == 1,
-                              let choice = chooseOne[Label.randomHand] else {
+                              chooseOne.chooser == "p1",
+                              chooseOne.options.count == 1,
+                              let choice = chooseOne.options[Label.randomHand] else {
                             fail("Missing choice")  
                             return
                         }
@@ -166,10 +167,10 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "c21": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
                             "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx)
-                        ]
+                        ])
                     }
                 }
 
@@ -201,18 +202,24 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx),
                             "c23": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c23")), ctx: ctx),
                             Label.randomHand: .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")),
                                                      ctx: ctx)
-                        ]
+                        ])
                     }
                 }
             }
 
             xcontext("target is self") {
                 it("should choose one inPlay card") {
+                    // Given
+                    // When
+                    // Then
+                }
+
+                it("should not choose hand cards") {
                     // Given
                     // When
                     // Then
