@@ -19,6 +19,7 @@ struct Play: GameReducerProtocol {
         guard state.players[actor] != nil else {
             throw GameError.playerNotFound(actor)
         }
+
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
         state.discard.push(card)
 
