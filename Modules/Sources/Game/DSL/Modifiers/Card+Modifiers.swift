@@ -9,7 +9,7 @@ import Foundation
 
 public extension Card {
     
-    init(_ name: String, @CardActionInfoBuilder content: () -> [CardActionInfo] = { [] }) {
+    init(_ name: String, @CardActionBuilder content: () -> [CardAction] = { [] }) {
         self.name = name
         self.actions = content()
     }
@@ -17,27 +17,27 @@ public extension Card {
 
 public extension CardEffect {
     
-    func onPlay(target: PlayerArg? = nil, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
+    func onPlay(target: PlayerArg? = nil, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardAction {
         .init(actionType: .play,
               playReqs: playReqs(),
               target: target,
               effect: self)
     }
     
-    func onEquip(@PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
+    func onEquip(@PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardAction {
         .init(actionType: .equip,
               playReqs: playReqs(),
               effect: self)
     }
     
-    func onHandicap(target: PlayerArg, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardActionInfo {
+    func onHandicap(target: PlayerArg, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardAction {
         .init(actionType: .handicap,
               playReqs: playReqs(),
               target: target,
               effect: self)
     }
     
-    func onEvent(@PlayReqBuilder playReqs: () -> [PlayReq]) -> CardActionInfo {
+    func onEvent(@PlayReqBuilder playReqs: () -> [PlayReq]) -> CardAction {
         .init(actionType: .triggered,
               playReqs: playReqs(),
               effect: self)

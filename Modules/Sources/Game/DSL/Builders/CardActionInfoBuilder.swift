@@ -1,5 +1,5 @@
 //
-//  CardActionInfoBuilder.swift
+//  CardActionBuilder.swift
 //  
 //
 //  Created by Hugues Telolahy on 03/04/2023.
@@ -8,9 +8,9 @@
 import Foundation
 
 @resultBuilder
-public struct CardActionInfoBuilder {
+public struct CardActionBuilder {
 
-    public static func buildBlock(_ components: CardActionInfo...) -> [CardActionInfo] {
+    public static func buildBlock(_ components: CardAction...) -> [CardAction] {
         components
     }
 }

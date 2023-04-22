@@ -9,11 +9,11 @@ public struct Card: Codable, Equatable {
     public let name: String
     
     /// Actions that can be performed with the card
-    public var actions: [CardActionInfo] = []
+    public var actions: [CardAction] = []
 }
 
 /// Describing card action
-public struct CardActionInfo: Codable, Equatable {
+public struct CardAction: Codable, Equatable {
     
     /// The action type
     public let actionType: CardActionType
