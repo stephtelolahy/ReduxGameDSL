@@ -42,21 +42,21 @@
             BlueprintIdentifier = "Game"
             BuildableName = "Game"
             BlueprintName = "Game"
-            ReferencedContainer = "container:Game">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "UI"
-            BuildableName = "UI"
-            BlueprintName = "UI"
-            ReferencedContainer = "container:UI">
+            ReferencedContainer = "container:Modules">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "Redux"
             BuildableName = "Redux"
             BlueprintName = "Redux"
-            ReferencedContainer = "container:Redux">
+            ReferencedContainer = "container:Modules">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "UI"
+            BuildableName = "UI"
+            BlueprintName = "UI"
+            ReferencedContainer = "container:Modules">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
