@@ -81,10 +81,10 @@ final class BangSpec: QuickSpec {
                         
                         // Then
                         expect(result).to(beEmpty())
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "p2": .play(actor: "p1", card: .bang, target: "p2"),
                             "p4": .play(actor: "p1", card: .bang, target: "p4")
-                        ]
+                        ])
                     }
                 }
             }
@@ -114,10 +114,10 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                             .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx),
                             Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
-                        ]
+                        ])
                     }
                 }
                 
@@ -141,9 +141,9 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
-                        expect(sut.state.chooseOne) == [
+                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                             Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
-                        ]
+                        ])
                     }
                 }
             }

@@ -8,12 +8,12 @@
 /// Card zone
 public struct CardLocation: Codable, Equatable {
 
+    /// Content
+    public var cards: [String] = []
+
     /// Number of cards in the location
     public var count: Int { cards.count }
 
     /// If defined, specifies player who has access to content
     public var visibility: String?
-
-    /// Content
-    public var cards: [String] = []
 }

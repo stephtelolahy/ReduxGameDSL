@@ -14,7 +14,7 @@ protocol GameReducerProtocol {
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
         if let chooseOne = state.chooseOne {
-            guard chooseOne.values.contains(action) else {
+            guard chooseOne.options.values.contains(action) else {
                 return state
             }
         }

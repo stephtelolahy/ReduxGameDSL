@@ -37,9 +37,10 @@ struct CardArgResolver {
             state.queue.insert(contentsOf: children, at: 0)
 
         case let .selectable(cIdOptions):
-            state.chooseOne = cIdOptions.reduce(into: [String: GameAction]()) {
+            let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
+            state.chooseOne = ChooseOne(chooser: chooser, options: options)
         }
         return state
     }

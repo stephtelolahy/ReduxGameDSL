@@ -58,6 +58,7 @@ public enum CardList {
                 PlayReq.isTimesPerTurn(1)
             }
         }
+        Card(.missed)
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

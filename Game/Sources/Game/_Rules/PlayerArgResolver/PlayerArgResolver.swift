@@ -28,9 +28,10 @@ struct PlayerArgResolver {
             state.queue.insert(contentsOf: children, at: 0)
             
         case let .selectable(pIds):
-            state.chooseOne = pIds.reduce(into: [String: GameAction]()) {
+            let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
             }
+            state.chooseOne = ChooseOne(chooser: ctx.actor, options: options)
         }
         
         return state

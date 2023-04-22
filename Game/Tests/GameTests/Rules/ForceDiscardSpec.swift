@@ -34,11 +34,11 @@ final class ForceDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.chooseOne) == [
+                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
                         "missed-10♣️": .apply(.discard(player: .id("p1"), card: .id("missed-10♣️")), ctx: ctx),
                         "missed-8♠️": .apply(.discard(player: .id("p1"), card: .id("missed-8♠️")), ctx: ctx),
                         Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
-                    ]
+                    ])
                 }
             }
 
@@ -56,9 +56,9 @@ final class ForceDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.chooseOne) == [
+                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
                         Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
-                    ]
+                    ])
                 }
             }
         }

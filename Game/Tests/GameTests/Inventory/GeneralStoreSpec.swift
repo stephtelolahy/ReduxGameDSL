@@ -42,11 +42,11 @@ final class GeneralStoreSpec: QuickSpec {
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx))]
-                    expect(sut.state.chooseOne) == [
+                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                         "c1": .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
                         "c2": .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx),
                         "c3": .apply(.chooseCard(player: .id("p1"), card: .id("c3")), ctx: ctx)
-                    ]
+                    ])
 
                     // When p1 choose
                     action = .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx)
@@ -56,10 +56,10 @@ final class GeneralStoreSpec: QuickSpec {
                     expect(result) == [
                         .success(.apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx))
                     ]
-                    expect(sut.state.chooseOne) == [
+                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                         "c2": .apply(.chooseCard(player: .id("p2"), card: .id("c2")), ctx: ctx),
                         "c3": .apply(.chooseCard(player: .id("p2"), card: .id("c3")), ctx: ctx)
-                    ]
+                    ])
 
                     // When p2 choose
                     action = .apply(.chooseCard(player: .id("p2"), card: .id("c2")), ctx: ctx)
@@ -100,10 +100,10 @@ final class GeneralStoreSpec: QuickSpec {
                     expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
                                        .success(.apply(.reveal, ctx: ctx)),
                                        .success(.apply(.reveal, ctx: ctx))]
-                    expect(sut.state.chooseOne) == [
+                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                         "c1": .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx),
                         "c2": .apply(.chooseCard(player: .id("p1"), card: .id("c2")), ctx: ctx)
-                    ]
+                    ])
 
                     // When p1 choose
                     action = .apply(.chooseCard(player: .id("p1"), card: .id("c1")), ctx: ctx)

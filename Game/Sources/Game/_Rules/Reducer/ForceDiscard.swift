@@ -31,11 +31,12 @@ struct ForceDiscard: GameReducerProtocol {
         // request a choice:
         // - discard one of matching card
         // - or Pass
-        state.chooseOne = cIdOptions.reduce(into: [String: GameAction]()) {
+        var options = cIdOptions.reduce(into: [String: GameAction]()) {
             $0[$1.label] = .apply(.discard(player: player, card: .id($1.id)), ctx: ctx)
         }
-        state.chooseOne?[Label.pass] = otherwise.withCtx(ctx)
-
+        options[Label.pass] = otherwise.withCtx(ctx)
+        state.chooseOne = ChooseOne(chooser: pId, options: options)
+        
         return state
     }
 }
