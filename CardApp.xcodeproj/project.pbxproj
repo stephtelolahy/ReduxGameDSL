@@ -7,24 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2619822B29DCDCCA00B229B0 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 2619822A29DCDCCA00B229B0 /* UI */; };
-		264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 264CD1CD29DA31BA00D0BC21 /* Game */; };
 		2699EF0129D93AD00030ACCD /* CardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2699EF0029D93AD00030ACCD /* CardApp.swift */; };
 		2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0429D93AD10030ACCD /* Assets.xcassets */; };
 		2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */; };
-		26E4AA9D29D941ED00631D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 26E4AA9C29D941ED00631D1F /* README.md */; };
+		269D0F0A29F3D67A0096EB49 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 269D0F0929F3D67A0096EB49 /* Game */; };
+		269D0F0C29F3D67A0096EB49 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 269D0F0B29F3D67A0096EB49 /* Redux */; };
+		269D0F0E29F3D67A0096EB49 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 269D0F0D29F3D67A0096EB49 /* UI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2619822729DCDBBB00B229B0 /* UI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UI; sourceTree = "<group>"; };
-		26806ADA29DA2F4800A2D2EE /* Game */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Game; sourceTree = "<group>"; };
 		2699EEFD29D93AD00030ACCD /* CardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2699EF0029D93AD00030ACCD /* CardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardApp.swift; sourceTree = "<group>"; };
 		2699EF0429D93AD10030ACCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2699EF0629D93AD10030ACCD /* CardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CardApp.entitlements; sourceTree = "<group>"; };
 		2699EF0829D93AD10030ACCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		26DFC34429E0BC2300C7E991 /* Redux */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Redux; sourceTree = "<group>"; };
-		26E4AA9C29D941ED00631D1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		26DD32B829F3D646002E0F93 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,8 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2619822B29DCDCCA00B229B0 /* UI in Frameworks */,
-				264CD1CE29DA31BA00D0BC21 /* Game in Frameworks */,
+				269D0F0A29F3D67A0096EB49 /* Game in Frameworks */,
+				269D0F0E29F3D67A0096EB49 /* UI in Frameworks */,
+				269D0F0C29F3D67A0096EB49 /* Redux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,22 +45,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		26806AD929DA2F4800A2D2EE /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				26DFC34429E0BC2300C7E991 /* Redux */,
-				2619822729DCDBBB00B229B0 /* UI */,
-				26806ADA29DA2F4800A2D2EE /* Game */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		2699EEF429D93AD00030ACCD = {
 			isa = PBXGroup;
 			children = (
-				26E4AA9C29D941ED00631D1F /* README.md */,
-				26806AD929DA2F4800A2D2EE /* Packages */,
-				2699EEFF29D93AD00030ACCD /* CardApp */,
+				26DD32B829F3D646002E0F93 /* Modules */,
+				2699EEFF29D93AD00030ACCD /* App */,
 				2699EEFE29D93AD00030ACCD /* Products */,
 				2653DAE829DA2ADD007EAE71 /* Frameworks */,
 			);
@@ -76,7 +63,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2699EEFF29D93AD00030ACCD /* CardApp */ = {
+		2699EEFF29D93AD00030ACCD /* App */ = {
 			isa = PBXGroup;
 			children = (
 				2699EF0029D93AD00030ACCD /* CardApp.swift */,
@@ -84,7 +71,7 @@
 				2699EF0629D93AD10030ACCD /* CardApp.entitlements */,
 				2699EF0729D93AD10030ACCD /* Preview Content */,
 			);
-			path = CardApp;
+			path = App;
 			sourceTree = "<group>";
 		};
 		2699EF0729D93AD10030ACCD /* Preview Content */ = {
@@ -113,8 +100,9 @@
 			);
 			name = CardApp;
 			packageProductDependencies = (
-				264CD1CD29DA31BA00D0BC21 /* Game */,
-				2619822A29DCDCCA00B229B0 /* UI */,
+				269D0F0929F3D67A0096EB49 /* Game */,
+				269D0F0B29F3D67A0096EB49 /* Redux */,
+				269D0F0D29F3D67A0096EB49 /* UI */,
 			);
 			productName = ReduxGameDSL;
 			productReference = 2699EEFD29D93AD00030ACCD /* CardApp.app */;
@@ -158,7 +146,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26E4AA9D29D941ED00631D1F /* README.md in Resources */,
 				2699EF0929D93AD10030ACCD /* Preview Assets.xcassets in Resources */,
 				2699EF0529D93AD10030ACCD /* Assets.xcassets in Resources */,
 			);
@@ -314,10 +301,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CardApp/CardApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = App/CardApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CardApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -352,10 +339,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CardApp/CardApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = App/CardApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CardApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -409,13 +396,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2619822A29DCDCCA00B229B0 /* UI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UI;
-		};
-		264CD1CD29DA31BA00D0BC21 /* Game */ = {
+		269D0F0929F3D67A0096EB49 /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
+		};
+		269D0F0B29F3D67A0096EB49 /* Redux */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Redux;
+		};
+		269D0F0D29F3D67A0096EB49 /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
