@@ -18,7 +18,7 @@ struct ForceDiscard: GameReducerProtocol {
         // resolve player
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
+                CardEffect.forceDiscard(player: .id($0), card: card, otherwise: otherwise).withCtx(ctx)
             }
         }
 

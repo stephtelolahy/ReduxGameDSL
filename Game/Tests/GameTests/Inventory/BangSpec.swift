@@ -91,7 +91,7 @@ final class BangSpec: QuickSpec {
             
             context("with target") {
                 context("having missed") {
-                    it("should ask to counter") {
+                    it("should ask to counter or pass") {
                         // Given
                         let state = GameState {
                             Player("p1") {
@@ -122,7 +122,7 @@ final class BangSpec: QuickSpec {
                 }
                 
                 context("not having missed") {
-                    it("should deal damage") {
+                    it("should ask to pass only") {
                         // Given
                         let state = GameState {
                             Player("p1") {
