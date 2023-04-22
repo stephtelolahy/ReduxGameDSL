@@ -69,7 +69,7 @@ final class GatlingSpec: QuickSpec {
                 }
             }
 
-            xcontext("two players") {
+            context("two players") {
                 it("should allow each player to counter") {
                     // Given
                     let state = GameState {
@@ -103,7 +103,6 @@ final class GatlingSpec: QuickSpec {
                     result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
                     expect(result) == [
                         .success(.apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2))
                     ]
