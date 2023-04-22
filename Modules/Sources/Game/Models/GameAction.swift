@@ -14,6 +14,6 @@ public enum GameAction: Codable, Equatable {
     /// apply a card side effect
     case apply(CardEffect, ctx: EffectContext)
     
-    /// process queued event
+    /// process queued effects
     case update
 }
