@@ -25,16 +25,16 @@ final class PanicSpec: QuickSpec {
                             }
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.failure(GameError.noPlayerWithCard)]
                     }
                 }
-
+                
                 context("some player allowed") {
                     it("should choose a target that is at range 1") {
                         // Given
@@ -61,11 +61,11 @@ final class PanicSpec: QuickSpec {
                             }
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result).to(beEmpty())
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
@@ -75,7 +75,7 @@ final class PanicSpec: QuickSpec {
                     }
                 }
             }
-
+            
             context("target is other") {
                 context("without cards") {
                     it("should throw error") {
@@ -89,17 +89,17 @@ final class PanicSpec: QuickSpec {
                             Player("p2")
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2")),
                                            .failure(.playerHasNoCard("p2"))]
                     }
                 }
-
+                
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
@@ -117,22 +117,22 @@ final class PanicSpec: QuickSpec {
                             }
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
-
+                        
                         guard let chooseOne = sut.state.chooseOne,
                               chooseOne.chooser == "p1",
                               chooseOne.options.count == 1,
                               let choice = chooseOne.options[.randomHand] else {
-                            fail("Missing choice")  
+                            fail("Missing choice")
                             return
                         }
-
+                        
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         let randomOptions: [GameAction] = [
                             .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
@@ -141,7 +141,7 @@ final class PanicSpec: QuickSpec {
                         expect(randomOptions).to(contain(choice))
                     }
                 }
-
+                
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
@@ -159,11 +159,11 @@ final class PanicSpec: QuickSpec {
                             }
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
@@ -173,7 +173,7 @@ final class PanicSpec: QuickSpec {
                         ])
                     }
                 }
-
+                
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
@@ -194,11 +194,11 @@ final class PanicSpec: QuickSpec {
                             }
                         }
                         let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
                         let result = self.awaitAction(action, store: sut)
-
+                        
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
@@ -206,19 +206,19 @@ final class PanicSpec: QuickSpec {
                             "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx),
                             "c23": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c23")), ctx: ctx),
                             .randomHand: .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")),
-                                                     ctx: ctx)
+                                                ctx: ctx)
                         ])
                     }
                 }
             }
-
+            
             xcontext("target is self") {
                 it("should choose one inPlay card") {
                     // Given
                     // When
                     // Then
                 }
-
+                
                 it("should not choose hand cards") {
                     // Given
                     // When
