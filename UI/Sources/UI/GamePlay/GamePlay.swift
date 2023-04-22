@@ -7,19 +7,19 @@
 import Redux
 import Game
 
-struct GamePlay: ReducerProtocol {
+public struct GamePlay: ReducerProtocol {
 
-    struct State: Codable, Equatable {
+    public struct State: Codable, Equatable {
         var game: GameState?
         var controlled: String?
         var message: String = String()
     }
 
-    enum Action: Codable, Equatable {
+    public enum Action: Codable, Equatable {
         case onAppear
     }
 
-    func reduce(state: State, action: Action) -> State {
+    public func reduce(state: State, action: Action) -> State {
         state
     }
 }
