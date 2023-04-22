@@ -6,7 +6,7 @@
 //
 
 /// A protocol that describes how to evolve the current state of an application to the next state,given an action
-public protocol ReducerProtocol<State,Action> {
+public protocol ReducerProtocol<State, Action> {
 
     /// A type that holds the current state of the reducer.
     associatedtype State

@@ -34,9 +34,9 @@ let package = Package(
             name: "Game",
             dependencies: [
                 "Redux",
-//            ],
-//            plugins: [
-//                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+            ],
+            plugins: [
+                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]),
         .testTarget(
             name: "GameTests",
@@ -50,9 +50,9 @@ let package = Package(
             dependencies: [
                 "Redux",
                 "Game"
-//            ],
-//            plugins: [
-//                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+            ],
+            plugins: [
+                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]),
         .testTarget(
             name: "UITests",
