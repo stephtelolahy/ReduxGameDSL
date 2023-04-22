@@ -19,7 +19,7 @@ private extension PlayReq {
     func matcher() -> PlayReqMatcherProtocol {
         switch self {
         case let .isPlayersAtLeast(count):
-            return IsPlayersAtLeast(count: count)
+            return IsPlayersAtLeast(minCount: count)
 
         case .isDamaged:
             return IsDamaged()
