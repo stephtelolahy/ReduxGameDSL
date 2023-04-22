@@ -22,6 +22,12 @@ public enum Action: Codable, Equatable {
     case game(GamePlay.Action)
 }
 
+public enum Screen: Codable, Equatable {
+    case splash
+    case home
+    case game
+}
+
 public extension AppState {
     static let reducer: Reducer<Self, Action> = { state, action in
         var screens = state.screens
