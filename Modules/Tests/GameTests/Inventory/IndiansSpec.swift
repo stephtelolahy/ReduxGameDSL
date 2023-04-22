@@ -41,7 +41,7 @@ final class IndiansSpec: QuickSpec {
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                         .bang: .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2),
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
+                        .pass: .apply(.damage(1, player: .target), ctx: ctx2)
                     ])
 
                     // When p2 counter
@@ -54,7 +54,7 @@ final class IndiansSpec: QuickSpec {
                     ]
                     let ctx3 = EffectContext(actor: "p1", card: .indians, target: "p3")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx3)
+                        .pass: .apply(.damage(1, player: .target), ctx: ctx3)
                     ])
 
                     // When p3 pass
@@ -95,7 +95,7 @@ final class IndiansSpec: QuickSpec {
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                         .bang: .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2),
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
+                        .pass: .apply(.damage(1, player: .target), ctx: ctx2)
                     ])
 
                     // When p2 counter

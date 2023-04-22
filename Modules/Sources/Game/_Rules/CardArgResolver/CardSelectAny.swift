@@ -22,7 +22,7 @@ struct CardSelectAny: CardArgResolverProtocol {
         if playerObj.hand.cards.isNotEmpty {
             if chooser != owner {
                 let randomId = playerObj.hand.cards.randomElement().unsafelyUnwrapped
-                let randomOption = CardArgOption(id: randomId, label: Label.randomHand)
+                let randomOption = CardArgOption(id: randomId, label: .randomHand)
                 options.append(randomOption)
             } else {
                 let handOptions = playerObj.hand.cards.toCardOptions()
