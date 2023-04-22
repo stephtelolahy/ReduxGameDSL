@@ -122,7 +122,7 @@ final class CatBalouSpec: QuickSpec {
                         guard let chooseOne = sut.state.chooseOne,
                               chooseOne.chooser == "p1",
                               chooseOne.options.count == 1,
-                              let choice = chooseOne.options[Label.randomHand] else {
+                              let choice = chooseOne.options[.randomHand] else {
                             fail("Missing choice")
                             return
                         }
@@ -198,7 +198,7 @@ final class CatBalouSpec: QuickSpec {
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
                             "c23": .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
-                            Label.randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                            .randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
                         ])
                     }
                 }

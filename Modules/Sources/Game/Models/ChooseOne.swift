@@ -19,3 +19,13 @@ public struct ChooseOne: Equatable, Codable {
         self.options = options
     }
 }
+
+/// ChooseOne labels
+public extension String {
+
+    /// Random hand card label
+    static let randomHand = "randomHand"
+
+    /// Pass when asked to do an action
+    static let pass = "pass"
+}
