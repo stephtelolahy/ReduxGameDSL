@@ -11,11 +11,11 @@ import Combine
 public func createGameStore(initial: GameState) -> Store<GameState, GameAction> {
     Store(initial: initial,
           reducer: GameReducer().reduce,
-          middlewares: [GameLoopMiddleware().middleware])
+          middlewares: [gameLoopMiddleware])
 }
 
 /// Dispatching queued side effects
-let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
+private let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
     guard state.queue.isNotEmpty,
           state.chooseOne == nil else {
         return Empty()
