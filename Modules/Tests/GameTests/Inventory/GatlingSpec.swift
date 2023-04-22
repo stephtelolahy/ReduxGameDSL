@@ -37,8 +37,8 @@ final class GatlingSpec: QuickSpec {
                     var result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
                     expect(result) == [.success(.play(actor: "p1", card: .gatling))]
+                    let ctx2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                         .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2),
                         Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
@@ -49,10 +49,10 @@ final class GatlingSpec: QuickSpec {
                     result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
                     expect(result) == [
                         .success(.apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2))
                     ]
+                    let ctx3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
                         Label.pass: .apply(.damage(1, player: .target), ctx: ctx3)
                     ])
@@ -91,8 +91,8 @@ final class GatlingSpec: QuickSpec {
                     var result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
                     expect(result) == [.success(.play(actor: "p1", card: .gatling))]
+                    let ctx2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                         .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2),
                         Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)

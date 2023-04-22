@@ -67,6 +67,14 @@ public enum CardList {
             }
             .onPlay()
         }
+        Card(.indians) {
+            CardEffect.apply(.others) {
+                CardEffect.forceDiscard(player: .target,
+                                        card: .selectHandNamed(.bang),
+                                        otherwise: .damage(1, player: .target))
+            }
+            .onPlay()
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
