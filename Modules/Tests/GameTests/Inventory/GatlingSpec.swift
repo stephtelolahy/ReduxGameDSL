@@ -37,35 +37,33 @@ final class GatlingSpec: QuickSpec {
                     var result = self.awaitAction(action, store: sut)
 
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: .gatling)
-                    let ctxP2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
-                    let ctxP3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
-
+                    let ctx2 = EffectContext(actor: "p1", card: .gatling, target: "p2")
                     expect(result) == [.success(.play(actor: "p1", card: .gatling))]
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
-                        .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctxP2),
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctxP2)
+                        .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2),
+                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
                     ])
 
                     // When p2 counter
-                    action = .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctxP2)
+                    action = .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2)
                     result = self.awaitAction(action, store: sut)
 
                     // Then
+                    let ctx3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
                     expect(result) == [
-                        .success(.apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctxP2))
+                        .success(.apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx2))
                     ]
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctxP3)
+                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx3)
                     ])
 
                     // When p3 pass
-                    action = .apply(.damage(1, player: .target), ctx: ctxP3)
+                    action = .apply(.damage(1, player: .target), ctx: ctx3)
                     result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [
-                        .success(.apply(.damage(1, player: .id("p3")), ctx: ctxP3))
+                        .success(.apply(.damage(1, player: .id("p3")), ctx: ctx3))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }
