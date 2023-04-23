@@ -17,19 +17,19 @@ struct Steal: GameReducerProtocol {
 
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.steal(player: .id($0), target: target, card: card).withCtx(ctx)
+                .steal(player: .id($0), target: target, card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(tId) = target else {
             return try PlayerArgResolver().resolve(arg: target, state: state, ctx: ctx) {
-                CardEffect.steal(player: player, target: .id($0), card: card).withCtx(ctx)
+                .steal(player: player, target: .id($0), card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(cId) = card else {
             return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
-                CardEffect.steal(player: player, target: target, card: .id($0)).withCtx(ctx)
+                .steal(player: player, target: target, card: .id($0)).withCtx(ctx)
             }
         }
 

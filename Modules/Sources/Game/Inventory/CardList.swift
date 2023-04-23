@@ -9,49 +9,49 @@ public enum CardList {
 
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
-            CardEffect.heal(1, player: .actor)
+            GameAction.heal(1, player: .actor)
                 .onPlay {
                     PlayReq.isDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
         Card(.saloon) {
-            CardEffect.heal(1, player: .damaged)
+            GameAction.heal(1, player: .damaged)
                 .onPlay {
                     PlayReq.isAnyDamaged
                 }
         }
         Card(.stagecoach) {
-            CardEffect.replay(2) {
-                CardEffect.draw(player: .actor)
+            GameAction.replay(2) {
+                GameAction.draw(player: .actor)
             }
             .onPlay()
         }
         Card(.wellsFargo) {
-            CardEffect.replay(3) {
-                CardEffect.draw(player: .actor)
+            GameAction.replay(3) {
+                GameAction.draw(player: .actor)
             }
             .onPlay()
         }
         Card(.catBalou) {
-            CardEffect.discard(player: .target, card: .selectAny)
+            GameAction.discard(player: .target, card: .selectAny)
                 .onPlay(target: .selectAnyWithCard)
         }
         Card(.panic) {
-            CardEffect.steal(player: .actor, target: .target, card: .selectAny)
+            GameAction.steal(player: .actor, target: .target, card: .selectAny)
                 .onPlay(target: .selectAtRangeWithCard(1))
         }
         Card(.generalStore) {
-            CardEffect.group {
-                CardEffect.replay(.numPlayers) {
-                    CardEffect.reveal
+            GameAction.group {
+                GameAction.replay(.numPlayers) {
+                    GameAction.reveal
                 }
-                CardEffect.chooseCard(player: .all, card: .selectChoosable)
+                GameAction.chooseCard(player: .all, card: .selectChoosable)
             }
             .onPlay()
         }
         Card(.bang) {
-            CardEffect.forceDiscard(player: .target,
+            GameAction.forceDiscard(player: .target,
                                     card: .selectHandNamed(.missed),
                                     otherwise: .damage(1, player: .target))
             .onPlay(target: .selectReachable) {
@@ -60,16 +60,16 @@ public enum CardList {
         }
         Card(.missed)
         Card(.gatling) {
-            CardEffect.apply(target: .others) {
-                CardEffect.forceDiscard(player: .target,
+            GameAction.apply(target: .others) {
+                GameAction.forceDiscard(player: .target,
                                         card: .selectHandNamed(.missed),
                                         otherwise: .damage(1, player: .target))
             }
             .onPlay()
         }
         Card(.indians) {
-            CardEffect.apply(target: .others) {
-                CardEffect.forceDiscard(player: .target,
+            GameAction.apply(target: .others) {
+                GameAction.forceDiscard(player: .target,
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target))
             }

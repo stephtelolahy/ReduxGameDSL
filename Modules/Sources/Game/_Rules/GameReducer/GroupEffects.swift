@@ -6,13 +6,11 @@
 //
 
 struct GroupEffects: GameReducerProtocol {
-    let effects: [CardEffect]
-    let ctx: EffectContext
+    let effects: [GameAction]
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
-        let children = effects.map { GameAction.apply($0, ctx: ctx) }
-        state.queue.insert(contentsOf: children, at: 0)
+        state.queue.insert(contentsOf: effects, at: 0)
         return state
     }
 }

@@ -15,7 +15,7 @@ public extension Card {
     }
 }
 
-public extension CardEffect {
+public extension GameAction {
     
     func onPlay(target: PlayerArg? = nil, @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }) -> CardAction {
         .init(actionType: .play,

@@ -16,7 +16,7 @@ struct Damage: GameReducerProtocol {
 
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.damage(value, player: .id($0)).withCtx(ctx)
+                .damage(value, player: .id($0)).withCtx(ctx)
             }
         }
 

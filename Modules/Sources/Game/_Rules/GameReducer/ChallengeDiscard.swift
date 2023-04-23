@@ -9,7 +9,7 @@ struct ChallengeDiscard: GameReducerProtocol {
     let action: GameAction
     let player: PlayerArg
     let card: CardArg
-    let otherwise: CardEffect
+    let otherwise: GameAction
     let challenger: PlayerArg
     let ctx: EffectContext
 
@@ -19,7 +19,7 @@ struct ChallengeDiscard: GameReducerProtocol {
         // resolve player
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.forceDiscard(player: .id($0), card: card, otherwise: otherwise).withCtx(ctx)
+                .forceDiscard(player: .id($0), card: card, otherwise: otherwise).withCtx(ctx)
             }
         }
 
@@ -33,7 +33,7 @@ struct ChallengeDiscard: GameReducerProtocol {
         // - discard one of matching card
         // - or Pass
         var options = cIdOptions.reduce(into: [String: GameAction]()) {
-            $0[$1.label] = .apply(.discard(player: player, card: .id($1.id)), ctx: ctx)
+            $0[$1.label] = .discard(player: player, card: .id($1.id)).withCtx(ctx)
         }
         options[.pass] = otherwise.withCtx(ctx)
         state.chooseOne = ChooseOne(chooser: pId, options: options)
