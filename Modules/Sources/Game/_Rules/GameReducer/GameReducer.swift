@@ -44,44 +44,44 @@ private extension GameAction {
             return Update()
 
         case let .heal(value, player, ctx):
-            return Heal(action: self, player: player, value: value, ctx: ctx)
+            return Heal(action: self, player: player, value: value, ctx: ctx!)
 
         case let .damage(value, player, ctx):
-            return Damage(action: self, player: player, value: value, ctx: ctx)
+            return Damage(action: self, player: player, value: value, ctx: ctx!)
 
         case let .draw(player, ctx):
-            return Draw(action: self, player: player, ctx: ctx)
+            return Draw(action: self, player: player, ctx: ctx!)
 
         case let .replayEffect(times, effectToRepeat, ctx):
-            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
+            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)
 
         case let .discard(player, card, ctx):
-            return Discard(action: self, player: player, card: card, ctx: ctx)
+            return Discard(action: self, player: player, card: card, ctx: ctx!)
 
         case let .steal(player, target, card, ctx):
-            return Steal(action: self, player: player, target: target, card: card, ctx: ctx)
+            return Steal(action: self, player: player, target: target, card: card, ctx: ctx!)
 
         case let .chooseCard(player, card, ctx):
-            return ChooseCard(action: self, player: player, card: card, ctx: ctx)
+            return ChooseCard(action: self, player: player, card: card, ctx: ctx!)
 
         case .reveal:
             return Reveal(action: self)
             
         case let .forceDiscard(player, card, otherwise, ctx):
-            return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx)
+            return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx!)
 
         case let .challengeDiscard(player, card, otherwise, challenger, ctx):
             return ChallengeDiscard(action: self,
                                     player: player,
                                     card: card,
                                     otherwise: otherwise,
-                                    challenger: challenger, ctx: ctx)
+                                    challenger: challenger, ctx: ctx!)
 
         case let .groupEffects(effects):
             return GroupEffects(effects: effects)
 
         case let .applyEffect(target, effect, ctx):
-            return ApplyEffect(target: target, effect: effect, ctx: ctx)
+            return ApplyEffect(target: target, effect: effect, ctx: ctx!)
         }
     }
 }

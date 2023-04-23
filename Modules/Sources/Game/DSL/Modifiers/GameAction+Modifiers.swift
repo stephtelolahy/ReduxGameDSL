@@ -25,6 +25,23 @@ extension GameAction {
 
 public extension GameAction {
     func withCtx(_ ctx: EffectContext) -> Self {
-        fatalError("This is changing enum context data")
+        var copy = self
+        copy.ctx = ctx
+        return copy
+    }
+
+    var ctx: EffectContext {
+        get {
+            switch self {
+            case let .heal(_, _, ctx): return ctx!
+            default: fatalError(.unexpected)
+            }
+        }
+        set {
+            switch self {
+            case let .heal(value, player, _): self = .heal(value, player: player, ctx: newValue)
+            default: fatalError(.unexpected)
+            }
+        }
     }
 }
