@@ -72,6 +72,9 @@ private extension GameAction {
             case let .forceDiscard(player, card, otherwise):
                 return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx)
 
+            case let .challengeDiscard(player, card, otherwise, challenger):
+                return ChallengeDiscard(action: self, player: player, card: card, otherwise: otherwise, challenger: challenger, ctx: ctx)
+
             case let .groupEffects(effects):
                 return GroupEffects(effects: effects, ctx: ctx)
 

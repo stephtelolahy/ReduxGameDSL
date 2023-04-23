@@ -34,6 +34,9 @@ public indirect enum CardEffect: Codable, Equatable {
     /// If cannot, then apply some effect
     case forceDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect)
 
+    /// Challenging other player to force discard
+    case challengeDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect, challenger: PlayerArg)
+
     /// Repeat an effect
     case replayEffect(NumArg, CardEffect)
 
