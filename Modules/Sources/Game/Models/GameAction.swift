@@ -9,7 +9,7 @@
 public enum GameAction: Codable, Equatable {
     
     /// play a hand card
-    case play(actor: String, card: String, target: String?)
+    case play(actor: String, card: String, target: String? = nil)
 
     /// apply a card side effect
     case apply(CardEffect, ctx: EffectContext)
