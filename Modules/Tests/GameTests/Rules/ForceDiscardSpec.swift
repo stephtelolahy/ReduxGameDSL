@@ -30,7 +30,8 @@ final class ForceDiscardSpec: QuickSpec {
                     // When
                     let action = GameAction.forceDiscard(player: .id("p1"),
                                                          card: .selectHandNamed(.missed),
-                                                         otherwise: .damage(1, player: .target), ctx: ctx)
+                                                         otherwise: .damage(1, player: .target),
+                                                         ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -52,7 +53,8 @@ final class ForceDiscardSpec: QuickSpec {
                     // When
                     let action = GameAction.forceDiscard(player: .id("p1"),
                                                          card: .selectHandNamed(.missed),
-                                                         otherwise: .damage(1, player: .target), ctx: ctx)
+                                                         otherwise: .damage(1, player: .target),
+                                                         ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

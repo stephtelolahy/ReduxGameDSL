@@ -72,7 +72,8 @@ private extension GameAction {
                                     player: player,
                                     card: card,
                                     otherwise: otherwise,
-                                    challenger: challenger, ctx: ctx!)
+                                    challenger: challenger,
+                                    ctx: ctx!)
 
         case let .replayEffect(times, effectToRepeat, ctx):
             return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)

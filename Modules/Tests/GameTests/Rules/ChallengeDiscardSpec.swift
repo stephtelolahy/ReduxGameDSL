@@ -30,12 +30,20 @@ final class ChallengeDiscardSpec: QuickSpec {
                     let action = GameAction.challengeDiscard(player: .id("p1"),
                                                              card: .selectHandNamed(.missed),
                                                              otherwise: .damage(1, player: .target),
-                                                             challenger: .id("px"), ctx: ctx)
+                                                             challenger: .id("px"),
+                                                             ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
                     
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        .missed: .discard(player: .id("p1"), card: .id(.missed), ctx: ctx),
+                        .missed: .group {
+                            GameAction.discard(player: .id("p1"), card: .id(.missed), ctx: ctx)
+                            GameAction.challengeDiscard(player: .id("px"),
+                                                        card: .selectHandNamed(.missed),
+                                                        otherwise: .damage(1, player: .target),
+                                                        challenger: .id("p1"),
+                                                        ctx: ctx)
+                        },
                         .pass: .damage(1, player: .target, ctx: ctx)
                     ])
                 }

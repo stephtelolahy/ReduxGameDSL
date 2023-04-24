@@ -28,7 +28,7 @@ public struct CardAction: Codable, Equatable {
     public let effect: GameAction
 }
 
-/// Describing how to apply card action
+/// Describing when card action is applied
 public enum CardActionType: Codable, Equatable {
     
     /// Discard immediately and apply side effect
