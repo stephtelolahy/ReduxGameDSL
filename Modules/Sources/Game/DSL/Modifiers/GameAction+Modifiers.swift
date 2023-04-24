@@ -23,19 +23,16 @@ extension GameAction {
     }
 }
 
-public extension GameAction {
+extension GameAction {
     func withCtx(_ ctx: EffectContext) -> Self {
         var copy = self
         copy.ctx = ctx
         return copy
     }
 
-    var ctx: EffectContext {
+    private var ctx: EffectContext {
         get {
-            switch self {
-            case let .heal(_, _, ctx): return ctx!
-            default: fatalError(.unexpected)
-            }
+            fatalError(.unexpected)
         }
         set {
             switch self {
