@@ -52,9 +52,6 @@ private extension GameAction {
         case let .draw(player, ctx):
             return Draw(action: self, player: player, ctx: ctx!)
 
-        case let .replayEffect(times, effectToRepeat, ctx):
-            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)
-
         case let .discard(player, card, ctx):
             return Discard(action: self, player: player, card: card, ctx: ctx!)
 
@@ -76,6 +73,9 @@ private extension GameAction {
                                     card: card,
                                     otherwise: otherwise,
                                     challenger: challenger, ctx: ctx!)
+
+        case let .replayEffect(times, effectToRepeat, ctx):
+            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)
 
         case let .groupEffects(effects):
             return GroupEffects(effects: effects)
