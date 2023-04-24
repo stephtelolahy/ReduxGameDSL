@@ -45,11 +45,11 @@ public indirect enum GameAction: Codable, Equatable {
     case challengeDiscard(player: PlayerArg, card: CardArg, otherwise: GameAction, challenger: PlayerArg, ctx: EffectContext? = nil)
 
     /// Repeat an effect
-    case replayEffect(NumArg, GameAction, ctx: EffectContext? = nil)
+    case replayEffect(times: NumArg, effect: GameAction, ctx: EffectContext? = nil)
 
     /// Dispatch effects sequentially
     case groupEffects([GameAction])
 
     /// Apply an effect to some players
-    case applyEffect(PlayerArg, GameAction, ctx: EffectContext? = nil)
+    case applyEffect(target: PlayerArg, effect: GameAction, ctx: EffectContext? = nil)
 }

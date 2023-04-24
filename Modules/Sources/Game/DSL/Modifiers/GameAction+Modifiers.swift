@@ -7,11 +7,11 @@
 
 extension GameAction {
     static func replay(_ times: NumArg, @GameActionBuilder content: () -> Self) -> Self {
-        .replayEffect(times, content())
+        .replayEffect(times: times, effect: content())
     }
 
     static func replay(_ times: Int, @GameActionBuilder content: () -> Self) -> Self {
-        .replayEffect(.numExact(times), content())
+        .replayEffect(times: .numExact(times), effect: content())
     }
 
     static func group(@GameActionsBuilder content: () -> [Self]) -> Self {
@@ -19,7 +19,7 @@ extension GameAction {
     }
 
     static func apply(target: PlayerArg, @GameActionBuilder content: () -> Self) -> Self {
-        .applyEffect(target, content())
+        .applyEffect(target: target, effect: content())
     }
 }
 
