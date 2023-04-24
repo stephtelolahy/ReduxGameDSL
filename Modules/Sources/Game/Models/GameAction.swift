@@ -48,7 +48,7 @@ public indirect enum GameAction: Codable, Equatable {
     case replayEffect(times: NumArg, effect: GameAction, ctx: EffectContext? = nil)
 
     /// Dispatch effects sequentially
-    case groupEffects([GameAction])
+    case groupEffects([GameAction], ctx: EffectContext? = nil)
 
     /// Apply an effect to some players
     case applyEffect(target: PlayerArg, effect: GameAction, ctx: EffectContext? = nil)

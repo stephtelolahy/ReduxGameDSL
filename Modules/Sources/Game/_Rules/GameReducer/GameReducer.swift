@@ -77,8 +77,8 @@ private extension GameAction {
         case let .replayEffect(times, effectToRepeat, ctx):
             return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)
 
-        case let .groupEffects(effects):
-            return GroupEffects(effects: effects)
+        case let .groupEffects(effects, ctx):
+            return GroupEffects(effects: effects, ctx: ctx!)
 
         case let .applyEffect(target, effect, ctx):
             return ApplyEffect(target: target, effect: effect, ctx: ctx!)
