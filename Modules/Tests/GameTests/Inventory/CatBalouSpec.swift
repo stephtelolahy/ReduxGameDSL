@@ -128,8 +128,8 @@ final class CatBalouSpec: QuickSpec {
                         }
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         let randomOptions: [GameAction] = [
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
+                            .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ]
                         expect(randomOptions).to(contain(choice))
                     }
@@ -161,8 +161,8 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c21": .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            "c21": .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
+                            "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
                     }
                 }
@@ -196,9 +196,9 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
-                            "c23": .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
-                            .randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                            "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx),
+                            "c23": .discard(player: .id("p2"), card: .id("c23"), ctx: ctx),
+                            .randomHand: .discard(player: .id("p2"), card: .id("c21"), ctx: ctx)
                         ])
                     }
                 }

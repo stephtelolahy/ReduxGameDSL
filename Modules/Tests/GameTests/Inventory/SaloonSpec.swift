@@ -39,8 +39,8 @@ final class SaloonSpec: QuickSpec {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: .saloon)
                     expect(result) == [.success(.play(actor: "p1", card: .saloon)),
-                                       .success(.apply(.heal(1, player: .id("p2")), ctx: ctx)),
-                                       .success(.apply(.heal(1, player: .id("p3")), ctx: ctx))]
+                                       .success(.heal(1, player: .id("p2"), ctx: ctx)),
+                                       .success(.heal(1, player: .id("p3"), ctx: ctx))]
                 }
             }
 

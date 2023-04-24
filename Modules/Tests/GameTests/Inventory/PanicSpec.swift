@@ -135,8 +135,8 @@ final class PanicSpec: QuickSpec {
                         
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         let randomOptions: [GameAction] = [
-                            .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
-                            .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx)
+                            .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx),
+                            .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx)
                         ]
                         expect(randomOptions).to(contain(choice))
                     }
@@ -168,8 +168,8 @@ final class PanicSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c21": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")), ctx: ctx),
-                            "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx)
+                            "c21": .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx),
+                            "c22": .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
                     }
                 }
@@ -203,10 +203,9 @@ final class PanicSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c22": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c22")), ctx: ctx),
-                            "c23": .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c23")), ctx: ctx),
-                            .randomHand: .apply(.steal(player: .id("p1"), target: .id("p2"), card: .id("c21")),
-                                                ctx: ctx)
+                            "c22": .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx),
+                            "c23": .steal(player: .id("p1"), target: .id("p2"), card: .id("c23"), ctx: ctx),
+                            .randomHand: .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx)
                         ])
                     }
                 }

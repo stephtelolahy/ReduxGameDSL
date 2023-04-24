@@ -28,16 +28,16 @@ final class ForceDiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.forceDiscard(player: .id("p1"),
-                                                                card: .selectHandNamed(.missed),
-                                                                otherwise: .damage(1, player: .target)), ctx: ctx)
+                    let action = GameAction.forceDiscard(player: .id("p1"),
+                                                         card: .selectHandNamed(.missed),
+                                                         otherwise: .damage(1, player: .target), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        "missed-10♣️": .apply(.discard(player: .id("p1"), card: .id("missed-10♣️")), ctx: ctx),
-                        "missed-8♠️": .apply(.discard(player: .id("p1"), card: .id("missed-8♠️")), ctx: ctx),
-                        .pass: .apply(.damage(1, player: .target), ctx: ctx)
+                        "missed-10♣️": .discard(player: .id("p1"), card: .id("missed-10♣️"), ctx: ctx),
+                        "missed-8♠️": .discard(player: .id("p1"), card: .id("missed-8♠️"), ctx: ctx),
+                        .pass: .damage(1, player: .target, ctx: ctx)
                     ])
                 }
             }
@@ -50,14 +50,14 @@ final class ForceDiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.forceDiscard(player: .id("p1"),
-                                                                card: .selectHandNamed(.missed),
-                                                                otherwise: .damage(1, player: .target)), ctx: ctx)
+                    let action = GameAction.forceDiscard(player: .id("p1"),
+                                                         card: .selectHandNamed(.missed),
+                                                         otherwise: .damage(1, player: .target), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        .pass: .apply(.damage(1, player: .target), ctx: ctx)
+                        .pass: .damage(1, player: .target, ctx: ctx)
                     ])
                 }
             }

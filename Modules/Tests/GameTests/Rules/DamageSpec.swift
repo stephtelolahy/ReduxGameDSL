@@ -27,7 +27,7 @@ final class DamageSpec: QuickSpec {
             context("1 life point") {
                 it("should reduce life point by 1") {
                     // When
-                    let action = GameAction.apply(.damage(1, player: .id("p1")), ctx: ctx)
+                    let action = GameAction.damage(1, player: .id("p1"), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -38,7 +38,7 @@ final class DamageSpec: QuickSpec {
             context("two life points") {
                 it("should reduce life point by 2") {
                     // When
-                    let action = GameAction.apply(.damage(2, player: .id("p1")), ctx: ctx)
+                    let action = GameAction.damage(2, player: .id("p1"), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

@@ -50,6 +50,6 @@ public indirect enum GameAction: Codable, Equatable {
     /// Dispatch effects sequentially
     case groupEffects([GameAction])
 
-    /// Apply an effect to a group of players
+    /// Apply an effect to some players
     case applyEffect(PlayerArg, GameAction, ctx: EffectContext? = nil)
 }

@@ -29,9 +29,9 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.steal(player: .id("p1"),
-                                                         target: .id("p2"),
-                                                         card: .id("c21")),
+                    let action = GameAction.steal(player: .id("p1"),
+                                                  target: .id("p2"),
+                                                  card: .id("c21"),
                                                   ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
@@ -55,9 +55,9 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.steal(player: .id("p1"),
-                                                         target: .id("p2"),
-                                                         card: .id("c21")),
+                    let action = GameAction.steal(player: .id("p1"),
+                                                  target: .id("p2"),
+                                                  card: .id("c21"),
                                                   ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
@@ -75,9 +75,9 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.steal(player: .id("p1"),
-                                                         target: .id("p1"),
-                                                         card: .id("c2")),
+                    let action = GameAction.steal(player: .id("p1"),
+                                                  target: .id("p1"),
+                                                  card: .id("c2"),
                                                   ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
