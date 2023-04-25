@@ -9,12 +9,14 @@ public enum CardList {
 
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
-            GameAction.heal(1, player: .actor)
-                .onPlay {
-                    PlayReq.isDamaged
-                    PlayReq.isPlayersAtLeast(3)
-                }
+            onPlay(content: {
+                GameAction.heal(1, player: .actor)
+            }, playReqs: {
+                PlayReq.isDamaged
+                PlayReq.isPlayersAtLeast(3)
+            })
         }
+        
         Card(.saloon) {
             GameAction.heal(1, player: .damaged)
                 .onPlay {

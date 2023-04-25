@@ -43,3 +43,16 @@ public extension GameAction {
               effect: self)
     }
 }
+
+// MARK: - Card
+
+public func onPlay(
+    target: PlayerArg? = nil,
+    @GameActionBuilder content: () -> GameAction,
+    @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }
+) -> CardAction {
+    .init(actionType: .play,
+          playReqs: playReqs(),
+          target: target,
+          effect: content())
+}
