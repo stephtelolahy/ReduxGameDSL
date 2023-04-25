@@ -6,7 +6,7 @@
 //
 
 public enum CardList {
-    
+
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
             onPlay(content: {
@@ -16,7 +16,7 @@ public enum CardList {
                 PlayReq.isPlayersAtLeast(3)
             })
         }
-        
+
         Card(.saloon) {
             onPlay(content: {
                 GameAction.heal(1, player: .damaged)
@@ -24,7 +24,7 @@ public enum CardList {
                 PlayReq.isAnyDamaged
             })
         }
-        
+
         Card(.stagecoach) {
             onPlay {
                 GameAction.replay(2) {
@@ -32,7 +32,7 @@ public enum CardList {
                 }
             }
         }
-        
+
         Card(.wellsFargo) {
             onPlay {
                 GameAction.replay(3) {
@@ -40,13 +40,13 @@ public enum CardList {
                 }
             }
         }
-        
+
         Card(.catBalou) {
             onPlay(target: .selectAnyWithCard) {
                 GameAction.discard(player: .target, card: .selectAny)
             }
         }
-        
+
         Card(.panic) {
             onPlay(target: .selectAtRangeWithCard(1)) {
                 GameAction.steal(player: .actor, target: .target, card: .selectAny)
@@ -63,7 +63,7 @@ public enum CardList {
                 }
             }
         }
-        
+
         Card(.bang) {
             onPlay(target: .selectReachable, content: {
                 GameAction.forceDiscard(player: .target,
@@ -73,9 +73,9 @@ public enum CardList {
                 PlayReq.isTimesPerTurn(1)
             })
         }
-        
+
         Card(.missed)
-        
+
         Card(.gatling) {
             onPlay {
                 GameAction.apply(target: .others) {
@@ -85,7 +85,7 @@ public enum CardList {
                 }
             }
         }
-        
+
         Card(.indians) {
             onPlay {
                 GameAction.apply(target: .others) {
@@ -96,7 +96,7 @@ public enum CardList {
             }
         }
     }
-    
+
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
         content().toDictionary()
     }
