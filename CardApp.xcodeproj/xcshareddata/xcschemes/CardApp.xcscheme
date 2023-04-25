@@ -32,16 +32,16 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2699EEFC29D93AD00030ACCD"
-            BuildableName = "CardApp.app"
-            BlueprintName = "CardApp"
-            ReferencedContainer = "container:CardApp.xcodeproj">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
             BlueprintIdentifier = "Game"
             BuildableName = "Game"
             BlueprintName = "Game"
+            ReferencedContainer = "container:Modules">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Inventory"
+            BuildableName = "Inventory"
+            BlueprintName = "Inventory"
             ReferencedContainer = "container:Modules">
          </BuildableReference>
          <BuildableReference
@@ -56,13 +56,6 @@
             BlueprintIdentifier = "UI"
             BuildableName = "UI"
             BlueprintName = "UI"
-            ReferencedContainer = "container:Modules">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Inventory"
-            BuildableName = "Inventory"
-            BlueprintName = "Inventory"
             ReferencedContainer = "container:Modules">
          </BuildableReference>
       </CodeCoverageTargets>
