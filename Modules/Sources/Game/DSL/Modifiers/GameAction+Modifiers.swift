@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 23/04/2023.
 //
 
-extension GameAction {
+public extension GameAction {
     static func replay(_ times: NumArg, @GameActionBuilder content: () -> Self) -> Self {
         .replayEffect(times: times, effect: content())
     }
