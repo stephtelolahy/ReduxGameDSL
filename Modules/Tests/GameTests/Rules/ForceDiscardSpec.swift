@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-@testable import Game
 
 final class ForceDiscardSpec: QuickSpec {
     override func spec() {
