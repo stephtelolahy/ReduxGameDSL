@@ -16,12 +16,12 @@ final class PlaySpec: QuickSpec {
         var action: GameAction!
         var result: GameState!
 
-        let card = Card("playable") {
+        let playable = Card("playable") {
             onPlay {
                 GameAction.heal(1, player: .actor)
             }
         }
-        let cards = ["playable": card]
+        let cardRef = ["playable": playable]
 
         describe("play") {
             context("hand card") {
@@ -34,6 +34,8 @@ final class PlaySpec: QuickSpec {
                             }
                         }
                     }
+                    .cardRef(cardRef)
+                    
                     // When
                     action = GameAction.play(actor: "p1", card: "playable")
                     result = sut.reduce(state: state, action: action)
