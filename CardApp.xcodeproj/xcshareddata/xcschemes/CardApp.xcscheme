@@ -58,6 +58,13 @@
             BlueprintName = "UI"
             ReferencedContainer = "container:Modules">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Inventory"
+            BuildableName = "Inventory"
+            BlueprintName = "Inventory"
+            ReferencedContainer = "container:Modules">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -87,6 +94,16 @@
                BlueprintIdentifier = "UITests"
                BuildableName = "UITests"
                BlueprintName = "UITests"
+               ReferencedContainer = "container:Modules">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "InventoryTests"
+               BuildableName = "InventoryTests"
+               BlueprintName = "InventoryTests"
                ReferencedContainer = "container:Modules">
             </BuildableReference>
          </TestableReference>

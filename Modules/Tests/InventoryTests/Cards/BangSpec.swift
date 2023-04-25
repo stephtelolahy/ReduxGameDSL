@@ -8,6 +8,7 @@
 import Game
 import Quick
 import Nimble
+import Inventory
 
 final class BangSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -22,7 +23,9 @@ final class BangSpec: QuickSpec {
                                 .bang
                             }
                         }
-                    }.counters([.bang: 1])
+                    }
+                    .counters([.bang: 1])
+                    .cardRef(CardList.all)
                     
                     let sut = createGameStore(initial: state)
                     
@@ -49,6 +52,7 @@ final class BangSpec: QuickSpec {
                             Player("p3")
                             Player("p4").mustang(1)
                         }
+                        .cardRef(CardList.all)
                         let sut = createGameStore(initial: state)
                         
                         // When
@@ -73,6 +77,7 @@ final class BangSpec: QuickSpec {
                             Player("p3")
                             Player("p4")
                         }
+                        .cardRef(CardList.all)
                         let sut = createGameStore(initial: state)
                         
                         // When
@@ -105,6 +110,7 @@ final class BangSpec: QuickSpec {
                                 }
                             }
                         }
+                        .cardRef(CardList.all)
                         let sut = createGameStore(initial: state)
                         
                         // When
@@ -132,6 +138,7 @@ final class BangSpec: QuickSpec {
                             }
                             Player("p2")
                         }
+                        .cardRef(CardList.all)
                         let sut = createGameStore(initial: state)
                         
                         // When

@@ -8,7 +8,7 @@ import Game
 
 public enum CardList {
 
-    static let cardRef: [String: Card] = createCards {
+    public static let all: [String: Card] = createCards {
         Card(.beer) {
             onPlay(content: {
                 GameAction.heal(1, player: .actor)
@@ -66,7 +66,8 @@ public enum CardList {
         }
 
         Card(.bang) {
-            onPlay(target: .selectReachable, content: {
+            onPlay(target: .selectReachable,
+                   content: {
                 GameAction.forceDiscard(player: .target,
                                         card: .selectHandNamed(.missed),
                                         otherwise: .damage(1, player: .target))
