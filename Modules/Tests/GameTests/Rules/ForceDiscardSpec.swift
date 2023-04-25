@@ -21,23 +21,23 @@ final class ForceDiscardSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "missed-10♣️"
-                                "missed-8♠️"
+                                "counter-10♣️"
+                                "counter-8♠️"
                             }
                         }
                     }
 
                     // When
                     let action = GameAction.forceDiscard(player: .id("p1"),
-                                                         card: .selectHandNamed(.missed),
+                                                         card: .selectHandNamed("counter"),
                                                          otherwise: .damage(1, player: .target),
                                                          ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        "missed-10♣️": .discard(player: .id("p1"), card: .id("missed-10♣️"), ctx: ctx),
-                        "missed-8♠️": .discard(player: .id("p1"), card: .id("missed-8♠️"), ctx: ctx),
+                        "counter-10♣️": .discard(player: .id("p1"), card: .id("counter-10♣️"), ctx: ctx),
+                        "counter-8♠️": .discard(player: .id("p1"), card: .id("counter-8♠️"), ctx: ctx),
                         .pass: .damage(1, player: .target, ctx: ctx)
                     ])
                 }
@@ -52,7 +52,7 @@ final class ForceDiscardSpec: QuickSpec {
 
                     // When
                     let action = GameAction.forceDiscard(player: .id("p1"),
-                                                         card: .selectHandNamed(.missed),
+                                                         card: .selectHandNamed("counter"),
                                                          otherwise: .damage(1, player: .target),
                                                          ctx: ctx)
                     let result = sut.reduce(state: state, action: action)

@@ -21,14 +21,14 @@ final class ChallengeDiscardSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                .missed
+                                "counter"
                             }
                         }
                     }
                     
                     // When
                     let action = GameAction.challengeDiscard(player: .id("p1"),
-                                                             card: .selectHandNamed(.missed),
+                                                             card: .selectHandNamed("counter"),
                                                              otherwise: .damage(1, player: .target),
                                                              challenger: .id("px"),
                                                              ctx: ctx)
@@ -36,10 +36,10 @@ final class ChallengeDiscardSpec: QuickSpec {
                     
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        .missed: .group {
-                            GameAction.discard(player: .id("p1"), card: .id(.missed), ctx: ctx)
+                        "counter": .group {
+                            GameAction.discard(player: .id("p1"), card: .id("counter"), ctx: ctx)
                             GameAction.challengeDiscard(player: .id("px"),
-                                                        card: .selectHandNamed(.missed),
+                                                        card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),
                                                         challenger: .id("p1"),
                                                         ctx: ctx)
