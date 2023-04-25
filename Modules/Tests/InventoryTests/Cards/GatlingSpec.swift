@@ -17,7 +17,7 @@ final class GatlingSpec: QuickSpec {
             context("three players") {
                 it("should allow each player to counter or pass") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .gatling
@@ -73,7 +73,7 @@ final class GatlingSpec: QuickSpec {
             context("two players") {
                 it("should allow each player to counter") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .gatling

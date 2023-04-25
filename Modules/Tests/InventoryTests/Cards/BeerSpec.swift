@@ -16,7 +16,7 @@ final class BeerSpec: QuickSpec {
             context("being damaged") {
                 it("should heal one life point") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .beer
@@ -43,7 +43,7 @@ final class BeerSpec: QuickSpec {
             context("already max health") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .beer
@@ -68,7 +68,7 @@ final class BeerSpec: QuickSpec {
             context("two players left") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .beer

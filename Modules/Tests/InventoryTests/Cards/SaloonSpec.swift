@@ -16,7 +16,7 @@ final class SaloonSpec: QuickSpec {
             context("any players damaged") {
                 it("should heal one life point") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .saloon
@@ -48,7 +48,7 @@ final class SaloonSpec: QuickSpec {
             context("no player damaged") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .saloon

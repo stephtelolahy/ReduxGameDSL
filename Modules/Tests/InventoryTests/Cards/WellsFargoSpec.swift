@@ -15,7 +15,7 @@ final class WellsFargoSpec: QuickSpec {
         describe("playing wellsFargo") {
             it("should draw 3 cards") {
                 // Given
-                let state = GameState {
+                let state = createGame {
                     Player("p1") {
                         Hand {
                             .wellsFargo

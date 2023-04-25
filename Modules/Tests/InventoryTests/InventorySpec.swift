@@ -8,6 +8,7 @@ import Foundation
 import Game
 import Quick
 import Nimble
+import Inventory
 
 final class InventorySpec: QuickSpec {
     override func spec() {
@@ -15,7 +16,7 @@ final class InventorySpec: QuickSpec {
             it("should contain all collectible cards") {
                 // Given
                 // When
-                let cards = GameState().cardRef
+                let cards = CardList.all
 
                 // Then
                 expect(cards[.beer]) != nil

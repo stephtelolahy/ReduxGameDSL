@@ -15,7 +15,7 @@ final class StagecoachSpec: QuickSpec {
         describe("playing stagecoach") {
             it("should draw 2 cards") {
                 // Given
-                let state = GameState {
+                let state = createGame {
                     Player("p1") {
                         Hand {
                             .stagecoach

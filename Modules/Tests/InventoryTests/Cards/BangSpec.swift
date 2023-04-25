@@ -17,7 +17,7 @@ final class BangSpec: QuickSpec {
             context("reached limit per turn") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .bang
@@ -41,7 +41,7 @@ final class BangSpec: QuickSpec {
                 context("no player reachable") {
                     it("should throw error") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -65,7 +65,7 @@ final class BangSpec: QuickSpec {
                 context("some player reachable") {
                     it("should choose a target") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -95,7 +95,7 @@ final class BangSpec: QuickSpec {
                 context("having missed") {
                     it("should ask to counter or pass") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -126,7 +126,7 @@ final class BangSpec: QuickSpec {
                 context("not having missed") {
                     it("should ask to pass only") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
