@@ -49,10 +49,10 @@ public extension GameAction {
 public func onPlay(
     target: PlayerArg? = nil,
     @GameActionBuilder content: () -> GameAction,
-    @PlayReqBuilder playReqs: () -> [PlayReq] = { [] }
+    @PlayReqBuilder require: () -> [PlayReq] = { [] }
 ) -> CardAction {
     .init(actionType: .play,
-          playReqs: playReqs(),
+          playReqs: require(),
           target: target,
           effect: content())
 }

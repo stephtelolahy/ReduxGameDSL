@@ -11,23 +11,24 @@ public enum CardList {
         Card(.beer) {
             onPlay(content: {
                 GameAction.heal(1, player: .actor)
-            }, playReqs: {
+            }, require: {
                 PlayReq.isDamaged
                 PlayReq.isPlayersAtLeast(3)
             })
         }
-        
         Card(.saloon) {
-            GameAction.heal(1, player: .damaged)
-                .onPlay {
-                    PlayReq.isAnyDamaged
-                }
+            onPlay(content: {
+                GameAction.heal(1, player: .damaged)
+            }, require: {
+                PlayReq.isAnyDamaged
+            })
         }
         Card(.stagecoach) {
-            GameAction.replay(2) {
-                GameAction.draw(player: .actor)
+            onPlay {
+                GameAction.replay(2) {
+                    GameAction.draw(player: .actor)
+                }
             }
-            .onPlay()
         }
         Card(.wellsFargo) {
             GameAction.replay(3) {
