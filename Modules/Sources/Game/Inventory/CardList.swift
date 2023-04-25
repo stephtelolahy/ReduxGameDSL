@@ -6,7 +6,7 @@
 //
 
 public enum CardList {
-
+    
     static let cardRef: [String: Card] = createCards {
         Card(.beer) {
             onPlay(content: {
@@ -16,6 +16,7 @@ public enum CardList {
                 PlayReq.isPlayersAtLeast(3)
             })
         }
+        
         Card(.saloon) {
             onPlay(content: {
                 GameAction.heal(1, player: .damaged)
@@ -23,6 +24,7 @@ public enum CardList {
                 PlayReq.isAnyDamaged
             })
         }
+        
         Card(.stagecoach) {
             onPlay {
                 GameAction.replay(2) {
@@ -30,56 +32,71 @@ public enum CardList {
                 }
             }
         }
+        
         Card(.wellsFargo) {
-            GameAction.replay(3) {
-                GameAction.draw(player: .actor)
-            }
-            .onPlay()
-        }
-        Card(.catBalou) {
-            GameAction.discard(player: .target, card: .selectAny)
-                .onPlay(target: .selectAnyWithCard)
-        }
-        Card(.panic) {
-            GameAction.steal(player: .actor, target: .target, card: .selectAny)
-                .onPlay(target: .selectAtRangeWithCard(1))
-        }
-        Card(.generalStore) {
-            GameAction.group {
-                GameAction.replay(.numPlayers) {
-                    GameAction.reveal
+            onPlay {
+                GameAction.replay(3) {
+                    GameAction.draw(player: .actor)
                 }
-                GameAction.chooseCard(player: .all, card: .selectChoosable)
             }
-            .onPlay()
         }
+        
+        Card(.catBalou) {
+            onPlay(target: .selectAnyWithCard) {
+                GameAction.discard(player: .target, card: .selectAny)
+            }
+        }
+        
+        Card(.panic) {
+            onPlay(target: .selectAtRangeWithCard(1)) {
+                GameAction.steal(player: .actor, target: .target, card: .selectAny)
+            }
+        }
+        
+        Card(.generalStore) {
+            onPlay {
+                GameAction.group {
+                    GameAction.replay(.numPlayers) {
+                        GameAction.reveal
+                    }
+                    GameAction.chooseCard(player: .all, card: .selectChoosable)
+                }
+            }
+        }
+        
         Card(.bang) {
-            GameAction.forceDiscard(player: .target,
-                                    card: .selectHandNamed(.missed),
-                                    otherwise: .damage(1, player: .target))
-            .onPlay(target: .selectReachable) {
-                PlayReq.isTimesPerTurn(1)
-            }
-        }
-        Card(.missed)
-        Card(.gatling) {
-            GameAction.apply(target: .others) {
+            onPlay(target: .selectReachable, content: {
                 GameAction.forceDiscard(player: .target,
                                         card: .selectHandNamed(.missed),
                                         otherwise: .damage(1, player: .target))
-            }
-            .onPlay()
+            }, require: {
+                PlayReq.isTimesPerTurn(1)
+            })
         }
-        Card(.indians) {
-            GameAction.apply(target: .others) {
-                GameAction.forceDiscard(player: .target,
-                                        card: .selectHandNamed(.bang),
-                                        otherwise: .damage(1, player: .target))
+        
+        Card(.missed)
+        
+        Card(.gatling) {
+            onPlay {
+                GameAction.apply(target: .others) {
+                    GameAction.forceDiscard(player: .target,
+                                            card: .selectHandNamed(.missed),
+                                            otherwise: .damage(1, player: .target))
+                }
             }
-            .onPlay()
+        }
+        
+        Card(.indians) {
+            onPlay {
+                GameAction.apply(target: .others) {
+                    GameAction.forceDiscard(player: .target,
+                                            card: .selectHandNamed(.bang),
+                                            otherwise: .damage(1, player: .target))
+                }
+            }
         }
     }
-
+    
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
         content().toDictionary()
     }

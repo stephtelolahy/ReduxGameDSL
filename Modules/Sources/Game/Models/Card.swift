@@ -18,11 +18,11 @@ public struct CardAction: Codable, Equatable {
     /// The action type
     public let actionType: CardActionType
 
-    /// The requirements to match before activating the action
-    public let playReqs: [PlayReq]
-
     /// The target to choose before performing the action
     public var target: PlayerArg?
+
+    /// The requirements to match before activating the action
+    public let playReqs: [PlayReq]
     
     /// The side effect after performing the action
     public let effect: GameAction
