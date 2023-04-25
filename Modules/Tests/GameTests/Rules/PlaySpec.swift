@@ -16,17 +16,15 @@ final class PlaySpec: QuickSpec {
         var action: GameAction!
         var result: GameState!
 
-        let playable = Card("playable") {
-            onPlay {
-                GameAction.heal(1, player: .actor)
-            }
-        }
-        let cardRef = ["playable": playable]
-
         describe("play") {
             context("hand card") {
                 beforeEach {
                     // Given
+                    let playable = Card("playable") {
+                        onPlay {
+                            GameAction.heal(1, player: .actor)
+                        }
+                    }
                     let state = GameState {
                         Player("p1") {
                             Hand {
@@ -34,7 +32,7 @@ final class PlaySpec: QuickSpec {
                             }
                         }
                     }
-                    .cardRef(cardRef)
+                    .cardRef(["playable": playable])
                     
                     // When
                     action = GameAction.play(actor: "p1", card: "playable")

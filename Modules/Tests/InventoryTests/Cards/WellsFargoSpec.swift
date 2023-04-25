@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class WellsFargoSpec: QuickSpec {
     override func spec() {

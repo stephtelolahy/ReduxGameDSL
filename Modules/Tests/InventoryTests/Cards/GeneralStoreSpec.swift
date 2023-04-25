@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class GeneralStoreSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
