@@ -6,7 +6,7 @@
 //
 
 public struct Hand: PlayerAttribute {
-    let value: CardLocation
+    private let value: CardLocation
 
     public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardLocation(cards: content())

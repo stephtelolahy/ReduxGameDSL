@@ -7,21 +7,8 @@
 
 public extension GameState {
 
-    init(@AttributeBuilder components: () -> [Attribute] = { [] }) {
-        for attr in components() {
-            if let player = attr as? Player {
-                self.players[player.id] = player
-                self.playOrder.append(player.id)
-            } else if let deck = attr as? Deck {
-                self.deck = deck.value
-            } else if let discard = attr as? DiscardPile {
-                self.discard = discard.value
-            } else if let choosable = attr as? Choosable {
-                self.choosable = choosable.value
-            } else if let chooseOne = attr as? MustChooseOne {
-                self.chooseOne = chooseOne.value
-            }
-        }
+    init(@GameAttributeBuilder components: () -> [GameAttribute] = { [] }) {
+        components().forEach { $0.update(game: &self) }
     }
 
     func isOver(_ value: Bool) -> Self {

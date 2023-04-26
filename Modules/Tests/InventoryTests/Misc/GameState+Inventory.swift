@@ -8,6 +8,6 @@
 import Game
 import Inventory
 
-func createGame(@AttributeBuilder components: () -> [Attribute]) -> GameState {
+func createGame(@GameAttributeBuilder components: () -> [GameAttribute]) -> GameState {
     .init(components: components).cardRef(CardList.all)
 }
