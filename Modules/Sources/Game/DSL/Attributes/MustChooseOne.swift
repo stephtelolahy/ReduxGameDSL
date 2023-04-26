@@ -6,7 +6,7 @@
 //
 
 public struct MustChooseOne: GameAttribute {
-    private let value: ChooseOne
+    let value: ChooseOne
 
     public init(_ chooser: String, content: () -> [String: GameAction]) {
         self.value = ChooseOne(chooser: chooser, options: content())

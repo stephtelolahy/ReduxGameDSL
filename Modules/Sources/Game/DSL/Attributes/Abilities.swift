@@ -6,7 +6,7 @@
 //
 
 public struct Abilities: PlayerAttribute {
-    private let value: [String]
+    let value: [String]
 
     public init(@StringBuilder _ content: () -> [String]) {
         self.value = content()

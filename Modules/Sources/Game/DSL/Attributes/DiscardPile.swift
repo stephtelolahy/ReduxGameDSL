@@ -6,7 +6,7 @@
 //
 
 public struct DiscardPile: GameAttribute {
-    private let value: CardStack
+    let value: CardStack
 
     public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardStack(content: content)
