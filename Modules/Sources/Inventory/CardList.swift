@@ -97,6 +97,15 @@ public enum CardList {
                 }
             }
         }
+
+        Card(.duel) {
+            onPlay(target: .selectAny) {
+                GameAction.challengeDiscard(player: .target,
+                                            card: .selectHandNamed(.bang),
+                                            otherwise: .damage(1, player: .target),
+                                            challenger: .actor)
+            }
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

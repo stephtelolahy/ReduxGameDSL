@@ -70,6 +70,9 @@ private extension PlayerArg {
 
         case let .selectAt(distance):
             return PlayerSelectAt(distance: distance)
+
+        case let .selectAny:
+            return PlayerSelectAny()
         }
     }
 }

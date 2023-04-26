@@ -29,7 +29,7 @@ final class InventorySpec: QuickSpec {
                 expect(cards[.missed]) != nil
                 expect(cards[.gatling]) != nil
                 expect(cards[.indians]) != nil
-//                expect(cards[.duel]) != nil
+                expect(cards[.duel]) != nil
 //                expect(cards[.barrel]) != nil
 //                expect(cards[.dynamite]) != nil
 //                expect(cards[.jail]) != nil
