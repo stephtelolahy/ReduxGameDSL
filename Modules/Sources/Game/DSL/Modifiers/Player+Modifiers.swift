@@ -9,17 +9,9 @@ import Foundation
 
 public extension Player {
 
-    init(_ id: String = UUID().uuidString, @AttributeBuilder components: () -> [Attribute] = { [] }) {
+    init(_ id: String = UUID().uuidString, @PlayerAttributeBuilder components: () -> [PlayerAttribute] = { [] }) {
         self.id = id
-        for attr in components() {
-            if let hand = attr as? Hand {
-                self.hand = hand.value
-            } else if let inPlay = attr as? InPlay {
-                self.inPlay = inPlay.value
-            } else if let abilities = attr as? Abilities {
-                self.abilities = abilities.value
-            }
-        }
+        components().forEach { $0.update(player: &self) }
     }
 
     func name(_ value: String) -> Self {
