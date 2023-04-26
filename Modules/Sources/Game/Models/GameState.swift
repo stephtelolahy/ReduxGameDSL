@@ -42,9 +42,7 @@ public struct GameState: Codable, Equatable {
     public var chooseOne: ChooseOne?
 
     /// All cards reference
-    public var cardRef: [String: Card] {
-        CardList.cardRef
-    }
+    public var cardRef: [String: Card] = [:]
 }
 
 // MARK: - Convenience

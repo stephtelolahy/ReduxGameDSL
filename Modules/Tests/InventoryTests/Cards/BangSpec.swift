@@ -8,6 +8,7 @@
 import Game
 import Quick
 import Nimble
+import Inventory
 
 final class BangSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -16,13 +17,14 @@ final class BangSpec: QuickSpec {
             context("reached limit per turn") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .bang
                             }
                         }
-                    }.counters([.bang: 1])
+                    }
+                    .counters([.bang: 1])
                     
                     let sut = createGameStore(initial: state)
                     
@@ -39,7 +41,7 @@ final class BangSpec: QuickSpec {
                 context("no player reachable") {
                     it("should throw error") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -63,7 +65,7 @@ final class BangSpec: QuickSpec {
                 context("some player reachable") {
                     it("should choose a target") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -93,7 +95,7 @@ final class BangSpec: QuickSpec {
                 context("having missed") {
                     it("should ask to counter or pass") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -115,8 +117,8 @@ final class BangSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
-                            .missed: .apply(.discard(player: .id("p2"), card: .id(.missed)), ctx: ctx),
-                            Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
+                            .missed: .discard(player: .id("p2"), card: .id(.missed), ctx: ctx),
+                            .pass: .damage(1, player: .target, ctx: ctx)
                         ])
                     }
                 }
@@ -124,7 +126,7 @@ final class BangSpec: QuickSpec {
                 context("not having missed") {
                     it("should ask to pass only") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -142,7 +144,7 @@ final class BangSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .bang, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .bang, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
-                            Label.pass: .apply(.damage(1, player: .target), ctx: ctx)
+                            .pass: .damage(1, player: .target, ctx: ctx)
                         ])
                     }
                 }

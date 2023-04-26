@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class IndiansSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -16,7 +17,7 @@ final class IndiansSpec: QuickSpec {
             context("three players") {
                 it("should allow each player to counter or pass") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .indians
@@ -40,30 +41,30 @@ final class IndiansSpec: QuickSpec {
                     expect(result) == [.success(.play(actor: "p1", card: .indians))]
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
-                        .bang: .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2),
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
+                        .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
+                        .pass: .damage(1, player: .target, ctx: ctx2)
                     ])
 
                     // When p2 counter
-                    action = .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2)
+                    action = .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2)
                     result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [
-                        .success(.apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2))
+                        .success(.discard(player: .id("p2"), card: .id(.bang), ctx: ctx2))
                     ]
                     let ctx3 = EffectContext(actor: "p1", card: .indians, target: "p3")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx3)
+                        .pass: .damage(1, player: .target, ctx: ctx3)
                     ])
 
                     // When p3 pass
-                    action = .apply(.damage(1, player: .target), ctx: ctx3)
+                    action = .damage(1, player: .target, ctx: ctx3)
                     result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [
-                        .success(.apply(.damage(1, player: .id("p3")), ctx: ctx3))
+                        .success(.damage(1, player: .id("p3"), ctx: ctx3))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }
@@ -72,7 +73,7 @@ final class IndiansSpec: QuickSpec {
             context("two players") {
                 it("should allow each player to counter") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .indians
@@ -94,17 +95,17 @@ final class IndiansSpec: QuickSpec {
                     expect(result) == [.success(.play(actor: "p1", card: .indians))]
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
-                        .bang: .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2),
-                        Label.pass: .apply(.damage(1, player: .target), ctx: ctx2)
+                        .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
+                        .pass: .damage(1, player: .target, ctx: ctx2)
                     ])
 
                     // When p2 counter
-                    action = .apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2)
+                    action = .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2)
                     result = self.awaitAction(action, store: sut)
 
                     // Then
                     expect(result) == [
-                        .success(.apply(.discard(player: .id("p2"), card: .id(.bang)), ctx: ctx2))
+                        .success(.discard(player: .id("p2"), card: .id(.bang), ctx: ctx2))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }

@@ -15,7 +15,7 @@ struct Draw: GameReducerProtocol {
         
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.draw(player: .id($0)).withCtx(ctx)
+                .draw(player: .id($0), ctx: ctx)
             }
         }
 

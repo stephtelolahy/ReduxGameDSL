@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
+@testable import Game
 import Quick
 import Nimble
-import Game
 import Redux
 
 final class ChooseOneSpec: QuickSpec {
@@ -28,7 +28,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching waited action") {
                 it("should remove waiting state") {
                     // When
-                    sut.dispatch(GameAction.play(actor: "p1", card: "c1"))
+                    sut.dispatch(.play(actor: "p1", card: "c1"))
 
                     // Then
                     expect(sut.state.chooseOne) == nil
@@ -38,7 +38,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching non waited action") {
                 it("should do nothing") {
                     // When
-                    sut.dispatch(GameAction.play(actor: "p1", card: "c3"))
+                    sut.dispatch(.play(actor: "p1", card: "c3"))
 
                     // Then
                     expect(sut.state.chooseOne) != nil
@@ -48,7 +48,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching update") {
                 it("should do nothing") {
                     // When
-                    sut.dispatch(GameAction.update)
+                    sut.dispatch(.update)
 
                     // Then
                     expect(sut.state.chooseOne) != nil

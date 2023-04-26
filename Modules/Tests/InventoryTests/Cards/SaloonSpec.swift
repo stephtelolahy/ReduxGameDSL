@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class SaloonSpec: QuickSpec {
     override func spec() {
@@ -15,7 +16,7 @@ final class SaloonSpec: QuickSpec {
             context("any players damaged") {
                 it("should heal one life point") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .saloon
@@ -39,15 +40,15 @@ final class SaloonSpec: QuickSpec {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: .saloon)
                     expect(result) == [.success(.play(actor: "p1", card: .saloon)),
-                                       .success(.apply(.heal(1, player: .id("p2")), ctx: ctx)),
-                                       .success(.apply(.heal(1, player: .id("p3")), ctx: ctx))]
+                                       .success(.heal(1, player: .id("p2"), ctx: ctx)),
+                                       .success(.heal(1, player: .id("p3"), ctx: ctx))]
                 }
             }
 
             context("no player damaged") {
                 it("should throw error") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1") {
                             Hand {
                                 .saloon

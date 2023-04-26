@@ -16,13 +16,13 @@ struct ChooseCard: GameReducerProtocol {
         
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
+                .chooseCard(player: .id($0), card: card, ctx: ctx)
             }
         }
 
         guard case let .id(cId) = card else {
             return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil) {
-                CardEffect.chooseCard(player: player, card: .id($0)).withCtx(ctx)
+                .chooseCard(player: player, card: .id($0), ctx: ctx)
             }
         }
 

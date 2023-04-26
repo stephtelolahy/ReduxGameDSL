@@ -30,7 +30,7 @@ final class HealSpec: QuickSpec {
                 context("value less than damage") {
                     it("should gain life points") {
                         // When
-                        let action = GameAction.apply(.heal(1, player: .id("p1")), ctx: ctx)
+                        let action = GameAction.heal(1, player: .id("p1"), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -41,7 +41,7 @@ final class HealSpec: QuickSpec {
                 context("value equal to damage") {
                     it("should gain life points") {
                         // When
-                        let action = GameAction.apply(.heal(2, player: .id("p1")), ctx: ctx)
+                        let action = GameAction.heal(2, player: .id("p1"), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -52,7 +52,7 @@ final class HealSpec: QuickSpec {
                 context("value more than damage") {
                     it("should gain life points limited to max health") {
                         // When
-                        let action = GameAction.apply(.heal(3, player: .id("p1")), ctx: ctx)
+                        let action = GameAction.heal(3, player: .id("p1"), ctx: ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -71,7 +71,7 @@ final class HealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.heal(1, player: .id("p1")), ctx: ctx)
+                    let action = GameAction.heal(1, player: .id("p1"), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

@@ -1,15 +1,16 @@
 //
-//  ForceDiscard.swift
+//  ChallengeDiscard.swift
 //  
 //
-//  Created by Hugues Telolahy on 16/04/2023.
+//  Created by Hugues Telolahy on 23/04/2023.
 //
 
-struct ForceDiscard: GameReducerProtocol {
+struct ChallengeDiscard: GameReducerProtocol {
     let action: GameAction
     let player: PlayerArg
     let card: CardArg
     let otherwise: GameAction
+    let challenger: PlayerArg
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
@@ -32,11 +33,19 @@ struct ForceDiscard: GameReducerProtocol {
         // - discard one of matching card
         // - or Pass
         var options = cIdOptions.reduce(into: [String: GameAction]()) {
-            $0[$1.label] = .discard(player: player, card: .id($1.id), ctx: ctx)
+            let discardEffect = GameAction.discard(player: player, card: .id($1.id), ctx: ctx)
+            let reverseEffect = GameAction.challengeDiscard(player: challenger,
+                                                            card: card,
+                                                            otherwise: otherwise,
+                                                            challenger: player, ctx: ctx)
+            $0[$1.label] = .group {
+                discardEffect
+                reverseEffect
+            }
         }
         options[.pass] = otherwise.withCtx(ctx)
         state.chooseOne = ChooseOne(chooser: pId, options: options)
-        
+
         return state
     }
 }

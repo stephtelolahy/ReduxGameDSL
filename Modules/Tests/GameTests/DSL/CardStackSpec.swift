@@ -41,7 +41,7 @@ final class CardStackSpec: QuickSpec {
                     expect(sut.count) == 2
                 }
                 
-                it("should return first card as top") {
+                it("should expose first card as top") {
                     // Given
                     // When
                     let sut = CardStack {

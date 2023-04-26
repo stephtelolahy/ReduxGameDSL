@@ -12,7 +12,6 @@ import Nimble
 final class RevealSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("reveal") {
             context("chosable nil") {
@@ -27,7 +26,7 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.reveal, ctx: ctx)
+                    let action = GameAction.reveal
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -51,7 +50,7 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.apply(.reveal, ctx: ctx)
+                    let action = GameAction.reveal
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

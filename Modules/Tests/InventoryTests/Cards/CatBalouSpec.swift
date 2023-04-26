@@ -8,6 +8,7 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class CatBalouSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -17,7 +18,7 @@ final class CatBalouSpec: QuickSpec {
                 context("no player allowed") {
                     it("should throw error") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -38,7 +39,7 @@ final class CatBalouSpec: QuickSpec {
                 context("some player allowed") {
                     it("should choose a target") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -75,7 +76,7 @@ final class CatBalouSpec: QuickSpec {
                 context("without cards") {
                     it("should throw error") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -98,7 +99,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -122,14 +123,14 @@ final class CatBalouSpec: QuickSpec {
                         guard let chooseOne = sut.state.chooseOne,
                               chooseOne.chooser == "p1",
                               chooseOne.options.count == 1,
-                              let choice = chooseOne.options[Label.randomHand] else {
+                              let choice = chooseOne.options[.randomHand] else {
                             fail("Missing choice")
                             return
                         }
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         let randomOptions: [GameAction] = [
-                            .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
+                            .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ]
                         expect(randomOptions).to(contain(choice))
                     }
@@ -138,7 +139,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -161,8 +162,8 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c21": .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx),
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx)
+                            "c21": .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
+                            "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
                     }
                 }
@@ -170,7 +171,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
-                        let state = GameState {
+                        let state = createGame {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -196,9 +197,9 @@ final class CatBalouSpec: QuickSpec {
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c22": .apply(.discard(player: .id("p2"), card: .id("c22")), ctx: ctx),
-                            "c23": .apply(.discard(player: .id("p2"), card: .id("c23")), ctx: ctx),
-                            Label.randomHand: .apply(.discard(player: .id("p2"), card: .id("c21")), ctx: ctx)
+                            "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx),
+                            "c23": .discard(player: .id("p2"), card: .id("c23"), ctx: ctx),
+                            .randomHand: .discard(player: .id("p2"), card: .id("c21"), ctx: ctx)
                         ])
                     }
                 }

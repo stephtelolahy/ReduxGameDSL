@@ -8,13 +8,14 @@
 import Quick
 import Nimble
 import Game
+import Inventory
 
 final class WellsFargoSpec: QuickSpec {
     override func spec() {
         describe("playing wellsFargo") {
             it("should draw 3 cards") {
                 // Given
-                let state = GameState {
+                let state = createGame {
                     Player("p1") {
                         Hand {
                             .wellsFargo
@@ -35,9 +36,9 @@ final class WellsFargoSpec: QuickSpec {
                 // Then
                 let ctx = EffectContext(actor: "p1", card: .wellsFargo)
                 expect(result) == [.success(.play(actor: "p1", card: .wellsFargo)),
-                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
-                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx)),
-                                   .success(.apply(.draw(player: .id("p1")), ctx: ctx))]
+                                   .success(.draw(player: .id("p1"), ctx: ctx)),
+                                   .success(.draw(player: .id("p1"), ctx: ctx)),
+                                   .success(.draw(player: .id("p1"), ctx: ctx))]
             }
         }
     }

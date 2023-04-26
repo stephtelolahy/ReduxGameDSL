@@ -5,10 +5,14 @@
 //  Created by Hugues Telolahy on 25/03/2023.
 //
 
-public struct DiscardPile: Attribute {
-    let value: CardStack
+public struct DiscardPile: GameAttribute {
+    private let value: CardStack
 
     public init(@StringBuilder _ content: () -> [String]) {
         self.value = CardStack(content: content)
+    }
+    
+    public func update(game: inout GameState) {
+        game.discard = value
     }
 }

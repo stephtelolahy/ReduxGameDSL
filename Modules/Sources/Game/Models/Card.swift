@@ -9,26 +9,26 @@ public struct Card: Codable, Equatable {
     public let name: String
     
     /// Actions that can be performed with the card
-    public var actions: [CardActionInfo] = []
+    public var actions: [CardAction] = []
 }
 
 /// Describing card action
-public struct CardActionInfo: Codable, Equatable {
+public struct CardAction: Codable, Equatable {
     
     /// The action type
     public let actionType: CardActionType
 
-    /// The requirements to match before activating the action
-    public let playReqs: [PlayReq]
-
     /// The target to choose before performing the action
     public var target: PlayerArg?
+
+    /// The requirements to match before activating the action
+    public let playReqs: [PlayReq]
     
     /// The side effect after performing the action
-    public let effect: CardEffect
+    public let effect: GameAction
 }
 
-/// Describing how to apply card action
+/// Describing when card action is applied
 public enum CardActionType: Codable, Equatable {
     
     /// Discard immediately and apply side effect

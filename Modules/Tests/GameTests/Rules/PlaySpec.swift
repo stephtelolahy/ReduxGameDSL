@@ -20,26 +20,29 @@ final class PlaySpec: QuickSpec {
             context("hand card") {
                 beforeEach {
                     // Given
+                    let playable = Card("playable") {
+                        onPlay {
+                            GameAction.heal(1, player: .actor)
+                        }
+                    }
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                .beer
+                                "playable"
                             }
                         }
-                        .health(2)
-                        .maxHealth(4)
-                        Player()
-                        Player()
                     }
+                    .cardRef(["playable": playable])
+                    
                     // When
-                    action = GameAction.play(actor: "p1", card: .beer)
+                    action = GameAction.play(actor: "p1", card: "playable")
                     result = sut.reduce(state: state, action: action)
                 }
 
                 it("should discard immediately") {
                     // Then
                     expect(result.player("p1").hand.cards).to(beEmpty())
-                    expect(result.discard.top) == .beer
+                    expect(result.discard.top) == "playable"
                 }
 
                 it("should emit completed action") {
@@ -49,8 +52,8 @@ final class PlaySpec: QuickSpec {
 
                 it("should queue side effects") {
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: .beer)
-                    expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
+                    let ctx = EffectContext(actor: "p1", card: "playable")
+                    expect(result.queue) == [.heal(1, player: .actor, ctx: ctx)]
                 }
             }
 
@@ -62,11 +65,11 @@ final class PlaySpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .stagecoach)
+                    let action = GameAction.play(actor: "p1", card: "unknown")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardNotFound(.stagecoach)
+                    expect(result.thrownError) == .cardNotFound("unknown")
                 }
             }
 
@@ -90,17 +93,17 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                .missed
+                                "unplayable"
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .missed)
+                    let action = GameAction.play(actor: "p1", card: "unplayable")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardIsNotPlayable(.missed)
+                    expect(result.thrownError) == .cardIsNotPlayable("unplayable")
                 }
             }
         }
