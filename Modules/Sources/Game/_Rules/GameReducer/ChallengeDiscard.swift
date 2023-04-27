@@ -43,7 +43,7 @@ struct ChallengeDiscard: GameReducerProtocol {
                 reverseEffect
             }
         }
-        options[.pass] = otherwise.withCtx(ctx!)
+        options[.pass] = otherwise.withCtx(ctx)
         state.chooseOne = ChooseOne(chooser: pId, options: options)
 
         return state
