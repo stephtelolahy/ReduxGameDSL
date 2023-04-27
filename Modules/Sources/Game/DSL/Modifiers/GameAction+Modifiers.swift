@@ -24,13 +24,13 @@ public extension GameAction {
 }
 
 extension GameAction {
-    func withCtx(_ ctx: EffectContext) -> Self {
+    func withCtx(_ ctx: EffectContext?) -> Self {
         var copy = self
         copy.ctx = ctx
         return copy
     }
 
-    private var ctx: EffectContext {
+    private var ctx: EffectContext? {
         get {
             fatalError(.unexpected)
         }

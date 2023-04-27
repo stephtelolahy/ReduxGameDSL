@@ -9,13 +9,13 @@ struct Heal: GameReducerProtocol {
     let action: GameAction
     let player: PlayerArg
     let value: Int
-    let ctx: EffectContext
+    let ctx: EffectContext?
     
     func reduce(state: GameState) throws -> GameState {
         var state = state
         
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx!) {
                 .heal(value, player: .id($0), ctx: ctx)
             }
         }
@@ -23,7 +23,7 @@ struct Heal: GameReducerProtocol {
         // update health
         try state[keyPath: \GameState.players[pId]]?.gainHealth(value)
         
-        state.completedAction = action
+        state.completedAction = action.withCtx(nil)
         
         return state
     }
