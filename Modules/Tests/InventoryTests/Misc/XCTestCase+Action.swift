@@ -51,26 +51,27 @@ extension XCTestCase {
         wait(for: [expectation], timeout: timeout)
         cancellable.cancel()
         
-        XCTAssertNil(store.state.chooseOne, "Game must be idle", file: file, line: line)
-        
         return result
     }
     
     func awaitSequence(
-        state: GameState,
         action: GameAction,
         choices: String...,
+        state: GameState,
         timeout: TimeInterval = 0.1,
         file: StaticString = #file,
         line: UInt = #line
     ) -> [Result<GameAction, GameError>] {
         let sut = createGameStore(initial: state)
-        return awaitAction(action,
-                           choices: choices,
-                           store: sut,
-                           timeout: timeout,
-                           file: file,
-                           line: line)
+        let result = awaitAction(action,
+                                 choices: choices,
+                                 store: sut,
+                                 timeout: timeout,
+                                 file: file,
+                                 line: line)
+        XCTAssertNil(sut.state.chooseOne, "Game must be idle", file: file, line: line)
+        XCTAssertTrue(sut.state.queue.isEmpty, "Game must be idle", file: file, line: line)
+        return result
     }
     
 }

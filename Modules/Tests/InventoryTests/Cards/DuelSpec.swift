@@ -34,9 +34,9 @@ final class DuelSpec: QuickSpec {
                         
                         // When
                         let result = self.awaitSequence(
-                            state: state,
                             action: .play(actor: "p1", card: .duel, target: "p2"),
-                            choices: .pass
+                            choices: .pass,
+                            state: state
                         )
                         
                         // Then
