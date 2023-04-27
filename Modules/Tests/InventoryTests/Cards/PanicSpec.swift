@@ -211,9 +211,6 @@ final class PanicSpec: QuickSpec {
                             "c23": .steal(player: .id("p1"), target: .id("p2"), card: .id("c23"), ctx: ctx),
                             .randomHand: .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx)
                         ])
-                        
-                        // TODO: 
-//                        expect(sut.state.chooseOne) == nil
                     }
                 }
             }

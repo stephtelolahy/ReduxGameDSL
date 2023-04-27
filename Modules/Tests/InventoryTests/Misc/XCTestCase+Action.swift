@@ -10,6 +10,7 @@ import Redux
 import Game
 
 extension XCTestCase {
+    
     func awaitAction(
         _ action: GameAction,
         choices: [String] = [],
@@ -18,7 +19,7 @@ extension XCTestCase {
         file: StaticString = #file,
         line: UInt = #line
     ) -> [Result<GameAction, GameError>] {
-
+        
         var choices = choices
         var result: [Result<GameAction, GameError>] = []
         let expectation = XCTestExpectation(description: "Awaiting game idle")
@@ -39,17 +40,37 @@ extension XCTestCase {
                     store.dispatch(choosenAction)
                 }
             }
-
+            
             if state.queue.isEmpty && state.chooseOne == nil {
                 expectation.fulfill()
             }
         }
-
+        
         store.dispatch(action)
-
+        
         wait(for: [expectation], timeout: timeout)
         cancellable.cancel()
-
+        
+        XCTAssertNil(store.state.chooseOne, "Game must be idle", file: file, line: line)
+        
         return result
     }
+    
+    func awaitSequence(
+        state: GameState,
+        action: GameAction,
+        choices: String...,
+        timeout: TimeInterval = 0.1,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> [Result<GameAction, GameError>] {
+        let sut = createGameStore(initial: state)
+        return awaitAction(action,
+                           choices: choices,
+                           store: sut,
+                           timeout: timeout,
+                           file: file,
+                           line: line)
+    }
+    
 }

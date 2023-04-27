@@ -165,10 +165,7 @@ final class CatBalouSpec: QuickSpec {
                             "c21": .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
                             "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
-                        
-                        // TODO: 
-//                        expect(sut.state.chooseOne) == nil
-                    }
+                                            }
                 }
 
                 context("having hand and inPlay cards") {
@@ -204,9 +201,6 @@ final class CatBalouSpec: QuickSpec {
                             "c23": .discard(player: .id("p2"), card: .id("c23"), ctx: ctx),
                             .randomHand: .discard(player: .id("p2"), card: .id("c21"), ctx: ctx)
                         ])
-                        
-                        // TODO: 
-//                        expect(sut.state.chooseOne) == nil
                     }
                 }
             }

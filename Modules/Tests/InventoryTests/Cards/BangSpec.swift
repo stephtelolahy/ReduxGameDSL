@@ -120,9 +120,6 @@ final class BangSpec: QuickSpec {
                             .missed: .discard(player: .id("p2"), card: .id(.missed), ctx: ctx),
                             .pass: .damage(1, player: .target, ctx: ctx)
                         ])
-                        
-                        // TODO: 
-//                        expect(sut.state.chooseOne) == nil
                     }
                 }
                 
@@ -149,9 +146,6 @@ final class BangSpec: QuickSpec {
                         expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
                             .pass: .damage(1, player: .target, ctx: ctx)
                         ])
-                        
-                        // TODO: 
-//                        expect(sut.state.chooseOne) == nil
                     }
                 }
             }

@@ -31,11 +31,13 @@ final class DuelSpec: QuickSpec {
                             }
                             Player("p2")
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .duel, target: "p2")
-                        let result = self.awaitAction(action, choices: [.pass], store: sut)
+                        let result = self.awaitSequence(
+                            state: state,
+                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                            choices: .pass
+                        )
                         
                         // Then
                         expect(result) == [
