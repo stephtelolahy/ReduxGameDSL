@@ -50,7 +50,7 @@ final class DuelSpec: QuickSpec {
 
                         // Then
                         expect(result) == [
-                            .success(.damage(1, player: .id("p2"), ctx: ctx2))
+                            .success(.damage(1, player: .id("p2")))
                         ]
                         expect(sut.state.chooseOne) == nil
                     }

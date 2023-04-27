@@ -44,10 +44,10 @@ private extension GameAction {
             return Update()
 
         case let .heal(value, player, ctx):
-            return Heal(action: self, player: player, value: value, ctx: ctx!)
+            return Heal(action: self, player: player, value: value, ctx: ctx)
 
         case let .damage(value, player, ctx):
-            return Damage(action: self, player: player, value: value, ctx: ctx!)
+            return Damage(action: self, player: player, value: value, ctx: ctx)
 
         case let .draw(player, ctx):
             return Draw(action: self, player: player, ctx: ctx!)

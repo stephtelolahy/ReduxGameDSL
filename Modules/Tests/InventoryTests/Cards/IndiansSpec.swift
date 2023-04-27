@@ -64,7 +64,7 @@ final class IndiansSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: .id("p3"), ctx: ctx3))
+                        .success(.damage(1, player: .id("p3")))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }
