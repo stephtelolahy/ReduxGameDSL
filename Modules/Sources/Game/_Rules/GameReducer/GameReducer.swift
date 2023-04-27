@@ -62,10 +62,10 @@ private extension GameAction {
             return ChooseCard(player: player, card: card, ctx: ctx)
 
         case .reveal:
-            return Reveal(action: self)
+            return Reveal()
             
         case let .forceDiscard(player, card, otherwise, ctx):
-            return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx!)
+            return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
 
         case let .challengeDiscard(player, card, otherwise, challenger, ctx):
             return ChallengeDiscard(action: self,
