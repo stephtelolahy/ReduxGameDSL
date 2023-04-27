@@ -8,13 +8,13 @@
 struct Draw: GameReducerProtocol {
     let action: GameAction
     let player: PlayerArg
-    let ctx: EffectContext
+    let ctx: EffectContext?
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
         
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx!) {
                 .draw(player: .id($0), ctx: ctx)
             }
         }
@@ -24,7 +24,7 @@ struct Draw: GameReducerProtocol {
 
         state[keyPath: \GameState.players[pId]]?.hand.add(card)
 
-        state.completedAction = action
+        state.completedAction = action.withCtx(nil)
 
         return state
     }

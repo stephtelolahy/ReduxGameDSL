@@ -34,11 +34,10 @@ final class WellsFargoSpec: QuickSpec {
                 let result = self.awaitAction(action, store: sut)
 
                 // Then
-                let ctx = EffectContext(actor: "p1", card: .wellsFargo)
                 expect(result) == [.success(.play(actor: "p1", card: .wellsFargo)),
-                                   .success(.draw(player: .id("p1"), ctx: ctx)),
-                                   .success(.draw(player: .id("p1"), ctx: ctx)),
-                                   .success(.draw(player: .id("p1"), ctx: ctx))]
+                                   .success(.draw(player: .id("p1"))),
+                                   .success(.draw(player: .id("p1"))),
+                                   .success(.draw(player: .id("p1")))]
             }
         }
     }

@@ -50,7 +50,7 @@ private extension GameAction {
             return Damage(action: self, player: player, value: value, ctx: ctx)
 
         case let .draw(player, ctx):
-            return Draw(action: self, player: player, ctx: ctx!)
+            return Draw(action: self, player: player, ctx: ctx)
 
         case let .discard(player, card, ctx):
             return Discard(action: self, player: player, card: card, ctx: ctx!)
