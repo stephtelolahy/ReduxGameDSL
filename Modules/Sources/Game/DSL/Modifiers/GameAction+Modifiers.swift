@@ -24,7 +24,7 @@ public extension GameAction {
 }
 
 extension GameAction {
-    func withCtx(_ ctx: EffectContext?) -> Self {
+    func withCtx(_ ctx: EffectContext) -> Self {
         var copy = self
         copy.ctx = ctx
         return copy

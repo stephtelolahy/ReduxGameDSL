@@ -6,7 +6,6 @@
 //
 
 struct Damage: GameReducerProtocol {
-    let action: GameAction
     let player: PlayerArg
     let value: Int
     let ctx: EffectContext?
@@ -23,7 +22,7 @@ struct Damage: GameReducerProtocol {
         // update health
         state[keyPath: \GameState.players[pId]]?.health -= value
 
-        state.completedAction = action.withCtx(nil)
+        state.completedAction = .damage(value, player: player)
 
         return state
     }

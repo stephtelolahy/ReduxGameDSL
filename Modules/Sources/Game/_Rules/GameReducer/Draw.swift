@@ -6,7 +6,6 @@
 //
 
 struct Draw: GameReducerProtocol {
-    let action: GameAction
     let player: PlayerArg
     let ctx: EffectContext?
 
@@ -24,7 +23,7 @@ struct Draw: GameReducerProtocol {
 
         state[keyPath: \GameState.players[pId]]?.hand.add(card)
 
-        state.completedAction = action.withCtx(nil)
+        state.completedAction = .draw(player: player)
 
         return state
     }
