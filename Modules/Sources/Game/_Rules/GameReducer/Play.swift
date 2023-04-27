@@ -6,7 +6,6 @@
 //
 
 struct Play: GameReducerProtocol {
-    let action: GameAction
     let actor: String
     let card: String
     let target: String?
@@ -46,7 +45,7 @@ struct Play: GameReducerProtocol {
         // queue side effects
         state.queue.append(playAction.effect.withCtx(ctx))
 
-        state.completedAction = action
+        state.completedAction = .play(actor: actor, card: card, target: target)
 
         return state
     }

@@ -38,7 +38,7 @@ private extension GameAction {
     func reducer() -> GameReducerProtocol {
         switch self {
         case let .play(actor, card, target):
-            return Play(action: self, actor: actor, card: card, target: target)
+            return Play(actor: actor, card: card, target: target)
 
         case .update:
             return Update()
@@ -53,7 +53,7 @@ private extension GameAction {
             return Draw(player: player, ctx: ctx)
 
         case let .discard(player, card, ctx):
-            return Discard(action: self, player: player, card: card, ctx: ctx!)
+            return Discard(player: player, card: card, ctx: ctx)
 
         case let .steal(player, target, card, ctx):
             return Steal(action: self, player: player, target: target, card: card, ctx: ctx!)

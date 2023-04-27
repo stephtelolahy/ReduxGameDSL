@@ -51,7 +51,7 @@ final class IndiansSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.discard(player: .id("p2"), card: .id(.bang), ctx: ctx2))
+                        .success(.discard(player: .id("p2"), card: .id(.bang)))
                     ]
                     let ctx3 = EffectContext(actor: "p1", card: .indians, target: "p3")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
@@ -105,7 +105,7 @@ final class IndiansSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.discard(player: .id("p2"), card: .id(.bang), ctx: ctx2))
+                        .success(.discard(player: .id("p2"), card: .id(.bang)))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }
