@@ -59,7 +59,7 @@ private extension GameAction {
             return Steal(player: player, target: target, card: card, ctx: ctx)
 
         case let .chooseCard(player, card, ctx):
-            return ChooseCard(action: self, player: player, card: card, ctx: ctx!)
+            return ChooseCard(player: player, card: card, ctx: ctx)
 
         case .reveal:
             return Reveal(action: self)
