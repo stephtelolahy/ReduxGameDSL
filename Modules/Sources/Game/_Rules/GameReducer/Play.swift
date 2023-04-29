@@ -14,13 +14,13 @@ struct Play: GameReducerProtocol {
         var state = state
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
-        // discard immediately
-        guard state.players[actor] != nil else {
+        guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
         }
 
-        try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
-        state.discard.push(card)
+        guard actorObj.hand.contains(card) else {
+            throw GameError.cardNotFound(card)
+        }
 
         // verify play action
         let cardName = card.extractName()
@@ -41,6 +41,10 @@ struct Play: GameReducerProtocol {
                 .play(actor: actor, card: card, target: $0)
             }
         }
+
+        // discard immediately
+        try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
+        state.discard.push(card)
 
         // queue side effects
         state.queue.append(playAction.effect.withCtx(ctx))

@@ -14,8 +14,32 @@ final class DuelSpec: QuickSpec {
     override func spec() {
         describe("playing Duel") {
             
-            xcontext("without target") {
+            context("without target") {
                 it("should ask to select target") {
+                    // Given
+                    let state = createGame {
+                        Player("p1") {
+                            Hand {
+                                .duel
+                            }
+                        }
+                        Player("p2")
+                        Player("p3")
+                        Player("p4")
+                    }
+
+                    // When
+                    let result = self.awaitSequence(
+                        action: .play(actor: "p1", card: .duel),
+                        choices: "p4", .pass,
+                        state: state
+                    )
+
+                    // Then
+                    expect(result) == [
+                        .success(.play(actor: "p1", card: .duel, target: "p4")),
+                        .success(.damage(1, player: .id("p4")))
+                    ]
                 }
             }
             
