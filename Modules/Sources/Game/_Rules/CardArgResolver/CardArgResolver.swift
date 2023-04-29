@@ -40,7 +40,7 @@ struct CardArgResolver {
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
-            state.chooseOne = ChooseOne(chooser: chooser, options: options)
+            state.queue.insert(.chooseOne(chooser: chooser, options: options), at: 0) 
         }
         return state
     }

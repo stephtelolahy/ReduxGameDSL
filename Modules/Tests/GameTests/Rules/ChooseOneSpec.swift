@@ -31,7 +31,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.play(actor: "p1", card: "c1"))
 
                     // Then
-                    expect(sut.state.chooseOne) == nil
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
 
@@ -41,7 +41,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.play(actor: "p1", card: "c3"))
 
                     // Then
-                    expect(sut.state.chooseOne) != nil
+                    expect(sut.state.queue).toNot(beEmpty())
                 }
             }
 
@@ -51,7 +51,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.update)
 
                     // Then
-                    expect(sut.state.chooseOne) != nil
+                    expect(sut.state.queue).toNot(beEmpty())
                 }
             }
         }

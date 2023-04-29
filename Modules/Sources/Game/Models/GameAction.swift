@@ -5,6 +5,7 @@
 //  Created by Hugues Telolahy on 06/04/2023.
 //
 
+// TODO: case .effect(CardEffect, ctx: EffectContext?)
 /// Function that causes any change in the game state
 public indirect enum GameAction: Codable, Equatable {
     
@@ -52,4 +53,8 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Apply an effect to some players
     case applyEffect(target: PlayerArg, effect: GameAction, ctx: EffectContext? = nil)
+
+    /// A player must perform a choice
+    /// Pending actions to choose before continuing effect resolving
+    case chooseOne(chooser: String, options: [String: GameAction])
 }

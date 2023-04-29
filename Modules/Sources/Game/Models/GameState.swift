@@ -31,12 +31,9 @@ public struct GameState: Codable, Equatable {
 
     /// Last occured event
     public var event: CodableResult<GameEvent, GameError>?
-    
+
     /// Queued effects
     public var queue: [GameAction] = []
-
-    /// Pending actions to choose before continuing effect resolving
-    public var chooseOne: ChooseOne?
 
     /// All cards reference
     public var cardRef: [String: Card] = [:]
@@ -53,4 +50,14 @@ public extension GameState {
         }
         return player
     }
+}
+
+/// ChooseOne labels
+public extension String {
+
+    /// Random hand card label
+    static let randomHand = "randomHand"
+
+    /// Pass when asked to do an action
+    static let pass = "pass"
 }

@@ -13,15 +13,14 @@ protocol GameReducerProtocol {
 
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
-        if let chooseOne = state.chooseOne {
-            guard chooseOne.options.values.contains(action) else {
+        if case let .chooseOne(_, options) = state.queue.first {
+            guard options.values.contains(action) else {
                 return state
             }
         }
 
         var state = state
         state.event = nil
-        state.chooseOne = nil
 
         do {
             return try action.reducer().reduce(state: state)
@@ -78,6 +77,10 @@ private extension GameAction {
 
         case let .applyEffect(target, effect, ctx):
             return ApplyEffect(target: target, effect: effect, ctx: ctx)
+
+        case .chooseOne:
+            // dispatch chooseOne for AI player only
+            fatalError(.unexpected)
         }
     }
 }

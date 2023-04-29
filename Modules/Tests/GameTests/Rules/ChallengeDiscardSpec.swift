@@ -35,7 +35,7 @@ final class ChallengeDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
                     
                     // Then
-                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(result.queue.first) == .chooseOne(chooser: "p1", options: [
                         "counter": .group {
                             GameAction.discard(player: .id("p1"), card: .id("counter"), ctx: ctx)
                             GameAction.challengeDiscard(player: .id("px"),

@@ -31,4 +31,7 @@ public enum GameEvent: Codable, Equatable {
 
     /// Draw a card from discard and put to choosable
     case reveal
+
+    /// Ask a player to choose an action
+    case chooseOne(chooser: String, choices: [String])
 }

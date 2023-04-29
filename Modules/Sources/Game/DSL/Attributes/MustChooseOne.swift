@@ -5,14 +5,15 @@
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
+// TODO: replace with Queueing(...)
 public struct MustChooseOne: GameAttribute {
-    let value: ChooseOne
+    let value: GameAction
 
     public init(_ chooser: String, content: () -> [String: GameAction]) {
-        self.value = ChooseOne(chooser: chooser, options: content())
+        self.value = .chooseOne(chooser: chooser, options: content())
     }
     
     public func update(game: inout GameState) {
-        game.chooseOne = value
+        game.queue.insert(value, at: 0)
     }
 }

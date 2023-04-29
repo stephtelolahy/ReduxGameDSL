@@ -43,7 +43,7 @@ final class GeneralStoreSpec: QuickSpec {
                                        .success(.reveal),
                                        .success(.reveal),
                                        .success(.reveal)]
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                         "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
                         "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx),
                         "c3": .chooseCard(player: .id("p1"), card: .id("c3"), ctx: ctx)
@@ -57,7 +57,7 @@ final class GeneralStoreSpec: QuickSpec {
                     expect(result) == [
                         .success(.chooseCard(player: "p1", card: "c1"))
                     ]
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                         "c2": .chooseCard(player: .id("p2"), card: .id("c2"), ctx: ctx),
                         "c3": .chooseCard(player: .id("p2"), card: .id("c3"), ctx: ctx)
                     ])
@@ -71,7 +71,7 @@ final class GeneralStoreSpec: QuickSpec {
                         .success(.chooseCard(player: "p2", card: "c2")),
                         .success(.chooseCard(player: "p3", card: "c3"))
                     ]
-                    expect(sut.state.chooseOne) == nil
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
             
@@ -101,7 +101,7 @@ final class GeneralStoreSpec: QuickSpec {
                     expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
                                        .success(.reveal),
                                        .success(.reveal)]
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                         "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
                         "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx)
                     ])
@@ -115,7 +115,7 @@ final class GeneralStoreSpec: QuickSpec {
                         .success(.chooseCard(player: "p1", card: "c1")),
                         .success(.chooseCard(player: "p2", card: "c2"))
                     ]
-                    expect(sut.state.chooseOne) == nil
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
         }

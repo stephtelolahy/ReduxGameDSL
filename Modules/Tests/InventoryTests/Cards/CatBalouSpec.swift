@@ -1,6 +1,6 @@
 //
 //  CatBalouSpec.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
@@ -64,7 +64,7 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result).to(beEmpty())
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                        expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                             "p2": .play(actor: "p1", card: .catBalou, target: "p2"),
                             "p3": .play(actor: "p1", card: .catBalou, target: "p3")
                         ])
@@ -120,10 +120,10 @@ final class CatBalouSpec: QuickSpec {
 
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
-                        guard let chooseOne = sut.state.chooseOne,
-                              chooseOne.chooser == "p1",
-                              chooseOne.options.count == 1,
-                              let choice = chooseOne.options[.randomHand] else {
+                        guard case let .chooseOne(chooser, options) = sut.state.queue.first,
+                              chooser == "p1",
+                              options.count == 1,
+                              let choice = options[.randomHand] else {
                             fail("Missing choice")
                             return
                         }
@@ -161,7 +161,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                        expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                             "c21": .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
                             "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
@@ -196,7 +196,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2"))]
                         let ctx = EffectContext(actor: "p1", card: .catBalou, target: "p2")
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
+                        expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
                             "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx),
                             "c23": .discard(player: .id("p2"), card: .id("c23"), ctx: ctx),
                             .randomHand: .discard(player: .id("p2"), card: .id("c21"), ctx: ctx)

@@ -29,15 +29,15 @@ extension XCTestCase {
                 result.append(event)
             }
             
-            if let chooseOne = state.chooseOne,
-               !choices.isEmpty,
-               let choosenAction = chooseOne.options[choices.removeFirst()] {
+            if case let .chooseOne(_, options) = state.queue.first,
+                !choices.isEmpty,
+               let choosenAction = options[choices.removeFirst()] {
                 DispatchQueue.main.async {
                     store.dispatch(choosenAction)
                 }
             }
             
-            if state.queue.isEmpty && state.chooseOne == nil {
+            if state.queue.isEmpty {
                 expectation.fulfill()
             }
         }
@@ -65,7 +65,6 @@ extension XCTestCase {
                                  timeout: timeout,
                                  file: file,
                                  line: line)
-        XCTAssertNil(sut.state.chooseOne, "Game must be idle", file: file, line: line)
         XCTAssertTrue(sut.state.queue.isEmpty, "Game must be idle", file: file, line: line)
         return result
     }

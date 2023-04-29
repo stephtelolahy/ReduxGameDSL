@@ -40,7 +40,7 @@ final class IndiansSpec: QuickSpec {
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: .indians))]
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p2", options: [
                         .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
                         .pass: .damage(1, player: .target, ctx: ctx2)
                     ])
@@ -54,7 +54,7 @@ final class IndiansSpec: QuickSpec {
                         .success(.discard(player: "p2", card: .bang))
                     ]
                     let ctx3 = EffectContext(actor: "p1", card: .indians, target: "p3")
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p3", options: [
                         .pass: .damage(1, player: .target, ctx: ctx3)
                     ])
 
@@ -66,7 +66,7 @@ final class IndiansSpec: QuickSpec {
                     expect(result) == [
                         .success(.damage(1, player: "p3"))
                     ]
-                    expect(sut.state.chooseOne) == nil
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
 
@@ -94,7 +94,7 @@ final class IndiansSpec: QuickSpec {
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: .indians))]
                     let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
-                    expect(sut.state.chooseOne) == ChooseOne(chooser: "p2", options: [
+                    expect(sut.state.queue.first) == .chooseOne(chooser: "p2", options: [
                         .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
                         .pass: .damage(1, player: .target, ctx: ctx2)
                     ])
@@ -107,7 +107,7 @@ final class IndiansSpec: QuickSpec {
                     expect(result) == [
                         .success(.discard(player: "p2", card: .bang))
                     ]
-                    expect(sut.state.chooseOne) == nil
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
         }

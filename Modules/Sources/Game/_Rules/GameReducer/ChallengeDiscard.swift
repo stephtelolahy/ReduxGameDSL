@@ -44,7 +44,7 @@ struct ChallengeDiscard: GameReducerProtocol {
             }
         }
         options[.pass] = otherwise.withCtx(ctx)
-        state.chooseOne = ChooseOne(chooser: pId, options: options)
+        state.queue.insert(.chooseOne(chooser: pId, options: options), at: 0)
 
         return state
     }
