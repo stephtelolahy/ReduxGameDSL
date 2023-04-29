@@ -34,8 +34,8 @@ final class StagecoachSpec: QuickSpec {
 
                 // Then
                 expect(result) == [.success(.play(actor: "p1", card: .stagecoach)),
-                                   .success(.draw(player: .id("p1"))),
-                                   .success(.draw(player: .id("p1")))]
+                                   .success(.draw(player: "p1")),
+                                   .success(.draw(player: "p1"))]
             }
         }
     }

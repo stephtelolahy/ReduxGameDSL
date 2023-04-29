@@ -49,7 +49,7 @@ struct Play: GameReducerProtocol {
         // queue side effects
         state.queue.append(playAction.effect.withCtx(ctx))
 
-        state.completedAction = .play(actor: actor, card: card, target: target)
+        state.event = .success(.play(actor: actor, card: card, target: target))
 
         return state
     }

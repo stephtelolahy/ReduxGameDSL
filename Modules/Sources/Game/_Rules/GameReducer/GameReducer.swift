@@ -20,14 +20,14 @@ struct GameReducer: ReducerProtocol {
         }
 
         var state = state
-        state.completedAction = nil
-        state.thrownError = nil
+        state.event = nil
         state.chooseOne = nil
 
         do {
             return try action.reducer().reduce(state: state)
         } catch {
-            state.thrownError = error as? GameError
+            // swiftlint:disable:next force_cast
+            state.event = .failure(error as! GameError)
             return state
         }
     }

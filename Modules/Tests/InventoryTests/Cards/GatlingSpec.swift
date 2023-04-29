@@ -51,7 +51,7 @@ final class GatlingSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.discard(player: .id("p2"), card: .id(.missed)))
+                        .success(.discard(player: "p2", card: .missed))
                     ]
                     let ctx3 = EffectContext(actor: "p1", card: .gatling, target: "p3")
                     expect(sut.state.chooseOne) == ChooseOne(chooser: "p3", options: [
@@ -64,7 +64,7 @@ final class GatlingSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: .id("p3")))
+                        .success(.damage(1, player: "p3"))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }
@@ -105,7 +105,7 @@ final class GatlingSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.discard(player: .id("p2"), card: .id(.missed)))
+                        .success(.discard(player: "p2", card: .missed))
                     ]
                     expect(sut.state.chooseOne) == nil
                 }

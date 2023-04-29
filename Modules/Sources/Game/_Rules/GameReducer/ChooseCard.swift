@@ -32,7 +32,7 @@ struct ChooseCard: GameReducerProtocol {
         
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
         
-        state.completedAction = .chooseCard(player: player, card: card)
+        state.event = .success(.chooseCard(player: pId, card: cId))
         
         return state
     }

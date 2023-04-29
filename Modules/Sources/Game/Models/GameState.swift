@@ -28,13 +28,10 @@ public struct GameState: Codable, Equatable {
 
     /// Is Game over
     public var isOver: Bool = false
+
+    /// Last occured event
+    public var event: CodableResult<GameEvent, GameError>?
     
-    /// Last completed action
-    public var completedAction: GameAction?
-
-    /// Last occured error
-    public var thrownError: GameError?
-
     /// Queued effects
     public var queue: [GameAction] = []
 

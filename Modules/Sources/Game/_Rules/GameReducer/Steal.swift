@@ -36,7 +36,7 @@ struct Steal: GameReducerProtocol {
 
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
-        state.completedAction = .steal(player: player, target: target, card: card)
+        state.event = .success(.steal(player: pId, target: tId, card: cId)) 
 
         return state
     }

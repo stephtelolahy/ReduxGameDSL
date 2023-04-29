@@ -38,7 +38,7 @@ final class DuelSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .duel, target: "p4")),
-                        .success(.damage(1, player: .id("p4")))
+                        .success(.damage(1, player: "p4"))
                     ]
                 }
             }
@@ -66,7 +66,7 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.damage(1, player: .id("p2")))
+                            .success(.damage(1, player: "p2"))
                         ]
                     }
                 }

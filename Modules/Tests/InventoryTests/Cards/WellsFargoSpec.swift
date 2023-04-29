@@ -35,9 +35,9 @@ final class WellsFargoSpec: QuickSpec {
 
                 // Then
                 expect(result) == [.success(.play(actor: "p1", card: .wellsFargo)),
-                                   .success(.draw(player: .id("p1"))),
-                                   .success(.draw(player: .id("p1"))),
-                                   .success(.draw(player: .id("p1")))]
+                                   .success(.draw(player: "p1")),
+                                   .success(.draw(player: "p1")),
+                                   .success(.draw(player: "p1"))]
             }
         }
     }

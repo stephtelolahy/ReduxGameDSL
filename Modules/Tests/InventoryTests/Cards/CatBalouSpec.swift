@@ -165,7 +165,7 @@ final class CatBalouSpec: QuickSpec {
                             "c21": .discard(player: .id("p2"), card: .id("c21"), ctx: ctx),
                             "c22": .discard(player: .id("p2"), card: .id("c22"), ctx: ctx)
                         ])
-                                            }
+                    }
                 }
 
                 context("having hand and inPlay cards") {
