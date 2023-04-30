@@ -17,10 +17,10 @@ final class ChooseOneSpec: QuickSpec {
         describe("chooseOne") {
             beforeEach {
                 let state = GameState()
-                    .queued([.chooseOne(chooser: "p1", options: [
+                    .waiting("p1", options: [
                         "c1": .play(actor: "p1", card: "c1"),
                         "c2": .play(actor: "p1", card: "c2")
-                    ])])
+                    ])
                 sut = createGameStore(initial: state)
             }
 
@@ -30,7 +30,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.play(actor: "p1", card: "c1"))
 
                     // Then
-                    expect(sut.state.queue).to(beEmpty())
+                    expect(sut.state.chooseOne) == nil
                 }
             }
 
@@ -40,7 +40,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.play(actor: "p1", card: "c3"))
 
                     // Then
-                    expect(sut.state.queue).toNot(beEmpty())
+                    expect(sut.state.chooseOne) != nil
                     expect(sut.state.event) == .failure(.unwaitedAction)
                 }
             }
@@ -51,7 +51,7 @@ final class ChooseOneSpec: QuickSpec {
                     sut.dispatch(.update)
 
                     // Then
-                    expect(sut.state.queue).toNot(beEmpty())
+                    expect(sut.state.queue).to(beEmpty())
                 }
             }
         }

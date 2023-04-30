@@ -17,8 +17,4 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Apply effect
     case effect(CardEffect, ctx: EffectContext?)
-
-    /// Ask a player to choose an action
-    // TODO: remove because this does not cause any change to the game state
-    case chooseOne(chooser: String, options: [String: GameAction])
 }

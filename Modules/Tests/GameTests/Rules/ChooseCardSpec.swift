@@ -32,7 +32,7 @@ final class ChooseCardSpec: QuickSpec {
 
                         // Then
                         expect(result.event) == nil
-                        expect(result.queue.first) == .chooseOne(chooser: "p1", options: [
+                        expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
                             "c1": CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx),
                             "c2": CardEffect.chooseCard(player: .id("p1"), card: .id("c2")).withCtx(ctx)
                         ])

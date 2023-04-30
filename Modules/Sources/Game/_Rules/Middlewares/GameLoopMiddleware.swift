@@ -9,12 +9,8 @@ import Combine
 
 /// Dispatching queued side effects
 let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
-    guard state.queue.isNotEmpty else {
-        return Empty()
-            .eraseToAnyPublisher()
-    }
-    
-    if case .chooseOne = state.queue.first {
+    guard state.queue.isNotEmpty,
+          state.chooseOne == nil else {
         return Empty()
             .eraseToAnyPublisher()
     }

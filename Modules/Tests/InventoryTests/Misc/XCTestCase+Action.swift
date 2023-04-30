@@ -29,14 +29,14 @@ extension XCTestCase {
                 result.append(event)
             }
             
-            if case let .chooseOne(_, options) = state.queue.first {
+            if let chooseOne = state.chooseOne {
                 guard !choices.isEmpty else {
-                    XCTFail("Expected a choice between \(options.keys)", file: file, line: line)
+                    XCTFail("Expected a choice between \(chooseOne.options.keys)", file: file, line: line)
                     return
                 }
                 
                 let choice = choices.removeFirst()
-                guard let choosenAction = options[choice] else {
+                guard let choosenAction = chooseOne.options[choice] else {
                     XCTFail("Expect a action matching choice \(choice)", file: file, line: line)
                     return
                 }

@@ -27,8 +27,8 @@ public extension GameState {
         copy { $0.cardRef = value }
     }
 
-    func queued(_ value: [GameAction]) -> Self {
-        copy { $0.queue = value }
+    func waiting(_ chooser: String, options: [String: GameAction]) -> Self {
+        copy { $0.chooseOne = ChooseOne(chooser: chooser, options: options) }
     }
 }
 

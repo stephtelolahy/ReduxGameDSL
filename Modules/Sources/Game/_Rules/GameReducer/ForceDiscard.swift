@@ -34,7 +34,7 @@ struct ForceDiscard: GameReducerProtocol {
             $0[$1.label] = CardEffect.discard(player: player, card: .id($1.id)).withCtx(ctx)
         }
         options[.pass] = otherwise.withCtx(ctx)
-        state.queue.insert(.chooseOne(chooser: pId, options: options), at: 0) 
+        state.chooseOne = ChooseOne(chooser: pId, options: options) 
         
         return state
     }

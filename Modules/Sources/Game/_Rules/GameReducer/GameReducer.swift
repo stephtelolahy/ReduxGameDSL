@@ -15,13 +15,13 @@ struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
         var state = state
 
-        if case let .chooseOne(_, options) = state.queue.first {
-            guard options.values.contains(action) else {
+        if let chooseOne = state.chooseOne {
+            guard chooseOne.options.values.contains(action) else {
                 state.event = .failure(.unwaitedAction)
                 return state
             }
 
-            state.queue.removeFirst()
+            state.chooseOne = nil
         }
 
         state.event = nil
@@ -84,9 +84,6 @@ private extension GameAction {
             case let .applyEffect(target, effect):
                 return ApplyEffect(target: target, effect: effect, ctx: ctx)
             }
-
-        case .chooseOne:
-            fatalError(.unexpected)
         }
     }
 }
