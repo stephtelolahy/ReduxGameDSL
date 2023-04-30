@@ -87,11 +87,22 @@ final class DuelSpec: QuickSpec {
                     }
                 }
                 
-                xcontext("target and actor discarding bang") {
+                context("target and actor discarding bang") {
                     it("should damage target") {
-                        // Given
                         // When
+                        let result = self.awaitSequence(
+                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                            choices: ["bang-2", "bang-1", .pass],
+                            state: state
+                        )
+
                         // Then
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .duel, target: "p2")),
+                            .success(.discard(player: "p2", card: "bang-2")),
+                            .success(.discard(player: "p1", card: "bang-1")),
+                            .success(.damage(1, player: "p2"))
+                        ]
                     }
                 }
             }

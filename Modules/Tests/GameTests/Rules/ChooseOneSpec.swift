@@ -41,6 +41,7 @@ final class ChooseOneSpec: QuickSpec {
 
                     // Then
                     expect(sut.state.queue).toNot(beEmpty())
+                    expect(sut.state.event) == .failure(.unwaitedAction)
                 }
             }
 

@@ -17,7 +17,7 @@ struct GameReducer: ReducerProtocol {
 
         if case let .chooseOne(_, options) = state.queue.first {
             guard options.values.contains(action) else {
-                // Entering unwaited action
+                state.event = .failure(.unwaitedAction)
                 return state
             }
 

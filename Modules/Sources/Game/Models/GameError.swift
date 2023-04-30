@@ -58,6 +58,9 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected non empty deck
     case deckIsEmpty
 
+    /// Ecxpected to choose one of waited action
+    case unwaitedAction
+
     /// Any unexpected error
     case unexpected
 }

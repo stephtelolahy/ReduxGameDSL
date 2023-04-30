@@ -37,13 +37,12 @@ final class ChallengeDiscardSpec: QuickSpec {
                     // Then
                     expect(result.queue.first) == .chooseOne(chooser: "p1", options: [
                         "counter": .group {
-                            GameAction.discard(player: .id("p1"), card: .id("counter"), ctx: ctx)
+                            GameAction.discard(player: .id("p1"), card: .id("counter"))
                             GameAction.challengeDiscard(player: .id("px"),
                                                         card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),
-                                                        challenger: .id("p1"),
-                                                        ctx: EffectContext(actor: "px", card: "cx", target: "px"))
-                        },
+                                                        challenger: .id("p1"))
+                        }.withCtx(EffectContext(actor: "px", card: "cx", target: "px")),
                         .pass: .damage(1, player: .target, ctx: ctx)
                     ])
                 }
