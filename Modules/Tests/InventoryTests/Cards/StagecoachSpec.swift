@@ -28,7 +28,8 @@ final class StagecoachSpec: QuickSpec {
                 }
                 
                 // When
-                let result = self.awaitAction(.play(actor: "p1", card: .stagecoach), state: state)
+                let action = GameAction.play(actor: "p1", card: .stagecoach)
+                let result = self.awaitAction(action, state: state)
                 
                 // Then
                 expect(result) == [.success(.play(actor: "p1", card: .stagecoach)),
