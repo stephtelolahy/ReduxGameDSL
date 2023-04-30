@@ -29,7 +29,7 @@ struct Discard: GameReducerProtocol {
 
         state.discard.push(cId)
 
-        state.event = .success(.discard(player: pId, card: cId))
+        state.event = .discard(player: pId, card: cId)
 
         return state
     }

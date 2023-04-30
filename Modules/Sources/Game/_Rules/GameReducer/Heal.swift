@@ -22,7 +22,7 @@ struct Heal: GameReducerProtocol {
         // update health
         try state[keyPath: \GameState.players[pId]]?.gainHealth(value)
         
-        state.event = .success(.heal(value, player: pId))
+        state.event = .heal(value, player: pId)
         
         return state
     }

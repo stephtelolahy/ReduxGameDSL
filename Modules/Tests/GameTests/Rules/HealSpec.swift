@@ -75,7 +75,7 @@ final class HealSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.event) == .failure(.playerAlreadyMaxHealth("p1"))
+                    expect(result.error) == .playerAlreadyMaxHealth("p1")
                 }
             }
         }

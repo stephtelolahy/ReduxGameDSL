@@ -41,7 +41,7 @@ final class ChooseOneSpec: QuickSpec {
 
                     // Then
                     expect(sut.state.chooseOne) != nil
-                    expect(sut.state.event) == .failure(.unwaitedAction)
+                    expect(sut.state.error) == .unwaitedAction
                 }
             }
 

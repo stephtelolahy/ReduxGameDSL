@@ -71,7 +71,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .failure(.choosableIsEmpty)
+                        expect(result.error) == .choosableIsEmpty
                     }
                 }
             }
@@ -93,7 +93,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .success(.chooseCard(player: "p1", card: "c1"))
+                        expect(result.event) == .chooseCard(player: "p1", card: "c1")
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.choosable?.cards) == ["c2"]
                     }
@@ -114,7 +114,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .success(.chooseCard(player: "p1", card: "c1"))
+                        expect(result.event) == .chooseCard(player: "p1", card: "c1")
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.choosable) == nil
                     }

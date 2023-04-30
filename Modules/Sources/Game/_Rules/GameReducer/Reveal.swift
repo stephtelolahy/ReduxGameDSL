@@ -14,7 +14,7 @@ struct Reveal: GameReducerProtocol {
         let card = try state.popDeck()
         state.choosable?.add(card)
 
-        state.event = .success(.reveal)
+        state.event = .reveal
 
         return state
     }

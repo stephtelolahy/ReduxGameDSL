@@ -17,20 +17,19 @@ struct GameReducer: ReducerProtocol {
 
         if let chooseOne = state.chooseOne {
             guard chooseOne.options.values.contains(action) else {
-                state.event = .failure(.unwaitedAction)
+                state.error = .unwaitedAction
                 return state
             }
-
             state.chooseOne = nil
         }
 
         state.event = nil
+        state.error = nil
 
         do {
             return try action.reducer().reduce(state: state)
         } catch {
-            // swiftlint:disable:next force_cast
-            state.event = .failure(error as! GameError)
+            state.error = error as? GameError
             return state
         }
     }

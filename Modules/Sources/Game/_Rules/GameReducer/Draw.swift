@@ -23,7 +23,7 @@ struct Draw: GameReducerProtocol {
 
         state[keyPath: \GameState.players[pId]]?.hand.add(card)
 
-        state.event = .success(.draw(player: pId))
+        state.event = .draw(player: pId)
 
         return state
     }

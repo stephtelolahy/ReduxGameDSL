@@ -70,7 +70,7 @@ final class DiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.event) == .failure(.cardNotFound("c1"))
+                    expect(result.error) == .cardNotFound("c1")
                 }
             }
         }

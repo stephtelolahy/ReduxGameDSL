@@ -33,7 +33,7 @@ final class RevealSpec: QuickSpec {
                     // Then
                     expect(result.choosable?.cards) == ["c1"]
                     expect(result.deck.top) == "c2"
-                    expect(result.event) == .success(.reveal)
+                    expect(result.event) == .reveal
                 }
             }
 
@@ -57,7 +57,7 @@ final class RevealSpec: QuickSpec {
                     // Then
                     expect(result.choosable?.cards) == ["c1", "c2"]
                     expect(result.deck.top) == "c3"
-                    expect(result.event) == .success(.reveal)
+                    expect(result.event) == .reveal
                 }
             }
         }
