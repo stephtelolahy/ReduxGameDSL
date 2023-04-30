@@ -29,10 +29,9 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: .id("p1"),
+                    let action = CardEffect.steal(player: .id("p1"),
                                                   target: .id("p2"),
-                                                  card: .id("c21"),
-                                                  ctx: ctx)
+                                                  card: .id("c21")).withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -55,10 +54,9 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: .id("p1"),
+                    let action = CardEffect.steal(player: .id("p1"),
                                                   target: .id("p2"),
-                                                  card: .id("c21"),
-                                                  ctx: ctx)
+                                                  card: .id("c21")).withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -75,14 +73,13 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: .id("p1"),
+                    let action = CardEffect.steal(player: .id("p1"),
                                                   target: .id("p1"),
-                                                  card: .id("c2"),
-                                                  ctx: ctx)
+                                                  card: .id("c2")).withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == GameError.cardNotFound("c2")
+                    expect(result.event) == .failure(.cardNotFound("c2"))
                 }
             }
         }

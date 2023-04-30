@@ -39,6 +39,7 @@ struct PlayerArgResolver {
 }
 
 private extension PlayerArg {
+    // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
         case .id:
@@ -70,6 +71,9 @@ private extension PlayerArg {
 
         case let .selectAt(distance):
             return PlayerSelectAt(distance: distance)
+
+        case .selectAny:
+            return PlayerSelectAny()
         }
     }
 }

@@ -2,22 +2,13 @@
 //  ChooseOne.swift
 //  
 //
-//  Created by Hugues Telolahy on 22/04/2023.
+//  Created by Hugues Telolahy on 30/04/2023.
 //
 
-/// Pending actions to choose before continuing effect resolving
-public struct ChooseOne: Equatable, Codable {
-
-    /// Actror
+/// Ask a player to choose an action
+public struct ChooseOne: Codable, Equatable {
     public let chooser: String
-
-    /// Expected actions
     public let options: [String: GameAction]
-
-    public init(chooser: String, options: [String: GameAction]) {
-        self.chooser = chooser
-        self.options = options
-    }
 }
 
 /// ChooseOne labels

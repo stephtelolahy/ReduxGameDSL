@@ -6,7 +6,6 @@
 //
 
 struct Play: GameReducerProtocol {
-    let action: GameAction
     let actor: String
     let card: String
     let target: String?
@@ -15,13 +14,13 @@ struct Play: GameReducerProtocol {
         var state = state
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
-        // discard immediately
-        guard state.players[actor] != nil else {
+        guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
         }
 
-        try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
-        state.discard.push(card)
+        guard actorObj.hand.contains(card) else {
+            throw GameError.cardNotFound(card)
+        }
 
         // verify play action
         let cardName = card.extractName()
@@ -43,10 +42,14 @@ struct Play: GameReducerProtocol {
             }
         }
 
+        // discard immediately
+        try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
+        state.discard.push(card)
+
         // queue side effects
         state.queue.append(playAction.effect.withCtx(ctx))
 
-        state.completedAction = action
+        state.event = .success(.play(actor: actor, card: card, target: target))
 
         return state
     }

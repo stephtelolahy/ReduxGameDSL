@@ -6,7 +6,6 @@
 //
 
 struct Steal: GameReducerProtocol {
-    let action: GameAction
     let player: PlayerArg
     let target: PlayerArg
     let card: CardArg
@@ -17,19 +16,19 @@ struct Steal: GameReducerProtocol {
 
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                .steal(player: .id($0), target: target, card: card, ctx: ctx)
+                CardEffect.steal(player: .id($0), target: target, card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(tId) = target else {
             return try PlayerArgResolver().resolve(arg: target, state: state, ctx: ctx) {
-                .steal(player: player, target: .id($0), card: card, ctx: ctx)
+                CardEffect.steal(player: player, target: .id($0), card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(cId) = card else {
             return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
-                .steal(player: player, target: target, card: .id($0), ctx: ctx)
+                CardEffect.steal(player: player, target: target, card: .id($0)).withCtx(ctx)
             }
         }
 
@@ -37,7 +36,7 @@ struct Steal: GameReducerProtocol {
 
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
-        state.completedAction = action
+        state.event = .success(.steal(player: pId, target: tId, card: cId)) 
 
         return state
     }

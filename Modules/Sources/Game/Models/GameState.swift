@@ -28,18 +28,15 @@ public struct GameState: Codable, Equatable {
 
     /// Is Game over
     public var isOver: Bool = false
-    
-    /// Last completed action
-    public var completedAction: GameAction?
 
-    /// Last occured error
-    public var thrownError: GameError?
+    /// Last occurred event
+    public var event: CodableResult<GameEvent, GameError>?
+
+    /// Ask a player to choose an action
+    public var chooseOne: ChooseOne?
 
     /// Queued effects
-    public var queue: [GameAction] = []
-
-    /// Pending actions to choose before continuing effect resolving
-    public var chooseOne: ChooseOne?
+    var queue: [GameAction] = []
 
     /// All cards reference
     public var cardRef: [String: Card] = [:]

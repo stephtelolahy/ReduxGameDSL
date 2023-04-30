@@ -27,24 +27,22 @@ final class ChallengeDiscardSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.challengeDiscard(player: .id("p1"),
+                    let action = CardEffect.challengeDiscard(player: .id("p1"),
                                                              card: .selectHandNamed("counter"),
                                                              otherwise: .damage(1, player: .target),
-                                                             challenger: .id("px"),
-                                                             ctx: ctx)
+                                                             challenger: .id("px")).withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
                     
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        "counter": .group {
-                            GameAction.discard(player: .id("p1"), card: .id("counter"), ctx: ctx)
-                            GameAction.challengeDiscard(player: .id("px"),
+                        "counter": CardEffect.group {
+                            CardEffect.discard(player: .id("p1"), card: .id("counter"))
+                            CardEffect.challengeDiscard(player: .id("px"),
                                                         card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),
-                                                        challenger: .id("p1"),
-                                                        ctx: ctx)
-                        },
-                        .pass: .damage(1, player: .target, ctx: ctx)
+                                                        challenger: .id("p1"))
+                        }.withCtx(EffectContext(actor: "px", card: "cx", target: "px")),
+                        .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
                     ])
                 }
             }

@@ -12,6 +12,7 @@ import Nimble
 final class RevealSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
+        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("reveal") {
             context("chosable nil") {
@@ -26,13 +27,13 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.reveal
+                    let action = CardEffect.reveal.withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.choosable?.cards) == ["c1"]
                     expect(result.deck.top) == "c2"
-                    expect(result.completedAction) == action
+                    expect(result.event) == .success(.reveal)
                 }
             }
 
@@ -50,13 +51,13 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.reveal
+                    let action = CardEffect.reveal.withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.choosable?.cards) == ["c1", "c2"]
                     expect(result.deck.top) == "c3"
-                    expect(result.completedAction) == action
+                    expect(result.event) == .success(.reveal)
                 }
             }
         }

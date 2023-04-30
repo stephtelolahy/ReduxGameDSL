@@ -22,7 +22,7 @@ final class PlaySpec: QuickSpec {
                     // Given
                     let playable = Card("playable") {
                         onPlay {
-                            GameAction.heal(1, player: .actor)
+                            CardEffect.heal(1, player: .actor)
                         }
                     }
                     let state = GameState {
@@ -47,13 +47,13 @@ final class PlaySpec: QuickSpec {
 
                 it("should emit completed action") {
                     // Then
-                    expect(result.completedAction) == action
+                    expect(result.event) == .success(.play(actor: "p1", card: "playable"))
                 }
 
                 it("should queue side effects") {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: "playable")
-                    expect(result.queue) == [.heal(1, player: .actor, ctx: ctx)]
+                    expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
                 }
             }
 
@@ -69,7 +69,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardNotFound("unknown")
+                    expect(result.event) == .failure(.cardNotFound("unknown"))
                 }
             }
 
@@ -83,7 +83,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .playerNotFound("p1")
+                    expect(result.event) == .failure(.playerNotFound("p1"))
                 }
             }
 
@@ -103,7 +103,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.thrownError) == .cardIsNotPlayable("unplayable")
+                    expect(result.event) == .failure(.cardIsNotPlayable("unplayable"))
                 }
             }
         }

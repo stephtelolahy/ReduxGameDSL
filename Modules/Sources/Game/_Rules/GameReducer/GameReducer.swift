@@ -13,21 +13,24 @@ protocol GameReducerProtocol {
 
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
+        var state = state
+
         if let chooseOne = state.chooseOne {
             guard chooseOne.options.values.contains(action) else {
+                state.event = .failure(.unwaitedAction)
                 return state
             }
+
+            state.chooseOne = nil
         }
 
-        var state = state
-        state.completedAction = nil
-        state.thrownError = nil
-        state.chooseOne = nil
+        state.event = nil
 
         do {
             return try action.reducer().reduce(state: state)
         } catch {
-            state.thrownError = error as? GameError
+            // swiftlint:disable:next force_cast
+            state.event = .failure(error as! GameError)
             return state
         }
     }
@@ -38,51 +41,49 @@ private extension GameAction {
     func reducer() -> GameReducerProtocol {
         switch self {
         case let .play(actor, card, target):
-            return Play(action: self, actor: actor, card: card, target: target)
+            return Play(actor: actor, card: card, target: target)
 
         case .update:
             return Update()
 
-        case let .heal(value, player, ctx):
-            return Heal(action: self, player: player, value: value, ctx: ctx!)
+        case let .effect(effect, ctx):
+            switch effect {
+            case let .heal(value, player):
+                return Heal(player: player, value: value, ctx: ctx)
 
-        case let .damage(value, player, ctx):
-            return Damage(action: self, player: player, value: value, ctx: ctx!)
+            case let .damage(value, player):
+                return Damage(player: player, value: value, ctx: ctx)
 
-        case let .draw(player, ctx):
-            return Draw(action: self, player: player, ctx: ctx!)
+            case let .draw(player):
+                return Draw(player: player, ctx: ctx)
 
-        case let .discard(player, card, ctx):
-            return Discard(action: self, player: player, card: card, ctx: ctx!)
+            case let .discard(player, card):
+                return Discard(player: player, card: card, ctx: ctx)
 
-        case let .steal(player, target, card, ctx):
-            return Steal(action: self, player: player, target: target, card: card, ctx: ctx!)
+            case let .steal(player, target, card):
+                return Steal(player: player, target: target, card: card, ctx: ctx)
 
-        case let .chooseCard(player, card, ctx):
-            return ChooseCard(action: self, player: player, card: card, ctx: ctx!)
+            case let .chooseCard(player, card):
+                return ChooseCard(player: player, card: card, ctx: ctx)
 
-        case .reveal:
-            return Reveal(action: self)
-            
-        case let .forceDiscard(player, card, otherwise, ctx):
-            return ForceDiscard(action: self, player: player, card: card, otherwise: otherwise, ctx: ctx!)
+            case .reveal:
+                return Reveal()
 
-        case let .challengeDiscard(player, card, otherwise, challenger, ctx):
-            return ChallengeDiscard(action: self,
-                                    player: player,
-                                    card: card,
-                                    otherwise: otherwise,
-                                    challenger: challenger,
-                                    ctx: ctx!)
+            case let .forceDiscard(player, card, otherwise):
+                return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
 
-        case let .replayEffect(times, effectToRepeat, ctx):
-            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx!)
+            case let .challengeDiscard(player, card, otherwise, challenger):
+                return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger, ctx: ctx)
 
-        case let .groupEffects(effects, ctx):
-            return GroupEffects(effects: effects, ctx: ctx!)
+            case let .replayEffect(times, effectToRepeat):
+                return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
 
-        case let .applyEffect(target, effect, ctx):
-            return ApplyEffect(target: target, effect: effect, ctx: ctx!)
+            case let .groupEffects(effects):
+                return GroupEffects(effects: effects, ctx: ctx)
+
+            case let .applyEffect(target, effect):
+                return ApplyEffect(target: target, effect: effect, ctx: ctx)
+            }
         }
     }
 }

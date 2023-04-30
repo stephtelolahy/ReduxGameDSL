@@ -6,7 +6,6 @@
 //
 
 struct Discard: GameReducerProtocol {
-    let action: GameAction
     let player: PlayerArg
     let card: CardArg
     let ctx: EffectContext
@@ -16,13 +15,13 @@ struct Discard: GameReducerProtocol {
         
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                .discard(player: .id($0), card: card, ctx: ctx)
+                CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(cId) = card else {
             return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
-                .discard(player: player, card: .id($0), ctx: ctx)
+                CardEffect.discard(player: player, card: .id($0)).withCtx(ctx)
             }
         }
 
@@ -30,7 +29,7 @@ struct Discard: GameReducerProtocol {
 
         state.discard.push(cId)
 
-        state.completedAction = action
+        state.event = .success(.discard(player: pId, card: cId))
 
         return state
     }

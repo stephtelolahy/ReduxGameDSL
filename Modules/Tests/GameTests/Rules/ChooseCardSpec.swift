@@ -27,14 +27,14 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.completedAction) == nil
+                        expect(result.event) == nil
                         expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
-                            "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx)
+                            "c1": CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx),
+                            "c2": CardEffect.chooseCard(player: .id("p1"), card: .id("c2")).withCtx(ctx)
                         ])
                     }
                 }
@@ -49,13 +49,13 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.completedAction) == nil
+                        expect(result.event) == nil
                         expect(result.queue) == [
-                            .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
+                            CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         ]
                     }
                 }
@@ -67,11 +67,11 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
 
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.thrownError) == GameError.choosableIsEmpty
+                        expect(result.event) == .failure(.choosableIsEmpty)
                     }
                 }
             }
@@ -89,11 +89,11 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.completedAction) == action
+                        expect(result.event) == .success(.chooseCard(player: "p1", card: "c1"))
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.choosable?.cards) == ["c2"]
                     }
@@ -110,11 +110,11 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.completedAction) == action
+                        expect(result.event) == .success(.chooseCard(player: "p1", card: "c1"))
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.choosable) == nil
                     }

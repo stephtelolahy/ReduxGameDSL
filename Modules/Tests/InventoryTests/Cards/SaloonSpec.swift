@@ -31,20 +31,18 @@ final class SaloonSpec: QuickSpec {
                             .health(3)
                             .maxHealth(4)
                     }
-                    let sut = createGameStore(initial: state)
-
+                    
                     // When
                     let action = GameAction.play(actor: "p1", card: .saloon)
-                    let result = self.awaitAction(action, store: sut)
-
+                    let result = self.awaitAction(action, state: state)
+                    
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: .saloon)
                     expect(result) == [.success(.play(actor: "p1", card: .saloon)),
-                                       .success(.heal(1, player: .id("p2"), ctx: ctx)),
-                                       .success(.heal(1, player: .id("p3"), ctx: ctx))]
+                                       .success(.heal(1, player: "p2")),
+                                       .success(.heal(1, player: "p3"))]
                 }
             }
-
+            
             context("no player damaged") {
                 it("should throw error") {
                     // Given
@@ -60,12 +58,11 @@ final class SaloonSpec: QuickSpec {
                             .health(3)
                             .maxHealth(3)
                     }
-                    let sut = createGameStore(initial: state)
-
+                    
                     // When
                     let action = GameAction.play(actor: "p1", card: .saloon)
-                    let result = self.awaitAction(action, store: sut)
-
+                    let result = self.awaitAction(action, state: state)
+                    
                     // Then
                     expect(result) == [.failure(.noPlayerDamaged)]
                 }

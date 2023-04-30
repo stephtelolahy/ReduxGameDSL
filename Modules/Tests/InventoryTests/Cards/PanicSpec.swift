@@ -1,6 +1,6 @@
 //
 //  PanicSpec.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 15/04/2023.
 //
@@ -25,11 +25,10 @@ final class PanicSpec: QuickSpec {
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic)
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, state: state)
                         
                         // Then
                         expect(result) == [.failure(GameError.noPlayerWithCard)]
@@ -61,18 +60,16 @@ final class PanicSpec: QuickSpec {
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic)
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, choices: ["p2", "c2"], state: state)
                         
                         // Then
-                        expect(result).to(beEmpty())
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .panic, target: "p2"),
-                            "p4": .play(actor: "p1", card: .panic, target: "p4")
-                        ])
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.steal(player: "p1", target: "p2", card: "c2"))
+                        ]
                     }
                 }
             }
@@ -89,15 +86,16 @@ final class PanicSpec: QuickSpec {
                             }
                             Player("p2")
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2")),
-                                           .failure(.playerHasNoCard("p2"))]
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .failure(.playerHasNoCard("p2"))
+                        ]
                     }
                 }
                 
@@ -113,33 +111,19 @@ final class PanicSpec: QuickSpec {
                             Player("p2") {
                                 Hand {
                                     "c21"
-                                    "c22"
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, choices: [.randomHand], state: state)
                         
                         // Then
-                        expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
-                        
-                        guard let chooseOne = sut.state.chooseOne,
-                              chooseOne.chooser == "p1",
-                              chooseOne.options.count == 1,
-                              let choice = chooseOne.options[.randomHand] else {
-                            fail("Missing choice")
-                            return
-                        }
-                        
-                        let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
-                        let randomOptions: [GameAction] = [
-                            .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx),
-                            .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx)
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.steal(player: "p1", target: "p2", card: "c21"))
                         ]
-                        expect(randomOptions).to(contain(choice))
                     }
                 }
                 
@@ -159,19 +143,16 @@ final class PanicSpec: QuickSpec {
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, choices: ["c22"], state: state)
                         
                         // Then
-                        expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
-                        let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c21": .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx),
-                            "c22": .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx)
-                        ])
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.steal(player: "p1", target: "p2", card: "c22"))
+                        ]
                     }
                 }
                 
@@ -194,20 +175,16 @@ final class PanicSpec: QuickSpec {
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, choices: ["c23"], state: state)
                         
                         // Then
-                        expect(result) == [.success(.play(actor: "p1", card: .panic, target: "p2"))]
-                        let ctx = EffectContext(actor: "p1", card: .panic, target: "p2")
-                        expect(sut.state.chooseOne) == ChooseOne(chooser: "p1", options: [
-                            "c22": .steal(player: .id("p1"), target: .id("p2"), card: .id("c22"), ctx: ctx),
-                            "c23": .steal(player: .id("p1"), target: .id("p2"), card: .id("c23"), ctx: ctx),
-                            .randomHand: .steal(player: .id("p1"), target: .id("p2"), card: .id("c21"), ctx: ctx)
-                        ])
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.steal(player: "p1", target: "p2", card: "c23"))
+                        ]
                     }
                 }
             }
