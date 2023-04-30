@@ -13,13 +13,17 @@ protocol GameReducerProtocol {
 
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
+        var state = state
+
         if case let .chooseOne(_, options) = state.queue.first {
             guard options.values.contains(action) else {
+                // Entering unwaited action
                 return state
             }
+
+            state.queue.removeFirst()
         }
 
-        var state = state
         state.event = nil
 
         do {

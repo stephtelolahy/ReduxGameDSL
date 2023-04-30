@@ -29,7 +29,7 @@ public struct GameState: Codable, Equatable {
     /// Is Game over
     public var isOver: Bool = false
 
-    /// Last occured event
+    /// Last occurred event
     public var event: CodableResult<GameEvent, GameError>?
 
     /// Queued effects
