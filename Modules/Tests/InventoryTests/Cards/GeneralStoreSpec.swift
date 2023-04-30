@@ -11,7 +11,6 @@ import Game
 import Inventory
 
 final class GeneralStoreSpec: QuickSpec {
-    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing generalStore") {
             context("three players") {
@@ -31,47 +30,22 @@ final class GeneralStoreSpec: QuickSpec {
                             "c3"
                         }
                     }
-                    let sut = createGameStore(initial: state)
                     
                     // When
-                    var action = GameAction.play(actor: "p1", card: .generalStore)
-                    var result = self.awaitAction(action, store: sut)
-                    
-                    // Then
-                    let ctx = EffectContext(actor: "p1", card: .generalStore)
-                    expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
-                                       .success(.reveal),
-                                       .success(.reveal),
-                                       .success(.reveal)]
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
-                        "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
-                        "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx),
-                        "c3": .chooseCard(player: .id("p1"), card: .id("c3"), ctx: ctx)
-                    ])
-                    
-                    // When p1 choose
-                    action = .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
-                    result = self.awaitAction(action, store: sut)
+                    let result = self.awaitSequence(action: .play(actor: "p1", card: .generalStore),
+                                                    choices: ["c1", "c2"],
+                                                    state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.chooseCard(player: "p1", card: "c1"))
-                    ]
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
-                        "c2": .chooseCard(player: .id("p2"), card: .id("c2"), ctx: ctx),
-                        "c3": .chooseCard(player: .id("p2"), card: .id("c3"), ctx: ctx)
-                    ])
-                    
-                    // When p2 choose
-                    action = .chooseCard(player: .id("p2"), card: .id("c2"), ctx: ctx)
-                    result = self.awaitAction(action, store: sut)
-                    
-                    // Then
-                    expect(result) == [
+                        .success(.play(actor: "p1", card: .generalStore)),
+                        .success(.reveal),
+                        .success(.reveal),
+                        .success(.reveal),
+                        .success(.chooseCard(player: "p1", card: "c1")),
                         .success(.chooseCard(player: "p2", card: "c2")),
                         .success(.chooseCard(player: "p3", card: "c3"))
                     ]
-                    expect(sut.state.queue).to(beEmpty())
                 }
             }
             
@@ -90,32 +64,20 @@ final class GeneralStoreSpec: QuickSpec {
                             "c2"
                         }
                     }
-                    let sut = createGameStore(initial: state)
                     
                     // When
-                    var action = GameAction.play(actor: "p1", card: .generalStore)
-                    var result = self.awaitAction(action, store: sut)
-                    
-                    // Then
-                    let ctx = EffectContext(actor: "p1", card: .generalStore)
-                    expect(result) == [.success(.play(actor: "p1", card: .generalStore)),
-                                       .success(.reveal),
-                                       .success(.reveal)]
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p1", options: [
-                        "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
-                        "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx)
-                    ])
-                    
-                    // When p1 choose
-                    action = .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
-                    result = self.awaitAction(action, store: sut)
-                    
+                    let result = self.awaitSequence(action: .play(actor: "p1", card: .generalStore),
+                                                    choices: ["c1"],
+                                                    state: state)
+
                     // Then
                     expect(result) == [
+                        .success(.play(actor: "p1", card: .generalStore)),
+                        .success(.reveal),
+                        .success(.reveal),
                         .success(.chooseCard(player: "p1", card: "c1")),
                         .success(.chooseCard(player: "p2", card: "c2"))
                     ]
-                    expect(sut.state.queue).to(beEmpty())
                 }
             }
         }

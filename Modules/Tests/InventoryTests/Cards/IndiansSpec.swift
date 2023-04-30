@@ -11,7 +11,6 @@ import Game
 import Inventory
 
 final class IndiansSpec: QuickSpec {
-    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing Indians") {
             context("three players") {
@@ -31,42 +30,18 @@ final class IndiansSpec: QuickSpec {
 
                         Player("p3")
                     }
-                    let sut = createGameStore(initial: state)
 
                     // When
-                    var action = GameAction.play(actor: "p1", card: .indians)
-                    var result = self.awaitAction(action, store: sut)
-
-                    // Then
-                    expect(result) == [.success(.play(actor: "p1", card: .indians))]
-                    let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p2", options: [
-                        .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
-                        .pass: .damage(1, player: .target, ctx: ctx2)
-                    ])
-
-                    // When p2 counter
-                    action = .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2)
-                    result = self.awaitAction(action, store: sut)
+                    let result = self.awaitSequence(action: .play(actor: "p1", card: .indians),
+                                                    choices: [.bang, .pass],
+                                                    state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.discard(player: "p2", card: .bang))
-                    ]
-                    let ctx3 = EffectContext(actor: "p1", card: .indians, target: "p3")
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p3", options: [
-                        .pass: .damage(1, player: .target, ctx: ctx3)
-                    ])
-
-                    // When p3 pass
-                    action = .damage(1, player: .target, ctx: ctx3)
-                    result = self.awaitAction(action, store: sut)
-
-                    // Then
-                    expect(result) == [
+                        .success(.play(actor: "p1", card: .indians)),
+                        .success(.discard(player: "p2", card: .bang)),
                         .success(.damage(1, player: "p3"))
                     ]
-                    expect(sut.state.queue).to(beEmpty())
                 }
             }
 
@@ -85,29 +60,17 @@ final class IndiansSpec: QuickSpec {
                             }
                         }
                     }
-                    let sut = createGameStore(initial: state)
 
                     // When
-                    var action = GameAction.play(actor: "p1", card: .indians)
-                    var result = self.awaitAction(action, store: sut)
-
-                    // Then
-                    expect(result) == [.success(.play(actor: "p1", card: .indians))]
-                    let ctx2 = EffectContext(actor: "p1", card: .indians, target: "p2")
-                    expect(sut.state.queue.first) == .chooseOne(chooser: "p2", options: [
-                        .bang: .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2),
-                        .pass: .damage(1, player: .target, ctx: ctx2)
-                    ])
-
-                    // When p2 counter
-                    action = .discard(player: .id("p2"), card: .id(.bang), ctx: ctx2)
-                    result = self.awaitAction(action, store: sut)
+                    let result = self.awaitSequence(action: .play(actor: "p1", card: .indians),
+                                                    choices: [.bang],
+                                                    state: state)
 
                     // Then
                     expect(result) == [
+                        .success(.play(actor: "p1", card: .indians)),
                         .success(.discard(player: "p2", card: .bang))
                     ]
-                    expect(sut.state.queue).to(beEmpty())
                 }
             }
         }

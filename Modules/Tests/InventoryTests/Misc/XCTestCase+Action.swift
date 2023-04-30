@@ -31,7 +31,7 @@ extension XCTestCase {
             
             if case let .chooseOne(_, options) = state.queue.first {
                 guard !choices.isEmpty else {
-                    XCTFail("Expected a choice", file: file, line: line)
+                    XCTFail("Expected a choice between \(options.keys)", file: file, line: line)
                     return
                 }
 
@@ -64,7 +64,7 @@ extension XCTestCase {
     
     func awaitSequence(
         action: GameAction,
-        choices: [String],
+        choices: [String] = [],
         state: GameState,
         timeout: TimeInterval = 0.1,
         file: StaticString = #file,
