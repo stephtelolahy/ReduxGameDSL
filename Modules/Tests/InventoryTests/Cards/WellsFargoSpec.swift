@@ -27,12 +27,11 @@ final class WellsFargoSpec: QuickSpec {
                         "c3"
                     }
                 }
-                let sut = createGameStore(initial: state)
-
+                
                 // When
                 let action = GameAction.play(actor: "p1", card: .wellsFargo)
-                let result = self.awaitAction(action, store: sut)
-
+                let result = self.awaitAction(action, state: state)
+                
                 // Then
                 expect(result) == [.success(.play(actor: "p1", card: .wellsFargo)),
                                    .success(.draw(player: "p1")),

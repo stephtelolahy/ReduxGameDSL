@@ -25,17 +25,16 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-                        let sut = createGameStore(initial: state)
-
+                        
                         // When
                         let action = GameAction.play(actor: "p1", card: .catBalou)
-                        let result = self.awaitAction(action, store: sut)
-
+                        let result = self.awaitAction(action, state: state)
+                        
                         // Then
                         expect(result) == [.failure(GameError.noPlayerWithCard)]
                     }
                 }
-
+                
                 context("some player allowed") {
                     it("should choose a target") {
                         // Given
@@ -56,12 +55,12 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-
+                        
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .catBalou),
-                                                        choices: ["p2", .randomHand],
-                                                        state: state)
-
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou),
+                                                      choices: ["p2", .randomHand],
+                                                      state: state)
+                        
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
@@ -70,7 +69,7 @@ final class CatBalouSpec: QuickSpec {
                     }
                 }
             }
-
+            
             context("target is other") {
                 context("without cards") {
                     it("should throw error") {
@@ -83,17 +82,17 @@ final class CatBalouSpec: QuickSpec {
                             }
                             Player("p2")
                         }
-
+                        
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .catBalou, target: "p2"),
-                                                        state: state)
-
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou, target: "p2"),
+                                                      state: state)
+                        
                         // Then
                         expect(result) == [.success(.play(actor: "p1", card: .catBalou, target: "p2")),
                                            .failure(.playerHasNoCard("p2"))]
                     }
                 }
-
+                
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
@@ -109,12 +108,12 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-
+                        
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .catBalou, target: "p2"),
-                                                        choices: [.randomHand],
-                                                        state: state)
-
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou, target: "p2"),
+                                                      choices: [.randomHand],
+                                                      state: state)
+                        
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
@@ -122,7 +121,7 @@ final class CatBalouSpec: QuickSpec {
                         ]
                     }
                 }
-
+                
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
@@ -139,13 +138,13 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-
+                        
                         // When
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .catBalou, target: "p2"),
-                                                        choices: ["c22"],
-                                                        state: state)
-
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou, target: "p2"),
+                                                      choices: ["c22"],
+                                                      state: state)
+                        
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
@@ -153,7 +152,7 @@ final class CatBalouSpec: QuickSpec {
                         ]
                     }
                 }
-
+                
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
@@ -173,12 +172,12 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                         }
-
+                        
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .catBalou, target: "p2"),
-                                                        choices: ["c23"],
-                                                        state: state)
-
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou, target: "p2"),
+                                                      choices: ["c23"],
+                                                      state: state)
+                        
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
@@ -187,14 +186,14 @@ final class CatBalouSpec: QuickSpec {
                     }
                 }
             }
-
+            
             xcontext("target is self") {
                 it("should choose one inPlay card") {
                     // Given
                     // When
                     // Then
                 }
-
+                
                 it("should not choose hand cards") {
                     // Given
                     // When

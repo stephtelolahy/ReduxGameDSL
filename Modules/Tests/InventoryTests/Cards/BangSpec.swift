@@ -26,11 +26,8 @@ final class BangSpec: QuickSpec {
                     }
                         .counters([.bang: 1])
                     
-                    let sut = createGameStore(initial: state)
-                    
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
-                    let result = self.awaitAction(action, store: sut)
+                    let result = self.awaitAction(.play(actor: "p1", card: .bang), state: state)
                     
                     // Assert
                     expect(result) == [.failure(.reachedLimitPerTurn(1))]
@@ -51,11 +48,10 @@ final class BangSpec: QuickSpec {
                             Player("p3")
                             Player("p4").mustang(1)
                         }
-                        let sut = createGameStore(initial: state)
                         
                         // When
                         let action = GameAction.play(actor: "p1", card: .bang)
-                        let result = self.awaitAction(action, store: sut)
+                        let result = self.awaitAction(action, state: state)
                         
                         // Then
                         expect(result) == [.failure(GameError.noPlayerAtRange(1))]
@@ -77,9 +73,9 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .bang),
-                                                        choices: ["p2", .pass],
-                                                        state: state)
+                        let result = self.awaitAction(.play(actor: "p1", card: .bang),
+                                                      choices: ["p2", .pass],
+                                                      state: state)
                         
                         // Then
                         expect(result) == [
@@ -108,9 +104,9 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .bang, target: "p2"),
-                                                        choices: [.missed],
-                                                        state: state)
+                        let result = self.awaitAction(.play(actor: "p1", card: .bang, target: "p2"),
+                                                      choices: [.missed],
+                                                      state: state)
                         
                         // Then
                         expect(result) == [
@@ -133,9 +129,9 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let result = self.awaitSequence(action: .play(actor: "p1", card: .bang, target: "p2"),
-                                                        choices: [.pass],
-                                                        state: state)
+                        let result = self.awaitAction(.play(actor: "p1", card: .bang, target: "p2"),
+                                                      choices: [.pass],
+                                                      state: state)
                         
                         // Then
                         expect(result) == [

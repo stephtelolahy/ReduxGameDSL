@@ -27,15 +27,15 @@ final class IndiansSpec: QuickSpec {
                                 .bang
                             }
                         }
-
+                        
                         Player("p3")
                     }
-
+                    
                     // When
-                    let result = self.awaitSequence(action: .play(actor: "p1", card: .indians),
-                                                    choices: [.bang, .pass],
-                                                    state: state)
-
+                    let result = self.awaitAction(.play(actor: "p1", card: .indians),
+                                                  choices: [.bang, .pass],
+                                                  state: state)
+                    
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .indians)),
@@ -44,7 +44,7 @@ final class IndiansSpec: QuickSpec {
                     ]
                 }
             }
-
+            
             context("two players") {
                 it("should allow each player to counter") {
                     // Given
@@ -60,12 +60,12 @@ final class IndiansSpec: QuickSpec {
                             }
                         }
                     }
-
+                    
                     // When
-                    let result = self.awaitSequence(action: .play(actor: "p1", card: .indians),
-                                                    choices: [.bang],
-                                                    state: state)
-
+                    let result = self.awaitAction(.play(actor: "p1", card: .indians),
+                                                  choices: [.bang],
+                                                  state: state)
+                    
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .indians)),

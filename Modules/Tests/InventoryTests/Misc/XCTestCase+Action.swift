@@ -5,21 +5,21 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
+@testable import Game
 import XCTest
 import Redux
-import Game
 
 extension XCTestCase {
     
     func awaitAction(
         _ action: GameAction,
         choices: [String] = [],
-        store: Store<GameState, GameAction>,
+        state: GameState,
         timeout: TimeInterval = 0.1,
         file: StaticString = #file,
         line: UInt = #line
     ) -> [CodableResult<GameEvent, GameError>] {
-        
+        let store = createGameStore(initial: state)
         var choices = choices
         var result: [CodableResult<GameEvent, GameError>] = []
         let expectation = XCTestExpectation(description: "Awaiting game idle")
@@ -34,13 +34,13 @@ extension XCTestCase {
                     XCTFail("Expected a choice between \(options.keys)", file: file, line: line)
                     return
                 }
-
+                
                 let choice = choices.removeFirst()
                 guard let choosenAction = options[choice] else {
                     XCTFail("Expect a action matching choice \(choice)", file: file, line: line)
                     return
                 }
-
+                
                 DispatchQueue.main.async {
                     store.dispatch(choosenAction)
                 }
@@ -56,25 +56,9 @@ extension XCTestCase {
         
         wait(for: [expectation], timeout: timeout)
         cancellable.cancel()
-
+        
         XCTAssertTrue(store.state.queue.isEmpty, "Game must be idle", file: file, line: line)
         
         return result
-    }
-    
-    func awaitSequence(
-        action: GameAction,
-        choices: [String] = [],
-        state: GameState,
-        timeout: TimeInterval = 0.1,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) -> [CodableResult<GameEvent, GameError>] {
-        awaitAction(action,
-                    choices: choices,
-                    store: createGameStore(initial: state),
-                    timeout: timeout,
-                    file: file,
-                    line: line)
     }
 }

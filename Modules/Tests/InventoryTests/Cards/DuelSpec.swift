@@ -37,8 +37,8 @@ final class DuelSpec: QuickSpec {
             context("without target") {
                 it("should ask to select target") {
                     // When
-                    let result = self.awaitSequence(
-                        action: .play(actor: "p1", card: .duel),
+                    let result = self.awaitAction(
+                        .play(actor: "p1", card: .duel),
                         choices: ["p4", .pass],
                         state: state
                     )
@@ -55,8 +55,8 @@ final class DuelSpec: QuickSpec {
                 context("passing") {
                     it("should damage") {
                         // When
-                        let result = self.awaitSequence(
-                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                        let result = self.awaitAction(
+                            .play(actor: "p1", card: .duel, target: "p2"),
                             choices: [.pass],
                             state: state
                         )
@@ -72,8 +72,8 @@ final class DuelSpec: QuickSpec {
                 context("discarding bang") {
                     it("should damage actor") {
                         // When
-                        let result = self.awaitSequence(
-                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                        let result = self.awaitAction(
+                            .play(actor: "p1", card: .duel, target: "p2"),
                             choices: ["bang-2", .pass],
                             state: state
                         )
@@ -90,8 +90,8 @@ final class DuelSpec: QuickSpec {
                 context("target and actor discarding bang") {
                     it("should damage target") {
                         // When
-                        let result = self.awaitSequence(
-                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                        let result = self.awaitAction(
+                            .play(actor: "p1", card: .duel, target: "p2"),
                             choices: ["bang-2", "bang-1", .pass],
                             state: state
                         )

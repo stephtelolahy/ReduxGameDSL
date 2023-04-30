@@ -27,15 +27,15 @@ final class GatlingSpec: QuickSpec {
                                 .missed
                             }
                         }
-
+                        
                         Player("p3")
                     }
-
+                    
                     // When
-                    let result = self.awaitSequence(action: .play(actor: "p1", card: .gatling),
-                                                    choices: [.missed, .pass],
-                                                    state: state)
-
+                    let result = self.awaitAction(.play(actor: "p1", card: .gatling),
+                                                  choices: [.missed, .pass],
+                                                  state: state)
+                    
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
@@ -44,7 +44,7 @@ final class GatlingSpec: QuickSpec {
                     ]
                 }
             }
-
+            
             context("two players") {
                 it("should allow each player to counter") {
                     // Given
@@ -60,12 +60,12 @@ final class GatlingSpec: QuickSpec {
                             }
                         }
                     }
-
+                    
                     // When
-                    let result = self.awaitSequence(action: .play(actor: "p1", card: .gatling),
-                                                    choices: [.missed],
-                                                    state: state)
-
+                    let result = self.awaitAction(.play(actor: "p1", card: .gatling),
+                                                  choices: [.missed],
+                                                  state: state)
+                    
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
