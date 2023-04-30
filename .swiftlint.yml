@@ -7,6 +7,7 @@ disabled_rules:
   - trailing_whitespace
   - redundant_type_annotation
 opt_in_rules:
+  - force_unwrapping
   - array_init
   - attributes
   - closure_end_indentation
