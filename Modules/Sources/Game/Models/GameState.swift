@@ -32,11 +32,11 @@ public struct GameState: Codable, Equatable {
     /// Last occurred event
     public var event: CodableResult<GameEvent, GameError>?
 
+    /// Ask a player to choose an action
+    public var chooseOne: ChooseOne?
+
     /// Queued effects
     var queue: [GameAction] = []
-
-    /// Ask a player to choose an action
-    var chooseOne: ChooseOne?
 
     /// All cards reference
     public var cardRef: [String: Card] = [:]
@@ -53,14 +53,4 @@ public extension GameState {
         }
         return player
     }
-}
-
-/// ChooseOne labels
-public extension String {
-
-    /// Random hand card label
-    static let randomHand = "randomHand"
-
-    /// Pass when asked to do an action
-    static let pass = "pass"
 }

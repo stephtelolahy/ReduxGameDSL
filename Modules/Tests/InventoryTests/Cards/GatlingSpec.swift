@@ -33,7 +33,7 @@ final class GatlingSpec: QuickSpec {
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .gatling)
-                        let result = self.awaitAction(action, choices: [.missed, .pass],state: state)
+                        let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
                     
                     // Then
                     expect(result) == [

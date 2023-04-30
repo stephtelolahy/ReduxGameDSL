@@ -7,7 +7,7 @@
 
 struct GroupEffects: GameReducerProtocol {
     let effects: [CardEffect]
-    let ctx: EffectContext?
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         var state = state

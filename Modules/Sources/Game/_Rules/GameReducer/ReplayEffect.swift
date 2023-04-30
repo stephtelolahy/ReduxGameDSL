@@ -8,10 +8,10 @@
 struct ReplayEffect: GameReducerProtocol {
     let times: NumArg
     let effect: CardEffect
-    let ctx: EffectContext?
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        let number = try NumArgResolver().resolve(arg: times, state: state, ctx: ctx!)
+        let number = try NumArgResolver().resolve(arg: times, state: state, ctx: ctx)
         guard number > 0 else {
             return state
         }

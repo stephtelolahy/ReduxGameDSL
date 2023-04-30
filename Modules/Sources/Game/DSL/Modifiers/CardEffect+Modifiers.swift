@@ -24,7 +24,7 @@ public extension CardEffect {
 }
 
 extension CardEffect {
-    func withCtx(_ ctx: EffectContext?) -> GameAction {
+    func withCtx(_ ctx: EffectContext) -> GameAction {
         .effect(self, ctx: ctx)
     }
 }

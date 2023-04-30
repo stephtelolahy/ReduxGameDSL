@@ -8,13 +8,13 @@
 struct Damage: GameReducerProtocol {
     let player: PlayerArg
     let value: Int
-    let ctx: EffectContext?
+    let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
         var state = state
 
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx!) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.damage(value, player: .id($0)).withCtx(ctx)
             }
         }

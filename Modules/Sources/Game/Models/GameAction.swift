@@ -16,5 +16,5 @@ public indirect enum GameAction: Codable, Equatable {
     case update
 
     /// Apply effect
-    case effect(CardEffect, ctx: EffectContext?)
+    case effect(CardEffect, ctx: EffectContext)
 }

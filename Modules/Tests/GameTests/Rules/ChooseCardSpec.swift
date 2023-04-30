@@ -89,7 +89,7 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(nil)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -110,7 +110,7 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(nil)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
