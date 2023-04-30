@@ -42,7 +42,7 @@ final class ChallengeDiscardSpec: QuickSpec {
                                                         card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),
                                                         challenger: .id("p1"),
-                                                        ctx: ctx)
+                                                        ctx: EffectContext(actor: "px", card: "cx", target: "px"))
                         },
                         .pass: .damage(1, player: .target, ctx: ctx)
                     ])

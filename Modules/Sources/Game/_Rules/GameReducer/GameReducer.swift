@@ -83,7 +83,6 @@ private extension GameAction {
             return ApplyEffect(target: target, effect: effect, ctx: ctx)
 
         case .chooseOne:
-            // dispatch chooseOne for AI player only
             fatalError(.unexpected)
         }
     }

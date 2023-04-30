@@ -27,17 +27,25 @@ struct ChallengeDiscard: GameReducerProtocol {
         guard case let .selectable(cIdOptions) = resolvedCard else {
             fatalError(.unexpected)
         }
+        
+        // resolving challenger
+        guard case let .id(challengerId) = challenger else {
+            return try PlayerArgResolver().resolve(arg: challenger, state: state, ctx: ctx!) {
+                .challengeDiscard(player: player, card: card, otherwise: otherwise, challenger: .id($0), ctx: ctx)
+            }
+        }
 
         // request a choice:
         // - discard one of matching card
         // - or Pass
+        let reversedCtx = EffectContext(actor: ctx!.actor, card: ctx!.card, target: challengerId)
         var options = cIdOptions.reduce(into: [String: GameAction]()) {
             let discardEffect = GameAction.discard(player: player, card: .id($1.id), ctx: ctx)
             let reverseEffect = GameAction.challengeDiscard(player: challenger,
                                                             card: card,
                                                             otherwise: otherwise,
                                                             challenger: player,
-                                                            ctx: ctx)
+                                                            ctx: reversedCtx)
             $0[$1.label] = .group {
                 discardEffect
                 reverseEffect

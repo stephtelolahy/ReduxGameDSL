@@ -11,27 +11,35 @@ import Game
 import Inventory
 
 final class DuelSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
+        var state: GameState!
+
         describe("playing Duel") {
+            beforeEach {
+                state = createGame {
+                    Player("p1") {
+                        Hand {
+                            .duel
+                            "bang-1"
+                        }
+                    }
+                    Player("p2") {
+                        Hand {
+                            "bang-2"
+                        }
+                    }
+                    Player("p3")
+                    Player("p4")
+                }
+            }
             
             context("without target") {
                 it("should ask to select target") {
-                    // Given
-                    let state = createGame {
-                        Player("p1") {
-                            Hand {
-                                .duel
-                            }
-                        }
-                        Player("p2")
-                        Player("p3")
-                        Player("p4")
-                    }
-
                     // When
                     let result = self.awaitSequence(
                         action: .play(actor: "p1", card: .duel),
-                        choices: "p4", .pass,
+                        choices: ["p4", .pass],
                         state: state
                     )
 
@@ -46,20 +54,10 @@ final class DuelSpec: QuickSpec {
             context("with target") {
                 context("passing") {
                     it("should damage") {
-                        // Given
-                        let state = createGame {
-                            Player("p1") {
-                                Hand {
-                                    .duel
-                                }
-                            }
-                            Player("p2")
-                        }
-                        
                         // When
                         let result = self.awaitSequence(
                             action: .play(actor: "p1", card: .duel, target: "p2"),
-                            choices: .pass,
+                            choices: [.pass],
                             state: state
                         )
                         
@@ -71,11 +69,21 @@ final class DuelSpec: QuickSpec {
                     }
                 }
                 
-                xcontext("discarding bang") {
+                context("discarding bang") {
                     it("should damage actor") {
-                        // Given
                         // When
+                        let result = self.awaitSequence(
+                            action: .play(actor: "p1", card: .duel, target: "p2"),
+                            choices: ["bang-2", .pass],
+                            state: state
+                        )
+
                         // Then
+                        expect(result) == [
+                            .success(.play(actor: "p1", card: .duel, target: "p2")),
+                            .success(.discard(player: "p2", card: "bang-2")),
+                            .success(.damage(1, player: "p1"))
+                        ]
                     }
                 }
                 
