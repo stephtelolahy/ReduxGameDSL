@@ -25,7 +25,7 @@ public struct CardAction: Codable, Equatable {
     public let playReqs: [PlayReq]
     
     /// The side effect after performing the action
-    public let effect: GameAction
+    public let effect: CardEffect
 }
 
 /// Describing when card action is applied

@@ -27,14 +27,14 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.event) == nil
                         expect(result.queue.first) == .chooseOne(chooser: "p1", options: [
-                            "c1": .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx),
-                            "c2": .chooseCard(player: .id("p1"), card: .id("c2"), ctx: ctx)
+                            "c1": CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx),
+                            "c2": CardEffect.chooseCard(player: .id("p1"), card: .id("c2")).withCtx(ctx)
                         ])
                     }
                 }
@@ -49,13 +49,13 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.event) == nil
                         expect(result.queue) == [
-                            .chooseCard(player: .id("p1"), card: .id("c1"), ctx: ctx)
+                            CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
                         ]
                     }
                 }
@@ -67,7 +67,7 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
 
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .selectChoosable, ctx: ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -89,7 +89,7 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .id("c1"))
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(nil)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -110,7 +110,7 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: .id("p1"), card: .id("c1"))
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .id("c1")).withCtx(nil)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then

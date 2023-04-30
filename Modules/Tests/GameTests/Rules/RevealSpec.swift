@@ -26,7 +26,7 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.reveal
+                    let action = CardEffect.reveal.withCtx(nil)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -50,7 +50,7 @@ final class RevealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.reveal
+                    let action = CardEffect.reveal.withCtx(nil)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

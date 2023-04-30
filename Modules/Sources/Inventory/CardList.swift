@@ -11,7 +11,7 @@ public enum CardList {
     public static let all: [String: Card] = createCards {
         Card(.beer) {
             onPlay(content: {
-                GameAction.heal(1, player: .actor)
+                CardEffect.heal(1, player: .actor)
             }, require: {
                 PlayReq.isDamaged
                 PlayReq.isPlayersAtLeast(3)
@@ -20,7 +20,7 @@ public enum CardList {
 
         Card(.saloon) {
             onPlay(content: {
-                GameAction.heal(1, player: .damaged)
+                CardEffect.heal(1, player: .damaged)
             }, require: {
                 PlayReq.isAnyDamaged
             })
@@ -28,39 +28,39 @@ public enum CardList {
 
         Card(.stagecoach) {
             onPlay {
-                GameAction.replay(2) {
-                    GameAction.draw(player: .actor)
+                CardEffect.replay(2) {
+                    CardEffect.draw(player: .actor)
                 }
             }
         }
 
         Card(.wellsFargo) {
             onPlay {
-                GameAction.replay(3) {
-                    GameAction.draw(player: .actor)
+                CardEffect.replay(3) {
+                    CardEffect.draw(player: .actor)
                 }
             }
         }
 
         Card(.catBalou) {
             onPlay(target: .selectAnyWithCard) {
-                GameAction.discard(player: .target, card: .selectAny)
+                CardEffect.discard(player: .target, card: .selectAny)
             }
         }
 
         Card(.panic) {
             onPlay(target: .selectAtRangeWithCard(1)) {
-                GameAction.steal(player: .actor, target: .target, card: .selectAny)
+                CardEffect.steal(player: .actor, target: .target, card: .selectAny)
             }
         }
         
         Card(.generalStore) {
             onPlay {
-                GameAction.group {
-                    GameAction.replay(.numPlayers) {
-                        GameAction.reveal
+                CardEffect.group {
+                    CardEffect.replay(.numPlayers) {
+                        CardEffect.reveal
                     }
-                    GameAction.chooseCard(player: .all, card: .selectChoosable)
+                    CardEffect.chooseCard(player: .all, card: .selectChoosable)
                 }
             }
         }
@@ -68,7 +68,7 @@ public enum CardList {
         Card(.bang) {
             onPlay(target: .selectReachable,
                    content: {
-                GameAction.forceDiscard(player: .target,
+                CardEffect.forceDiscard(player: .target,
                                         card: .selectHandNamed(.missed),
                                         otherwise: .damage(1, player: .target))
             }, require: {
@@ -80,8 +80,8 @@ public enum CardList {
 
         Card(.gatling) {
             onPlay {
-                GameAction.apply(target: .others) {
-                    GameAction.forceDiscard(player: .target,
+                CardEffect.apply(target: .others) {
+                    CardEffect.forceDiscard(player: .target,
                                             card: .selectHandNamed(.missed),
                                             otherwise: .damage(1, player: .target))
                 }
@@ -90,8 +90,8 @@ public enum CardList {
 
         Card(.indians) {
             onPlay {
-                GameAction.apply(target: .others) {
-                    GameAction.forceDiscard(player: .target,
+                CardEffect.apply(target: .others) {
+                    CardEffect.forceDiscard(player: .target,
                                             card: .selectHandNamed(.bang),
                                             otherwise: .damage(1, player: .target))
                 }
@@ -100,7 +100,7 @@ public enum CardList {
 
         Card(.duel) {
             onPlay(target: .selectAny) {
-                GameAction.challengeDiscard(player: .target,
+                CardEffect.challengeDiscard(player: .target,
                                             card: .selectHandNamed(.bang),
                                             otherwise: .damage(1, player: .target),
                                             challenger: .actor)

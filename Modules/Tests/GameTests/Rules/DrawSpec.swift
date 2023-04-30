@@ -27,7 +27,7 @@ final class DrawSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.draw(player: .id("p1"), ctx: ctx)
+                    let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -49,7 +49,7 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.draw(player: .id("p1"), ctx: ctx)
+                        let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -67,7 +67,7 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.draw(player: .id("p1"), ctx: ctx)
+                        let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then

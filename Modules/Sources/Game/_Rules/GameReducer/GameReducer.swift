@@ -46,41 +46,44 @@ private extension GameAction {
         case .update:
             return Update()
 
-        case let .heal(value, player, ctx):
-            return Heal(player: player, value: value, ctx: ctx)
+        case let .effect(effect, ctx):
+            switch effect {
+            case let .heal(value, player):
+                return Heal(player: player, value: value, ctx: ctx)
 
-        case let .damage(value, player, ctx):
-            return Damage(player: player, value: value, ctx: ctx)
+            case let .damage(value, player):
+                return Damage(player: player, value: value, ctx: ctx)
 
-        case let .draw(player, ctx):
-            return Draw(player: player, ctx: ctx)
+            case let .draw(player):
+                return Draw(player: player, ctx: ctx)
 
-        case let .discard(player, card, ctx):
-            return Discard(player: player, card: card, ctx: ctx)
+            case let .discard(player, card):
+                return Discard(player: player, card: card, ctx: ctx)
 
-        case let .steal(player, target, card, ctx):
-            return Steal(player: player, target: target, card: card, ctx: ctx)
+            case let .steal(player, target, card):
+                return Steal(player: player, target: target, card: card, ctx: ctx)
 
-        case let .chooseCard(player, card, ctx):
-            return ChooseCard(player: player, card: card, ctx: ctx)
+            case let .chooseCard(player, card):
+                return ChooseCard(player: player, card: card, ctx: ctx)
 
-        case .reveal:
-            return Reveal()
-            
-        case let .forceDiscard(player, card, otherwise, ctx):
-            return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
+            case .reveal:
+                return Reveal()
 
-        case let .challengeDiscard(player, card, otherwise, challenger, ctx):
-            return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger, ctx: ctx)
+            case let .forceDiscard(player, card, otherwise):
+                return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
 
-        case let .replayEffect(times, effectToRepeat, ctx):
-            return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
+            case let .challengeDiscard(player, card, otherwise, challenger):
+                return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger, ctx: ctx)
 
-        case let .groupEffects(effects, ctx):
-            return GroupEffects(effects: effects, ctx: ctx)
+            case let .replayEffect(times, effectToRepeat):
+                return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
 
-        case let .applyEffect(target, effect, ctx):
-            return ApplyEffect(target: target, effect: effect, ctx: ctx)
+            case let .groupEffects(effects):
+                return GroupEffects(effects: effects, ctx: ctx)
+
+            case let .applyEffect(target, effect):
+                return ApplyEffect(target: target, effect: effect, ctx: ctx)
+            }
 
         case .chooseOne:
             fatalError(.unexpected)

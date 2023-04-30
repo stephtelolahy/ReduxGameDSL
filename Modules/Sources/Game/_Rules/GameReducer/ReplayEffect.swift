@@ -7,7 +7,7 @@
 
 struct ReplayEffect: GameReducerProtocol {
     let times: NumArg
-    let effect: GameAction
+    let effect: CardEffect
     let ctx: EffectContext?
 
     func reduce(state: GameState) throws -> GameState {
