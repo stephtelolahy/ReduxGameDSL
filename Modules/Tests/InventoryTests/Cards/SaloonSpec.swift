@@ -33,8 +33,7 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .saloon)
-                    let result = self.awaitAction(action, state: state)
+                    let result = self.awaitAction(.play(actor: "p1", card: .saloon), state: state)
                     
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: .saloon)),
@@ -60,8 +59,7 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .saloon)
-                    let result = self.awaitAction(action, state: state)
+                    let result = self.awaitAction(.play(actor: "p1", card: .saloon), state: state)
                     
                     // Then
                     expect(result) == [.failure(.noPlayerDamaged)]

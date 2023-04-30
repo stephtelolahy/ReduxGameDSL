@@ -33,7 +33,7 @@ public struct GameState: Codable, Equatable {
     public var event: CodableResult<GameEvent, GameError>?
 
     /// Queued effects
-    public var queue: [GameAction] = []
+    var queue: [GameAction] = []
 
     /// All cards reference
     public var cardRef: [String: Card] = [:]

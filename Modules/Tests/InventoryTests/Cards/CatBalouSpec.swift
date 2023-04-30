@@ -27,8 +27,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
-                        let result = self.awaitAction(action, state: state)
+                        let result = self.awaitAction(.play(actor: "p1", card: .catBalou), state: state)
                         
                         // Then
                         expect(result) == [.failure(GameError.noPlayerWithCard)]

@@ -50,8 +50,7 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .bang)
-                        let result = self.awaitAction(action, state: state)
+                        let result = self.awaitAction(.play(actor: "p1", card: .bang), state: state)
                         
                         // Then
                         expect(result) == [.failure(GameError.noPlayerAtRange(1))]

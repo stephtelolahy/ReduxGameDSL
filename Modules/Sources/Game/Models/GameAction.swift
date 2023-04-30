@@ -5,7 +5,6 @@
 //  Created by Hugues Telolahy on 06/04/2023.
 //
 
-// TODO: case .effect(CardEffect, ctx: EffectContext?)
 /// Function that causes any change in the game state
 public indirect enum GameAction: Codable, Equatable {
     
