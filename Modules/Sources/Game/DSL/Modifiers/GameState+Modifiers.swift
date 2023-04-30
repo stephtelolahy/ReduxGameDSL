@@ -26,6 +26,10 @@ public extension GameState {
     func cardRef(_ value: [String: Card]) -> Self {
         copy { $0.cardRef = value }
     }
+
+    func queued(_ value: [GameAction]) -> Self {
+        copy { $0.queue = value }
+    }
 }
 
 private extension GameState {
