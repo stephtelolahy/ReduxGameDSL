@@ -7,7 +7,6 @@
 import Game
 
 public enum CardList {
-
     public static let all: [String: Card] = createCards {
         Card(.beer) {
             onPlay(content: {
