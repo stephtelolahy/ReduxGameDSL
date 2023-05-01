@@ -114,8 +114,7 @@ public enum CardList {
         Card(.endTurn) {
             onPlay {
                 CardEffect.group {
-                    // TODO: use .excessHand
-                    CardEffect.replay(2) {
+                    CardEffect.replay(.excessHand) {
                         CardEffect.discard(player: .actor, card: .selectHand)
                     }
                     CardEffect.setTurn(.next)

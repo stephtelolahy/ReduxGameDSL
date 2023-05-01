@@ -11,6 +11,7 @@ import Game
 import Inventory
 
 final class EndTurnSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("ending turn") {
             context("no excess cards") {
@@ -34,8 +35,38 @@ final class EndTurnSpec: QuickSpec {
                 }
             }
 
-            context("having excess card") {
-                it("should discard cards") {
+            context("having one excess card") {
+                it("should discard a hand card") {
+                    // Given
+                    let state = createGame {
+                        Player("p1") {
+                            Hand {
+                                "c1"
+                                "c2"
+                                "c3"
+                            }
+                        }
+                        .health(2)
+                        Player("p2")
+                    }
+                    .turn("p1")
+
+                    // When
+                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let result = self.awaitAction(action, choices: ["c1"], state: state)
+
+                    // Then
+                    expect(result) == [
+                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.chooseOne(chooser: "p1", options: ["c1", "c2", "c3"])),
+                        .success(.discard(player: "p1", card: "c1")),
+                        .success(.setTurn("p2"))
+                    ]
+                }
+            }
+
+            context("having 2 excess cards") {
+                it("should discard hand cards") {
                     // Given
                     let state = createGame {
                         Player("p1") {

@@ -18,11 +18,14 @@ struct NumArgResolver {
 private extension NumArg {
     func resolver() -> NumArgResolverProtocol {
         switch self {
-        case let .numExact(number):
+        case let .exact(number):
             return NumExact(number: number)
 
         case .numPlayers:
             return NumPlayers()
+
+        case .excessHand:
+            return NumExcessHand()
         }
     }
 }
