@@ -33,7 +33,7 @@ struct ForceDiscard: GameReducerProtocol {
         }
         options[.pass] = otherwise.withCtx(ctx)
         var state = state
-        state.chooseOne = ChooseOne(chooser: pId, options: options)
+        state.setChooseOne(chooser: pId, options: options)
         
         return state
     }

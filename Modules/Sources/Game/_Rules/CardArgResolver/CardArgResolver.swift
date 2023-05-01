@@ -40,7 +40,7 @@ struct CardArgResolver {
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
-            state.chooseOne = ChooseOne(chooser: chooser, options: options)
+            state.setChooseOne(chooser: chooser, options: options)
         }
         return state
     }

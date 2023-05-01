@@ -62,7 +62,9 @@ final class CatBalouSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
+                            .success(.chooseOne(chooser: "p1", options: ["p2", "p3"])),
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: [.randomHand])),
                             .success(.discard(player: "p2", card: "c2"))
                         ]
                     }
@@ -115,6 +117,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: [.randomHand])),
                             .success(.discard(player: "p2", card: "c21"))
                         ]
                     }
@@ -138,13 +141,13 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        // When
                         let action = GameAction.play(actor: "p1", card: .catBalou, target: "p2")
                         let result = self.awaitAction(action, choices: ["c22"], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: ["c21", "c22"])),
                             .success(.discard(player: "p2", card: "c22"))
                         ]
                     }
@@ -177,6 +180,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: [.randomHand, "c22", "c23"])),
                             .success(.discard(player: "p2", card: "c23"))
                         ]
                     }

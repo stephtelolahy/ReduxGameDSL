@@ -42,7 +42,9 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
+                        .success(.chooseOne(chooser: "p1", options: ["p2", "p3", "p4"])),
                         .success(.play(actor: "p1", card: .duel, target: "p4")),
+                        .success(.chooseOne(chooser: "p4", options: [.pass])),
                         .success(.damage(1, player: "p4"))
                     ]
                 }
@@ -58,6 +60,7 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
+                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
                             .success(.damage(1, player: "p2"))
                         ]
                     }
@@ -72,7 +75,9 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
+                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
                             .success(.discard(player: "p2", card: "bang-2")),
+                            .success(.chooseOne(chooser: "p1", options: [.pass, "bang-1"])),
                             .success(.damage(1, player: "p1"))
                         ]
                     }
@@ -87,8 +92,11 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
+                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
                             .success(.discard(player: "p2", card: "bang-2")),
+                            .success(.chooseOne(chooser: "p1", options: [.pass, "bang-1"])),
                             .success(.discard(player: "p1", card: "bang-1")),
+                            .success(.chooseOne(chooser: "p2", options: [.pass])),
                             .success(.damage(1, player: "p2"))
                         ]
                     }

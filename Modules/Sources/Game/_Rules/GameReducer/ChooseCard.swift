@@ -18,7 +18,7 @@ struct ChooseCard: GameReducerProtocol {
         }
         
         guard case let .id(cId) = card else {
-            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: nil) {
+            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: nil) {
                 CardEffect.chooseCard(player: player, card: .id($0)).withCtx(ctx)
             }
         }

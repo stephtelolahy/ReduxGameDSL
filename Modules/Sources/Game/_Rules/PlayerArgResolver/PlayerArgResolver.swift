@@ -31,7 +31,7 @@ struct PlayerArgResolver {
             let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
             }
-            state.chooseOne = ChooseOne(chooser: ctx.actor, options: options)
+            state.setChooseOne(chooser: ctx.actor, options: options)
         }
         
         return state

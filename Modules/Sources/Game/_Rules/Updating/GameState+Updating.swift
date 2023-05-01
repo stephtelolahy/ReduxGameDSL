@@ -43,4 +43,9 @@ extension GameState {
         distance += self.player(other).mustang
         return distance
     }
+
+    mutating func setChooseOne(chooser: String, options: [String: GameAction]) {
+        chooseOne = ChooseOne(chooser: chooser, options: options)
+        event = .chooseOne(chooser: chooser, options: Set(options.keys))
+    }
 }

@@ -67,7 +67,9 @@ final class PanicSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
+                            .success(.chooseOne(chooser: "p1", options: ["p2", "p4"])),
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: ["c2"])),
                             .success(.steal(player: "p1", target: "p2", card: "c2"))
                         ]
                     }
@@ -122,6 +124,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: [.randomHand])),
                             .success(.steal(player: "p1", target: "p2", card: "c21"))
                         ]
                     }
@@ -151,6 +154,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: ["c21", "c22"])),
                             .success(.steal(player: "p1", target: "p2", card: "c22"))
                         ]
                     }
@@ -183,6 +187,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.chooseOne(chooser: "p1", options: [.randomHand, "c22", "c23"])),
                             .success(.steal(player: "p1", target: "p2", card: "c23"))
                         ]
                     }

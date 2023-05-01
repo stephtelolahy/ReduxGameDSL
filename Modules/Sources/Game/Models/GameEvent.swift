@@ -34,5 +34,5 @@ public enum GameEvent: Codable, Equatable {
     case reveal
 
     /// Ask a player to choose an action
-    case chooseOne(chooser: String, options: [String])
+    case chooseOne(chooser: String, options: Set<String>)
 }

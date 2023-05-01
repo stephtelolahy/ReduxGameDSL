@@ -38,7 +38,9 @@ final class GatlingSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
+                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
                         .success(.discard(player: "p2", card: .missed)),
+                        .success(.chooseOne(chooser: "p3", options: [.pass])),
                         .success(.damage(1, player: "p3"))
                     ]
                 }
@@ -67,6 +69,7 @@ final class GatlingSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
+                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
                         .success(.discard(player: "p2", card: .missed))
                     ]
                 }
