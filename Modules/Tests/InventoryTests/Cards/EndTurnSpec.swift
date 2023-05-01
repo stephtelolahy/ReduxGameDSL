@@ -35,6 +35,34 @@ final class EndTurnSpec: QuickSpec {
                 }
             }
 
+            context("custom hand limit") {
+                it("should discard nothing") {
+                    // Given
+                    let state = createGame {
+                        Player("p1") {
+                            Hand {
+                                "c1"
+                                "c2"
+                            }
+                        }
+                        .health(1)
+                        .handLimit(10)
+                        Player("p2")
+                    }
+                    .turn("p1")
+
+                    // When
+                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let result = self.awaitAction(action, state: state)
+
+                    // Then
+                    expect(result) == [
+                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.setTurn("p2"))
+                    ]
+                }
+            }
+
             context("having one excess card") {
                 it("should discard a hand card") {
                     // Given
