@@ -41,6 +41,9 @@ private extension GameAction {
         case let .play(actor, card, target):
             return Play(actor: actor, card: card, target: target)
 
+        case let .invoke(actor, card):
+            return Invoke(actor: actor, card: card)
+
         case .update:
             return Update()
 
@@ -76,6 +79,9 @@ private extension GameAction {
                                         otherwise: otherwise,
                                         challenger: challenger,
                                         ctx: ctx)
+
+            case let .setTurn(player):
+                return SetTurn(player: player, ctx: ctx)
 
             case let .replayEffect(times, effectToRepeat):
                 return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)

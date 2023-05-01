@@ -74,6 +74,9 @@ private extension PlayerArg {
 
         case .selectAny:
             return PlayerSelectAny()
+
+        case .next:
+            return PlayerNext()
         }
     }
 }

@@ -12,6 +12,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Play a hand card
     case play(actor: String, card: String, target: String? = nil)
 
+    /// Invoke an ability
+    case invoke(actor: String, card: String)
+
     /// Process queued effects
     case update
 
