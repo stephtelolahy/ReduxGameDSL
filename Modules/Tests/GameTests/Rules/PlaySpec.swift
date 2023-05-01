@@ -45,7 +45,7 @@ final class PlaySpec: QuickSpec {
                     expect(result.discard.top) == "playable"
                 }
 
-                it("should emit completed action") {
+                it("should emit event") {
                     // Then
                     expect(result.event) == .play(actor: "p1", card: "playable")
                 }

@@ -16,7 +16,7 @@ final class ChallengeDiscardSpec: QuickSpec {
         
         describe("challenge discard") {
             context("having required card") {
-                it("should ask to choose card or pass") {
+                it("should ask to choose card or pass and reverse challenge") {
                     // Given
                     let state = GameState {
                         Player("p1") {

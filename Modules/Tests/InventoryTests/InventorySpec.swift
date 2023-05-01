@@ -42,6 +42,15 @@ final class InventorySpec: QuickSpec {
 //                expect(cards[.volcanic]) != nil
 //                expect(cards[.winchester]) != nil
             }
+
+            it("should contain all abilities") {
+                // Given
+                // When
+                let cards = CardList.all
+
+                // Then
+                expect(cards[.endTurn]) != nil
+            }
         }
     }
 }

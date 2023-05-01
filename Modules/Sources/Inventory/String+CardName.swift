@@ -50,4 +50,12 @@ public extension String {
     static let kitCarlson = "kitCarlson"
     static let jesseJones = "jesseJones"
     static let pedroRamirez = "pedroRamirez"
+
+    // MARK: - Abilities
+    
+    static let endTurn = "endTurn"
+    static let drawCardsOnSetTurn = "drawCardsOnSetTurn"
+    static let eliminateOnLooseLastHealth = "eliminateOnLooseLastHealth"
+    static let nextTurnOnEliminated = "nextTurnOnEliminated"
+    static let discardCardsOnEliminated = "discardCardsOnEliminated"
 }

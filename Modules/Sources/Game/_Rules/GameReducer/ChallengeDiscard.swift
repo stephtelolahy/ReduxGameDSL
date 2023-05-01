@@ -18,7 +18,8 @@ struct ChallengeDiscard: GameReducerProtocol {
         // resolve player
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.challengeDiscard(player: .id($0), card: card, otherwise: otherwise, challenger: challenger).withCtx(ctx)
+                CardEffect.challengeDiscard(player: .id($0), card: card, otherwise: otherwise, challenger: challenger)
+                    .withCtx(ctx)
             }
         }
         
@@ -31,7 +32,8 @@ struct ChallengeDiscard: GameReducerProtocol {
         // resolving challenger
         guard case let .id(challengerId) = challenger else {
             return try PlayerArgResolver().resolve(arg: challenger, state: state, ctx: ctx) {
-                CardEffect.challengeDiscard(player: player, card: card, otherwise: otherwise, challenger: .id($0)).withCtx(ctx)
+                CardEffect.challengeDiscard(player: player, card: card, otherwise: otherwise, challenger: .id($0))
+                    .withCtx(ctx)
             }
         }
         

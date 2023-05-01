@@ -72,7 +72,11 @@ private extension GameAction {
                 return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
 
             case let .challengeDiscard(player, card, otherwise, challenger):
-                return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger, ctx: ctx)
+                return ChallengeDiscard(player: player,
+                                        card: card,
+                                        otherwise: otherwise,
+                                        challenger: challenger,
+                                        ctx: ctx)
 
             case let .replayEffect(times, effectToRepeat):
                 return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
