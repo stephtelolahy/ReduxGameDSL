@@ -113,7 +113,13 @@ public enum CardList {
 
         Card(.endTurn) {
             onPlay {
-                CardEffect.setTurn(.next)
+                CardEffect.group {
+                    // TODO: use .excessHand
+                    CardEffect.replay(2) {
+                        CardEffect.discard(player: .actor, card: .selectHand)
+                    }
+                    CardEffect.setTurn(.next)
+                }
             }
         }
     }

@@ -24,7 +24,8 @@ final class IndiansSpec: QuickSpec {
                         }
                         Player("p2") {
                             Hand {
-                                .bang
+                                String.bang
+                                String.missed
                             }
                         }
                         

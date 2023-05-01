@@ -9,6 +9,12 @@
 public struct ChooseOne: Codable, Equatable {
     public let chooser: String
     public let options: [String: GameAction]
+
+    init(chooser: String, options: [String: GameAction]) {
+        assert(!options.isEmpty)
+        self.chooser = chooser
+        self.options = options
+    }
 }
 
 /// ChooseOne labels

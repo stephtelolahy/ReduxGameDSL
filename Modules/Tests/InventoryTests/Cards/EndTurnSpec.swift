@@ -34,19 +34,35 @@ final class EndTurnSpec: QuickSpec {
                 }
             }
 
-            xcontext("1 excess card") {
-                it("should discard a card") {
+            context("having excess card") {
+                it("should discard cards") {
                     // Given
-                    // When
-                    // Then
-                }
-            }
+                    let state = createGame {
+                        Player("p1") {
+                            Hand {
+                                "c1"
+                                "c2"
+                                "c3"
+                            }
+                        }
+                        .health(1)
+                        Player("p2")
+                    }
+                    .turn("p1")
 
-            xcontext("2 excess cards") {
-                it("should discard 2 cards") {
-                    // Given
                     // When
+                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let result = self.awaitAction(action, choices: ["c1", "c3"], state: state)
+
                     // Then
+                    expect(result) == [
+                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.chooseOne(chooser: "p1", options: ["c1", "c2", "c3"])),
+                        .success(.discard(player: "p1", card: "c1")),
+                        .success(.chooseOne(chooser: "p1", options: ["c2", "c3"])),
+                        .success(.discard(player: "p1", card: "c3")),
+                        .success(.setTurn("p2"))
+                    ]
                 }
             }
         }

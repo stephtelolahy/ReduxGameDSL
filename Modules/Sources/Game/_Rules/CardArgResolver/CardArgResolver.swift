@@ -37,6 +37,10 @@ struct CardArgResolver {
             state.queue.insert(contentsOf: children, at: 0)
 
         case let .selectable(cIdOptions):
+            guard cIdOptions.isNotEmpty else {
+                return state
+            }
+
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
@@ -60,6 +64,9 @@ private extension CardArg {
 
         case let .selectHandNamed(name):
             return CardSelectHandNamed(name: name)
+
+        case .selectHand:
+            return CardSelectHand()
         }
     }
 }
