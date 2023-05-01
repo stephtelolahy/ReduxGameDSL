@@ -10,17 +10,14 @@ struct Draw: GameReducerProtocol {
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
-        
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.draw(player: .id($0)).withCtx(ctx)
             }
         }
 
-        // draw card
+        var state = state
         let card = try state.popDeck()
-
         state[keyPath: \GameState.players[pId]]?.hand.add(card)
 
         state.event = .draw(player: pId)

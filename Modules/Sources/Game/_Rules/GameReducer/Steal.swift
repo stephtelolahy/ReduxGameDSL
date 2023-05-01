@@ -12,8 +12,6 @@ struct Steal: GameReducerProtocol {
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
-
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.steal(player: .id($0), target: target, card: card).withCtx(ctx)
@@ -32,8 +30,8 @@ struct Steal: GameReducerProtocol {
             }
         }
 
+        var state = state
         try state[keyPath: \GameState.players[tId]]?.removeCard(cId)
-
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)
 
         state.event = .steal(player: pId, target: tId, card: cId) 

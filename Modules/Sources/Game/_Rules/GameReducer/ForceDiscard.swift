@@ -12,8 +12,6 @@ struct ForceDiscard: GameReducerProtocol {
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
-
         // resolve player
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
@@ -34,6 +32,7 @@ struct ForceDiscard: GameReducerProtocol {
             $0[$1.label] = CardEffect.discard(player: player, card: .id($1.id)).withCtx(ctx)
         }
         options[.pass] = otherwise.withCtx(ctx)
+        var state = state
         state.chooseOne = ChooseOne(chooser: pId, options: options)
         
         return state

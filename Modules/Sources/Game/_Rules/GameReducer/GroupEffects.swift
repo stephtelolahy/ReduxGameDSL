@@ -10,8 +10,8 @@ struct GroupEffects: GameReducerProtocol {
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
         let children = effects.map { $0.withCtx(ctx) }
+        var state = state
         state.queue.insert(contentsOf: children, at: 0)
         return state
     }

@@ -11,9 +11,6 @@ struct Play: GameReducerProtocol {
     let target: String?
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
-        let ctx = EffectContext(actor: actor, card: card, target: target)
-
         guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
         }
@@ -30,6 +27,7 @@ struct Play: GameReducerProtocol {
         }
 
         // verify requirements
+        let ctx = EffectContext(actor: actor, card: card, target: target)
         for playReq in playAction.playReqs {
             try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
         }
@@ -43,6 +41,7 @@ struct Play: GameReducerProtocol {
         }
 
         // discard immediately
+        var state = state
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
         state.discard.push(card)
 

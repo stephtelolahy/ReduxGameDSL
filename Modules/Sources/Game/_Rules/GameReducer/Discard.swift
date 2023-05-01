@@ -11,8 +11,6 @@ struct Discard: GameReducerProtocol {
     let ctx: EffectContext
 
     func reduce(state: GameState) throws -> GameState {
-        var state = state
-        
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
@@ -25,6 +23,7 @@ struct Discard: GameReducerProtocol {
             }
         }
 
+        var state = state
         try state[keyPath: \GameState.players[pId]]?.removeCard(cId)
 
         state.discard.push(cId)
