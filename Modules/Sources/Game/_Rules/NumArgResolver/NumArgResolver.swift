@@ -26,6 +26,9 @@ private extension NumArg {
 
         case .excessHand:
             return NumExcessHand()
+            
+        case .startTurnCards:
+            return NumStartTurnCards()
         }
     }
 }

@@ -16,4 +16,7 @@ public enum NumArg: Codable, Equatable {
 
     /// Number of excess cards at the end of turn
     case excessHand
+    
+    /// Number of start turn cards
+    case startTurnCards
 }

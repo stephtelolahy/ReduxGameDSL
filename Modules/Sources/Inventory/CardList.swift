@@ -121,6 +121,16 @@ public enum CardList {
                 }
             }
         }
+        
+        Card(.startTurn) {
+            onPlay {
+                CardEffect.replay(.startTurnCards) {
+                    CardEffect.draw(player: .actor)
+                }
+            } require: {
+                PlayReq.onSetTurn
+            }
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
