@@ -4,11 +4,10 @@
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
-
 import Redux
 
 protocol GameReducerProtocol {
-    func reduce(state: GameState) throws -> GameState
+    func reduce(state: GameState, action: GameAction) throws -> GameState
 }
 
 struct GameReducer: ReducerProtocol {
@@ -17,28 +16,11 @@ struct GameReducer: ReducerProtocol {
         queueTriggeredEffects(state: &state)
         do {
             try validateAction(action: action, state: &state)
-            return try process(action: action, state: state)
+            return try action.reducer().reduce(state: state, action: action)
         } catch {
             state.error = error as? GameError
             return state
         }
-    }
-    
-    private func process(action: GameAction, state: GameState) throws -> GameState {
-        switch action {
-        case let .effect(effect, _):
-            switch effect {
-            case .heal:
-                return try Heal().reduce(state: state, action: action)
-                
-            default:
-                break
-            }
-        default:
-            break
-        }
-        
-        return try action.reducer().reduce(state: state)
     }
     
     private func queueTriggeredEffects(state: inout GameState) {
@@ -89,62 +71,41 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-        case let .play(actor, card, target):
-            return Play(actor: actor, card: card, target: target)
+        case .play: return Play()
             
-        case let .invoke(actor, card):
-            return Invoke(actor: actor, card: card)
+        case .invoke: return Invoke()
             
-        case let .trigger(actor, card):
-            return Trigger(actor: actor, card: card)
+        case .trigger: return Trigger()
             
-        case .update:
-            return Update()
+        case .update: return Update()
             
-        case let .effect(effect, ctx):
+        case let .effect(effect, _):
             switch effect {
-            case let .damage(value, player):
-                return Damage(player: player, value: value, ctx: ctx)
+            case .draw: return Draw()
                 
-            case let .draw(player):
-                return Draw(player: player, ctx: ctx)
+            case .discard: return Discard()
                 
-            case let .discard(player, card):
-                return Discard(player: player, card: card, ctx: ctx)
+            case .steal: return Steal()
                 
-            case let .steal(player, target, card):
-                return Steal(player: player, target: target, card: card, ctx: ctx)
+            case .reveal: return Reveal()
                 
-            case let .chooseCard(player, card):
-                return ChooseCard(player: player, card: card, ctx: ctx)
+            case .heal: return Heal()
                 
-            case .reveal:
-                return Reveal()
+            case .damage: return Damage()
                 
-            case let .forceDiscard(player, card, otherwise):
-                return ForceDiscard(player: player, card: card, otherwise: otherwise, ctx: ctx)
+            case .forceDiscard: return ForceDiscard()
                 
-            case let .challengeDiscard(player, card, otherwise, challenger):
-                return ChallengeDiscard(player: player,
-                                        card: card,
-                                        otherwise: otherwise,
-                                        challenger: challenger,
-                                        ctx: ctx)
+            case .challengeDiscard: return ChallengeDiscard()
                 
-            case let .setTurn(player):
-                return SetTurn(player: player, ctx: ctx)
+            case .setTurn: return SetTurn()
                 
-            case let .replayEffect(times, effectToRepeat):
-                return ReplayEffect(times: times, effect: effectToRepeat, ctx: ctx)
+            case .chooseCard: return ChooseCard()
                 
-            case let .groupEffects(effects):
-                return GroupEffects(effects: effects, ctx: ctx)
+            case .applyEffect: return ApplyEffect()
                 
-            case let .applyEffect(target, effect):
-                return ApplyEffect(target: target, effect: effect, ctx: ctx)
+            case .replayEffect: return ReplayEffect()
                 
-            default:
-                fatalError(.unexpected)
+            case .groupEffects: return GroupEffects()
             }
         }
     }

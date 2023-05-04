@@ -6,11 +6,12 @@
 //
 
 struct ApplyEffect: GameReducerProtocol {
-    let target: PlayerArg
-    let effect: CardEffect
-    let ctx: EffectContext
-    
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .effect(effect, ctx) = action,
+              case let .applyEffect(target, effect) = effect else {
+            fatalError(.unexpected)
+        }
+        
         let targets = try PlayerArgResolver().resolve(arg: target, state: state, ctx: ctx)
         guard case let .identified(pIds) = targets else {
             fatalError(GameError.unexpected)

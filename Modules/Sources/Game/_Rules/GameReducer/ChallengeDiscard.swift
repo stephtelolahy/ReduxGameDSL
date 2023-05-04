@@ -6,13 +6,12 @@
 //
 
 struct ChallengeDiscard: GameReducerProtocol {
-    let player: PlayerArg
-    let card: CardArg
-    let otherwise: CardEffect
-    let challenger: PlayerArg
-    let ctx: EffectContext
-    
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .effect(effect, ctx) = action,
+              case let .challengeDiscard(player, card, otherwise, challenger) = effect else {
+            fatalError(.unexpected)
+        }
+        
         // resolve player
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
@@ -51,6 +50,7 @@ struct ChallengeDiscard: GameReducerProtocol {
             }.withCtx(reversedCtx)
         }
         options[.pass] = otherwise.withCtx(ctx)
+        
         var state = state
         state.setChooseOne(chooser: pId, options: options)
         

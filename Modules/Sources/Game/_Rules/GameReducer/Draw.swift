@@ -6,10 +6,12 @@
 //
 
 struct Draw: GameReducerProtocol {
-    let player: PlayerArg
-    let ctx: EffectContext
-
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .effect(effect, ctx) = action,
+              case let .draw(player) = effect else {
+            fatalError(.unexpected)
+        }
+        
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.draw(player: .id($0)).withCtx(ctx)

@@ -6,10 +6,11 @@
 //
 
 struct Invoke: GameReducerProtocol {
-    let actor: String
-    let card: String
-
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .invoke(actor, card) = action else {
+            fatalError(.unexpected)
+        }
+        
         // verify play action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],

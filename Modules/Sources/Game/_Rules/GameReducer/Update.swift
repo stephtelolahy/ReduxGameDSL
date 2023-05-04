@@ -6,7 +6,11 @@
 //
 
 struct Update: GameReducerProtocol {
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case .update = action else {
+            fatalError(.unexpected)
+        }
+        
         guard state.queue.isNotEmpty else {
             return state
         }

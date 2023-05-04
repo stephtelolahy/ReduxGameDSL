@@ -4,9 +4,8 @@
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
-import Redux
 
-struct Heal: ThrowableReducerProtocol {
+struct Heal: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         guard case let .effect(effect, ctx) = action,
               case let .heal(value, player) = effect else {

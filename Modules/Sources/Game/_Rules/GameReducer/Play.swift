@@ -6,11 +6,11 @@
 //
 
 struct Play: GameReducerProtocol {
-    let actor: String
-    let card: String
-    let target: String?
-
-    func reduce(state: GameState) throws -> GameState {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .play(actor, card, target) = action else {
+            fatalError(.unexpected)
+        }
+        
         guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
         }
