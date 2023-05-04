@@ -31,7 +31,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.invoke(actor: "p1", card: .startTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .startTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
                 }
@@ -57,7 +57,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.invoke(actor: "p1", card: .startTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .startTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]

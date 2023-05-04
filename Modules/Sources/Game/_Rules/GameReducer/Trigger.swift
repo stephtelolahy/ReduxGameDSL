@@ -1,11 +1,11 @@
 //
-//  Invoke.swift
+//  Trigger.swift
 //  
 //
-//  Created by Hugues Telolahy on 01/05/2023.
+//  Created by Hugues Stephano TELOLAHY on 04/05/2023.
 //
 
-struct Invoke: GameReducerProtocol {
+struct Trigger: GameReducerProtocol {
     let actor: String
     let card: String
 
@@ -16,18 +16,13 @@ struct Invoke: GameReducerProtocol {
               let action = cardObj.actions.first(where: { $0.actionType == .play }) else {
             throw GameError.cardIsNotPlayable(card)
         }
-
-        // verify requirements
-        let ctx = EffectContext(actor: actor, card: card)
-        for playReq in action.playReqs {
-            try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
-        }
-
+        
         // queue side effects
+        let ctx = EffectContext(actor: actor, card: card)
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
 
-        state.event = .invoke(actor: actor, card: card)
+        state.event = .trigger(actor: actor, card: card)
 
         return state
     }

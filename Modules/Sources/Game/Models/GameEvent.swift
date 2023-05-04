@@ -14,6 +14,9 @@ public enum GameEvent: Codable, Equatable {
 
     /// Invoke an ability
     case invoke(actor: String, card: String)
+    
+    /// Trigger an ability
+    case trigger(actor: String, card: String)
 
     /// Restore player's health, limited to maxHealth
     case heal(Int, player: String)

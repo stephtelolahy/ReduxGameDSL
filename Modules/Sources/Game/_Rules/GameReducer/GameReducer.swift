@@ -17,9 +17,6 @@ struct GameReducer: ReducerProtocol {
 
         queueTriggeredEffects(state: &state)
 
-        state.event = nil
-        state.error = nil
-
         if let chooseOne = state.chooseOne {
             guard chooseOne.options.values.contains(action) else {
                 state.error = .unwaitedAction
@@ -41,10 +38,13 @@ struct GameReducer: ReducerProtocol {
             let actorObj = state.player(actor)
             for card in actorObj.abilities
             where isTriggered(actor: actor, card: card, state: state) {
-                let action = GameAction.invoke(actor: actor, card: card)
+                let action = GameAction.trigger(actor: actor, card: card)
                 state.queue.insert(action, at: 0)
             }
         }
+        
+        state.event = nil
+        state.error = nil
     }
 
     private func isTriggered(actor: String, card: String, state: GameState) -> Bool {
@@ -77,6 +77,9 @@ private extension GameAction {
 
         case let .invoke(actor, card):
             return Invoke(actor: actor, card: card)
+            
+        case let .trigger(actor, card):
+            return Trigger(actor: actor, card: card)
 
         case .update:
             return Update()
