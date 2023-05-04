@@ -17,11 +17,28 @@ struct GameReducer: ReducerProtocol {
         queueTriggeredEffects(state: &state)
         do {
             try validateAction(action: action, state: &state)
-            return try action.reducer().reduce(state: state)
+            return try process(action: action, state: state)
         } catch {
             state.error = error as? GameError
             return state
         }
+    }
+    
+    private func process(action: GameAction, state: GameState) throws -> GameState {
+        switch action {
+        case let .effect(effect, _):
+            switch effect {
+            case .heal:
+                return try Heal().reduce(state: state, action: action)
+                
+            default:
+                break
+            }
+        default:
+            break
+        }
+        
+        return try action.reducer().reduce(state: state)
     }
     
     private func queueTriggeredEffects(state: inout GameState) {
@@ -86,9 +103,6 @@ private extension GameAction {
             
         case let .effect(effect, ctx):
             switch effect {
-            case let .heal(value, player):
-                return Heal(player: player, value: value, ctx: ctx)
-                
             case let .damage(value, player):
                 return Damage(player: player, value: value, ctx: ctx)
                 
@@ -128,6 +142,9 @@ private extension GameAction {
                 
             case let .applyEffect(target, effect):
                 return ApplyEffect(target: target, effect: effect, ctx: ctx)
+                
+            default:
+                fatalError(.unexpected)
             }
         }
     }

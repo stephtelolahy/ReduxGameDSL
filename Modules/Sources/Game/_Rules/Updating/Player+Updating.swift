@@ -6,6 +6,15 @@
 //
 
 extension Player {
+    mutating func gainHealth(_ value: Int) throws {
+        guard health < maxHealth else {
+            throw GameError.playerAlreadyMaxHealth(id)
+        }
+        
+        let newHealth = min(health + value, maxHealth)
+        health = newHealth
+    }
+    
     mutating func removeCard(_ card: String) throws {
         if hand.contains(card) {
             try hand.remove(card)
