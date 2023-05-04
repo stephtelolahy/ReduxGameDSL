@@ -42,6 +42,7 @@ final class StartTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
+                            .abilities([.startTurn])
                             .starTurnCards(3)
                         Deck {
                             "c1"

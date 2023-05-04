@@ -29,6 +29,9 @@ private extension PlayReq {
 
         case let .isTimesPerTurn(count):
             return IsTimesPerTurn(maxTimes: count)
+
+        case .onSetTurn:
+            return OnSetTurn()
         }
     }
 }

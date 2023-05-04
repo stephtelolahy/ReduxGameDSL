@@ -14,6 +14,9 @@ protocol GameReducerProtocol {
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
         var state = state
+
+        queueTriggeredEffects(state: &state)
+
         state.event = nil
         state.error = nil
 
@@ -31,6 +34,37 @@ struct GameReducer: ReducerProtocol {
             state.error = error as? GameError
             return state
         }
+    }
+
+    private func queueTriggeredEffects(state: inout GameState) {
+        for actor in state.playOrder {
+            let actorObj = state.player(actor)
+            for card in actorObj.abilities
+            where isTriggered(actor: actor, card: card, state: state) {
+                let action = GameAction.invoke(actor: actor, card: card)
+                state.queue.insert(action, at: 0)
+            }
+        }
+    }
+
+    private func isTriggered(actor: String, card: String, state: GameState) -> Bool {
+        let ctx = EffectContext(actor: actor, card: card)
+        guard let cardObj = state.cardRef[card] else {
+            return false
+        }
+
+        for action in cardObj.actions where
+        action.actionType == .play {
+            for playReq in action.playReqs {
+                do {
+                    try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
+                } catch {
+                    return false
+                }
+                return true
+            }
+        }
+        return false
     }
 }
 
