@@ -40,7 +40,7 @@ extension Array where Element == String {
     }
 }
 
-struct CardArgResolver {
+struct CardArgResolver: CardArgResolverProtocol {
     func resolve(
         arg: CardArg,
         state: GameState,

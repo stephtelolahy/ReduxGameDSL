@@ -6,29 +6,25 @@
 //
 
 protocol NumArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> Int
+    func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int
 }
 
-struct NumArgResolver {
+struct NumArgResolver: NumArgResolverProtocol {
     func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int {
-        try arg.resolver().resolve(state: state, ctx: ctx)
+        try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
     }
 }
 
 private extension NumArg {
     func resolver() -> NumArgResolverProtocol {
         switch self {
-        case let .exact(number):
-            return NumExact(number: number)
+        case .exact: return NumExact()
 
-        case .numPlayers:
-            return NumPlayers()
+        case .numPlayers: return NumPlayers()
 
-        case .excessHand:
-            return NumExcessHand()
+        case .excessHand: return NumExcessHand()
             
-        case .startTurnCards:
-            return NumStartTurnCards()
+        case .startTurnCards: return NumStartTurnCards()
         }
     }
 }

@@ -6,9 +6,11 @@
 //
 
 struct NumExact: NumArgResolverProtocol {
-    let number: Int
+    func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int {
+        guard case let .exact(number) = arg else {
+            fatalError(.unexpected)
+        }
 
-    func resolve(state: GameState, ctx: EffectContext) throws -> Int {
-        number
+        return number
     }
 }
