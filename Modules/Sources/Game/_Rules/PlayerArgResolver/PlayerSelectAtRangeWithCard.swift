@@ -6,9 +6,11 @@
 //
 
 struct PlayerSelectAtRangeWithCard: PlayerArgResolverProtocol {
-    let distance: Int
+    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+        guard case let .selectAtRangeWithCard(distance) = arg else {
+            fatalError(.unexpected)
+        }
 
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         let others = state.playersAt(distance, from: ctx.actor)
             .filter { (state.player($0).hand.cards + state.player($0).inPlay.cards).isNotEmpty }
 

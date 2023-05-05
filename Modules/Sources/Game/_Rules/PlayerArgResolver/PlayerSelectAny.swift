@@ -6,7 +6,7 @@
 //
 
 struct PlayerSelectAny: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         let others = state.playOrder
             .starting(with: ctx.actor)
             .dropFirst()

@@ -223,6 +223,7 @@ final class PlayerSpec: QuickSpec {
                     }
                 }
                 """
+                // swiftlint:disable:next: force_unwrapping
                 let jsonData = JSON.data(using: .utf8)!
 
                 // When

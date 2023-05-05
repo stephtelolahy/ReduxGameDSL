@@ -6,12 +6,21 @@
 //
 
 protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
+    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
 }
 
-struct PlayerArgResolver {
+/// Resolved player argument
+enum PlayerArgOutput {
+    /// Appply effect to well known object identifiers
+    case identified([String])
+
+    /// Must choose one of given object identifiers
+    case selectable([String])
+}
+
+struct PlayerArgResolver: PlayerArgResolverProtocol {
     func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        try arg.resolver().resolve(state: state, ctx: ctx)
+        try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
     }
     
     func resolve(
@@ -42,41 +51,29 @@ private extension PlayerArg {
     // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
-        case .id:
-            fatalError(.unexpected)
+        case .actor: return PlayerActor()
 
-        case .actor:
-            return PlayerActor()
+        case .damaged: return PlayerDamaged()
             
-        case .damaged:
-            return PlayerDamaged()
+        case .target: return PlayerTarget()
             
-        case .target:
-            return PlayerTarget()
-            
-        case .selectAnyWithCard:
-            return PlayerSelectAnyWithCard()
+        case .selectAnyWithCard: return PlayerSelectAnyWithCard()
 
-        case .all:
-            return PlayerAll()
+        case .all: return PlayerAll()
 
-        case .others:
-            return PlayerOthers()
+        case .others: return PlayerOthers()
 
-        case let .selectAtRangeWithCard(distance):
-            return PlayerSelectAtRangeWithCard(distance: distance)
+        case .selectAtRangeWithCard: return PlayerSelectAtRangeWithCard()
 
-        case .selectReachable:
-            return PlayerSelectReachable()
+        case .selectReachable: return PlayerSelectReachable()
 
-        case let .selectAt(distance):
-            return PlayerSelectAt(distance: distance)
+        case .selectAt: return PlayerSelectAt()
 
-        case .selectAny:
-            return PlayerSelectAny()
+        case .selectAny: return PlayerSelectAny()
 
-        case .next:
-            return PlayerNext()
+        case .next: return PlayerNext()
+
+        default: fatalError(.unexpected)
         }
     }
 }

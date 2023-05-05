@@ -18,7 +18,6 @@ public protocol ReducerProtocol<State, Action> {
     func reduce(state: State, action: Action) -> State
 }
 
-
 /// A protocol that describes how to evolve the current state of an application to the next state,given an action
 public protocol ThrowableReducerProtocol<State, Action> {
 
