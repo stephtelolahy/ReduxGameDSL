@@ -6,7 +6,38 @@
 //
 
 protocol CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput
+    func resolve(
+        arg: CardArg,
+        state: GameState,
+        ctx: EffectContext,
+        chooser: String,
+        owner: String?
+    ) throws -> CardArgOutput
+}
+
+/// Resolved card argument
+enum CardArgOutput {
+    /// Appply effect to well known object identifiers
+    case identified([String])
+
+    /// Must choose one of given object identifiers
+    case selectable([CardArgOption])
+}
+
+/// Selectable argument option
+struct CardArgOption {
+
+    /// Identifier
+    let id: String
+
+    /// Displayed label
+    let label: String
+}
+
+extension Array where Element == String {
+    func toCardOptions() -> [CardArgOption] {
+        map { .init(id: $0, label: $0) }
+    }
 }
 
 struct CardArgResolver {
@@ -17,7 +48,13 @@ struct CardArgResolver {
         chooser: String,
         owner: String?
     ) throws -> CardArgOutput {
-        try arg.resolver().resolve(state: state, ctx: ctx, chooser: chooser, owner: owner)
+        try arg.resolver().resolve(
+            arg: arg,
+            state: state,
+            ctx: ctx,
+            chooser: chooser,
+            owner: owner
+        )
     }
 
     // swiftlint:disable:next function_parameter_count
@@ -30,7 +67,13 @@ struct CardArgResolver {
         copy: @escaping (String) -> GameAction
     ) throws -> GameState {
         var state = state
-        let resolved = try resolve(arg: arg, state: state, ctx: ctx, chooser: chooser, owner: owner)
+        let resolved = try resolve(
+            arg: arg,
+            state: state,
+            ctx: ctx,
+            chooser: chooser,
+            owner: owner
+        )
         switch resolved {
         case let .identified(cIds):
             let children = cIds.map { copy($0) }
@@ -53,20 +96,15 @@ struct CardArgResolver {
 private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
-        case .id:
-            fatalError(.unexpected)
+        case .selectAny: return CardSelectAny()
 
-        case .selectAny:
-            return CardSelectAny()
+        case .selectChoosable: return CardSelectChoosable()
 
-        case .selectChoosable:
-            return CardSelectChoosable()
+        case .selectHandNamed: return CardSelectHandNamed()
 
-        case let .selectHandNamed(name):
-            return CardSelectHandNamed(name: name)
+        case .selectHand: return CardSelectHand()
 
-        case .selectHand:
-            return CardSelectHand()
+        default: fatalError(.unexpected)
         }
     }
 }

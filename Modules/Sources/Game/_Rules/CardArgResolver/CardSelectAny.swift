@@ -6,7 +6,13 @@
 //
 
 struct CardSelectAny: CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) throws -> CardArgOutput {
+    func resolve(
+        arg: CardArg,
+        state: GameState,
+        ctx: EffectContext,
+        chooser: String,
+        owner: String?
+    ) throws -> CardArgOutput {
         guard let owner else {
             fatalError(.missingCardOwner)
         }
