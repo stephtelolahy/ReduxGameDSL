@@ -1,5 +1,5 @@
 //
-//  StartTurnSpec.swift
+//  DrawOnSetTurnSpec.swift
 //  
 //
 //  Created by Hugues Stephano TELOLAHY on 02/05/2023.
@@ -10,7 +10,7 @@ import Nimble
 import Game
 import Inventory
 
-final class StartTurnSpec: QuickSpec {
+final class DrawOnSetTurnSpec: QuickSpec {
     override func spec() {
         describe("starting turn") {
             context("a default player") {
@@ -18,7 +18,7 @@ final class StartTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.drawCardsOnSetTurn])
+                            .abilities([.drawOnSetTurn])
                         Deck {
                             "c1"
                             "c2"
@@ -31,7 +31,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawCardsOnSetTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
                 }
@@ -42,7 +42,7 @@ final class StartTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.drawCardsOnSetTurn])
+                            .abilities([.drawOnSetTurn])
                             .starTurnCards(3)
                         Deck {
                             "c1"
@@ -57,7 +57,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawCardsOnSetTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
