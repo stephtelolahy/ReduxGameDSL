@@ -8,7 +8,7 @@
 struct IsAnyDamaged: PlayReqMatcherProtocol {
     func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
         if state.playOrder.allSatisfy({ state.player($0).health >= state.player($0).maxHealth }) {
-            throw GameError.noPlayerDamaged
+            throw GameError.mismatched(playReq)
         }
     }
 }

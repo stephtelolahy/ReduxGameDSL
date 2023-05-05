@@ -27,6 +27,8 @@ private extension PlayReq {
         case .isTimesPerTurn: return IsTimesPerTurn()
             
         case .onSetTurn: return OnSetTurn()
+
+        case .onLooseLastHealth: return OnLooseLastHealth()
         }
     }
 }

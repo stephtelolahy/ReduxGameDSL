@@ -12,7 +12,7 @@ struct IsPlayersAtLeast: PlayReqMatcherProtocol {
         }
 
         if state.playOrder.count < minCount {
-            throw GameError.playersMustBeAtLeast(minCount)
+            throw GameError.mismatched(playReq)
         }
     }
 }

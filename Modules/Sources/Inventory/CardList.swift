@@ -131,6 +131,14 @@ public enum CardList {
                 PlayReq.onSetTurn
             }
         }
+
+        Card(.eliminateOnLooseLastHealth) {
+            onPlay {
+                CardEffect.eliminate(.actor)
+            } require: {
+                PlayReq.onLooseLastHealth
+            }
+        }
     }
 
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

@@ -15,7 +15,7 @@ struct Trigger: GameReducerProtocol {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
               let action = cardObj.actions.first(where: { $0.actionType == .play }) else {
-            throw GameError.cardIsNotPlayable(card)
+            throw GameError.cardNotPlayable(card)
         }
         
         // queue side effects

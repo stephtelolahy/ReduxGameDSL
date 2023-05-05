@@ -31,7 +31,7 @@ final class BangSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
-                    expect(result) == [.failure(.reachedLimitPerTurn(1))]
+                    expect(result) == [.failure(.mismatched(.isTimesPerTurn(1)))]
                 }
             }
             

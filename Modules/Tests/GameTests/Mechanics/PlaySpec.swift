@@ -103,7 +103,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardIsNotPlayable("unplayable")
+                    expect(result.error) == .cardNotPlayable("unplayable")
                 }
             }
         }

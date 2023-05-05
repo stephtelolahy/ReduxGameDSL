@@ -22,4 +22,7 @@ public enum PlayReq: Codable, Equatable {
     
     /// When setting turn
     case onSetTurn
+
+    /// When loosing last life point
+    case onLooseLastHealth
 }

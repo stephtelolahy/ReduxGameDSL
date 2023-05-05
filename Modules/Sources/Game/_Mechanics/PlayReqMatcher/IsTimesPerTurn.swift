@@ -19,7 +19,7 @@ struct IsTimesPerTurn: PlayReqMatcherProtocol {
         let cardName = ctx.card.extractName()
         let playedTimes = state.counters[cardName] ?? 0
         guard playedTimes < maxTimes else {
-            throw GameError.reachedLimitPerTurn(maxTimes)
+            throw GameError.mismatched(playReq)
         }
     }
 }

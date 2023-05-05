@@ -10,7 +10,7 @@ struct IsDamaged: PlayReqMatcherProtocol {
     func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
         let actorObj = state.player(ctx.actor)
         if actorObj.health >= actorObj.maxHealth {
-            throw GameError.playerAlreadyMaxHealth(ctx.actor)
+            throw GameError.mismatched(playReq)
         }
     }
 }

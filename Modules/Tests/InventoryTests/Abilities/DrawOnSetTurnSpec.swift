@@ -24,7 +24,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                             "c2"
                         }
                     }
-                        .event(.setTurn("p1"))
+                    .event(.setTurn("p1"))
                     
                     // When
                     let action = GameAction.update
@@ -50,7 +50,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                             "c3"
                         }
                     }
-                        .event(.setTurn("p1"))
+                    .event(.setTurn("p1"))
                     
                     // When
                     let action = GameAction.update
@@ -70,7 +70,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                     }
-                        .event(.setTurn("p1"))
+                    .event(.setTurn("p1"))
 
                     // When
                     let action = GameAction.update

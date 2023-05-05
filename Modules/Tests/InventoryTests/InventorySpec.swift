@@ -50,6 +50,8 @@ final class InventorySpec: QuickSpec {
 
                 // Then
                 expect(cards[.endTurn]) != nil
+                expect(cards[.drawOnSetTurn]) != nil
+                expect(cards[.eliminateOnLooseLastHealth]) != nil
             }
         }
     }

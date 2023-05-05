@@ -25,7 +25,7 @@ public enum GameError: Error, Codable, Equatable {
     case cardNotFound(String)
 
     /// Expected card to have onPlay effect
-    case cardIsNotPlayable(String)
+    case cardNotPlayable(String)
 
     // MARK: - Context error
 
@@ -36,10 +36,7 @@ public enum GameError: Error, Codable, Equatable {
     case missingCardOwner
 
     // MARK: - Game error
-
-    /// Expected players count to be leat X
-    case playersMustBeAtLeast(Int)
-
+    
     /// Expected to get some choosable cards
     case choosableIsEmpty
 
@@ -52,15 +49,16 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected some player at range X
     case noPlayerAtRange(Int)
 
-    /// Expected to play a card below limit per turn
-    case reachedLimitPerTurn(Int)
-
     /// Expected non empty deck
     case deckIsEmpty
 
-    /// Ecxpected to choose one of waited action
+    /// Expected to choose one of waited action
     case unwaitedAction
 
     /// Any unexpected error
+    @available(*, deprecated, message: "avoir unexpected error")
     case unexpected
+
+    /// Not matching given requirement
+    case mismatched(PlayReq)
 }
