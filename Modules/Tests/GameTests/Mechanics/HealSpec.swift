@@ -35,6 +35,7 @@ final class HealSpec: QuickSpec {
 
                         // Then
                         expect(result.player("p1").health) == 3
+                        expect(result.event) == .heal(1, player: "p1")
                     }
                 }
 
@@ -46,6 +47,7 @@ final class HealSpec: QuickSpec {
 
                         // Then
                         expect(result.player("p1").health) == 4
+                        expect(result.event) == .heal(2, player: "p1")
                     }
                 }
 
@@ -57,6 +59,7 @@ final class HealSpec: QuickSpec {
 
                         // Then
                         expect(result.player("p1").health) == 4
+                        expect(result.event) == .heal(3, player: "p1")
                     }
                 }
             }
