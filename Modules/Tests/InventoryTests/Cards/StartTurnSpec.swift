@@ -18,7 +18,7 @@ final class StartTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.startTurn])
+                            .abilities([.drawCardsOnSetTurn])
                         Deck {
                             "c1"
                             "c2"
@@ -31,7 +31,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .startTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .drawCardsOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
                 }
@@ -42,7 +42,7 @@ final class StartTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.startTurn])
+                            .abilities([.drawCardsOnSetTurn])
                             .starTurnCards(3)
                         Deck {
                             "c1"
@@ -57,7 +57,7 @@ final class StartTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .startTurn)),
+                    expect(result) == [.success(.trigger(actor: "p1", card: .drawCardsOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
