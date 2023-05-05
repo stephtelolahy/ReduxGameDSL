@@ -24,7 +24,7 @@ final class StartTurnSpec: QuickSpec {
                             "c2"
                         }
                     }
-                    .event(.setTurn("p1"))
+                        .event(.setTurn("p1"))
                     
                     // When
                     let action = GameAction.update
@@ -50,7 +50,7 @@ final class StartTurnSpec: QuickSpec {
                             "c3"
                         }
                     }
-                    .event(.setTurn("p1"))
+                        .event(.setTurn("p1"))
                     
                     // When
                     let action = GameAction.update
@@ -61,6 +61,23 @@ final class StartTurnSpec: QuickSpec {
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
+                }
+            }
+
+            context("a player without ability") {
+                it("should do nothing") {
+                    // Given
+                    let state = createGame {
+                        Player("p1")
+                    }
+                        .event(.setTurn("p1"))
+
+                    // When
+                    let action = GameAction.update
+                    let result = self.awaitAction(action, state: state)
+
+                    // Then
+                    expect(result).to(beEmpty())
                 }
             }
         }
