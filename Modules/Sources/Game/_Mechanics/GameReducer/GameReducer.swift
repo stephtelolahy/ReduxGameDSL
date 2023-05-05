@@ -98,6 +98,8 @@ private extension GameAction {
             case .challengeDiscard: return ChallengeDiscard()
                 
             case .setTurn: return SetTurn()
+
+            case .eliminate: return Eliminate()
                 
             case .chooseCard: return ChooseCard()
                 

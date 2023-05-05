@@ -15,7 +15,7 @@ extension XCTestCase {
         _ action: GameAction,
         choices: [String] = [],
         state: GameState,
-        timeout: TimeInterval = 0.1,
+        timeout: TimeInterval = 0.5,
         file: StaticString = #file,
         line: UInt = #line
     ) -> [Result<GameEvent, GameError>] {

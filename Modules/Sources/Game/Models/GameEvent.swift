@@ -42,6 +42,9 @@ public enum GameEvent: Codable, Equatable {
     /// Set turn
     case setTurn(String)
 
+    /// Eliminate
+    case eliminate(String)
+
     /// Ask a player to choose an action
     case chooseOne(chooser: String, options: Set<String>)
 }
