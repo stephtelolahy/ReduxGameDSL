@@ -6,32 +6,27 @@
 //
 
 protocol PlayReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) throws
+    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws
 }
 
-struct PlayReqMatcher {
+struct PlayReqMatcher: PlayReqMatcherProtocol {
     func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
-        try playReq.matcher().match(state: state, ctx: ctx)
+        try playReq.matcher().match(playReq: playReq, state: state, ctx: ctx)
     }
 }
 
 private extension PlayReq {
     func matcher() -> PlayReqMatcherProtocol {
         switch self {
-        case let .isPlayersAtLeast(count):
-            return IsPlayersAtLeast(minCount: count)
+        case .isPlayersAtLeast: return IsPlayersAtLeast()
 
-        case .isDamaged:
-            return IsDamaged()
+        case .isDamaged: return IsDamaged()
 
-        case .isAnyDamaged:
-            return IsAnyDamaged()
+        case .isAnyDamaged: return IsAnyDamaged()
 
-        case let .isTimesPerTurn(count):
-            return IsTimesPerTurn(maxTimes: count)
-
-        case .onSetTurn:
-            return OnSetTurn()
+        case .isTimesPerTurn: return IsTimesPerTurn()
+            
+        case .onSetTurn: return OnSetTurn()
         }
     }
 }

@@ -6,9 +6,11 @@
 //
 
 struct IsPlayersAtLeast: PlayReqMatcherProtocol {
-    let minCount: Int
+    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
+        guard case let .isPlayersAtLeast(minCount) = playReq else {
+            fatalError(.unexpected)
+        }
 
-    func match(state: GameState, ctx: EffectContext) throws {
         if state.playOrder.count < minCount {
             throw GameError.playersMustBeAtLeast(minCount)
         }
