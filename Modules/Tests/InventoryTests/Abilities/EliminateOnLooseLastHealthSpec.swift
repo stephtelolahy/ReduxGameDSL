@@ -17,6 +17,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
+                            .health(0)
                             .abilities([.eliminateOnLooseLastHealth])
                     }
                     .event(.damage(1, player: "p1"))
@@ -33,11 +34,22 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                 }
             }
 
-            xcontext("loosing non last health") {
+            context("loosing non last health") {
                 it("should remain active") {
                     // Given
+                    let state = createGame {
+                        Player("p1")
+                            .health(1)
+                            .abilities([.eliminateOnLooseLastHealth])
+                    }
+                    .event(.damage(1, player: "p1"))
+
                     // When
+                    let action = GameAction.update
+                    let result = self.awaitAction(action, state: state)
+
                     // Then
+                    expect(result).to(beEmpty())
                 }
             }
         }

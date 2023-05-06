@@ -13,7 +13,7 @@ struct PlayerSelectAt: PlayerArgResolverProtocol {
 
         let others = state.playersAt(distance, from: ctx.actor)
         guard others.isNotEmpty else {
-            throw GameError.noPlayerAtRange(distance)
+            throw GameError.noPlayer(arg)
         }
 
         return .selectable(others)

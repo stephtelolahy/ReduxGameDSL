@@ -55,7 +55,7 @@ final class BangSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.failure(GameError.noPlayerAtRange(1))]
+                        expect(result) == [.failure(GameError.noPlayer(.selectAt(1)))]
                     }
                 }
                 

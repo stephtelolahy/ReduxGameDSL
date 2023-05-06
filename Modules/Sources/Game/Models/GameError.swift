@@ -8,7 +8,7 @@
 /// Game errors
 public enum GameError: Error, Codable, Equatable {
 
-    // MARK: - Player error
+    // MARK: - Specific error
 
     /// Expected a player with given identifier
     case playerNotFound(String)
@@ -16,49 +16,34 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected player to be damaged
     case playerAlreadyMaxHealth(String)
 
-    /// Expected player to have cards
-    case playerHasNoCard(String)
-
-    // MARK: - Card error
-
     /// Expected a card with given identifier
     case cardNotFound(String)
 
     /// Expected card to have onPlay effect
     case cardNotPlayable(String)
-
-    // MARK: - Context error
-
-    /// Expected a targeted player
-    case missingTarget
-
-    /// Expected a card owner
-    case missingCardOwner
-
-    // MARK: - Game error
     
-    /// Expected to get some choosable cards
+    /// Expected some choosable cards
     case choosableIsEmpty
-
-    /// No player having card
-    case noPlayerWithCard
-
-    /// Expected some player damaged
-    case noPlayerDamaged
-
-    /// Expected some player at range X
-    case noPlayerAtRange(Int)
 
     /// Expected non empty deck
     case deckIsEmpty
 
+    // MARK: - Matching error
+
+    /// Not matching card
+    case noCard(CardArg)
+
+    /// Not matching player
+    case noPlayer(PlayerArg)
+
+    /// Not matching requirement
+    case mismatched(PlayReq)
+
     /// Expected to choose one of waited action
     case unwaitedAction
 
-    /// Any unexpected error
-    @available(*, deprecated, message: "avoir unexpected error")
-    case unexpected
+    // MARK: - Default error
 
-    /// Not matching given requirement
-    case mismatched(PlayReq)
+    /// Any unexpected error
+    case unexpected
 }

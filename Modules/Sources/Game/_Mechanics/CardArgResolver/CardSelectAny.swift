@@ -14,7 +14,7 @@ struct CardSelectAny: CardArgResolverProtocol {
         owner: String?
     ) throws -> CardArgOutput {
         guard let owner else {
-            fatalError(.missingCardOwner)
+            fatalError(.unexpected)
         }
 
         let playerObj = state.player(owner)
@@ -37,7 +37,7 @@ struct CardSelectAny: CardArgResolverProtocol {
         }
 
         guard options.isNotEmpty else {
-            throw GameError.playerHasNoCard(owner)
+            throw GameError.noCard(arg)
         }
 
         return .selectable(options)

@@ -14,7 +14,7 @@ struct CardSelectHand: CardArgResolverProtocol {
         owner: String?
     ) throws -> CardArgOutput {
         guard let owner else {
-            fatalError(.missingCardOwner)
+            fatalError(.unexpected)
         }
 
         let playerObj = state.player(owner)
