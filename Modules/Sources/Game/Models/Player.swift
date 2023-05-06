@@ -19,7 +19,7 @@ public struct Player: Identifiable, Codable, Equatable {
     /// Card attributes
     public var attributes: [AttributeKey: Int] = [:]
 
-    /// Abilities
+    /// Abilities implemented with Card having the same name
     public var abilities: Set<String> = []
 
     /// Hand cards
