@@ -27,7 +27,7 @@ public struct GameState: Codable, Equatable {
     public var choosable: CardLocation?
 
     /// Is Game over
-    public var isOver: Bool = false
+    public var isOver: GameOver?
 
     /// Last occurred event
     public var event: GameEvent?

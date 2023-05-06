@@ -11,8 +11,8 @@ public extension GameState {
         components().forEach { $0.update(game: &self) }
     }
 
-    func isOver(_ value: Bool) -> Self {
-        copy { $0.isOver = value }
+    func isOver(_ value: String) -> Self {
+        copy { $0.isOver = GameOver(winner: value) }
     }
 
     func turn(_ value: String) -> Self {

@@ -48,4 +48,12 @@ extension GameState {
         chooseOne = ChooseOne(chooser: chooser, options: options)
         event = .chooseOne(chooser: chooser, options: Set(options.keys))
     }
+
+    func hasWinner() -> String? {
+        if playOrder.count == 1 {
+            return playOrder[0]
+        }
+
+        return nil
+    }
 }

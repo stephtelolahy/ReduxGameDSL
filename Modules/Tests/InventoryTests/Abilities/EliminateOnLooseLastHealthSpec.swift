@@ -19,6 +19,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                         Player("p1")
                             .health(0)
                             .abilities([.eliminateOnLooseLastHealth])
+                        Player("p2")
                     }
                     .event(.damage(1, player: "p1"))
 

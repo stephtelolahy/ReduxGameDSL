@@ -33,7 +33,7 @@ final class GameSpec: QuickSpec {
                 }
                 
                 it("should not be over") {
-                    expect(sut.isOver) == false
+                    expect(sut.isOver) == nil
                 }
                 
                 it("should not have turn") {
@@ -97,10 +97,10 @@ final class GameSpec: QuickSpec {
                 it("should be over") {
                     // Given
                     // When
-                    let sut = GameState().isOver(true)
+                    let sut = GameState().isOver("p1")
                     
                     // Then
-                    expect(sut.isOver) == true
+                    expect(sut.isOver) == GameOver(winner: "p1")
                 }
             }
             
@@ -135,7 +135,9 @@ final class GameSpec: QuickSpec {
                 // Given
                 let JSON = """
                 {
-                  "isOver": true,
+                  "isOver": {
+                     "winner": "p1"
+                  },
                   "players": {
                     "p1": {
                       "id": "p1",
@@ -183,7 +185,7 @@ final class GameSpec: QuickSpec {
                 let sut = try JSONDecoder().decode(GameState.self, from: jsonData)
 
                 // Then
-                expect(sut.isOver) == true
+                expect(sut.isOver) == GameOver(winner: "p1")
                 expect(sut.players["p1"]) != nil
                 expect(sut.playOrder) == ["p1"]
                 expect(sut.turn) == "p1"

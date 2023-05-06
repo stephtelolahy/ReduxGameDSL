@@ -21,6 +21,7 @@ final class StagecoachSpec: QuickSpec {
                             .stagecoach
                         }
                     }
+                    Player("p2")
                     Deck {
                         "c1"
                         "c2"

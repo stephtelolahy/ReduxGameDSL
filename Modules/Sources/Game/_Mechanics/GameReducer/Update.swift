@@ -10,13 +10,19 @@ struct Update: GameReducerProtocol {
         guard case .update = action else {
             fatalError(.unexpected)
         }
-        
-        guard state.queue.isNotEmpty else {
+
+        if let winner = state.hasWinner() {
+            var state = state
+            state.isOver = GameOver(winner: winner)
             return state
         }
+        
+        if state.queue.isNotEmpty {
+            var state = state
+            let action = state.queue.remove(at: 0)
+            return GameReducer().reduce(state: state, action: action)
+        }
 
-        var state = state
-        let action = state.queue.remove(at: 0)
-        return GameReducer().reduce(state: state, action: action)
+        return state
     }
 }
