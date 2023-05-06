@@ -24,12 +24,12 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let action = GameAction.play(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.play(actor: "p1", card: .endTurn)),
                         .success(.setTurn("p2"))
                     ]
                 }
@@ -45,19 +45,19 @@ final class EndTurnSpec: QuickSpec {
                                 "c2"
                             }
                         }
-                        .health(1)
-                        .handLimit(10)
+                        .attribute(.health, 1)
+                        .attribute(.handLimit, 10)
                         Player("p2")
                     }
                     .turn("p1")
 
                     // When
-                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let action = GameAction.play(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.play(actor: "p1", card: .endTurn)),
                         .success(.setTurn("p2"))
                     ]
                 }
@@ -74,18 +74,18 @@ final class EndTurnSpec: QuickSpec {
                                 "c3"
                             }
                         }
-                        .health(2)
+                        .attribute(.health, 2)
                         Player("p2")
                     }
                     .turn("p1")
 
                     // When
-                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let action = GameAction.play(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1"], state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.play(actor: "p1", card: .endTurn)),
                         .success(.chooseOne(chooser: "p1", options: ["c1", "c2", "c3"])),
                         .success(.discard(player: "p1", card: "c1")),
                         .success(.setTurn("p2"))
@@ -104,18 +104,18 @@ final class EndTurnSpec: QuickSpec {
                                 "c3"
                             }
                         }
-                        .health(1)
+                        .attribute(.health, 1)
                         Player("p2")
                     }
                     .turn("p1")
 
                     // When
-                    let action = GameAction.invoke(actor: "p1", card: .endTurn)
+                    let action = GameAction.play(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1", "c3"], state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.invoke(actor: "p1", card: .endTurn)),
+                        .success(.play(actor: "p1", card: .endTurn)),
                         .success(.chooseOne(chooser: "p1", options: ["c1", "c2", "c3"])),
                         .success(.discard(player: "p1", card: "c1")),
                         .success(.chooseOne(chooser: "p1", options: ["c2", "c3"])),

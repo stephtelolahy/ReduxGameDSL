@@ -1,11 +1,11 @@
 //
-//  CardSelectChoosable.swift
+//  CardSelectArena.swift
 //  
 //
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
-struct CardSelectChoosable: CardArgResolverProtocol {
+struct CardSelectArena: CardArgResolverProtocol {
     func resolve(
         arg: CardArg,
         state: GameState,
@@ -13,9 +13,9 @@ struct CardSelectChoosable: CardArgResolverProtocol {
         chooser: String,
         owner: String?
     ) throws -> CardArgOutput {
-        guard let cards = state.choosable?.cards,
+        guard let cards = state.arena?.cards,
               cards.isNotEmpty else {
-            throw GameError.choosableIsEmpty
+            throw GameError.noCard(arg)
         }
 
         if cards.count == 1 {

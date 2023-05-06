@@ -19,11 +19,8 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected a card with given identifier
     case cardNotFound(String)
 
-    /// Expected card to have onPlay effect
+    /// Expected card to have action
     case cardNotPlayable(String)
-    
-    /// Expected some choosable cards
-    case choosableIsEmpty
 
     /// Expected non empty deck
     case deckIsEmpty

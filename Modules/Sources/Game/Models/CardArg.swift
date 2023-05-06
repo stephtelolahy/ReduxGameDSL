@@ -17,8 +17,8 @@ public enum CardArg: Codable, Equatable {
     /// Select any player's hand card
     case selectHand
 
-    /// Select any choosable card
-    case selectChoosable
+    /// Select any arena card
+    case selectArena
 
     /// Select any self's hand card matching given name
     case selectHandNamed(String)

@@ -13,17 +13,18 @@ import Inventory
 final class DrawOnSetTurnSpec: QuickSpec {
     override func spec() {
         describe("starting turn") {
-            context("a default player") {
+            context("a player with 2 initial cards") {
                 it("should draw 2 cards") {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.drawOnSetTurn])
+                        Player("p2")
                         Deck {
                             "c1"
                             "c2"
                         }
                     }
+                    .ability(.drawOnSetTurn)
                     .event(.setTurn("p1"))
                     
                     // When
@@ -31,7 +32,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
+                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
                 }
@@ -42,14 +43,15 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .abilities([.drawOnSetTurn])
-                            .starTurnCards(3)
+                            .attribute(.starTurnCards, 3)
+                        Player("p2")
                         Deck {
                             "c1"
                             "c2"
                             "c3"
                         }
                     }
+                    .ability(.drawOnSetTurn)
                     .event(.setTurn("p1"))
                     
                     // When
@@ -57,7 +59,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
+                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]

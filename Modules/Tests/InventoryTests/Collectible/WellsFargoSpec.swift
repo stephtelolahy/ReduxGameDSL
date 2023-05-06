@@ -21,6 +21,7 @@ final class WellsFargoSpec: QuickSpec {
                             .wellsFargo
                         }
                     }
+                    Player("p2")
                     Deck {
                         "c1"
                         "c2"

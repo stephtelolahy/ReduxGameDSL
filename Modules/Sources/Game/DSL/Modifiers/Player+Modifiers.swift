@@ -11,6 +11,12 @@ public extension Player {
 
     init(_ id: String = UUID().uuidString, @PlayerAttributeBuilder components: () -> [PlayerAttribute] = { [] }) {
         self.id = id
+        attributes = [
+            .health: 0,
+            .maxHealth: 0,
+            .weapon: 1,
+            .starTurnCards: 2
+        ]
         components().forEach { $0.update(player: &self) }
     }
 
@@ -18,36 +24,12 @@ public extension Player {
         copy { $0.name = value }
     }
 
-    func maxHealth(_ value: Int) -> Self {
-        copy { $0.maxHealth = value }
-    }
-
-    func health(_ value: Int) -> Self {
-        copy { $0.health = value }
-    }
-
-    func handLimit(_ value: Int) -> Self {
-        copy { $0.handLimit = value }
-    }
-
-    func weapon(_ value: Int) -> Self {
-        copy { $0.weapon = value }
-    }
-
-    func mustang(_ value: Int) -> Self {
-        copy { $0.mustang = value }
-    }
-
-    func scope(_ value: Int) -> Self {
-        copy { $0.scope = value }
+    func attribute(_ key: AttributeKey, _ value: Int) -> Self {
+        copy { $0.attributes[key] = value }
     }
     
-    func starTurnCards(_ value: Int) -> Self {
-        copy { $0.starTurnCards = value }
-    }
-    
-    func abilities(_ value: [String]) -> Self {
-        copy { $0.abilities = value }
+    func ability(_ value: String) -> Self {
+        copy { $0.abilities.insert(value) }
     }
 }
 

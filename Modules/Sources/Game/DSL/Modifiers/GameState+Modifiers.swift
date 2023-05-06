@@ -11,8 +11,8 @@ public extension GameState {
         components().forEach { $0.update(game: &self) }
     }
 
-    func isOver(_ value: Bool) -> Self {
-        copy { $0.isOver = value }
+    func isOver(_ value: String) -> Self {
+        copy { $0.isOver = GameOver(winner: value) }
     }
 
     func turn(_ value: String) -> Self {
@@ -20,7 +20,7 @@ public extension GameState {
     }
 
     func counters(_ value: [String: Int]) -> Self {
-        copy { $0.counters = value }
+        copy { $0.playCounter = value }
     }
 
     func cardRef(_ value: [String: Card]) -> Self {
@@ -33,6 +33,14 @@ public extension GameState {
     
     func event(_ value: GameEvent) -> Self {
         copy { $0.event = value }
+    }
+
+    func attribute(_ key: AttributeKey, _ value: Int) -> Self {
+        copy { $0.attributes[key] = value }
+    }
+
+    func ability(_ value: String) -> Self {
+        copy { $0.abilities.insert(value) }
     }
 }
 

@@ -47,7 +47,7 @@ final class DistanceSpec: QuickSpec {
                 it("should decrement distance to others") {
                     // Given
                     let state = GameState {
-                        Player("p1").scope(1)
+                        Player("p1").attribute(.scope, 1)
                         Player("p2")
                         Player("p3")
                         Player("p4")
@@ -76,7 +76,7 @@ final class DistanceSpec: QuickSpec {
                 it("should increment distance from others") {
                     // Given
                     let state = GameState {
-                        Player("p1").mustang(1)
+                        Player("p1").attribute(.mustang, 1)
                         Player("p2")
                         Player("p3")
                         Player("p4")

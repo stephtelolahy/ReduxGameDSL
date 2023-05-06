@@ -6,13 +6,21 @@
 //
 
 extension Player {
+    var isDamaged: Bool {
+        health < maxHealth
+    }
+
     mutating func gainHealth(_ value: Int) throws {
         guard health < maxHealth else {
             throw GameError.playerAlreadyMaxHealth(id)
         }
         
         let newHealth = min(health + value, maxHealth)
-        health = newHealth
+        attributes[.health] = newHealth
+    }
+
+    mutating func looseHealth(_ value: Int) {
+        attributes[.health] = health - value
     }
     
     mutating func removeCard(_ card: String) throws {
@@ -23,5 +31,13 @@ extension Player {
         } else {
             throw GameError.cardNotFound(card)
         }
+    }
+
+    private var health: Int {
+        attributes[.health] ?? 0
+    }
+
+    private var maxHealth: Int {
+        attributes[.maxHealth] ?? 0
     }
 }

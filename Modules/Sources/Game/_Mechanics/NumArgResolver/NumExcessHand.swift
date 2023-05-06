@@ -13,7 +13,8 @@ struct NumExcessHand: NumArgResolverProtocol {
 }
 
 private extension Player {
+    /// Your hand size limit, at the end of your turn, is equal to the life points you currently have
     func handLimitAtEndOfTurn() -> Int {
-        handLimit ?? health
+        attributes[.handLimit] ?? attributes[.health] ?? 0
     }
 }

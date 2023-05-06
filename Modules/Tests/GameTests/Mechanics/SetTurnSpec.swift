@@ -28,7 +28,7 @@ final class SetTurnSpec: QuickSpec {
                 // Then
                 expect(result.turn) == "p1"
                 expect(result.event) == .setTurn("p1")
-                expect(result.counters).to(beEmpty())
+                expect(result.playCounter).to(beEmpty())
             }
         }
     }

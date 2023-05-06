@@ -32,7 +32,7 @@ final class PlayerSpec: QuickSpec {
                 }
 
                 it("should not have hand limit") {
-                    expect(sut.handLimit) == nil
+                    expect(sut.attributes[.handLimit]) == nil
                 }
 
                 it("should have empty hand") {
@@ -40,27 +40,31 @@ final class PlayerSpec: QuickSpec {
                 }
 
                 it("should have health == 0") {
-                    expect(sut.health) == 0
+                    expect(sut.attributes[.health]) == 0
                 }
 
                 it("should have max health == 0") {
-                    expect(sut.maxHealth) == 0
+                    expect(sut.attributes[.maxHealth]) == 0
                 }
 
                 it("should have empty inPlay") {
                     expect(sut.inPlay.cards).to(beEmpty())
                 }
 
-                it("should have mustang == 0") {
-                    expect(sut.mustang) == 0
+                it("should not have mustang") {
+                    expect(sut.attributes[.mustang]) == nil
                 }
 
-                it("should have scope == 0") {
-                    expect(sut.scope) == 0
+                it("should not have scope") {
+                    expect(sut.attributes[.scope]) == nil
                 }
 
                 it("should have weapon == 1") {
-                    expect(sut.weapon) == 1
+                    expect(sut.attributes[.weapon]) == 1
+                }
+
+                it("should have 2 start turn cards") {
+                    expect(sut.attributes[.starTurnCards]) == 2
                 }
             }
 
@@ -102,17 +106,6 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified hand limit") {
-                it("should have hand limit") {
-                    // Given
-                    // When
-                    let sut = Player().handLimit(10)
-
-                    // Then
-                    expect(sut.handLimit) == 10
-                }
-            }
-
             context("initialized with hand") {
                 it("should have hand cards") {
                     // Given
@@ -126,28 +119,6 @@ final class PlayerSpec: QuickSpec {
 
                     // Then
                     expect(sut.hand.cards) == ["c1", "c2"]
-                }
-            }
-
-            context("modified health") {
-                it("should have health") {
-                    // Given
-                    // When
-                    let sut = Player().health(2)
-
-                    // Then
-                    expect(sut.health) == 2
-                }
-            }
-
-            context("modified max health") {
-                it("should have max health") {
-                    // Given
-                    // When
-                    let sut = Player().maxHealth(3)
-
-                    // Then
-                    expect(sut.maxHealth) == 3
                 }
             }
 
@@ -167,36 +138,14 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified mustang") {
-                it("should have mustang") {
+            context("modified attribute") {
+                it("should have that attribute") {
                     // Given
                     // When
-                    let sut = Player().mustang(1)
+                    let sut = Player().attribute(.mustang, 1)
 
                     // Then
-                    expect(sut.mustang) == 1
-                }
-            }
-
-            context("modified scope") {
-                it("should have scope") {
-                    // Given
-                    // When
-                    let sut = Player().scope(1)
-
-                    // Then
-                    expect(sut.scope) == 1
-                }
-            }
-
-            context("modified weapon") {
-                it("should have weapon") {
-                    // Given
-                    // When
-                    let sut = Player().weapon(4)
-
-                    // Then
-                    expect(sut.weapon) == 4
+                    expect(sut.attributes[.mustang]) == 1
                 }
             }
 
@@ -206,14 +155,16 @@ final class PlayerSpec: QuickSpec {
                 {
                     "id": "p1",
                     "name": "n1",
-                    "maxHealth": 4,
-                    "health": 2,
-                    "handLimit": 2,
-                    "weapon": 3,
-                    "mustang": 0,
-                    "scope": 1,
-                    "starTurnCards": 2,
-                    "abilities": [],
+                    "abilities": ["endTurn"],
+                    "attributes": {
+                        "maxHealth": 4,
+                        "health": 2,
+                        "mustang": 0,
+                        "scope": 1,
+                        "weapon": 3,
+                        "handLimit": 2,
+                        "starTurnCards": 2,
+                    },
                     "hand": {
                         "visibility": "p1",
                         "cards": []
@@ -232,12 +183,14 @@ final class PlayerSpec: QuickSpec {
                 // Then
                 expect(sut.id) == "p1"
                 expect(sut.name) == "n1"
-                expect(sut.maxHealth) == 4
-                expect(sut.health) == 2
-                expect(sut.handLimit) == 2
-                expect(sut.weapon) == 3
-                expect(sut.mustang) == 0
-                expect(sut.scope) == 1
+                expect(sut.abilities).to(contain(["endTurn"]))
+                expect(sut.attributes[.maxHealth]) == 4
+                expect(sut.attributes[.health]) == 2
+                expect(sut.attributes[.handLimit]) == 2
+                expect(sut.attributes[.weapon]) == 3
+                expect(sut.attributes[.mustang]) == 0
+                expect(sut.attributes[.scope]) == 1
+                expect(sut.attributes[.starTurnCards]) == 2
             }
         }
     }

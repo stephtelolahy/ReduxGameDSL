@@ -28,12 +28,12 @@ final class GameSpec: QuickSpec {
                     expect(sut.discard.count) == 0
                 }
                 
-                it("should not have choosable") {
-                    expect(sut.choosable) == nil
+                it("should not have arena") {
+                    expect(sut.arena) == nil
                 }
                 
                 it("should not be over") {
-                    expect(sut.isOver) == false
+                    expect(sut.isOver) == nil
                 }
                 
                 it("should not have turn") {
@@ -77,19 +77,19 @@ final class GameSpec: QuickSpec {
                 }
             }
             
-            context("initialized with choosable") {
-                it("should have choosable cards") {
+            context("initialized with arena") {
+                it("should have arena cards") {
                     // Given
                     // When
                     let sut = GameState {
-                        Choosable {
+                        Arena {
                             "c1"
                             "c2"
                         }
                     }
                     
                     // Then
-                    expect(sut.choosable?.cards) == ["c1", "c2"]
+                    expect(sut.arena?.cards) == ["c1", "c2"]
                 }
             }
             
@@ -97,10 +97,10 @@ final class GameSpec: QuickSpec {
                 it("should be over") {
                     // Given
                     // When
-                    let sut = GameState().isOver(true)
+                    let sut = GameState().isOver("p1")
                     
                     // Then
-                    expect(sut.isOver) == true
+                    expect(sut.isOver) == GameOver(winner: "p1")
                 }
             }
             
@@ -135,7 +135,9 @@ final class GameSpec: QuickSpec {
                 // Given
                 let JSON = """
                 {
-                  "isOver": true,
+                  "isOver": {
+                     "winner": "p1"
+                  },
                   "players": {
                     "p1": {
                       "id": "p1",
@@ -148,6 +150,7 @@ final class GameSpec: QuickSpec {
                       "scope": 1,
                       "abilities": [],
                       "starTurnCards": 2,
+                      "attributes": {},
                       "hand": {
                         "visibility": "p1",
                         "cards": []
@@ -157,6 +160,8 @@ final class GameSpec: QuickSpec {
                       }
                     }
                   },
+                  "attributes": {},
+                  "abilities": [],
                   "playOrder": [
                     "p1"
                   ],
@@ -172,7 +177,7 @@ final class GameSpec: QuickSpec {
                     ]
                   },
                   "queue": [],
-                  "counters": {},
+                  "playCounter": {},
                   "cardRef": {},
                 }
                 """
@@ -183,13 +188,13 @@ final class GameSpec: QuickSpec {
                 let sut = try JSONDecoder().decode(GameState.self, from: jsonData)
 
                 // Then
-                expect(sut.isOver) == true
+                expect(sut.isOver) == GameOver(winner: "p1")
                 expect(sut.players["p1"]) != nil
                 expect(sut.playOrder) == ["p1"]
                 expect(sut.turn) == "p1"
                 expect(sut.deck.count) == 1
                 expect(sut.discard.count) == 1
-                expect(sut.choosable) == nil
+                expect(sut.arena) == nil
             }
         }
     }

@@ -16,7 +16,7 @@ final class RevealSpec: QuickSpec {
 
         describe("reveal") {
             context("chosable nil") {
-                it("should draw top deck and create choosable zone") {
+                it("should draw top deck and create arena") {
                     // Given
                     let state = GameState {
                         Deck {
@@ -31,21 +31,21 @@ final class RevealSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.choosable?.cards) == ["c1"]
+                    expect(result.arena?.cards) == ["c1"]
                     expect(result.deck.top) == "c2"
                     expect(result.event) == .reveal
                 }
             }
 
             context("chosable containing card") {
-                it("should draw top deck and add to choosable zone") {
+                it("should draw top deck and add to arene") {
                     // Given
                     let state = GameState {
                         Deck {
                             "c2"
                             "c3"
                         }
-                        Choosable {
+                        Arena {
                             "c1"
                         }
                     }
@@ -55,7 +55,7 @@ final class RevealSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.choosable?.cards) == ["c1", "c2"]
+                    expect(result.arena?.cards) == ["c1", "c2"]
                     expect(result.deck.top) == "c3"
                     expect(result.event) == .reveal
                 }

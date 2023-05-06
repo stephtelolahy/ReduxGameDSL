@@ -5,7 +5,7 @@ import Foundation
 /// have actions that can be played and have side effects that happen when they are being played.
 public struct Card: Codable, Equatable {
     
-    /// Name
+    /// Unique Name
     public let name: String
     
     /// Actions that can be performed with the card
@@ -31,15 +31,18 @@ public struct CardAction: Codable, Equatable {
 /// Describing when card action is applied
 public enum CardActionType: Codable, Equatable {
     
-    /// Discard immediately and apply side effect
+    /// Discard card and apply side effect
     case play
+
+    /// Ability, just apply side effect
+    case spell
     
-    /// Use card as self equipment
-    case equip
-    
-    /// Use card as handicap againts another player
-    case handicap
-    
+//    /// Use card as self equipment
+//    case equip
+//
+//    /// Use card as handicap againts another player
+//    case handicap
+
     /// Apply side effects immediately, when an event occurred
-    case triggered
+    case trigger
 }

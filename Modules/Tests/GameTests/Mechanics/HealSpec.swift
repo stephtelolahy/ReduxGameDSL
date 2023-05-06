@@ -22,8 +22,8 @@ final class HealSpec: QuickSpec {
                     // Given
                     state = GameState {
                         Player("p1")
-                            .health(2)
-                            .maxHealth(4)
+                            .attribute(.health, 2)
+                            .attribute(.maxHealth, 4)
                     }
                 }
 
@@ -34,7 +34,7 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.player("p1").health) == 3
+                        expect(result.player("p1").attributes[.health]) == 3
                         expect(result.event) == .heal(1, player: "p1")
                     }
                 }
@@ -46,7 +46,7 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.player("p1").health) == 4
+                        expect(result.player("p1").attributes[.health]) == 4
                         expect(result.event) == .heal(2, player: "p1")
                     }
                 }
@@ -58,7 +58,7 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.player("p1").health) == 4
+                        expect(result.player("p1").attributes[.health]) == 4
                         expect(result.event) == .heal(3, player: "p1")
                     }
                 }
@@ -69,8 +69,8 @@ final class HealSpec: QuickSpec {
                     // Given
                     let state = GameState {
                         Player("p1")
-                            .health(4)
-                            .maxHealth(4)
+                            .attribute(.health, 4)
+                            .attribute(.maxHealth, 3)
                     }
 
                     // When

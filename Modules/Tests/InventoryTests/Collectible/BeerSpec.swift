@@ -22,8 +22,8 @@ final class BeerSpec: QuickSpec {
                                 .beer
                             }
                         }
-                        .health(2)
-                        .maxHealth(3)
+                        .attribute(.health, 2)
+                        .attribute(.maxHealth, 3)
                         Player()
                         Player()
                     }
@@ -47,8 +47,8 @@ final class BeerSpec: QuickSpec {
                                 .beer
                             }
                         }
-                        .health(3)
-                        .maxHealth(3)
+                        .attribute(.health, 3)
+                        .attribute(.maxHealth, 3)
                         Player()
                         Player()
                     }
@@ -71,8 +71,8 @@ final class BeerSpec: QuickSpec {
                                 .beer
                             }
                         }
-                        .health(2)
-                        .maxHealth(3)
+                        .attribute(.health, 2)
+                        .attribute(.maxHealth, 3)
                         Player()
                     }
 

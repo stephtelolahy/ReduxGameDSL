@@ -1,20 +1,24 @@
 //
-//  Trigger.swift
+//  ForcePlay.swift
 //  
 //
 //  Created by Hugues Stephano TELOLAHY on 04/05/2023.
 //
 
-struct Trigger: GameReducerProtocol {
+struct ForcePlay: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .trigger(actor, card) = action else {
+        guard case let .forcePlay(actor, card) = action else {
             fatalError(.unexpected)
         }
+
+        guard state.players[actor] != nil else {
+            throw GameError.playerNotFound(actor)
+        }
         
-        // verify play action
+        // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let action = cardObj.actions.first(where: { $0.actionType == .play }) else {
+              let action = cardObj.actions.first(where: { $0.actionType == .trigger }) else {
             throw GameError.cardNotPlayable(card)
         }
         
@@ -23,7 +27,7 @@ struct Trigger: GameReducerProtocol {
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
 
-        state.event = .trigger(actor: actor, card: card)
+        state.event = .forcePlay(actor: actor, card: card)
 
         return state
     }

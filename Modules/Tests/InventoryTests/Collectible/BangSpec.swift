@@ -45,9 +45,9 @@ final class BangSpec: QuickSpec {
                                     .bang
                                 }
                             }
-                            Player("p2").mustang(1)
+                            Player("p2").attribute(.mustang, 1)
                             Player("p3")
-                            Player("p4").mustang(1)
+                            Player("p4").attribute(.mustang, 1)
                         }
                         
                         // When

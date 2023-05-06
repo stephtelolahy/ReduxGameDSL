@@ -41,6 +41,6 @@ public enum PlayerArg: Codable, Equatable {
     /// Other players
     case others
 
-    /// Player after current turn
+    /// The next player's turn, in clockwise order.
     case next
 }

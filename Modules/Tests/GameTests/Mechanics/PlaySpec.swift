@@ -15,16 +15,16 @@ final class PlaySpec: QuickSpec {
         let sut = GameReducer()
         var action: GameAction!
         var result: GameState!
+        let playable = Card("playable") {
+            onPlay {
+                CardEffect.heal(1, player: .actor)
+            }
+        }
 
         describe("play") {
             context("hand card") {
                 beforeEach {
                     // Given
-                    let playable = Card("playable") {
-                        onPlay {
-                            CardEffect.heal(1, player: .actor)
-                        }
-                    }
                     let state = GameState {
                         Player("p1") {
                             Hand {
@@ -50,6 +50,11 @@ final class PlaySpec: QuickSpec {
                     expect(result.event) == .play(actor: "p1", card: "playable")
                 }
 
+                it("should increment counter") {
+                    // Then
+                    expect(result.playCounter["playable"]) == 1
+                }
+
                 it("should queue side effects") {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: "playable")
@@ -63,13 +68,14 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1")
                     }
+                    .cardRef(["playable": playable])
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "unknown")
+                    let action = GameAction.play(actor: "p1", card: "playable")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardNotFound("unknown")
+                    expect(result.error) == .cardNotFound("playable")
                 }
             }
 

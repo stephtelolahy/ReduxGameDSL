@@ -62,7 +62,7 @@ public enum CardList {
                     CardEffect.replay(.numPlayers) {
                         CardEffect.reveal
                     }
-                    CardEffect.chooseCard(player: .all, card: .selectChoosable)
+                    CardEffect.chooseCard(player: .all, card: .selectArena)
                 }
             }
         }
@@ -112,7 +112,7 @@ public enum CardList {
         // MARK: - Abilities
 
         Card(.endTurn) {
-            onPlay {
+            onSpell {
                 CardEffect.group {
                     CardEffect.replay(.excessHand) {
                         CardEffect.discard(player: .actor, card: .selectHand)
@@ -123,8 +123,8 @@ public enum CardList {
         }
         
         Card(.drawOnSetTurn) {
-            onPlay {
-                CardEffect.replay(.startTurnCards) {
+            onTriggered {
+                CardEffect.replay(.playerAttr(.starTurnCards)) {
                     CardEffect.draw(player: .actor)
                 }
             } require: {
@@ -133,7 +133,7 @@ public enum CardList {
         }
 
         Card(.eliminateOnLooseLastHealth) {
-            onPlay {
+            onTriggered {
                 CardEffect.eliminate(.actor)
             } require: {
                 PlayReq.onLooseLastHealth

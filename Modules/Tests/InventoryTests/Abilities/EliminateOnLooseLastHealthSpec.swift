@@ -17,9 +17,10 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .health(0)
-                            .abilities([.eliminateOnLooseLastHealth])
+                            .attribute(.health, 0)
+                        Player("p2")
                     }
+                    .ability(.eliminateOnLooseLastHealth)
                     .event(.damage(1, player: "p1"))
 
                     // When
@@ -28,7 +29,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.trigger(actor: "p1", card: .eliminateOnLooseLastHealth)),
+                        .success(.forcePlay(actor: "p1", card: .eliminateOnLooseLastHealth)),
                         .success(.eliminate("p1"))
                     ]
                 }
@@ -39,9 +40,9 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .health(1)
-                            .abilities([.eliminateOnLooseLastHealth])
+                            .attribute(.health, 1)
                     }
+                    .ability(.eliminateOnLooseLastHealth)
                     .event(.damage(1, player: "p1"))
 
                     // When
