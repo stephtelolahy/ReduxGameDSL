@@ -15,14 +15,10 @@ struct Play: GameReducerProtocol {
             throw GameError.playerNotFound(actor)
         }
 
-        guard actorObj.hand.contains(card) else {
-            throw GameError.cardNotFound(card)
-        }
-
         // verify play action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let action = cardObj.actions.first(where: { $0.actionType == .play }) else {
+              let action = cardObj.actions.first else {
             throw GameError.cardNotPlayable(card)
         }
 
@@ -40,16 +36,23 @@ struct Play: GameReducerProtocol {
             }
         }
 
-        // discard immediately
         var state = state
-        try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
-        state.discard.push(card)
+
+        // discard played hand card
+        if case .play = action.actionType {
+            guard actorObj.hand.contains(card) else {
+                throw GameError.cardNotFound(card)
+            }
+            
+            try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
+            state.discard.push(card)
+        }
 
         // queue side effects
         state.queue.append(action.effect.withCtx(ctx))
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
-        
+
         state.event = .play(actor: actor, card: card, target: target)
 
         return state

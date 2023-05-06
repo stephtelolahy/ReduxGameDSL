@@ -12,9 +12,6 @@ public enum GameEvent: Codable, Equatable {
     /// Play a hand card
     case play(actor: String, card: String, target: String? = nil)
 
-    /// Invoke an ability
-    case invoke(actor: String, card: String)
-    
     /// Trigger an ability
     case trigger(actor: String, card: String)
 

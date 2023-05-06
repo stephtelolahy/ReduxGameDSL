@@ -35,7 +35,7 @@ struct GameReducer: ReducerProtocol {
             let actorObj = state.player(actor)
             for card in actorObj.abilities
             where isTriggered(actor: actor, card: card, state: state) {
-                let action = GameAction.trigger(actor: actor, card: card)
+                let action = GameAction.forcePlay(actor: actor, card: card)
                 state.queue.insert(action, at: 0)
             }
         }
@@ -83,9 +83,7 @@ private extension GameAction {
         switch self {
         case .play: return Play()
             
-        case .invoke: return Invoke()
-            
-        case .trigger: return Trigger()
+        case .forcePlay: return ForcePlay()
             
         case .update: return Update()
             

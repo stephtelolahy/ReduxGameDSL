@@ -112,7 +112,7 @@ public enum CardList {
         // MARK: - Abilities
 
         Card(.endTurn) {
-            onPlay {
+            onSpell {
                 CardEffect.group {
                     CardEffect.replay(.excessHand) {
                         CardEffect.discard(player: .actor, card: .selectHand)

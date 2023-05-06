@@ -1,13 +1,13 @@
 //
-//  Invoke.swift
+//  ForcePlay.swift
 //  
 //
-//  Created by Hugues Telolahy on 01/05/2023.
+//  Created by Hugues Stephano TELOLAHY on 04/05/2023.
 //
 
-struct Invoke: GameReducerProtocol {
+struct ForcePlay: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .invoke(actor, card) = action else {
+        guard case let .forcePlay(actor, card) = action else {
             fatalError(.unexpected)
         }
         
@@ -17,20 +17,13 @@ struct Invoke: GameReducerProtocol {
               let action = cardObj.actions.first(where: { $0.actionType == .play }) else {
             throw GameError.cardNotPlayable(card)
         }
-
-        // verify requirements
-        let ctx = EffectContext(actor: actor, card: card)
-        for playReq in action.playReqs {
-            try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
-        }
-
+        
         // queue side effects
+        let ctx = EffectContext(actor: actor, card: card)
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
 
-        state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
-        
-        state.event = .invoke(actor: actor, card: card)
+        state.event = .trigger(actor: actor, card: card)
 
         return state
     }
