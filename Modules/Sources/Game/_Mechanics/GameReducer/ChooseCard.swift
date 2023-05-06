@@ -25,9 +25,9 @@ struct ChooseCard: GameReducerProtocol {
         }
 
         var state = state
-        try state.choosable?.remove(cId)
-        if state.choosable?.cards.isEmpty == true {
-            state.choosable = nil
+        try state.arena?.remove(cId)
+        if state.arena?.cards.isEmpty == true {
+            state.arena = nil
         }
         
         state[keyPath: \GameState.players[pId]]?.hand.add(cId)

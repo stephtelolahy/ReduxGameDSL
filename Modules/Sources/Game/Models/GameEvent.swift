@@ -30,10 +30,10 @@ public enum GameEvent: Codable, Equatable {
     /// Draw card from other player
     case steal(player: String, target: String, card: String)
 
-    /// Draw some cards from choosable zone
+    /// Draw some cards from arena
     case chooseCard(player: String, card: String)
 
-    /// Draw a card from discard and put to choosable
+    /// Draw a card from discard and put to arena
     case reveal
 
     /// Set turn

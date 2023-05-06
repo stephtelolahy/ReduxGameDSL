@@ -1,11 +1,11 @@
 //
-//  Choosable.swift
+//  Arena.swift
 //  CardApp
 //
 //  Created by Hugues Telolahy on 02/04/2023.
 //
 
-public struct Choosable: GameAttribute {
+public struct Arena: GameAttribute {
     let value: CardLocation
 
     public init(@StringBuilder _ content: () -> [String]) {
@@ -13,6 +13,6 @@ public struct Choosable: GameAttribute {
     }
     
     public func update(game: inout GameState) {
-        game.choosable = value
+        game.arena = value
     }
 }

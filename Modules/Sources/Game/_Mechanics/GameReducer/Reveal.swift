@@ -8,11 +8,11 @@
 struct Reveal: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
         var state = state
-        if state.choosable == nil {
-            state.choosable = .init()
+        if state.arena == nil {
+            state.arena = .init()
         }
         let card = try state.popDeck()
-        state.choosable?.add(card)
+        state.arena?.add(card)
 
         state.event = .reveal
 

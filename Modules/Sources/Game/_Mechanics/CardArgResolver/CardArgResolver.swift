@@ -98,7 +98,7 @@ private extension CardArg {
         switch self {
         case .selectAny: return CardSelectAny()
 
-        case .selectChoosable: return CardSelectChoosable()
+        case .selectArena: return CardSelectArena()
 
         case .selectHandNamed: return CardSelectHandNamed()
 

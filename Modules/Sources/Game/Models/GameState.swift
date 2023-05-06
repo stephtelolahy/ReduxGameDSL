@@ -23,8 +23,8 @@ public struct GameState: GameElement, Codable, Equatable {
     /// Discard pile
     public var discard: CardStack = .init()
 
-    /// Choosable cards
-    public var choosable: CardLocation?
+    /// Cards shop
+    public var arena: CardLocation?
 
     /// Shared attributes for all players
     public var attributes: [AttributeKey: Int] = [:]

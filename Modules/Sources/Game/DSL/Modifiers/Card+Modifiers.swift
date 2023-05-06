@@ -42,7 +42,7 @@ public func onTriggered(
     @CardEffectBuilder content: () -> CardEffect,
     @PlayReqBuilder require: () -> [PlayReq] = { [] }
 ) -> CardAction {
-    .init(actionType: .triggered,
+    .init(actionType: .trigger,
           target: target,
           playReqs: require(),
           effect: content())

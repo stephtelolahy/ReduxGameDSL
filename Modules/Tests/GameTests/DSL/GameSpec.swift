@@ -28,8 +28,8 @@ final class GameSpec: QuickSpec {
                     expect(sut.discard.count) == 0
                 }
                 
-                it("should not have choosable") {
-                    expect(sut.choosable) == nil
+                it("should not have arena") {
+                    expect(sut.arena) == nil
                 }
                 
                 it("should not be over") {
@@ -77,19 +77,19 @@ final class GameSpec: QuickSpec {
                 }
             }
             
-            context("initialized with choosable") {
-                it("should have choosable cards") {
+            context("initialized with arena") {
+                it("should have arena cards") {
                     // Given
                     // When
                     let sut = GameState {
-                        Choosable {
+                        Arena {
                             "c1"
                             "c2"
                         }
                     }
                     
                     // Then
-                    expect(sut.choosable?.cards) == ["c1", "c2"]
+                    expect(sut.arena?.cards) == ["c1", "c2"]
                 }
             }
             
@@ -194,7 +194,7 @@ final class GameSpec: QuickSpec {
                 expect(sut.turn) == "p1"
                 expect(sut.deck.count) == 1
                 expect(sut.discard.count) == 1
-                expect(sut.choosable) == nil
+                expect(sut.arena) == nil
             }
         }
     }

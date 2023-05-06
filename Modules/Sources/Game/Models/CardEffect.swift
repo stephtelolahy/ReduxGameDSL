@@ -22,10 +22,10 @@ public indirect enum CardEffect: Codable, Equatable {
     /// Draw card from other player
     case steal(player: PlayerArg, target: PlayerArg, card: CardArg)
     
-    /// Draw some cards from choosable zone
+    /// Draw some cards from arena
     case chooseCard(player: PlayerArg, card: CardArg)
     
-    /// Draw a card from discard and put to choosable
+    /// Draw a card from discard and put to arena
     case reveal
     
     /// Player must choose to discard one of his card.

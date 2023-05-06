@@ -20,14 +20,14 @@ final class ChooseCardSpec: QuickSpec {
                     it("should ask a choice") {
                         // Given
                         let state = GameState {
-                            Choosable {
+                            Arena {
                                 "c1"
                                 "c2"
                             }
                         }
 
                         // When
-                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectArena).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -43,13 +43,13 @@ final class ChooseCardSpec: QuickSpec {
                     it("should not ask a choice") {
                         // Given
                         let state = GameState {
-                            Choosable {
+                            Arena {
                                 "c1"
                             }
                         }
 
                         // When
-                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectArena).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -67,11 +67,11 @@ final class ChooseCardSpec: QuickSpec {
 
                         // When
 
-                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectChoosable).withCtx(ctx)
+                        let action = CardEffect.chooseCard(player: .id("p1"), card: .selectArena).withCtx(ctx)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.error) == .choosableIsEmpty
+                        expect(result.error) == .noCard(.selectArena)
                     }
                 }
             }
@@ -82,7 +82,7 @@ final class ChooseCardSpec: QuickSpec {
                         // Given
                         let state = GameState {
                             Player("p1")
-                            Choosable {
+                            Arena {
                                 "c1"
                                 "c2"
                             }
@@ -95,7 +95,7 @@ final class ChooseCardSpec: QuickSpec {
                         // Then
                         expect(result.event) == .chooseCard(player: "p1", card: "c1")
                         expect(result.player("p1").hand.cards) == ["c1"]
-                        expect(result.choosable?.cards) == ["c2"]
+                        expect(result.arena?.cards) == ["c2"]
                     }
                 }
 
@@ -104,7 +104,7 @@ final class ChooseCardSpec: QuickSpec {
                         // Given
                         let state = GameState {
                             Player("p1")
-                            Choosable {
+                            Arena {
                                 "c1"
                             }
                         }
@@ -116,7 +116,7 @@ final class ChooseCardSpec: QuickSpec {
                         // Then
                         expect(result.event) == .chooseCard(player: "p1", card: "c1")
                         expect(result.player("p1").hand.cards) == ["c1"]
-                        expect(result.choosable) == nil
+                        expect(result.arena) == nil
                     }
                 }
             }

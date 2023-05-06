@@ -62,7 +62,7 @@ public enum CardList {
                     CardEffect.replay(.numPlayers) {
                         CardEffect.reveal
                     }
-                    CardEffect.chooseCard(player: .all, card: .selectChoosable)
+                    CardEffect.chooseCard(player: .all, card: .selectArena)
                 }
             }
         }
