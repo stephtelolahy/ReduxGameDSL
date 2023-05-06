@@ -38,12 +38,15 @@ public struct Player: Identifiable, Codable, Equatable {
     /// Cards to draw at beginning of turn
     public var starTurnCards: Int = 2
 
-    /// abilities
+    /// Card attributes
+    public var attributes: [AttributeKey: Int] = [:]
+
+    /// Abilities
     public var abilities: [String] = []
 
-    /// hand cards
+    /// Hand cards
     public var hand: CardLocation = .init()
 
-    /// in play cards
+    /// In play cards
     public var inPlay: CardLocation = .init()
 }

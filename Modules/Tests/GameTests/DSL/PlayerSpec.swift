@@ -214,6 +214,7 @@ final class PlayerSpec: QuickSpec {
                     "scope": 1,
                     "starTurnCards": 2,
                     "abilities": [],
+                    "attributes": {},
                     "hand": {
                         "visibility": "p1",
                         "cards": []

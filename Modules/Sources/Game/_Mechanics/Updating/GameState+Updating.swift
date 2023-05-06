@@ -23,8 +23,10 @@ extension GameState {
     }
 
     /// Getting distance between players
-    /// The distance between two players is the minimum number of places between them, counting clockwise or counterclockwise.
-    /// When a character is eliminated, he is no longer counted when evaluating the distance: some players will get "closer" when someone is eliminated.
+    /// The distance between two players is the minimum number of places between them,
+    /// counting clockwise or counterclockwise.
+    /// When a character is eliminated, he is no longer counted when evaluating the distance:
+    /// some players will get "closer" when someone is eliminated.
     func playersAt(_ range: Int, from player: String) -> [String] {
         playOrder
             .filter { $0 != player }

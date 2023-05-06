@@ -150,6 +150,7 @@ final class GameSpec: QuickSpec {
                       "scope": 1,
                       "abilities": [],
                       "starTurnCards": 2,
+                      "attributes": {},
                       "hand": {
                         "visibility": "p1",
                         "cards": []
