@@ -124,7 +124,7 @@ public enum CardList {
         
         Card(.drawOnSetTurn) {
             onPlay {
-                CardEffect.replay(.startTurnCards) {
+                CardEffect.replay(.playerAttr(.starTurnCards)) {
                     CardEffect.draw(player: .actor)
                 }
             } require: {

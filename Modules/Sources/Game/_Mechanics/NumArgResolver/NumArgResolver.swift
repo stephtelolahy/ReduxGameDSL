@@ -24,7 +24,7 @@ private extension NumArg {
 
         case .excessHand: return NumExcessHand()
             
-        case .startTurnCards: return NumStartTurnCards()
+        case .playerAttr: return NumPlayerAttr()
         }
     }
 }
