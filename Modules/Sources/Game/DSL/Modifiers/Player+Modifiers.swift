@@ -42,8 +42,8 @@ public extension Player {
         copy { $0.scope = value }
     }
     
-    func starTurnCards(_ value: Int) -> Self {
-        copy { $0.starTurnCards = value }
+    func attribute(_ key: AttributeKey, value: Int) -> Self {
+        copy { $0.attributes[key] = value }
     }
     
     func abilities(_ value: [String]) -> Self {

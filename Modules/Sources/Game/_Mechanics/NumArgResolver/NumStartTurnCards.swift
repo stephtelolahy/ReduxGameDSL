@@ -8,6 +8,6 @@
 struct NumStartTurnCards: NumArgResolverProtocol {
     func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int {
         let actorObj = state.player(ctx.actor)
-        return actorObj.starTurnCards
+        return actorObj.attributes[.starTurnCards] ?? 0
     }
 }

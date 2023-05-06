@@ -34,9 +34,6 @@ public struct Player: Identifiable, Codable, Equatable {
 
     /// Decrement distance to others
     public var scope: Int = 0
-    
-    /// Cards to draw at beginning of turn
-    public var starTurnCards: Int = 2
 
     /// Card attributes
     public var attributes: [AttributeKey: Int] = [:]

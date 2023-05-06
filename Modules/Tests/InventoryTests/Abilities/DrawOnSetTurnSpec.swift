@@ -13,12 +13,13 @@ import Inventory
 final class DrawOnSetTurnSpec: QuickSpec {
     override func spec() {
         describe("starting turn") {
-            context("a default player") {
+            context("a player with 2 initial cards") {
                 it("should draw 2 cards") {
                     // Given
                     let state = createGame {
                         Player("p1")
                             .abilities([.drawOnSetTurn])
+                            .attribute(.starTurnCards, value: 2)
                         Player("p2")
                         Deck {
                             "c1"
@@ -44,7 +45,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                             .abilities([.drawOnSetTurn])
-                            .starTurnCards(3)
+                            .attribute(.starTurnCards, value: 3)
                         Player("p2")
                         Deck {
                             "c1"
