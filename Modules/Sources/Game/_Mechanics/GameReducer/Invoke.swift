@@ -28,6 +28,8 @@ struct Invoke: GameReducerProtocol {
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
 
+        state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
+        
         state.event = .invoke(actor: actor, card: card)
 
         return state

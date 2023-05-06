@@ -8,7 +8,7 @@
 import Foundation
 
 /// Player who is playing in a game
-public struct Player: Identifiable, Codable, Equatable {
+public struct Player: GameElement, Identifiable, Codable, Equatable {
 
     /// Unique identifier
     public let id: String
@@ -16,10 +16,10 @@ public struct Player: Identifiable, Codable, Equatable {
     /// Display name
     public var name: String = String()
     
-    /// Card attributes
+    /// Player specific attributes
     public var attributes: [AttributeKey: Int] = [:]
 
-    /// Abilities implemented with Card having the same name
+    /// Player specific abilities
     public var abilities: Set<String> = []
 
     /// Hand cards

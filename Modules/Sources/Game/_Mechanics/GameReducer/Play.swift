@@ -48,6 +48,8 @@ struct Play: GameReducerProtocol {
         // queue side effects
         state.queue.append(action.effect.withCtx(ctx))
 
+        state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
+        
         state.event = .play(actor: actor, card: card, target: target)
 
         return state

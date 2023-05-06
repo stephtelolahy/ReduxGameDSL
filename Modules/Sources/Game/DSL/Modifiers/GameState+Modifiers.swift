@@ -20,7 +20,7 @@ public extension GameState {
     }
 
     func counters(_ value: [String: Int]) -> Self {
-        copy { $0.counters = value }
+        copy { $0.playCounter = value }
     }
 
     func cardRef(_ value: [String: Card]) -> Self {

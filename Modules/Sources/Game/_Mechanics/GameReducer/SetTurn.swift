@@ -20,7 +20,7 @@ struct SetTurn: GameReducerProtocol {
 
         var state = state
         state.turn = pId
-        state.counters = [:]
+        state.playCounter = [:]
         state.event = .setTurn(pId)
 
         return state

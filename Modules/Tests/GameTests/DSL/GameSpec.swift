@@ -160,6 +160,8 @@ final class GameSpec: QuickSpec {
                       }
                     }
                   },
+                  "attributes": {},
+                  "abilities": [],
                   "playOrder": [
                     "p1"
                   ],
@@ -175,7 +177,7 @@ final class GameSpec: QuickSpec {
                     ]
                   },
                   "queue": [],
-                  "counters": {},
+                  "playCounter": {},
                   "cardRef": {},
                 }
                 """

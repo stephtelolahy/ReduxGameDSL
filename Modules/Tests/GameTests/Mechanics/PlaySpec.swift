@@ -50,6 +50,11 @@ final class PlaySpec: QuickSpec {
                     expect(result.event) == .play(actor: "p1", card: "playable")
                 }
 
+                it("should increment counter") {
+                    // Then
+                    expect(result.playCounter["playable"]) == 1
+                }
+
                 it("should queue side effects") {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: "playable")
