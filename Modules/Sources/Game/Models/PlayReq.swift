@@ -19,4 +19,10 @@ public enum PlayReq: Codable, Equatable {
 
     /// The maximum times per turn a card may be played is X
     case isTimesPerTurn(Int)
+    
+    /// When setting turn
+    case onSetTurn
+
+    /// When loosing last life point
+    case onLooseLastHealth
 }

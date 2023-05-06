@@ -28,7 +28,11 @@ public extension GameState {
     }
 
     func waiting(_ chooser: String, options: [String: GameAction]) -> Self {
-        copy { $0.chooseOne = ChooseOne(chooser: chooser, options: options) }
+        copy { $0.setChooseOne(chooser: chooser, options: options) }
+    }
+    
+    func event(_ value: GameEvent) -> Self {
+        copy { $0.event = value }
     }
 }
 

@@ -14,6 +14,9 @@ public enum CardArg: Codable, Equatable {
     /// Select any player's hand or inPlay card
     case selectAny
 
+    /// Select any player's hand card
+    case selectHand
+
     /// Select any choosable card
     case selectChoosable
 

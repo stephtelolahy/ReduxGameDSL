@@ -9,8 +9,14 @@
 public enum NumArg: Codable, Equatable {
 
     /// Exact number
-    case numExact(Int)
+    case exact(Int)
 
     /// Number of active players
     case numPlayers
+
+    /// Number of excess cards at the end of turn
+    case excessHand
+    
+    /// Number of start turn cards
+    case startTurnCards
 }

@@ -7,8 +7,10 @@
 import Game
 
 public enum CardList {
-
     public static let all: [String: Card] = createCards {
+
+        // MARK: - Collectible
+
         Card(.beer) {
             onPlay(content: {
                 CardEffect.heal(1, player: .actor)
@@ -104,6 +106,37 @@ public enum CardList {
                                             card: .selectHandNamed(.bang),
                                             otherwise: .damage(1, player: .target),
                                             challenger: .actor)
+            }
+        }
+
+        // MARK: - Abilities
+
+        Card(.endTurn) {
+            onPlay {
+                CardEffect.group {
+                    CardEffect.replay(.excessHand) {
+                        CardEffect.discard(player: .actor, card: .selectHand)
+                    }
+                    CardEffect.setTurn(.next)
+                }
+            }
+        }
+        
+        Card(.drawOnSetTurn) {
+            onPlay {
+                CardEffect.replay(.startTurnCards) {
+                    CardEffect.draw(player: .actor)
+                }
+            } require: {
+                PlayReq.onSetTurn
+            }
+        }
+
+        Card(.eliminateOnLooseLastHealth) {
+            onPlay {
+                CardEffect.eliminate(.actor)
+            } require: {
+                PlayReq.onLooseLastHealth
             }
         }
     }

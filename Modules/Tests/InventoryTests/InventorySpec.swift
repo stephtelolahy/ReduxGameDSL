@@ -24,6 +24,7 @@ final class InventorySpec: QuickSpec {
                 expect(cards[.stagecoach]) != nil
                 expect(cards[.wellsFargo]) != nil
                 expect(cards[.catBalou]) != nil
+                expect(cards[.panic]) != nil
                 expect(cards[.generalStore]) != nil
                 expect(cards[.bang]) != nil
                 expect(cards[.missed]) != nil
@@ -40,7 +41,17 @@ final class InventorySpec: QuickSpec {
 //                expect(cards[.scope]) != nil
 //                expect(cards[.volcanic]) != nil
 //                expect(cards[.winchester]) != nil
-//                expect(cards[.panic]) != nil
+            }
+
+            it("should contain all abilities") {
+                // Given
+                // When
+                let cards = CardList.all
+
+                // Then
+                expect(cards[.endTurn]) != nil
+                expect(cards[.drawOnSetTurn]) != nil
+                expect(cards[.eliminateOnLooseLastHealth]) != nil
             }
         }
     }

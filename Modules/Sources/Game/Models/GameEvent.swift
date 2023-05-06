@@ -9,8 +9,14 @@
 /// Renderable events
 public enum GameEvent: Codable, Equatable {
 
-    /// play a hand card
+    /// Play a hand card
     case play(actor: String, card: String, target: String? = nil)
+
+    /// Invoke an ability
+    case invoke(actor: String, card: String)
+    
+    /// Trigger an ability
+    case trigger(actor: String, card: String)
 
     /// Restore player's health, limited to maxHealth
     case heal(Int, player: String)
@@ -32,4 +38,13 @@ public enum GameEvent: Codable, Equatable {
 
     /// Draw a card from discard and put to choosable
     case reveal
+
+    /// Set turn
+    case setTurn(String)
+
+    /// Eliminate
+    case eliminate(String)
+
+    /// Ask a player to choose an action
+    case chooseOne(chooser: String, options: Set<String>)
 }

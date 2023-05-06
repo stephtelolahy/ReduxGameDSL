@@ -147,6 +147,7 @@ final class GameSpec: QuickSpec {
                       "mustang": 0,
                       "scope": 1,
                       "abilities": [],
+                      "starTurnCards": 2,
                       "hand": {
                         "visibility": "p1",
                         "cards": []
@@ -175,6 +176,7 @@ final class GameSpec: QuickSpec {
                   "cardRef": {},
                 }
                 """
+                // swiftlint:disable:next: force_unwrapping
                 let jsonData = JSON.data(using: .utf8)!
 
                 // When

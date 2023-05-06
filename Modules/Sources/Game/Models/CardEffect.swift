@@ -32,9 +32,15 @@ public indirect enum CardEffect: Codable, Equatable {
     /// If cannot, then apply some effect
     case forceDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect)
     
-    // Challenging other player to force discard
+    /// Challenging other player to force discard
     case challengeDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect, challenger: PlayerArg)
-    
+
+    /// Set attribute turn
+    case setTurn(PlayerArg)
+
+    /// Eliminate a player
+    case eliminate(PlayerArg)
+
     /// Repeat an effect
     case replayEffect(times: NumArg, effect: CardEffect)
     

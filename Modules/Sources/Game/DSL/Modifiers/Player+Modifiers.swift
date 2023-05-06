@@ -41,6 +41,14 @@ public extension Player {
     func scope(_ value: Int) -> Self {
         copy { $0.scope = value }
     }
+    
+    func starTurnCards(_ value: Int) -> Self {
+        copy { $0.starTurnCards = value }
+    }
+    
+    func abilities(_ value: [String]) -> Self {
+        copy { $0.abilities = value }
+    }
 }
 
 private extension Player {

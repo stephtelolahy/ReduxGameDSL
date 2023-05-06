@@ -212,6 +212,7 @@ final class PlayerSpec: QuickSpec {
                     "weapon": 3,
                     "mustang": 0,
                     "scope": 1,
+                    "starTurnCards": 2,
                     "abilities": [],
                     "hand": {
                         "visibility": "p1",
@@ -222,6 +223,7 @@ final class PlayerSpec: QuickSpec {
                     }
                 }
                 """
+                // swiftlint:disable:next: force_unwrapping
                 let jsonData = JSON.data(using: .utf8)!
 
                 // When
