@@ -38,7 +38,7 @@ public indirect enum CardEffect: Codable, Equatable {
     /// Set attribute turn
     case setTurn(PlayerArg)
 
-    /// Eliminate a player
+    /// Eliminate a player from the game
     case eliminate(PlayerArg)
 
     /// Repeat an effect

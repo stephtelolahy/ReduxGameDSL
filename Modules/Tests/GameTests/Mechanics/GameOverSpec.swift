@@ -14,7 +14,7 @@ final class GameOverSpec: QuickSpec {
         let sut = GameReducer()
 
         describe("a game") {
-            context("one player remains") {
+            context("one player last") {
                 it("should be over") {
                     // Given
                     let state = GameState {
@@ -30,7 +30,7 @@ final class GameOverSpec: QuickSpec {
                 }
             }
 
-            context("two player remains") {
+            context("two player") {
                 it("should not be over") {
                     // Given
                     let state = GameState {

@@ -6,7 +6,8 @@
 //
 
 extension GameState {
-    /// Remove top deck card by reseting deck if empty
+    /// Draw the top card from the deck
+    /// As soon as the draw pile is empty, shuffle the discard pile to create a new playing deck.
     mutating func popDeck() throws -> String {
         if deck.cards.isEmpty {
             guard discard.count >= 2 else {
@@ -22,6 +23,8 @@ extension GameState {
     }
 
     /// Getting distance between players
+    /// The distance between two players is the minimum number of places between them, counting clockwise or counterclockwise.
+    /// When a character is eliminated, he is no longer counted when evaluating the distance: some players will get "closer" when someone is eliminated.
     func playersAt(_ range: Int, from player: String) -> [String] {
         playOrder
             .filter { $0 != player }
