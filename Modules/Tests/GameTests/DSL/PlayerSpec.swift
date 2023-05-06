@@ -52,11 +52,11 @@ final class PlayerSpec: QuickSpec {
                 }
 
                 it("should have mustang == 0") {
-                    expect(sut.mustang) == 0
+                    expect(sut.attributes[.mustang]) == nil
                 }
 
                 it("should have scope == 0") {
-                    expect(sut.scope) == 0
+                    expect(sut.attributes[.scope]) == nil
                 }
 
                 it("should have weapon == 1") {
@@ -167,25 +167,14 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified mustang") {
-                it("should have mustang") {
+            context("modified attribute") {
+                it("should have that attribute") {
                     // Given
                     // When
-                    let sut = Player().mustang(1)
+                    let sut = Player().attribute(.mustang, value: 1)
 
                     // Then
-                    expect(sut.mustang) == 1
-                }
-            }
-
-            context("modified scope") {
-                it("should have scope") {
-                    // Given
-                    // When
-                    let sut = Player().scope(1)
-
-                    // Then
-                    expect(sut.scope) == 1
+                    expect(sut.attributes[.mustang]) == 1
                 }
             }
 
@@ -210,11 +199,12 @@ final class PlayerSpec: QuickSpec {
                     "health": 2,
                     "handLimit": 2,
                     "weapon": 3,
-                    "mustang": 0,
-                    "scope": 1,
                     "starTurnCards": 2,
                     "abilities": [],
-                    "attributes": {},
+                    "attributes": {
+                        "mustang": 0,
+                        "scope": 1
+                    },
                     "hand": {
                         "visibility": "p1",
                         "cards": []
@@ -237,8 +227,8 @@ final class PlayerSpec: QuickSpec {
                 expect(sut.health) == 2
                 expect(sut.handLimit) == 2
                 expect(sut.weapon) == 3
-                expect(sut.mustang) == 0
-                expect(sut.scope) == 1
+                expect(sut.attributes[.mustang]) == 0
+                expect(sut.attributes[.scope]) == 1
             }
         }
     }

@@ -44,8 +44,13 @@ extension GameState {
         let rightDistance = (oIndex > pIndex) ? (oIndex - pIndex) : (oIndex + pCount - pIndex)
         let leftDistance = (pIndex > oIndex) ? (pIndex - oIndex) : (pIndex + pCount - oIndex)
         var distance = min(rightDistance, leftDistance)
-        distance -= self.player(player).scope
-        distance += self.player(other).mustang
+
+        let scope = self.player(player).attributes[.scope] ?? 0
+        distance -= scope
+
+        let mustang = self.player(other).attributes[.mustang] ?? 0
+        distance += mustang
+
         return distance
     }
 

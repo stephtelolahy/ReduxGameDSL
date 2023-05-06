@@ -33,14 +33,6 @@ public extension Player {
     func weapon(_ value: Int) -> Self {
         copy { $0.weapon = value }
     }
-
-    func mustang(_ value: Int) -> Self {
-        copy { $0.mustang = value }
-    }
-
-    func scope(_ value: Int) -> Self {
-        copy { $0.scope = value }
-    }
     
     func attribute(_ key: AttributeKey, value: Int) -> Self {
         copy { $0.attributes[key] = value }

@@ -28,13 +28,7 @@ public struct Player: Identifiable, Codable, Equatable {
 
     /// Weapon range
     public var weapon: Int = 1
-
-    /// Increment distance from others
-    public var mustang: Int = 0
-
-    /// Decrement distance to others
-    public var scope: Int = 0
-
+    
     /// Card attributes
     public var attributes: [AttributeKey: Int] = [:]
 
