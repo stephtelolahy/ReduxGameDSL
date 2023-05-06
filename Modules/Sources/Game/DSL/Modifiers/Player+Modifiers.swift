@@ -11,6 +11,10 @@ public extension Player {
 
     init(_ id: String = UUID().uuidString, @PlayerAttributeBuilder components: () -> [PlayerAttribute] = { [] }) {
         self.id = id
+        attributes = [
+            .weapon: 1,
+            .starTurnCards: 2
+        ]
         components().forEach { $0.update(player: &self) }
     }
 
@@ -28,10 +32,6 @@ public extension Player {
 
     func handLimit(_ value: Int) -> Self {
         copy { $0.handLimit = value }
-    }
-
-    func weapon(_ value: Int) -> Self {
-        copy { $0.weapon = value }
     }
     
     func attribute(_ key: AttributeKey, value: Int) -> Self {

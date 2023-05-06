@@ -5,6 +5,7 @@
 //  Created by Hugues Telolahy on 06/05/2023.
 //
 
+/// Game element attributes
 public enum AttributeKey: String, Codable, CodingKeyRepresentable {
 
     /// max health
@@ -13,7 +14,8 @@ public enum AttributeKey: String, Codable, CodingKeyRepresentable {
     /// life points
     case health
 
-    /// max number of cards at end of turn, default: health
+    /// override maximum allowed hand cards at the end of his turn
+    /// by default health is maximum allowed hand cards
     case handLimit
 
     /// gun range, default: 1

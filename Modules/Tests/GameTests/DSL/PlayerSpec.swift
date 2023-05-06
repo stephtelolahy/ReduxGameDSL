@@ -51,16 +51,20 @@ final class PlayerSpec: QuickSpec {
                     expect(sut.inPlay.cards).to(beEmpty())
                 }
 
-                it("should have mustang == 0") {
+                it("should not have mustang") {
                     expect(sut.attributes[.mustang]) == nil
                 }
 
-                it("should have scope == 0") {
+                it("should not have scope") {
                     expect(sut.attributes[.scope]) == nil
                 }
 
                 it("should have weapon == 1") {
-                    expect(sut.weapon) == 1
+                    expect(sut.attributes[.weapon]) == 1
+                }
+
+                it("should have 2 start turn cards") {
+                    expect(sut.attributes[.starTurnCards]) == 2
                 }
             }
 
@@ -178,17 +182,6 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified weapon") {
-                it("should have weapon") {
-                    // Given
-                    // When
-                    let sut = Player().weapon(4)
-
-                    // Then
-                    expect(sut.weapon) == 4
-                }
-            }
-
             it("should be serializable") {
                 // Given
                 let JSON = """
@@ -198,12 +191,12 @@ final class PlayerSpec: QuickSpec {
                     "maxHealth": 4,
                     "health": 2,
                     "handLimit": 2,
-                    "weapon": 3,
                     "starTurnCards": 2,
                     "abilities": [],
                     "attributes": {
                         "mustang": 0,
-                        "scope": 1
+                        "scope": 1,
+                        "weapon": 3
                     },
                     "hand": {
                         "visibility": "p1",
@@ -226,7 +219,7 @@ final class PlayerSpec: QuickSpec {
                 expect(sut.maxHealth) == 4
                 expect(sut.health) == 2
                 expect(sut.handLimit) == 2
-                expect(sut.weapon) == 3
+                expect(sut.attributes[.weapon]) == 3
                 expect(sut.attributes[.mustang]) == 0
                 expect(sut.attributes[.scope]) == 1
             }

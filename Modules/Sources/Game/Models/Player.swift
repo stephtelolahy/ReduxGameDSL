@@ -25,9 +25,6 @@ public struct Player: Identifiable, Codable, Equatable {
     /// override maximum allowed hand cards at the end of his turn
     /// by default health is maximum allowed hand cards
     public var handLimit: Int?
-
-    /// Weapon range
-    public var weapon: Int = 1
     
     /// Card attributes
     public var attributes: [AttributeKey: Int] = [:]

@@ -19,7 +19,6 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                             .abilities([.drawOnSetTurn])
-                            .attribute(.starTurnCards, value: 2)
                         Player("p2")
                         Deck {
                             "c1"
