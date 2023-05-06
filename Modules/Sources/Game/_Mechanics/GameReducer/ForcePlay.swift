@@ -11,7 +11,7 @@ struct ForcePlay: GameReducerProtocol {
             fatalError(.unexpected)
         }
 
-        guard let actorObj = state.players[actor] else {
+        guard state.players[actor] != nil else {
             throw GameError.playerNotFound(actor)
         }
         
