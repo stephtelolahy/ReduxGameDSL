@@ -11,7 +11,7 @@ public struct ChooseOne: Codable, Equatable {
     public let options: [String: GameAction]
 
     init(chooser: String, options: [String: GameAction]) {
-        assert(!options.isEmpty)
+        assert(options.isNotEmpty)
         self.chooser = chooser
         self.options = options
     }
