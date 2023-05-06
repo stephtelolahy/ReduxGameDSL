@@ -18,13 +18,13 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .ability(.drawOnSetTurn)
                         Player("p2")
                         Deck {
                             "c1"
                             "c2"
                         }
                     }
+                    .ability(.drawOnSetTurn)
                     .event(.setTurn("p1"))
                     
                     // When
@@ -43,7 +43,6 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .ability(.drawOnSetTurn)
                             .attribute(.starTurnCards, 3)
                         Player("p2")
                         Deck {
@@ -52,6 +51,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                             "c3"
                         }
                     }
+                    .ability(.drawOnSetTurn)
                     .event(.setTurn("p1"))
                     
                     // When

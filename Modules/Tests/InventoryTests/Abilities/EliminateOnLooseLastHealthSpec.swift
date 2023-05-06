@@ -18,9 +18,9 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                             .attribute(.health, 0)
-                            .ability(.eliminateOnLooseLastHealth)
                         Player("p2")
                     }
+                    .ability(.eliminateOnLooseLastHealth)
                     .event(.damage(1, player: "p1"))
 
                     // When
@@ -41,8 +41,8 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                             .attribute(.health, 1)
-                            .ability(.eliminateOnLooseLastHealth)
                     }
+                    .ability(.eliminateOnLooseLastHealth)
                     .event(.damage(1, player: "p1"))
 
                     // When

@@ -34,6 +34,14 @@ public extension GameState {
     func event(_ value: GameEvent) -> Self {
         copy { $0.event = value }
     }
+
+    func attribute(_ key: AttributeKey, _ value: Int) -> Self {
+        copy { $0.attributes[key] = value }
+    }
+
+    func ability(_ value: String) -> Self {
+        copy { $0.abilities.insert(value) }
+    }
 }
 
 private extension GameState {

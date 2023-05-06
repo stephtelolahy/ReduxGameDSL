@@ -33,7 +33,7 @@ struct GameReducer: ReducerProtocol {
         var state = state
         for actor in state.playOrder {
             let actorObj = state.player(actor)
-            for card in actorObj.abilities
+            for card in (actorObj.abilities.union(state.abilities))
             where isTriggered(actor: actor, card: card, state: state) {
                 let action = GameAction.forcePlay(actor: actor, card: card)
                 state.queue.insert(action, at: 0)
