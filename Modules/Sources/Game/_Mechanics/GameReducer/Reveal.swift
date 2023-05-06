@@ -7,11 +7,6 @@
 
 struct Reveal: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, _) = action,
-              case .reveal = effect else {
-            fatalError(.unexpected)
-        }
-        
         var state = state
         if state.choosable == nil {
             state.choosable = .init()

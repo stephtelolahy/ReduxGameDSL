@@ -36,7 +36,7 @@ public struct GameState: Codable, Equatable {
     public var error: GameError?
     
     /// Pending action
-    public var chooseOne: ChooseOne?
+    var chooseOne: ChooseOne?
 
     /// Queued effects
     var queue: [GameAction] = []

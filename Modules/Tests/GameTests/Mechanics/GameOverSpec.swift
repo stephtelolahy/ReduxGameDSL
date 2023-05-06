@@ -47,5 +47,21 @@ final class GameOverSpec: QuickSpec {
                 }
             }
         }
+
+        context("when over") {
+            it("should not handle any action") {
+                // Given
+                let state = GameState()
+                    .isOver("p1")
+
+                // When
+                let action = GameAction.play(actor: "p1", card: "c1")
+                let result = sut.reduce(state: state, action: action)
+
+                // Then
+                expect(result.event) == nil
+                expect(result.error) == nil
+            }
+        }
     }
 }

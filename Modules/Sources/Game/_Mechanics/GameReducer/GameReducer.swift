@@ -12,10 +12,16 @@ protocol GameReducerProtocol {
 
 struct GameReducer: ReducerProtocol {
     func reduce(state: GameState, action: GameAction) -> GameState {
+        guard state.isOver == nil else {
+            return state
+        }
+
         var state = state
-        queueTriggeredEffects(state: &state)
+        state = queueTriggeredEffects(state: state)
+
         do {
-            try validateAction(action: action, state: &state)
+            state = try validateAction(action: action, state: state)
+
             return try action.reducer().reduce(state: state, action: action)
         } catch {
             state.error = error as? GameError
@@ -23,7 +29,8 @@ struct GameReducer: ReducerProtocol {
         }
     }
     
-    private func queueTriggeredEffects(state: inout GameState) {
+    private func queueTriggeredEffects(state: GameState) -> State {
+        var state = state
         for actor in state.playOrder {
             let actorObj = state.player(actor)
             for card in actorObj.abilities
@@ -35,6 +42,7 @@ struct GameReducer: ReducerProtocol {
         
         state.event = nil
         state.error = nil
+        return state
     }
     
     private func isTriggered(actor: String, card: String, state: GameState) -> Bool {
@@ -57,13 +65,15 @@ struct GameReducer: ReducerProtocol {
         return false
     }
     
-    private func validateAction(action: GameAction, state: inout GameState) throws {
+    private func validateAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
         if let chooseOne = state.chooseOne {
             guard chooseOne.options.values.contains(action) else {
                 throw GameError.unwaitedAction
             }
             state.chooseOne = nil
         }
+        return state
     }
 }
 

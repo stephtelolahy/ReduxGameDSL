@@ -7,10 +7,6 @@
 
 struct Update: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case .update = action else {
-            fatalError(.unexpected)
-        }
-
         if let winner = state.hasWinner() {
             var state = state
             state.isOver = GameOver(winner: winner)
