@@ -123,7 +123,7 @@ public enum CardList {
         }
         
         Card(.drawOnSetTurn) {
-            onPlay {
+            onTriggered {
                 CardEffect.replay(.playerAttr(.starTurnCards)) {
                     CardEffect.draw(player: .actor)
                 }
@@ -133,7 +133,7 @@ public enum CardList {
         }
 
         Card(.eliminateOnLooseLastHealth) {
-            onPlay {
+            onTriggered {
                 CardEffect.eliminate(.actor)
             } require: {
                 PlayReq.onLooseLastHealth

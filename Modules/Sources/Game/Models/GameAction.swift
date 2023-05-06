@@ -9,10 +9,10 @@
 /// Triggered by user or by the system, that causes any update to the game state
 public indirect enum GameAction: Codable, Equatable {
     
-    /// Play an active hand card
+    /// Play an active card
     case play(actor: String, card: String, target: String? = nil)
 
-    /// Trigger an ability
+    /// Trigger a card when some event occurred
     case forcePlay(actor: String, card: String)
 
     /// Process queued effects

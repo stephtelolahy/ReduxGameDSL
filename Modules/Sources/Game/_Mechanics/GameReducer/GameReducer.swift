@@ -52,7 +52,7 @@ struct GameReducer: ReducerProtocol {
         }
         
         for action in cardObj.actions where
-        action.actionType == .play {
+        action.actionType == .triggered {
             for playReq in action.playReqs {
                 do {
                     try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)

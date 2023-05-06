@@ -32,7 +32,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
+                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]
                 }
@@ -59,7 +59,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.trigger(actor: "p1", card: .drawOnSetTurn)),
+                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1")),
                                        .success(.draw(player: "p1"))]

@@ -29,7 +29,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.trigger(actor: "p1", card: .eliminateOnLooseLastHealth)),
+                        .success(.forcePlay(actor: "p1", card: .eliminateOnLooseLastHealth)),
                         .success(.eliminate("p1"))
                     ]
                 }

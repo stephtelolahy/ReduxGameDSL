@@ -9,11 +9,11 @@
 /// Renderable events
 public enum GameEvent: Codable, Equatable {
 
-    /// Play a hand card
+    /// Play a card
     case play(actor: String, card: String, target: String? = nil)
 
-    /// Trigger an ability
-    case trigger(actor: String, card: String)
+    /// Trigger a card
+    case forcePlay(actor: String, card: String)
 
     /// Restore player's health, limited to maxHealth
     case heal(Int, player: String)

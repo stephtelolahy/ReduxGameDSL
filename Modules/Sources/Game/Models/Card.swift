@@ -42,7 +42,7 @@ public enum CardActionType: Codable, Equatable {
 //
 //    /// Use card as handicap againts another player
 //    case handicap
-//
-//    /// Apply side effects immediately, when an event occurred
-//    case triggered
+
+    /// Apply side effects immediately, when an event occurred
+    case triggered
 }

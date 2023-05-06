@@ -36,3 +36,14 @@ public func onSpell(
           playReqs: require(),
           effect: content())
 }
+
+public func onTriggered(
+    target: PlayerArg? = nil,
+    @CardEffectBuilder content: () -> CardEffect,
+    @PlayReqBuilder require: () -> [PlayReq] = { [] }
+) -> CardAction {
+    .init(actionType: .triggered,
+          target: target,
+          playReqs: require(),
+          effect: content())
+}
