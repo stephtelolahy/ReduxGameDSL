@@ -20,7 +20,7 @@ public struct Player: Identifiable, Codable, Equatable {
     public var attributes: [AttributeKey: Int] = [:]
 
     /// Abilities
-    public var abilities: [String] = []
+    public var abilities: Set<String> = []
 
     /// Hand cards
     public var hand: CardLocation = .init()

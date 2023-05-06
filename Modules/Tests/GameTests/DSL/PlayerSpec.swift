@@ -142,7 +142,7 @@ final class PlayerSpec: QuickSpec {
                 it("should have that attribute") {
                     // Given
                     // When
-                    let sut = Player().attribute(.mustang, value: 1)
+                    let sut = Player().attribute(.mustang, 1)
 
                     // Then
                     expect(sut.attributes[.mustang]) == 1
@@ -155,15 +155,15 @@ final class PlayerSpec: QuickSpec {
                 {
                     "id": "p1",
                     "name": "n1",
-                    "starTurnCards": 2,
-                    "abilities": [],
+                    "abilities": ["endTurn"],
                     "attributes": {
                         "maxHealth": 4,
                         "health": 2,
                         "mustang": 0,
                         "scope": 1,
                         "weapon": 3,
-                        "handLimit": 2
+                        "handLimit": 2,
+                        "starTurnCards": 2,
                     },
                     "hand": {
                         "visibility": "p1",
@@ -183,12 +183,14 @@ final class PlayerSpec: QuickSpec {
                 // Then
                 expect(sut.id) == "p1"
                 expect(sut.name) == "n1"
+                expect(sut.abilities).to(contain(["endTurn"]))
                 expect(sut.attributes[.maxHealth]) == 4
                 expect(sut.attributes[.health]) == 2
                 expect(sut.attributes[.handLimit]) == 2
                 expect(sut.attributes[.weapon]) == 3
                 expect(sut.attributes[.mustang]) == 0
                 expect(sut.attributes[.scope]) == 1
+                expect(sut.attributes[.starTurnCards]) == 2
             }
         }
     }

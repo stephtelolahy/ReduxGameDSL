@@ -22,8 +22,8 @@ final class HealSpec: QuickSpec {
                     // Given
                     state = GameState {
                         Player("p1")
-                            .attribute(.health, value: 2)
-                            .attribute(.maxHealth, value: 4)
+                            .attribute(.health, 2)
+                            .attribute(.maxHealth, 4)
                     }
                 }
 
@@ -69,8 +69,8 @@ final class HealSpec: QuickSpec {
                     // Given
                     let state = GameState {
                         Player("p1")
-                            .attribute(.health, value: 4)
-                            .attribute(.maxHealth, value: 3)
+                            .attribute(.health, 4)
+                            .attribute(.maxHealth, 3)
                     }
 
                     // When

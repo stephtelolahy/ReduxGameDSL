@@ -24,12 +24,12 @@ public extension Player {
         copy { $0.name = value }
     }
 
-    func attribute(_ key: AttributeKey, value: Int) -> Self {
+    func attribute(_ key: AttributeKey, _ value: Int) -> Self {
         copy { $0.attributes[key] = value }
     }
     
-    func abilities(_ value: [String]) -> Self {
-        copy { $0.abilities = value }
+    func ability(_ value: String) -> Self {
+        copy { $0.abilities.insert(value) }
     }
 }
 

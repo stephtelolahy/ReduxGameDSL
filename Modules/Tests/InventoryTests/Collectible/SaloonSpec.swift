@@ -22,14 +22,14 @@ final class SaloonSpec: QuickSpec {
                                 .saloon
                             }
                         }
-                        .attribute(.health, value: 4)
-                        .attribute(.maxHealth, value: 4)
+                        .attribute(.health, 4)
+                        .attribute(.maxHealth, 4)
                         Player("p2")
-                            .attribute(.health, value: 2)
-                            .attribute(.maxHealth, value: 4)
+                            .attribute(.health, 2)
+                            .attribute(.maxHealth, 4)
                         Player("p3")
-                            .attribute(.health, value: 3)
-                            .attribute(.maxHealth, value: 4)
+                            .attribute(.health, 3)
+                            .attribute(.maxHealth, 4)
                     }
                     
                     // When
@@ -52,11 +52,11 @@ final class SaloonSpec: QuickSpec {
                                 .saloon
                             }
                         }
-                        .attribute(.health, value: 4)
-                        .attribute(.maxHealth, value: 4)
+                        .attribute(.health, 4)
+                        .attribute(.maxHealth, 4)
                         Player("p2")
-                            .attribute(.health, value: 3)
-                            .attribute(.maxHealth, value: 3)
+                            .attribute(.health, 3)
+                            .attribute(.maxHealth, 3)
                     }
                     
                     // When

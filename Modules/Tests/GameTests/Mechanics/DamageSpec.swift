@@ -20,7 +20,7 @@ final class DamageSpec: QuickSpec {
             beforeEach {
                 state = GameState {
                     Player("p1")
-                        .attribute(.health, value: 2)
+                        .attribute(.health, 2)
                 }
             }
 
