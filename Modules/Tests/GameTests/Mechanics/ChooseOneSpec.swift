@@ -44,16 +44,6 @@ final class ChooseOneSpec: QuickSpec {
                     expect(sut.state.error) == .unwaitedAction
                 }
             }
-
-            context("when dispatching update") {
-                it("should do nothing") {
-                    // When
-                    sut.dispatch(.update)
-
-                    // Then
-                    expect(sut.state.queue).to(beEmpty())
-                }
-            }
         }
     }
 }

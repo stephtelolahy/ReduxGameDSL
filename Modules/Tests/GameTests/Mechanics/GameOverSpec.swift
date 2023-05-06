@@ -12,6 +12,7 @@ import Nimble
 final class GameOverSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
+        let ctx = EffectContext(actor: "px", card: "cx")
 
         describe("a game") {
             context("one player last") {
@@ -19,10 +20,11 @@ final class GameOverSpec: QuickSpec {
                     // Given
                     let state = GameState {
                         Player("p1")
+                        Player("p2")
                     }
 
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.eliminate(.id("p2")), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -36,10 +38,11 @@ final class GameOverSpec: QuickSpec {
                     let state = GameState {
                         Player("p1")
                         Player("p2")
+                        Player("p3")
                     }
 
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.eliminate(.id("p3")), ctx: ctx)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

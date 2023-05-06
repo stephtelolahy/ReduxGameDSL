@@ -16,6 +16,6 @@ let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
             .eraseToAnyPublisher()
     }
     
-    return Just(.update)
+    return Just(state.queue[0])
         .eraseToAnyPublisher()
 }
