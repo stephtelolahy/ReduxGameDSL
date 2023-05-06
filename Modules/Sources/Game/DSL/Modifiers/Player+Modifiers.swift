@@ -30,10 +30,6 @@ public extension Player {
         copy { $0.health = value }
     }
 
-    func handLimit(_ value: Int) -> Self {
-        copy { $0.handLimit = value }
-    }
-    
     func attribute(_ key: AttributeKey, value: Int) -> Self {
         copy { $0.attributes[key] = value }
     }
