@@ -45,7 +45,7 @@ final class EndTurnSpec: QuickSpec {
                                 "c2"
                             }
                         }
-                        .health(1)
+                        .attribute(.health, value: 1)
                         .attribute(.handLimit, value: 10)
                         Player("p2")
                     }
@@ -74,7 +74,7 @@ final class EndTurnSpec: QuickSpec {
                                 "c3"
                             }
                         }
-                        .health(2)
+                        .attribute(.health, value: 2)
                         Player("p2")
                     }
                     .turn("p1")
@@ -104,7 +104,7 @@ final class EndTurnSpec: QuickSpec {
                                 "c3"
                             }
                         }
-                        .health(1)
+                        .attribute(.health, value: 1)
                         Player("p2")
                     }
                     .turn("p1")

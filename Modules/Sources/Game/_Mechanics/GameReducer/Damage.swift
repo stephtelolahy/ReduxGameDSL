@@ -19,7 +19,7 @@ struct Damage: GameReducerProtocol {
         }
 
         var state = state
-        state[keyPath: \GameState.players[pId]]?.health -= value
+        state[keyPath: \GameState.players[pId]]?.looseHealth(value)
         
         state.event = .damage(value, player: pId)
 

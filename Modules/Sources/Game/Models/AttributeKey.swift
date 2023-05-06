@@ -8,34 +8,34 @@
 /// Game element attributes
 public enum AttributeKey: String, Codable, CodingKeyRepresentable {
 
-    /// max health
-    case bullets
+    /// Max health
+    case maxHealth
 
-    /// life points
+    /// Life points
     case health
 
-    /// override maximum allowed hand cards at the end of his turn
+    /// Override maximum allowed hand cards at the end of his turn
     /// by default health is maximum allowed hand cards
     case handLimit
 
-    /// gun range, default: 1
+    /// Gun range, default: 1
     case weapon
 
-    /// increment distance from others
+    /// Increment distance from others
     case mustang
 
-    /// decrement distance to others
+    /// Decrement distance to others
     case scope
 
     /// Cards to draw at beginning of turn
     case starTurnCards
 
-    /// number of flipped cards on a draw, default: 1
+    /// Number of flipped cards on a draw, default: 1
     case flippedCards
 
-    /// number of 'missed' required to cancel your bang, default: 1
+    /// Number of 'missed' required to cancel your bang, default: 1
     case bangsCancelable
 
-    /// number of bangs per turn, default: 1
+    /// Number of bangs per turn, default: 1
     case bangsPerTurn
 }

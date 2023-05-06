@@ -40,11 +40,11 @@ final class PlayerSpec: QuickSpec {
                 }
 
                 it("should have health == 0") {
-                    expect(sut.health) == 0
+                    expect(sut.attributes[.health]) == 0
                 }
 
                 it("should have max health == 0") {
-                    expect(sut.maxHealth) == 0
+                    expect(sut.attributes[.maxHealth]) == 0
                 }
 
                 it("should have empty inPlay") {
@@ -122,28 +122,6 @@ final class PlayerSpec: QuickSpec {
                 }
             }
 
-            context("modified health") {
-                it("should have health") {
-                    // Given
-                    // When
-                    let sut = Player().health(2)
-
-                    // Then
-                    expect(sut.health) == 2
-                }
-            }
-
-            context("modified max health") {
-                it("should have max health") {
-                    // Given
-                    // When
-                    let sut = Player().maxHealth(3)
-
-                    // Then
-                    expect(sut.maxHealth) == 3
-                }
-            }
-
             context("initialized with inPlay") {
                 it("should have inPlay cards") {
                     // Given
@@ -177,12 +155,11 @@ final class PlayerSpec: QuickSpec {
                 {
                     "id": "p1",
                     "name": "n1",
-                    "maxHealth": 4,
-                    "health": 2,
-
                     "starTurnCards": 2,
                     "abilities": [],
                     "attributes": {
+                        "maxHealth": 4,
+                        "health": 2,
                         "mustang": 0,
                         "scope": 1,
                         "weapon": 3,
@@ -206,8 +183,8 @@ final class PlayerSpec: QuickSpec {
                 // Then
                 expect(sut.id) == "p1"
                 expect(sut.name) == "n1"
-                expect(sut.maxHealth) == 4
-                expect(sut.health) == 2
+                expect(sut.attributes[.maxHealth]) == 4
+                expect(sut.attributes[.health]) == 2
                 expect(sut.attributes[.handLimit]) == 2
                 expect(sut.attributes[.weapon]) == 3
                 expect(sut.attributes[.mustang]) == 0

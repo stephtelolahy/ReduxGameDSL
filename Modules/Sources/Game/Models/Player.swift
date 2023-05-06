@@ -13,14 +13,8 @@ public struct Player: Identifiable, Codable, Equatable {
     /// Unique identifier
     public let id: String
 
-    /// player name
+    /// Display name
     public var name: String = String()
-
-    /// max health
-    public var maxHealth: Int = 0
-
-    /// current health
-    public var health: Int = 0
     
     /// Card attributes
     public var attributes: [AttributeKey: Int] = [:]

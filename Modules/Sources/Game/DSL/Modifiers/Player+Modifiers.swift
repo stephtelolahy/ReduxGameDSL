@@ -12,6 +12,8 @@ public extension Player {
     init(_ id: String = UUID().uuidString, @PlayerAttributeBuilder components: () -> [PlayerAttribute] = { [] }) {
         self.id = id
         attributes = [
+            .health: 0,
+            .maxHealth: 0,
             .weapon: 1,
             .starTurnCards: 2
         ]
@@ -20,14 +22,6 @@ public extension Player {
 
     func name(_ value: String) -> Self {
         copy { $0.name = value }
-    }
-
-    func maxHealth(_ value: Int) -> Self {
-        copy { $0.maxHealth = value }
-    }
-
-    func health(_ value: Int) -> Self {
-        copy { $0.health = value }
     }
 
     func attribute(_ key: AttributeKey, value: Int) -> Self {
