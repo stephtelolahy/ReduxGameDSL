@@ -12,8 +12,6 @@ import Inventory
 
 final class DrawOnSetTurnSpec: QuickSpec {
     override func spec() {
-        let ctx = EffectContext(actor: "px", card: "cx")
-
         describe("starting turn") {
             context("a player with 2 initial cards") {
                 it("should draw 2 cards") {
@@ -29,7 +27,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     .ability(.drawOnSetTurn)
                     
                     // When
-                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
+                    let action = GameAction.setTurn("p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
@@ -58,7 +56,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     .ability(.drawOnSetTurn)
 
                     // When
-                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
+                    let action = GameAction.setTurn("p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
@@ -80,7 +78,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
+                    let action = GameAction.setTurn("p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then

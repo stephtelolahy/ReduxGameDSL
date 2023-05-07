@@ -38,34 +38,7 @@ public struct GameReducer: ReducerProtocol {
 
         do {
             state = try validateAction(action: action, state: state)
-
-            switch action {
-            case .play:
-                state = try Play().reduce(state: state, action: action)
-
-            case .forcePlay:
-                state = try ForcePlay().reduce(state: state, action: action)
-
-            case let .effect(effect, ctx):
-                if let reduer = effect.reducer() {
-                    state = try reduer.reduce(state: state, action: action)
-                } else {
-                    let result = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
-                    switch result {
-                    case let .actions(actions):
-                        state.queue.insert(contentsOf: actions, at: 0)
-
-                    case let .chooseOne(chooseOne):
-                        state.chooseOne = chooseOne
-                        state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
-                    }
-                }
-
-            default:
-                state = try action.reducer().reduce(state: state, action: action)
-                state.event = action.toEvent()
-            }
-
+            state = try processAction(action: action, state: state)
             state = queueTriggeredEffects(state: state)
             state = checkGameOver(state: state)
             return state
@@ -90,6 +63,38 @@ private extension GameReducer {
 
         if state.queue.first == action {
             state.queue.removeFirst()
+        }
+
+        return state
+    }
+
+    func processAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
+        switch action {
+        case .play:
+            state = try Play().reduce(state: state, action: action)
+
+        case .forcePlay:
+            state = try ForcePlay().reduce(state: state, action: action)
+
+        case let .effect(effect, ctx):
+            if let reduer = effect.reducer() {
+                state = try reduer.reduce(state: state, action: action)
+            } else {
+                let result = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
+                switch result {
+                case let .actions(actions):
+                    state.queue.insert(contentsOf: actions, at: 0)
+
+                case let .chooseOne(chooseOne):
+                    state.chooseOne = chooseOne
+                    state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
+                }
+            }
+
+        default:
+            state = try action.reducer().reduce(state: state, action: action)
+            state.event = action.toEvent()
         }
 
         return state
@@ -147,8 +152,6 @@ private extension CardEffect {
 
         case .challengeDiscard: return ChallengeDiscard()
 
-        case .setTurn: return SetTurn()
-
         case .eliminate: return Eliminate()
 
         case .applyEffect: return ApplyEffect()
@@ -171,6 +174,7 @@ private extension CardEffect {
         case .steal: return Steal()
         case .reveal: return Reveal()
         case .chooseCard: return ChooseCard()
+        case .setTurn: return SetTurn()
         default:
             fatalError(.unexpected)
         }
@@ -190,6 +194,7 @@ private extension GameAction {
         case .reveal: return Reveal()
         case .chooseCard: return ChooseCard()
         case .groupActions: return GroupActions()
+        case .setTurn: return SetTurn()
         default:
             fatalError(.unexpected)
         }
@@ -206,6 +211,7 @@ private extension GameAction {
         case let .steal(player, target, card): return .steal(player: player, target: target, card: card)
         case .reveal: return .reveal
         case let .chooseCard(player, card): return .chooseCard(player: player, card: card)
+        case let .setTurn(player): return .setTurn(player)
         default: return nil
         }
     }

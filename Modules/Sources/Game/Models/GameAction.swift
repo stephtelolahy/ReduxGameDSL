@@ -36,6 +36,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Draw a card from discard and put to arena
     case reveal
 
+    /// Set turn
+    case setTurn(String)
+
     // MARK: - Invisible actions
 
     /// Apply an effect

@@ -16,10 +16,4 @@ public struct EffectContext: Codable, Equatable {
 
     /// targeted player
     var target: String?
-
-    public init(actor: String, card: String, target: String? = nil) {
-        self.actor = actor
-        self.card = card
-        self.target = target
-    }
 }
