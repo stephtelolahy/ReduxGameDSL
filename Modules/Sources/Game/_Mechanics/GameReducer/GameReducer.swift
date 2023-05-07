@@ -143,8 +143,6 @@ private extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol? {
         switch self {
-        case .reveal: return Reveal()
-
         case .forceDiscard: return ForceDiscard()
 
         case .challengeDiscard: return ChallengeDiscard()
@@ -173,6 +171,7 @@ private extension CardEffect {
         case .discard: return Discard()
         case .draw: return Draw()
         case .steal: return Steal()
+        case .reveal: return Reveal()
         default:
             fatalError(.unexpected)
         }
@@ -189,6 +188,7 @@ private extension GameAction {
         case .discard: return Discard()
         case .draw: return Draw()
         case .steal: return Steal()
+        case .reveal: return Reveal()
         case .groupActions: return GroupActions()
         default:
             fatalError(.unexpected)
@@ -204,6 +204,7 @@ private extension GameAction {
         case let .discard(player, card): return .discard(player: player, card: card)
         case let .draw(player): return .draw(player: player)
         case let .steal(player, target, card): return .steal(player: player, target: target, card: card)
+        case .reveal: return .reveal
         default: return nil
         }
     }

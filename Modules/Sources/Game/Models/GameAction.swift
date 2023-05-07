@@ -30,6 +30,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Draw card from other player
     case steal(player: String, target: String, card: String)
 
+    /// Draw a card from discard and put to arena
+    case reveal
+
     // MARK: - Invisible actions
 
     /// Apply an effect

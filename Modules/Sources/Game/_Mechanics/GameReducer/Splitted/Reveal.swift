@@ -19,3 +19,9 @@ struct Reveal: GameReducerProtocol {
         return state
     }
 }
+
+extension Reveal: EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+        .actions([.reveal])
+    }
+}
