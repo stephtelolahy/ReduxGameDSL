@@ -42,7 +42,7 @@ private extension GameReducer {
         var state = state
         state = try action.reducer().reduce(state: state, action: action)
         switch action {
-        case .play, .effect, .chooseOne:
+        case .play, .effect, .chooseOne, .groupActions:
             break
 
         default:
