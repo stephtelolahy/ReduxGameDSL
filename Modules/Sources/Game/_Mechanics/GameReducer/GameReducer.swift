@@ -68,20 +68,8 @@ private extension GameReducer {
         case .forcePlay:
             state = try ForcePlay().reduce(state: state, action: action)
 
-        case let .effect(effect, ctx):
-            if let reduer = effect.reducer() {
-                state = try reduer.reduce(state: state, action: action)
-            } else {
-                let result = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
-                switch result {
-                case let .actions(actions):
-                    state.queue.insert(contentsOf: actions, at: 0)
-
-                case let .chooseOne(chooseOne):
-                    state.chooseOne = chooseOne
-                    state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
-                }
-            }
+        case .effect:
+            state = try EffectReducer().reduce(state: state, action: action)
 
         default:
             state = try action.reducer().reduce(state: state, action: action)
@@ -132,41 +120,6 @@ private extension GameReducer {
         }
 
         return state
-    }
-}
-
-private extension CardEffect {
-    // swiftlint:disable:next cyclomatic_complexity
-    func reducer() -> GameReducerProtocol? {
-        switch self {
-        case .forceDiscard: return ForceDiscard()
-
-        case .challengeDiscard: return ChallengeDiscard()
-
-        case .replayEffect: return ReplayEffect()
-
-        default:
-            return nil
-        }
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity
-    func resolver() -> EffectResolverProtocol {
-        switch self {
-        case .heal: return Heal()
-        case .damage: return Damage()
-        case .discard: return Discard()
-        case .draw: return Draw()
-        case .steal: return Steal()
-        case .reveal: return Reveal()
-        case .chooseCard: return ChooseCard()
-        case .setTurn: return SetTurn()
-        case .eliminate: return Eliminate()
-        case .applyEffect: return ApplyEffect()
-        case .groupEffects: return GroupEffects()
-        default:
-            fatalError(.unexpected)
-        }
     }
 }
 

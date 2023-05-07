@@ -5,16 +5,15 @@
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
-struct ForceDiscard: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .forceDiscard(player, card, otherwise) = effect else {
+struct ForceDiscard: EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+        guard case let .forceDiscard(player, card, otherwise) = effect else {
             fatalError(.unexpected)
         }
         
         // resolve player
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
                 CardEffect.forceDiscard(player: .id($0), card: card, otherwise: otherwise).withCtx(ctx)
             }
         }
@@ -32,9 +31,7 @@ struct ForceDiscard: GameReducerProtocol {
             $0[$1.label] = .discard(player: pId, card: $1.id)
         }
         options[.pass] = otherwise.withCtx(ctx)
-        var state = state
-        state.setChooseOne(chooser: pId, options: options)
-        
-        return state
+        let chooseOne = ChooseOne(chooser: pId, options: options)
+        return .chooseOne(chooseOne)
     }
 }

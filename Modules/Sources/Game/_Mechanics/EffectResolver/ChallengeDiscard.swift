@@ -5,17 +5,24 @@
 //  Created by Hugues Telolahy on 23/04/2023.
 //
 
-struct ChallengeDiscard: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .challengeDiscard(player, card, otherwise, challenger) = effect else {
+struct ChallengeDiscard: EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+        guard case let .challengeDiscard(player, card, otherwise, challenger) = effect else {
             fatalError(.unexpected)
         }
         
         // resolve player
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
                 CardEffect.challengeDiscard(player: .id($0), card: card, otherwise: otherwise, challenger: challenger)
+                    .withCtx(ctx)
+            }
+        }
+
+        // resolving challenger
+        guard case let .id(challengerId) = challenger else {
+            return try PlayerArgResolver().resolving(arg: challenger, state: state, ctx: ctx) {
+                CardEffect.challengeDiscard(player: player, card: card, otherwise: otherwise, challenger: .id($0))
                     .withCtx(ctx)
             }
         }
@@ -24,14 +31,6 @@ struct ChallengeDiscard: GameReducerProtocol {
         let resolvedCard = try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: pId)
         guard case let .selectable(cIdOptions) = resolvedCard else {
             fatalError(.unexpected)
-        }
-        
-        // resolving challenger
-        guard case let .id(challengerId) = challenger else {
-            return try PlayerArgResolver().resolve(arg: challenger, state: state, ctx: ctx) {
-                CardEffect.challengeDiscard(player: player, card: card, otherwise: otherwise, challenger: .id($0))
-                    .withCtx(ctx)
-            }
         }
         
         // request a choice:
@@ -51,9 +50,7 @@ struct ChallengeDiscard: GameReducerProtocol {
         }
         options[.pass] = otherwise.withCtx(ctx)
         
-        var state = state
-        state.setChooseOne(chooser: pId, options: options)
-        
-        return state
+        let chooseOne = ChooseOne(chooser: pId, options: options)
+        return .chooseOne(chooseOne)
     }
 }
