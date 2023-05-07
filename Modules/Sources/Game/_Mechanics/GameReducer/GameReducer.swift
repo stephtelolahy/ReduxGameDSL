@@ -143,17 +143,14 @@ private extension CardEffect {
 
         case .challengeDiscard: return ChallengeDiscard()
 
-        case .applyEffect: return ApplyEffect()
-
         case .replayEffect: return ReplayEffect()
-
-        case .groupEffects: return GroupEffects()
 
         default:
             return nil
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> EffectResolverProtocol {
         switch self {
         case .heal: return Heal()
@@ -165,6 +162,8 @@ private extension CardEffect {
         case .chooseCard: return ChooseCard()
         case .setTurn: return SetTurn()
         case .eliminate: return Eliminate()
+        case .applyEffect: return ApplyEffect()
+        case .groupEffects: return GroupEffects()
         default:
             fatalError(.unexpected)
         }

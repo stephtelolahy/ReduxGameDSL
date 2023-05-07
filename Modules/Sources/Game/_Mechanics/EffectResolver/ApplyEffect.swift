@@ -5,10 +5,9 @@
 //  Created by Hugues Telolahy on 22/04/2023.
 //
 
-struct ApplyEffect: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .applyEffect(target, effect) = effect else {
+struct ApplyEffect: EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+        guard case let .applyEffect(target, effect) = effect else {
             fatalError(.unexpected)
         }
         
@@ -22,9 +21,6 @@ struct ApplyEffect: GameReducerProtocol {
                                          card: ctx.card,
                                          target: $0))
         }
-
-        var state = state
-        state.queue.insert(contentsOf: children, at: 0)
-        return state
+        return .actions(children)
     }
 }
