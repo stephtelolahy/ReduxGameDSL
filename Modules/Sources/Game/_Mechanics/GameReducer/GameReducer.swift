@@ -59,6 +59,10 @@ public struct GameReducer: ReducerProtocol {
                 state = try Discard().reduce(state: state, action: action)
                 state.event = action.toEvent()
 
+            case .draw:
+                state = try Draw().reduce(state: state, action: action)
+                state.event = action.toEvent()
+
             case let .effect(effect, ctx):
                 if let reduer = effect.reducer() {
                     state = try reduer.reduce(state: state, action: action)
@@ -155,8 +159,6 @@ private extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol? {
         switch self {
-        case .draw: return Draw()
-
         case .steal: return Steal()
 
         case .reveal: return Reveal()
@@ -190,12 +192,13 @@ private extension CardEffect {
 
         case .discard: return Discard()
 
+        case .draw: return Draw()
+
         default:
             fatalError(.unexpected)
         }
     }
 }
-
 
 private extension GameAction {
     func toEvent() -> GameEvent {
@@ -203,6 +206,7 @@ private extension GameAction {
         case let .heal(value, player): return .heal(value, player: player)
         case let .damage(value, player): return .damage(value, player: player)
         case let .discard(player, card): return .discard(player: player, card: card)
+        case let .draw(player): return .draw(player: player)
         default:
             fatalError(.unexpected)
         }

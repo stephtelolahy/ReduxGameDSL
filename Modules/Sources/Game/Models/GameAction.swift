@@ -27,6 +27,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
     case damage(Int, player: String)
 
+    /// Draw top deck card
+    case draw(player: String)
+
     /// Discard a player's card
     case discard(player: String, card: String)
 }
