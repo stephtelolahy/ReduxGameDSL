@@ -39,15 +39,15 @@ struct ChallengeDiscard: GameReducerProtocol {
         // - or Pass
         let reversedCtx = EffectContext(actor: ctx.actor, card: ctx.card, target: challengerId)
         var options = cIdOptions.reduce(into: [String: GameAction]()) {
-            let discardEffect = CardEffect.discard(player: player, card: .id($1.id))
-            let reverseEffect = CardEffect.challengeDiscard(player: challenger,
+            let discardAction = GameAction.event(.discard(player: pId, card: $1.id))
+            let reverseAction = CardEffect.challengeDiscard(player: challenger,
                                                             card: card,
                                                             otherwise: otherwise,
-                                                            challenger: player)
-            $0[$1.label] = CardEffect.group {
-                discardEffect
-                reverseEffect
-            }.withCtx(reversedCtx)
+                                                            challenger: player).withCtx(reversedCtx)
+            $0[$1.label] = GameAction.group {
+                discardAction
+                reverseAction
+            }
         }
         options[.pass] = otherwise.withCtx(ctx)
         

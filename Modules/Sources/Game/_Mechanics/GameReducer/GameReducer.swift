@@ -6,7 +6,6 @@
 //
 import Redux
 
-@available(*, deprecated, message: "EffectResolverProtocol")
 protocol GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState
 }
@@ -66,6 +65,9 @@ public struct GameReducer: ReducerProtocol {
             case let .event(event):
                 state = try event.reducer().reduce(state: state, event: event)
                 state.event = event
+
+            case .groupActions:
+                state = try GroupActions().reduce(state: state, action: action)
             }
 
             state = queueTriggeredEffects(state: state)

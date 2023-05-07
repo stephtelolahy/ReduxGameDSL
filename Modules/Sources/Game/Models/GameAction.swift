@@ -20,4 +20,7 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Dispatch an event
     case event(GameEvent)
+
+    /// Dispatch actions sequentially
+    case groupActions([GameAction])
 }

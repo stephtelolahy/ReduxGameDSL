@@ -35,8 +35,8 @@ final class ForceDiscardSpec: QuickSpec {
 
                     // Then
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        "counter-10♣️": CardEffect.discard(player: .id("p1"), card: .id("counter-10♣️")).withCtx(ctx),
-                        "counter-8♠️": CardEffect.discard(player: .id("p1"), card: .id("counter-8♠️")).withCtx(ctx),
+                        "counter-10♣️": GameAction.event(.discard(player: "p1", card: "counter-10♣️")),
+                        "counter-8♠️": GameAction.event(.discard(player: "p1", card: "counter-8♠️")),
                         .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
                     ])
                 }
