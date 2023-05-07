@@ -143,8 +143,6 @@ private extension CardEffect {
 
         case .challengeDiscard: return ChallengeDiscard()
 
-        case .eliminate: return Eliminate()
-
         case .applyEffect: return ApplyEffect()
 
         case .replayEffect: return ReplayEffect()
@@ -166,6 +164,7 @@ private extension CardEffect {
         case .reveal: return Reveal()
         case .chooseCard: return ChooseCard()
         case .setTurn: return SetTurn()
+        case .eliminate: return Eliminate()
         default:
             fatalError(.unexpected)
         }
@@ -173,6 +172,7 @@ private extension CardEffect {
 }
 
 private extension GameAction {
+    // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
 //        case .play: return Play()
@@ -186,6 +186,7 @@ private extension GameAction {
         case .chooseCard: return ChooseCard()
         case .groupActions: return GroupActions()
         case .setTurn: return SetTurn()
+        case .eliminate: return Eliminate()
         default:
             fatalError(.unexpected)
         }
@@ -203,6 +204,7 @@ private extension GameAction {
         case .reveal: return .reveal
         case let .chooseCard(player, card): return .chooseCard(player: player, card: card)
         case let .setTurn(player): return .setTurn(player)
+        case let .eliminate(player): return .eliminate(player)
         default: return nil
         }
     }

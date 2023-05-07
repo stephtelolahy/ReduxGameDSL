@@ -39,6 +39,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Set turn
     case setTurn(String)
 
+    /// Eliminate
+    case eliminate(String)
+
     // MARK: - Invisible actions
 
     /// Apply an effect

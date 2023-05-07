@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 05/05/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class EliminateSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("eliminating a player") {
             it("should remove from PlayOrder and emit event") {
@@ -23,7 +22,7 @@ final class EliminateSpec: QuickSpec {
                 }
 
                 // When
-                let action = CardEffect.eliminate(.id("p1")).withCtx(ctx)
+                let action = GameAction.eliminate("p1")
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
