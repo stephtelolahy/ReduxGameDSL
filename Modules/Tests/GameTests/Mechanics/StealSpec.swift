@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 15/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class StealSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("steal") {
             context("hand card") {
@@ -29,14 +28,13 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.steal(player: .id("p1"),
-                                                  target: .id("p2"),
-                                                  card: .id("c21")).withCtx(ctx)
+                    let action = GameAction.steal(player: "p1", target: "p2", card: "c21")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").hand.cards) == ["c22"]
+                    expect(result.event) == .steal(player: "p1", target: "p2", card: "c21")
                 }
             }
 
@@ -54,14 +52,13 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.steal(player: .id("p1"),
-                                                  target: .id("p2"),
-                                                  card: .id("c21")).withCtx(ctx)
+                    let action = GameAction.steal(player: "p1", target: "p2", card: "c21")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").inPlay.cards) == ["c22"]
+                    expect(result.event) == .steal(player: "p1", target: "p2", card: "c21")
                 }
             }
 
@@ -73,9 +70,7 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.steal(player: .id("p1"),
-                                                  target: .id("p1"),
-                                                  card: .id("c2")).withCtx(ctx)
+                    let action = GameAction.steal(player: "p1", target: "p1", card: "c2")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
