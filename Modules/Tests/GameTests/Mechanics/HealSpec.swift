@@ -29,36 +29,36 @@ final class HealSpec: QuickSpec {
                 context("value less than damage") {
                     it("should gain life points") {
                         // When
-                        let action = GameAction.heal(1, player: "p1")
+                        let action = GameAction.heal(player: "p1", value: 1)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").attributes[.health]) == 3
-                        expect(result.event) == .heal(1, player: "p1")
+                        expect(result.event) == .heal(player: "p1", value: 1)
                     }
                 }
 
                 context("value equal to damage") {
                     it("should gain life points") {
                         // When
-                        let action = GameAction.heal(2, player: "p1")
+                        let action = GameAction.heal(player: "p1", value: 2)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").attributes[.health]) == 4
-                        expect(result.event) == .heal(2, player: "p1")
+                        expect(result.event) == .heal(player: "p1", value: 2)
                     }
                 }
 
                 context("value more than damage") {
                     it("should gain life points limited to max health") {
                         // When
-                        let action = GameAction.heal(3, player: "p1")
+                        let action = GameAction.heal(player: "p1", value: 3)
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
                         expect(result.player("p1").attributes[.health]) == 4
-                        expect(result.event) == .heal(3, player: "p1")
+                        expect(result.event) == .heal(player: "p1", value: 3)
                     }
                 }
             }
@@ -73,7 +73,7 @@ final class HealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.heal(1, player: "p1")
+                    let action = GameAction.heal(player: "p1", value: 1)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

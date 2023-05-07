@@ -9,17 +9,17 @@
 /// Renderable events
 public enum GameEvent: Codable, Equatable {
 
-    /// Play a card
+    /// Play an active card
     case play(actor: String, card: String, target: String? = nil)
 
-    /// Trigger a card
+    /// Trigger a card when some event occurred
     case forcePlay(actor: String, card: String)
 
     /// Restore player's health, limited to maxHealth
-    case heal(Int, player: String)
+    case heal(player: String, value: Int)
 
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
-    case damage(Int, player: String)
+    case damage(player: String, value: Int)
 
     /// Draw top deck card
     case draw(player: String)

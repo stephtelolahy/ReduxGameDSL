@@ -15,21 +15,23 @@ public indirect enum GameAction: Codable, Equatable {
     /// Trigger a card when some event occurred
     case forcePlay(actor: String, card: String)
 
-    /// Apply an effect
-    case effect(CardEffect, ctx: EffectContext)
-
-    /// Dispatch actions sequentially
-    case groupActions([Self])
-
     /// Restore player's health, limited to maxHealth
-    case heal(Int, player: String)
+    case heal(player: String, value: Int)
 
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
-    case damage(Int, player: String)
+    case damage(player: String, value: Int)
 
     /// Draw top deck card
     case draw(player: String)
 
     /// Discard a player's card
     case discard(player: String, card: String)
+
+    // MARK: - Invisible actions
+
+    /// Apply an effect
+    case effect(CardEffect, ctx: EffectContext)
+
+    /// Dispatch actions sequentially
+    case groupActions([Self])
 }

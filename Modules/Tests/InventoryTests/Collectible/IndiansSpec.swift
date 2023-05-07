@@ -42,7 +42,7 @@ final class IndiansSpec: QuickSpec {
                         .success(.chooseOne(chooser: "p2", options: [.pass, .bang])),
                         .success(.discard(player: "p2", card: .bang)),
                         .success(.chooseOne(chooser: "p3", options: [.pass])),
-                        .success(.damage(1, player: "p3"))
+                        .success(.damage(player: "p3", value: 1))
                     ]
                 }
             }

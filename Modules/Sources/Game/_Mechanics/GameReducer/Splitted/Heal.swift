@@ -7,7 +7,7 @@
 
 struct Heal: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .heal(value, player) = action else {
+        guard case let .heal(player, value) = action else {
             fatalError(.unexpected)
         }
 
@@ -24,7 +24,7 @@ extension Heal: EffectResolverProtocol {
         }
 
         return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
-            .heal(value, player: $0)
+            .heal(player: $0, value: value)
         }
     }
 }

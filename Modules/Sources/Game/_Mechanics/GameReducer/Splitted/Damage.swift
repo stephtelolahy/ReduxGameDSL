@@ -7,7 +7,7 @@
 
 struct Damage: GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .damage(value, player) = action else {
+        guard case let .damage(player, value) = action else {
             fatalError(.unexpected)
         }
 
@@ -24,7 +24,7 @@ extension Damage: EffectResolverProtocol {
         }
 
         return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
-            .damage(value, player: $0)
+            .damage(player: $0, value: value)
         }
     }
 }

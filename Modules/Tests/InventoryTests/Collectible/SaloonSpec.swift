@@ -38,8 +38,8 @@ final class SaloonSpec: QuickSpec {
                     
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: .saloon)),
-                                       .success(.heal(1, player: "p2")),
-                                       .success(.heal(1, player: "p3"))]
+                                       .success(.heal(player: "p2", value: 1)),
+                                       .success(.heal(player: "p3", value: 1))]
                 }
             }
             

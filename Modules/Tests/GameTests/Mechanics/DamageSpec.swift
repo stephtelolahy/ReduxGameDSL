@@ -26,19 +26,19 @@ final class DamageSpec: QuickSpec {
             context("1 life point") {
                 it("should reduce life point by 1") {
                     // When
-                    let action = GameAction.damage(1, player: "p1")
+                    let action = GameAction.damage(player: "p1", value: 1)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").attributes[.health]) == 1
-                    expect(result.event) == .damage(1, player: "p1")
+                    expect(result.event) == .damage(player: "p1", value: 1)
                 }
             }
 
             context("two life points") {
                 it("should reduce life point by 2") {
                     // When
-                    let action = GameAction.damage(2, player: "p1")
+                    let action = GameAction.damage(player: "p1", value: 2)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

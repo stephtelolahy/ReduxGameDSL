@@ -41,7 +41,7 @@ final class GatlingSpec: QuickSpec {
                         .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
                         .success(.discard(player: "p2", card: .missed)),
                         .success(.chooseOne(chooser: "p3", options: [.pass])),
-                        .success(.damage(1, player: "p3"))
+                        .success(.damage(player: "p3", value: 1))
                     ]
                 }
             }

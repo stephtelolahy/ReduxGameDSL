@@ -27,7 +27,6 @@ public struct GameReducer: ReducerProtocol {
 
     public init() {}
 
-    // swiftlint:disable:next cyclomatic_complexity
     public func reduce(state: GameState, action: GameAction) -> GameState {
         guard state.isOver == nil else {
             return state
@@ -47,22 +46,6 @@ public struct GameReducer: ReducerProtocol {
             case .forcePlay:
                 state = try ForcePlay().reduce(state: state, action: action)
 
-            case .heal:
-                state = try Heal().reduce(state: state, action: action)
-                state.event = action.toEvent()
-
-            case .damage:
-                state = try Damage().reduce(state: state, action: action)
-                state.event = action.toEvent()
-
-            case .discard:
-                state = try Discard().reduce(state: state, action: action)
-                state.event = action.toEvent()
-
-            case .draw:
-                state = try Draw().reduce(state: state, action: action)
-                state.event = action.toEvent()
-
             case let .effect(effect, ctx):
                 if let reduer = effect.reducer() {
                     state = try reduer.reduce(state: state, action: action)
@@ -78,8 +61,9 @@ public struct GameReducer: ReducerProtocol {
                     }
                 }
 
-            case .groupActions:
-                state = try GroupActions().reduce(state: state, action: action)
+            default:
+                state = try action.reducer().reduce(state: state, action: action)
+                state.event = action.toEvent()
             }
 
             state = queueTriggeredEffects(state: state)
@@ -187,13 +171,9 @@ private extension CardEffect {
     func resolver() -> EffectResolverProtocol {
         switch self {
         case .heal: return Heal()
-
         case .damage: return Damage()
-
         case .discard: return Discard()
-
         case .draw: return Draw()
-
         default:
             fatalError(.unexpected)
         }
@@ -201,14 +181,29 @@ private extension CardEffect {
 }
 
 private extension GameAction {
-    func toEvent() -> GameEvent {
+    func reducer() -> GameReducerProtocol {
         switch self {
-        case let .heal(value, player): return .heal(value, player: player)
-        case let .damage(value, player): return .damage(value, player: player)
-        case let .discard(player, card): return .discard(player: player, card: card)
-        case let .draw(player): return .draw(player: player)
+//        case .play: return Play()
+//        case .forcePlay: return ForcePlay()
+        case .heal: return Heal()
+        case .damage: return Damage()
+        case .discard: return Discard()
+        case .draw: return Draw()
+        case .groupActions: return GroupActions()
         default:
             fatalError(.unexpected)
+        }
+    }
+
+    func toEvent() -> GameEvent? {
+        switch self {
+//        case let .play(actor, card, target): return .play(actor: actor, card: card, target: target)
+//        case let .forcePlay(actor, card): return .forcePlay(actor: actor, card: card)
+        case let .heal(player, value): return .heal(player: player, value: value)
+        case let .damage(player, value): return .damage(player: player, value: value)
+        case let .discard(player, card): return .discard(player: player, card: card)
+        case let .draw(player): return .draw(player: player)
+        default: return nil
         }
     }
 }
