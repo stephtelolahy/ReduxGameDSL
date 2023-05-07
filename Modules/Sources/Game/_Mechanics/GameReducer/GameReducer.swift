@@ -29,7 +29,10 @@ public struct GameReducer: ReducerProtocol {
 
         do {
             state = try validateAction(action: action, state: state)
-            state = try processAction(action: action, state: state)
+            state = try action.reducer().reduce(state: state, action: action)
+            if let eventToEmit = action.toEvent() {
+                state.event = eventToEmit
+            }
             state = queueTriggeredEffects(state: state)
             state = checkGameOver(state: state)
             return state
@@ -59,26 +62,6 @@ private extension GameReducer {
         return state
     }
 
-    func processAction(action: GameAction, state: GameState) throws -> GameState {
-        var state = state
-        switch action {
-        case .play:
-            state = try Play().reduce(state: state, action: action)
-
-        case .forcePlay:
-            state = try ForcePlay().reduce(state: state, action: action)
-
-        case .effect:
-            state = try EffectReducer().reduce(state: state, action: action)
-
-        default:
-            state = try action.reducer().reduce(state: state, action: action)
-            state.event = action.toEvent()
-        }
-
-        return state
-    }
-    
     func queueTriggeredEffects(state: GameState) -> State {
         var state = state
         for actor in state.playOrder {
@@ -127,8 +110,8 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-//        case .play: return Play()
-//        case .forcePlay: return ForcePlay()
+        case .play: return Play()
+        case .forcePlay: return ForcePlay()
         case .heal: return Heal()
         case .damage: return Damage()
         case .discard: return Discard()
@@ -139,8 +122,7 @@ private extension GameAction {
         case .groupActions: return GroupActions()
         case .setTurn: return SetTurn()
         case .eliminate: return Eliminate()
-        default:
-            fatalError(.unexpected)
+        case .effect: return EffectReducer()
         }
     }
 
