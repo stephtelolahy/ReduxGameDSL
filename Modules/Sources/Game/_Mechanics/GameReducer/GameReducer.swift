@@ -151,8 +151,6 @@ private extension CardEffect {
 
         case .eliminate: return Eliminate()
 
-        case .chooseCard: return ChooseCard()
-
         case .applyEffect: return ApplyEffect()
 
         case .replayEffect: return ReplayEffect()
@@ -172,6 +170,7 @@ private extension CardEffect {
         case .draw: return Draw()
         case .steal: return Steal()
         case .reveal: return Reveal()
+        case .chooseCard: return ChooseCard()
         default:
             fatalError(.unexpected)
         }
@@ -189,6 +188,7 @@ private extension GameAction {
         case .draw: return Draw()
         case .steal: return Steal()
         case .reveal: return Reveal()
+        case .chooseCard: return ChooseCard()
         case .groupActions: return GroupActions()
         default:
             fatalError(.unexpected)
@@ -205,6 +205,7 @@ private extension GameAction {
         case let .draw(player): return .draw(player: player)
         case let .steal(player, target, card): return .steal(player: player, target: target, card: card)
         case .reveal: return .reveal
+        case let .chooseCard(player, card): return .chooseCard(player: player, card: card)
         default: return nil
         }
     }
