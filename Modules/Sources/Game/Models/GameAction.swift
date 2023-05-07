@@ -17,4 +17,7 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Apply an effect
     case effect(CardEffect, ctx: EffectContext)
+
+    /// Dispatch an event
+    case event(GameEvent)
 }

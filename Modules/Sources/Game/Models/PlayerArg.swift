@@ -9,6 +9,7 @@
 public enum PlayerArg: Codable, Equatable {
 
     /// The player identified by
+    @available(*, deprecated, message: "")
     case id(String)
 
     /// Who is playing the card

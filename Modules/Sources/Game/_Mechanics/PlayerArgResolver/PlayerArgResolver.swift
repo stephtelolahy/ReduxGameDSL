@@ -22,7 +22,8 @@ struct PlayerArgResolver: PlayerArgResolverProtocol {
     func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
     }
-    
+
+    @available(*, deprecated, message: "")
     func resolve(
         arg: PlayerArg,
         state: GameState,
@@ -44,6 +45,27 @@ struct PlayerArgResolver: PlayerArgResolverProtocol {
         }
         
         return state
+    }
+
+    func resolving(
+        arg: PlayerArg,
+        state: GameState,
+        ctx: EffectContext,
+        copy: @escaping (String) -> GameAction
+    ) throws -> EffectOutput {
+        let resolved = try resolve(arg: arg, state: state, ctx: ctx)
+        switch resolved {
+        case let .identified(pIds):
+            let children = pIds.map { copy($0) }
+            return .actions(children)
+
+        case let .selectable(pIds):
+            let options = pIds.reduce(into: [String: GameAction]()) {
+                $0[$1] = copy($1)
+            }
+            let chooseOne = ChooseOne(chooser: ctx.actor, options: options)
+            return .chooseOne(chooseOne)
+        }
     }
 }
 

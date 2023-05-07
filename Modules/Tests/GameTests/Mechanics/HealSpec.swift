@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class HealSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
         var state: GameState!
 
         describe("heal") {
@@ -30,7 +29,7 @@ final class HealSpec: QuickSpec {
                 context("value less than damage") {
                     it("should gain life points") {
                         // When
-                        let action = CardEffect.heal(1, player: .id("p1")).withCtx(ctx)
+                        let action = GameAction.event(.heal(1, player: "p1"))
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -42,7 +41,7 @@ final class HealSpec: QuickSpec {
                 context("value equal to damage") {
                     it("should gain life points") {
                         // When
-                        let action = CardEffect.heal(2, player: .id("p1")).withCtx(ctx)
+                        let action = GameAction.event(.heal(2, player: "p1"))
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -54,7 +53,7 @@ final class HealSpec: QuickSpec {
                 context("value more than damage") {
                     it("should gain life points limited to max health") {
                         // When
-                        let action = CardEffect.heal(3, player: .id("p1")).withCtx(ctx)
+                        let action = GameAction.event(.heal(3, player: "p1"))
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -74,11 +73,12 @@ final class HealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.heal(1, player: .id("p1")).withCtx(ctx)
+                    let action = GameAction.event(.heal(1, player: "p1"))
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.error) == .playerAlreadyMaxHealth("p1")
+                    expect(result.event) == nil
                 }
             }
         }

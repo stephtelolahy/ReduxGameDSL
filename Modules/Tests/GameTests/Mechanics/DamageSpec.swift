@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class DamageSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
         var state: GameState!
         
         describe("damage") {
@@ -27,18 +26,19 @@ final class DamageSpec: QuickSpec {
             context("1 life point") {
                 it("should reduce life point by 1") {
                     // When
-                    let action = CardEffect.damage(1, player: .id("p1")).withCtx(ctx)
+                    let action = GameAction.event(.damage(1, player: "p1"))
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").attributes[.health]) == 1
+                    expect(result.event) == .damage(1, player: "p1")
                 }
             }
 
             context("two life points") {
                 it("should reduce life point by 2") {
                     // When
-                    let action = CardEffect.damage(2, player: .id("p1")).withCtx(ctx)
+                    let action = GameAction.event(.damage(2, player: "p1"))
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

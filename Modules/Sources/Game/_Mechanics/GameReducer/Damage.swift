@@ -5,24 +5,28 @@
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
-struct Damage: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .damage(value, player) = effect else {
+struct Damage {}
+
+extension Damage: EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+        guard case let .damage(value, player) = effect else {
             fatalError(.unexpected)
         }
-        
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.damage(value, player: .id($0)).withCtx(ctx)
-            }
+
+        return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+            .event(.damage(value, player: $0))
+        }
+    }
+}
+
+extension Damage: EventReducerProtocol {
+    func reduce(state: GameState, event: GameEvent) throws -> GameState {
+        guard case let .damage(value, player) = event else {
+            fatalError(.unexpected)
         }
 
         var state = state
-        state[keyPath: \GameState.players[pId]]?.looseHealth(value)
-        
-        state.event = .damage(value, player: pId)
-
+        state[keyPath: \GameState.players[player]]?.looseHealth(value)
         return state
     }
 }

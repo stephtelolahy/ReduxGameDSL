@@ -6,12 +6,29 @@
 //
 import Redux
 
+@available(*, deprecated, message: "EffectResolverProtocol")
 protocol GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState
 }
 
-struct GameReducer: ReducerProtocol {
-    func reduce(state: GameState, action: GameAction) -> GameState {
+protocol EffectResolverProtocol {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput
+}
+
+enum EffectOutput {
+    case actions([GameAction])
+    case chooseOne(ChooseOne)
+}
+
+protocol EventReducerProtocol {
+    func reduce(state: GameState, event: GameEvent) throws -> GameState
+}
+
+public struct GameReducer: ReducerProtocol {
+
+    public init() {}
+
+    public func reduce(state: GameState, action: GameAction) -> GameState {
         guard state.isOver == nil else {
             return state
         }
@@ -22,7 +39,35 @@ struct GameReducer: ReducerProtocol {
 
         do {
             state = try validateAction(action: action, state: state)
-            state = try action.reducer().reduce(state: state, action: action)
+
+            switch action {
+            case .play:
+                state = try Play().reduce(state: state, action: action)
+
+            case .forcePlay:
+                state = try ForcePlay().reduce(state: state, action: action)
+
+            case let .effect(effect, ctx):
+
+                if let reduer = effect.reducer() {
+                    state = try reduer.reduce(state: state, action: action)
+                } else {
+                    let result = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
+                    switch result {
+                    case let .actions(actions):
+                        state.queue.insert(contentsOf: actions, at: 0)
+
+                    case let .chooseOne(chooseOne):
+                        state.chooseOne = chooseOne
+                        state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
+                    }
+                }
+                
+            case let .event(event):
+                state = try event.reducer().reduce(state: state, event: event)
+                state.event = event
+            }
+
             state = queueTriggeredEffects(state: state)
             state = checkGameOver(state: state)
             return state
@@ -96,44 +141,62 @@ private extension GameReducer {
     }
 }
 
-private extension GameAction {
+extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
-    func reducer() -> GameReducerProtocol {
+    func reducer() -> GameReducerProtocol? {
         switch self {
-        case .play: return Play()
-            
-        case .forcePlay: return ForcePlay()
-            
-        case let .effect(effect, _):
-            switch effect {
-            case .draw: return Draw()
-                
-            case .discard: return Discard()
-                
-            case .steal: return Steal()
-                
-            case .reveal: return Reveal()
-                
-            case .heal: return Heal()
-                
-            case .damage: return Damage()
-                
-            case .forceDiscard: return ForceDiscard()
-                
-            case .challengeDiscard: return ChallengeDiscard()
-                
-            case .setTurn: return SetTurn()
+        case .draw: return Draw()
 
-            case .eliminate: return Eliminate()
-                
-            case .chooseCard: return ChooseCard()
-                
-            case .applyEffect: return ApplyEffect()
-                
-            case .replayEffect: return ReplayEffect()
-                
-            case .groupEffects: return GroupEffects()
-            }
+        case .steal: return Steal()
+
+        case .reveal: return Reveal()
+
+        case .forceDiscard: return ForceDiscard()
+
+        case .challengeDiscard: return ChallengeDiscard()
+
+        case .setTurn: return SetTurn()
+
+        case .eliminate: return Eliminate()
+
+        case .chooseCard: return ChooseCard()
+
+        case .applyEffect: return ApplyEffect()
+
+        case .replayEffect: return ReplayEffect()
+
+        case .groupEffects: return GroupEffects()
+
+        default:
+            return nil
+        }
+    }
+
+    func resolver() -> EffectResolverProtocol {
+        switch self {
+        case .heal: return Heal()
+
+        case .damage: return Damage()
+
+        case .discard: return Discard()
+
+        default:
+            fatalError(.unexpected)
+        }
+    }
+}
+
+extension GameEvent {
+    func reducer() -> EventReducerProtocol {
+        switch self {
+        case .heal: return Heal()
+
+        case .damage: return Damage()
+
+        case .discard: return Discard()
+
+        default:
+            fatalError(.unexpected)
         }
     }
 }
