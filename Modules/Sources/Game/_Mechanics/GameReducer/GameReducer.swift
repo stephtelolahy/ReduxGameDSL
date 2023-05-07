@@ -10,10 +10,6 @@ protocol GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState
 }
 
-protocol EventReducerProtocol {
-    func reduce(state: GameState, event: GameEvent) throws -> GameState
-}
-
 public struct GameReducer: ReducerProtocol {
 
     public init() {}
@@ -28,24 +24,34 @@ public struct GameReducer: ReducerProtocol {
         state.error = nil
 
         do {
-            state = try validateAction(action: action, state: state)
-            state = try action.reducer().reduce(state: state, action: action)
-            if let eventToEmit = action.toEvent() {
-                state.event = eventToEmit
-            }
+            state = try prepareAction(action: action, state: state)
+            state = try executeAction(action: action, state: state)
             state = queueTriggeredEffects(state: state)
-            state = checkGameOver(state: state)
-            return state
+            state = updateGameOver(state: state)
         } catch {
             state.error = error as? GameError
-            return state
         }
+
+        return state
     }
 }
 
 private extension GameReducer {
 
-    func validateAction(action: GameAction, state: GameState) throws -> GameState {
+    func executeAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
+        state = try action.reducer().reduce(state: state, action: action)
+        switch action {
+        case .play, .effect, .chooseOne:
+            break
+
+        default:
+            state.event = action
+        }
+        return state
+    }
+
+    func prepareAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
 
         if let chooseOne = state.chooseOne {
@@ -95,7 +101,7 @@ private extension GameReducer {
         return false
     }
 
-    func checkGameOver(state: GameState) -> GameState {
+    func updateGameOver(state: GameState) -> GameState {
         if let winner = state.hasWinner() {
             var state = state
             state.isOver = GameOver(winner: winner)
@@ -123,24 +129,7 @@ private extension GameAction {
         case .setTurn: return SetTurn()
         case .eliminate: return Eliminate()
         case .effect: return EffectReducer()
-        }
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity
-    func toEvent() -> GameEvent? {
-        switch self {
-//        case let .play(actor, card, target): return .play(actor: actor, card: card, target: target)
-        case let .forcePlay(actor, card): return .forcePlay(actor: actor, card: card)
-        case let .heal(player, value): return .heal(player: player, value: value)
-        case let .damage(player, value): return .damage(player: player, value: value)
-        case let .discard(player, card): return .discard(player: player, card: card)
-        case let .draw(player): return .draw(player: player)
-        case let .steal(player, target, card): return .steal(player: player, target: target, card: card)
-        case .reveal: return .reveal
-        case let .chooseCard(player, card): return .chooseCard(player: player, card: card)
-        case let .setTurn(player): return .setTurn(player)
-        case let .eliminate(player): return .eliminate(player)
-        default: return nil
+        case .chooseOne: fatalError(.unexpected)
         }
     }
 }

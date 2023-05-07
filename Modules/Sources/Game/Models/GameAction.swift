@@ -49,4 +49,7 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Dispatch actions sequentially
     case groupActions([Self])
+
+    /// Ask a player to choose an action
+    case chooseOne(chooser: String, options: Set<String>)
 }
