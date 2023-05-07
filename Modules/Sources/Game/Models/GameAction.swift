@@ -18,9 +18,15 @@ public indirect enum GameAction: Codable, Equatable {
     /// Apply an effect
     case effect(CardEffect, ctx: EffectContext)
 
-    /// Dispatch an event
-    case event(GameEvent)
-
     /// Dispatch actions sequentially
-    case groupActions([GameAction])
+    case groupActions([Self])
+
+    /// Restore player's health, limited to maxHealth
+    case heal(Int, player: String)
+
+    /// Deals damage to a player, attempting to reduce its Health by the stated amount
+    case damage(Int, player: String)
+
+    /// Discard a player's card
+    case discard(player: String, card: String)
 }

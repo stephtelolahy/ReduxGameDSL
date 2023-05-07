@@ -5,7 +5,17 @@
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
-struct Damage {}
+struct Damage: GameReducerProtocol {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .damage(value, player) = action else {
+            fatalError(.unexpected)
+        }
+
+        var state = state
+        state[keyPath: \GameState.players[player]]?.looseHealth(value)
+        return state
+    }
+}
 
 extension Damage: EffectResolverProtocol {
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
@@ -14,19 +24,7 @@ extension Damage: EffectResolverProtocol {
         }
 
         return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
-            .event(.damage(value, player: $0))
+            .damage(value, player: $0)
         }
-    }
-}
-
-extension Damage: EventReducerProtocol {
-    func reduce(state: GameState, event: GameEvent) throws -> GameState {
-        guard case let .damage(value, player) = event else {
-            fatalError(.unexpected)
-        }
-
-        var state = state
-        state[keyPath: \GameState.players[player]]?.looseHealth(value)
-        return state
     }
 }

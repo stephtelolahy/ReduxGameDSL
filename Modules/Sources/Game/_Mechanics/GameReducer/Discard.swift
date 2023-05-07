@@ -5,7 +5,18 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct Discard {}
+struct Discard: GameReducerProtocol {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .discard(player, card) = action else {
+            fatalError(.unexpected)
+        }
+
+        var state = state
+        try state[keyPath: \GameState.players[player]]?.removeCard(card)
+        state.discard.push(card)
+        return state
+    }
+}
 
 extension Discard: EffectResolverProtocol {
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
@@ -20,20 +31,7 @@ extension Discard: EffectResolverProtocol {
         }
 
         return try CardArgResolver().resolving(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
-            GameAction.event(.discard(player: pId, card: $0))
+            .discard(player: pId, card: $0)
         }
-    }
-}
-
-extension Discard: EventReducerProtocol {
-    func reduce(state: GameState, event: GameEvent) throws -> GameState {
-        guard case let .discard(player, card) = event else {
-            fatalError(.unexpected)
-        }
-
-        var state = state
-        try state[keyPath: \GameState.players[player]]?.removeCard(card)
-        state.discard.push(card)
-        return state
     }
 }

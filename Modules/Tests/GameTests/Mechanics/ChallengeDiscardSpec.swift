@@ -37,7 +37,7 @@ final class ChallengeDiscardSpec: QuickSpec {
                     let reversedCtx = EffectContext(actor: "px", card: "cx", target: "px")
                     expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
                         "counter": GameAction.group {
-                            GameAction.event(.discard(player: "p1", card: "counter"))
+                            GameAction.discard(player: "p1", card: "counter")
                             CardEffect.challengeDiscard(player: .id("px"),
                                                         card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),

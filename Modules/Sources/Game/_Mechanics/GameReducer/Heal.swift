@@ -5,7 +5,17 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-struct Heal {}
+struct Heal: GameReducerProtocol {
+    func reduce(state: GameState, action: GameAction) throws -> GameState {
+        guard case let .heal(value, player) = action else {
+            fatalError(.unexpected)
+        }
+
+        var state = state
+        try state[keyPath: \GameState.players[player]]?.gainHealth(value)
+        return state
+    }
+}
 
 extension Heal: EffectResolverProtocol {
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
@@ -14,19 +24,7 @@ extension Heal: EffectResolverProtocol {
         }
 
         return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
-            .event(.heal(value, player: $0))
+            .heal(value, player: $0)
         }
-    }
-}
-
-extension Heal: EventReducerProtocol {
-    func reduce(state: GameState, event: GameEvent) throws -> GameState {
-        guard case let .heal(value, player) = event else {
-            fatalError(.unexpected)
-        }
-
-        var state = state
-        try state[keyPath: \GameState.players[player]]?.gainHealth(value)
-        return state
     }
 }

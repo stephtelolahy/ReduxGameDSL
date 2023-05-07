@@ -24,7 +24,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.event(.damage(1, player: "p1"))
+                    let action = GameAction.damage(1, player: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -46,7 +46,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.event(.damage(1, player: "p1"))
+                    let action = GameAction.damage(1, player: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then

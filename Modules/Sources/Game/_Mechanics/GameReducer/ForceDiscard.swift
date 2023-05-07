@@ -29,7 +29,7 @@ struct ForceDiscard: GameReducerProtocol {
         // - discard one of matching card
         // - or Pass
         var options = cIdOptions.reduce(into: [String: GameAction]()) {
-            $0[$1.label] = GameAction.event(.discard(player: pId, card: $1.id))
+            $0[$1.label] = .discard(player: pId, card: $1.id)
         }
         options[.pass] = otherwise.withCtx(ctx)
         var state = state

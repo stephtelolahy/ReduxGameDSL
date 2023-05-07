@@ -27,6 +27,7 @@ public struct GameReducer: ReducerProtocol {
 
     public init() {}
 
+    // swiftlint:disable:next cyclomatic_complexity
     public func reduce(state: GameState, action: GameAction) -> GameState {
         guard state.isOver == nil else {
             return state
@@ -46,8 +47,19 @@ public struct GameReducer: ReducerProtocol {
             case .forcePlay:
                 state = try ForcePlay().reduce(state: state, action: action)
 
-            case let .effect(effect, ctx):
+            case .heal:
+                state = try Heal().reduce(state: state, action: action)
+                state.event = action.toEvent()
 
+            case .damage:
+                state = try Damage().reduce(state: state, action: action)
+                state.event = action.toEvent()
+
+            case .discard:
+                state = try Discard().reduce(state: state, action: action)
+                state.event = action.toEvent()
+
+            case let .effect(effect, ctx):
                 if let reduer = effect.reducer() {
                     state = try reduer.reduce(state: state, action: action)
                 } else {
@@ -61,10 +73,6 @@ public struct GameReducer: ReducerProtocol {
                         state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
                     }
                 }
-                
-            case let .event(event):
-                state = try event.reducer().reduce(state: state, event: event)
-                state.event = event
 
             case .groupActions:
                 state = try GroupActions().reduce(state: state, action: action)
@@ -143,7 +151,7 @@ private extension GameReducer {
     }
 }
 
-extension CardEffect {
+private extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol? {
         switch self {
@@ -188,15 +196,13 @@ extension CardEffect {
     }
 }
 
-extension GameEvent {
-    func reducer() -> EventReducerProtocol {
+
+private extension GameAction {
+    func toEvent() -> GameEvent {
         switch self {
-        case .heal: return Heal()
-
-        case .damage: return Damage()
-
-        case .discard: return Discard()
-
+        case let .heal(value, player): return .heal(value, player: player)
+        case let .damage(value, player): return .damage(value, player: player)
+        case let .discard(player, card): return .discard(player: player, card: card)
         default:
             fatalError(.unexpected)
         }
