@@ -15,8 +15,4 @@ public struct CardBuilder {
     public static func buildExpression(_ card: Card) -> Card {
         card
     }
-
-    public static func buildExpression(_ name: String) -> Card {
-        Card(name)
-    }
 }

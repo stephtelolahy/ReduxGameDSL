@@ -14,9 +14,15 @@ func createGameStore(initial: GameState) -> Store<GameState, GameAction> {
           middlewares: [gameLoopMiddleware, eventLoggerMiddleware])
 }
 
-private let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
+private let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, action in
     if #available(macOS 13.0, *) {
-        print("➡️ \(String(describing: state.event))".replacing("Game.GameEvent.", with: ""))
+        print("➡️ \(String(describing: action))".replacing("Game.", with: ""))
+        if let event = state.event {
+            print("✅ \(String(describing: event))".replacing("Game.", with: ""))
+        }
+        if let error = state.error {
+            print("❌ \(String(describing: error))".replacing("Game.", with: ""))
+        }
     } else {
         // Fallback on earlier versions
     }

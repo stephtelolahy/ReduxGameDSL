@@ -12,6 +12,8 @@ import Inventory
 
 final class DrawOnSetTurnSpec: QuickSpec {
     override func spec() {
+        let ctx = EffectContext(actor: "px", card: "cx")
+
         describe("starting turn") {
             context("a player with 2 initial cards") {
                 it("should draw 2 cards") {
@@ -25,16 +27,18 @@ final class DrawOnSetTurnSpec: QuickSpec {
                         }
                     }
                     .ability(.drawOnSetTurn)
-                    .event(.setTurn("p1"))
                     
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
-                                       .success(.draw(player: "p1")),
-                                       .success(.draw(player: "p1"))]
+                    expect(result) == [
+                        .success(.setTurn("p1")),
+                        .success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
+                        .success(.draw(player: "p1")),
+                        .success(.draw(player: "p1"))
+                    ]
                 }
             }
             
@@ -52,17 +56,19 @@ final class DrawOnSetTurnSpec: QuickSpec {
                         }
                     }
                     .ability(.drawOnSetTurn)
-                    .event(.setTurn("p1"))
-                    
+
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
-                                       .success(.draw(player: "p1")),
-                                       .success(.draw(player: "p1")),
-                                       .success(.draw(player: "p1"))]
+                    expect(result) == [
+                        .success(.setTurn("p1")),
+                        .success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
+                        .success(.draw(player: "p1")),
+                        .success(.draw(player: "p1")),
+                        .success(.draw(player: "p1"))
+                    ]
                 }
             }
 
@@ -72,14 +78,15 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     let state = createGame {
                         Player("p1")
                     }
-                    .event(.setTurn("p1"))
 
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.setTurn(.id("p1")), ctx: ctx)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result).to(beEmpty())
+                    expect(result) == [
+                        .success(.setTurn("p1"))
+                    ]
                 }
             }
         }

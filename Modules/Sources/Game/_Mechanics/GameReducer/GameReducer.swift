@@ -17,19 +17,42 @@ struct GameReducer: ReducerProtocol {
         }
 
         var state = state
-        state = queueTriggeredEffects(state: state)
+        state.event = nil
+        state.error = nil
 
         do {
             state = try validateAction(action: action, state: state)
-
-            return try action.reducer().reduce(state: state, action: action)
+            state = try action.reducer().reduce(state: state, action: action)
+            state = queueTriggeredEffects(state: state)
+            state = checkGameOver(state: state)
+            return state
         } catch {
             state.error = error as? GameError
             return state
         }
     }
+}
+
+private extension GameReducer {
+
+    func validateAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
+
+        if let chooseOne = state.chooseOne {
+            guard chooseOne.options.values.contains(action) else {
+                throw GameError.unwaitedAction
+            }
+            state.chooseOne = nil
+        }
+
+        if state.queue.first == action {
+            state.queue.removeFirst()
+        }
+
+        return state
+    }
     
-    private func queueTriggeredEffects(state: GameState) -> State {
+    func queueTriggeredEffects(state: GameState) -> State {
         var state = state
         for actor in state.playOrder {
             let actorObj = state.player(actor)
@@ -39,13 +62,10 @@ struct GameReducer: ReducerProtocol {
                 state.queue.insert(action, at: 0)
             }
         }
-        
-        state.event = nil
-        state.error = nil
         return state
     }
     
-    private func isTriggered(actor: String, card: String, state: GameState) -> Bool {
+    func isTriggered(actor: String, card: String, state: GameState) -> Bool {
         let ctx = EffectContext(actor: actor, card: card)
         guard let cardObj = state.cardRef[card] else {
             return false
@@ -64,15 +84,14 @@ struct GameReducer: ReducerProtocol {
         }
         return false
     }
-    
-    private func validateAction(action: GameAction, state: GameState) throws -> GameState {
-        var state = state
-        if let chooseOne = state.chooseOne {
-            guard chooseOne.options.values.contains(action) else {
-                throw GameError.unwaitedAction
-            }
-            state.chooseOne = nil
+
+    func checkGameOver(state: GameState) -> GameState {
+        if let winner = state.hasWinner() {
+            var state = state
+            state.isOver = GameOver(winner: winner)
+            return state
         }
+
         return state
     }
 }
@@ -84,8 +103,6 @@ private extension GameAction {
         case .play: return Play()
             
         case .forcePlay: return ForcePlay()
-            
-        case .update: return Update()
             
         case let .effect(effect, _):
             switch effect {

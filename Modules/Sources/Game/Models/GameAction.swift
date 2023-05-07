@@ -15,12 +15,6 @@ public indirect enum GameAction: Codable, Equatable {
     /// Trigger a card when some event occurred
     case forcePlay(actor: String, card: String)
 
-    /// Process current state
-    /// - Queueing triggered effects
-    /// - Dispatching next queued effect
-    /// - Resolving game over
-    case update
-
     /// Apply an effect
     case effect(CardEffect, ctx: EffectContext)
 }

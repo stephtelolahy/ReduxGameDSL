@@ -30,10 +30,6 @@ public extension GameState {
     func waiting(_ chooser: String, options: [String: GameAction]) -> Self {
         copy { $0.setChooseOne(chooser: chooser, options: options) }
     }
-    
-    func event(_ value: GameEvent) -> Self {
-        copy { $0.event = value }
-    }
 
     func attribute(_ key: AttributeKey, _ value: Int) -> Self {
         copy { $0.attributes[key] = value }

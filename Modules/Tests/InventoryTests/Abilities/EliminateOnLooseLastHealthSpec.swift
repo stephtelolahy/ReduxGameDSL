@@ -11,24 +11,26 @@ import Nimble
 
 final class EliminateOnLooseLastHealthSpec: QuickSpec {
     override func spec() {
+        let ctx = EffectContext(actor: "px", card: "cx")
+
         describe("a player") {
             context("loosing last health") {
                 it("should be eliminated") {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .attribute(.health, 0)
+                            .attribute(.health, 1)
                         Player("p2")
                     }
                     .ability(.eliminateOnLooseLastHealth)
-                    .event(.damage(1, player: "p1"))
 
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.damage(1, player: .id("p1")), ctx: ctx)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
+                        .success(.damage(1, player: "p1")),
                         .success(.forcePlay(actor: "p1", card: .eliminateOnLooseLastHealth)),
                         .success(.eliminate("p1"))
                     ]
@@ -40,17 +42,18 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1")
-                            .attribute(.health, 1)
+                            .attribute(.health, 2)
                     }
                     .ability(.eliminateOnLooseLastHealth)
-                    .event(.damage(1, player: "p1"))
 
                     // When
-                    let action = GameAction.update
+                    let action = GameAction.effect(.damage(1, player: .id("p1")), ctx: ctx)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result).to(beEmpty())
+                    expect(result) == [
+                        .success(.damage(1, player: "p1"))
+                    ]
                 }
             }
         }
