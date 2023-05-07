@@ -10,15 +10,6 @@ protocol GameReducerProtocol {
     func reduce(state: GameState, action: GameAction) throws -> GameState
 }
 
-protocol EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput
-}
-
-enum EffectOutput {
-    case actions([GameAction])
-    case chooseOne(ChooseOne)
-}
-
 protocol EventReducerProtocol {
     func reduce(state: GameState, event: GameEvent) throws -> GameState
 }
