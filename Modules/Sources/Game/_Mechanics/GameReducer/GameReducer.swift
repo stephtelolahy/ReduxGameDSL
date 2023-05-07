@@ -126,10 +126,11 @@ private extension GameAction {
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func toEvent() -> GameEvent? {
         switch self {
 //        case let .play(actor, card, target): return .play(actor: actor, card: card, target: target)
-//        case let .forcePlay(actor, card): return .forcePlay(actor: actor, card: card)
+        case let .forcePlay(actor, card): return .forcePlay(actor: actor, card: card)
         case let .heal(player, value): return .heal(player: player, value: value)
         case let .damage(player, value): return .damage(player: player, value: value)
         case let .discard(player, card): return .discard(player: player, card: card)

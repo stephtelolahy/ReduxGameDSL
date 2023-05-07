@@ -13,9 +13,6 @@ struct Reveal: GameReducerProtocol {
         }
         let card = try state.popDeck()
         state.arena?.add(card)
-
-        state.event = .reveal
-
         return state
     }
 }

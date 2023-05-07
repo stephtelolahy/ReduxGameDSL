@@ -26,9 +26,6 @@ struct ForcePlay: GameReducerProtocol {
         let ctx = EffectContext(actor: actor, card: card)
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
-
-        state.event = .forcePlay(actor: actor, card: card)
-
         return state
     }
 }
