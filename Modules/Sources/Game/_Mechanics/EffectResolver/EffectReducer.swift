@@ -14,9 +14,13 @@ struct EffectReducer: GameReducerProtocol {
         guard case let .effect(effect, ctx) = action else {
             fatalError(.unexpected)
         }
-
+        
+        let children = try effect
+            .resolver()
+            .resolve(effect: effect, state: state, ctx: ctx)
+            .simplify(state: state)
+        
         var state = state
-        let children = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
         state.queue.insert(contentsOf: children, at: 0)
         return state
     }
@@ -40,6 +44,43 @@ private extension CardEffect {
         case .applyEffect: return ApplyEffect()
         case .groupEffects: return GroupEffects()
         case .replayEffect: return ReplayEffect()
+        }
+    }
+}
+
+private extension Array where Element == GameAction {
+    func simplify(state: GameState) throws -> Self {
+        guard self.count == 1 else {
+            return self
+        }
+        
+        guard let simplified = try self[0].simplify(state: state) else {
+            return self
+        }
+        
+        return [simplified]
+    }
+}
+
+private extension GameAction {
+    func simplify(state: GameState) throws -> GameAction? {
+        switch self {
+        case let .chooseAction(chooser, options):
+            var options = options
+            for (key, value) in options {
+                if case let .effect(optionEffect, optionCtx) = value {
+                    let resolvedAction = try optionEffect
+                        .resolver()
+                        .resolve(effect: optionEffect, state: state, ctx: optionCtx)
+                    if resolvedAction.count == 1 {
+                        options[key] = resolvedAction[0]
+                    }
+                }
+            }
+            return .chooseAction(chooser: chooser, options: options)
+            
+        default:
+            return nil
         }
     }
 }

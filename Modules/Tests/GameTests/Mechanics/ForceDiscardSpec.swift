@@ -35,9 +35,9 @@ final class ForceDiscardSpec: QuickSpec {
 
                     // Then
                     expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
-                        "counter-10♣️": GameAction.discard(player: "p1", card: "counter-10♣️"),
-                        "counter-8♠️": GameAction.discard(player: "p1", card: "counter-8♠️"),
-                        .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
+                        "counter-10♣️": .discard(player: "p1", card: "counter-10♣️"),
+                        "counter-8♠️": .discard(player: "p1", card: "counter-8♠️"),
+                        .pass: .damage(player: "p1", value: 1)
                     ])
                 }
             }
@@ -57,7 +57,7 @@ final class ForceDiscardSpec: QuickSpec {
 
                     // Then
                     expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
-                        .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
+                        .pass: .damage(player: "p1", value: 1)
                     ])
                 }
             }

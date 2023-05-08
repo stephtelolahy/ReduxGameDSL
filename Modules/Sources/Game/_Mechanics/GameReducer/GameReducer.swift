@@ -132,7 +132,6 @@ private extension GameAction {
         case .eliminate: return Eliminate()
         case .effect: return EffectReducer()
         case .chooseAction: return ChooseAction()
-        case .chooseOne: fatalError(.unexpected)
         }
     }
 }

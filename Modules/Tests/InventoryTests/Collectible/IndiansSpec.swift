@@ -42,13 +42,11 @@ final class IndiansSpec: QuickSpec {
                         .success(.play(actor: "p1", card: .indians)),
                         .success(.chooseAction(chooser: "p2", options: [
                             .bang: .discard(player: "p2", card: .bang),
-                            .pass: .effect(.damage(1, player: .target),
-                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p2"))
+                            .pass: .damage(player: "p2", value: 1)
                         ])),
                         .success(.discard(player: "p2", card: .bang)),
                         .success(.chooseAction(chooser: "p3", options: [
-                            .pass: .effect(.damage(1, player: .target),
-                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p3"))
+                            .pass: .damage(player: "p3", value: 1)
                         ])),
                         .success(.damage(player: "p3", value: 1))
                     ]
@@ -80,8 +78,7 @@ final class IndiansSpec: QuickSpec {
                         .success(.play(actor: "p1", card: .indians)),
                         .success(.chooseAction(chooser: "p2", options: [
                             .bang: .discard(player: "p2", card: .bang),
-                            .pass: .effect(.damage(1, player: .target),
-                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p2"))
+                            .pass: .damage(player: "p2", value: 1)
                         ])),
                         .success(.discard(player: "p2", card: .bang))
                     ]

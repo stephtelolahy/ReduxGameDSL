@@ -43,7 +43,7 @@ final class ChallengeDiscardSpec: QuickSpec {
                                                         otherwise: .damage(1, player: .target),
                                                         challenger: .id("p1")).withCtx(reversedCtx)
                         },
-                        .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
+                        .pass: .damage(player: "p1", value: 1)
                     ])
                 }
             }

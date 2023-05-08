@@ -32,8 +32,8 @@ final class ChooseCardSpec: QuickSpec {
 
                         // Then
                         expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
-                            "c1": GameAction.chooseCard(player: "p1", card: "c1"),
-                            "c2": GameAction.chooseCard(player: "p1", card: "c2")
+                            "c1": .chooseCard(player: "p1", card: "c1"),
+                            "c2": .chooseCard(player: "p1", card: "c2")
                         ])
                     }
                 }

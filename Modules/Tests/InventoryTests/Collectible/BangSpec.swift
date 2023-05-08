@@ -85,8 +85,7 @@ final class BangSpec: QuickSpec {
                             ])),
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
                             .success(.chooseAction(chooser: "p2", options: [
-                                .pass: .effect(.damage(1, player: .target),
-                                               ctx: EffectContext(actor: "p1", card: .bang, target: "p2"))
+                                .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.damage(player: "p2", value: 1))
                         ]
@@ -120,8 +119,7 @@ final class BangSpec: QuickSpec {
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
                             .success(.chooseAction(chooser: "p2", options: [
                                 .missed: .discard(player: "p2", card: .missed),
-                                .pass: .effect(.damage(1, player: .target),
-                                               ctx: EffectContext(actor: "p1", card: .bang, target: "p2"))
+                                .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.discard(player: "p2", card: .missed))
                         ]
@@ -148,8 +146,7 @@ final class BangSpec: QuickSpec {
                         expect(result) == [
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
                             .success(.chooseAction(chooser: "p2", options: [
-                                .pass: .effect(.damage(1, player: .target),
-                                               ctx: EffectContext(actor: "p1", card: .bang, target: "p2"))
+                                .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.damage(player: "p2", value: 1))
                         ]
