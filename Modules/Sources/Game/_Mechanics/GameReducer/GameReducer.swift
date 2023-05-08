@@ -106,7 +106,7 @@ private extension GameReducer {
     }
 
     func updateGameOver(state: GameState) -> GameState {
-        if let winner = state.hasWinner() {
+        if let winner = state.getWinner() {
             var state = state
             state.isOver = GameOver(winner: winner)
             return state

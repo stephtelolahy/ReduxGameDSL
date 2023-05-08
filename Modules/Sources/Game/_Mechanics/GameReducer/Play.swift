@@ -31,9 +31,12 @@ struct Play: GameReducerProtocol {
         // resolve target
         if let requiredTarget = action.target,
            target == nil {
-            return try PlayerArgResolver().resolve(arg: requiredTarget, state: state, ctx: ctx) {
+            let children = try PlayerArgResolver().resolving(arg: requiredTarget, state: state, ctx: ctx) {
                 .play(actor: actor, card: card, target: $0)
             }
+            var state = state
+            state.queue.insert(contentsOf: children, at: 0)
+            return state
         }
 
         var state = state
