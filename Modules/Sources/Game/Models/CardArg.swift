@@ -9,7 +9,6 @@
 public enum CardArg: Codable, Equatable {
 
     /// Card identified by
-    @available(*, deprecated, message: "")
     case id(String)
 
     /// Select any player's hand or inPlay card
