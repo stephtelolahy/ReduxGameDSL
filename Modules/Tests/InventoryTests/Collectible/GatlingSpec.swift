@@ -11,6 +11,7 @@ import Game
 import Inventory
 
 final class GatlingSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing gatling") {
             context("three players") {
@@ -38,9 +39,16 @@ final class GatlingSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
-                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .missed: .discard(player: "p2", card: .missed),
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .gatling, target: "p2"))
+                        ])),
                         .success(.discard(player: "p2", card: .missed)),
-                        .success(.chooseOne(chooser: "p3", options: [.pass])),
+                        .success(.chooseAction(chooser: "p3", options: [
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .gatling, target: "p3"))
+                        ])),
                         .success(.damage(player: "p3", value: 1))
                     ]
                 }
@@ -69,7 +77,11 @@ final class GatlingSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
-                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .missed: .discard(player: "p2", card: .missed),
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .gatling, target: "p2"))
+                        ])),
                         .success(.discard(player: "p2", card: .missed))
                     ]
                 }

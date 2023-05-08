@@ -11,6 +11,7 @@ import Game
 import Inventory
 
 final class IndiansSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing Indians") {
             context("three players") {
@@ -39,9 +40,16 @@ final class IndiansSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .indians)),
-                        .success(.chooseOne(chooser: "p2", options: [.pass, .bang])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .bang: .discard(player: "p2", card: .bang),
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p2"))
+                        ])),
                         .success(.discard(player: "p2", card: .bang)),
-                        .success(.chooseOne(chooser: "p3", options: [.pass])),
+                        .success(.chooseAction(chooser: "p3", options: [
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p3"))
+                        ])),
                         .success(.damage(player: "p3", value: 1))
                     ]
                 }
@@ -70,7 +78,11 @@ final class IndiansSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .indians)),
-                        .success(.chooseOne(chooser: "p2", options: [.pass, .bang])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .bang: .discard(player: "p2", card: .bang),
+                            .pass: .effect(.damage(1, player: .target),
+                                           ctx: EffectContext(actor: "p1", card: .indians, target: "p2"))
+                        ])),
                         .success(.discard(player: "p2", card: .bang))
                     ]
                 }

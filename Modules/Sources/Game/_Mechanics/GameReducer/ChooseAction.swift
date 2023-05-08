@@ -13,7 +13,6 @@ struct ChooseAction: GameReducerProtocol {
 
         var state = state
         state.chooseOne = ChooseOne(chooser: chooser, options: options)
-        state.event = .chooseOne(chooser: chooser, options: Set(options.keys))
         return state
     }
 }

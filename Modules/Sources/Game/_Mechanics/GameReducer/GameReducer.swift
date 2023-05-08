@@ -61,8 +61,6 @@ private extension GameReducer {
         switch action {
         case .play,
              .effect,
-             .chooseOne,
-             .chooseAction,
              .groupActions:
             break
 
