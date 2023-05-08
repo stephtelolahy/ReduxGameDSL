@@ -6,7 +6,7 @@
 //
 
 struct ForceDiscard: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .forceDiscard(player, card, otherwise) = effect else {
             fatalError(.unexpected)
         }
@@ -31,7 +31,7 @@ struct ForceDiscard: EffectResolverProtocol {
             $0[$1.label] = .discard(player: pId, card: $1.id)
         }
         options[.pass] = otherwise.withCtx(ctx)
-        let chooseOne = ChooseOne(chooser: pId, options: options)
-        return .chooseOne(chooseOne)
+        
+        return [.chooseAction(chooser: pId, options: options)]
     }
 }

@@ -6,12 +6,7 @@
 //
 
 protocol EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput
-}
-
-enum EffectOutput {
-    case actions([GameAction])
-    case chooseOne(ChooseOne)
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction]
 }
 
 struct EffectReducer: GameReducerProtocol {
@@ -21,15 +16,8 @@ struct EffectReducer: GameReducerProtocol {
         }
 
         var state = state
-        let result = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
-        switch result {
-        case let .actions(actions):
-            state.queue.insert(contentsOf: actions, at: 0)
-
-        case let .chooseOne(chooseOne):
-            state.chooseOne = chooseOne
-            state.event = .chooseOne(chooser: chooseOne.chooser, options: Set(chooseOne.options.keys))
-        }
+        let children = try effect.resolver().resolve(effect: effect, state: state, ctx: ctx)
+        state.queue.insert(contentsOf: children, at: 0)
         return state
     }
 }

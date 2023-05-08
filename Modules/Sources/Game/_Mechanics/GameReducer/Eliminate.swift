@@ -18,7 +18,7 @@ struct Eliminate: GameReducerProtocol {
 }
 
 extension Eliminate: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .eliminate(player) = effect else {
             fatalError(.unexpected)
         }

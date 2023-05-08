@@ -6,7 +6,7 @@
 //
 
 struct ChallengeDiscard: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .challengeDiscard(player, card, otherwise, challenger) = effect else {
             fatalError(.unexpected)
         }
@@ -50,7 +50,6 @@ struct ChallengeDiscard: EffectResolverProtocol {
         }
         options[.pass] = otherwise.withCtx(ctx)
         
-        let chooseOne = ChooseOne(chooser: pId, options: options)
-        return .chooseOne(chooseOne)
+        return [.chooseAction(chooser: pId, options: options)]
     }
 }

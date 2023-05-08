@@ -52,19 +52,17 @@ struct PlayerArgResolver: PlayerArgResolverProtocol {
         state: GameState,
         ctx: EffectContext,
         copy: @escaping (String) -> GameAction
-    ) throws -> EffectOutput {
+    ) throws -> [GameAction] {
         let resolved = try resolve(arg: arg, state: state, ctx: ctx)
         switch resolved {
         case let .identified(pIds):
-            let children = pIds.map { copy($0) }
-            return .actions(children)
+            return pIds.map { copy($0) }
 
         case let .selectable(pIds):
             let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
             }
-            let chooseOne = ChooseOne(chooser: ctx.actor, options: options)
-            return .chooseOne(chooseOne)
+            return [.chooseAction(chooser: ctx.actor, options: options)]
         }
     }
 }

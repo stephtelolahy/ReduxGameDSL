@@ -19,7 +19,7 @@ struct Draw: GameReducerProtocol {
 }
 
 extension Draw: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .draw(player) = effect else {
             fatalError(.unexpected)
         }

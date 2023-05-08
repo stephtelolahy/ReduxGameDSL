@@ -38,19 +38,6 @@ public struct GameReducer: ReducerProtocol {
 
 private extension GameReducer {
 
-    func executeAction(action: GameAction, state: GameState) throws -> GameState {
-        var state = state
-        state = try action.reducer().reduce(state: state, action: action)
-        switch action {
-        case .play, .effect, .chooseOne, .groupActions:
-            break
-
-        default:
-            state.event = action
-        }
-        return state
-    }
-
     func prepareAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
 
@@ -65,6 +52,23 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
+        return state
+    }
+
+    func executeAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
+        state = try action.reducer().reduce(state: state, action: action)
+        switch action {
+        case .play,
+             .effect,
+             .chooseOne,
+             .chooseAction,
+             .groupActions:
+            break
+
+        default:
+            state.event = action
+        }
         return state
     }
 
@@ -129,6 +133,7 @@ private extension GameAction {
         case .setTurn: return SetTurn()
         case .eliminate: return Eliminate()
         case .effect: return EffectReducer()
+        case .chooseAction: return ChooseAction()
         case .chooseOne: fatalError(.unexpected)
         }
     }

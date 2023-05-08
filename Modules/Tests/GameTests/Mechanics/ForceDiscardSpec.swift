@@ -34,7 +34,7 @@ final class ForceDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
                         "counter-10♣️": GameAction.discard(player: "p1", card: "counter-10♣️"),
                         "counter-8♠️": GameAction.discard(player: "p1", card: "counter-8♠️"),
                         .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
@@ -56,7 +56,7 @@ final class ForceDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
+                    expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
                         .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
                     ])
                 }

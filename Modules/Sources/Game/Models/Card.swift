@@ -37,11 +37,11 @@ public enum CardActionType: Codable, Equatable {
     /// Ability, just apply side effect
     case spell
     
-//    /// Use card as self equipment
-//    case equip
-//
-//    /// Use card as handicap againts another player
-//    case handicap
+    /// Use card as self equipment
+    case equip
+
+    /// Use card as handicap againts another player
+    case handicap
 
     /// Apply side effects immediately, when an event occurred
     case trigger

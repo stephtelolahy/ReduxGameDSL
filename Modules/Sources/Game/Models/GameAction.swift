@@ -8,6 +8,8 @@
 /// Game action
 /// Triggered by user or by the system, that causes any update to the game state
 public indirect enum GameAction: Codable, Equatable {
+
+    // MARK: - Renderable actions
     
     /// Play an active card
     case play(actor: String, card: String, target: String? = nil)
@@ -42,6 +44,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Eliminate
     case eliminate(String)
 
+    /// Ask a player to choose an action
+    case chooseAction(chooser: String, options: [String: GameAction])
+
     // MARK: - Invisible actions
 
     /// Apply an effect
@@ -51,5 +56,6 @@ public indirect enum GameAction: Codable, Equatable {
     case groupActions([Self])
 
     /// Ask a player to choose an action
+    @available(*, deprecated, message: "")
     case chooseOne(chooser: String, options: Set<String>)
 }

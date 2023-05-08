@@ -6,7 +6,7 @@
 //
 
 struct ApplyEffect: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .applyEffect(target, effect) = effect else {
             fatalError(.unexpected)
         }
@@ -21,6 +21,6 @@ struct ApplyEffect: EffectResolverProtocol {
                                          card: ctx.card,
                                          target: $0))
         }
-        return .actions(children)
+        return children
     }
 }

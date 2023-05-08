@@ -18,7 +18,7 @@ struct Damage: GameReducerProtocol {
 }
 
 extension Damage: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .damage(value, player) = effect else {
             fatalError(.unexpected)
         }

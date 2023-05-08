@@ -31,8 +31,7 @@ final class ChooseCardSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .chooseOne(chooser: "p1", options: ["c1", "c2"])
-                        expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
+                        expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
                             "c1": GameAction.chooseCard(player: "p1", card: "c1"),
                             "c2": GameAction.chooseCard(player: "p1", card: "c2")
                         ])

@@ -100,7 +100,7 @@ struct CardArgResolver: CardArgResolverProtocol {
         chooser: String,
         owner: String?,
         copy: @escaping (String) -> GameAction
-    ) throws -> EffectOutput {
+    ) throws -> [GameAction] {
         let resolved = try resolve(
             arg: arg,
             state: state,
@@ -110,8 +110,7 @@ struct CardArgResolver: CardArgResolverProtocol {
         )
         switch resolved {
         case let .identified(cIds):
-            let children = cIds.map { copy($0) }
-            return .actions(children)
+            return cIds.map { copy($0) }
 
         case let .selectable(cIdOptions):
             guard cIdOptions.isNotEmpty else {
@@ -121,8 +120,7 @@ struct CardArgResolver: CardArgResolverProtocol {
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
-            let chooseOne = ChooseOne(chooser: chooser, options: options)
-            return .chooseOne(chooseOne)
+            return [.chooseAction(chooser: chooser, options: options)]
         }
     }
 }

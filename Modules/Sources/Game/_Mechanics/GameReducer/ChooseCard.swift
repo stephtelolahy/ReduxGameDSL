@@ -22,7 +22,7 @@ struct ChooseCard: GameReducerProtocol {
 }
 
 extension ChooseCard: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> EffectOutput {
+    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .chooseCard(player, card) = effect else {
             fatalError(.unexpected)
         }
