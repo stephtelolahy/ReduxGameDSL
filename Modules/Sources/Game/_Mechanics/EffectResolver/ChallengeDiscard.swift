@@ -6,11 +6,12 @@
 //
 
 struct ChallengeDiscard: EffectResolverProtocol {
+    let player: PlayerArg
+    let card: CardArg
+    let otherwise: CardEffect
+    let challenger: PlayerArg
+    
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .challengeDiscard(player, card, otherwise, challenger) = effect else {
-            fatalError(.unexpected)
-        }
-        
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.challengeDiscard(player: .id($0), card: card, otherwise: otherwise, challenger: challenger)

@@ -10,20 +10,19 @@ struct Heal: GameReducerProtocol {
         guard case let .heal(player, value) = action else {
             fatalError(.unexpected)
         }
-
+        
         var state = state
         try state[keyPath: \GameState.players[player]]?.gainHealth(value)
         return state
     }
 }
 
-extension Heal: EffectResolverProtocol {
+struct EffectHeal: EffectResolverProtocol {
+    let player: PlayerArg
+    let value: Int
+    
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .heal(value, player) = effect else {
-            fatalError(.unexpected)
-        }
-
-        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+        try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .heal(player: $0, value: value)
         }
     }

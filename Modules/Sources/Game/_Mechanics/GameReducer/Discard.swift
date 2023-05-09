@@ -18,12 +18,11 @@ struct Discard: GameReducerProtocol {
     }
 }
 
-extension Discard: EffectResolverProtocol {
+struct EffectDiscard: EffectResolverProtocol {
+    let player: PlayerArg
+    let card: CardArg
+    
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .discard(player, card) = effect else {
-            fatalError(.unexpected)
-        }
-
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.discard(player: .id($0), card: card).withCtx(ctx)

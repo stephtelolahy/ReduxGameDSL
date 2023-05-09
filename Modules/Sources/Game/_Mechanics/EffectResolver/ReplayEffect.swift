@@ -6,16 +6,13 @@
 //
 
 struct ReplayEffect: EffectResolverProtocol {
+    let effect: CardEffect
+    let times: NumArg
+    
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .replayEffect(times, effect) = effect else {
-            fatalError(.unexpected)
-        }
-        
         let number = try NumArgResolver().resolve(arg: times, state: state, ctx: ctx)
-        let children = (0..<number).map { _ in
-            effect.withCtx(ctx)
+        return (0..<number).map { _ in
+            self.effect.withCtx(ctx)
         }
-
-        return children
     }
 }

@@ -6,12 +6,9 @@
 //
 
 struct GroupEffects: EffectResolverProtocol {
+    let effects: [CardEffect]
+    
     func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .groupEffects(effects) = effect else {
-            fatalError(.unexpected)
-        }
-
-        let children = effects.map { $0.withCtx(ctx) }
-        return children
+        effects.map { $0.withCtx(ctx) }
     }
 }
