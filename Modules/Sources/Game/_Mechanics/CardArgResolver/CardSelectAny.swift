@@ -7,7 +7,6 @@
 
 struct CardSelectAny: CardArgResolverProtocol {
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
@@ -37,7 +36,7 @@ struct CardSelectAny: CardArgResolverProtocol {
         }
 
         guard options.isNotEmpty else {
-            throw GameError.noCard(arg)
+            throw GameError.noCard(.selectAny)
         }
 
         return .selectable(options)

@@ -7,7 +7,6 @@
 
 struct CardSelectArena: CardArgResolverProtocol {
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
@@ -15,7 +14,7 @@ struct CardSelectArena: CardArgResolverProtocol {
     ) throws -> CardArgOutput {
         guard let cards = state.arena?.cards,
               cards.isNotEmpty else {
-            throw GameError.noCard(arg)
+            throw GameError.noCard(.selectArena)
         }
 
         if cards.count == 1 {

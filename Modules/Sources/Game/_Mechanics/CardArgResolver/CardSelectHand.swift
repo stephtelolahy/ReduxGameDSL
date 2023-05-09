@@ -7,7 +7,6 @@
 
 struct CardSelectHand: CardArgResolverProtocol {
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,

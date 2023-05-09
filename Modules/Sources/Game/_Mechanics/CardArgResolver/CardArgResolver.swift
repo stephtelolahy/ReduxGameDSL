@@ -7,7 +7,6 @@
 
 protocol CardArgResolverProtocol {
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
@@ -40,7 +39,7 @@ extension Array where Element == String {
     }
 }
 
-struct CardArgResolver: CardArgResolverProtocol {
+struct CardArgResolver {
     func resolve(
         arg: CardArg,
         state: GameState,
@@ -49,7 +48,6 @@ struct CardArgResolver: CardArgResolverProtocol {
         owner: String?
     ) throws -> CardArgOutput {
         try arg.resolver().resolve(
-            arg: arg,
             state: state,
             ctx: ctx,
             chooser: chooser,
@@ -94,13 +92,9 @@ private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
         case .selectAny: return CardSelectAny()
-
         case .selectArena: return CardSelectArena()
-
-        case .selectHandNamed: return CardSelectHandNamed()
-
+        case let .selectHandNamed(name): return CardSelectHandNamed(name: name)
         case .selectHand: return CardSelectHand()
-
         default: fatalError(.unexpected)
         }
     }
