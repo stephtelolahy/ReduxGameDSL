@@ -6,10 +6,10 @@
 //
 
 struct OnSetTurn: PlayReqMatcherProtocol {
-    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
+    func match(state: GameState, ctx: EffectContext) throws {
         guard case let .setTurn(turn) = state.event,
               turn == ctx.actor else {
-            throw GameError.mismatched(playReq)
+            throw GameError.mismatched(.onSetTurn)
         }
     }
 }

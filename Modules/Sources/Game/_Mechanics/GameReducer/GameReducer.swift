@@ -93,7 +93,7 @@ private extension GameReducer {
         action.actionType == .trigger {
             for playReq in action.playReqs {
                 do {
-                    try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
+                    try playReq.match(state: state, ctx: ctx)
                 } catch {
                     return false
                 }
