@@ -18,7 +18,7 @@ struct EffectReducer: GameReducerProtocol {
         let children = try effect
             .resolver()
             .resolve(effect: effect, state: state, ctx: ctx)
-            .simplify(state: state)
+            .simplifyChooseAction(state: state)
         
         var state = state
         state.queue.insert(contentsOf: children, at: 0)
@@ -49,12 +49,12 @@ private extension CardEffect {
 }
 
 private extension Array where Element == GameAction {
-    func simplify(state: GameState) throws -> Self {
+    func simplifyChooseAction(state: GameState) throws -> Self {
         guard self.count == 1 else {
             return self
         }
         
-        guard let simplified = try self[0].simplify(state: state) else {
+        guard let simplified = try self[0].simplifyChooseAction(state: state) else {
             return self
         }
         
@@ -63,24 +63,21 @@ private extension Array where Element == GameAction {
 }
 
 private extension GameAction {
-    func simplify(state: GameState) throws -> GameAction? {
-        switch self {
-        case let .chooseAction(chooser, options):
-            var options = options
-            for (key, value) in options {
-                if case let .effect(optionEffect, optionCtx) = value {
-                    let resolvedAction = try optionEffect
-                        .resolver()
-                        .resolve(effect: optionEffect, state: state, ctx: optionCtx)
-                    if resolvedAction.count == 1 {
-                        options[key] = resolvedAction[0]
-                    }
-                }
-            }
-            return .chooseAction(chooser: chooser, options: options)
-            
-        default:
+    func simplifyChooseAction(state: GameState) throws -> GameAction? {
+        guard case .chooseAction(let chooser, var options) = self else {
             return nil
         }
+        
+        for (key, value) in options {
+            if case let .effect(optionEffect, optionCtx) = value {
+                let resolvedAction = try optionEffect
+                    .resolver()
+                    .resolve(effect: optionEffect, state: state, ctx: optionCtx)
+                if resolvedAction.count == 1 {
+                    options[key] = resolvedAction[0]
+                }
+            }
+        }
+        return .chooseAction(chooser: chooser, options: options)
     }
 }
