@@ -23,7 +23,7 @@ extension Damage: EffectResolverProtocol {
             fatalError(.unexpected)
         }
 
-        return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .damage(player: $0, value: value)
         }
     }

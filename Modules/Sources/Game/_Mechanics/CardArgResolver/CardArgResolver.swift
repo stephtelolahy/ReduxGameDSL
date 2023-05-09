@@ -58,7 +58,7 @@ struct CardArgResolver: CardArgResolverProtocol {
     }
 
     // swiftlint:disable:next function_parameter_count
-    func resolving(
+    func resolve(
         arg: CardArg,
         state: GameState,
         ctx: EffectContext,

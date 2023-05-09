@@ -28,10 +28,9 @@ struct Play: GameReducerProtocol {
             try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
         }
 
-        // resolve target
         if let requiredTarget = cardAction.target,
            target == nil {
-            let children = try PlayerArgResolver().resolving(arg: requiredTarget, state: state, ctx: ctx) {
+            let children = try PlayerArgResolver().resolve(arg: requiredTarget, state: state, ctx: ctx) {
                 .play(actor: actor, card: card, target: $0)
             }
             var state = state

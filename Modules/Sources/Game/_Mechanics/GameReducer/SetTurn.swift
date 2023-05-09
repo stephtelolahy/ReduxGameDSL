@@ -24,7 +24,7 @@ extension SetTurn: EffectResolverProtocol {
             fatalError(.unexpected)
         }
         
-        return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .setTurn($0)
         }
     }

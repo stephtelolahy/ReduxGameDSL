@@ -11,14 +11,12 @@ struct ForceDiscard: EffectResolverProtocol {
             fatalError(.unexpected)
         }
         
-        // resolve player
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.forceDiscard(player: .id($0), card: card, otherwise: otherwise).withCtx(ctx)
             }
         }
 
-        // resolving card
         let resolvedCard = try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: pId)
         guard case let .selectable(cIdOptions) = resolvedCard else {
             fatalError(.unexpected)

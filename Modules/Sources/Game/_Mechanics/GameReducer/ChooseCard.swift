@@ -28,12 +28,12 @@ extension ChooseCard: EffectResolverProtocol {
         }
 
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
             }
         }
 
-        return try CardArgResolver().resolving(arg: card, state: state, ctx: ctx, chooser: pId, owner: nil) {
+        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: nil) {
             .chooseCard(player: pId, card: $0)
         }
     }

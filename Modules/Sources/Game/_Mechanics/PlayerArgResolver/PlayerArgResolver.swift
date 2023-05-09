@@ -23,7 +23,7 @@ struct PlayerArgResolver: PlayerArgResolverProtocol {
         try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
     }
 
-    func resolving(
+    func resolve(
         arg: PlayerArg,
         state: GameState,
         ctx: EffectContext,

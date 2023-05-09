@@ -25,18 +25,18 @@ extension Steal: EffectResolverProtocol {
         }
 
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.steal(player: .id($0), target: target, card: card).withCtx(ctx)
             }
         }
 
         guard case let .id(tId) = target else {
-            return try PlayerArgResolver().resolving(arg: target, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: target, state: state, ctx: ctx) {
                 CardEffect.steal(player: player, target: .id($0), card: card).withCtx(ctx)
             }
         }
 
-        return try CardArgResolver().resolving(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
+        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
             .steal(player: pId, target: tId, card: $0)
         }
     }

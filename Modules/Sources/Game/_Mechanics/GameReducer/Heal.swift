@@ -23,7 +23,7 @@ extension Heal: EffectResolverProtocol {
             fatalError(.unexpected)
         }
 
-        return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .heal(player: $0, value: value)
         }
     }

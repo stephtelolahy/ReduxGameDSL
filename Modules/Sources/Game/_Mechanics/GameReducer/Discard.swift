@@ -25,12 +25,12 @@ extension Discard: EffectResolverProtocol {
         }
 
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolving(arg: player, state: state, ctx: ctx) {
+            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
             }
         }
 
-        return try CardArgResolver().resolving(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
+        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
             .discard(player: pId, card: $0)
         }
     }
