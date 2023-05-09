@@ -5,10 +5,6 @@
 //  Created by Hugues Telolahy on 07/05/2023.
 //
 
-protocol EffectResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction]
-}
-
 struct EffectReducer: GameReducerProtocol {
     let effect: CardEffect
     let ctx: EffectContext
@@ -22,6 +18,10 @@ struct EffectReducer: GameReducerProtocol {
         state.queue.insert(contentsOf: children, at: 0)
         return state
     }
+}
+
+protocol EffectResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction]
 }
 
 private extension CardEffect {

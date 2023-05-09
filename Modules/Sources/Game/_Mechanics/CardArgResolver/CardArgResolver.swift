@@ -5,40 +5,6 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-protocol CardArgResolverProtocol {
-    func resolve(
-        state: GameState,
-        ctx: EffectContext,
-        chooser: String,
-        owner: String?
-    ) throws -> CardArgOutput
-}
-
-/// Resolved card argument
-enum CardArgOutput {
-    /// Appply effect to well known object identifiers
-    case identified([String])
-
-    /// Must choose one of given object identifiers
-    case selectable([CardArgOption])
-}
-
-/// Selectable argument option
-struct CardArgOption {
-
-    /// Identifier
-    let id: String
-
-    /// Displayed label
-    let label: String
-}
-
-extension Array where Element == String {
-    func toCardOptions() -> [CardArgOption] {
-        map { .init(id: $0, label: $0) }
-    }
-}
-
 extension CardArg {
     func resolve(
         state: GameState,
@@ -81,6 +47,40 @@ extension CardArg {
             }
             return [.chooseAction(chooser: chooser, options: options)]
         }
+    }
+}
+
+protocol CardArgResolverProtocol {
+    func resolve(
+        state: GameState,
+        ctx: EffectContext,
+        chooser: String,
+        owner: String?
+    ) throws -> CardArgOutput
+}
+
+/// Resolved card argument
+enum CardArgOutput {
+    /// Appply effect to well known object identifiers
+    case identified([String])
+
+    /// Must choose one of given object identifiers
+    case selectable([CardArgOption])
+}
+
+/// Selectable argument option
+struct CardArgOption {
+
+    /// Identifier
+    let id: String
+
+    /// Displayed label
+    let label: String
+}
+
+extension Array where Element == String {
+    func toCardOptions() -> [CardArgOption] {
+        map { .init(id: $0, label: $0) }
     }
 }
 
