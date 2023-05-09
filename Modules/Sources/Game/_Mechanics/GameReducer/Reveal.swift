@@ -6,7 +6,7 @@
 //
 
 struct Reveal: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         if state.arena == nil {
             state.arena = .init()

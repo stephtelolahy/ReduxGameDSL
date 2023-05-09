@@ -6,11 +6,9 @@
 //
 
 struct Draw: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .draw(player) = action else {
-            fatalError(.unexpected)
-        }
+    let player: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         let card = try state.popDeck()
         state[keyPath: \GameState.players[player]]?.hand.add(card)

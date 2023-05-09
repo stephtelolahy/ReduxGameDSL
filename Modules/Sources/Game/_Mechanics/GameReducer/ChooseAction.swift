@@ -6,11 +6,10 @@
 //
 
 struct ChooseAction: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .chooseAction(chooser, options) = action else {
-            fatalError(.unexpected)
-        }
+    let chooser: String
+    let options: [String: GameAction]
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         state.chooseOne = ChooseOne(chooser: chooser, options: options)
         return state

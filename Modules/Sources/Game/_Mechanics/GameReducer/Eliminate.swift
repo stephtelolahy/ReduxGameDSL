@@ -6,11 +6,9 @@
 //
 
 struct Eliminate: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .eliminate(player) = action else {
-            fatalError(.unexpected)
-        }
-        
+    let player: String
+
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         state.playOrder.removeAll(where: { $0 == player })
         return state

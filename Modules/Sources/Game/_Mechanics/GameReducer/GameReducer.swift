@@ -7,7 +7,7 @@
 import Redux
 
 protocol GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState
+    func reduce(state: GameState) throws -> GameState
 }
 
 public struct GameReducer: ReducerProtocol {
@@ -57,7 +57,7 @@ private extension GameReducer {
 
     func executeAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
-        state = try action.reducer().reduce(state: state, action: action)
+        state = try action.reducer().reduce(state: state)
         switch action {
         case .play,
              .effect,
@@ -118,20 +118,20 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-        case .play: return Play()
-        case .forcePlay: return ForcePlay()
-        case .heal: return Heal()
-        case .damage: return Damage()
-        case .discard: return Discard()
-        case .draw: return Draw()
-        case .steal: return Steal()
+        case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
+        case let .forcePlay(actor, card): return ForcePlay(actor: actor, card: card)
+        case let .heal(player, value): return Heal(player: player, value: value)
+        case let .damage(player, value): return Damage(player: player, value: value)
+        case let .discard(player, card): return Discard(player: player, card: card)
+        case let .draw(player): return Draw(player: player)
+        case let .steal(player, target, card): return Steal(player: player, target: target, card: card)
         case .reveal: return Reveal()
-        case .chooseCard: return ChooseCard()
-        case .groupActions: return GroupActions()
-        case .setTurn: return SetTurn()
-        case .eliminate: return Eliminate()
-        case .effect: return EffectReducer()
-        case .chooseAction: return ChooseAction()
+        case let .chooseCard(player, card): return ChooseCard(player: player, card: card)
+        case let .groupActions(actions): return GroupActions(children: actions)
+        case let .setTurn(player): return SetTurn(player: player)
+        case let .eliminate(player): return Eliminate(player: player)
+        case let .effect(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
+        case let .chooseAction(chooser, options): return ChooseAction(chooser: chooser, options: options)
         }
     }
 }

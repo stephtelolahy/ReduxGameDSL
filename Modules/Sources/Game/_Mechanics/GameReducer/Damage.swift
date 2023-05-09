@@ -6,11 +6,10 @@
 //
 
 struct Damage: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .damage(player, value) = action else {
-            fatalError(.unexpected)
-        }
+    let player: String
+    let value: Int
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         state[keyPath: \GameState.players[player]]?.looseHealth(value)
         return state

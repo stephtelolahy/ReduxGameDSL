@@ -10,17 +10,15 @@ protocol EffectResolverProtocol {
 }
 
 struct EffectReducer: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action else {
-            fatalError(.unexpected)
-        }
-        
+    let effect: CardEffect
+    let ctx: EffectContext
+
+    func reduce(state: GameState) throws -> GameState {
+        var state = state
         let children = try effect
             .resolver()
             .resolve(state: state, ctx: ctx)
             .simplifyChooseAction(state: state)
-        
-        var state = state
         state.queue.insert(contentsOf: children, at: 0)
         return state
     }

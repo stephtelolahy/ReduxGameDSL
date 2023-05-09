@@ -6,11 +6,10 @@
 //
 
 struct Discard: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .discard(player, card) = action else {
-            fatalError(.unexpected)
-        }
+    let player: String
+    let card: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         try state[keyPath: \GameState.players[player]]?.removeCard(card)
         state.discard.push(card)

@@ -6,11 +6,11 @@
 //
 
 struct Steal: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .steal(player, target, card) = action else {
-            fatalError(.unexpected)
-        }
+    let player: String
+    let target: String
+    let card: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         try state[keyPath: \GameState.players[target]]?.removeCard(card)
         state[keyPath: \GameState.players[player]]?.hand.add(card)

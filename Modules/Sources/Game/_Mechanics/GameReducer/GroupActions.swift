@@ -6,11 +6,9 @@
 //
 
 struct GroupActions: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .groupActions(children) = action else {
-            fatalError(.unexpected)
-        }
+    let children: [GameAction]
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         state.queue.insert(contentsOf: children, at: 0)
         return state

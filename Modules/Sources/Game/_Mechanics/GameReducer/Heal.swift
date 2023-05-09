@@ -6,11 +6,10 @@
 //
 
 struct Heal: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .heal(player, value) = action else {
-            fatalError(.unexpected)
-        }
-        
+    let player: String
+    let value: Int
+
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         try state[keyPath: \GameState.players[player]]?.gainHealth(value)
         return state

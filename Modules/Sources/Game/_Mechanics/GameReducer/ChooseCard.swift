@@ -6,11 +6,10 @@
 //
 
 struct ChooseCard: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .chooseCard(player, card) = action else {
-            fatalError(.unexpected)
-        }
+    let player: String
+    let card: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         try state.arena?.remove(card)
         if state.arena?.cards.isEmpty == true {

@@ -6,11 +6,9 @@
 //
 
 struct SetTurn: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .setTurn(player) = action else {
-            fatalError(.unexpected)
-        }
-        
+    let player: String
+
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         state.turn = player
         state.playCounter = [:]
