@@ -6,7 +6,7 @@
 //
 
 protocol PlayerArgResolverProtocol {
-    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
 }
 
 /// Resolved player argument
@@ -18,18 +18,17 @@ enum PlayerArgOutput {
     case selectable([String])
 }
 
-struct PlayerArgResolver: PlayerArgResolverProtocol {
-    func resolve(arg: PlayerArg, state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
+extension PlayerArg {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+        try resolver().resolve(state: state, ctx: ctx)
     }
 
     func resolve(
-        arg: PlayerArg,
         state: GameState,
         ctx: EffectContext,
         copy: @escaping (String) -> GameAction
     ) throws -> [GameAction] {
-        let resolved = try resolve(arg: arg, state: state, ctx: ctx)
+        let resolved = try resolve(state: state, ctx: ctx)
         switch resolved {
         case let .identified(pIds):
             return pIds.map { copy($0) }
@@ -48,27 +47,16 @@ private extension PlayerArg {
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
         case .actor: return PlayerActor()
-
         case .damaged: return PlayerDamaged()
-            
         case .target: return PlayerTarget()
-            
         case .selectAnyWithCard: return PlayerSelectAnyWithCard()
-
         case .all: return PlayerAll()
-
         case .others: return PlayerOthers()
-
-        case .selectAtRangeWithCard: return PlayerSelectAtRangeWithCard()
-
+        case let .selectAtRangeWithCard(distance): return PlayerSelectAtRangeWithCard(distance: distance)
         case .selectReachable: return PlayerSelectReachable()
-
-        case .selectAt: return PlayerSelectAt()
-
+        case let .selectAt(distance): return PlayerSelectAt(distance: distance)
         case .selectAny: return PlayerSelectAny()
-
         case .next: return PlayerNext()
-
         default: fatalError(.unexpected)
         }
     }

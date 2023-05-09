@@ -10,7 +10,7 @@ struct ApplyEffect: EffectResolverProtocol {
     let effect: CardEffect
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let targets = try PlayerArgResolver().resolve(arg: target, state: state, ctx: ctx)
+        let targets = try target.resolve(state: state, ctx: ctx)
         guard case let .identified(pIds) = targets else {
             fatalError(.unexpected)
         }

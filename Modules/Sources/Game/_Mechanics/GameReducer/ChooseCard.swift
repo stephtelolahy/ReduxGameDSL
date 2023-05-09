@@ -26,7 +26,7 @@ struct EffectChooseCard: EffectResolverProtocol {
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try player.resolve(state: state, ctx: ctx) {
                 CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
             }
         }

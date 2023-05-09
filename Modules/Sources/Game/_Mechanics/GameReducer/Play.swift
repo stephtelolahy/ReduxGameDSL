@@ -30,7 +30,7 @@ struct Play: GameReducerProtocol {
 
         if let requiredTarget = cardAction.target,
            target == nil {
-            let children = try PlayerArgResolver().resolve(arg: requiredTarget, state: state, ctx: ctx) {
+            let children = try requiredTarget.resolve(state: state, ctx: ctx) {
                 .play(actor: actor, card: card, target: $0)
             }
             var state = state

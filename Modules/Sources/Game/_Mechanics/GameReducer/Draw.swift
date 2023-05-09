@@ -20,7 +20,7 @@ struct EffectDraw: EffectResolverProtocol {
     let player: PlayerArg
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+        try player.resolve(state: state, ctx: ctx) {
             .draw(player: $0)
         }
     }
