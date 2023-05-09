@@ -26,7 +26,7 @@ struct ChallengeDiscard: EffectResolverProtocol {
             }
         }
         
-        let resolvedCard = try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: pId)
+        let resolvedCard = try card.resolve(state: state, ctx: ctx, chooser: pId, owner: pId)
         guard case let .selectable(cIdOptions) = resolvedCard else {
             fatalError(.unexpected)
         }

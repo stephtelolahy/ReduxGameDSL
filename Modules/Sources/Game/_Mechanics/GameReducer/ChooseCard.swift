@@ -31,7 +31,7 @@ struct EffectChooseCard: EffectResolverProtocol {
             }
         }
 
-        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: pId, owner: nil) {
+        return try card.resolve(state: state, ctx: ctx, chooser: pId, owner: nil) {
             .chooseCard(player: pId, card: $0)
         }
     }

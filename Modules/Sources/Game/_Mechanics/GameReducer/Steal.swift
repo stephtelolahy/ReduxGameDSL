@@ -36,7 +36,7 @@ struct EffectSteal: EffectResolverProtocol {
             }
         }
 
-        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
+        return try card.resolve(state: state, ctx: ctx, chooser: ctx.actor, owner: tId) {
             .steal(player: pId, target: tId, card: $0)
         }
     }

@@ -28,7 +28,7 @@ struct EffectDiscard: EffectResolverProtocol {
             }
         }
 
-        return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
+        return try card.resolve(state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
             .discard(player: pId, card: $0)
         }
     }

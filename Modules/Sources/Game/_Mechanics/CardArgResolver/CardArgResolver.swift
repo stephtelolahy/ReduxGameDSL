@@ -39,15 +39,14 @@ extension Array where Element == String {
     }
 }
 
-struct CardArgResolver {
+extension CardArg {
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
         owner: String?
     ) throws -> CardArgOutput {
-        try arg.resolver().resolve(
+        try resolver().resolve(
             state: state,
             ctx: ctx,
             chooser: chooser,
@@ -55,9 +54,7 @@ struct CardArgResolver {
         )
     }
 
-    // swiftlint:disable:next function_parameter_count
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
@@ -65,7 +62,6 @@ struct CardArgResolver {
         copy: @escaping (String) -> GameAction
     ) throws -> [GameAction] {
         let resolved = try resolve(
-            arg: arg,
             state: state,
             ctx: ctx,
             chooser: chooser,
