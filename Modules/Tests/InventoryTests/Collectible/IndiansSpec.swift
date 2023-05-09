@@ -11,7 +11,6 @@ import Game
 import Inventory
 
 final class IndiansSpec: QuickSpec {
-    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing Indians") {
             context("three players") {

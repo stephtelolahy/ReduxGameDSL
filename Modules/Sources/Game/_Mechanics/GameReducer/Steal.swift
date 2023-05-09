@@ -18,12 +18,12 @@ struct Steal: GameReducerProtocol {
     }
 }
 
-extension Steal: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .steal(player, target, card) = effect else {
-            fatalError(.unexpected)
-        }
+struct EffectSteal: EffectResolverProtocol {
+    let player: PlayerArg
+    let target: PlayerArg
+    let card: CardArg
 
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .id(pId) = player else {
             return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
                 CardEffect.steal(player: .id($0), target: target, card: card).withCtx(ctx)

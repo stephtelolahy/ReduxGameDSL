@@ -17,13 +17,11 @@ struct Eliminate: GameReducerProtocol {
     }
 }
 
-extension Eliminate: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .eliminate(player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+struct EffectEliminate: EffectResolverProtocol {
+    let player: PlayerArg
+
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .eliminate($0)
         }
     }

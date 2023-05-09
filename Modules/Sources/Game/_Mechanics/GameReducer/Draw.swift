@@ -18,13 +18,11 @@ struct Draw: GameReducerProtocol {
     }
 }
 
-extension Draw: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .draw(player) = effect else {
-            fatalError(.unexpected)
-        }
+struct EffectDraw: EffectResolverProtocol {
+    let player: PlayerArg
 
-        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .draw(player: $0)
         }
     }

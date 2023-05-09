@@ -8,7 +8,7 @@
 struct GroupEffects: EffectResolverProtocol {
     let effects: [CardEffect]
     
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         effects.map { $0.withCtx(ctx) }
     }
 }

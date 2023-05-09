@@ -6,7 +6,7 @@
 //
 
 protocol EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction]
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction]
 }
 
 struct EffectReducer: GameReducerProtocol {
@@ -17,7 +17,7 @@ struct EffectReducer: GameReducerProtocol {
         
         let children = try effect
             .resolver()
-            .resolve(effect: effect, state: state, ctx: ctx)
+            .resolve(state: state, ctx: ctx)
             .simplifyChooseAction(state: state)
         
         var state = state
@@ -33,12 +33,12 @@ private extension CardEffect {
         case let .heal(value, player): return EffectHeal(player: player, value: value)
         case let .damage(value, player): return EffectDamage(player: player, value: value)
         case let .discard(player, card): return EffectDiscard(player: player, card: card)
-        case .draw: return Draw()
-        case .steal: return Steal()
-        case .reveal: return Reveal()
-        case .chooseCard: return ChooseCard()
-        case .setTurn: return SetTurn()
-        case .eliminate: return Eliminate()
+        case let .draw(player): return EffectDraw(player: player)
+        case let .steal(player, target, card): return EffectSteal(player: player, target: target, card: card)
+        case .reveal: return EffectReveal()
+        case let .chooseCard(player, card): return EffectChooseCard(player: player, card: card)
+        case let .setTurn(player): return EffectSetTurn(player: player)
+        case let .eliminate(player): return EffectEliminate(player: player)
         // swiftlint:disable:next line_length
         case let .forceDiscard(player, card, otherwise): return ForceDiscard(player: player, card: card, otherwise: otherwise)
         // swiftlint:disable:next line_length
@@ -74,7 +74,7 @@ private extension GameAction {
             if case let .effect(optionEffect, optionCtx) = value {
                 let resolvedAction = try optionEffect
                     .resolver()
-                    .resolve(effect: optionEffect, state: state, ctx: optionCtx)
+                    .resolve(state: state, ctx: optionCtx)
                 if resolvedAction.count == 1 {
                     options[key] = resolvedAction[0]
                 }

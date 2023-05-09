@@ -11,7 +11,6 @@ import Game
 import Inventory
 
 final class GatlingSpec: QuickSpec {
-    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing gatling") {
             context("three players") {
@@ -34,7 +33,7 @@ final class GatlingSpec: QuickSpec {
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .gatling)
-                        let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
+                    let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
                     
                     // Then
                     expect(result) == [
@@ -70,7 +69,7 @@ final class GatlingSpec: QuickSpec {
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .gatling)
-                        let result = self.awaitAction(action, choices: [.missed], state: state)
+                    let result = self.awaitAction(action, choices: [.missed], state: state)
                     
                     // Then
                     expect(result) == [

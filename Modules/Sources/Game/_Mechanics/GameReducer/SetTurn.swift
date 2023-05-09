@@ -18,13 +18,11 @@ struct SetTurn: GameReducerProtocol {
     }
 }
 
-extension SetTurn: EffectResolverProtocol {
-    func resolve(effect: CardEffect, state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .setTurn(player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+struct EffectSetTurn: EffectResolverProtocol {
+    let player: PlayerArg
+
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
             .setTurn($0)
         }
     }
