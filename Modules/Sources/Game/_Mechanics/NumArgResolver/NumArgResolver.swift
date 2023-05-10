@@ -6,12 +6,12 @@
 //
 
 protocol NumArgResolverProtocol {
-    func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int
 }
 
-struct NumArgResolver: NumArgResolverProtocol {
+struct NumArgResolver {
     func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int {
-        try arg.resolver().resolve(arg: arg, state: state, ctx: ctx)
+        try arg.resolver().resolve(state: state, ctx: ctx)
     }
 }
 
