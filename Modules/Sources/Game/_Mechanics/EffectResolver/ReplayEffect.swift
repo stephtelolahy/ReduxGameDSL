@@ -10,7 +10,7 @@ struct ReplayEffect: EffectResolverProtocol {
     let times: NumArg
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let number = try NumArgResolver().resolve(arg: times, state: state, ctx: ctx)
+        let number = try times.resolve(state: state, ctx: ctx)
         return (0..<number).map { _ in
             effect.withCtx(ctx)
         }

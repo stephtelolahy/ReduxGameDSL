@@ -5,14 +5,15 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-protocol PlayReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) throws
-}
-
 extension PlayReq {
     func match(state: GameState, ctx: EffectContext) throws {
         try matcher().match(state: state, ctx: ctx)
     }
+}
+
+protocol PlayReqMatcherProtocol {
+    // TODO: return boolean
+    func match(state: GameState, ctx: EffectContext) throws
 }
 
 private extension PlayReq {
