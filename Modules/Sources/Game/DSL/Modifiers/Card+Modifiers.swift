@@ -16,12 +16,16 @@ public extension Card {
 }
 
 public extension CardEffect {
-    func triggered(on actionType: CardActionType, target: PlayerArg? = nil) -> CardAction {
-        .init(actionType: actionType, target: target, playReqs: [], effect: self)
+    func triggered(on actionType: CardActionType) -> CardAction {
+        .init(actionType: actionType, playReqs: [], effect: self)
     }
 }
 
 public extension CardAction {
+    func target(_ target: PlayerArg) -> Self {
+        .init(actionType: actionType, target: target, playReqs: playReqs, effect: effect)
+    }
+
     func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {
         .init(actionType: actionType, target: target, playReqs: playReqs(), effect: effect)
     }

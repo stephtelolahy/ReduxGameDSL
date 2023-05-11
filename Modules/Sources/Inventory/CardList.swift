@@ -11,11 +11,13 @@ public enum CardList {
 
         // MARK: - Collectible
 
+        // TODO: remove PlayReq => emit error if first effect cannot be applied
+
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isDamaged // TODO: remove
+                    PlayReq.isDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
@@ -23,7 +25,7 @@ public enum CardList {
         Card(.saloon) {
             CardEffect.heal(1, player: .damaged)
                 .triggered(on: .play)
-                .require { // TODO: remove requirement, apply effect to group allDamaged
+                .require {
                     PlayReq.isAnyDamaged
                 }
         }
@@ -42,28 +44,29 @@ public enum CardList {
 
         Card(.catBalou) {
             CardEffect.discard(player: .target, card: .selectAny)
-                .triggered(on: .play, target: .selectAnyWithCard) // TODO: action modifier .target()
+                .triggered(on: .play)
+                .target(.selectAnyWithCard)
         }
 
         Card(.panic) {
             CardEffect.steal(player: .actor, target: .target, card: .selectAny)
-                .triggered(on: .play, target: .selectAtRangeWithCard(1))
+                .triggered(on: .play)
+                .target(.selectAtRangeWithCard(1))
         }
 
         Card(.generalStore) {
-            CardEffect.group { // TODO: modifier .andThen()
-                CardEffect.reveal
-                    .replay(.numPlayers)
-                CardEffect.chooseCard(player: .all, card: .selectArena)
-            }
-            .triggered(on: .play)
+            CardEffect.reveal
+                .replay(.numPlayers)
+                .andThen(CardEffect.chooseCard(player: .all, card: .selectArena))
+                .triggered(on: .play)
         }
 
         Card(.bang) {
             CardEffect.forceDiscard(player: .target,
                                     card: .selectHandNamed(.missed),
                                     otherwise: .damage(1, player: .target))
-            .triggered(on: .play, target: .selectReachable)
+            .triggered(on: .play)
+            .target(.selectReachable)
             .require {
                 PlayReq.isTimesPerTurn(1)
             }
@@ -92,18 +95,17 @@ public enum CardList {
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target),
                                         challenger: .actor) // TODO: modifier .targetChallenge(target, otherwise)
-            .triggered(on: .play, target: .selectAny)
+            .triggered(on: .play)
+            .target(.selectAny)
         }
 
         // MARK: - Abilities
 
         Card(.endTurn) {
-            CardEffect.group {
-                CardEffect.discard(player: .actor, card: .selectHand)
-                    .replay(.excessHand)
-                CardEffect.setTurn(.next)
-            }
-            .triggered(on: .spell)
+            CardEffect.discard(player: .actor, card: .selectHand)
+                .replay(.excessHand)
+                .andThen(CardEffect.setTurn(.next))
+                .triggered(on: .spell)
         }
         
         Card(.drawOnSetTurn) {

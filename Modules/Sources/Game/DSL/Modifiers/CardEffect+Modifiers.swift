@@ -14,8 +14,11 @@ public extension CardEffect {
         .replayEffect(times: .exact(times), effect: self)
     }
 
-    static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
-        .groupEffects(content())
+    func andThen(_ effect: Self) -> Self {
+        var array: [CardEffect] = []
+        array.append(self)
+        array.append(effect)
+        return .groupEffects(array)
     }
 
     func apply(to target: PlayerArg) -> Self {
