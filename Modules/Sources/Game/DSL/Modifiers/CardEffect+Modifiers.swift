@@ -6,12 +6,12 @@
 //
 
 public extension CardEffect {
-    static func replay(_ times: NumArg, @CardEffectBuilder content: () -> Self) -> Self {
-        .replayEffect(times: times, effect: content())
+    func replay(_ times: NumArg) -> Self {
+        .replayEffect(times: times, effect: self)
     }
 
-    static func replay(_ times: Int, @CardEffectBuilder content: () -> Self) -> Self {
-        .replayEffect(times: .exact(times), effect: content())
+    func replay(_ times: Int) -> Self {
+        .replayEffect(times: .exact(times), effect: self)
     }
 
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {

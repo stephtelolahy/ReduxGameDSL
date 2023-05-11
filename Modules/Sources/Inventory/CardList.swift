@@ -15,7 +15,7 @@ public enum CardList {
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isDamaged
+                    PlayReq.isDamaged // TODO: remove
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
@@ -23,28 +23,26 @@ public enum CardList {
         Card(.saloon) {
             CardEffect.heal(1, player: .damaged)
                 .triggered(on: .play)
-                .require {
+                .require { // TODO: remove requirement, apply effect to group allDamaged
                     PlayReq.isAnyDamaged
                 }
         }
 
         Card(.stagecoach) {
-            CardEffect.replay(2) {
-                CardEffect.draw(player: .actor)
-            }
-            .triggered(on: .play)
+            CardEffect.draw(player: .actor)
+                .replay(2)
+                .triggered(on: .play)
         }
 
         Card(.wellsFargo) {
-            CardEffect.replay(3) {
-                CardEffect.draw(player: .actor)
-            }
-            .triggered(on: .play)
+            CardEffect.draw(player: .actor)
+                .replay(3)
+                .triggered(on: .play)
         }
 
         Card(.catBalou) {
             CardEffect.discard(player: .target, card: .selectAny)
-                .triggered(on: .play, target: .selectAnyWithCard)
+                .triggered(on: .play, target: .selectAnyWithCard) // TODO: action modifier .target()
         }
 
         Card(.panic) {
@@ -53,10 +51,9 @@ public enum CardList {
         }
 
         Card(.generalStore) {
-            CardEffect.group {
-                CardEffect.replay(.numPlayers) {
-                    CardEffect.reveal
-                }
+            CardEffect.group { // TODO: modifier .andThen()
+                CardEffect.reveal
+                    .replay(.numPlayers)
                 CardEffect.chooseCard(player: .all, card: .selectArena)
             }
             .triggered(on: .play)
@@ -96,7 +93,7 @@ public enum CardList {
             CardEffect.challengeDiscard(player: .target,
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target),
-                                        challenger: .actor)
+                                        challenger: .actor) // TODO: modifier .targetChallenge(target, otherwise)
             .triggered(on: .play, target: .selectAny)
         }
 
@@ -104,22 +101,20 @@ public enum CardList {
 
         Card(.endTurn) {
             CardEffect.group {
-                CardEffect.replay(.excessHand) {
-                    CardEffect.discard(player: .actor, card: .selectHand)
-                }
+                CardEffect.discard(player: .actor, card: .selectHand)
+                    .replay(.excessHand)
                 CardEffect.setTurn(.next)
             }
             .triggered(on: .spell)
         }
         
         Card(.drawOnSetTurn) {
-            CardEffect.replay(.playerAttr(.starTurnCards)) {
-                CardEffect.draw(player: .actor)
-            }
-            .triggered(on: .event)
-            .require {
-                PlayReq.onSetTurn
-            }
+            CardEffect.draw(player: .actor)
+                .replay(.playerAttr(.starTurnCards))
+                .triggered(on: .event)
+                .require {
+                    PlayReq.onSetTurn
+                }
         }
 
         Card(.eliminateOnLooseLastHealth) {
