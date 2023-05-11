@@ -18,8 +18,8 @@ public extension CardEffect {
         .groupEffects(content())
     }
 
-    static func apply(target: PlayerArg, @CardEffectBuilder content: () -> Self) -> Self {
-        .applyEffect(target: target, effect: content())
+    func apply(to target: PlayerArg) -> Self {
+        .applyEffect(target: target, effect: self)
     }
 }
 

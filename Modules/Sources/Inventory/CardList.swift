@@ -72,20 +72,18 @@ public enum CardList {
         Card(.missed)
 
         Card(.gatling) {
-            CardEffect.apply(target: .others) {
-                CardEffect.forceDiscard(player: .target,
-                                        card: .selectHandNamed(.missed),
-                                        otherwise: .damage(1, player: .target))
-            }
+            CardEffect.forceDiscard(player: .target,
+                                    card: .selectHandNamed(.missed),
+                                    otherwise: .damage(1, player: .target))
+            .apply(to: .others)
             .triggered(on: .play)
         }
 
         Card(.indians) {
-            CardEffect.apply(target: .others) {
-                CardEffect.forceDiscard(player: .target,
-                                        card: .selectHandNamed(.bang),
-                                        otherwise: .damage(1, player: .target))
-            }
+            CardEffect.forceDiscard(player: .target,
+                                    card: .selectHandNamed(.bang),
+                                    otherwise: .damage(1, player: .target))
+            .apply(to: .others)
             .triggered(on: .play)
         }
 
