@@ -11,7 +11,6 @@ import Nimble
 
 final class EliminateOnLooseLastHealthSpec: QuickSpec {
     override func spec() {
-        let ctx = EffectContext(actor: "px", card: "cx")
 
         describe("a player") {
             context("loosing last health") {
@@ -25,12 +24,12 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.effect(.damage(1, player: .id("p1")), ctx: ctx)
+                    let action = GameAction.damage(player: "p1", value: 1)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: "p1")),
+                        .success(.damage(player: "p1", value: 1)),
                         .success(.forcePlay(actor: "p1", card: .eliminateOnLooseLastHealth)),
                         .success(.eliminate("p1"))
                     ]
@@ -47,12 +46,12 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.effect(.damage(1, player: .id("p1")), ctx: ctx)
+                    let action = GameAction.damage(player: "p1", value: 1)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: "p1"))
+                        .success(.damage(player: "p1", value: 1))
                     ]
                 }
             }

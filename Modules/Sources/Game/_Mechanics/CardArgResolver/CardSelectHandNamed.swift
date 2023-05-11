@@ -6,17 +6,14 @@
 //
 
 struct CardSelectHandNamed: CardArgResolverProtocol {
+    let name: String
+
     func resolve(
-        arg: CardArg,
         state: GameState,
         ctx: EffectContext,
         chooser: String,
         owner: String?
     ) throws -> CardArgOutput {
-        guard case let .selectHandNamed(name) = arg else {
-            fatalError(.unexpected)
-        }
-
         guard let owner else {
             fatalError(.unexpected)
         }

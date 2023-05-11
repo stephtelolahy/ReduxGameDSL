@@ -34,15 +34,16 @@ final class ChallengeDiscardSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
                     
                     // Then
-                    expect(result.chooseOne) == ChooseOne(chooser: "p1", options: [
-                        "counter": CardEffect.group {
-                            CardEffect.discard(player: .id("p1"), card: .id("counter"))
+                    let reversedCtx = EffectContext(actor: "px", card: "cx", target: "px")
+                    expect(result.queue.first) == .chooseAction(chooser: "p1", options: [
+                        "counter": GameAction.group {
+                            GameAction.discard(player: "p1", card: "counter")
                             CardEffect.challengeDiscard(player: .id("px"),
                                                         card: .selectHandNamed("counter"),
                                                         otherwise: .damage(1, player: .target),
-                                                        challenger: .id("p1"))
-                        }.withCtx(EffectContext(actor: "px", card: "cx", target: "px")),
-                        .pass: CardEffect.damage(1, player: .target).withCtx(ctx)
+                                                        challenger: .id("p1")).withCtx(reversedCtx)
+                        },
+                        .pass: .damage(player: "p1", value: 1)
                     ])
                 }
             }

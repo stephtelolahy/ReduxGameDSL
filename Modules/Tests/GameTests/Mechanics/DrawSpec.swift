@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class DrawSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("draw") {
             context("deck containing cards") {
@@ -27,7 +26,7 @@ final class DrawSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
+                    let action = GameAction.draw(player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -49,7 +48,7 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
+                        let action = GameAction.draw(player: "p1")
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
@@ -68,7 +67,7 @@ final class DrawSpec: QuickSpec {
                         }
 
                         // When
-                        let action = CardEffect.draw(player: .id("p1")).withCtx(ctx)
+                        let action = GameAction.draw(player: "p1")
                         let result = sut.reduce(state: state, action: action)
 
                         // Then

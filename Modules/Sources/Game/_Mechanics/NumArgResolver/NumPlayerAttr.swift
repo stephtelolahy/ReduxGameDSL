@@ -6,11 +6,9 @@
 //
 
 struct NumPlayerAttr: NumArgResolverProtocol {
-    func resolve(arg: NumArg, state: GameState, ctx: EffectContext) throws -> Int {
-        guard case let .playerAttr(key) = arg else {
-            fatalError(.unexpected)
-        }
+    let key: AttributeKey
 
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int {
         let actorObj = state.player(ctx.actor)
         return actorObj.attributes[key] ?? 0
     }

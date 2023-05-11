@@ -6,9 +6,7 @@
 //
 
 struct IsAnyDamaged: PlayReqMatcherProtocol {
-    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
-        guard state.playOrder.contains(where: { state.player($0).isDamaged }) else {
-            throw GameError.mismatched(playReq)
-        }
+    func match(state: GameState, ctx: EffectContext) throws -> Bool {
+        state.playOrder.contains(where: { state.player($0).isDamaged })
     }
 }

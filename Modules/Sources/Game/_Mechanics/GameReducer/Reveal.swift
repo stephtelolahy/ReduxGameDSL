@@ -6,16 +6,19 @@
 //
 
 struct Reveal: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         if state.arena == nil {
             state.arena = .init()
         }
         let card = try state.popDeck()
         state.arena?.add(card)
-
-        state.event = .reveal
-
         return state
+    }
+}
+
+struct EffectReveal: EffectResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        [.reveal]
     }
 }

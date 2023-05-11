@@ -7,10 +7,8 @@
 
 /// Actor is damaged
 struct IsDamaged: PlayReqMatcherProtocol {
-    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
+    func match(state: GameState, ctx: EffectContext) throws -> Bool {
         let actorObj = state.player(ctx.actor)
-        guard actorObj.isDamaged else {
-            throw GameError.mismatched(playReq)
-        }
+        return actorObj.isDamaged
     }
 }

@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 06/05/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class GameOverSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "px", card: "cx")
 
         describe("a game") {
             context("one player last") {
@@ -24,7 +23,7 @@ final class GameOverSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.effect(.eliminate(.id("p2")), ctx: ctx)
+                    let action = GameAction.eliminate("p2")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -42,7 +41,7 @@ final class GameOverSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.effect(.eliminate(.id("p3")), ctx: ctx)
+                    let action = GameAction.eliminate("p3")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

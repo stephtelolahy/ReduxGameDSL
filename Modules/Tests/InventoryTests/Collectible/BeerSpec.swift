@@ -34,7 +34,7 @@ final class BeerSpec: QuickSpec {
 
                     // Then
                     expect(result) == [.success(.play(actor: "p1", card: .beer)),
-                                       .success(.heal(1, player: "p1"))]
+                                       .success(.heal(player: "p1", value: 1))]
                 }
             }
 

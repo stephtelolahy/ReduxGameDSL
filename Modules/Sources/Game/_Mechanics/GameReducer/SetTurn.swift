@@ -6,23 +6,22 @@
 //
 
 struct SetTurn: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .setTurn(player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.setTurn(.id($0)).withCtx(ctx)
-            }
-        }
+    let player: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
-        state.turn = pId
+        state.turn = player
         state.playCounter = [:]
-        state.event = .setTurn(pId)
-
         return state
+    }
+}
+
+struct EffectSetTurn: EffectResolverProtocol {
+    let player: PlayerArg
+
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try player.resolve(state: state, ctx: ctx) {
+            .setTurn($0)
+        }
     }
 }

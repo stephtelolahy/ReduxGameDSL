@@ -6,24 +6,21 @@
 //
 
 struct Eliminate: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-                case let .eliminate(player) = effect else {
-            fatalError(.unexpected)
-        }
+    let player: String
 
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.eliminate(.id($0)).withCtx(ctx)
-            }
-        }
-
+    func reduce(state: GameState) throws -> GameState {
         var state = state
-
-        state.playOrder.removeAll(where: { $0 == pId })
-
-        state.event = .eliminate(pId)
-
+        state.playOrder.removeAll(where: { $0 == player })
         return state
+    }
+}
+
+struct EffectEliminate: EffectResolverProtocol {
+    let player: PlayerArg
+
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try player.resolve(state: state, ctx: ctx) {
+            .eliminate($0)
+        }
     }
 }

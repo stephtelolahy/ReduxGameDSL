@@ -6,11 +6,10 @@
 //
 
 struct ForcePlay: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .forcePlay(actor, card) = action else {
-            fatalError(.unexpected)
-        }
+    let actor: String
+    let card: String
 
+    func reduce(state: GameState) throws -> GameState {
         guard state.players[actor] != nil else {
             throw GameError.playerNotFound(actor)
         }
@@ -26,9 +25,6 @@ struct ForcePlay: GameReducerProtocol {
         let ctx = EffectContext(actor: actor, card: card)
         var state = state
         state.queue.append(action.effect.withCtx(ctx))
-
-        state.event = .forcePlay(actor: actor, card: card)
-
         return state
     }
 }

@@ -42,10 +42,16 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(chooser: "p1", options: ["p2", "p3", "p4"])),
+                        .success(.chooseAction(chooser: "p1", options: [
+                            "p2": .play(actor: "p1", card: .duel, target: "p2"),
+                            "p3": .play(actor: "p1", card: .duel, target: "p3"),
+                            "p4": .play(actor: "p1", card: .duel, target: "p4")
+                        ])),
                         .success(.play(actor: "p1", card: .duel, target: "p4")),
-                        .success(.chooseOne(chooser: "p4", options: [.pass])),
-                        .success(.damage(1, player: "p4"))
+                        .success(.chooseAction(chooser: "p4", options: [
+                            .pass: .damage(player: "p4", value: 1)
+                        ])),
+                        .success(.damage(player: "p4", value: 1))
                     ]
                 }
             }
@@ -60,8 +66,15 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
-                            .success(.damage(1, player: "p2"))
+                            .success(.chooseAction(chooser: "p2", options: [
+                                "bang-2": .groupActions([
+                                    .discard(player: "p2", card: "bang-2"),
+                                    .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
+                                            ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
+                                ]),
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
+                            .success(.damage(player: "p2", value: 1))
                         ]
                     }
                 }
@@ -75,10 +88,24 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
+                            .success(.chooseAction(chooser: "p2", options: [
+                                "bang-2": .groupActions([
+                                    .discard(player: "p2", card: "bang-2"),
+                                    .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
+                                            ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
+                                ]),
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
                             .success(.discard(player: "p2", card: "bang-2")),
-                            .success(.chooseOne(chooser: "p1", options: [.pass, "bang-1"])),
-                            .success(.damage(1, player: "p1"))
+                            .success(.chooseAction(chooser: "p1", options: [
+                                "bang-1": .groupActions([
+                                    .discard(player: "p1", card: "bang-1"),
+                                    .effect(.challengeDiscard(player: .id("p2"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p1")),
+                                            ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
+                                ]),
+                                .pass: .damage(player: "p1", value: 1)
+                            ])),
+                            .success(.damage(player: "p1", value: 1))
                         ]
                     }
                 }
@@ -92,12 +119,28 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass, "bang-2"])),
+                            .success(.chooseAction(chooser: "p2", options: [
+                                "bang-2": .groupActions([
+                                    .discard(player: "p2", card: "bang-2"),
+                                    .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
+                                            ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
+                                ]),
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
                             .success(.discard(player: "p2", card: "bang-2")),
-                            .success(.chooseOne(chooser: "p1", options: [.pass, "bang-1"])),
+                            .success(.chooseAction(chooser: "p1", options: [
+                                "bang-1": .groupActions([
+                                    .discard(player: "p1", card: "bang-1"),
+                                    .effect(.challengeDiscard(player: .id("p2"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p1")),
+                                            ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
+                                ]),
+                                .pass: .damage(player: "p1", value: 1)
+                            ])),
                             .success(.discard(player: "p1", card: "bang-1")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass])),
-                            .success(.damage(1, player: "p2"))
+                            .success(.chooseAction(chooser: "p2", options: [
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
+                            .success(.damage(player: "p2", value: 1))
                         ]
                     }
                 }

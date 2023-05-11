@@ -54,12 +54,7 @@ extension GameState {
         return distance
     }
 
-    mutating func setChooseOne(chooser: String, options: [String: GameAction]) {
-        chooseOne = ChooseOne(chooser: chooser, options: options)
-        event = .chooseOne(chooser: chooser, options: Set(options.keys))
-    }
-
-    func hasWinner() -> String? {
+    func getWinner() -> String? {
         if playOrder.count == 1 {
             return playOrder[0]
         }

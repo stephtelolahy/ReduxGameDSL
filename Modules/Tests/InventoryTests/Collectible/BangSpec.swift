@@ -79,10 +79,15 @@ final class BangSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.chooseOne(chooser: "p1", options: ["p2", "p4"])),
+                            .success(.chooseAction(chooser: "p1", options: [
+                                "p2": .play(actor: "p1", card: .bang, target: "p2"),
+                                "p4": .play(actor: "p1", card: .bang, target: "p4")
+                            ])),
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass])),
-                            .success(.damage(1, player: "p2"))
+                            .success(.chooseAction(chooser: "p2", options: [
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
+                            .success(.damage(player: "p2", value: 1))
                         ]
                     }
                 }
@@ -112,7 +117,10 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
+                            .success(.chooseAction(chooser: "p2", options: [
+                                .missed: .discard(player: "p2", card: .missed),
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
                             .success(.discard(player: "p2", card: .missed))
                         ]
                     }
@@ -137,8 +145,10 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseOne(chooser: "p2", options: [.pass])),
-                            .success(.damage(1, player: "p2"))
+                            .success(.chooseAction(chooser: "p2", options: [
+                                .pass: .damage(player: "p2", value: 1)
+                            ])),
+                            .success(.damage(player: "p2", value: 1))
                         ]
                     }
                 }

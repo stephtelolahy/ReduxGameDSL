@@ -18,10 +18,10 @@ extension XCTestCase {
         timeout: TimeInterval = 0.5,
         file: StaticString = #file,
         line: UInt = #line
-    ) -> [Result<GameEvent, GameError>] {
+    ) -> [Result<GameAction, GameError>] {
         let store = createGameStore(initial: state)
         var choices = choices
-        var result: [Result<GameEvent, GameError>] = []
+        var result: [Result<GameAction, GameError>] = []
         let expectation = XCTestExpectation(description: "Awaiting game idle")
         expectation.isInverted = true
         let cancellable = store.$state.dropFirst(1).sink { state in

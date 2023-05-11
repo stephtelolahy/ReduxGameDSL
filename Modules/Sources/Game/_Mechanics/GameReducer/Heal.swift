@@ -6,23 +6,23 @@
 //
 
 struct Heal: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .heal(value, player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.heal(value, player: .id($0)).withCtx(ctx)
-            }
-        }
-        
+    let player: String
+    let value: Int
+
+    func reduce(state: GameState) throws -> GameState {
         var state = state
-        try state[keyPath: \GameState.players[pId]]?.gainHealth(value)
-        
-        state.event = .heal(value, player: pId)
-        
+        try state[keyPath: \GameState.players[player]]?.gainHealth(value)
         return state
+    }
+}
+
+struct EffectHeal: EffectResolverProtocol {
+    let player: PlayerArg
+    let value: Int
+    
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try player.resolve(state: state, ctx: ctx) {
+            .heal(player: $0, value: value)
+        }
     }
 }

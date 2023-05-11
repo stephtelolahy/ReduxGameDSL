@@ -6,23 +6,23 @@
 //
 
 struct Damage: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .damage(value, player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.damage(value, player: .id($0)).withCtx(ctx)
-            }
-        }
+    let player: String
+    let value: Int
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
-        state[keyPath: \GameState.players[pId]]?.looseHealth(value)
-        
-        state.event = .damage(value, player: pId)
-
+        state[keyPath: \GameState.players[player]]?.looseHealth(value)
         return state
+    }
+}
+
+struct EffectDamage: EffectResolverProtocol {
+    let player: PlayerArg
+    let value: Int
+    
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try player.resolve(state: state, ctx: ctx) {
+            .damage(player: $0, value: value)
+        }
     }
 }

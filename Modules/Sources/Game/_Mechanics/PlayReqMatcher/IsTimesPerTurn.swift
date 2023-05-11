@@ -6,20 +6,16 @@
 //
 
 struct IsTimesPerTurn: PlayReqMatcherProtocol {
-    func match(playReq: PlayReq, state: GameState, ctx: EffectContext) throws {
-        guard case let .isTimesPerTurn(maxTimes) = playReq else {
-            fatalError(.unexpected)
-        }
-        
+    let maxTimes: Int
+
+    func match(state: GameState, ctx: EffectContext) throws -> Bool {
         // No limit
         guard maxTimes > 0 else {
-            return
+            return false
         }
 
         let cardName = ctx.card.extractName()
         let playedTimes = state.playCounter[cardName] ?? 0
-        guard playedTimes < maxTimes else {
-            throw GameError.mismatched(playReq)
-        }
+        return playedTimes < maxTimes
     }
 }

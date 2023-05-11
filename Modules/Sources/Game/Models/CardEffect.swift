@@ -42,11 +42,11 @@ public indirect enum CardEffect: Codable, Equatable {
     case eliminate(PlayerArg)
 
     /// Repeat an effect
-    case replayEffect(times: NumArg, effect: CardEffect)
+    case replayEffect(times: NumArg, effect: Self)
     
     /// Dispatch effects sequentially
-    case groupEffects([CardEffect])
+    case groupEffects([Self])
     
     /// Apply an effect to some players
-    case applyEffect(target: PlayerArg, effect: CardEffect)
+    case applyEffect(target: PlayerArg, effect: Self)
 }

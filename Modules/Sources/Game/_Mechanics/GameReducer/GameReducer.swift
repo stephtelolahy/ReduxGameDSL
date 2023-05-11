@@ -6,12 +6,11 @@
 //
 import Redux
 
-protocol GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState
-}
+public struct GameReducer: ReducerProtocol {
 
-struct GameReducer: ReducerProtocol {
-    func reduce(state: GameState, action: GameAction) -> GameState {
+    public init() {}
+
+    public func reduce(state: GameState, action: GameAction) -> GameState {
         guard state.isOver == nil else {
             return state
         }
@@ -21,21 +20,21 @@ struct GameReducer: ReducerProtocol {
         state.error = nil
 
         do {
-            state = try validateAction(action: action, state: state)
-            state = try action.reducer().reduce(state: state, action: action)
+            state = try prepareAction(action: action, state: state)
+            state = try executeAction(action: action, state: state)
             state = queueTriggeredEffects(state: state)
-            state = checkGameOver(state: state)
-            return state
+            state = updateGameOver(state: state)
         } catch {
             state.error = error as? GameError
-            return state
         }
+
+        return state
     }
 }
 
 private extension GameReducer {
 
-    func validateAction(action: GameAction, state: GameState) throws -> GameState {
+    func prepareAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
 
         if let chooseOne = state.chooseOne {
@@ -51,7 +50,22 @@ private extension GameReducer {
 
         return state
     }
-    
+
+    func executeAction(action: GameAction, state: GameState) throws -> GameState {
+        var state = state
+        state = try action.reducer().reduce(state: state)
+        switch action {
+        case .play,
+                .effect,
+                .groupActions:
+            break
+
+        default:
+            state.event = action
+        }
+        return state
+    }
+
     func queueTriggeredEffects(state: GameState) -> State {
         var state = state
         for actor in state.playOrder {
@@ -75,7 +89,7 @@ private extension GameReducer {
         action.actionType == .trigger {
             for playReq in action.playReqs {
                 do {
-                    try PlayReqMatcher().match(playReq: playReq, state: state, ctx: ctx)
+                    try playReq.match(state: state, ctx: ctx)
                 } catch {
                     return false
                 }
@@ -85,8 +99,8 @@ private extension GameReducer {
         return false
     }
 
-    func checkGameOver(state: GameState) -> GameState {
-        if let winner = state.hasWinner() {
+    func updateGameOver(state: GameState) -> GameState {
+        if let winner = state.getWinner() {
             var state = state
             state.isOver = GameOver(winner: winner)
             return state
@@ -96,44 +110,28 @@ private extension GameReducer {
     }
 }
 
+protocol GameReducerProtocol {
+    func reduce(state: GameState) throws -> GameState
+}
+
 private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-        case .play: return Play()
-            
-        case .forcePlay: return ForcePlay()
-            
-        case let .effect(effect, _):
-            switch effect {
-            case .draw: return Draw()
-                
-            case .discard: return Discard()
-                
-            case .steal: return Steal()
-                
-            case .reveal: return Reveal()
-                
-            case .heal: return Heal()
-                
-            case .damage: return Damage()
-                
-            case .forceDiscard: return ForceDiscard()
-                
-            case .challengeDiscard: return ChallengeDiscard()
-                
-            case .setTurn: return SetTurn()
-
-            case .eliminate: return Eliminate()
-                
-            case .chooseCard: return ChooseCard()
-                
-            case .applyEffect: return ApplyEffect()
-                
-            case .replayEffect: return ReplayEffect()
-                
-            case .groupEffects: return GroupEffects()
-            }
+        case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
+        case let .forcePlay(actor, card): return ForcePlay(actor: actor, card: card)
+        case let .heal(player, value): return Heal(player: player, value: value)
+        case let .damage(player, value): return Damage(player: player, value: value)
+        case let .discard(player, card): return Discard(player: player, card: card)
+        case let .draw(player): return Draw(player: player)
+        case let .steal(player, target, card): return Steal(player: player, target: target, card: card)
+        case .reveal: return Reveal()
+        case let .chooseCard(player, card): return ChooseCard(player: player, card: card)
+        case let .groupActions(actions): return GroupActions(children: actions)
+        case let .setTurn(player): return SetTurn(player: player)
+        case let .eliminate(player): return Eliminate(player: player)
+        case let .effect(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
+        case let .chooseAction(chooser, options): return ChooseAction(chooser: chooser, options: options)
         }
     }
 }

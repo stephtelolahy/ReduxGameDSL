@@ -5,14 +5,13 @@
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-@testable import Game
 import Quick
 import Nimble
+import Game
 
 final class DiscardSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
 
         describe("discard") {
             context("hand card") {
@@ -28,7 +27,7 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.discard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
+                    let action = GameAction.discard(player: "p1", card: "c1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -50,7 +49,7 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.discard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
+                    let action = GameAction.discard(player: "p1", card: "c1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -66,7 +65,7 @@ final class DiscardSpec: QuickSpec {
                     }
 
                     // When
-                    let action = CardEffect.discard(player: .id("p1"), card: .id("c1")).withCtx(ctx)
+                    let action = GameAction.discard(player: "p1", card: "c1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

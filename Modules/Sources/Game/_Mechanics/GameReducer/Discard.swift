@@ -6,31 +6,30 @@
 //
 
 struct Discard: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .discard(player, card) = effect else {
-            fatalError(.unexpected)
-        }
-        
+    let player: String
+    let card: String
+
+    func reduce(state: GameState) throws -> GameState {
+        var state = state
+        try state[keyPath: \GameState.players[player]]?.removeCard(card)
+        state.discard.push(card)
+        return state
+    }
+}
+
+struct EffectDiscard: EffectResolverProtocol {
+    let player: PlayerArg
+    let card: CardArg
+    
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
+            return try player.resolve(state: state, ctx: ctx) {
                 CardEffect.discard(player: .id($0), card: card).withCtx(ctx)
             }
         }
 
-        guard case let .id(cId) = card else {
-            return try CardArgResolver().resolve(arg: card, state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
-                CardEffect.discard(player: player, card: .id($0)).withCtx(ctx)
-            }
+        return try card.resolve(state: state, ctx: ctx, chooser: ctx.actor, owner: pId) {
+            .discard(player: pId, card: $0)
         }
-
-        var state = state
-        try state[keyPath: \GameState.players[pId]]?.removeCard(cId)
-
-        state.discard.push(cId)
-
-        state.event = .discard(player: pId, card: cId)
-
-        return state
     }
 }

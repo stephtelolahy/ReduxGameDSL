@@ -6,24 +6,22 @@
 //
 
 struct Draw: GameReducerProtocol {
-    func reduce(state: GameState, action: GameAction) throws -> GameState {
-        guard case let .effect(effect, ctx) = action,
-              case let .draw(player) = effect else {
-            fatalError(.unexpected)
-        }
-        
-        guard case let .id(pId) = player else {
-            return try PlayerArgResolver().resolve(arg: player, state: state, ctx: ctx) {
-                CardEffect.draw(player: .id($0)).withCtx(ctx)
-            }
-        }
+    let player: String
 
+    func reduce(state: GameState) throws -> GameState {
         var state = state
         let card = try state.popDeck()
-        state[keyPath: \GameState.players[pId]]?.hand.add(card)
-
-        state.event = .draw(player: pId)
-
+        state[keyPath: \GameState.players[player]]?.hand.add(card)
         return state
+    }
+}
+
+struct EffectDraw: EffectResolverProtocol {
+    let player: PlayerArg
+
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+        try player.resolve(state: state, ctx: ctx) {
+            .draw(player: $0)
+        }
     }
 }

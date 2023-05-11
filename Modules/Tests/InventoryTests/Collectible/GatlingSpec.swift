@@ -33,15 +33,20 @@ final class GatlingSpec: QuickSpec {
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .gatling)
-                        let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
+                    let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
                     
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
-                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .missed: .discard(player: "p2", card: .missed),
+                            .pass: .damage(player: "p2", value: 1)
+                        ])),
                         .success(.discard(player: "p2", card: .missed)),
-                        .success(.chooseOne(chooser: "p3", options: [.pass])),
-                        .success(.damage(1, player: "p3"))
+                        .success(.chooseAction(chooser: "p3", options: [
+                            .pass: .damage(player: "p3", value: 1)
+                        ])),
+                        .success(.damage(player: "p3", value: 1))
                     ]
                 }
             }
@@ -64,12 +69,15 @@ final class GatlingSpec: QuickSpec {
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .gatling)
-                        let result = self.awaitAction(action, choices: [.missed], state: state)
+                    let result = self.awaitAction(action, choices: [.missed], state: state)
                     
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .gatling)),
-                        .success(.chooseOne(chooser: "p2", options: [.missed, .pass])),
+                        .success(.chooseAction(chooser: "p2", options: [
+                            .missed: .discard(player: "p2", card: .missed),
+                            .pass: .damage(player: "p2", value: 1)
+                        ])),
                         .success(.discard(player: "p2", card: .missed))
                     ]
                 }
