@@ -17,7 +17,7 @@ struct ForcePlay: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let action = cardObj.actions.first(where: { $0.actionType == .trigger }) else {
+              let action = cardObj.actions.first(where: { $0.actionType == .event }) else {
             throw GameError.cardNotPlayable(card)
         }
         

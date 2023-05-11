@@ -15,35 +15,14 @@ public extension Card {
     }
 }
 
-public func onPlay(
-    target: PlayerArg? = nil,
-    @CardEffectBuilder content: () -> CardEffect,
-    @PlayReqBuilder require: () -> [PlayReq] = { [] }
-) -> CardAction {
-    .init(actionType: .play,
-          target: target,
-          playReqs: require(),
-          effect: content())
+public extension CardEffect {
+    func triggered(on actionType: CardActionType, target: PlayerArg? = nil) -> CardAction {
+        .init(actionType: actionType, target: target, playReqs: [], effect: self)
+    }
 }
 
-public func onSpell(
-    target: PlayerArg? = nil,
-    @CardEffectBuilder content: () -> CardEffect,
-    @PlayReqBuilder require: () -> [PlayReq] = { [] }
-) -> CardAction {
-    .init(actionType: .spell,
-          target: target,
-          playReqs: require(),
-          effect: content())
-}
-
-public func onTriggered(
-    target: PlayerArg? = nil,
-    @CardEffectBuilder content: () -> CardEffect,
-    @PlayReqBuilder require: () -> [PlayReq] = { [] }
-) -> CardAction {
-    .init(actionType: .trigger,
-          target: target,
-          playReqs: require(),
-          effect: content())
+public extension CardAction {
+    func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {
+        .init(actionType: actionType, target: target, playReqs: playReqs(), effect: effect)
+    }
 }

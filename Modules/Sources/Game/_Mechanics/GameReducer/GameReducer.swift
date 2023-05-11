@@ -86,7 +86,7 @@ private extension GameReducer {
         }
         
         for action in cardObj.actions where
-        action.actionType == .trigger {
+        action.actionType == .event {
             for playReq in action.playReqs {
                 do {
                     try playReq.match(state: state, ctx: ctx)
