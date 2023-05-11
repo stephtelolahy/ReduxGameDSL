@@ -31,7 +31,7 @@ final class CatBalouSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.failure(GameError.noPlayer(.selectAnyWithCard))]
+                        expect(result) == [.failure(.noPlayer(.selectAnyWithCard))]
                     }
                 }
                 

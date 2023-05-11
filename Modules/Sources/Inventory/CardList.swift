@@ -22,7 +22,7 @@ public enum CardList {
         }
 
         Card(.saloon) {
-            // TODO: emit error if resolving output no action
+            // TODO: emit error if resolving output empty action
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
                 .triggered(on: .play)
@@ -66,6 +66,7 @@ public enum CardList {
         }
 
         Card(.bang) {
+            // TODO: modifier .otherwise()
             CardEffect.forceDiscard(player: .target,
                                     card: .selectHandNamed(.missed),
                                     otherwise: .damage(1, player: .target))
@@ -87,7 +88,6 @@ public enum CardList {
         }
 
         Card(.indians) {
-            // TODO: modifier .otherwise()
             CardEffect.forceDiscard(player: .target,
                                     card: .selectHandNamed(.bang),
                                     otherwise: .damage(1, player: .target))
@@ -96,7 +96,7 @@ public enum CardList {
         }
 
         Card(.duel) {
-            // TODO: modifier .challenge(target)
+            // TODO: modifier .challenger(target)
             CardEffect.challengeDiscard(player: .target,
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target),

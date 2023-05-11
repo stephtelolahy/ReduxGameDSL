@@ -69,6 +69,7 @@ final class DuelSpec: QuickSpec {
                             .success(.chooseAction(chooser: "p2", options: [
                                 "bang-2": .groupActions([
                                     .discard(player: "p2", card: "bang-2"),
+                                    // swiftlint:disable:next line_length
                                     .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
                                             ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
                                 ]),
@@ -91,6 +92,7 @@ final class DuelSpec: QuickSpec {
                             .success(.chooseAction(chooser: "p2", options: [
                                 "bang-2": .groupActions([
                                     .discard(player: "p2", card: "bang-2"),
+                                    // swiftlint:disable:next line_length
                                     .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
                                             ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
                                 ]),
@@ -100,6 +102,7 @@ final class DuelSpec: QuickSpec {
                             .success(.chooseAction(chooser: "p1", options: [
                                 "bang-1": .groupActions([
                                     .discard(player: "p1", card: "bang-1"),
+                                    // swiftlint:disable:next line_length
                                     .effect(.challengeDiscard(player: .id("p2"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p1")),
                                             ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
                                 ]),
@@ -122,6 +125,7 @@ final class DuelSpec: QuickSpec {
                             .success(.chooseAction(chooser: "p2", options: [
                                 "bang-2": .groupActions([
                                     .discard(player: "p2", card: "bang-2"),
+                                    // swiftlint:disable:next line_length
                                     .effect(.challengeDiscard(player: .id("p1"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p2")),
                                             ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
                                 ]),
@@ -131,6 +135,7 @@ final class DuelSpec: QuickSpec {
                             .success(.chooseAction(chooser: "p1", options: [
                                 "bang-1": .groupActions([
                                     .discard(player: "p1", card: "bang-1"),
+                                    // swiftlint:disable:next line_length
                                     .effect(.challengeDiscard(player: .id("p2"), card: .selectHandNamed(.bang), otherwise: .damage(1, player: .target), challenger: .id("p1")),
                                             ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
                                 ]),
