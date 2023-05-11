@@ -6,10 +6,6 @@
 //
 import Redux
 
-protocol GameReducerProtocol {
-    func reduce(state: GameState) throws -> GameState
-}
-
 public struct GameReducer: ReducerProtocol {
 
     public init() {}
@@ -112,6 +108,10 @@ private extension GameReducer {
 
         return state
     }
+}
+
+protocol GameReducerProtocol {
+    func reduce(state: GameState) throws -> GameState
 }
 
 private extension GameAction {

@@ -5,14 +5,14 @@
 //  Created by Hugues Telolahy on 15/04/2023.
 //
 
-protocol NumArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> Int
-}
-
 extension NumArg {
     func resolve(state: GameState, ctx: EffectContext) throws -> Int {
         try resolver().resolve(state: state, ctx: ctx)
     }
+}
+
+protocol NumArgResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int
 }
 
 private extension NumArg {

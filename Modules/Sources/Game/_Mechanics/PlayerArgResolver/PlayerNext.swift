@@ -8,7 +8,7 @@
 struct PlayerNext: PlayerArgResolverProtocol {
     func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         guard let turn = state.turn,
-              let next = state.playOrder.element(after: turn)else {
+              let next = state.playOrder.element(after: turn) else {
             fatalError(.unexpected)
         }
 

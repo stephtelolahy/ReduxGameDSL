@@ -5,24 +5,7 @@
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
-}
-
-/// Resolved player argument
-enum PlayerArgOutput {
-    /// Appply effect to well known object identifiers
-    case identified([String])
-
-    /// Must choose one of given object identifiers
-    case selectable([String])
-}
-
 extension PlayerArg {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        try resolver().resolve(state: state, ctx: ctx)
-    }
-
     func resolve(
         state: GameState,
         ctx: EffectContext,
@@ -32,7 +15,7 @@ extension PlayerArg {
         switch resolved {
         case let .identified(pIds):
             return pIds.map { copy($0) }
-
+            
         case let .selectable(pIds):
             let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
@@ -40,6 +23,23 @@ extension PlayerArg {
             return [.chooseAction(chooser: ctx.actor, options: options)]
         }
     }
+    
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+        try resolver().resolve(state: state, ctx: ctx)
+    }
+}
+
+protocol PlayerArgResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
+}
+
+/// Resolved player argument
+enum PlayerArgOutput {
+    /// Appply effect to well known object identifiers
+    case identified([String])
+    
+    /// Must choose one of given object identifiers
+    case selectable([String])
 }
 
 private extension PlayerArg {
@@ -57,7 +57,7 @@ private extension PlayerArg {
         case let .selectAt(distance): return PlayerSelectAt(distance: distance)
         case .selectAny: return PlayerSelectAny()
         case .next: return PlayerNext()
-        default: fatalError(.unexpected)
+        case .id: fatalError(.unexpected)
         }
     }
 }

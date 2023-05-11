@@ -91,7 +91,7 @@ private extension CardArg {
         case .selectArena: return CardSelectArena()
         case let .selectHandNamed(name): return CardSelectHandNamed(name: name)
         case .selectHand: return CardSelectHand()
-        default: fatalError(.unexpected)
+        case .id: fatalError(.unexpected)
         }
     }
 }
