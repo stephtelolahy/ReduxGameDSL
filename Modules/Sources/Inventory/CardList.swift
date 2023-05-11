@@ -11,13 +11,15 @@ public enum CardList {
 
         // MARK: - Collectible
 
-        // TODO: remove PlayReq => emit error if first effect cannot be applied
+        // TODO: remove PlayReq
+        //  => emit error if resolving first action throws error
+        //  => emit error if resolving first action is empty
 
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isDamaged
+                    PlayReq.isDamaged // TODO: remove
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
@@ -27,7 +29,7 @@ public enum CardList {
                 .apply(to: .damaged)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isAnyDamaged
+                    PlayReq.isAnyDamaged // TODO: remove
                 }
         }
 
@@ -56,13 +58,13 @@ public enum CardList {
         }
 
         Card(.generalStore) {
-            CardEffect.reveal
-                .replay(.numPlayers)
-                .andThen {
-                    CardEffect.chooseCard(player: .target, card: .selectArena)
-                        .apply(to: .all)
-                }
-                .triggered(on: .play)
+            CardEffect.group {
+                CardEffect.reveal
+                    .replay(.numPlayers)
+                CardEffect.chooseCard(player: .target, card: .selectArena)
+                    .apply(to: .all)
+            }
+            .triggered(on: .play)
         }
 
         Card(.bang) {
@@ -106,12 +108,12 @@ public enum CardList {
         // MARK: - Abilities
 
         Card(.endTurn) {
-            CardEffect.discard(player: .actor, card: .selectHand)
-                .replay(.excessHand)
-                .andThen {
-                    CardEffect.setTurn(.next)
-                }
-                .triggered(on: .spell)
+            CardEffect.group {
+                CardEffect.discard(player: .actor, card: .selectHand)
+                    .replay(.excessHand)
+                CardEffect.setTurn(.next)
+            }
+            .triggered(on: .spell)
         }
         
         Card(.drawOnSetTurn) {
