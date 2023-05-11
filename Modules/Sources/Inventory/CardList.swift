@@ -12,7 +12,7 @@ public enum CardList {
         // MARK: - Collectible
 
         Card(.beer) {
-            // TODO: emit error if resolving first action throws error
+            // TODO: emit error if resolving throws error
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
@@ -22,7 +22,7 @@ public enum CardList {
         }
 
         Card(.saloon) {
-            // TODO: emit error if resolving first action is empty
+            // TODO: emit error if resolving output no action
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
                 .triggered(on: .play)
@@ -87,7 +87,7 @@ public enum CardList {
         }
 
         Card(.indians) {
-            // TODO: modifier: otherwise
+            // TODO: modifier .otherwise()
             CardEffect.forceDiscard(player: .target,
                                     card: .selectHandNamed(.bang),
                                     otherwise: .damage(1, player: .target))
@@ -96,7 +96,7 @@ public enum CardList {
         }
 
         Card(.duel) {
-            // TODO: modifier .targetChallenge(target, otherwise)
+            // TODO: modifier .challenge(target)
             CardEffect.challengeDiscard(player: .target,
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target),
