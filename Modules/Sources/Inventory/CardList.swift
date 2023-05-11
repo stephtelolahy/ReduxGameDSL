@@ -11,11 +11,8 @@ public enum CardList {
 
         // MARK: - Collectible
 
-        // TODO: remove PlayReq
-        //  => emit error if resolving first action throws error
-        //  => emit error if resolving first action is empty
-
         Card(.beer) {
+            // TODO: emit error if resolving first action throws error
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
@@ -25,11 +22,12 @@ public enum CardList {
         }
 
         Card(.saloon) {
+            // TODO: emit error if resolving first action is empty
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isAnyDamaged // TODO: remove
+                    PlayReq.isAnyDamaged
                 }
         }
 
@@ -89,6 +87,7 @@ public enum CardList {
         }
 
         Card(.indians) {
+            // TODO: modifier: otherwise
             CardEffect.forceDiscard(player: .target,
                                     card: .selectHandNamed(.bang),
                                     otherwise: .damage(1, player: .target))
@@ -97,10 +96,11 @@ public enum CardList {
         }
 
         Card(.duel) {
+            // TODO: modifier .targetChallenge(target, otherwise)
             CardEffect.challengeDiscard(player: .target,
                                         card: .selectHandNamed(.bang),
                                         otherwise: .damage(1, player: .target),
-                                        challenger: .actor) // TODO: modifier .targetChallenge(target, otherwise)
+                                        challenger: .actor)
             .triggered(on: .play)
             .target(.selectAny)
         }
@@ -119,18 +119,12 @@ public enum CardList {
         Card(.drawOnSetTurn) {
             CardEffect.draw(player: .actor)
                 .replay(.playerAttr(.starTurnCards))
-                .triggered(on: .event)
-                .require {
-                    PlayReq.onSetTurn
-                }
+                .triggered(on: .immediately(.onSetTurn))
         }
 
         Card(.eliminateOnLooseLastHealth) {
             CardEffect.eliminate(.actor)
-                .triggered(on: .event)
-                .require {
-                    PlayReq.onLooseLastHealth
-                }
+                .triggered(on: .immediately(.onLooseLastHealth))
         }
     }
     

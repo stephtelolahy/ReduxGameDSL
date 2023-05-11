@@ -44,5 +44,5 @@ public enum CardActionType: Codable, Equatable {
     case handicap
 
     /// Apply side effects immediately, when an event occurred
-    case event
+    case immediately(PlayEvent)
 }

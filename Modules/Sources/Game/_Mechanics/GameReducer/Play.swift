@@ -18,7 +18,7 @@ struct Play: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { $0.actionType != .event }) else {
+              let cardAction = cardObj.actions.first(where: { !$0.isImmediate }) else {
             throw GameError.cardNotPlayable(card)
         }
 

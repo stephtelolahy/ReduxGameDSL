@@ -85,15 +85,19 @@ private extension GameReducer {
             return false
         }
         
-        for action in cardObj.actions where
-        action.actionType == .event {
-            for playReq in action.playReqs {
+        for action in cardObj.actions {
+            if case let .immediately(event) = action.actionType {
                 do {
-                    try playReq.match(state: state, ctx: ctx)
+                    let matched = try event.match(state: state, ctx: ctx)
+                    if matched {
+                        for playReq in action.playReqs {
+                            try playReq.match(state: state, ctx: ctx)
+                        }
+                        return true
+                    }
                 } catch {
                     return false
                 }
-                return true
             }
         }
         return false
