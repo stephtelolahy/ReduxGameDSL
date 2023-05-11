@@ -16,7 +16,7 @@ public enum CardList {
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isDamaged // TODO: remove
+                    PlayReq.isDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }

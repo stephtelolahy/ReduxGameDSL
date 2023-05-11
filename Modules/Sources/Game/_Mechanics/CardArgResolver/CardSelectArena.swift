@@ -18,7 +18,7 @@ struct CardSelectArena: CardArgResolverProtocol {
         }
 
         if cards.count == 1 {
-            return .identified([cards[0]])
+            return .identified(cards)
         } else {
             return .selectable(cards.toCardOptions())
         }
