@@ -48,5 +48,5 @@ public indirect enum CardEffect: Codable, Equatable {
     case groupEffects([Self])
     
     /// Apply an effect to some players
-    case applyEffect(target: PlayerArg, effect: Self)
+    case applyEffect(target: PlayerGroupArg, effect: Self)
 }

@@ -23,7 +23,8 @@ public enum CardList {
         }
 
         Card(.saloon) {
-            CardEffect.heal(1, player: .damaged)
+            CardEffect.heal(1, player: .target)
+                .apply(to: .damaged)
                 .triggered(on: .play)
                 .require {
                     PlayReq.isAnyDamaged
@@ -57,7 +58,10 @@ public enum CardList {
         Card(.generalStore) {
             CardEffect.reveal
                 .replay(.numPlayers)
-                .andThen(CardEffect.chooseCard(player: .all, card: .selectArena))
+                .andThen {
+                    CardEffect.chooseCard(player: .target, card: .selectArena)
+                        .apply(to: .all)
+                }
                 .triggered(on: .play)
         }
 
@@ -104,7 +108,9 @@ public enum CardList {
         Card(.endTurn) {
             CardEffect.discard(player: .actor, card: .selectHand)
                 .replay(.excessHand)
-                .andThen(CardEffect.setTurn(.next))
+                .andThen {
+                    CardEffect.setTurn(.next)
+                }
                 .triggered(on: .spell)
         }
         
