@@ -12,23 +12,17 @@ public enum CardList {
         // MARK: - Collectible
 
         Card(.beer) {
-            // TODO: emit error if resolving throws error
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
                 .require {
-                    PlayReq.isDamaged
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
 
         Card(.saloon) {
-            // TODO: emit error if resolving output empty action
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
                 .triggered(on: .play)
-                .require {
-                    PlayReq.isAnyDamaged
-                }
         }
 
         Card(.stagecoach) {

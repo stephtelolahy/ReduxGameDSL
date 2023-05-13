@@ -30,6 +30,8 @@ final class PlaySpec: QuickSpec {
                                 "playable"
                             }
                         }
+                        .attribute(.health, 1)
+                        .attribute(.maxHealth, 3)
                     }
                     .cardRef(["playable": playable])
                     

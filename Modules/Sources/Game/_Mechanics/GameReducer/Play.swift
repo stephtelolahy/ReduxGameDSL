@@ -38,6 +38,10 @@ struct Play: GameReducerProtocol {
             return state
         }
 
+        // validate action
+        let action = GameAction.play(actor: actor, card: card, target: target)
+        _ = try action.validate(state: state)
+
         var state = state
 
         // discard played hand card

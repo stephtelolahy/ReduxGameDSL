@@ -100,7 +100,6 @@ final class PanicSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.play(actor: "p1", card: .panic, target: "p2")),
                             .failure(.noCard(.selectAny))
                         ]
                     }

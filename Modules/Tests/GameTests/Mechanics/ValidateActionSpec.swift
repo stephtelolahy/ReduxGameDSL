@@ -1,5 +1,5 @@
 //
-//  ValidateMoveSpec.swift
+//  ValidateActionSpec.swift
 //  
 //
 //  Created by Hugues Stephano TELOLAHY on 12/05/2023.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Game
 
-final class ValidateMoveSpec: XCTestCase {
+final class ValidateActionSpec: XCTestCase {
     
     private let beer = Card("beer") {
         CardEffect.heal(1, player: .actor)
@@ -30,10 +30,9 @@ final class ValidateMoveSpec: XCTestCase {
         
         // When
         let action = GameAction.play(actor: "p1", card: "beer")
-        let isValid = try action.isValid(state)
         
         // Then
-        XCTAssertTrue(isValid)
+        XCTAssertNoThrow(try action.validate(state: state))
     }
     
     func test_GivenPlayAction_WhenDispatchingRecursivelyFails_ThenShouldBeInvalid() throws {
@@ -53,7 +52,7 @@ final class ValidateMoveSpec: XCTestCase {
         let action = GameAction.play(actor: "p1", card: "beer")
         
         // Then
-        XCTAssertThrowsError(try action.isValid(state)) { error in
+        XCTAssertThrowsError(try action.validate(state: state)) { error in
             XCTAssertEqual(error as? GameError, .playerAlreadyMaxHealth("p1"))
         }
     }
@@ -69,10 +68,9 @@ final class ValidateMoveSpec: XCTestCase {
             "option1": .damage(player: "p1", value: 1),
             "option2": .damage(player: "p1", value: 2)
         ])
-        let isValid = try action.isValid(state)
 
         // Then
-        XCTAssertTrue(isValid)
+        XCTAssertNoThrow(try action.validate(state: state))
     }
 
     func test_GivenChooseAction_WhenAnyOptionFails_ThenShouldBeInvalid() throws {
@@ -90,7 +88,7 @@ final class ValidateMoveSpec: XCTestCase {
         ])
 
         // Then
-        XCTAssertThrowsError(try action.isValid(state)) { error in
+        XCTAssertThrowsError(try action.validate(state: state)) { error in
             XCTAssertEqual(error as? GameError, .playerAlreadyMaxHealth("p1"))
         }
     }

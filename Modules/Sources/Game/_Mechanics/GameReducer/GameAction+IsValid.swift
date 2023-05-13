@@ -6,29 +6,29 @@
 //
 
 extension GameAction {
-    func isValid(_ state: GameState) throws -> Bool {
+    func validate(state: GameState) throws {
         switch self {
         case let .play(actor, card, target):
-            return try isValidPlay(actor: actor,
-                                   card: card,
-                                   target: target,
-                                   state: state)
+            try validatePlay(actor: actor,
+                             card: card,
+                             target: target,
+                             state: state)
             
         case let .effect(effect, ctx: ctx):
-            return try isValidEffect(effect: effect, ctx: ctx, state: state)
+            try validateEffect(effect: effect, ctx: ctx, state: state)
 
         case let .chooseAction(chooser, options):
-            return try isValidChooseAction(chooser: chooser, options: options, state: state)
+            try validateChoose(chooser: chooser, options: options, state: state)
             
         default:
-            return try isValidAction(action: self, state: state)
+            try validateAction(action: self, state: state)
         }
     }
 }
 
 private extension GameAction {
- 
-    func isValidPlay(actor: String, card: String, target: String?, state: GameState) throws -> Bool {
+
+    func validatePlay(actor: String, card: String, target: String?, state: GameState) throws {
         
         guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
@@ -60,37 +60,26 @@ private extension GameAction {
         
         let sideEffect = cardAction.effect.withCtx(ctx)
         
-        return try sideEffect.isValid(state)
+        try sideEffect.validate(state: state)
     }
     
-    func isValidEffect(effect: CardEffect, ctx: EffectContext, state: GameState) throws -> Bool {
+    func validateEffect(effect: CardEffect, ctx: EffectContext, state: GameState) throws {
         let children = try effect.resolve(state: state, ctx: ctx)
-        
-        for action in children {
-            let result = try action.isValid(state)
-            
-            if !result {
-                return false
-            }
+        guard let action = children.first else {
+            // Empty effect
+            return
         }
-        
-        return true
+
+        try action.validate(state: state)
     }
 
-    func isValidChooseAction(chooser: String, options: [String: GameAction], state: GameState) throws -> Bool {
-        for (key, action) in options {
-            let result = try action.isValid(state)
-
-            if !result {
-                return false
-            }
+    func validateChoose(chooser: String, options: [String: GameAction], state: GameState) throws {
+        for (_, action) in options {
+            try action.validate(state: state)
         }
-
-        return true
     }
     
-    func isValidAction(action: GameAction, state: GameState) throws -> Bool {
+    func validateAction(action: GameAction, state: GameState) throws {
         _ = try action.reducer().reduce(state: state)
-        return true
     }
 }

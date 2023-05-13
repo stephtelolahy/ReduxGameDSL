@@ -11,12 +11,6 @@ public enum PlayReq: Codable, Equatable {
     /// The minimum number of active players is X
     case isPlayersAtLeast(Int)
 
-    /// Actor must be damaged
-    case isDamaged
-
-    /// At least one player must be damaged
-    case isAnyDamaged
-
     /// The maximum times per turn a card may be played is X
     case isTimesPerTurn(Int)
 }
