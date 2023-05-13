@@ -9,23 +9,26 @@ extension GameAction {
     func isValid(_ state: GameState) throws -> Bool {
         switch self {
         case let .play(actor, card, target):
-            return try isValidPlay(state: state,
-                                   actor: actor,
+            return try isValidPlay(actor: actor,
                                    card: card,
-                                   target: target)
+                                   target: target,
+                                   state: state)
             
         case let .effect(effect, ctx: ctx):
             return try isValidEffect(effect: effect, ctx: ctx, state: state)
+
+        case let .chooseAction(chooser, options):
+            return try isValidChooseAction(chooser: chooser, options: options, state: state)
             
         default:
-            fatalError(.unexpected)
+            return try isValidAction(action: self, state: state)
         }
     }
 }
 
 private extension GameAction {
  
-    func isValidPlay(state: GameState, actor: String, card: String, target: String?) throws -> Bool {
+    func isValidPlay(actor: String, card: String, target: String?, state: GameState) throws -> Bool {
         
         guard let actorObj = state.players[actor] else {
             throw GameError.playerNotFound(actor)
@@ -73,8 +76,21 @@ private extension GameAction {
         
         return true
     }
+
+    func isValidChooseAction(chooser: String, options: [String: GameAction], state: GameState) throws -> Bool {
+        for (key, action) in options {
+            let result = try action.isValid(state)
+
+            if !result {
+                return false
+            }
+        }
+
+        return true
+    }
     
     func isValidAction(action: GameAction, state: GameState) throws -> Bool {
-        _ = try 
+        _ = try action.reducer().reduce(state: state)
+        return true
     }
 }

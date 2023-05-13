@@ -118,7 +118,7 @@ protocol GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState
 }
 
-private extension GameAction {
+extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
