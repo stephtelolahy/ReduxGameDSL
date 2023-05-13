@@ -6,15 +6,11 @@
 //
 
 struct ApplyEffect: EffectResolverProtocol {
-    let target: PlayerArg
+    let target: PlayerGroupArg
     let effect: CardEffect
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let targets = try target.resolve(state: state, ctx: ctx)
-        guard case let .identified(pIds) = targets else {
-            fatalError(.unexpected)
-        }
-        
+        let pIds = try target.resolve(state: state, ctx: ctx)
         return pIds.map {
             effect.withCtx(EffectContext(actor: ctx.actor, card: ctx.card, target: $0))
         }

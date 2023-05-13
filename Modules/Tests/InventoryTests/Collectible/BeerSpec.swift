@@ -58,7 +58,7 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.mismatched(.isDamaged))]
+                    expect(result) == [.failure(.playerAlreadyMaxHealth("p1"))]
                 }
             }
 

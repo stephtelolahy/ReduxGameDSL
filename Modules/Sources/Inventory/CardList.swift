@@ -8,139 +8,113 @@ import Game
 
 public enum CardList {
     public static let all: [String: Card] = createCards {
-
+        
         // MARK: - Collectible
-
+        
         Card(.beer) {
-            onPlay(content: {
-                CardEffect.heal(1, player: .actor)
-            }, require: {
-                PlayReq.isDamaged
-                PlayReq.isPlayersAtLeast(3)
-            })
+            CardEffect.heal(1, player: .actor)
+                .triggered(on: .play)
+                .require {
+                    PlayReq.isPlayersAtLeast(3)
+                }
         }
-
+        
         Card(.saloon) {
-            onPlay(content: {
-                CardEffect.heal(1, player: .damaged)
-            }, require: {
-                PlayReq.isAnyDamaged
-            })
+            CardEffect.heal(1, player: .target)
+                .apply(to: .damaged)
+                .triggered(on: .play)
         }
-
+        
         Card(.stagecoach) {
-            onPlay {
-                CardEffect.replay(2) {
-                    CardEffect.draw(player: .actor)
-                }
-            }
+            CardEffect.draw(player: .actor)
+                .replay(2)
+                .triggered(on: .play)
         }
-
+        
         Card(.wellsFargo) {
-            onPlay {
-                CardEffect.replay(3) {
-                    CardEffect.draw(player: .actor)
-                }
-            }
+            CardEffect.draw(player: .actor)
+                .replay(3)
+                .triggered(on: .play)
         }
-
+        
         Card(.catBalou) {
-            onPlay(target: .selectAnyWithCard) {
-                CardEffect.discard(player: .target, card: .selectAny)
-            }
+            CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
+                .triggered(on: .play)
+                .target(.selectAnyWithCard)
         }
-
+        
         Card(.panic) {
-            onPlay(target: .selectAtRangeWithCard(1)) {
-                CardEffect.steal(player: .actor, target: .target, card: .selectAny)
-            }
+            CardEffect.steal(player: .actor, target: .target, card: .selectAny)
+                .triggered(on: .play)
+                .target(.selectAtRangeWithCard(1))
         }
         
         Card(.generalStore) {
-            onPlay {
-                CardEffect.group {
-                    CardEffect.replay(.numPlayers) {
-                        CardEffect.reveal
-                    }
-                    CardEffect.chooseCard(player: .all, card: .selectArena)
-                }
+            CardEffect.group {
+                CardEffect.reveal
+                    .replay(.numPlayers)
+                CardEffect.chooseCard(player: .target, card: .selectArena)
+                    .apply(to: .all)
             }
+            .triggered(on: .play)
         }
-
+        
         Card(.bang) {
-            onPlay(target: .selectReachable,
-                   content: {
-                CardEffect.forceDiscard(player: .target,
-                                        card: .selectHandNamed(.missed),
-                                        otherwise: .damage(1, player: .target))
-            }, require: {
-                PlayReq.isTimesPerTurn(1)
-            })
+            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+                .otherwise(.damage(1, player: .target))
+                .triggered(on: .play)
+                .target(.selectReachable)
+                .require {
+                    PlayReq.isTimesPerTurn(1)
+                }
         }
-
+        
         Card(.missed)
-
+        
         Card(.gatling) {
-            onPlay {
-                CardEffect.apply(target: .others) {
-                    CardEffect.forceDiscard(player: .target,
-                                            card: .selectHandNamed(.missed),
-                                            otherwise: .damage(1, player: .target))
-                }
-            }
+            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+                .otherwise(.damage(1, player: .target))
+                .apply(to: .others)
+                .triggered(on: .play)
         }
-
+        
         Card(.indians) {
-            onPlay {
-                CardEffect.apply(target: .others) {
-                    CardEffect.forceDiscard(player: .target,
-                                            card: .selectHandNamed(.bang),
-                                            otherwise: .damage(1, player: .target))
-                }
-            }
+            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+                .otherwise(.damage(1, player: .target))
+                .apply(to: .others)
+                .triggered(on: .play)
         }
 
         Card(.duel) {
-            onPlay(target: .selectAny) {
-                CardEffect.challengeDiscard(player: .target,
-                                            card: .selectHandNamed(.bang),
-                                            otherwise: .damage(1, player: .target),
-                                            challenger: .actor)
-            }
+            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+                .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
+                .triggered(on: .play)
+                .target(.selectAny)
         }
-
+        
         // MARK: - Abilities
-
+        
         Card(.endTurn) {
-            onSpell {
-                CardEffect.group {
-                    CardEffect.replay(.excessHand) {
-                        CardEffect.discard(player: .actor, card: .selectHand)
-                    }
-                    CardEffect.setTurn(.next)
-                }
+            CardEffect.group {
+                CardEffect.discard(player: .actor, card: .selectHand)
+                    .replay(.excessHand)
+                CardEffect.setTurn(.next)
             }
+            .triggered(on: .spell)
         }
         
         Card(.drawOnSetTurn) {
-            onTriggered {
-                CardEffect.replay(.playerAttr(.starTurnCards)) {
-                    CardEffect.draw(player: .actor)
-                }
-            } require: {
-                PlayReq.onSetTurn
-            }
+            CardEffect.draw(player: .actor)
+                .replay(.playerAttr(.starTurnCards))
+                .triggered(on: .immediately(.onSetTurn))
         }
-
+        
         Card(.eliminateOnLooseLastHealth) {
-            onTriggered {
-                CardEffect.eliminate(.actor)
-            } require: {
-                PlayReq.onLooseLastHealth
-            }
+            CardEffect.eliminate(.actor)
+                .triggered(on: .immediately(.onLooseLastHealth))
         }
     }
-
+    
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
         content().toDictionary()
     }

@@ -14,11 +14,11 @@ public enum PlayerArg: Codable, Equatable {
     /// Who is playing the card
     case actor
 
-    /// All damaged players
-    case damaged
-
     /// Target player that was previously selected
     case target
+
+    /// The next player's turn, in clockwise order.
+    case next
 
     /// Select any other player
     case selectAny
@@ -34,6 +34,10 @@ public enum PlayerArg: Codable, Equatable {
 
     /// Select any reachable player
     case selectReachable
+}
+
+/// Player group argument
+public enum PlayerGroupArg: Codable, Equatable {
 
     /// All players
     case all
@@ -41,6 +45,6 @@ public enum PlayerArg: Codable, Equatable {
     /// Other players
     case others
 
-    /// The next player's turn, in clockwise order.
-    case next
+    /// All damaged players
+    case damaged
 }

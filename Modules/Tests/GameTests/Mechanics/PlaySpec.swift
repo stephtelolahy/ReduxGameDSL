@@ -16,9 +16,8 @@ final class PlaySpec: QuickSpec {
         var action: GameAction!
         var result: GameState!
         let playable = Card("playable") {
-            onPlay {
-                CardEffect.heal(1, player: .actor)
-            }
+            CardEffect.heal(1, player: .actor)
+                .triggered(on: .play)
         }
 
         describe("play") {
@@ -31,6 +30,8 @@ final class PlaySpec: QuickSpec {
                                 "playable"
                             }
                         }
+                        .attribute(.health, 1)
+                        .attribute(.maxHealth, 3)
                     }
                     .cardRef(["playable": playable])
                     

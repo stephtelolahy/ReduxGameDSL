@@ -39,7 +39,7 @@ extension CardArg {
 
         case let .selectable(cIdOptions):
             guard cIdOptions.isNotEmpty else {
-                fatalError(.unexpected)
+                throw GameError.noCard(self)
             }
 
             let options = cIdOptions.reduce(into: [String: GameAction]()) {

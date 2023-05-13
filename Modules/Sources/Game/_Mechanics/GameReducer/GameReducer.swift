@@ -56,8 +56,8 @@ private extension GameReducer {
         state = try action.reducer().reduce(state: state)
         switch action {
         case .play,
-                .effect,
-                .groupActions:
+             .effect,
+             .groupActions:
             break
 
         default:
@@ -85,15 +85,19 @@ private extension GameReducer {
             return false
         }
         
-        for action in cardObj.actions where
-        action.actionType == .trigger {
-            for playReq in action.playReqs {
+        for action in cardObj.actions {
+            if case let .immediately(event) = action.actionType {
                 do {
-                    try playReq.match(state: state, ctx: ctx)
+                    let matched = try event.match(state: state, ctx: ctx)
+                    if matched {
+                        for playReq in action.playReqs {
+                            try playReq.match(state: state, ctx: ctx)
+                        }
+                        return true
+                    }
                 } catch {
                     return false
                 }
-                return true
             }
         }
         return false
@@ -114,7 +118,7 @@ protocol GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState
 }
 
-private extension GameAction {
+extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {

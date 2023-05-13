@@ -31,7 +31,7 @@ final class PanicSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.failure(GameError.noPlayer(.selectAtRangeWithCard(1)))]
+                        expect(result) == [.failure(.noPlayer(.selectAtRangeWithCard(1)))]
                     }
                 }
                 
@@ -100,7 +100,6 @@ final class PanicSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.play(actor: "p1", card: .panic, target: "p2")),
                             .failure(.noCard(.selectAny))
                         ]
                     }

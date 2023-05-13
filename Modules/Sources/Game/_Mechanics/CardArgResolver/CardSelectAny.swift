@@ -35,10 +35,6 @@ struct CardSelectAny: CardArgResolverProtocol {
             }
         }
 
-        guard options.isNotEmpty else {
-            throw GameError.noCard(.selectAny)
-        }
-
         return .selectable(options)
     }
 }

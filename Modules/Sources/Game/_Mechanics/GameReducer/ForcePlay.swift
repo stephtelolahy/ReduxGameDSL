@@ -17,10 +17,10 @@ struct ForcePlay: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let action = cardObj.actions.first(where: { $0.actionType == .trigger }) else {
+              let action = cardObj.actions.first(where: { $0.isImmediate }) else {
             throw GameError.cardNotPlayable(card)
         }
-        
+
         // queue side effects
         let ctx = EffectContext(actor: actor, card: card)
         var state = state

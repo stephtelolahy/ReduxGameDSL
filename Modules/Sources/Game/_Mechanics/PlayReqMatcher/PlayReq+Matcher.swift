@@ -22,9 +22,20 @@ private extension PlayReq {
     func matcher() -> PlayReqMatcherProtocol {
         switch self {
         case let .isPlayersAtLeast(minCount): return IsPlayersAtLeast(minCount: minCount)
-        case .isDamaged: return IsDamaged()
-        case .isAnyDamaged: return IsAnyDamaged()
         case let .isTimesPerTurn(maxTimes): return IsTimesPerTurn(maxTimes: maxTimes)
+        }
+    }
+}
+
+extension PlayEvent {
+    func match(state: GameState, ctx: EffectContext) throws -> Bool {
+        try matcher().match(state: state, ctx: ctx)
+    }
+}
+
+private extension PlayEvent {
+    func matcher() -> PlayReqMatcherProtocol {
+        switch self {
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
         }

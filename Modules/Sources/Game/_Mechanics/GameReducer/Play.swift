@@ -18,7 +18,7 @@ struct Play: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { $0.actionType != .trigger }) else {
+              let cardAction = cardObj.actions.first(where: { !$0.isImmediate }) else {
             throw GameError.cardNotPlayable(card)
         }
 
@@ -37,6 +37,10 @@ struct Play: GameReducerProtocol {
             state.queue.insert(contentsOf: children, at: 0)
             return state
         }
+
+        // validate action
+        let action = GameAction.play(actor: actor, card: card, target: target)
+        _ = try action.validate(state: state)
 
         var state = state
 

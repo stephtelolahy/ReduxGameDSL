@@ -6,6 +6,9 @@
 //
 
 public indirect enum CardEffect: Codable, Equatable {
+
+    // MARK: - Actions
+
     /// Restore player's health, limited to maxHealth
     case heal(Int, player: PlayerArg)
     
@@ -16,8 +19,8 @@ public indirect enum CardEffect: Codable, Equatable {
     case draw(player: PlayerArg)
     
     /// Discard a player's card to discard pile
-    /// The card chooser is current actor
-    case discard(player: PlayerArg, card: CardArg)
+    /// Default chooser is player
+    case discard(player: PlayerArg, card: CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
     case steal(player: PlayerArg, target: PlayerArg, card: CardArg)
@@ -25,21 +28,16 @@ public indirect enum CardEffect: Codable, Equatable {
     /// Draw some cards from arena
     case chooseCard(player: PlayerArg, card: CardArg)
     
-    /// Draw a card from discard and put to arena
+    /// Draw a card from deck and put to arena
     case reveal
     
-    /// Player must choose to discard one of his card.
-    /// If cannot, then apply some effect
-    case forceDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect)
-    
-    /// Challenging other player to force discard
-    case challengeDiscard(player: PlayerArg, card: CardArg, otherwise: CardEffect, challenger: PlayerArg)
-
     /// Set attribute turn
     case setTurn(PlayerArg)
 
     /// Eliminate a player from the game
     case eliminate(PlayerArg)
+
+    // MARK: - Operators
 
     /// Repeat an effect
     case replayEffect(times: NumArg, effect: Self)
@@ -48,5 +46,11 @@ public indirect enum CardEffect: Codable, Equatable {
     case groupEffects([Self])
     
     /// Apply an effect to some players
-    case applyEffect(target: PlayerArg, effect: Self)
+    case applyEffect(target: PlayerGroupArg, effect: Self)
+
+    /// Try an effect. If cannot, then apply some effect
+    case forceEffect(effect: Self, otherwise: Self)
+
+    /// Force two players to perform an effect repeatedly. If cannot, then apply some effect
+    case challengeEffect(target: PlayerArg, challenger: PlayerArg, effect: Self, otherwise: Self)
 }
