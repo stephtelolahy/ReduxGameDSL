@@ -23,7 +23,7 @@ private extension CardEffect {
         switch self {
         case let .heal(value, player): return EffectHeal(player: player, value: value)
         case let .damage(value, player): return EffectDamage(player: player, value: value)
-        case let .discard(player, card): return EffectDiscard(player: player, card: card)
+        case let .discard(player, card, chooser): return EffectDiscard(player: player, card: card, chooser: chooser)
         case let .draw(player): return EffectDraw(player: player)
         case let .steal(player, target, card): return EffectSteal(player: player, target: target, card: card)
         case .reveal: return EffectReveal()
@@ -31,12 +31,11 @@ private extension CardEffect {
         case let .setTurn(player): return EffectSetTurn(player: player)
         case let .eliminate(player): return EffectEliminate(player: player)
         // swiftlint:disable:next line_length
-        case let .forceDiscard(player, card, otherwise): return ForceDiscard(player: player, card: card, otherwise: otherwise)
-        // swiftlint:disable:next line_length
         case let .challengeDiscard(player, card, otherwise, challenger): return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger)
         case let .applyEffect(target, effect): return ApplyEffect(target: target, effect: effect)
         case let .groupEffects(effects): return GroupEffects(effects: effects)
         case let .replayEffect(times, effect): return ReplayEffect(effect: effect, times: times)
+        case let .forceEffect(effect, otherwise): return ForceEffect(effect: effect, otherwise: otherwise)
         }
     }
 }

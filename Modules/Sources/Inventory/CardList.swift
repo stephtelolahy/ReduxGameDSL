@@ -8,9 +8,9 @@ import Game
 
 public enum CardList {
     public static let all: [String: Card] = createCards {
-
+        
         // MARK: - Collectible
-
+        
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
                 .triggered(on: .play)
@@ -18,37 +18,37 @@ public enum CardList {
                     PlayReq.isPlayersAtLeast(3)
                 }
         }
-
+        
         Card(.saloon) {
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
                 .triggered(on: .play)
         }
-
+        
         Card(.stagecoach) {
             CardEffect.draw(player: .actor)
                 .replay(2)
                 .triggered(on: .play)
         }
-
+        
         Card(.wellsFargo) {
             CardEffect.draw(player: .actor)
                 .replay(3)
                 .triggered(on: .play)
         }
-
+        
         Card(.catBalou) {
-            CardEffect.discard(player: .target, card: .selectAny)
+            CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
                 .triggered(on: .play)
                 .target(.selectAnyWithCard)
         }
-
+        
         Card(.panic) {
             CardEffect.steal(player: .actor, target: .target, card: .selectAny)
                 .triggered(on: .play)
                 .target(.selectAtRangeWithCard(1))
         }
-
+        
         Card(.generalStore) {
             CardEffect.group {
                 CardEffect.reveal
@@ -58,37 +58,33 @@ public enum CardList {
             }
             .triggered(on: .play)
         }
-
+        
         Card(.bang) {
-            // TODO: modifier .otherwise()
-            CardEffect.forceDiscard(player: .target,
-                                    card: .selectHandNamed(.missed),
-                                    otherwise: .damage(1, player: .target))
-            .triggered(on: .play)
-            .target(.selectReachable)
-            .require {
-                PlayReq.isTimesPerTurn(1)
-            }
+            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+                .otherwise(.damage(1, player: .target))
+                .triggered(on: .play)
+                .target(.selectReachable)
+                .require {
+                    PlayReq.isTimesPerTurn(1)
+                }
         }
-
+        
         Card(.missed)
-
+        
         Card(.gatling) {
-            CardEffect.forceDiscard(player: .target,
-                                    card: .selectHandNamed(.missed),
-                                    otherwise: .damage(1, player: .target))
-            .apply(to: .others)
-            .triggered(on: .play)
+            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+                .otherwise(.damage(1, player: .target))
+                .apply(to: .others)
+                .triggered(on: .play)
         }
-
+        
         Card(.indians) {
-            CardEffect.forceDiscard(player: .target,
-                                    card: .selectHandNamed(.bang),
-                                    otherwise: .damage(1, player: .target))
-            .apply(to: .others)
-            .triggered(on: .play)
+            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+                .otherwise(.damage(1, player: .target))
+                .apply(to: .others)
+                .triggered(on: .play)
         }
-
+        
         Card(.duel) {
             // TODO: modifier .challenger(target)
             CardEffect.challengeDiscard(player: .target,
@@ -98,9 +94,9 @@ public enum CardList {
             .triggered(on: .play)
             .target(.selectAny)
         }
-
+        
         // MARK: - Abilities
-
+        
         Card(.endTurn) {
             CardEffect.group {
                 CardEffect.discard(player: .actor, card: .selectHand)
@@ -115,7 +111,7 @@ public enum CardList {
                 .replay(.playerAttr(.starTurnCards))
                 .triggered(on: .immediately(.onSetTurn))
         }
-
+        
         Card(.eliminateOnLooseLastHealth) {
             CardEffect.eliminate(.actor)
                 .triggered(on: .immediately(.onLooseLastHealth))

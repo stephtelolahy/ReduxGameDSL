@@ -18,6 +18,10 @@ public extension CardEffect {
         .applyEffect(target: target, effect: self)
     }
 
+    func otherwise(_ effect: Self) -> Self {
+        .forceEffect(effect: self, otherwise: effect)
+    }
+
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
         .groupEffects(content())
     }
