@@ -30,12 +30,12 @@ private extension CardEffect {
         case let .chooseCard(player, card): return EffectChooseCard(player: player, card: card)
         case let .setTurn(player): return EffectSetTurn(player: player)
         case let .eliminate(player): return EffectEliminate(player: player)
-        // swiftlint:disable:next line_length
-        case let .challengeDiscard(player, card, otherwise, challenger): return ChallengeDiscard(player: player, card: card, otherwise: otherwise, challenger: challenger)
         case let .applyEffect(target, effect): return ApplyEffect(target: target, effect: effect)
         case let .groupEffects(effects): return GroupEffects(effects: effects)
         case let .replayEffect(times, effect): return ReplayEffect(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return ForceEffect(effect: effect, otherwise: otherwise)
+            // swiftlint:disable:next line_length
+        case let .challengeEffect(target, challenger, effect, otherwise): return ChallengeEffect(target: target, challenger: challenger, effect: effect, otherwise: otherwise)
         }
     }
 }

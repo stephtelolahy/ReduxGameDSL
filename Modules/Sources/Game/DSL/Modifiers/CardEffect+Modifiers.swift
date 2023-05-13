@@ -22,6 +22,10 @@ public extension CardEffect {
         .forceEffect(effect: self, otherwise: effect)
     }
 
+    func challenge(target: PlayerArg, challenger: PlayerArg, otherwise: Self) -> Self {
+        .challengeEffect(target: target, challenger: challenger, effect: self, otherwise: otherwise)
+    }
+
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
         .groupEffects(content())
     }

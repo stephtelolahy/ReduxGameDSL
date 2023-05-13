@@ -84,15 +84,12 @@ public enum CardList {
                 .apply(to: .others)
                 .triggered(on: .play)
         }
-        
+
         Card(.duel) {
-            // TODO: modifier .challenger(target)
-            CardEffect.challengeDiscard(player: .target,
-                                        card: .selectHandNamed(.bang),
-                                        otherwise: .damage(1, player: .target),
-                                        challenger: .actor)
-            .triggered(on: .play)
-            .target(.selectAny)
+            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+                .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
+                .triggered(on: .play)
+                .target(.selectAny)
         }
         
         // MARK: - Abilities
