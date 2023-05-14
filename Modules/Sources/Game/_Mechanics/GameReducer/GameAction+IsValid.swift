@@ -29,37 +29,23 @@ extension GameAction {
 private extension GameAction {
 
     func validatePlay(actor: String, card: String, target: String?, state: GameState) throws {
-        
-        guard let actorObj = state.players[actor] else {
-            throw GameError.playerNotFound(actor)
-        }
-        
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { !$0.isImmediate }) else {
+              let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
-        
-        // verify requirements
-        let ctx = EffectContext(actor: actor, card: card, target: target)
-        for playReq in cardAction.playReqs {
-            try playReq.match(state: state, ctx: ctx)
-        }
-        
+
         var state = state
 
         // discard played hand card
-        if case .play = cardAction.actionType {
-            guard actorObj.hand.contains(card) else {
-                throw GameError.cardNotFound(card)
-            }
-
+        let actorObj = state.player(actor)
+        if actorObj.hand.contains(card) {
             try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
             state.discard.push(card)
         }
-        
+
+        let ctx = EffectContext(actor: actor, card: card, target: target)
         let sideEffect = cardAction.effect.withCtx(ctx)
-        
         try sideEffect.validate(state: state)
     }
     

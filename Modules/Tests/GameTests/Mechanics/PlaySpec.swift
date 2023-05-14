@@ -17,7 +17,7 @@ final class PlaySpec: QuickSpec {
         var result: GameState!
         let playable = Card("playable") {
             CardEffect.heal(1, player: .actor)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
 
         describe("play") {
@@ -60,23 +60,6 @@ final class PlaySpec: QuickSpec {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: "playable")
                     expect(result.queue) == [CardEffect.heal(1, player: .actor).withCtx(ctx)]
-                }
-            }
-
-            context("missing card") {
-                it("should throw error") {
-                    // Given
-                    let state = GameState {
-                        Player("p1")
-                    }
-                    .cardRef(["playable": playable])
-
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "playable")
-                    let result = sut.reduce(state: state, action: action)
-
-                    // Then
-                    expect(result.error) == .cardNotFound("playable")
                 }
             }
 

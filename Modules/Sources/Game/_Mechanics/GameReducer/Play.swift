@@ -18,7 +18,7 @@ struct Play: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { !$0.isImmediate }) else {
+              let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
 
@@ -45,21 +45,18 @@ struct Play: GameReducerProtocol {
         var state = state
 
         // discard played hand card
-        if case .play = cardAction.actionType {
-            guard actorObj.hand.contains(card) else {
-                throw GameError.cardNotFound(card)
-            }
-
+        if actorObj.hand.contains(card) {
             try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
             state.discard.push(card)
         }
 
-        // queue side effects
-        state.queue.append(cardAction.effect.withCtx(ctx))
-
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
 
         state.event = .play(actor: actor, card: card, target: target)
+
+        // queue side effects
+        let sideEffect = cardAction.effect.withCtx(ctx)
+        state.queue.insert(sideEffect, at: 0)
 
         return state
     }

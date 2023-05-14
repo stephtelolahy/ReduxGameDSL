@@ -12,7 +12,7 @@ final class ValidateActionSpec: XCTestCase {
     
     private let beer = Card("beer") {
         CardEffect.heal(1, player: .actor)
-            .triggered(on: .play)
+            .triggered(.onPlay)
     }
 
     func test_GivenPlayAction_WhenDispatchingRecursivelySucceed_ThenShouldBeValid() throws {
