@@ -70,37 +70,37 @@ private extension GameReducer {
         var state = state
         for actor in state.playOrder {
             let actorObj = state.player(actor)
-            for card in (actorObj.abilities.union(state.abilities))
-            where isTriggered(actor: actor, card: card, state: state) {
-                let action = GameAction.forcePlay(actor: actor, card: card)
-                state.queue.insert(action, at: 0)
+            for card in (actorObj.abilities.union(state.abilities)) {
+                let ctx = EffectContext(actor: actor, card: card)
+                if let effect = triggeredEffect(ctx: ctx, state: state) {
+                    let sideEffect = effect.withCtx(EffectContext(actor: actor, card: card))
+                    state.queue.insert(sideEffect, at: 0)
+                }
             }
         }
         return state
     }
     
-    func isTriggered(actor: String, card: String, state: GameState) -> Bool {
-        let ctx = EffectContext(actor: actor, card: card)
-        guard let cardObj = state.cardRef[card] else {
-            return false
+    func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
+        guard let cardObj = state.cardRef[ctx.card] else {
+            return nil
         }
         
         for action in cardObj.actions {
-            if case let .immediately(event) = action.actionType {
-                do {
-                    let matched = try event.match(state: state, ctx: ctx)
-                    if matched {
-                        for playReq in action.playReqs {
-                            try playReq.match(state: state, ctx: ctx)
-                        }
-                        return true
+            do {
+                let matched = try action.eventReq.match(state: state, ctx: ctx)
+                if matched {
+                    for playReq in action.playReqs {
+                        try playReq.match(state: state, ctx: ctx)
                     }
-                } catch {
-                    return false
+
+                    return action.effect
                 }
+            } catch {
+                return nil
             }
         }
-        return false
+        return nil
     }
 
     func updateGameOver(state: GameState) -> GameState {
@@ -123,7 +123,6 @@ extension GameAction {
     func reducer() -> GameReducerProtocol {
         switch self {
         case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
-        case let .forcePlay(actor, card): return ForcePlay(actor: actor, card: card)
         case let .heal(player, value): return Heal(player: player, value: value)
         case let .damage(player, value): return Damage(player: player, value: value)
         case let .discard(player, card): return Discard(player: player, card: card)

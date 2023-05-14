@@ -33,7 +33,6 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.setTurn("p1")),
-                        .success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                         .success(.draw(player: "p1")),
                         .success(.draw(player: "p1"))
                     ]
@@ -62,7 +61,6 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.setTurn("p1")),
-                        .success(.forcePlay(actor: "p1", card: .drawOnSetTurn)),
                         .success(.draw(player: "p1")),
                         .success(.draw(player: "p1")),
                         .success(.draw(player: "p1"))

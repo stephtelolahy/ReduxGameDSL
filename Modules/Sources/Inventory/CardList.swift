@@ -13,7 +13,7 @@ public enum CardList {
         
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
-                .triggered(on: .play)
+                .triggered(.onPlay)
                 .require {
                     PlayReq.isPlayersAtLeast(3)
                 }
@@ -22,30 +22,30 @@ public enum CardList {
         Card(.saloon) {
             CardEffect.heal(1, player: .target)
                 .apply(to: .damaged)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
         
         Card(.stagecoach) {
             CardEffect.draw(player: .actor)
                 .replay(2)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
         
         Card(.wellsFargo) {
             CardEffect.draw(player: .actor)
                 .replay(3)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
         
         Card(.catBalou) {
             CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
-                .triggered(on: .play)
+                .triggered(.onPlay)
                 .target(.selectAnyWithCard)
         }
         
         Card(.panic) {
             CardEffect.steal(player: .actor, target: .target, card: .selectAny)
-                .triggered(on: .play)
+                .triggered(.onPlay)
                 .target(.selectAtRangeWithCard(1))
         }
         
@@ -56,13 +56,13 @@ public enum CardList {
                 CardEffect.chooseCard(player: .target, card: .selectArena)
                     .apply(to: .all)
             }
-            .triggered(on: .play)
+            .triggered(.onPlay)
         }
         
         Card(.bang) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
                 .otherwise(.damage(1, player: .target))
-                .triggered(on: .play)
+                .triggered(.onPlay)
                 .target(.selectReachable)
                 .require {
                     PlayReq.isTimesPerTurn(1)
@@ -75,20 +75,20 @@ public enum CardList {
             CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
                 .otherwise(.damage(1, player: .target))
                 .apply(to: .others)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
         
         Card(.indians) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
                 .otherwise(.damage(1, player: .target))
                 .apply(to: .others)
-                .triggered(on: .play)
+                .triggered(.onPlay)
         }
 
         Card(.duel) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
                 .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
-                .triggered(on: .play)
+                .triggered(.onPlay)
                 .target(.selectAny)
         }
         
@@ -100,18 +100,18 @@ public enum CardList {
                     .replay(.excessHand)
                 CardEffect.setTurn(.next)
             }
-            .triggered(on: .spell)
+            .triggered(.onPlay)
         }
         
         Card(.drawOnSetTurn) {
             CardEffect.draw(player: .actor)
                 .replay(.playerAttr(.starTurnCards))
-                .triggered(on: .immediately(.onSetTurn))
+                .triggered(.onSetTurn)
         }
         
         Card(.eliminateOnLooseLastHealth) {
             CardEffect.eliminate(.actor)
-                .triggered(on: .immediately(.onLooseLastHealth))
+                .triggered(.onLooseLastHealth)
         }
     }
     

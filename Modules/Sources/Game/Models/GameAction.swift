@@ -13,10 +13,7 @@ public indirect enum GameAction: Codable, Equatable {
     
     /// Play an active card
     case play(actor: String, card: String, target: String? = nil)
-
-    /// Trigger a card when some event occurred
-    case forcePlay(actor: String, card: String)
-
+    
     /// Restore player's health, limited to maxHealth
     case heal(player: String, value: Int)
 

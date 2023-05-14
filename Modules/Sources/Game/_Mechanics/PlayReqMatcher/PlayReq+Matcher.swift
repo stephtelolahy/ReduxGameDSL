@@ -27,15 +27,16 @@ private extension PlayReq {
     }
 }
 
-extension PlayEvent {
+extension EventReq {
     func match(state: GameState, ctx: EffectContext) throws -> Bool {
         try matcher().match(state: state, ctx: ctx)
     }
 }
 
-private extension PlayEvent {
+private extension EventReq {
     func matcher() -> PlayReqMatcherProtocol {
         switch self {
+        case .onPlay: fatalError(.unexpected)
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
         }

@@ -15,8 +15,8 @@ public struct Card: Codable, Equatable {
 /// Describing card action
 public struct CardAction: Codable, Equatable {
     
-    /// The action type
-    public let actionType: CardActionType
+    /// Describing when card action is applied
+    public let eventReq: EventReq
 
     /// The target to choose before performing the action
     public var target: PlayerArg?
@@ -24,25 +24,6 @@ public struct CardAction: Codable, Equatable {
     /// The requirements to match before activating the action
     public let playReqs: [PlayReq]
     
-    /// The side effect after performing the action
+    /// The side effect
     public let effect: CardEffect
-}
-
-/// Describing when card action is applied
-public enum CardActionType: Codable, Equatable {
-    
-    /// Discard card and apply side effect
-    case play
-
-    /// Ability, just apply side effect
-    case spell
-    
-    /// Use card as self equipment
-    case equip
-
-    /// Use card as handicap againts another player
-    case handicap
-
-    /// Apply side effects immediately, when an event occurred
-    case immediately(PlayEvent)
 }

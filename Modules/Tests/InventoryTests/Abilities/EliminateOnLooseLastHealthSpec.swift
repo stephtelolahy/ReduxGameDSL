@@ -30,7 +30,6 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.damage(player: "p1", value: 1)),
-                        .success(.forcePlay(actor: "p1", card: .eliminateOnLooseLastHealth)),
                         .success(.eliminate("p1"))
                     ]
                 }
