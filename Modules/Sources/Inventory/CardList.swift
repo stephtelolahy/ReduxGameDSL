@@ -113,6 +113,16 @@ public enum CardList {
             CardEffect.eliminate(.actor)
                 .triggered(.onLooseLastHealth)
         }
+
+        Card(.nextTurnOnEliminated) {
+            CardEffect.setTurn(.next)
+                .triggered(.onEliminated)
+                .require {
+                    PlayReq.isCurrentTurn
+                }
+        }
+
+        Card(.discardCardsOnEliminated)
     }
     
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

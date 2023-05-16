@@ -22,7 +22,7 @@ public struct GameReducer: ReducerProtocol {
         do {
             state = try prepareAction(action: action, state: state)
             state = try executeAction(action: action, state: state)
-            state = queueTriggeredEffects(state: state)
+            state = postExecuteAction(action: action, state: state)
             state = updateGameOver(state: state)
         } catch {
             state.error = error as? GameError
@@ -66,9 +66,15 @@ private extension GameReducer {
         return state
     }
 
-    func queueTriggeredEffects(state: GameState) -> State {
+    func postExecuteAction(action: GameAction, state: GameState) -> State {
         var state = state
-        for actor in state.playOrder {
+
+        var players = state.playOrder
+        if case let .eliminate(justEliminated) = state.event {
+            players.append(justEliminated)
+        }
+
+        for actor in players {
             let actorObj = state.player(actor)
             for card in (actorObj.abilities.union(state.abilities)) {
                 let ctx = EffectContext(actor: actor, card: card)

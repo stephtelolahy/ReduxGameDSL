@@ -13,17 +13,23 @@ public enum PlayReq: Codable, Equatable {
 
     /// The maximum times per turn a card may be played is X
     case isTimesPerTurn(Int)
+
+    /// Is actor the current turn
+    case isCurrentTurn
 }
 
 /// Function defining occurred event to play a card
 public enum EventReq: Codable, Equatable {
 
-    /// When playing a card
+    /// After playing a card
     case onPlay
 
-    /// When setting turn
+    /// After setting turn
     case onSetTurn
 
-    /// When loosing last life point
+    /// After loosing last life point
     case onLooseLastHealth
+
+    /// After being eliminated
+    case onEliminated
 }

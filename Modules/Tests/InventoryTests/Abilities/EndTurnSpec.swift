@@ -98,7 +98,7 @@ final class EndTurnSpec: QuickSpec {
             }
 
             context("having 2 excess cards") {
-                it("should discard hand cards") {
+                it("should discard 2 hand cards") {
                     // Given
                     let state = createGame {
                         Player("p1") {
