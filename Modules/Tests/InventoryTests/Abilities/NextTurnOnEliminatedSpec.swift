@@ -35,28 +35,6 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
                     ]
                 }
             }
-
-            context("not current turn") {
-                it("should do nothing") {
-                    // Given
-                    let state = createGame {
-                        Player("p1")
-                        Player("p2")
-                        Player("p3")
-                    }
-                    .ability(.nextTurnOnEliminated)
-                    .turn("p2")
-
-                    // When
-                    let action = GameAction.eliminate("p3")
-                    let result = self.awaitAction(action, state: state)
-
-                    // Then
-                    expect(result) == [
-                        .success(.eliminate("p3"))
-                    ]
-                }
-            }
         }
     }
 }

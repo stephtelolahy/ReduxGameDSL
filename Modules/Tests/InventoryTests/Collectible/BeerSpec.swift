@@ -81,7 +81,7 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.mismatched(.isPlayersAtLeast(3)))]
+                    expect(result) == [.failure(.noReq(.isPlayersAtLeast(3)))]
                 }
             }
         }

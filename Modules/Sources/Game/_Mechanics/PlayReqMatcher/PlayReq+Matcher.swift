@@ -9,7 +9,7 @@ extension PlayReq {
     func match(state: GameState, ctx: EffectContext) throws {
         let matched = try matcher().match(state: state, ctx: ctx)
         guard matched else {
-            throw GameError.mismatched(self)
+            throw GameError.noReq(self)
         }
     }
 }

@@ -129,7 +129,11 @@ public enum CardList {
             .triggered(.onEliminated)
     }
 
-    static let discardCardsOnEliminated = Card(.discardCardsOnEliminated)
+    static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {
+        CardEffect.discard(.all)
+            .target(.actor)
+            .triggered(.onEliminated)
+    }
 
     public static let all: [String: Card] = createCards {
         beer

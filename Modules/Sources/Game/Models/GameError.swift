@@ -34,7 +34,7 @@ public enum GameError: Error, Codable, Equatable {
     case noPlayer(PlayerArg)
 
     /// Not matching requirement
-    case mismatched(PlayReq)
+    case noReq(PlayReq)
 
     /// Expected to choose one of waited action
     case unwaitedAction

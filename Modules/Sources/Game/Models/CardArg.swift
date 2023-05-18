@@ -11,6 +11,9 @@ public enum CardArg: Codable, Equatable {
     /// Card identified by
     case id(String)
 
+    /// All cards
+    case all
+
     /// Select any player's hand or inPlay card
     case selectAny
 
