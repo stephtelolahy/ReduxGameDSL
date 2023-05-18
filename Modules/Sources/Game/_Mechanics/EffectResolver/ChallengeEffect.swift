@@ -50,7 +50,7 @@ struct ChallengeEffect: EffectResolverProtocol {
             case let .chooseOne(chooser, options):
                 let reversedAction = CardEffect.challengeEffect(target: challenger,
                                                                 challenger: target,
-                                                                effect: effect.withTarget(challenger),
+                                                                effect: effect,
                                                                 otherwise: otherwise)
                     .withCtx(EffectContext(actor: ctx.actor, card: ctx.card, target: challengerId))
                 var options = options.mapValues { childAction in
@@ -71,18 +71,6 @@ struct ChallengeEffect: EffectResolverProtocol {
             }
 
             return [.chooseOne(chooser: target, options: [.pass: otherwise.withCtx(ctx)])]
-        }
-    }
-}
-
-private extension CardEffect {
-    func withTarget(_ target: PlayerArg) -> Self {
-        switch self {
-        case let .discard(_, card, chooser):
-            return .discard(player: target, card: card, chooser: chooser)
-            
-        default:
-            fatalError(.unexpected)
         }
     }
 }

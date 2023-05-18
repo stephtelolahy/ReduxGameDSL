@@ -23,7 +23,7 @@ private extension CardEffect {
         switch self {
         case let .heal(value): return ResolveTargetForAction { .heal(player: $0, value: value) }
         case let .damage(value): return ResolveTargetForAction { .damage(player: $0, value: value) }
-        case let .discard(player, card, chooser): return EffectDiscard(player: player, card: card, chooser: chooser)
+        case let .discard(card, chooser): return EffectDiscard(card: card, chooser: chooser)
         case .draw: return ResolveTargetForAction { .draw(player: $0) }
         case let .steal(player, target, card): return EffectSteal(player: player, target: target, card: card)
         case .reveal: return JustAction(action: .reveal)
