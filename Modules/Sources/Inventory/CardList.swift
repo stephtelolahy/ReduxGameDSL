@@ -21,7 +21,7 @@ public enum CardList {
         
         Card(.saloon) {
             CardEffect.heal(1, player: .target)
-                .apply(to: .damaged)
+                .target(.damaged)
                 .triggered(.onPlay)
         }
         
@@ -54,7 +54,7 @@ public enum CardList {
                 CardEffect.reveal
                     .replay(.numPlayers)
                 CardEffect.chooseCard(player: .target, card: .selectArena)
-                    .apply(to: .all)
+                    .target(.all)
             }
             .triggered(.onPlay)
         }
@@ -74,14 +74,14 @@ public enum CardList {
         Card(.gatling) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
                 .otherwise(.damage(1, player: .target))
-                .apply(to: .others)
+                .target(.others)
                 .triggered(.onPlay)
         }
         
         Card(.indians) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
                 .otherwise(.damage(1, player: .target))
-                .apply(to: .others)
+                .target(.others)
                 .triggered(.onPlay)
         }
 

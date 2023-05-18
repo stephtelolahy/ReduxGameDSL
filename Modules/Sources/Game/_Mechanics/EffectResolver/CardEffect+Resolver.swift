@@ -30,7 +30,7 @@ private extension CardEffect {
         case let .chooseCard(player, card): return EffectChooseCard(player: player, card: card)
         case let .setTurn(player): return EffectSetTurn(player: player)
         case let .eliminate(player): return EffectEliminate(player: player)
-        case let .applyEffect(target, effect): return ApplyEffect(target: target, effect: effect)
+        case let .targetEffect(target, effect): return TargetEffect(target: target, effect: effect)
         case let .groupEffects(effects): return GroupEffects(effects: effects)
         case let .replayEffect(times, effect): return ReplayEffect(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return ForceEffect(effect: effect, otherwise: otherwise)
