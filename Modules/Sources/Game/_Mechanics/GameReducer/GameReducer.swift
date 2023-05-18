@@ -56,8 +56,8 @@ private extension GameReducer {
         state = try action.reduce(state: state)
         switch action {
         case .play,
-             .resolve,
-             .groupActions:
+                .resolve,
+                .groupActions:
             break
 
         default:
