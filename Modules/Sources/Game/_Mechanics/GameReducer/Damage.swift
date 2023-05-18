@@ -15,15 +15,3 @@ struct Damage: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectDamage: EffectResolverProtocol {
-    let value: Int
-    
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
-        
-        return [.damage(player: target, value: value)]
-    }
-}

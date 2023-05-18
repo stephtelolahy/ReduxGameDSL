@@ -15,15 +15,3 @@ struct Heal: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectHeal: EffectResolverProtocol {
-    let value: Int
-    
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
-
-        return [.heal(player: target, value: value)]
-    }
-}
