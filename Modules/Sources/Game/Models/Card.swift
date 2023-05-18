@@ -17,9 +17,6 @@ public struct CardAction: Codable, Equatable {
     
     /// Describing when card action is triggered
     public let eventReq: EventReq
-
-    /// The target to choose before performing the action
-    public var target: PlayerArg?
     
     /// The side effect
     public let effect: CardEffect

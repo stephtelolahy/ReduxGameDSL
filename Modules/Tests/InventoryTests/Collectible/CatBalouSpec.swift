@@ -87,6 +87,11 @@ final class CatBalouSpec: QuickSpec {
                                 }
                             }
                             Player("p2")
+                            Player("p3") {
+                                Hand {
+                                    "c3"
+                                }
+                            }
                         }
                         
                         // When

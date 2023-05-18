@@ -37,31 +37,32 @@ private extension GameAction {
 
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
-        // resolve target
-        if let requiredTarget = cardAction.target,
-           target == nil {
-            let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
-            guard case let .selectable(pIds) = resolvedTarget else {
-                fatalError(.unexpected)
-            }
+        var sideEffect = cardAction.effect
 
-            let firstAction = GameAction.play(actor: actor, card: card, target: pIds[0])
-            try firstAction.validate(state: state)
-            return
+        // resolve target
+        if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
+            let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
+            if case let .selectable(pIds) = resolvedTarget {
+
+                if target == nil {
+                    let firstAction = GameAction.play(actor: actor, card: card, target: pIds[0])
+                    try firstAction.validate(state: state)
+                    return
+                }
+
+                sideEffect = childEffect
+            }
         }
 
-        var state = state
-
         // discard played hand card
+        var state = state
         let actorObj = state.player(actor)
         if actorObj.hand.contains(card) {
             try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
             state.discard.push(card)
         }
 
-        let sideEffect = cardAction.effect.withCtx(ctx)
-
-        try sideEffect.validate(state: state)
+        try sideEffect.withCtx(ctx).validate(state: state)
     }
     
     func validateEffect(effect: CardEffect, ctx: EffectContext, state: GameState) throws {

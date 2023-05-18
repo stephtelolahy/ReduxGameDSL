@@ -39,14 +39,14 @@ public enum CardList {
         
         Card(.catBalou) {
             CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
-                .triggered(.onPlay)
                 .target(.selectAnyWithCard)
+                .triggered(.onPlay)
         }
         
         Card(.panic) {
             CardEffect.steal(player: .actor, target: .target, card: .selectAny)
-                .triggered(.onPlay)
                 .target(.selectAtRangeWithCard(1))
+                .triggered(.onPlay)
         }
         
         Card(.generalStore) {
@@ -62,11 +62,11 @@ public enum CardList {
         Card(.bang) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
                 .otherwise(.damage(1, player: .target))
+                .target(.selectReachable)
                 .require {
                     PlayReq.isTimesPerTurn(1)
                 }
                 .triggered(.onPlay)
-                .target(.selectReachable)
         }
         
         Card(.missed)
@@ -88,8 +88,8 @@ public enum CardList {
         Card(.duel) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
                 .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
-                .triggered(.onPlay)
                 .target(.selectAny)
+                .triggered(.onPlay)
         }
         
         // MARK: - Abilities
