@@ -61,7 +61,7 @@ private extension GameAction {
         }
         
         for (key, value) in options {
-            if case let .effect(optionEffect, optionCtx) = value {
+            if case let .resolve(optionEffect, optionCtx) = value {
                 let resolvedAction = try optionEffect
                     .resolver()
                     .resolve(state: state, ctx: optionCtx)

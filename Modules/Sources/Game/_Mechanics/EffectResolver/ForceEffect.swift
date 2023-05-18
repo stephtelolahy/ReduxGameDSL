@@ -19,7 +19,7 @@ struct ForceEffect: EffectResolverProtocol {
 
             let action = children[0]
             switch action {
-            case let .effect(childEffect, childCtx):
+            case let .resolve(childEffect, childCtx):
                 return [CardEffect.forceEffect(effect: childEffect, otherwise: otherwise).withCtx(childCtx)]
 
             case let .chooseOne(chooser, options):

@@ -56,7 +56,7 @@ private extension GameReducer {
         state = try action.reducer().reduce(state: state)
         switch action {
         case .play,
-             .effect,
+             .resolve,
              .groupActions:
             break
 
@@ -139,7 +139,7 @@ extension GameAction {
         case let .groupActions(actions): return GroupActions(children: actions)
         case let .setTurn(player): return SetTurn(player: player)
         case let .eliminate(player): return Eliminate(player: player)
-        case let .effect(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
+        case let .resolve(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }

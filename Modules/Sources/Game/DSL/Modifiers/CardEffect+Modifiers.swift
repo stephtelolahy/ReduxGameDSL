@@ -33,6 +33,6 @@ public extension CardEffect {
 
 extension CardEffect {
     func withCtx(_ ctx: EffectContext) -> GameAction {
-        .effect(self, ctx: ctx)
+        .resolve(self, ctx: ctx)
     }
 }

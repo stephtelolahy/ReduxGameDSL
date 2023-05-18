@@ -41,7 +41,7 @@ struct ChallengeEffect: EffectResolverProtocol {
 
             let action = children[0]
             switch action {
-            case let .effect(childEffect, childCtx):
+            case let .resolve(childEffect, childCtx):
                 return [CardEffect.challengeEffect(target: target,
                                                    challenger: challenger,
                                                    effect: childEffect,

@@ -46,8 +46,8 @@ public indirect enum GameAction: Codable, Equatable {
 
     // MARK: - Invisible actions
 
-    /// Apply an effect
-    case effect(CardEffect, ctx: EffectContext)
+    /// Resolve an effect
+    case resolve(CardEffect, ctx: EffectContext)
 
     /// Dispatch actions sequentially
     case groupActions([Self])
