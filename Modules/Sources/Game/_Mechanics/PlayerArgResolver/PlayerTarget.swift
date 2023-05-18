@@ -11,6 +11,6 @@ struct PlayerTarget: PlayerArgResolverProtocol {
             throw GameError.noPlayer(.target)
         }
 
-        return .identified(target)
+        return .identified([target])
     }
 }

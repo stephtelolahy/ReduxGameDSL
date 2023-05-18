@@ -64,7 +64,7 @@ final class SaloonSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.failure(.noPlayers(.damaged))]
+                    expect(result) == [.failure(.noPlayer(.damaged))]
                 }
             }
         }

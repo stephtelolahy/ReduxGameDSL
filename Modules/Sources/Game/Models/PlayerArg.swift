@@ -34,10 +34,6 @@ public enum PlayerArg: Codable, Equatable {
 
     /// Select any reachable player
     case selectReachable
-}
-
-/// Player group argument
-public enum PlayerGroupArg: Codable, Equatable {
 
     /// All players
     case all

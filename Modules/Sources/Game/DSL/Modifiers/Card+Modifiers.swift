@@ -22,6 +22,7 @@ public extension CardEffect {
 }
 
 public extension CardAction {
+    @available(*, deprecated, message: "")
     func target(_ target: PlayerArg) -> Self {
         .init(eventReq: eventReq, target: target, effect: effect)
     }

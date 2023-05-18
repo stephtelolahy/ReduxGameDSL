@@ -5,11 +5,11 @@
 //  Created by Hugues Telolahy on 22/04/2023.
 //
 
-struct PlayerOthers: PlayerGroupArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> [String] {
+struct PlayerOthers: PlayerArgResolverProtocol {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         let others = state.playOrder
             .starting(with: ctx.actor)
             .dropFirst()
-        return Array(others)
+        return .identified(Array(others))
     }
 }

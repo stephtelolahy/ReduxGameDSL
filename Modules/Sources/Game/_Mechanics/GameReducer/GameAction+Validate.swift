@@ -59,7 +59,6 @@ private extension GameAction {
             state.discard.push(card)
         }
 
-
         let sideEffect = cardAction.effect.withCtx(ctx)
 
         try sideEffect.validate(state: state)

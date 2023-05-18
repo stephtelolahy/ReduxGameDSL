@@ -14,6 +14,6 @@ struct PlayerNext: PlayerArgResolverProtocol {
             fatalError(.unexpected)
         }
         
-        return .identified(next)
+        return .identified([next])
     }
 }
