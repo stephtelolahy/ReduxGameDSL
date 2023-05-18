@@ -7,10 +7,10 @@
 
 extension Array where Element: Equatable {
 
-    /// start array with given element, keeping initial order
+    /// Start array with given element, keeping initial order
     func starting(with element: Element) -> [Element] {
         guard let elementIndex = firstIndex(of: element) else {
-            return self
+            fatalError("Element \(element) not found in array \(self)")
         }
 
         return (0..<count).map { self[($0 + elementIndex) % count] }

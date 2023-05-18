@@ -23,6 +23,7 @@ private extension PlayReq {
         switch self {
         case let .isPlayersAtLeast(minCount): return IsPlayersAtLeast(minCount: minCount)
         case let .isTimesPerTurn(maxTimes): return IsTimesPerTurn(maxTimes: maxTimes)
+        case .isCurrentTurn: return IsCurrentTurn()
         }
     }
 }
@@ -39,6 +40,7 @@ private extension EventReq {
         case .onPlay: fatalError(.unexpected)
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
+        case .onEliminated: return OnEliminated()
         }
     }
 }

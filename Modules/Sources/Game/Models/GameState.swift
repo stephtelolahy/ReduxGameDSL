@@ -11,6 +11,9 @@ public struct GameState: GameElement, Codable, Equatable {
     /// Playing order
     public var playOrder: [String] = []
 
+    /// Initial order
+    public var setupOrder: [String] = []
+
     /// Current turn's player
     public var turn: String?
 
