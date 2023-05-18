@@ -18,12 +18,11 @@ struct Play: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
+              var sideEffect = cardObj.actions[.onPlay] else {
             throw GameError.cardNotPlayable(card)
         }
 
-        var sideEffect: CardEffect = cardAction.effect
-        if case let .requireEffect(_, childEffect) = cardAction.effect {
+        if case let .requireEffect(_, childEffect) = sideEffect {
             sideEffect = childEffect
         }
 

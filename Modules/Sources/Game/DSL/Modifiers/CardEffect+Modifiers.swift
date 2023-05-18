@@ -33,6 +33,10 @@ public extension CardEffect {
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
         .groupEffects(content())
     }
+
+    func triggered(_ eventReq: EventReq) -> CardAction {
+        .init(eventReq: eventReq, effect: self)
+    }
 }
 
 extension CardEffect {

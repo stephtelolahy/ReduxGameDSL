@@ -31,13 +31,11 @@ private extension GameAction {
     func validatePlay(actor: String, card: String, target: String?, state: GameState) throws {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
+              var sideEffect = cardObj.actions[.onPlay] else {
             throw GameError.cardNotPlayable(card)
         }
 
         let ctx = EffectContext(actor: actor, card: card, target: target)
-
-        var sideEffect = cardAction.effect
 
         // resolve target
         if case let .targetEffect(requiredTarget, childEffect) = sideEffect {

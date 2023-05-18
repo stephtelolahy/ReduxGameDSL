@@ -11,12 +11,14 @@ public extension Card {
     
     init(_ name: String, @CardActionBuilder content: () -> [CardAction] = { [] }) {
         self.name = name
-        self.actions = content()
+        self.actions = content().toDictionary()
     }
 }
 
-public extension CardEffect {
-    func triggered(_ eventReq: EventReq) -> CardAction {
-        .init(eventReq: eventReq, effect: self)
+private extension Array where Element == CardAction {
+    func toDictionary() -> [EventReq: CardEffect] {
+        reduce(into: [EventReq: CardEffect]()) {
+            $0[$1.eventReq] = $1.effect
+        }
     }
 }

@@ -9,15 +9,5 @@ public struct Card: Codable, Equatable {
     public let name: String
     
     /// Actions that can be performed with the card
-    public var actions: [CardAction] = []
-}
-
-/// Describing card action
-public struct CardAction: Codable, Equatable {
-    
-    /// Describing when card action is triggered
-    public let eventReq: EventReq
-    
-    /// The side effect
-    public let effect: CardEffect
+    public let actions: [EventReq: CardEffect]
 }

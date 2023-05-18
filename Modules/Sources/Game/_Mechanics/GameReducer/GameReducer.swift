@@ -92,14 +92,14 @@ private extension GameReducer {
             return nil
         }
         
-        for cardAction in cardObj.actions {
+        for (eventReq, sideEffect) in cardObj.actions {
             do {
-                let eventMatched = try cardAction.eventReq.match(state: state, ctx: ctx)
+                let eventMatched = try eventReq.match(state: state, ctx: ctx)
                 if eventMatched {
-                    let gameAction = GameAction.resolve(cardAction.effect, ctx: ctx)
+                    let gameAction = GameAction.resolve(sideEffect, ctx: ctx)
                     try gameAction.validate(state: state)
 
-                    return cardAction.effect
+                    return sideEffect
                 }
             } catch {
                 return nil
