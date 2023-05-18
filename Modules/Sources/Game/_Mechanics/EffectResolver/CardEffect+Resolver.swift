@@ -22,7 +22,7 @@ private extension CardEffect {
     func resolver() -> EffectResolverProtocol {
         switch self {
         case let .heal(value): return EffectHeal(value: value)
-        case let .damage(value, player): return EffectDamage(player: player, value: value)
+        case let .damage(value): return EffectDamage(value: value)
         case let .discard(player, card, chooser): return EffectDiscard(player: player, card: card, chooser: chooser)
         case .draw: return EffectDraw()
         case let .steal(player, target, card): return EffectSteal(player: player, target: target, card: card)

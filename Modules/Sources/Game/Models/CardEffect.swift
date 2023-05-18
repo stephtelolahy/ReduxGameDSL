@@ -13,7 +13,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case heal(Int)
     
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
-    case damage(Int, player: PlayerArg)
+    case damage(Int)
     
     /// Draw top deck card
     case draw

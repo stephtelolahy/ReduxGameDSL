@@ -63,7 +63,7 @@ public enum CardList {
 
     static let bang = Card(.bang) {
         CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
-            .otherwise(.damage(1, player: .target))
+            .otherwise(.damage(1))
             .target(.selectReachable)
             .require {
                 PlayReq.isTimesPerTurn(1)
@@ -75,21 +75,21 @@ public enum CardList {
 
     static let gatling = Card(.gatling) {
         CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
-            .otherwise(.damage(1, player: .target))
+            .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let indians = Card(.indians) {
         CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
-            .otherwise(.damage(1, player: .target))
+            .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let duel = Card(.duel) {
         CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
-            .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
+            .challenge(target: .target, challenger: .actor, otherwise: .damage(1))
             .target(.selectAny)
             .triggered(.onPlay)
     }
