@@ -12,7 +12,6 @@ import Nimble
 final class ChooseCardSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let ctx = EffectContext(actor: "p1", card: "cx")
         describe("choose a card") {
             context("specified") {
                 context("multiple cards remaining") {

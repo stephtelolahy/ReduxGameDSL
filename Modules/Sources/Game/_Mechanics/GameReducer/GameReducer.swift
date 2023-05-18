@@ -146,7 +146,7 @@ private extension GameAction {
         case let .groupActions(actions): return GroupActions(children: actions)
         case let .setTurn(player): return SetTurn(player: player)
         case let .eliminate(player): return Eliminate(player: player)
-        case let .resolve(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
+        case let .resolve(effect, ctx): return Resolve(effect: effect, ctx: ctx)
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }

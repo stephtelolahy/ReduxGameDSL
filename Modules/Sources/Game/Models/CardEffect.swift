@@ -23,7 +23,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case discard(CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
-    case steal(player: PlayerArg, target: PlayerArg, card: CardArg)
+    case steal(CardArg, stealer: PlayerArg)
     
     /// Draw some cards from arena
     case chooseCard
