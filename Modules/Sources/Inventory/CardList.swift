@@ -7,122 +7,140 @@
 import Game
 
 public enum CardList {
-    public static let all: [String: Card] = createCards {
-        
-        // MARK: - Collectible
-        
-        Card(.beer) {
-            CardEffect.heal(1, player: .actor)
-                .require {
-                    PlayReq.isPlayersAtLeast(3)
-                }
-                .triggered(.onPlay)
-        }
-        
-        Card(.saloon) {
-            CardEffect.heal(1, player: .target)
-                .target(.damaged)
-                .triggered(.onPlay)
-        }
-        
-        Card(.stagecoach) {
-            CardEffect.draw(player: .actor)
-                .replay(2)
-                .triggered(.onPlay)
-        }
-        
-        Card(.wellsFargo) {
-            CardEffect.draw(player: .actor)
-                .replay(3)
-                .triggered(.onPlay)
-        }
-        
-        Card(.catBalou) {
-            CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
-                .target(.selectAnyWithCard)
-                .triggered(.onPlay)
-        }
-        
-        Card(.panic) {
-            CardEffect.steal(player: .actor, target: .target, card: .selectAny)
-                .target(.selectAtRangeWithCard(1))
-                .triggered(.onPlay)
-        }
-        
-        Card(.generalStore) {
-            CardEffect.group {
-                CardEffect.reveal
-                    .replay(.numPlayers)
-                CardEffect.chooseCard(player: .target, card: .selectArena)
-                    .target(.all)
+
+    // MARK: - Collectibles
+
+    static let beer = Card(.beer) {
+        CardEffect.heal(1, player: .actor)
+            .require {
+                PlayReq.isPlayersAtLeast(3)
             }
             .triggered(.onPlay)
-        }
-        
-        Card(.bang) {
-            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
-                .otherwise(.damage(1, player: .target))
-                .target(.selectReachable)
-                .require {
-                    PlayReq.isTimesPerTurn(1)
-                }
-                .triggered(.onPlay)
-        }
-        
-        Card(.missed)
-        
-        Card(.gatling) {
-            CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
-                .otherwise(.damage(1, player: .target))
-                .target(.others)
-                .triggered(.onPlay)
-        }
-        
-        Card(.indians) {
-            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
-                .otherwise(.damage(1, player: .target))
-                .target(.others)
-                .triggered(.onPlay)
-        }
+    }
 
-        Card(.duel) {
-            CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
-                .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
-                .target(.selectAny)
-                .triggered(.onPlay)
+    static let saloon = Card(.saloon) {
+        CardEffect.heal(1, player: .target)
+            .target(.damaged)
+            .triggered(.onPlay)
+    }
+
+    static let stagecoach = Card(.stagecoach) {
+        CardEffect.draw(player: .actor)
+            .replay(2)
+            .triggered(.onPlay)
+    }
+
+    static let wellsFargo = Card(.wellsFargo) {
+        CardEffect.draw(player: .actor)
+            .replay(3)
+            .triggered(.onPlay)
+    }
+
+    static let catBalou = Card(.catBalou) {
+        CardEffect.discard(player: .target, card: .selectAny, chooser: .actor)
+            .target(.selectAnyWithCard)
+            .triggered(.onPlay)
+    }
+
+    static let panic = Card(.panic) {
+        CardEffect.steal(player: .actor, target: .target, card: .selectAny)
+            .target(.selectAtRangeWithCard(1))
+            .triggered(.onPlay)
+    }
+
+    static let generalStore = Card(.generalStore) {
+        CardEffect.group {
+            CardEffect.reveal
+                .replay(.numPlayers)
+            CardEffect.chooseCard(player: .target, card: .selectArena)
+                .target(.all)
         }
-        
-        // MARK: - Abilities
-        
-        Card(.endTurn) {
-            CardEffect.group {
-                CardEffect.discard(player: .actor, card: .selectHand)
-                    .replay(.excessHand)
-                CardEffect.setTurn(.next)
+        .triggered(.onPlay)
+    }
+
+    static let bang = Card(.bang) {
+        CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+            .otherwise(.damage(1, player: .target))
+            .target(.selectReachable)
+            .require {
+                PlayReq.isTimesPerTurn(1)
             }
             .triggered(.onPlay)
-        }
-        
-        Card(.drawOnSetTurn) {
-            CardEffect.draw(player: .actor)
-                .replay(.playerAttr(.starTurnCards))
-                .triggered(.onSetTurn)
-        }
-        
-        Card(.eliminateOnLooseLastHealth) {
-            CardEffect.eliminate(.actor)
-                .triggered(.onLooseLastHealth)
-        }
+    }
 
-        Card(.nextTurnOnEliminated) {
+    static let missed = Card(.missed)
+
+    static let gatling = Card(.gatling) {
+        CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
+            .otherwise(.damage(1, player: .target))
+            .target(.others)
+            .triggered(.onPlay)
+    }
+
+    static let indians = Card(.indians) {
+        CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+            .otherwise(.damage(1, player: .target))
+            .target(.others)
+            .triggered(.onPlay)
+    }
+
+    static let duel = Card(.duel) {
+        CardEffect.discard(player: .target, card: .selectHandNamed(.bang))
+            .challenge(target: .target, challenger: .actor, otherwise: .damage(1, player: .target))
+            .target(.selectAny)
+            .triggered(.onPlay)
+    }
+
+    // MARK: - Abilities
+
+    static let endTurn = Card(.endTurn) {
+        CardEffect.group {
+            CardEffect.discard(player: .actor, card: .selectHand)
+                .replay(.excessHand)
             CardEffect.setTurn(.next)
-                .require {
-                    PlayReq.isCurrentTurn
-                }
-                .triggered(.onEliminated)
         }
+        .triggered(.onPlay)
+    }
 
-        Card(.discardCardsOnEliminated)
+    static let drawOnSetTurn = Card(.drawOnSetTurn) {
+        CardEffect.draw(player: .actor)
+            .replay(.playerAttr(.starTurnCards))
+            .triggered(.onSetTurn)
+    }
+
+    static let eliminateOnLooseLastHealth = Card(.eliminateOnLooseLastHealth) {
+        CardEffect.eliminate(.actor)
+            .triggered(.onLooseLastHealth)
+    }
+
+    static let nextTurnOnEliminated = Card(.nextTurnOnEliminated) {
+        CardEffect.setTurn(.next)
+            .require {
+                PlayReq.isCurrentTurn
+            }
+            .triggered(.onEliminated)
+    }
+
+    static let discardCardsOnEliminated = Card(.discardCardsOnEliminated)
+
+    public static let all: [String: Card] = createCards {
+        beer
+        saloon
+        stagecoach
+        wellsFargo
+        catBalou
+        panic
+        generalStore
+        bang
+        missed
+        gatling
+        indians
+        duel
+        endTurn
+        drawOnSetTurn
+        eliminateOnLooseLastHealth
+        nextTurnOnEliminated
+        discardCardsOnEliminated
     }
     
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {
