@@ -16,7 +16,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case damage(Int, player: PlayerArg)
     
     /// Draw top deck card
-    case draw(player: PlayerArg)
+    case draw
     
     /// Discard a player's card to discard pile
     /// Default chooser is player

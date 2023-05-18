@@ -17,11 +17,11 @@ struct Draw: GameReducerProtocol {
 }
 
 struct EffectDraw: EffectResolverProtocol {
-    let player: PlayerArg
-
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        try player.resolve(state: state, ctx: ctx) {
-            .draw(player: $0)
+        guard let target = ctx.target else {
+            throw GameError.noPlayer(.target)
         }
+
+        return [.draw(player: target)]
     }
 }

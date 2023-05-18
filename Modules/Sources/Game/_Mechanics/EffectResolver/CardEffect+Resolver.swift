@@ -24,7 +24,7 @@ private extension CardEffect {
         case let .heal(value, player): return EffectHeal(player: player, value: value)
         case let .damage(value, player): return EffectDamage(player: player, value: value)
         case let .discard(player, card, chooser): return EffectDiscard(player: player, card: card, chooser: chooser)
-        case let .draw(player): return EffectDraw(player: player)
+        case .draw: return EffectDraw()
         case let .steal(player, target, card): return EffectSteal(player: player, target: target, card: card)
         case .reveal: return EffectReveal()
         case let .chooseCard(player, card): return EffectChooseCard(player: player, card: card)

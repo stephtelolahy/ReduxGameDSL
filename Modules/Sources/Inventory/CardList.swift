@@ -25,13 +25,15 @@ public enum CardList {
     }
 
     static let stagecoach = Card(.stagecoach) {
-        CardEffect.draw(player: .actor)
+        CardEffect.draw
+            .target(.actor)
             .replay(2)
             .triggered(.onPlay)
     }
 
     static let wellsFargo = Card(.wellsFargo) {
-        CardEffect.draw(player: .actor)
+        CardEffect.draw
+            .target(.actor)
             .replay(3)
             .triggered(.onPlay)
     }
@@ -103,7 +105,8 @@ public enum CardList {
     }
 
     static let drawOnSetTurn = Card(.drawOnSetTurn) {
-        CardEffect.draw(player: .actor)
+        CardEffect.draw
+            .target(.actor)
             .replay(.playerAttr(.starTurnCards))
             .triggered(.onSetTurn)
     }
