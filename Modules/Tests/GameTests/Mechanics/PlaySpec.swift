@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
-@testable import Game
+import Game
 import Quick
 import Nimble
 
@@ -60,7 +60,9 @@ final class PlaySpec: QuickSpec {
                 it("should queue side effects") {
                     // Then
                     let ctx = EffectContext(actor: "p1", card: "playable")
-                    expect(result.queue) == [CardEffect.heal(1).target(.actor).withCtx(ctx)]
+                    expect(result.queue) == [
+                        .resolve(.heal(1).target(.actor), ctx: ctx)
+                    ]
                 }
             }
 
