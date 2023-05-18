@@ -26,7 +26,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case steal(player: PlayerArg, target: PlayerArg, card: CardArg)
     
     /// Draw some cards from arena
-    case chooseCard(player: PlayerArg, card: CardArg)
+    case chooseCard
     
     /// Draw a card from deck and put to arena
     case reveal

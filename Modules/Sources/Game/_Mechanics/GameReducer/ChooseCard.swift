@@ -21,18 +21,13 @@ struct ChooseCard: GameReducerProtocol {
 }
 
 struct EffectChooseCard: EffectResolverProtocol {
-    let player: PlayerArg
-    let card: CardArg
-
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard case let .id(pId) = player else {
-            return try player.resolve(state: state, ctx: ctx) {
-                CardEffect.chooseCard(player: .id($0), card: card).withCtx(ctx)
-            }
+        guard let target = ctx.target else {
+            throw GameError.noPlayer(.target)
         }
 
-        return try card.resolve(state: state, ctx: ctx, chooser: pId, owner: nil) {
-            .chooseCard(player: pId, card: $0)
+        return try CardArg.selectArena.resolve(state: state, ctx: ctx, chooser: target, owner: nil) {
+            .chooseCard(player: target, card: $0)
         }
     }
 }

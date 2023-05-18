@@ -55,7 +55,7 @@ public enum CardList {
         CardEffect.group {
             CardEffect.reveal
                 .replay(.numPlayers)
-            CardEffect.chooseCard(player: .target, card: .selectArena)
+            CardEffect.chooseCard
                 .target(.all)
         }
         .triggered(.onPlay)
