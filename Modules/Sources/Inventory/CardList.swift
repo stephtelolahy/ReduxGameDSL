@@ -100,7 +100,8 @@ public enum CardList {
         CardEffect.group {
             CardEffect.discard(player: .actor, card: .selectHand)
                 .replay(.excessHand)
-            CardEffect.setTurn(.next)
+            CardEffect.setTurn
+                .target(.next)
         }
         .triggered(.onPlay)
     }
@@ -113,12 +114,14 @@ public enum CardList {
     }
 
     static let eliminateOnLooseLastHealth = Card(.eliminateOnLooseLastHealth) {
-        CardEffect.eliminate(.actor)
+        CardEffect.eliminate
+            .target(.actor)
             .triggered(.onLooseLastHealth)
     }
 
     static let nextTurnOnEliminated = Card(.nextTurnOnEliminated) {
-        CardEffect.setTurn(.next)
+        CardEffect.setTurn
+            .target(.next)
             .require {
                 PlayReq.isCurrentTurn
             }

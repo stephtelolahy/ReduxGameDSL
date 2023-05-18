@@ -32,10 +32,10 @@ public indirect enum CardEffect: Codable, Equatable {
     case reveal
     
     /// Set attribute turn
-    case setTurn(PlayerArg)
+    case setTurn
 
     /// Eliminate a player from the game
-    case eliminate(PlayerArg)
+    case eliminate
 
     // MARK: - Operators
 
