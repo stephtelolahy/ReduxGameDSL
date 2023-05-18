@@ -1,5 +1,5 @@
 //
-//  GameAction+IsValid.swift
+//  GameAction+Validate.swift
 //  
 //
 //  Created by Hugues Stephano TELOLAHY on 13/05/2023.
@@ -18,10 +18,10 @@ extension GameAction {
             try validateEffect(effect: effect, ctx: ctx, state: state)
 
         case let .chooseOne(chooser, options):
-            try validateChoose(chooser: chooser, options: options, state: state)
+            try validateChooseOne(chooser: chooser, options: options, state: state)
             
         default:
-            try validateAction(action: self, state: state)
+            try validateAny(action: self, state: state)
         }
     }
 }
@@ -35,6 +35,21 @@ private extension GameAction {
             throw GameError.cardNotPlayable(card)
         }
 
+        let ctx = EffectContext(actor: actor, card: card, target: target)
+
+        // resolve target
+        if let requiredTarget = cardAction.target,
+           target == nil {
+            let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
+            guard case let .selectable(pIds) = resolvedTarget else {
+                fatalError(.unexpected)
+            }
+
+            let firstAction = GameAction.play(actor: actor, card: card, target: pIds[0])
+            try firstAction.validate(state: state)
+            return
+        }
+
         var state = state
 
         // discard played hand card
@@ -44,28 +59,29 @@ private extension GameAction {
             state.discard.push(card)
         }
 
-        let ctx = EffectContext(actor: actor, card: card, target: target)
+
         let sideEffect = cardAction.effect.withCtx(ctx)
+
         try sideEffect.validate(state: state)
     }
     
     func validateEffect(effect: CardEffect, ctx: EffectContext, state: GameState) throws {
         let children = try effect.resolve(state: state, ctx: ctx)
-        guard let action = children.first else {
+        guard let firstAction = children.first else {
             // Empty effect
             return
         }
 
-        try action.validate(state: state)
+        try firstAction.validate(state: state)
     }
 
-    func validateChoose(chooser: String, options: [String: GameAction], state: GameState) throws {
+    func validateChooseOne(chooser: String, options: [String: GameAction], state: GameState) throws {
         for (_, action) in options {
             try action.validate(state: state)
         }
     }
     
-    func validateAction(action: GameAction, state: GameState) throws {
-        _ = try action.reducer().reduce(state: state)
+    func validateAny(action: GameAction, state: GameState) throws {
+        _ = try action.reduce(state: state)
     }
 }

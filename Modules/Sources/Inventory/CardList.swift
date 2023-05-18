@@ -13,10 +13,10 @@ public enum CardList {
         
         Card(.beer) {
             CardEffect.heal(1, player: .actor)
-                .triggered(.onPlay)
                 .require {
                     PlayReq.isPlayersAtLeast(3)
                 }
+                .triggered(.onPlay)
         }
         
         Card(.saloon) {
@@ -62,11 +62,11 @@ public enum CardList {
         Card(.bang) {
             CardEffect.discard(player: .target, card: .selectHandNamed(.missed))
                 .otherwise(.damage(1, player: .target))
-                .triggered(.onPlay)
-                .target(.selectReachable)
                 .require {
                     PlayReq.isTimesPerTurn(1)
                 }
+                .triggered(.onPlay)
+                .target(.selectReachable)
         }
         
         Card(.missed)
@@ -116,10 +116,10 @@ public enum CardList {
 
         Card(.nextTurnOnEliminated) {
             CardEffect.setTurn(.next)
-                .triggered(.onEliminated)
                 .require {
                     PlayReq.isCurrentTurn
                 }
+                .triggered(.onEliminated)
         }
 
         Card(.discardCardsOnEliminated)

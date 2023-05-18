@@ -24,7 +24,7 @@ extension PlayerArg {
         }
     }
     
-    private func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         try resolver().resolve(state: state, ctx: ctx)
     }
 }

@@ -23,8 +23,9 @@ final class BangSpec: QuickSpec {
                                 .bang
                             }
                         }
+                        Player("p2")
                     }
-                        .counters([.bang: 1])
+                    .counters([.bang: 1])
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .bang)

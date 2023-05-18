@@ -26,6 +26,10 @@ public extension CardEffect {
         .challengeEffect(target: target, challenger: challenger, effect: self, otherwise: otherwise)
     }
 
+    func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {
+        .requireEffect(playReqs: playReqs(), effect: self)
+    }
+
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
         .groupEffects(content())
     }

@@ -21,13 +21,14 @@ struct Play: GameReducerProtocol {
               let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
-
-        // verify requirements
+        
         let ctx = EffectContext(actor: actor, card: card, target: target)
-        for playReq in cardAction.playReqs {
-            try playReq.match(state: state, ctx: ctx)
-        }
 
+        // validate action
+        let action = GameAction.play(actor: actor, card: card, target: target)
+        _ = try action.validate(state: state)
+
+        // resolve target
         if let requiredTarget = cardAction.target,
            target == nil {
             let children = try requiredTarget.resolve(state: state, ctx: ctx) {
@@ -37,10 +38,6 @@ struct Play: GameReducerProtocol {
             state.queue.insert(contentsOf: children, at: 0)
             return state
         }
-
-        // validate action
-        let action = GameAction.play(actor: actor, card: card, target: target)
-        _ = try action.validate(state: state)
 
         var state = state
 
@@ -55,8 +52,12 @@ struct Play: GameReducerProtocol {
         state.event = .play(actor: actor, card: card, target: target)
 
         // queue side effects
-        let sideEffect = cardAction.effect.withCtx(ctx)
-        state.queue.insert(sideEffect, at: 0)
+        var sideEffect = cardAction.effect
+        if case let .requireEffect(_, childEffect) = cardAction.effect {
+            sideEffect = childEffect
+        }
+
+        state.queue.insert(sideEffect.withCtx(ctx), at: 0)
 
         return state
     }
