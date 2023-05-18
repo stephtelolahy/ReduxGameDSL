@@ -10,13 +10,8 @@ struct TargetEffect: EffectResolverProtocol {
     let effect: CardEffect
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let resolved = try target.resolve(state: state, ctx: ctx)
-        guard case let .identified(pIds) = resolved else {
-            fatalError(.unexpected)
-        }
-
-        return pIds.map {
-            effect.withCtx(EffectContext(actor: ctx.actor, card: ctx.card, target: $0))
+        try target.resolve(state: state, ctx: ctx) {
+            .resolve(effect, ctx: EffectContext(actor: ctx.actor, card: ctx.card, target: $0))
         }
     }
 }
