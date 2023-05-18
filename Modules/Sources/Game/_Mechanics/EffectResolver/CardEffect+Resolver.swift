@@ -35,7 +35,7 @@ private extension CardEffect {
         case let .replayEffect(times, effect): return ReplayEffect(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return ForceEffect(effect: effect, otherwise: otherwise)
             // swiftlint:disable:next line_length
-        case let .challengeEffect(challenger, effect, otherwise): return ChallengeEffect(challenger: challenger, effect: effect, otherwise: otherwise)
+        case let .challengerEffect(challenger, effect, otherwise): return ChallengerEffect(challenger: challenger, effect: effect, otherwise: otherwise)
         case let .requireEffect(playReqs, effect): return RequireEffect(playReqs: playReqs, effect: effect)
         }
     }

@@ -1,11 +1,11 @@
 //
-//  ChallengeEffect.swift
+//  ChallengerEffect.swift
 //  
 //
 //  Created by Hugues Telolahy on 13/05/2023.
 //
 
-struct ChallengeEffect: EffectResolverProtocol {
+struct ChallengerEffect: EffectResolverProtocol {
     let challenger: PlayerArg
     let effect: CardEffect
     let otherwise: CardEffect
@@ -17,9 +17,9 @@ struct ChallengeEffect: EffectResolverProtocol {
 
         guard case let .id(challengerId) = challenger else {
             return try challenger.resolve(state: state, ctx: ctx) {
-                CardEffect.challengeEffect(challenger: .id($0),
-                                           effect: effect,
-                                           otherwise: otherwise)
+                CardEffect.challengerEffect(challenger: .id($0),
+                                            effect: effect,
+                                            otherwise: otherwise)
                 .withCtx(ctx)
             }
         }
@@ -34,14 +34,14 @@ struct ChallengeEffect: EffectResolverProtocol {
             let action = children[0]
             switch action {
             case let .resolve(childEffect, childCtx):
-                return [CardEffect.challengeEffect(challenger: challenger,
-                                                   effect: childEffect,
-                                                   otherwise: otherwise).withCtx(childCtx)]
+                return [CardEffect.challengerEffect(challenger: challenger,
+                                                    effect: childEffect,
+                                                    otherwise: otherwise).withCtx(childCtx)]
 
             case let .chooseOne(chooser, options):
-                let reversedAction = CardEffect.challengeEffect(challenger: .id(target),
-                                                                effect: effect,
-                                                                otherwise: otherwise)
+                let reversedAction = CardEffect.challengerEffect(challenger: .id(target),
+                                                                 effect: effect,
+                                                                 otherwise: otherwise)
                     .withCtx(EffectContext(actor: ctx.actor, card: ctx.card, target: challengerId))
                 var options = options.mapValues { childAction in
                     GameAction.group {
