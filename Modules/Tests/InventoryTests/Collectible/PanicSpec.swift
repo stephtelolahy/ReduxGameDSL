@@ -67,12 +67,12 @@ final class PanicSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "p2": .play(actor: "p1", card: .panic, target: "p2"),
                                 "p4": .play(actor: "p1", card: .panic, target: "p4")
                             ])),
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "c2": .steal(player: "p1", target: "p2", card: "c2")
                             ])),
                             .success(.steal(player: "p1", target: "p2", card: "c2"))
@@ -128,7 +128,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .steal(player: "p1", target: "p2", card: "c21")
                             ])),
                             .success(.steal(player: "p1", target: "p2", card: "c21"))
@@ -160,7 +160,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "c21": .steal(player: "p1", target: "p2", card: "c21"),
                                 "c22": .steal(player: "p1", target: "p2", card: "c22")
                             ])),
@@ -196,7 +196,7 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .panic, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .steal(player: "p1", target: "p2", card: "c21"),
                                 "c22": .steal(player: "p1", target: "p2", card: "c22"),
                                 "c23": .steal(player: "p1", target: "p2", card: "c23")

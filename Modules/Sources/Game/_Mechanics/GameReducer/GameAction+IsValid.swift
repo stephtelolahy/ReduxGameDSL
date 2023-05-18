@@ -17,7 +17,7 @@ extension GameAction {
         case let .effect(effect, ctx: ctx):
             try validateEffect(effect: effect, ctx: ctx, state: state)
 
-        case let .chooseAction(chooser, options):
+        case let .chooseOne(chooser, options):
             try validateChoose(chooser: chooser, options: options, state: state)
             
         default:

@@ -64,7 +64,7 @@ final class ValidateActionSpec: XCTestCase {
         }
 
         // When
-        let action = GameAction.chooseAction(chooser: "p1", options: [
+        let action = GameAction.chooseOne(chooser: "p1", options: [
             "option1": .damage(player: "p1", value: 1),
             "option2": .damage(player: "p1", value: 2)
         ])
@@ -82,7 +82,7 @@ final class ValidateActionSpec: XCTestCase {
         }
 
         // When
-        let action = GameAction.chooseAction(chooser: "p1", options: [
+        let action = GameAction.chooseOne(chooser: "p1", options: [
             "option1": .damage(player: "p1", value: 1),
             "option2": .heal(player: "p1", value: 1)
         ])

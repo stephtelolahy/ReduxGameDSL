@@ -9,7 +9,7 @@ extension CardEffect {
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         try resolver()
             .resolve(state: state, ctx: ctx)
-            .simplifyChooseAction(state: state)
+            .simplifyChooseOne(state: state)
     }
 }
 
@@ -41,12 +41,12 @@ private extension CardEffect {
 }
 
 private extension Array where Element == GameAction {
-    func simplifyChooseAction(state: GameState) throws -> Self {
+    func simplifyChooseOne(state: GameState) throws -> Self {
         guard self.count == 1 else {
             return self
         }
         
-        guard let simplified = try self[0].simplifyChooseAction(state: state) else {
+        guard let simplified = try self[0].simplifyChooseOne(state: state) else {
             return self
         }
         
@@ -55,8 +55,8 @@ private extension Array where Element == GameAction {
 }
 
 private extension GameAction {
-    func simplifyChooseAction(state: GameState) throws -> GameAction? {
-        guard case .chooseAction(let chooser, var options) = self else {
+    func simplifyChooseOne(state: GameState) throws -> GameAction? {
+        guard case .chooseOne(let chooser, var options) = self else {
             return nil
         }
         
@@ -70,6 +70,6 @@ private extension GameAction {
                 }
             }
         }
-        return .chooseAction(chooser: chooser, options: options)
+        return .chooseOne(chooser: chooser, options: options)
     }
 }

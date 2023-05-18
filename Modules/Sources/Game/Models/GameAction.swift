@@ -42,7 +42,7 @@ public indirect enum GameAction: Codable, Equatable {
     case eliminate(String)
 
     /// Ask a player to choose an action
-    case chooseAction(chooser: String, options: [String: GameAction])
+    case chooseOne(chooser: String, options: [String: GameAction])
 
     // MARK: - Invisible actions
 

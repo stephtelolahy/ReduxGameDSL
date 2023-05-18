@@ -86,7 +86,7 @@ final class EndTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .endTurn)),
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "c1": .discard(player: "p1", card: "c1"),
                             "c2": .discard(player: "p1", card: "c2"),
                             "c3": .discard(player: "p1", card: "c3")
@@ -120,13 +120,13 @@ final class EndTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.play(actor: "p1", card: .endTurn)),
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "c1": .discard(player: "p1", card: "c1"),
                             "c2": .discard(player: "p1", card: "c2"),
                             "c3": .discard(player: "p1", card: "c3")
                         ])),
                         .success(.discard(player: "p1", card: "c1")),
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "c2": .discard(player: "p1", card: "c2"),
                             "c3": .discard(player: "p1", card: "c3")
                         ])),

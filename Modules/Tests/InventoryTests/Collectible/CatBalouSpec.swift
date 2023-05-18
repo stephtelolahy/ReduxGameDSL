@@ -62,12 +62,12 @@ final class CatBalouSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "p2": .play(actor: "p1", card: .catBalou, target: "p2"),
                                 "p3": .play(actor: "p1", card: .catBalou, target: "p3")
                             ])),
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c2")
                             ])),
                             .success(.discard(player: "p2", card: "c2"))
@@ -121,7 +121,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21")
                             ])),
                             .success(.discard(player: "p2", card: "c21"))
@@ -153,7 +153,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "c21": .discard(player: "p2", card: "c21"),
                                 "c22": .discard(player: "p2", card: "c22")
                             ])),
@@ -189,7 +189,7 @@ final class CatBalouSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21"),
                                 "c22": .discard(player: "p2", card: "c22"),
                                 "c23": .discard(player: "p2", card: "c23")

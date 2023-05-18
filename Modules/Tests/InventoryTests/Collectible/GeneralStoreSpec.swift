@@ -42,13 +42,13 @@ final class GeneralStoreSpec: QuickSpec {
                         .success(.reveal),
                         .success(.reveal),
                         .success(.reveal),
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "c1": .chooseCard(player: "p1", card: "c1"),
                             "c2": .chooseCard(player: "p1", card: "c2"),
                             "c3": .chooseCard(player: "p1", card: "c3")
                         ])),
                         .success(.chooseCard(player: "p1", card: "c1")),
-                        .success(.chooseAction(chooser: "p2", options: [
+                        .success(.chooseOne(chooser: "p2", options: [
                             "c2": .chooseCard(player: "p2", card: "c2"),
                             "c3": .chooseCard(player: "p2", card: "c3")
                         ])),
@@ -83,7 +83,7 @@ final class GeneralStoreSpec: QuickSpec {
                         .success(.play(actor: "p1", card: .generalStore)),
                         .success(.reveal),
                         .success(.reveal),
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "c1": .chooseCard(player: "p1", card: "c1"),
                             "c2": .chooseCard(player: "p1", card: "c2")
                         ])),

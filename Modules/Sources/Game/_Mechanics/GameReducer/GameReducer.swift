@@ -140,7 +140,7 @@ extension GameAction {
         case let .setTurn(player): return SetTurn(player: player)
         case let .eliminate(player): return Eliminate(player: player)
         case let .effect(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
-        case let .chooseAction(chooser, options): return ChooseAction(chooser: chooser, options: options)
+        case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }
 }
