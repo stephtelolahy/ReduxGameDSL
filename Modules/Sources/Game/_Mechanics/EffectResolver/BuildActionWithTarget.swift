@@ -1,11 +1,11 @@
 //
-//  ResolveTargetForAction.swift
+//  BuildActionWithTarget.swift
 //  
 //
 //  Created by Hugues Telolahy on 18/05/2023.
 //
 
-struct ResolveTargetForAction: EffectResolverProtocol {
+struct BuildActionWithTarget: EffectResolverProtocol {
     let action: (String) -> GameAction
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
