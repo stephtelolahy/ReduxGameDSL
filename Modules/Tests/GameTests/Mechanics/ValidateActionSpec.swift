@@ -11,7 +11,8 @@ import XCTest
 final class ValidateActionSpec: XCTestCase {
     
     private let beer = Card("beer") {
-        CardEffect.heal(1, player: .actor)
+        CardEffect.heal(1)
+            .target(.actor)
             .triggered(.onPlay)
     }
 

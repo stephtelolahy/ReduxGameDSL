@@ -21,7 +21,7 @@ private extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> EffectResolverProtocol {
         switch self {
-        case let .heal(value, player): return EffectHeal(player: player, value: value)
+        case let .heal(value): return EffectHeal(value: value)
         case let .damage(value, player): return EffectDamage(player: player, value: value)
         case let .discard(player, card, chooser): return EffectDiscard(player: player, card: card, chooser: chooser)
         case .draw: return EffectDraw()

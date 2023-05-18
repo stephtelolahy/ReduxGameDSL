@@ -10,7 +10,7 @@ public indirect enum CardEffect: Codable, Equatable {
     // MARK: - Actions
 
     /// Restore player's health, limited to maxHealth
-    case heal(Int, player: PlayerArg)
+    case heal(Int)
     
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
     case damage(Int, player: PlayerArg)

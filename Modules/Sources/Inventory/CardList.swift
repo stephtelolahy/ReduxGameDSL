@@ -11,7 +11,8 @@ public enum CardList {
     // MARK: - Collectibles
 
     static let beer = Card(.beer) {
-        CardEffect.heal(1, player: .actor)
+        CardEffect.heal(1)
+            .target(.actor)
             .require {
                 PlayReq.isPlayersAtLeast(3)
             }
@@ -19,7 +20,7 @@ public enum CardList {
     }
 
     static let saloon = Card(.saloon) {
-        CardEffect.heal(1, player: .target)
+        CardEffect.heal(1)
             .target(.damaged)
             .triggered(.onPlay)
     }
