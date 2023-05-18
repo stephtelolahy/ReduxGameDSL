@@ -66,20 +66,6 @@ final class PlaySpec: QuickSpec {
                 }
             }
 
-            context("missing player") {
-                it("should throw error") {
-                    // Given
-                    let state = GameState()
-
-                    // When
-                    let action = GameAction.play(actor: "p1", card: "c1")
-                    let result = sut.reduce(state: state, action: action)
-
-                    // Then
-                    expect(result.error) == .playerNotFound("p1")
-                }
-            }
-
             context("not playable card") {
                 it("should throw error") {
                     // Given

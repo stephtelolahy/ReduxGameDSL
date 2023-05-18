@@ -11,7 +11,7 @@ struct PlayerNext: PlayerArgResolverProtocol {
               let next = state.setupOrder
             .filter({ state.playOrder.contains($0) || $0 == turn })
             .element(after: turn) else {
-            fatalError(.unexpected)
+            throw GameError.noPlayer(.next)
         }
         
         return .identified([next])

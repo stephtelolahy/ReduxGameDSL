@@ -11,10 +11,6 @@ struct Play: GameReducerProtocol {
     let target: String?
 
     func reduce(state: GameState) throws -> GameState {
-        guard let actorObj = state.players[actor] else {
-            throw GameError.playerNotFound(actor)
-        }
-
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
@@ -53,6 +49,7 @@ struct Play: GameReducerProtocol {
         var state = state
 
         // discard played hand card
+        let actorObj = state.player(actor)
         if actorObj.hand.contains(card) {
             try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
             state.discard.push(card)
