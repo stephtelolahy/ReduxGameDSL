@@ -53,11 +53,11 @@ private extension GameReducer {
 
     func executeAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
-        state = try action.reducer().reduce(state: state)
+        state = try action.reduce(state: state)
         switch action {
         case .play,
-             .effect,
-             .groupActions:
+                .resolve,
+                .groupActions:
             break
 
         default:
@@ -92,15 +92,14 @@ private extension GameReducer {
             return nil
         }
         
-        for action in cardObj.actions {
+        for (eventReq, sideEffect) in cardObj.actions {
             do {
-                let matched = try action.eventReq.match(state: state, ctx: ctx)
-                if matched {
-                    for playReq in action.playReqs {
-                        try playReq.match(state: state, ctx: ctx)
-                    }
+                let eventMatched = try eventReq.match(state: state, ctx: ctx)
+                if eventMatched {
+                    let gameAction = GameAction.resolve(sideEffect, ctx: ctx)
+                    try gameAction.validate(state: state)
 
-                    return action.effect
+                    return sideEffect
                 }
             } catch {
                 return nil
@@ -125,6 +124,14 @@ protocol GameReducerProtocol {
 }
 
 extension GameAction {
+    func reduce(state: GameState) throws -> GameState {
+        var state = state
+        state = try reducer().reduce(state: state)
+        return state
+    }
+}
+
+private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
@@ -139,8 +146,8 @@ extension GameAction {
         case let .groupActions(actions): return GroupActions(children: actions)
         case let .setTurn(player): return SetTurn(player: player)
         case let .eliminate(player): return Eliminate(player: player)
-        case let .effect(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
-        case let .chooseAction(chooser, options): return ChooseAction(chooser: chooser, options: options)
+        case let .resolve(effect, ctx): return Resolve(effect: effect, ctx: ctx)
+        case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }
 }

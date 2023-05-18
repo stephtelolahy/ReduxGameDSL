@@ -42,13 +42,13 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseAction(chooser: "p1", options: [
+                        .success(.chooseOne(chooser: "p1", options: [
                             "p2": .play(actor: "p1", card: .duel, target: "p2"),
                             "p3": .play(actor: "p1", card: .duel, target: "p3"),
                             "p4": .play(actor: "p1", card: .duel, target: "p4")
                         ])),
                         .success(.play(actor: "p1", card: .duel, target: "p4")),
-                        .success(.chooseAction(chooser: "p4", options: [
+                        .success(.chooseOne(chooser: "p4", options: [
                             .pass: .damage(player: "p4", value: 1)
                         ])),
                         .success(.damage(player: "p4", value: 1))
@@ -66,11 +66,11 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.chooseAction(chooser: "p2", options: [
+                            .success(.chooseOne(chooser: "p2", options: [
                                 "bang-2": .groupActions([
                                     .discard(player: "p2", card: "bang-2"),
                                     // swiftlint:disable:next line_length
-                                    .effect(.challengeEffect(target: .id("p1"), challenger: .id("p2"), effect: .discard(player: .id("p1"), card: .selectHandNamed(.bang)), otherwise: .damage(1, player: .target)), ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
+                                    .resolve(.challengerEffect(challenger: .id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
                                 ]),
                                 .pass: .damage(player: "p2", value: 1)
                             ])),
@@ -88,20 +88,20 @@ final class DuelSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .duel, target: "p2")),
-                            .success(.chooseAction(chooser: "p2", options: [
+                            .success(.chooseOne(chooser: "p2", options: [
                                 "bang-2": .groupActions([
                                     .discard(player: "p2", card: "bang-2"),
                                     // swiftlint:disable:next line_length
-                                    .effect(.challengeEffect(target: .id("p1"), challenger: .id("p2"), effect: .discard(player: .id("p1"), card: .selectHandNamed(.bang)), otherwise: .damage(1, player: .target)), ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
+                                    .resolve(.challengerEffect(challenger: .id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: EffectContext(actor: "p1", card: .duel, target: "p1"))
                                 ]),
                                 .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.discard(player: "p2", card: "bang-2")),
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "bang-1": .groupActions([
                                     .discard(player: "p1", card: "bang-1"),
                                     // swiftlint:disable:next line_length
-                                    .effect(.challengeEffect(target: .id("p2"), challenger: .id("p1"), effect: .discard(player: .id("p2"), card: .selectHandNamed(.bang)), otherwise: .damage(1, player: .target)), ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
+                                    .resolve(.challengerEffect(challenger: .id("p1"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: EffectContext(actor: "p1", card: .duel, target: "p2"))
                                 ]),
                                 .pass: .damage(player: "p1", value: 1)
                             ])),

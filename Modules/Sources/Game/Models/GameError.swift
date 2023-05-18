@@ -5,13 +5,10 @@
 //  Created by Hugues Telolahy on 07/04/2023.
 //
 
-/// Game errors
+/// Renderable game errors
 public enum GameError: Error, Codable, Equatable {
 
     // MARK: - Specific error
-
-    /// Expected a player with given identifier
-    case playerNotFound(String)
 
     /// Expected player to be damaged
     case playerAlreadyMaxHealth(String)
@@ -25,6 +22,9 @@ public enum GameError: Error, Codable, Equatable {
     /// Expected non empty deck
     case deckIsEmpty
 
+    /// Expected to choose one of waited action
+    case unwaitedAction
+
     // MARK: - Matching error
 
     /// Not matching card
@@ -33,17 +33,6 @@ public enum GameError: Error, Codable, Equatable {
     /// Not matching player
     case noPlayer(PlayerArg)
 
-    /// Not matching player
-    case noPlayers(PlayerGroupArg)
-
     /// Not matching requirement
-    case mismatched(PlayReq)
-
-    /// Expected to choose one of waited action
-    case unwaitedAction
-
-    // MARK: - Default error
-
-    /// Any unexpected error
-    case unexpected
+    case noReq(PlayReq)
 }

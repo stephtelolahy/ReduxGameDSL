@@ -16,9 +16,3 @@ struct Reveal: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectReveal: EffectResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        [.reveal]
-    }
-}

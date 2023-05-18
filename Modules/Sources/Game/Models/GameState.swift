@@ -45,10 +45,10 @@ public struct GameState: GameElement, Codable, Equatable {
     public var error: GameError?
     
     /// Pending action
-    var chooseOne: ChooseOne?
+    public var chooseOne: ChooseOne?
 
     /// Queued effects
-    var queue: [GameAction] = []
+    public var queue: [GameAction] = []
 
     /// All cards reference
     public var cardRef: [String: Card] = [:]

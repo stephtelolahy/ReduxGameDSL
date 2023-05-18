@@ -14,13 +14,3 @@ struct Eliminate: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectEliminate: EffectResolverProtocol {
-    let player: PlayerArg
-
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        try player.resolve(state: state, ctx: ctx) {
-            .eliminate($0)
-        }
-    }
-}

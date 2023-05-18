@@ -19,13 +19,13 @@ struct ForceEffect: EffectResolverProtocol {
 
             let action = children[0]
             switch action {
-            case let .effect(childEffect, childCtx):
+            case let .resolve(childEffect, childCtx):
                 return [CardEffect.forceEffect(effect: childEffect, otherwise: otherwise).withCtx(childCtx)]
 
-            case let .chooseAction(chooser, options):
+            case let .chooseOne(chooser, options):
                 var options = options
                 options[.pass] = otherwise.withCtx(ctx)
-                return [.chooseAction(chooser: chooser, options: options)]
+                return [.chooseOne(chooser: chooser, options: options)]
 
             default:
                 fatalError(.unexpected)
@@ -35,7 +35,7 @@ struct ForceEffect: EffectResolverProtocol {
                 fatalError(.unexpected)
             }
 
-            return [.chooseAction(chooser: target, options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(chooser: target, options: [.pass: otherwise.withCtx(ctx)])]
         }
     }
 }

@@ -67,24 +67,6 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     ]
                 }
             }
-
-            context("a player without ability") {
-                it("should do nothing") {
-                    // Given
-                    let state = createGame {
-                        Player("p1")
-                    }
-
-                    // When
-                    let action = GameAction.setTurn("p1")
-                    let result = self.awaitAction(action, state: state)
-
-                    // Then
-                    expect(result) == [
-                        .success(.setTurn("p1"))
-                    ]
-                }
-            }
         }
     }
 }

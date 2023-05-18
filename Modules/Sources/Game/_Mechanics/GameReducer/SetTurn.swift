@@ -15,13 +15,3 @@ struct SetTurn: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectSetTurn: EffectResolverProtocol {
-    let player: PlayerArg
-
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        try player.resolve(state: state, ctx: ctx) {
-            .setTurn($0)
-        }
-    }
-}

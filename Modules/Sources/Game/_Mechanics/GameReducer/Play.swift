@@ -11,40 +11,45 @@ struct Play: GameReducerProtocol {
     let target: String?
 
     func reduce(state: GameState) throws -> GameState {
-        guard let actorObj = state.players[actor] else {
-            throw GameError.playerNotFound(actor)
-        }
-
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              let cardAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
+              var sideEffect = cardObj.actions[.onPlay] else {
             throw GameError.cardNotPlayable(card)
         }
 
-        // verify requirements
-        let ctx = EffectContext(actor: actor, card: card, target: target)
-        for playReq in cardAction.playReqs {
-            try playReq.match(state: state, ctx: ctx)
-        }
-
-        if let requiredTarget = cardAction.target,
-           target == nil {
-            let children = try requiredTarget.resolve(state: state, ctx: ctx) {
-                .play(actor: actor, card: card, target: $0)
-            }
-            var state = state
-            state.queue.insert(contentsOf: children, at: 0)
-            return state
+        if case let .requireEffect(_, childEffect) = sideEffect {
+            sideEffect = childEffect
         }
 
         // validate action
         let action = GameAction.play(actor: actor, card: card, target: target)
         _ = try action.validate(state: state)
 
+        // resolve target
+        let ctx = EffectContext(actor: actor, card: card, target: target)
+        if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
+            let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
+            if case let .selectable(pIds) = resolvedTarget {
+
+                if target == nil {
+                    var state = state
+                    let options = pIds.reduce(into: [String: GameAction]()) {
+                        $0[$1] = GameAction.play(actor: actor, card: card, target: $1)
+                    }
+                    let childAction = GameAction.chooseOne(chooser: actor, options: options)
+                    state.queue.insert(childAction, at: 0)
+                    return state
+                }
+
+                sideEffect = childEffect
+            }
+        }
+
         var state = state
 
         // discard played hand card
+        let actorObj = state.player(actor)
         if actorObj.hand.contains(card) {
             try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
             state.discard.push(card)
@@ -55,9 +60,7 @@ struct Play: GameReducerProtocol {
         state.event = .play(actor: actor, card: card, target: target)
 
         // queue side effects
-        let sideEffect = cardAction.effect.withCtx(ctx)
-        state.queue.insert(sideEffect, at: 0)
-
+        state.queue.insert(sideEffect.withCtx(ctx), at: 0)
         return state
     }
 }

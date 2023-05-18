@@ -23,15 +23,16 @@ final class BangSpec: QuickSpec {
                                 .bang
                             }
                         }
+                        Player("p2")
                     }
-                        .counters([.bang: 1])
+                    .counters([.bang: 1])
                     
                     // When
                     let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
-                    expect(result) == [.failure(.mismatched(.isTimesPerTurn(1)))]
+                    expect(result) == [.failure(.noReq(.isTimesPerTurn(1)))]
                 }
             }
             
@@ -79,12 +80,12 @@ final class BangSpec: QuickSpec {
                         
                         // Then
                         expect(result) == [
-                            .success(.chooseAction(chooser: "p1", options: [
+                            .success(.chooseOne(chooser: "p1", options: [
                                 "p2": .play(actor: "p1", card: .bang, target: "p2"),
                                 "p4": .play(actor: "p1", card: .bang, target: "p4")
                             ])),
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseAction(chooser: "p2", options: [
+                            .success(.chooseOne(chooser: "p2", options: [
                                 .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.damage(player: "p2", value: 1))
@@ -117,7 +118,7 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseAction(chooser: "p2", options: [
+                            .success(.chooseOne(chooser: "p2", options: [
                                 .missed: .discard(player: "p2", card: .missed),
                                 .pass: .damage(player: "p2", value: 1)
                             ])),
@@ -145,7 +146,7 @@ final class BangSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.play(actor: "p1", card: .bang, target: "p2")),
-                            .success(.chooseAction(chooser: "p2", options: [
+                            .success(.chooseOne(chooser: "p2", options: [
                                 .pass: .damage(player: "p2", value: 1)
                             ])),
                             .success(.damage(player: "p2", value: 1))

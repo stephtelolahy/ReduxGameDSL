@@ -15,13 +15,3 @@ struct Draw: GameReducerProtocol {
         return state
     }
 }
-
-struct EffectDraw: EffectResolverProtocol {
-    let player: PlayerArg
-
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        try player.resolve(state: state, ctx: ctx) {
-            .draw(player: $0)
-        }
-    }
-}

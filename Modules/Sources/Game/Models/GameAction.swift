@@ -42,12 +42,12 @@ public indirect enum GameAction: Codable, Equatable {
     case eliminate(String)
 
     /// Ask a player to choose an action
-    case chooseAction(chooser: String, options: [String: GameAction])
+    case chooseOne(chooser: String, options: [String: GameAction])
 
     // MARK: - Invisible actions
 
-    /// Apply an effect
-    case effect(CardEffect, ctx: EffectContext)
+    /// Resolve an effect
+    case resolve(CardEffect, ctx: EffectContext)
 
     /// Dispatch actions sequentially
     case groupActions([Self])

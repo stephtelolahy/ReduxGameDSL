@@ -6,33 +6,41 @@
 //
 
 public extension CardEffect {
-    func replay(_ times: NumArg) -> Self {
-        .replayEffect(times: times, effect: self)
+    func `repeat`(_ times: NumArg) -> Self {
+        .repeatEffect(times: times, effect: self)
     }
 
-    func replay(_ times: Int) -> Self {
-        .replayEffect(times: .exact(times), effect: self)
+    func `repeat`(_ times: Int) -> Self {
+        .repeatEffect(times: .exact(times), effect: self)
     }
 
-    func apply(to target: PlayerGroupArg) -> Self {
-        .applyEffect(target: target, effect: self)
+    func target(_ target: PlayerArg) -> Self {
+        .targetEffect(target: target, effect: self)
     }
 
     func otherwise(_ effect: Self) -> Self {
         .forceEffect(effect: self, otherwise: effect)
     }
 
-    func challenge(target: PlayerArg, challenger: PlayerArg, otherwise: Self) -> Self {
-        .challengeEffect(target: target, challenger: challenger, effect: self, otherwise: otherwise)
+    func challenger(_ challenger: PlayerArg, otherwise: Self) -> Self {
+        .challengerEffect(challenger: challenger, effect: self, otherwise: otherwise)
+    }
+
+    func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {
+        .requireEffect(playReqs: playReqs(), effect: self)
     }
 
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
         .groupEffects(content())
     }
+
+    func triggered(_ eventReq: EventReq) -> CardAction {
+        .init(eventReq: eventReq, effect: self)
+    }
 }
 
 extension CardEffect {
     func withCtx(_ ctx: EffectContext) -> GameAction {
-        .effect(self, ctx: ctx)
+        .resolve(self, ctx: ctx)
     }
 }
