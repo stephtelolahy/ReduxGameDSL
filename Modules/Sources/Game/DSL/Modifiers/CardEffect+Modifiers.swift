@@ -6,12 +6,12 @@
 //
 
 public extension CardEffect {
-    func replay(_ times: NumArg) -> Self {
-        .replayEffect(times: times, effect: self)
+    func `repeat`(_ times: NumArg) -> Self {
+        .repeatEffect(times: times, effect: self)
     }
 
-    func replay(_ times: Int) -> Self {
-        .replayEffect(times: .exact(times), effect: self)
+    func `repeat`(_ times: Int) -> Self {
+        .repeatEffect(times: .exact(times), effect: self)
     }
 
     func target(_ target: PlayerArg) -> Self {

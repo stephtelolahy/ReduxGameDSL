@@ -40,7 +40,7 @@ public indirect enum CardEffect: Codable, Equatable {
     // MARK: - Operators
 
     /// Repeat an effect
-    case replayEffect(times: NumArg, effect: Self)
+    case repeatEffect(times: NumArg, effect: Self)
     
     /// Dispatch effects sequentially
     case groupEffects([Self])

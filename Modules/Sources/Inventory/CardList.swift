@@ -28,14 +28,14 @@ public enum CardList {
     static let stagecoach = Card(.stagecoach) {
         CardEffect.draw
             .target(.actor)
-            .replay(2)
+            .repeat(2)
             .triggered(.onPlay)
     }
 
     static let wellsFargo = Card(.wellsFargo) {
         CardEffect.draw
             .target(.actor)
-            .replay(3)
+            .repeat(3)
             .triggered(.onPlay)
     }
 
@@ -54,7 +54,7 @@ public enum CardList {
     static let generalStore = Card(.generalStore) {
         CardEffect.group {
             CardEffect.reveal
-                .replay(.numPlayers)
+                .repeat(.numPlayers)
             CardEffect.chooseCard
                 .target(.all)
         }
@@ -100,7 +100,7 @@ public enum CardList {
         CardEffect.group {
             CardEffect.discard(.selectHand)
                 .target(.actor)
-                .replay(.excessHand)
+                .repeat(.excessHand)
             CardEffect.setTurn
                 .target(.next)
         }
@@ -110,7 +110,7 @@ public enum CardList {
     static let drawOnSetTurn = Card(.drawOnSetTurn) {
         CardEffect.draw
             .target(.actor)
-            .replay(.playerAttr(.starTurnCards))
+            .repeat(.playerAttr(.starTurnCards))
             .triggered(.onSetTurn)
     }
 

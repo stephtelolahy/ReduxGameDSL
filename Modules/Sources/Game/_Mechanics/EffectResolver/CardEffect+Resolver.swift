@@ -32,7 +32,7 @@ private extension CardEffect {
         case .eliminate: return BuildActionWithTarget { .eliminate($0) }
         case let .targetEffect(target, effect): return TargetEffect(target: target, effect: effect)
         case let .groupEffects(effects): return GroupEffects(effects: effects)
-        case let .replayEffect(times, effect): return ReplayEffect(effect: effect, times: times)
+        case let .repeatEffect(times, effect): return RepeatEffect(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return ForceEffect(effect: effect, otherwise: otherwise)
             // swiftlint:disable:next line_length
         case let .challengerEffect(challenger, effect, otherwise): return ChallengerEffect(challenger: challenger, effect: effect, otherwise: otherwise)
