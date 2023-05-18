@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 05/05/2023.
 //
 
-@testable import Game
+import Game
 import Quick
 import Nimble
 
