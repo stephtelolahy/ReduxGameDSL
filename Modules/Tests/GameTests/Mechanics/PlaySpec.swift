@@ -15,7 +15,7 @@ final class PlaySpec: QuickSpec {
         let sut = GameReducer()
         var action: GameAction!
         var result: GameState!
-        let playable = Card("playable") {
+        let playable = Card("beer") {
             CardEffect.heal(1)
                 .target(.actor)
                 .triggered(.onPlay)
@@ -28,38 +28,38 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "playable"
+                                "beer"
                             }
                         }
                         .attribute(.health, 1)
                         .attribute(.maxHealth, 3)
                     }
-                    .cardRef(["playable": playable])
+                    .cardRef(["beer": playable])
                     
                     // When
-                    action = GameAction.play(actor: "p1", card: "playable")
+                    action = GameAction.play(actor: "p1", card: "beer")
                     result = sut.reduce(state: state, action: action)
                 }
 
                 it("should discard immediately") {
                     // Then
                     expect(result.player("p1").hand.cards).to(beEmpty())
-                    expect(result.discard.top) == "playable"
+                    expect(result.discard.top) == "beer"
                 }
 
                 it("should emit event") {
                     // Then
-                    expect(result.event) == .play(actor: "p1", card: "playable")
+                    expect(result.event) == .play(actor: "p1", card: "beer")
                 }
 
                 it("should increment counter") {
                     // Then
-                    expect(result.playCounter["playable"]) == 1
+                    expect(result.playCounter["beer"]) == 1
                 }
 
                 it("should queue side effects") {
                     // Then
-                    let ctx = EffectContext(actor: "p1", card: "playable")
+                    let ctx = EffectContext(actor: "p1", card: "beer")
                     expect(result.queue) == [
                         .resolve(.heal(1).target(.actor), ctx: ctx)
                     ]
@@ -72,17 +72,17 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "unplayable"
+                                "missed"
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "unplayable")
+                    let action = GameAction.play(actor: "p1", card: "missed")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardNotPlayable("unplayable")
+                    expect(result.error) == .cardNotPlayable("missed")
                 }
             }
         }
