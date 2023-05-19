@@ -21,6 +21,7 @@ public enum Setup {
             player.hand = CardLocation(cards: hand, visibility: identifier)
             player.attributes[.maxHealth] = health
             player.attributes[.health] = health
+            player.abilities = Set(figure.abilities)
             return player
         }
 
@@ -39,9 +40,11 @@ public enum Setup {
 public struct Figure {
     let name: String
     let bullets: Int
+    let abilities: [String]
 
-    public init(name: String, bullets: Int) {
+    public init(name: String, bullets: Int, abilities: [String]) {
         self.name = name
         self.bullets = bullets
+        self.abilities = abilities
     }
 }

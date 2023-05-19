@@ -20,8 +20,8 @@ final class SetupSpec: QuickSpec {
                     // Given
                     let deck = Array(1...80).map { "c\($0)" }
                     let figures = [
-                        Figure(name: "p1", bullets: 4),
-                        Figure(name: "p2", bullets: 3)
+                        Figure(name: "p1", bullets: 4, abilities: ["a11"]),
+                        Figure(name: "p2", bullets: 3, abilities: ["a21"])
                     ]
                     let abilities = ["a1", "a2"]
 
@@ -50,12 +50,9 @@ final class SetupSpec: QuickSpec {
                 }
 
                 it("should set default abilities") {
-                    expect(state.player("p1").abilities).to(beEmpty())
-                    expect(state.player("p2").abilities).to(beEmpty())
                     expect(state.abilities) == ["a1", "a2"]
-                }
-
-                xit("should contains card references") {
+                    expect(state.player("p1").abilities) == ["a11"]
+                    expect(state.player("p2").abilities) == ["a21"]
                 }
             }
         }
