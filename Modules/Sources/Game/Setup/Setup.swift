@@ -35,6 +35,16 @@ public enum Setup {
         state.deck = CardStack(cards: deck)
         return state
     }
+
+    public static func createDeck(cardSets: [String: [String]]) -> [String] {
+        var result: [String] = []
+        for (key, values) in cardSets {
+            for value in values {
+                result.append("\(key)-\(value)")
+            }
+        }
+        return result
+    }
 }
 
 public struct Figure {

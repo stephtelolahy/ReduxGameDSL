@@ -1,5 +1,5 @@
 //
-//  RevealSpec.swift
+//  DrawToArenaSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 15/04/2023.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class RevealSpec: QuickSpec {
+final class DrawToArenaSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
 
