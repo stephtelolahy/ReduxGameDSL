@@ -26,7 +26,7 @@ private extension CardEffect {
         case let .discard(card, chooser): return EffectDiscard(card: card, chooser: chooser)
         case .draw: return BuildActionWithTarget { .draw(player: $0) }
         case let .steal(card, stealer): return EffectSteal(card: card, stealer: stealer)
-        case .reveal: return BuildAction(action: .reveal)
+        case .drawToArena: return BuildAction(action: .drawToArena)
         case .chooseCard: return EffectChooseCard()
         case .setTurn: return BuildActionWithTarget { .setTurn($0) }
         case .eliminate: return BuildActionWithTarget { .eliminate($0) }
