@@ -46,15 +46,3 @@ public enum Setup {
         return result
     }
 }
-
-public struct Figure {
-    let name: String
-    let bullets: Int
-    let abilities: [String]
-
-    public init(name: String, bullets: Int, abilities: [String]) {
-        self.name = name
-        self.bullets = bullets
-        self.abilities = abilities
-    }
-}
