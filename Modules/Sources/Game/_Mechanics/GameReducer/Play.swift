@@ -20,30 +20,16 @@ struct Play: GameReducerProtocol {
 
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
-        // verify requirements
-        if case let .requireEffect(playReqs, childEffect) = sideEffect {
-            for playReq in playReqs {
-                try playReq.match(state: state, ctx: ctx)
-            }
-
+        if case let .requireEffect(_, childEffect) = sideEffect {
             sideEffect = childEffect
         }
 
-        // resolve target
         if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
-            if case let .selectable(pIds) = resolvedTarget {
-
-                if target == nil {
-                    var state = state
-                    let options = pIds.reduce(into: [String: GameAction]()) {
-                        $0[$1] = GameAction.play(actor: actor, card: card, target: $1)
-                    }
-                    let childAction = GameAction.chooseOne(chooser: actor, options: options)
-                    state.queue.insert(childAction, at: 0)
-                    return state
+            if case .selectable = resolvedTarget {
+                guard target != nil else {
+                    fatalError("invalid play: missing target")
                 }
-
                 sideEffect = childEffect
             }
         }
@@ -58,8 +44,6 @@ struct Play: GameReducerProtocol {
         }
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
-
-        state.event = .play(actor: actor, card: card, target: target)
 
         // queue side effects
         state.queue.insert(sideEffect.withCtx(ctx), at: 0)

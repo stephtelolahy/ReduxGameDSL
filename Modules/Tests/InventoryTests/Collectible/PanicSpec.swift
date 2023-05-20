@@ -62,7 +62,7 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .panic)
+                        let action = GameAction.move(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, choices: ["p2", "c2"], state: state)
                         
                         // Then
@@ -82,34 +82,6 @@ final class PanicSpec: QuickSpec {
             }
             
             context("target is other") {
-                context("without cards") {
-                    it("should throw error") {
-                        // Given
-                        let state = createGame {
-                            Player("p1") {
-                                Hand {
-                                    .panic
-                                }
-                            }
-                            Player("p2")
-                            Player("p3") {
-                                Hand {
-                                    "c3"
-                                }
-                            }
-                        }
-                        
-                        // When
-                        let action = GameAction.play(actor: "p1", card: .panic, target: "p2")
-                        let result = self.awaitAction(action, state: state)
-                        
-                        // Then
-                        expect(result) == [
-                            .failure(.noCard(.selectAny))
-                        ]
-                    }
-                }
-                
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given

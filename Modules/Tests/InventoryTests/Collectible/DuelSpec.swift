@@ -37,7 +37,7 @@ final class DuelSpec: QuickSpec {
             context("without target") {
                 it("should ask to select target") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: .duel)
+                    let action = GameAction.move(actor: "p1", card: .duel)
                     let result = self.awaitAction(action, choices: ["p4", .pass], state: state)
 
                     // Then

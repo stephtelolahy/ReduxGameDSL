@@ -49,7 +49,7 @@ private extension GameReducer {
         }
 
         // validate move
-        if case .play = action {
+        if case .move = action {
             _ = try action.validate(state: state)
         }
 
@@ -60,7 +60,7 @@ private extension GameReducer {
         var state = state
         state = try action.reduce(state: state)
         switch action {
-        case .play,
+        case .move,
                 .resolve,
                 .groupActions:
             break

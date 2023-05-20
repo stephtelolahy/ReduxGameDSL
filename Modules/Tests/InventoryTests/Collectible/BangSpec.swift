@@ -28,7 +28,7 @@ final class BangSpec: QuickSpec {
                     .counters([.bang: 1])
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
+                    let action = GameAction.move(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
@@ -75,7 +75,7 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .bang)
+                        let action = GameAction.move(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
                         
                         // Then

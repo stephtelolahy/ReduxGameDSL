@@ -57,7 +57,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.move(actor: "p1", card: .catBalou)
                         let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
@@ -77,32 +77,6 @@ final class CatBalouSpec: QuickSpec {
             }
             
             context("target is other") {
-                context("without cards") {
-                    it("should throw error") {
-                        // Given
-                        let state = createGame {
-                            Player("p1") {
-                                Hand {
-                                    .catBalou
-                                }
-                            }
-                            Player("p2")
-                            Player("p3") {
-                                Hand {
-                                    "c3"
-                                }
-                            }
-                        }
-                        
-                        // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou, target: "p2")
-                        let result = self.awaitAction(action, state: state)
-                        
-                        // Then
-                        expect(result) == [.failure(.noCard(.selectAny))]
-                    }
-                }
-                
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
