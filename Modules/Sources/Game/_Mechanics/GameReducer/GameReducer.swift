@@ -155,4 +155,20 @@ private extension GameAction {
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }
+    
+    func validate(state: GameState) throws {
+        var state = try reduce(state: state)
+        if state.queue.isNotEmpty {
+            let nextAction = state.queue.remove(at: 0)
+            switch nextAction {
+            case let .chooseOne(_, options):
+                if let firstAction = options.first?.value {
+                    try firstAction.validate(state: state)
+                }
+
+            default:
+                try nextAction.validate(state: state)
+            }
+        }
+    }
 }

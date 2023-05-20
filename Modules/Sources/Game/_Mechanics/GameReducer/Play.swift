@@ -18,12 +18,17 @@ struct Play: GameReducerProtocol {
             throw GameError.cardNotPlayable(card)
         }
 
-        if case let .requireEffect(_, childEffect) = sideEffect {
+        let ctx = EffectContext(actor: actor, card: card, target: target)
+
+        if case let .requireEffect(playReqs, childEffect) = sideEffect {
+            for playReq in playReqs {
+                try playReq.match(state: state, ctx: ctx)
+            }
+
             sideEffect = childEffect
         }
 
         // resolve target
-        let ctx = EffectContext(actor: actor, card: card, target: target)
         if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case let .selectable(pIds) = resolvedTarget {
