@@ -14,65 +14,23 @@ final class CatBalouSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing catBalou") {
-            context("without target") {
-                context("no player allowed") {
-                    it("should throw error") {
-                        // Given
-                        let state = createGame {
-                            Player("p1") {
-                                Hand {
-                                    .catBalou
-                                }
+            context("no player allowed") {
+                it("should throw error") {
+                    // Given
+                    let state = createGame {
+                        Player("p1") {
+                            Hand {
+                                .catBalou
                             }
                         }
-                        
-                        // When
-                        let action = GameAction.move(actor: "p1", card: .catBalou)
-                        let result = self.awaitAction(action, state: state)
-                        
-                        // Then
-                        expect(result) == [.failure(.noPlayer(.selectAnyWithCard))]
                     }
-                }
-                
-                context("some player allowed") {
-                    it("should choose a target") {
-                        // Given
-                        let state = createGame {
-                            Player("p1") {
-                                Hand {
-                                    .catBalou
-                                }
-                            }
-                            Player("p2") {
-                                Hand {
-                                    "c2"
-                                }
-                            }
-                            Player("p3") {
-                                InPlay {
-                                    "c3"
-                                }
-                            }
-                        }
-                        
-                        // When
-                        let action = GameAction.move(actor: "p1", card: .catBalou)
-                        let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
-                        
-                        // Then
-                        expect(result) == [
-                            .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .catBalou, target: "p2"),
-                                "p3": .play(actor: "p1", card: .catBalou, target: "p3")
-                            ])),
-                            .success(.play(actor: "p1", card: .catBalou, target: "p2")),
-                            .success(.chooseOne(chooser: "p1", options: [
-                                .randomHand: .discard(player: "p2", card: "c2")
-                            ])),
-                            .success(.discard(player: "p2", card: "c2"))
-                        ]
-                    }
+
+                    // When
+                    let action = GameAction.move(actor: "p1", card: .catBalou)
+                    let result = self.awaitAction(action, state: state)
+
+                    // Then
+                    expect(result) == [.failure(.noPlayer(.selectAnyWithCard))]
                 }
             }
             
@@ -94,11 +52,14 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou, target: "p2")
-                        let result = self.awaitAction(action, choices: [.randomHand], state: state)
+                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
                         expect(result) == [
+                            .success(.chooseOne(chooser: "p1", options: [
+                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                            ])),
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21")
@@ -126,11 +87,14 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou, target: "p2")
-                        let result = self.awaitAction(action, choices: ["c22"], state: state)
+                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let result = self.awaitAction(action, choices: ["p2", "c22"], state: state)
                         
                         // Then
                         expect(result) == [
+                            .success(.chooseOne(chooser: "p1", options: [
+                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                            ])),
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 "c21": .discard(player: "p2", card: "c21"),
@@ -162,11 +126,14 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou, target: "p2")
-                        let result = self.awaitAction(action, choices: ["c23"], state: state)
+                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let result = self.awaitAction(action, choices: ["p2", "c23"], state: state)
                         
                         // Then
                         expect(result) == [
+                            .success(.chooseOne(chooser: "p1", options: [
+                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                            ])),
                             .success(.play(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21"),

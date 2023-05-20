@@ -34,7 +34,7 @@ struct Move: GameReducerProtocol {
             if case let .selectable(pIds) = resolvedTarget {
                 var state = state
                 let options = pIds.reduce(into: [String: GameAction]()) {
-                    $0[$1] = GameAction.play(actor: actor, card: card, target: $1)
+                    $0[$1] = .play(actor: actor, card: card, target: $1)
                 }
                 let childAction = GameAction.chooseOne(chooser: actor, options: options)
                 state.queue.insert(childAction, at: 0)
