@@ -45,11 +45,9 @@ struct Move: GameReducerProtocol {
         let action: GameAction
         let actorObj = state.player(actor)
         if actorObj.hand.contains(card) {
-            // playing brown card
             action = .play(actor: actor, card: card)
         } else {
-            // TODO: playing an ability
-            action = .play(actor: actor, card: card)
+            action = .spell(actor: actor, card: card)
         }
 
         // queue play action
