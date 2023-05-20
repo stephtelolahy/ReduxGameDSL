@@ -27,7 +27,7 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .panic)
+                        let action = GameAction.move(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, state: state)
                         
                         // Then

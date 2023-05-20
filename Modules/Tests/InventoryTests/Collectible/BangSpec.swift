@@ -52,7 +52,7 @@ final class BangSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .bang)
+                        let action = GameAction.move(actor: "p1", card: .bang)
                         let result = self.awaitAction(action, state: state)
                         
                         // Then

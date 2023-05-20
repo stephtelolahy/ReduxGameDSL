@@ -24,7 +24,7 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -52,7 +52,7 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -80,7 +80,7 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1"], state: state)
 
                     // Then
@@ -114,7 +114,7 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1", "c3"], state: state)
 
                     // Then

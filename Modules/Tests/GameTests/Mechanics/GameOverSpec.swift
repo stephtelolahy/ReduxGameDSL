@@ -57,7 +57,7 @@ final class GameOverSpec: QuickSpec {
                     .isOver("p1")
 
                 // When
-                let action = GameAction.play(actor: "p1", card: "c1")
+                let action = GameAction.move(actor: "p1", card: "c1")
                 let result = sut.reduce(state: state, action: action)
 
                 // Then

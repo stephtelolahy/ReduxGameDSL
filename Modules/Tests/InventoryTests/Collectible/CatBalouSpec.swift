@@ -27,7 +27,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.move(actor: "p1", card: .catBalou)
                         let result = self.awaitAction(action, state: state)
                         
                         // Then

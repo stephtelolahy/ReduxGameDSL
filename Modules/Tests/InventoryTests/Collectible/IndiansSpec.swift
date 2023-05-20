@@ -33,7 +33,7 @@ final class IndiansSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .indians)
+                    let action = GameAction.move(actor: "p1", card: .indians)
                     let result = self.awaitAction(action, choices: [.bang, .pass], state: state)
                     
                     // Then
@@ -69,7 +69,7 @@ final class IndiansSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .indians)
+                    let action = GameAction.move(actor: "p1", card: .indians)
                     let result = self.awaitAction(action, choices: [.bang], state: state)
                     
                     // Then
