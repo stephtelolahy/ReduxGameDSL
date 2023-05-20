@@ -22,10 +22,6 @@ struct Play: GameReducerProtocol {
             sideEffect = childEffect
         }
 
-        // validate action
-        let action = GameAction.play(actor: actor, card: card, target: target)
-        _ = try action.validate(state: state)
-
         // resolve target
         let ctx = EffectContext(actor: actor, card: card, target: target)
         if case let .targetEffect(requiredTarget, childEffect) = sideEffect {

@@ -48,6 +48,11 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
+        // validate move
+        if case .play = action {
+            _ = try action.validate(state: state)
+        }
+
         return state
     }
 

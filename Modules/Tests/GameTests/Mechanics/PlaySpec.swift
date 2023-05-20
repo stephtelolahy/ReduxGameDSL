@@ -10,12 +10,11 @@ import Quick
 import Nimble
 
 final class PlaySpec: QuickSpec {
-    // swiftlint:disable:next function_body_length
     override func spec() {
         let sut = GameReducer()
         var action: GameAction!
         var result: GameState!
-        let playable = Card("beer") {
+        let beer = Card("beer") {
             CardEffect.heal(1)
                 .target(.actor)
                 .triggered(.onPlay)
@@ -34,7 +33,7 @@ final class PlaySpec: QuickSpec {
                         .attribute(.health, 1)
                         .attribute(.maxHealth, 3)
                     }
-                    .cardRef(["beer": playable])
+                    .cardRef(["beer": beer])
                     
                     // When
                     action = GameAction.play(actor: "p1", card: "beer")
