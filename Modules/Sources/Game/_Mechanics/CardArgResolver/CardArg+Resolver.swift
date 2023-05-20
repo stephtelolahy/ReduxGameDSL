@@ -10,24 +10,10 @@ extension CardArg {
         state: GameState,
         ctx: EffectContext,
         chooser: String,
-        owner: String?
-    ) throws -> CardArgOutput {
-        try resolver().resolve(
-            state: state,
-            ctx: ctx,
-            chooser: chooser,
-            owner: owner
-        )
-    }
-
-    func resolve(
-        state: GameState,
-        ctx: EffectContext,
-        chooser: String,
         owner: String?,
         copy: @escaping (String) -> GameAction
     ) throws -> [GameAction] {
-        let resolved = try resolve(
+        let resolved = resolve(
             state: state,
             ctx: ctx,
             chooser: chooser,
@@ -48,6 +34,20 @@ extension CardArg {
             return [.chooseOne(chooser: chooser, options: options)]
         }
     }
+
+    private func resolve(
+        state: GameState,
+        ctx: EffectContext,
+        chooser: String,
+        owner: String?
+    ) -> CardArgOutput {
+        resolver().resolve(
+            state: state,
+            ctx: ctx,
+            chooser: chooser,
+            owner: owner
+        )
+    }
 }
 
 protocol CardArgResolverProtocol {
@@ -56,7 +56,7 @@ protocol CardArgResolverProtocol {
         ctx: EffectContext,
         chooser: String,
         owner: String?
-    ) throws -> CardArgOutput
+    ) -> CardArgOutput
 }
 
 /// Resolved card argument

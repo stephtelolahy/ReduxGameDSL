@@ -11,7 +11,7 @@ struct CardSelectArena: CardArgResolverProtocol {
         ctx: EffectContext,
         chooser: String,
         owner: String?
-    ) throws -> CardArgOutput {
+    ) -> CardArgOutput {
         let cards = state.arena?.cards ?? []
         if cards.count == 1 {
             return .identified(cards)

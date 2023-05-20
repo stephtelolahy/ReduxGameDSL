@@ -13,7 +13,7 @@ struct CardSelectHandNamed: CardArgResolverProtocol {
         ctx: EffectContext,
         chooser: String,
         owner: String?
-    ) throws -> CardArgOutput {
+    ) -> CardArgOutput {
         guard let owner else {
             fatalError(.unexpected)
         }
