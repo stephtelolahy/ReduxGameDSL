@@ -22,9 +22,7 @@ struct ChooseCard: GameReducerProtocol {
 
 struct EffectChooseCard: EffectResolverProtocol {
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
+        let target = try ctx.getTarget()
 
         return try CardArg.selectArena.resolve(state: state, ctx: ctx, chooser: target, owner: nil) {
             .chooseCard(player: target, card: $0)

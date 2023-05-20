@@ -22,9 +22,7 @@ struct EffectDiscard: EffectResolverProtocol {
     var chooser: PlayerArg?
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
+        let target = try ctx.getTarget()
 
         var chooserId = target
         if let chooser {
