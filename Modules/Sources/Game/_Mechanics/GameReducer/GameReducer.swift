@@ -142,6 +142,7 @@ private extension GameAction {
         switch self {
         case let .move(actor, card): return Move(actor: actor, card: card)
         case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
+        case let .spell(actor, card): return Spell(actor: actor, card: card)
         case let .heal(player, value): return Heal(player: player, value: value)
         case let .damage(player, value): return Damage(player: player, value: value)
         case let .discard(player, card): return Discard(player: player, card: card)

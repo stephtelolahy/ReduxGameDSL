@@ -1,11 +1,11 @@
 //
-//  Move.swift
+//  Spell.swift
 //  
 //
 //  Created by Hugues Telolahy on 20/05/2023.
 //
 
-struct Move: GameReducerProtocol {
+struct Spell: GameReducerProtocol {
     let actor: String
     let card: String
 
