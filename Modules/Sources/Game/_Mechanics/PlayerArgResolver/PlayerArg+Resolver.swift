@@ -25,7 +25,7 @@ extension PlayerArg {
     }
     
     func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        let output = try resolver().resolve(state: state, ctx: ctx)
+        let output = resolver().resolve(state: state, ctx: ctx)
         let pIds: [String]
         switch output {
         case let .identified(identifiers):
@@ -43,7 +43,7 @@ extension PlayerArg {
 }
 
 protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput
 }
 
 /// Resolved player argument
