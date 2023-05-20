@@ -140,6 +140,7 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
+        case let .move(actor, card): return Move(actor: actor, card: card)
         case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
         case let .heal(player, value): return Heal(player: player, value: value)
         case let .damage(player, value): return Damage(player: player, value: value)
@@ -155,7 +156,7 @@ private extension GameAction {
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }
-    
+
     func validate(state: GameState) throws {
         var state = try reduce(state: state)
         if state.queue.isNotEmpty {
