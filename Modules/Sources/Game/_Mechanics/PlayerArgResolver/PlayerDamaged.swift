@@ -10,11 +10,6 @@ struct PlayerDamaged: PlayerArgResolverProtocol {
         let damaged = state.playOrder
             .starting(with: ctx.actor)
             .filter { state.player($0).isDamaged }
-
-        guard damaged.isNotEmpty else {
-            throw GameError.noPlayer(.damaged)
-        }
-
         return .identified(damaged)
     }
 }

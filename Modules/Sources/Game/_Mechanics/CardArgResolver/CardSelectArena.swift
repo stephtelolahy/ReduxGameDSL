@@ -12,11 +12,7 @@ struct CardSelectArena: CardArgResolverProtocol {
         chooser: String,
         owner: String?
     ) throws -> CardArgOutput {
-        guard let cards = state.arena?.cards,
-              cards.isNotEmpty else {
-            throw GameError.noCard(.selectArena)
-        }
-
+        let cards = state.arena?.cards ?? []
         if cards.count == 1 {
             return .identified(cards)
         } else {

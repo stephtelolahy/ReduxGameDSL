@@ -55,7 +55,7 @@ final class BangSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.noPlayer(.selectAt(1)))]
+                    expect(result) == [.failure(.noPlayer(.selectReachable))]
                 }
             }
 

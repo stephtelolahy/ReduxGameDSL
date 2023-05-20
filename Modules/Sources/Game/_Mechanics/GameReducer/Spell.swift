@@ -10,7 +10,6 @@ struct Spell: GameReducerProtocol {
     let card: String
 
     func reduce(state: GameState) throws -> GameState {
-        // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
               var sideEffect = cardObj.actions[.onPlay] else {
@@ -26,8 +25,7 @@ struct Spell: GameReducerProtocol {
         var state = state
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
-
-        // queue side effects
+        
         state.queue.insert(sideEffect.withCtx(ctx), at: 0)
         return state
     }
