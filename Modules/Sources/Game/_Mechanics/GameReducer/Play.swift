@@ -20,6 +20,7 @@ struct Play: GameReducerProtocol {
 
         let ctx = EffectContext(actor: actor, card: card, target: target)
 
+        // verify requirements
         if case let .requireEffect(playReqs, childEffect) = sideEffect {
             for playReq in playReqs {
                 try playReq.match(state: state, ctx: ctx)
