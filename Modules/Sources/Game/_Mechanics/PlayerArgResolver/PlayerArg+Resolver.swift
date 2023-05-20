@@ -25,12 +25,25 @@ extension PlayerArg {
     }
     
     func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
-        try resolver().resolve(state: state, ctx: ctx)
+        let output = resolver().resolve(state: state, ctx: ctx)
+        let pIds: [String]
+        switch output {
+        case let .identified(identifiers):
+            pIds = identifiers
+
+        case let .selectable(options):
+            pIds = options
+        }
+
+        guard pIds.isNotEmpty else {
+            throw GameError.noPlayer(self)
+        }
+        return output
     }
 }
 
 protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput
 }
 
 /// Resolved player argument

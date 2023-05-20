@@ -11,9 +11,7 @@ struct ChallengerEffect: EffectResolverProtocol {
     let otherwise: CardEffect
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
+        let target = try ctx.getTarget()
 
         guard case let .id(challengerId) = challenger else {
             return try challenger.resolve(state: state, ctx: ctx) {

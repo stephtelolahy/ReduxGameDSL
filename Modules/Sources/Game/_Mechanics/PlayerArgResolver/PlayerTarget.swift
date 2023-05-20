@@ -6,9 +6,9 @@
 //
 
 struct PlayerTarget: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
         guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
+            return .identified([])
         }
 
         return .identified([target])

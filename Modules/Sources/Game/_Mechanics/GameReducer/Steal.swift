@@ -23,9 +23,7 @@ struct EffectSteal: EffectResolverProtocol {
     let stealer: PlayerArg
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let target = ctx.target else {
-            throw GameError.noPlayer(.target)
-        }
+        let target = try ctx.getTarget()
         
         guard case let .id(pId) = stealer else {
             return try stealer.resolve(state: state, ctx: ctx) {
@@ -33,7 +31,7 @@ struct EffectSteal: EffectResolverProtocol {
             }
         }
 
-        return try card.resolve(state: state, ctx: ctx, chooser: ctx.actor, owner: target) {
+        return try card.resolve(state: state, ctx: ctx, chooser: pId, owner: target) {
             .steal(player: pId, target: target, card: $0)
         }
     }

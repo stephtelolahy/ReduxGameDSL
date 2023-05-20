@@ -11,8 +11,11 @@ public indirect enum GameAction: Codable, Equatable {
 
     // MARK: - Renderable actions
     
-    /// Play an active card
+    /// Play a brown card, discard immediately
     case play(actor: String, card: String, target: String? = nil)
+
+    /// Invoke  an ability
+    case spell(actor: String, card: String)
     
     /// Restore player's health, limited to maxHealth
     case heal(player: String, value: Int)
@@ -45,6 +48,9 @@ public indirect enum GameAction: Codable, Equatable {
     case chooseOne(chooser: String, options: [String: GameAction])
 
     // MARK: - Invisible actions
+
+    /// Resolve a move
+    case move(actor: String, card: String)
 
     /// Resolve an effect
     case resolve(CardEffect, ctx: EffectContext)

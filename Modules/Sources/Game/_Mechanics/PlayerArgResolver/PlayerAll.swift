@@ -6,7 +6,7 @@
 //
 
 struct PlayerAll: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
         let all = state.playOrder
             .starting(with: ctx.actor)
         return .identified(all)

@@ -6,12 +6,12 @@
 //
 
 struct PlayerNext: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
         guard let turn = state.turn,
               let next = state.setupOrder
             .filter({ state.playOrder.contains($0) || $0 == turn })
             .element(after: turn) else {
-            throw GameError.noPlayer(.next)
+            return .identified([])
         }
         
         return .identified([next])

@@ -24,12 +24,12 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .endTurn)),
+                        .success(.spell(actor: "p1", card: .endTurn)),
                         .success(.setTurn("p2"))
                     ]
                 }
@@ -52,12 +52,12 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .endTurn)),
+                        .success(.spell(actor: "p1", card: .endTurn)),
                         .success(.setTurn("p2"))
                     ]
                 }
@@ -80,12 +80,12 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1"], state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .endTurn)),
+                        .success(.spell(actor: "p1", card: .endTurn)),
                         .success(.chooseOne(chooser: "p1", options: [
                             "c1": .discard(player: "p1", card: "c1"),
                             "c2": .discard(player: "p1", card: "c2"),
@@ -114,12 +114,12 @@ final class EndTurnSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .endTurn)
+                    let action = GameAction.move(actor: "p1", card: .endTurn)
                     let result = self.awaitAction(action, choices: ["c1", "c3"], state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .endTurn)),
+                        .success(.spell(actor: "p1", card: .endTurn)),
                         .success(.chooseOne(chooser: "p1", options: [
                             "c1": .discard(player: "p1", card: "c1"),
                             "c2": .discard(player: "p1", card: "c2"),

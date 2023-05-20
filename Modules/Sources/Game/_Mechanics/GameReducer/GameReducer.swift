@@ -48,6 +48,11 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
+        // validate move
+        if case .move = action {
+            _ = try action.validate(state: state)
+        }
+
         return state
     }
 
@@ -55,7 +60,7 @@ private extension GameReducer {
         var state = state
         state = try action.reduce(state: state)
         switch action {
-        case .play,
+        case .move,
                 .resolve,
                 .groupActions:
             break
@@ -109,7 +114,7 @@ private extension GameReducer {
     }
 
     func updateGameOver(state: GameState) -> GameState {
-        if let winner = state.getWinner() {
+        if let winner = state.winner() {
             var state = state
             state.isOver = GameOver(winner: winner)
             return state
@@ -135,7 +140,9 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
+        case let .move(actor, card): return Move(actor: actor, card: card)
         case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
+        case let .spell(actor, card): return Spell(actor: actor, card: card)
         case let .heal(player, value): return Heal(player: player, value: value)
         case let .damage(player, value): return Damage(player: player, value: value)
         case let .discard(player, card): return Discard(player: player, card: card)
@@ -148,6 +155,22 @@ private extension GameAction {
         case let .eliminate(player): return Eliminate(player: player)
         case let .resolve(effect, ctx): return Resolve(effect: effect, ctx: ctx)
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
+        }
+    }
+
+    func validate(state: GameState) throws {
+        var state = try reduce(state: state)
+        if state.queue.isNotEmpty {
+            let nextAction = state.queue.remove(at: 0)
+            switch nextAction {
+            case let .chooseOne(_, options):
+                if let firstAction = options.first?.value {
+                    try firstAction.validate(state: state)
+                }
+
+            default:
+                try nextAction.validate(state: state)
+            }
         }
     }
 }
