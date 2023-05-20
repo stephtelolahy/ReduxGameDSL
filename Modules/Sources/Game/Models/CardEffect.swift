@@ -29,7 +29,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case chooseCard
     
     /// Draw a card from deck and put to arena
-    case reveal
+    case drawToArena
     
     /// Set attribute turn
     case setTurn

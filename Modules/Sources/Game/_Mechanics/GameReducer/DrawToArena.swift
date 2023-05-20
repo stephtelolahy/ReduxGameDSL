@@ -1,11 +1,11 @@
 //
-//  Reveal.swift
+//  DrawToArena.swift
 //  
 //
 //  Created by Hugues Telolahy on 15/04/2023.
 //
 
-struct Reveal: GameReducerProtocol {
+struct DrawToArena: GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState {
         var state = state
         if state.arena == nil {

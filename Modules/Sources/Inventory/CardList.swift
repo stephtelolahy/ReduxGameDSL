@@ -53,7 +53,7 @@ public enum CardList {
 
     static let generalStore = Card(.generalStore) {
         CardEffect.group {
-            CardEffect.reveal
+            CardEffect.drawToArena
                 .repeat(.numPlayers)
             CardEffect.chooseCard
                 .target(.all)

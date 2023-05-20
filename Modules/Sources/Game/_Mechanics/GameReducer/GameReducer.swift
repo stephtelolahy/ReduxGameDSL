@@ -141,7 +141,7 @@ private extension GameAction {
         case let .discard(player, card): return Discard(player: player, card: card)
         case let .draw(player): return Draw(player: player)
         case let .steal(player, target, card): return Steal(player: player, target: target, card: card)
-        case .reveal: return Reveal()
+        case .drawToArena: return DrawToArena()
         case let .chooseCard(player, card): return ChooseCard(player: player, card: card)
         case let .groupActions(actions): return GroupActions(children: actions)
         case let .setTurn(player): return SetTurn(player: player)
