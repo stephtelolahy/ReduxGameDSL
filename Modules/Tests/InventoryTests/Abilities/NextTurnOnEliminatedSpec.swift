@@ -37,34 +37,41 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
             }
             
             context("current turn and having cards") {
-                it("should discard cards before setting next turn") {
+                it("should successively discard cards, set next turn, next player draw cards") {
                     // Given
                     let state = createGame {
-                        Player("p1")
-                        Player("p2")
-                        Player("p3") {
+                        Player("p1") {
                             Hand {
-                                "c1"
+                                "c11"
                             }
                             InPlay {
-                                "c2"
+                                "c12"
                             }
+                        }
+                        Player("p2")
+                        Player("p3")
+                        Deck {
+                            "c1"
+                            "c2"
                         }
                     }
                     .ability(.discardCardsOnEliminated)
                     .ability(.nextTurnOnEliminated)
-                    .turn("p3")
+                    .ability(.drawOnSetTurn)
+                    .turn("p1")
 
                     // When
-                    let action = GameAction.eliminate("p3")
+                    let action = GameAction.eliminate("p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.eliminate("p3")),
-                        .success(.discard(player: "p3", card: "c2")),
-                        .success(.discard(player: "p3", card: "c1")),
-                        .success(.setTurn("p1"))
+                        .success(.eliminate("p1")),
+                        .success(.discard(player: "p1", card: "c12")),
+                        .success(.discard(player: "p1", card: "c11")),
+                        .success(.setTurn("p2")),
+                        .success(.draw(player: "p2")),
+                        .success(.draw(player: "p2"))
                     ]
                 }
             }

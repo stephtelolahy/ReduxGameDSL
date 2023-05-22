@@ -29,7 +29,7 @@ public extension Player {
     }
     
     func ability(_ value: String) -> Self {
-        copy { $0.abilities.insert(value) }
+        copy { $0.abilities.append(value) }
     }
 }
 

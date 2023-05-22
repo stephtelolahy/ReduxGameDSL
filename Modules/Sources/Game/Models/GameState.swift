@@ -33,7 +33,7 @@ public struct GameState: GameElement, Codable, Equatable {
     public var attributes: [AttributeKey: Int] = [:]
 
     /// Shared abilities for all players
-    public var abilities: Set<String> = []
+    public var abilities: [String] = []
 
     /// Is Game over
     public var isOver: GameOver?

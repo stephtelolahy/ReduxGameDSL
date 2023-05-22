@@ -11,6 +11,7 @@ public protocol GameElement {
     /// Attributes
     var attributes: [AttributeKey: Int] { get }
 
-    /// Abilities implemented with Card having the same name
-    var abilities: Set<String> { get }
+    /// Abilities
+    /// Sorted by priority
+    var abilities: [String] { get }
 }
