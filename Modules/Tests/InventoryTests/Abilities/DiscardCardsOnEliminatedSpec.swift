@@ -13,7 +13,7 @@ import Inventory
 final class DiscardCardsOnEliminatedSpec: QuickSpec {
     override func spec() {
         describe("being eliminated") {
-            context("and having cards") {
+            context("having cards") {
                 it("should discard cards") {
                     // Given
                     let state = createGame {
