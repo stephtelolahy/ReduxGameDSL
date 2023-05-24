@@ -1,11 +1,11 @@
 //
-//  Resolve.swift
+//  EffectReducer.swift
 //
 //
 //  Created by Hugues Telolahy on 07/05/2023.
 //
 
-struct Resolve: GameReducerProtocol {
+struct EffectReducer: GameReducerProtocol {
     let effect: CardEffect
     let ctx: EffectContext
     
