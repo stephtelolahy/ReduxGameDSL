@@ -21,7 +21,7 @@ public enum Setup {
             player.hand = CardLocation(cards: hand, visibility: identifier)
             player.attributes[.maxHealth] = health
             player.attributes[.health] = health
-            player.abilities = Set(figure.abilities)
+            player.abilities = figure.abilities
             return player
         }
 
@@ -31,7 +31,7 @@ public enum Setup {
             state.setupOrder.append(player.id)
             state.playOrder.append(player.id)
         }
-        state.abilities = Set(abilities)
+        state.abilities = abilities
         state.deck = CardStack(cards: deck)
         return state
     }

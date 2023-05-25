@@ -13,6 +13,6 @@ public struct Abilities: PlayerAttribute {
     }
     
     public func update(player: inout Player) {
-        player.abilities = Set(value)
+        player.abilities = value
     }
 }

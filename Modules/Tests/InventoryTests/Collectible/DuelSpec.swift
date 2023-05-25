@@ -96,7 +96,6 @@ final class DuelSpec: QuickSpec {
                     ]
                 }
             }
-
         }
     }
 }

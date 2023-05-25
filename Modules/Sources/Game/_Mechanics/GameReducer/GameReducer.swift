@@ -79,16 +79,19 @@ private extension GameReducer {
             players.append(justEliminated)
         }
 
+        var triggered: [GameAction] = []
         for actor in players {
             let actorObj = state.player(actor)
-            for card in (actorObj.abilities.union(state.abilities)) {
+            for card in (actorObj.abilities + state.abilities) {
                 let ctx = EffectContext(actor: actor, card: card)
                 if let effect = triggeredEffect(ctx: ctx, state: state) {
                     let sideEffect = effect.withCtx(EffectContext(actor: actor, card: card))
-                    state.queue.insert(sideEffect, at: 0)
+                    triggered.append(sideEffect)
                 }
             }
         }
+        state.queue.insert(contentsOf: triggered, at: 0)
+        
         return state
     }
     
@@ -153,7 +156,7 @@ private extension GameAction {
         case let .groupActions(actions): return GroupActions(children: actions)
         case let .setTurn(player): return SetTurn(player: player)
         case let .eliminate(player): return Eliminate(player: player)
-        case let .resolve(effect, ctx): return Resolve(effect: effect, ctx: ctx)
+        case let .resolve(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
         case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
         }
     }
