@@ -7,7 +7,7 @@
 
 extension PlayReq {
     func match(state: GameState, ctx: EffectContext) throws {
-        let matched = try matcher().match(state: state, ctx: ctx)
+        let matched = matcher().match(state: state, ctx: ctx)
         guard matched else {
             throw GameError.noReq(self)
         }
@@ -15,7 +15,7 @@ extension PlayReq {
 }
 
 protocol PlayReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) throws -> Bool
+    func match(state: GameState, ctx: EffectContext) -> Bool
 }
 
 private extension PlayReq {
@@ -27,4 +27,3 @@ private extension PlayReq {
         }
     }
 }
-
