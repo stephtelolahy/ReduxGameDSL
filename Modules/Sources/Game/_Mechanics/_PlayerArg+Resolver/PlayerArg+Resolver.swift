@@ -59,18 +59,18 @@ private extension PlayerArg {
     // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
+        case .id: fatalError(.unexpected)
         case .actor: return PlayerActor()
         case .target: return PlayerTarget()
         case .selectAnyWithCard: return PlayerSelectAnyWithCard()
-        case let .selectAtRangeWithCard(distance): return PlayerSelectAtRangeWithCard(distance: distance)
+        case .selectAtRangeWithCard(let distance): return PlayerSelectAtRangeWithCard(distance: distance)
         case .selectReachable: return PlayerSelectReachable()
-        case let .selectAt(distance): return PlayerSelectAt(distance: distance)
+        case .selectAt(let distance): return PlayerSelectAt(distance: distance)
         case .selectAny: return PlayerSelectAny()
         case .next: return PlayerNext()
         case .damaged: return PlayerDamaged()
         case .all: return PlayerAll()
         case .others: return PlayerOthers()
-        case .id: fatalError(.unexpected)
         }
     }
 }
