@@ -87,12 +87,12 @@ extension Array where Element == String {
 private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
+        case .id: fatalError(.unexpected)
         case .selectAny: return CardSelectAny()
         case .selectArena: return CardSelectArena()
-        case let .selectHandNamed(name): return CardSelectHandNamed(name: name)
+        case .selectHandNamed(let name): return CardSelectHandNamed(name: name)
         case .selectHand: return CardSelectHand()
         case .all: return CardAll()
-        case .id: fatalError(.unexpected)
         }
     }
 }
