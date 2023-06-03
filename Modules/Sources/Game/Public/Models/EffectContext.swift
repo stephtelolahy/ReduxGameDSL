@@ -14,7 +14,7 @@ public struct EffectContext: Codable, Equatable {
     /// played card
     let card: String
 
-    /// targeted player
+    /// selected target
     var target: String?
 
     /// selected card
