@@ -22,8 +22,8 @@ public extension CardEffect {
         .forceEffect(effect: self, otherwise: effect)
     }
 
-    func challenger(_ challenger: PlayerArg, otherwise: Self) -> Self {
-        .challengerEffect(challenger: challenger, effect: self, otherwise: otherwise)
+    func challenge(_ challenger: PlayerArg, otherwise: Self) -> Self {
+        .challengeEffect(challenger: challenger, effect: self, otherwise: otherwise)
     }
 
     func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {

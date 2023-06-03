@@ -1,11 +1,11 @@
 //
-//  RequireEffect.swift
+//  EffectRequire.swift
 //  
 //
 //  Created by Hugues Telolahy on 18/05/2023.
 //
 
-struct RequireEffect: EffectResolverProtocol {
+struct EffectRequire: EffectResolverProtocol {
     let playReqs: [PlayReq]
     let effect: CardEffect
 

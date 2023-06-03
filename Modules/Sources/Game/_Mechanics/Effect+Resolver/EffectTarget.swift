@@ -1,11 +1,11 @@
 //
-//  TargetEffect.swift
+//  EffectTarget.swift
 //  
 //
 //  Created by Hugues Telolahy on 22/04/2023.
 //
 
-struct TargetEffect: EffectResolverProtocol {
+struct EffectTarget: EffectResolverProtocol {
     let target: PlayerArg
     let effect: CardEffect
     

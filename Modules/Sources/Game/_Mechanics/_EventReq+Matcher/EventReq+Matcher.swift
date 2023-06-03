@@ -18,10 +18,10 @@ protocol EventReqMatcherProtocol {
 private extension EventReq {
     func matcher() -> EventReqMatcherProtocol {
         switch self {
-        case .onPlay: fatalError(.unexpected)
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
         case .onEliminated: return OnEliminated()
+        default: fatalError(.unexpected)
         }
     }
 }

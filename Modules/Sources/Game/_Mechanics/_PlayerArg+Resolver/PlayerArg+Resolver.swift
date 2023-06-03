@@ -59,7 +59,6 @@ private extension PlayerArg {
     // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
-        case .id: fatalError(.unexpected)
         case .actor: return PlayerActor()
         case .target: return PlayerTarget()
         case .selectAnyWithCard: return PlayerSelectAnyWithCard()
@@ -71,6 +70,7 @@ private extension PlayerArg {
         case .damaged: return PlayerDamaged()
         case .all: return PlayerAll()
         case .others: return PlayerOthers()
+        default: fatalError(.unexpected)
         }
     }
 }

@@ -89,7 +89,7 @@ public enum CardList {
 
     static let duel = Card(.duel) {
         CardEffect.discard(.selectHandNamed(.bang))
-            .challenger(.actor, otherwise: .damage(1))
+            .challenge(.actor, otherwise: .damage(1))
             .target(.selectAny)
             .triggered(.onPlay)
     }

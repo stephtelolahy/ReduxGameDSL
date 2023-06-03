@@ -1,11 +1,11 @@
 //
-//  RepeatEffect.swift
+//  EffectRepeat.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct RepeatEffect: EffectResolverProtocol {
+struct EffectRepeat: EffectResolverProtocol {
     let effect: CardEffect
     let times: NumArg
     

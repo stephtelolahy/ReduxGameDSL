@@ -1,11 +1,11 @@
 //
-//  ForceEffect.swift
+//  EffectForce.swift
 //  
 //
 //  Created by Hugues Telolahy on 13/05/2023.
 //
 
-struct ForceEffect: EffectResolverProtocol {
+struct EffectForce: EffectResolverProtocol {
     let effect: CardEffect
     let otherwise: CardEffect
 
