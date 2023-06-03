@@ -21,15 +21,15 @@ private extension CardEffect {
     // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> EffectResolverProtocol {
         switch self {
-        case let .heal(value): return EffectBuild { .heal(player: $0, value: value) }
-        case let .damage(value): return EffectBuild { .damage(player: $0, value: value) }
+        case let .heal(value): return EffectBuild { .heal(player: $0.getTarget(), value: value) }
+        case let .damage(value): return EffectBuild { .damage(player: $0.getTarget(), value: value) }
         case let .discard(card, chooser): return EffectDiscard(card: card, chooser: chooser)
-        case .draw: return EffectBuild { .draw(player: $0) }
+        case .draw: return EffectBuild { .draw(player: $0.getTarget()) }
         case let .steal(card, stealer): return EffectSteal(card: card, stealer: stealer)
-        case .drawToArena: return EffectJust(action: .drawToArena)
+        case .drawToArena: return EffectBuild { _ in .drawToArena }
         case .chooseCard: return EffectChooseCard()
-        case .setTurn: return EffectBuild { .setTurn($0) }
-        case .eliminate: return EffectBuild { .eliminate($0) }
+        case .setTurn: return EffectBuild { .setTurn($0.getTarget()) }
+        case .eliminate: return EffectBuild { .eliminate($0.getTarget()) }
         case let .targetEffect(target, effect): return EffectTarget(target: target, effect: effect)
         case let .groupEffects(effects): return EffectGroup(effects: effects)
         case let .repeatEffect(times, effect): return EffectRepeat(effect: effect, times: times)

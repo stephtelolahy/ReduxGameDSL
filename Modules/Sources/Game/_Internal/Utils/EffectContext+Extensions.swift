@@ -6,9 +6,9 @@
 //
 
 extension EffectContext {
-    func getTarget() throws -> String {
+    func getTarget() -> String {
         guard let targetId = target else {
-            throw GameError.noPlayer(.target)
+            fatalError(String(describing: GameError.noPlayer(.target)))
         }
 
         return targetId
