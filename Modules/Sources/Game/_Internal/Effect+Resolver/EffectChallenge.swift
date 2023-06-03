@@ -40,7 +40,7 @@ struct EffectChallenge: EffectResolverProtocol {
                 let reversedAction = CardEffect.challengeEffect(challenger: .id(target),
                                                                 effect: effect,
                                                                 otherwise: otherwise)
-                    .withCtx(EffectContext(actor: ctx.actor, card: ctx.card, target: challengerId))
+                    .withCtx(ctx.copy(target: challengerId))
                 var options = options.mapValues { childAction in
                     GameAction.group {
                         childAction

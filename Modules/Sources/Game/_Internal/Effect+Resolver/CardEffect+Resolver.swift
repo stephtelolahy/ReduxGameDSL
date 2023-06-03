@@ -35,6 +35,7 @@ private extension CardEffect {
 
         // operation on effects
         case let .targetEffect(target, effect): return EffectTarget(target: target, effect: effect)
+        case let .cardEffect(card, effect): return EffectCard(card: card, effect: effect)
         case let .groupEffects(effects): return EffectGroup(effects: effects)
         case let .repeatEffect(times, effect): return EffectRepeat(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return EffectForce(effect: effect, otherwise: otherwise)

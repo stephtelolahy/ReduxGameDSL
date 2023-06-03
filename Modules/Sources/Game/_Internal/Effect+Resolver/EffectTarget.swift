@@ -11,7 +11,7 @@ struct EffectTarget: EffectResolverProtocol {
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         try target.resolve(state: state, ctx: ctx) {
-            .resolve(effect, ctx: EffectContext(actor: ctx.actor, card: ctx.card, target: $0))
+            .resolve(effect, ctx: ctx.copy(target: $0))
         }
     }
 }
