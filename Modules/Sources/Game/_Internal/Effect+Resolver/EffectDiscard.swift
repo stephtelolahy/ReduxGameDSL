@@ -8,7 +8,7 @@
 @available(*, deprecated, message: "")
 struct EffectDiscard: EffectResolverProtocol {
     let card: CardArg
-    var chooser: PlayerArg?
+    let chooser: PlayerArg?
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         let target = try ctx.getTarget()
