@@ -1,11 +1,11 @@
 //
-//  SetTurn.swift
+//  ActionSetTurn.swift
 //  
 //
 //  Created by Hugues Telolahy on 01/05/2023.
 //
 
-struct SetTurn: GameReducerProtocol {
+struct ActionSetTurn: GameReducerProtocol {
     let player: String
 
     func reduce(state: GameState) throws -> GameState {

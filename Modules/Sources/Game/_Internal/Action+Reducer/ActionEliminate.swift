@@ -1,11 +1,11 @@
 //
-//  Eliminate.swift
+//  ActionEliminate.swift
 //  
 //
 //  Created by Hugues Telolahy on 05/05/2023.
 //
 
-struct Eliminate: GameReducerProtocol {
+struct ActionEliminate: GameReducerProtocol {
     let player: String
 
     func reduce(state: GameState) throws -> GameState {

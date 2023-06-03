@@ -1,11 +1,11 @@
 //
-//  ChooseOneReducer.swift
+//  ActionChooseOne.swift
 //  
 //
 //  Created by Hugues Telolahy on 08/05/2023.
 //
 
-struct ChooseOneReducer: GameReducerProtocol {
+struct ActionChooseOne: GameReducerProtocol {
     let chooser: String
     let options: [String: GameAction]
 
