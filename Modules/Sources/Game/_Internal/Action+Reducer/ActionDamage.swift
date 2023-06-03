@@ -1,11 +1,11 @@
 //
-//  Damage.swift
+//  ActionDamage.swift
 //  
 //
 //  Created by Hugues Telolahy on 16/04/2023.
 //
 
-struct Damage: GameReducerProtocol {
+struct ActionDamage: GameReducerProtocol {
     let player: String
     let value: Int
 

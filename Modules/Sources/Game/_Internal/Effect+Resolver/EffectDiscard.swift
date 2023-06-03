@@ -1,26 +1,15 @@
 //
-//  Discard.swift
+//  EffectDiscard.swift
 //  
 //
-//  Created by Hugues Telolahy on 10/04/2023.
+//  Created by Hugues Telolahy on 03/06/2023.
 //
 
-struct Discard: GameReducerProtocol {
-    let player: String
-    let card: String
-
-    func reduce(state: GameState) throws -> GameState {
-        var state = state
-        try state[keyPath: \GameState.players[player]]?.removeCard(card)
-        state.discard.push(card)
-        return state
-    }
-}
-
+@available(*, deprecated, message: "")
 struct EffectDiscard: EffectResolverProtocol {
     let card: CardArg
     var chooser: PlayerArg?
-    
+
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         let target = try ctx.getTarget()
 

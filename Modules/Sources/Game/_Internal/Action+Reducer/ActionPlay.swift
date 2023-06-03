@@ -1,11 +1,11 @@
 //
-//  Play.swift
+//  ActionPlay.swift
 //  
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
 
-struct Play: GameReducerProtocol {
+struct ActionPlay: GameReducerProtocol {
     let actor: String
     let card: String
     let target: String?

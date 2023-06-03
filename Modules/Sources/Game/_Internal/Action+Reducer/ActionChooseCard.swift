@@ -1,11 +1,11 @@
 //
-//  ChooseCard.swift
+//  ActionChooseCard.swift
 //  
 //
 //  Created by Hugues Telolahy on 11/04/2023.
 //
 
-struct ChooseCard: GameReducerProtocol {
+struct ActionChooseCard: GameReducerProtocol {
     let player: String
     let card: String
 
@@ -17,15 +17,5 @@ struct ChooseCard: GameReducerProtocol {
         }
         state[keyPath: \GameState.players[player]]?.hand.add(card)
         return state
-    }
-}
-
-struct EffectChooseCard: EffectResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let target = try ctx.getTarget()
-
-        return try CardArg.selectArena.resolve(state: state, ctx: ctx, chooser: target, owner: nil) {
-            .chooseCard(player: target, card: $0)
-        }
     }
 }

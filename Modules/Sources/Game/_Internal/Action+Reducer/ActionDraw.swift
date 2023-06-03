@@ -1,11 +1,11 @@
 //
-//  Draw.swift
+//  ActionDraw.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
 //
 
-struct Draw: GameReducerProtocol {
+struct ActionDraw: GameReducerProtocol {
     let player: String
 
     func reduce(state: GameState) throws -> GameState {

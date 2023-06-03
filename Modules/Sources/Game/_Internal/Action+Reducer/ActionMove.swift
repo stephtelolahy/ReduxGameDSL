@@ -1,11 +1,11 @@
 //
-//  Move.swift
+//  ActionMove.swift
 //  
 //
 //  Created by Hugues Telolahy on 20/05/2023.
 //
 
-struct Move: GameReducerProtocol {
+struct ActionMove: GameReducerProtocol {
     let actor: String
     let card: String
 

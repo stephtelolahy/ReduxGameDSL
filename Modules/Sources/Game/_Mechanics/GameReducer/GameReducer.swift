@@ -127,40 +127,7 @@ private extension GameReducer {
     }
 }
 
-protocol GameReducerProtocol {
-    func reduce(state: GameState) throws -> GameState
-}
-
-extension GameAction {
-    func reduce(state: GameState) throws -> GameState {
-        var state = state
-        state = try reducer().reduce(state: state)
-        return state
-    }
-}
-
 private extension GameAction {
-    // swiftlint:disable:next cyclomatic_complexity
-    func reducer() -> GameReducerProtocol {
-        switch self {
-        case let .move(actor, card): return Move(actor: actor, card: card)
-        case let .play(actor, card, target): return Play(actor: actor, card: card, target: target)
-        case let .spell(actor, card): return Spell(actor: actor, card: card)
-        case let .heal(player, value): return Heal(player: player, value: value)
-        case let .damage(player, value): return Damage(player: player, value: value)
-        case let .discard(player, card): return Discard(player: player, card: card)
-        case let .draw(player): return Draw(player: player)
-        case let .steal(player, target, card): return Steal(player: player, target: target, card: card)
-        case .drawToArena: return DrawToArena()
-        case let .chooseCard(player, card): return ChooseCard(player: player, card: card)
-        case let .groupActions(actions): return GroupActions(children: actions)
-        case let .setTurn(player): return SetTurn(player: player)
-        case let .eliminate(player): return Eliminate(player: player)
-        case let .resolve(effect, ctx): return EffectReducer(effect: effect, ctx: ctx)
-        case let .chooseOne(chooser, options): return ChooseOneReducer(chooser: chooser, options: options)
-        }
-    }
-
     func validate(state: GameState) throws {
         var state = try reduce(state: state)
         if state.queue.isNotEmpty {
