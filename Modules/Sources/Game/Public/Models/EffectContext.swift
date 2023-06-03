@@ -18,7 +18,7 @@ public struct EffectContext: Codable, Equatable {
     var target: String?
 
     /// selected card
-    var selected: String?
+    var cardSelected: String?
 
     public init(actor: String, card: String, target: String? = nil) {
         self.actor = actor

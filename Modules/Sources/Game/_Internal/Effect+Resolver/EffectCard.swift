@@ -13,7 +13,7 @@ struct EffectCard: EffectResolverProtocol {
         let chooser = ctx.getTarget()
         let owner = ctx.getTarget()
         return try card.resolve(state: state, ctx: ctx, chooser: chooser, owner: owner) {
-            .resolve(effect, ctx: ctx.copy(selected: $0))
+            .resolve(effect, ctx: ctx.copy(cardSelected: $0))
         }
     }
 }

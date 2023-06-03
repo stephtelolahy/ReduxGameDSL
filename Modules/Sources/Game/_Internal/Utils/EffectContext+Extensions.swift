@@ -14,12 +14,12 @@ extension EffectContext {
         return target
     }
 
-    func getSelected() -> String {
-        guard let selected else {
+    func getCardSelected() -> String {
+        guard let cardSelected else {
             fatalError("No selected card")
         }
 
-        return selected
+        return cardSelected
     }
 
     func copy(target: String) -> Self {
@@ -28,9 +28,9 @@ extension EffectContext {
         return copy
     }
 
-    func copy(selected: String) -> Self {
+    func copy(cardSelected: String) -> Self {
         var copy = self
-        copy.selected = selected
+        copy.cardSelected = cardSelected
         return copy
     }
 }
