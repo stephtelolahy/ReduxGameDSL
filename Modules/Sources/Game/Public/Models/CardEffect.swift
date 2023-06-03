@@ -19,13 +19,12 @@ public indirect enum CardEffect: Codable, Equatable {
     case draw
     
     /// Discard a player's card to discard pile
-    /// Default chooser is player
-    case discard(CardArg, chooser: PlayerArg? = nil)
+    case discard
     
     /// Draw card from other player
     case steal
     
-    /// Draw some cards from arena
+    /// Choose some cards from arena
     case chooseCard
     
     /// Draw a card from deck and put to arena

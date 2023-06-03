@@ -8,7 +8,7 @@
 extension EffectContext {
     func getTarget() -> String {
         guard let target else {
-            fatalError("No target")
+            fatalError("Missing target")
         }
 
         return target
@@ -16,7 +16,7 @@ extension EffectContext {
 
     func getCardSelected() -> String {
         guard let cardSelected else {
-            fatalError("No selected card")
+            fatalError("Missing selected card")
         }
 
         return cardSelected
