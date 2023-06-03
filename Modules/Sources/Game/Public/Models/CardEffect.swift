@@ -23,7 +23,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case discard(CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
-    case steal(CardArg, stealer: PlayerArg)
+    case steal
     
     /// Draw some cards from arena
     case chooseCard
@@ -49,7 +49,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case targetEffect(target: PlayerArg, effect: Self)
 
     /// Apply an effect with some card
-    case cardEffect(card: CardArg, effect: Self)
+    case cardEffect(card: CardArg, chooser: PlayerArg?, effect: Self)
 
     /// Try an effect. If cannot, then apply some effect
     case forceEffect(effect: Self, otherwise: Self)

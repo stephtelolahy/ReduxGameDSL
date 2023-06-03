@@ -18,8 +18,8 @@ public extension CardEffect {
         .targetEffect(target: target, effect: self)
     }
 
-    func card(_ card: CardArg) -> Self {
-        .cardEffect(card: card, effect: self)
+    func card(_ card: CardArg, chooser: PlayerArg? = nil) -> Self {
+        .cardEffect(card: card, chooser: chooser, effect: self)
     }
 
     func otherwise(_ effect: Self) -> Self {

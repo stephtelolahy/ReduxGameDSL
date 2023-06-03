@@ -22,20 +22,20 @@ private extension CardEffect {
     func resolver() -> EffectResolverProtocol {
         switch self {
         // action with context
-        case let .heal(value): return EffectBuild { .heal(player: $0.getTarget(), value: value) }
-        case let .damage(value): return EffectBuild { .damage(player: $0.getTarget(), value: value) }
+        case .heal(let value): return EffectBuild { .heal(player: $0.getTarget(), value: value) }
+        case .damage(let value): return EffectBuild { .damage(player: $0.getTarget(), value: value) }
         case .draw: return EffectBuild { .draw(player: $0.getTarget()) }
         case .drawToArena: return EffectBuild { _ in .drawToArena }
         case .setTurn: return EffectBuild { .setTurn($0.getTarget()) }
         case .eliminate: return EffectBuild { .eliminate($0.getTarget()) }
         case .chooseCard: return EffectBuild { .chooseCard(player: $0.getTarget(), card: $0.getCardSelected()) }
+        case .steal: return EffectBuild { .steal(player: $0.actor, target: $0.getTarget(), card: $0.getCardSelected()) }
 
         case let .discard(card, chooser): return EffectDiscard(card: card, chooser: chooser)
-        case let .steal(card, stealer): return EffectSteal(card: card, stealer: stealer)
 
         // operation on effect
         case let .targetEffect(target, effect): return EffectTarget(target: target, effect: effect)
-        case let .cardEffect(card, effect): return EffectCard(card: card, effect: effect)
+        case let .cardEffect(card, chooser, effect): return EffectCard(card: card, chooser: chooser, effect: effect)
         case let .groupEffects(effects): return EffectGroup(effects: effects)
         case let .repeatEffect(times, effect): return EffectRepeat(effect: effect, times: times)
         case let .forceEffect(effect, otherwise): return EffectForce(effect: effect, otherwise: otherwise)

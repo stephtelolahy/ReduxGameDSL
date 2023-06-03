@@ -46,7 +46,8 @@ public enum CardList {
     }
 
     static let panic = Card(.panic) {
-        CardEffect.steal(.selectAny, stealer: .actor)
+        CardEffect.steal
+            .card(.selectAny, chooser: .actor)
             .target(.selectAtRangeWithCard(1))
             .triggered(.onPlay)
     }
