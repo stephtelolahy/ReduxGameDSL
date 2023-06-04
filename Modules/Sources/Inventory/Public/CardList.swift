@@ -40,13 +40,15 @@ public enum CardList {
     }
 
     static let catBalou = Card(.catBalou) {
-        CardEffect.discard(.selectAny, chooser: .actor)
+        CardEffect.discard
+            .card(.selectAny, chooser: .actor)
             .target(.selectAnyWithCard)
             .triggered(.onPlay)
     }
 
     static let panic = Card(.panic) {
-        CardEffect.steal(.selectAny, stealer: .actor)
+        CardEffect.steal
+            .card(.selectAny, chooser: .actor)
             .target(.selectAtRangeWithCard(1))
             .triggered(.onPlay)
     }
@@ -56,13 +58,15 @@ public enum CardList {
             CardEffect.drawToArena
                 .repeat(.numPlayers)
             CardEffect.chooseCard
+                .card(.selectArena)
                 .target(.all)
         }
         .triggered(.onPlay)
     }
 
     static let bang = Card(.bang) {
-        CardEffect.discard(.selectHandNamed(.missed))
+        CardEffect.discard
+            .card(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.selectReachable)
             .require {
@@ -74,21 +78,24 @@ public enum CardList {
     static let missed = Card(.missed)
 
     static let gatling = Card(.gatling) {
-        CardEffect.discard(.selectHandNamed(.missed))
+        CardEffect.discard
+            .card(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let indians = Card(.indians) {
-        CardEffect.discard(.selectHandNamed(.bang))
+        CardEffect.discard
+            .card(.selectHandNamed(.bang))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let duel = Card(.duel) {
-        CardEffect.discard(.selectHandNamed(.bang))
+        CardEffect.discard
+            .card(.selectHandNamed(.bang))
             .challenge(.actor, otherwise: .damage(1))
             .target(.selectAny)
             .triggered(.onPlay)
@@ -98,7 +105,8 @@ public enum CardList {
 
     static let endTurn = Card(.endTurn) {
         CardEffect.group {
-            CardEffect.discard(.selectHand)
+            CardEffect.discard
+                .card(.selectHand)
                 .target(.actor)
                 .repeat(.excessHand)
             CardEffect.setTurn
@@ -130,7 +138,8 @@ public enum CardList {
     }
 
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {
-        CardEffect.discard(.all)
+        CardEffect.discard
+            .card(.all)
             .target(.actor)
             .triggered(.onEliminated)
     }

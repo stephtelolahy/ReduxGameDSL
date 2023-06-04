@@ -18,6 +18,10 @@ public extension CardEffect {
         .targetEffect(target: target, effect: self)
     }
 
+    func card(_ card: CardArg, chooser: PlayerArg? = nil) -> Self {
+        .cardEffect(card: card, chooser: chooser, effect: self)
+    }
+
     func otherwise(_ effect: Self) -> Self {
         .forceEffect(effect: self, otherwise: effect)
     }

@@ -6,11 +6,31 @@
 //
 
 extension EffectContext {
-    func getTarget() throws -> String {
-        guard let targetId = target else {
-            throw GameError.noPlayer(.target)
+    func getTarget() -> String {
+        guard let target else {
+            fatalError("Missing target")
         }
 
-        return targetId
+        return target
+    }
+
+    func getCardSelected() -> String {
+        guard let cardSelected else {
+            fatalError("Missing selected card")
+        }
+
+        return cardSelected
+    }
+
+    func copy(target: String) -> Self {
+        var copy = self
+        copy.target = target
+        return copy
+    }
+
+    func copy(cardSelected: String) -> Self {
+        var copy = self
+        copy.cardSelected = cardSelected
+        return copy
     }
 }
