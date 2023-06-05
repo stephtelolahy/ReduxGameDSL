@@ -74,6 +74,7 @@ private extension GameReducer {
     func postExecuteAction(action: GameAction, state: GameState) -> State {
         var state = state
 
+        // Queue triggered effects
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
             players.append(justEliminated)
@@ -91,6 +92,26 @@ private extension GameReducer {
             }
         }
         state.queue.insert(contentsOf: triggered, at: 0)
+
+        // Emit active moves
+        if state.queue.isEmpty,
+           let actor = state.turn,
+           let actorObj = state.players[actor] {
+            var activeCards: [String] = []
+            for card in actorObj.hand.cards {
+                let move = GameAction.move(actor: actor, card: card)
+                do {
+                    try move.validate(state: state)
+                    activeCards.append(card)
+                } catch {
+                    continue
+                }
+            }
+
+            if activeCards.isNotEmpty {
+                state.active = ActiveCards(player: actor, cards: activeCards)
+            }
+        }
         
         return state
     }
