@@ -47,6 +47,13 @@ final class SimulationTests: XCTestCase {
                     sut.dispatch(move)
                 }
             }
+            
+            if let chooseOne = state.chooseOne {
+                let randomAction = chooseOne.options.values.randomElement()!
+                DispatchQueue.main.async {
+                    sut.dispatch(randomAction)
+                }
+            }
         }
         
         // When

@@ -97,17 +97,17 @@ private extension GameReducer {
         state.queue.insert(contentsOf: triggered, at: 0)
 
         // Emit active moves
+        // with playable cards
         if state.queue.isEmpty,
+           state.isOver == nil,
+           state.chooseOne == nil,
            let actor = state.turn,
            let actorObj = state.players[actor] {
             var activeCards: [String] = []
-            for card in actorObj.hand.cards {
-                let move = GameAction.move(actor: actor, card: card)
-                do {
-                    try move.validate(state: state)
+            for card in (actorObj.hand.cards + actorObj.abilities + state.abilities) {
+                let ctx = EffectContext(actor: actor, card: card)
+                if isPlayable(ctx: ctx, state: state) {
                     activeCards.append(card)
-                } catch {
-                    continue
                 }
             }
 
@@ -117,6 +117,24 @@ private extension GameReducer {
         }
         
         return state
+    }
+    
+    func isPlayable(ctx: EffectContext, state: GameState) -> Bool {
+        guard let cardObj = state.cardRef[ctx.card] else {
+            return false
+        }
+        
+        guard cardObj.actions[.onPlay] != nil else {
+            return false
+        }
+        
+        do {
+            let move = GameAction.move(actor: ctx.actor, card: ctx.card)
+            try move.validate(state: state)
+            return true
+        } catch {
+            return false
+        }
     }
     
     func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
