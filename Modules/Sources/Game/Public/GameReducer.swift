@@ -52,6 +52,9 @@ private extension GameReducer {
         if case .move = action {
             _ = try action.validate(state: state)
         }
+        
+        // remove active
+        state.active = nil
 
         return state
     }
