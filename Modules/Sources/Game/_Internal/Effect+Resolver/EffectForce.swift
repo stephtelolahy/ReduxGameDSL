@@ -9,7 +9,7 @@ struct EffectForce: EffectResolverProtocol {
     let effect: CardEffect
     let otherwise: CardEffect
 
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: [ContextKey: String]) throws -> [GameAction] {
         do {
             let children = try effect.resolve(state: state, ctx: ctx)
 
@@ -31,11 +31,7 @@ struct EffectForce: EffectResolverProtocol {
                 fatalError(.unexpected)
             }
         } catch {
-            guard let target = ctx.target else {
-                fatalError(.unexpected)
-            }
-
-            return [.chooseOne(chooser: target, options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]
         }
     }
 }

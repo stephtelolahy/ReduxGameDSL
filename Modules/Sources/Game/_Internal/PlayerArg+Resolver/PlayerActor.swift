@@ -6,7 +6,7 @@
 //
 
 struct PlayerActor: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
-        .identified([ctx.actor])
+    func resolve(state: GameState, ctx: [ContextKey: String]) -> PlayerArgOutput {
+        .identified([ctx.get(.actor)])
     }
 }

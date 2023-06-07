@@ -8,7 +8,7 @@
 struct CardSelectArena: CardArgResolverProtocol {
     func resolve(
         state: GameState,
-        ctx: EffectContext,
+        ctx: [ContextKey: String],
         chooser: String,
         owner: String?
     ) -> CardArgOutput {

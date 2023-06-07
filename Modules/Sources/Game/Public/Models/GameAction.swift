@@ -53,7 +53,7 @@ public indirect enum GameAction: Codable, Equatable {
     case move(actor: String, card: String)
 
     /// Resolve an effect
-    case resolve(CardEffect, ctx: EffectContext)
+    case resolve(CardEffect, ctx: [ContextKey: String])
 
     /// Dispatch actions sequentially
     case groupActions([Self])

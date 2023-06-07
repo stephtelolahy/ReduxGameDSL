@@ -6,7 +6,7 @@
 //
 
 struct IsCurrentTurn: PlayReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) -> Bool {
-        ctx.actor == state.turn
+    func match(state: GameState, ctx: [ContextKey: String]) -> Bool {
+        state.turn == ctx.get(.actor)
     }
 }

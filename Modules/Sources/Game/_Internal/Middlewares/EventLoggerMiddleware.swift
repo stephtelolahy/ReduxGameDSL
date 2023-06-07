@@ -38,6 +38,9 @@ private extension String {
                 .replacing("CardArg.", with: "")
                 .replacing("PlayerArg.", with: "")
                 .replacing("NumArg.", with: "")
+                .replacing("ContextKey.", with: "")
+                .replacing("GameAction.", with: "")
+                .replacing("AttributeKey.", with: "")
         }
         return self
     }

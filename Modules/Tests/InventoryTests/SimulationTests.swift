@@ -21,10 +21,7 @@ final class SimulationTests: XCTestCase {
             .discardCardsOnEliminated,
             .nextTurnOnEliminated,
         ]
-        let figures = [
-            Figure(name: "p1", bullets: 4, abilities: []),
-            Figure(name: "p2", bullets: 3, abilities: [])
-        ]
+        let figures = (1...7).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
         let deck = Setup.createDeck(cardSets: CardSets.bang)
         
         let game = Setup.createGame(figures: figures,
@@ -60,7 +57,7 @@ final class SimulationTests: XCTestCase {
         sut.dispatch(.setTurn("p1"))
         
         // Then
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 2.0)
         cancellable.cancel()
     }
 }

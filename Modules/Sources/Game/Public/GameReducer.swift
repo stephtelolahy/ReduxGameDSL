@@ -87,9 +87,9 @@ private extension GameReducer {
         for actor in players {
             let actorObj = state.player(actor)
             for card in (actorObj.abilities + state.abilities) {
-                let ctx = EffectContext(actor: actor, card: card)
+                let ctx: [ContextKey: String] = [.actor: actor, .card: card]
                 if let effect = triggeredEffect(ctx: ctx, state: state) {
-                    let sideEffect = effect.withCtx(EffectContext(actor: actor, card: card))
+                    let sideEffect = effect.withCtx(ctx)
                     triggered.append(sideEffect)
                 }
             }
@@ -105,7 +105,7 @@ private extension GameReducer {
            let actorObj = state.players[actor] {
             var activeCards: [String] = []
             for card in (actorObj.hand.cards + actorObj.abilities + state.abilities) {
-                let ctx = EffectContext(actor: actor, card: card)
+                let ctx: [ContextKey: String] = [.actor: actor, .card: card]
                 if isPlayable(ctx: ctx, state: state) {
                     activeCards.append(card)
                 }
@@ -119,8 +119,8 @@ private extension GameReducer {
         return state
     }
     
-    func isPlayable(ctx: EffectContext, state: GameState) -> Bool {
-        let cardName = ctx.card.extractName()
+    func isPlayable(ctx: [ContextKey: String], state: GameState) -> Bool {
+        let cardName = ctx.get(.card).extractName()
         guard let cardObj = state.cardRef[cardName] else {
             return false
         }
@@ -130,7 +130,7 @@ private extension GameReducer {
         }
         
         do {
-            let move = GameAction.move(actor: ctx.actor, card: ctx.card)
+            let move = GameAction.move(actor: ctx.get(.actor), card: ctx.get(.card))
             try move.validate(state: state)
             return true
         } catch {
@@ -138,8 +138,8 @@ private extension GameReducer {
         }
     }
     
-    func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
-        guard let cardObj = state.cardRef[ctx.card] else {
+    func triggeredEffect(ctx: [ContextKey: String], state: GameState) -> CardEffect? {
+        guard let cardObj = state.cardRef[ctx.get(.card)] else {
             return nil
         }
         

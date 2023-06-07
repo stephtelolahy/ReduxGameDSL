@@ -9,9 +9,9 @@ struct EffectTarget: EffectResolverProtocol {
     let target: PlayerArg
     let effect: CardEffect
     
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: [ContextKey: String]) throws -> [GameAction] {
         try target.resolve(state: state, ctx: ctx) {
-            .resolve(effect, ctx: ctx.copy(target: $0))
+            .resolve(effect, ctx: ctx.copy([.target: $0]))
         }
     }
 }

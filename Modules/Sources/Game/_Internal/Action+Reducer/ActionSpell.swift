@@ -16,7 +16,7 @@ struct ActionSpell: GameReducerProtocol {
             throw GameError.cardNotPlayable(card)
         }
 
-        let ctx = EffectContext(actor: actor, card: card)
+        let ctx: [ContextKey: String] = [.actor: actor, .card: card]
 
         if case let .requireEffect(_, childEffect) = sideEffect {
             sideEffect = childEffect

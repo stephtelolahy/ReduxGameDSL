@@ -6,9 +6,9 @@
 //
 
 struct PlayerAll: PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: [ContextKey: String]) -> PlayerArgOutput {
         let all = state.playOrder
-            .starting(with: ctx.actor)
+            .starting(with: ctx.get(.actor))
         return .identified(all)
     }
 }

@@ -6,13 +6,13 @@
 //
 
 extension EventReq {
-    func match(state: GameState, ctx: EffectContext) throws -> Bool {
+    func match(state: GameState, ctx: [ContextKey: String]) throws -> Bool {
         matcher().match(state: state, ctx: ctx)
     }
 }
 
 protocol EventReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) -> Bool
+    func match(state: GameState, ctx: [ContextKey: String]) -> Bool
 }
 
 private extension EventReq {
@@ -27,7 +27,7 @@ private extension EventReq {
 }
 
 private struct EventReqNeverMatch: EventReqMatcherProtocol {
-    func match(state: GameState, ctx: EffectContext) -> Bool {
+    func match(state: GameState, ctx: [ContextKey: String]) -> Bool {
         false
     }
 }

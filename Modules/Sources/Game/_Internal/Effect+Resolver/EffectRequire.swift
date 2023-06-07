@@ -9,7 +9,7 @@ struct EffectRequire: EffectResolverProtocol {
     let playReqs: [PlayReq]
     let effect: CardEffect
 
-    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: [ContextKey: String]) throws -> [GameAction] {
         for playReq in playReqs {
             try playReq.match(state: state, ctx: ctx)
         }
