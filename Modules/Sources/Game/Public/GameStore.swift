@@ -8,7 +8,7 @@
 import Redux
 import Combine
 
-func createGameStore(initial: GameState) -> Store<GameState, GameAction> {
+public func createGameStore(initial: GameState) -> Store<GameState, GameAction> {
     Store(initial: initial,
           reducer: GameReducer().reduce,
           middlewares: [gameLoopMiddleware, eventLoggerMiddleware])

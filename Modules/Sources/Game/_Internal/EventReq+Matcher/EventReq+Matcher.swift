@@ -21,7 +21,13 @@ private extension EventReq {
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
         case .onEliminated: return OnEliminated()
-        default: fatalError(.unexpected)
+        default: return EventReqNeverMatch()
         }
+    }
+}
+
+private struct EventReqNeverMatch: EventReqMatcherProtocol {
+    func match(state: GameState, ctx: EffectContext) -> Bool {
+        false
     }
 }

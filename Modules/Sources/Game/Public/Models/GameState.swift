@@ -47,6 +47,9 @@ public struct GameState: GameElement, Codable, Equatable {
     /// Pending action
     public var chooseOne: ChooseOne?
 
+    /// Active cards
+    public var active: ActiveCards?
+
     /// Queued effects
     public var queue: [GameAction] = []
 
