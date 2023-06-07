@@ -120,7 +120,8 @@ private extension GameReducer {
     }
     
     func isPlayable(ctx: EffectContext, state: GameState) -> Bool {
-        guard let cardObj = state.cardRef[ctx.card] else {
+        let cardName = ctx.card.extractName()
+        guard let cardObj = state.cardRef[cardName] else {
             return false
         }
         

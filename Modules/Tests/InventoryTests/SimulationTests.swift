@@ -18,8 +18,8 @@ final class SimulationTests: XCTestCase {
             .endTurn,
             .drawOnSetTurn,
             .eliminateOnLooseLastHealth,
-            .nextTurnOnEliminated,
             .discardCardsOnEliminated,
+            .nextTurnOnEliminated,
         ]
         let figures = [
             Figure(name: "p1", bullets: 4, abilities: []),
@@ -60,7 +60,7 @@ final class SimulationTests: XCTestCase {
         sut.dispatch(.setTurn("p1"))
         
         // Then
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 1.0)
         cancellable.cancel()
     }
 }
