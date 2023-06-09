@@ -19,7 +19,7 @@ final class SimulationTests: XCTestCase {
             .drawOnSetTurn,
             .eliminateOnLooseLastHealth,
             .discardCardsOnEliminated,
-            .nextTurnOnEliminated,
+            .nextTurnOnEliminated
         ]
         let figures = (1...7).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
         let deck = Setup.createDeck(cardSets: CardSets.bang)
@@ -38,6 +38,7 @@ final class SimulationTests: XCTestCase {
             }
             
             if let active = state.active {
+                // swiftlint:disable:next force_unwrapping
                 let randomCard = active.cards.randomElement()!
                 let move = GameAction.move(actor: active.player, card: randomCard)
                 DispatchQueue.main.async {
@@ -46,6 +47,7 @@ final class SimulationTests: XCTestCase {
             }
             
             if let chooseOne = state.chooseOne {
+                // swiftlint:disable:next force_unwrapping
                 let randomAction = chooseOne.options.values.randomElement()!
                 DispatchQueue.main.async {
                     sut.dispatch(randomAction)
@@ -61,5 +63,3 @@ final class SimulationTests: XCTestCase {
         cancellable.cancel()
     }
 }
-
-
