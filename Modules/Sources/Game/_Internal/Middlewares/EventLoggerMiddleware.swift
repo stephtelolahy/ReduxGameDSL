@@ -32,15 +32,17 @@ let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, action i
 private extension String {
     func removingPackageName() -> String {
         if #available(macOS 13.0, *) {
-            return self
-                .replacing("Game.", with: "")
-                .replacing("CardEffect.", with: "")
-                .replacing("CardArg.", with: "")
-                .replacing("PlayerArg.", with: "")
-                .replacing("NumArg.", with: "")
-                .replacing("ContextKey.", with: "")
-                .replacing("GameAction.", with: "")
-                .replacing("AttributeKey.", with: "")
+            if #available(iOS 16.0, *) {
+                return self
+                    .replacing("Game.", with: "")
+                    .replacing("CardEffect.", with: "")
+                    .replacing("CardArg.", with: "")
+                    .replacing("PlayerArg.", with: "")
+                    .replacing("NumArg.", with: "")
+                    .replacing("ContextKey.", with: "")
+                    .replacing("GameAction.", with: "")
+                    .replacing("AttributeKey.", with: "")
+            }
         }
         return self
     }
