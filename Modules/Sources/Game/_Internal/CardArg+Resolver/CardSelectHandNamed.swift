@@ -10,7 +10,7 @@ struct CardSelectHandNamed: CardArgResolverProtocol {
 
     func resolve(
         state: GameState,
-        ctx: [ContextKey: String],
+        ctx: PlayContext,
         chooser: String,
         owner: String?
     ) -> CardArgOutput {

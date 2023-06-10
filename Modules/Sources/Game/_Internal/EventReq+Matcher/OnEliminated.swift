@@ -6,7 +6,7 @@
 //
 
 struct OnEliminated: EventReqMatcherProtocol {
-    func match(state: GameState, ctx: [ContextKey: String]) -> Bool {
+    func match(state: GameState, ctx: PlayContext) -> Bool {
         guard case let .eliminate(player) = state.event,
               player == ctx.get(.actor) else {
             return false

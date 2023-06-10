@@ -44,7 +44,7 @@ public extension CardEffect {
 }
 
 extension CardEffect {
-    func withCtx(_ ctx: [ContextKey: String]) -> GameAction {
+    func withCtx(_ ctx: PlayContext) -> GameAction {
         .resolve(self, ctx: ctx)
     }
 }

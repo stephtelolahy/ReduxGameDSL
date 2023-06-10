@@ -30,7 +30,7 @@ public struct GameState: GameElement, Codable, Equatable {
     public var arena: CardLocation?
 
     /// Shared attributes for all players
-    public var attributes: [AttributeKey: Int] = [:]
+    public var attributes: Attributes = [:]
 
     /// Shared abilities for all players
     public var abilities: [String] = []

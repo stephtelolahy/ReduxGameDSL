@@ -8,7 +8,7 @@
 struct NumPlayerAttr: NumArgResolverProtocol {
     let key: AttributeKey
 
-    func resolve(state: GameState, ctx: [ContextKey: String]) throws -> Int {
+    func resolve(state: GameState, ctx: PlayContext) throws -> Int {
         let actorObj = state.player(ctx.get(.actor))
         return actorObj.attributes[key] ?? 0
     }

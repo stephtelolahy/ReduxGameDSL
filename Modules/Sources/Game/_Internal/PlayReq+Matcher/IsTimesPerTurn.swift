@@ -8,7 +8,7 @@
 struct IsTimesPerTurn: PlayReqMatcherProtocol {
     let maxTimes: Int
 
-    func match(state: GameState, ctx: [ContextKey: String]) -> Bool {
+    func match(state: GameState, ctx: PlayContext) -> Bool {
         // No limit
         guard maxTimes > 0 else {
             return false

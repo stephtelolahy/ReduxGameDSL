@@ -7,7 +7,7 @@
 
 struct ActionResolve: GameReducerProtocol {
     let effect: CardEffect
-    let ctx: [ContextKey: String]
+    let ctx: PlayContext
     
     func reduce(state: GameState) throws -> GameState {
         var state = state

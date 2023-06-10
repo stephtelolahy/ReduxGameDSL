@@ -9,7 +9,7 @@
 public protocol GameElement {
 
     /// Attributes
-    var attributes: [AttributeKey: Int] { get }
+    var attributes: Attributes { get }
 
     /// Abilities
     /// Sorted by priority
