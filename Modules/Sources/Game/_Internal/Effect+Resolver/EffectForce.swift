@@ -9,7 +9,7 @@ struct EffectForce: EffectResolverProtocol {
     let effect: CardEffect
     let otherwise: CardEffect
 
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         do {
             let children = try effect.resolve(state: state, ctx: ctx)
 

@@ -10,7 +10,7 @@ struct EffectCard: EffectResolverProtocol {
     let chooser: PlayerArg?
     let effect: CardEffect
 
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         let owner = ctx.get(.target)
         var chooserId = owner
         if let chooser {

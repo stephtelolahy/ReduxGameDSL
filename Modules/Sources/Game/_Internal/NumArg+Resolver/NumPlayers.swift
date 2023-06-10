@@ -6,7 +6,7 @@
 //
 
 struct NumPlayers: NumArgResolverProtocol {
-    func resolve(state: GameState, ctx: PlayContext) throws -> Int {
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int {
         state.playOrder.count
     }
 }

@@ -6,7 +6,7 @@
 //
 
 struct CardAll: CardArgResolverProtocol {
-    func resolve(state: GameState, ctx: PlayContext, chooser: String, owner: String?) -> CardArgOutput {
+    func resolve(state: GameState, ctx: EffectContext, chooser: String, owner: String?) -> CardArgOutput {
         let playerObj = state.player(ctx.get(.actor))
         let all = playerObj.inPlay.cards + playerObj.hand.cards
         return .identified(all)

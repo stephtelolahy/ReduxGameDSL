@@ -8,7 +8,7 @@
 extension CardArg {
     func resolve(
         state: GameState,
-        ctx: PlayContext,
+        ctx: EffectContext,
         chooser: String,
         owner: String?,
         copy: @escaping (String) -> GameAction
@@ -37,7 +37,7 @@ extension CardArg {
 
     private func resolve(
         state: GameState,
-        ctx: PlayContext,
+        ctx: EffectContext,
         chooser: String,
         owner: String?
     ) -> CardArgOutput {
@@ -53,7 +53,7 @@ extension CardArg {
 protocol CardArgResolverProtocol {
     func resolve(
         state: GameState,
-        ctx: PlayContext,
+        ctx: EffectContext,
         chooser: String,
         owner: String?
     ) -> CardArgOutput

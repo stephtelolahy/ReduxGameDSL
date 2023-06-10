@@ -21,4 +21,4 @@ public enum ContextKey: String, Codable, CodingKeyRepresentable {
     case cardSelected
 }
 
-public typealias PlayContext = [ContextKey: String]
+public typealias EffectContext = [ContextKey: String]

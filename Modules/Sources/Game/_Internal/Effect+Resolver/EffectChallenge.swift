@@ -10,7 +10,7 @@ struct EffectChallenge: EffectResolverProtocol {
     let effect: CardEffect
     let otherwise: CardEffect
     
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         let target = ctx.get(.target)
         
         guard case let .id(challengerId) = challenger else {

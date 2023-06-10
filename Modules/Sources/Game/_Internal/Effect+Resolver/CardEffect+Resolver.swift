@@ -6,7 +6,7 @@
 //
 
 extension CardEffect {
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         try resolver()
             .resolve(state: state, ctx: ctx)
             .simplifyChooseOne(state: state)
@@ -14,7 +14,7 @@ extension CardEffect {
 }
 
 protocol EffectResolverProtocol {
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction]
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction]
 }
 
 private extension CardEffect {

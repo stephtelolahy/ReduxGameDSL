@@ -7,9 +7,9 @@
 
 /// Build an action with context
 struct EffectBuild: EffectResolverProtocol {
-    let action: (PlayContext) -> GameAction
+    let action: (EffectContext) -> GameAction
 
-    func resolve(state: GameState, ctx: PlayContext) throws -> [GameAction] {
+    func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         return [action(ctx)]
     }
 }

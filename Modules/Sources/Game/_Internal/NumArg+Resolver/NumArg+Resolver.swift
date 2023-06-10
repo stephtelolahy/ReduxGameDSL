@@ -6,13 +6,13 @@
 //
 
 extension NumArg {
-    func resolve(state: GameState, ctx: PlayContext) throws -> Int {
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int {
         try resolver().resolve(state: state, ctx: ctx)
     }
 }
 
 protocol NumArgResolverProtocol {
-    func resolve(state: GameState, ctx: PlayContext) throws -> Int
+    func resolve(state: GameState, ctx: EffectContext) throws -> Int
 }
 
 private extension NumArg {

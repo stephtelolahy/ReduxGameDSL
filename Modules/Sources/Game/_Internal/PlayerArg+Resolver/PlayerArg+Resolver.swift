@@ -8,7 +8,7 @@
 extension PlayerArg {
     func resolve(
         state: GameState,
-        ctx: PlayContext,
+        ctx: EffectContext,
         copy: @escaping (String) -> GameAction
     ) throws -> [GameAction] {
         let resolved = try resolve(state: state, ctx: ctx)
@@ -24,7 +24,7 @@ extension PlayerArg {
         }
     }
     
-    func resolve(state: GameState, ctx: PlayContext) throws -> PlayerArgOutput {
+    func resolve(state: GameState, ctx: EffectContext) throws -> PlayerArgOutput {
         let output = resolver().resolve(state: state, ctx: ctx)
         let pIds: [String]
         switch output {
@@ -43,7 +43,7 @@ extension PlayerArg {
 }
 
 protocol PlayerArgResolverProtocol {
-    func resolve(state: GameState, ctx: PlayContext) -> PlayerArgOutput
+    func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput
 }
 
 /// Resolved player argument
