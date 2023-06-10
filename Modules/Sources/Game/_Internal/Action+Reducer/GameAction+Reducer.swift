@@ -24,6 +24,7 @@ private extension GameAction {
         case let .move(actor, card): return ActionMove(actor: actor, card: card)
         case let .play(actor, card, target): return ActionPlay(actor: actor, card: card, target: target)
         case let .spell(actor, card): return ActionSpell(actor: actor, card: card)
+        case let .equip(actor, card): return ActionEquip(actor: actor, card: card)
         case let .heal(player, value): return ActionHeal(player: player, value: value)
         case let .damage(player, value): return ActionDamage(player: player, value: value)
         case let .discard(player, card): return ActionDiscard(player: player, card: card)
