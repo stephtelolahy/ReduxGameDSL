@@ -6,7 +6,7 @@
 //
 
 /// Context data associated to an effect
-public enum ContextKey: String, Equatable, Codable {
+public enum ContextKey: String, Codable, CodingKeyRepresentable {
     
     /// the actor playing card
     case actor
