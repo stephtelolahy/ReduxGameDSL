@@ -11,7 +11,7 @@ struct EffectCard: EffectResolverProtocol {
     let effect: CardEffect
 
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        let owner = ctx.getTarget()
+        let owner = ctx.get(.target)
         var chooserId = owner
         if let chooser {
             if case let .id(cId) = chooser {
@@ -31,7 +31,7 @@ struct EffectCard: EffectResolverProtocol {
         }
 
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: owner) {
-            .resolve(effect, ctx: ctx.copy(cardSelected: $0))
+            .resolve(effect, ctx: ctx.copy([.cardSelected: $0]))
         }
     }
 }

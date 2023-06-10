@@ -7,10 +7,6 @@
 
 struct PlayerTarget: PlayerArgResolverProtocol {
     func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
-        guard let target = ctx.target else {
-            return .identified([])
-        }
-
-        return .identified([target])
+        .identified([ctx.get(.target)])
     }
 }

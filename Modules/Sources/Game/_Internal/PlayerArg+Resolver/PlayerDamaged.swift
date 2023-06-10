@@ -8,7 +8,7 @@
 struct PlayerDamaged: PlayerArgResolverProtocol {
     func resolve(state: GameState, ctx: EffectContext) -> PlayerArgOutput {
         let damaged = state.playOrder
-            .starting(with: ctx.actor)
+            .starting(with: ctx.get(.actor))
             .filter { state.player($0).isDamaged }
         return .identified(damaged)
     }

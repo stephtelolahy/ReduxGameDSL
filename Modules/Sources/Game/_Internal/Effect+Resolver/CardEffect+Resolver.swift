@@ -23,31 +23,31 @@ private extension CardEffect {
         switch self {
             // action with context
         case let .heal(value):
-            return EffectBuild { .heal(player: $0.getTarget(), value: value) }
+            return EffectBuild { .heal(player: $0.get(.target), value: value) }
 
         case let .damage(value):
-            return EffectBuild { .damage(player: $0.getTarget(), value: value) }
+            return EffectBuild { .damage(player: $0.get(.target), value: value) }
 
         case .draw:
-            return EffectBuild { .draw(player: $0.getTarget()) }
+            return EffectBuild { .draw(player: $0.get(.target)) }
 
         case .drawToArena:
             return EffectBuild { _ in .drawToArena }
 
         case .setTurn:
-            return EffectBuild { .setTurn($0.getTarget()) }
+            return EffectBuild { .setTurn($0.get(.target)) }
 
         case .eliminate:
-            return EffectBuild { .eliminate($0.getTarget()) }
+            return EffectBuild { .eliminate($0.get(.target)) }
 
         case .chooseCard:
-            return EffectBuild { .chooseCard(player: $0.getTarget(), card: $0.getCardSelected()) }
+            return EffectBuild { .chooseCard(player: $0.get(.target), card: $0.get(.cardSelected)) }
 
         case .discard:
-            return EffectBuild { .discard(player: $0.getTarget(), card: $0.getCardSelected()) }
+            return EffectBuild { .discard(player: $0.get(.target), card: $0.get(.cardSelected)) }
 
         case .steal:
-            return EffectBuild { .steal(player: $0.actor, target: $0.getTarget(), card: $0.getCardSelected()) }
+            return EffectBuild { .steal(player: $0.get(.actor), target: $0.get(.target), card: $0.get(.cardSelected)) }
 
             // operation on effect
         case let .targetEffect(target, effect):

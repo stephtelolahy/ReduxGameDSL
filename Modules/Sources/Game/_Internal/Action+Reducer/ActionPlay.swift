@@ -17,7 +17,8 @@ struct ActionPlay: GameReducerProtocol {
             throw GameError.cardNotPlayable(card)
         }
 
-        let ctx = EffectContext(actor: actor, card: card, target: target)
+        var ctx: EffectContext = [.actor: actor, .card: card]
+        ctx[.target] = target
 
         if case let .requireEffect(_, childEffect) = sideEffect {
             sideEffect = childEffect

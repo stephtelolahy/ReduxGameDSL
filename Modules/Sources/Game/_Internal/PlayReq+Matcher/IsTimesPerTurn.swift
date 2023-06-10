@@ -14,7 +14,7 @@ struct IsTimesPerTurn: PlayReqMatcherProtocol {
             return false
         }
 
-        let cardName = ctx.card.extractName()
+        let cardName = ctx.get(.card).extractName()
         let playedTimes = state.playCounter[cardName] ?? 0
         return playedTimes < maxTimes
     }

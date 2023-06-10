@@ -39,3 +39,5 @@ public enum AttributeKey: String, Codable, CodingKeyRepresentable {
     /// Number of bangs per turn, default: 1
     case bangsPerTurn
 }
+
+public typealias Attributes = [AttributeKey: Int]

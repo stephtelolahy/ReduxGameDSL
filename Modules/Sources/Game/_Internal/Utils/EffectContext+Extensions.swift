@@ -6,31 +6,15 @@
 //
 
 extension EffectContext {
-    func getTarget() -> String {
-        guard let target else {
-            fatalError("Missing target")
+    func get(_ key: ContextKey) -> String {
+        guard let value = self[key] else {
+            fatalError("missing value for key \(key)")
         }
 
-        return target
+        return value
     }
 
-    func getCardSelected() -> String {
-        guard let cardSelected else {
-            fatalError("Missing selected card")
-        }
-
-        return cardSelected
-    }
-
-    func copy(target: String) -> Self {
-        var copy = self
-        copy.target = target
-        return copy
-    }
-
-    func copy(cardSelected: String) -> Self {
-        var copy = self
-        copy.cardSelected = cardSelected
-        return copy
+    func copy(_ other: Self) -> Self {
+        self.merging(other) { _, new in new }
     }
 }

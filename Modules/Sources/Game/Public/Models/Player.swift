@@ -17,7 +17,7 @@ public struct Player: GameElement, Identifiable, Codable, Equatable {
     public var name: String = String()
     
     /// Player specific attributes
-    public var attributes: [AttributeKey: Int] = [:]
+    public var attributes: Attributes = [:]
 
     /// Player specific abilities
     public var abilities: [String] = []

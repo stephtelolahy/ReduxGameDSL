@@ -31,11 +31,7 @@ struct EffectForce: EffectResolverProtocol {
                 fatalError(.unexpected)
             }
         } catch {
-            guard let target = ctx.target else {
-                fatalError(.unexpected)
-            }
-
-            return [.chooseOne(chooser: target, options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]
         }
     }
 }
