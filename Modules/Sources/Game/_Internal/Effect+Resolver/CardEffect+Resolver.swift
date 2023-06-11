@@ -70,6 +70,9 @@ private extension CardEffect {
 
         case let .requireEffect(playReqs, effect):
             return EffectRequire(playReqs: playReqs, effect: effect)
+
+        case .none:
+            return EffectNone()
         }
     }
 }

@@ -101,6 +101,19 @@ public enum CardList {
             .triggered(.onPlay)
     }
 
+    // TODO: describe equipement card
+    static let barrel = Card(.barrel) {
+        CardEffect.none
+            .triggered(.onPlay)
+    }
+
+    // TODO: describe handicap card
+    static let jail = Card(.jail) {
+        CardEffect.none
+            .target(.selectAny)
+            .triggered(.onPlay)
+    }
+
     // MARK: - Abilities
 
     static let endTurn = Card(.endTurn) {
@@ -157,6 +170,8 @@ public enum CardList {
         gatling
         indians
         duel
+        barrel
+        jail
         endTurn
         drawOnSetTurn
         eliminateOnLooseLastHealth

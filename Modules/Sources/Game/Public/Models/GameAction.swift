@@ -23,8 +23,6 @@ public indirect enum GameAction: Codable, Equatable {
     /// Play an handicap card
     case handicap(actor: String, card: String, target: String)
 
-    // MARK: - Renderable actions
-
     /// Restore player's health, limited to maxHealth
     case heal(player: String, value: Int)
 

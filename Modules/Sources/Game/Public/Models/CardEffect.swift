@@ -58,4 +58,7 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Requirements to validate an effect
     case requireEffect(playReqs: [PlayReq], effect: Self)
+
+    /// Do nothing
+    case none
 }
