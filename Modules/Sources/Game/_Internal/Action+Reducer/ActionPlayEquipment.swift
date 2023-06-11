@@ -1,11 +1,11 @@
 //
-//  ActionEquip.swift
+//  ActionPlayEquipment.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/06/2023.
 //
 
-struct ActionEquip: GameReducerProtocol {
+struct ActionPlayEquipment: GameReducerProtocol {
     let actor: String
     let card: String
 

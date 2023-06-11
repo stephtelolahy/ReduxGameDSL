@@ -1,11 +1,11 @@
 //
-//  ActionSpell.swift
+//  ActionPlayAbility.swift
 //  
 //
 //  Created by Hugues Telolahy on 20/05/2023.
 //
 
-struct ActionSpell: GameReducerProtocol {
+struct ActionPlayAbility: GameReducerProtocol {
     let actor: String
     let card: String
 

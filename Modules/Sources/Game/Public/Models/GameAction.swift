@@ -55,8 +55,8 @@ public indirect enum GameAction: Codable, Equatable {
 
     // MARK: - Invisible actions
 
-    /// Resolve a move
-    case move(actor: String, card: String)
+    /// Resolve a play
+    case play(actor: String, card: String)
 
     /// Resolve an effect
     case resolve(CardEffect, ctx: EffectContext)

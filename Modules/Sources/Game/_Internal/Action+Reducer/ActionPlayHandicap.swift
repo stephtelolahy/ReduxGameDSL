@@ -1,11 +1,11 @@
 //
-//  ActionHandicap.swift
+//  ActionPlayHandicap.swift
 //  
 //
 //  Created by Hugues Telolahy on 11/06/2023.
 //
 
-struct ActionHandicap: GameReducerProtocol {
+struct ActionPlayHandicap: GameReducerProtocol {
     let actor: String
     let card: String
     let target: String

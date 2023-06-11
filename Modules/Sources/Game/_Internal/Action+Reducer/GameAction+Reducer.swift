@@ -21,11 +21,11 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-        case let .move(actor, card): return ActionMove(actor: actor, card: card)
-        case let .playImmediate(actor, card, target): return ActionPlay(actor: actor, card: card, target: target)
-        case let .playAbility(actor, card): return ActionSpell(actor: actor, card: card)
-        case let .playEquipment(actor, card): return ActionEquip(actor: actor, card: card)
-        case let .playHandicap(actor, card, target): return ActionHandicap(actor: actor, card: card, target: target)
+        case let .play(actor, card): return ActionPlay(actor: actor, card: card)
+        case let .playImmediate(actor, card, target): return ActionPlayImmediate(actor: actor, card: card, target: target)
+        case let .playAbility(actor, card): return ActionPlayAbility(actor: actor, card: card)
+        case let .playEquipment(actor, card): return ActionPlayEquipment(actor: actor, card: card)
+        case let .playHandicap(actor, card, target): return ActionPlayHandicap(actor: actor, card: card, target: target)
         case let .heal(player, value): return ActionHeal(player: player, value: value)
         case let .damage(player, value): return ActionDamage(player: player, value: value)
         case let .discard(player, card): return ActionDiscard(player: player, card: card)

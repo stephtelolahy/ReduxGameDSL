@@ -1,6 +1,6 @@
 //
-//  MoveSpec.swift
-//  
+//  PlaySpec.swift
+//
 //
 //  Created by Hugues Telolahy on 11/06/2023.
 //
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class MoveSpec: QuickSpec {
+final class PlaySpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         let beer = Card("beer") {
@@ -20,6 +20,26 @@ final class MoveSpec: QuickSpec {
         let cardRef = ["beer": beer]
 
         describe("move") {
+            context("not playable card") {
+                it("should throw error") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                "missed"
+                            }
+                        }
+                    }
+
+                    // When
+                    let action = GameAction.playImmediate(actor: "p1", card: "missed")
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.error) == .cardNotPlayable("missed")
+                }
+            }
+
             context("brown card") {
                 it("should discard immediately") {
                     // Given
@@ -35,7 +55,7 @@ final class MoveSpec: QuickSpec {
                     .cardRef(cardRef)
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: "beer")
+                    let action = GameAction.play(actor: "p1", card: "beer")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

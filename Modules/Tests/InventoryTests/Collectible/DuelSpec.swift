@@ -37,7 +37,7 @@ final class DuelSpec: QuickSpec {
             context("passing") {
                 it("should damage") {
                     // When
-                    let action = GameAction.move(actor: "p1", card: .duel)
+                    let action = GameAction.play(actor: "p1", card: .duel)
                     let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
 
                     // Then
@@ -64,7 +64,7 @@ final class DuelSpec: QuickSpec {
             context("discarding bang") {
                 it("should damage actor") {
                     // When
-                    let action = GameAction.move(actor: "p1", card: .duel)
+                    let action = GameAction.play(actor: "p1", card: .duel)
                     let result = self.awaitAction(action, choices: ["p2", "bang-2", .pass], state: state)
 
                     // Then

@@ -48,8 +48,8 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
-        // validate move
-        if case .move = action {
+        // validate play
+        if case .play = action {
             _ = try action.validate(state: state)
         }
         
@@ -63,7 +63,7 @@ private extension GameReducer {
         var state = state
         state = try action.reduce(state: state)
         switch action {
-        case .move,
+        case .play,
                 .resolve,
                 .groupActions:
             break
@@ -96,8 +96,7 @@ private extension GameReducer {
         }
         state.queue.insert(contentsOf: triggered, at: 0)
 
-        // Emit active moves
-        // with playable cards
+        // Emit active cards
         if state.queue.isEmpty,
            state.isOver == nil,
            state.chooseOne == nil,
@@ -130,8 +129,8 @@ private extension GameReducer {
         }
         
         do {
-            let move = GameAction.move(actor: ctx.get(.actor), card: ctx.get(.card))
-            try move.validate(state: state)
+            let action = GameAction.play(actor: ctx.get(.actor), card: ctx.get(.card))
+            try action.validate(state: state)
             return true
         } catch {
             return false
