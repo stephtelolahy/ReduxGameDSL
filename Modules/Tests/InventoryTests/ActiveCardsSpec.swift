@@ -10,6 +10,7 @@ import Nimble
 import Game
 import Inventory
 
+// TODO: move to game mechanics tests
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
