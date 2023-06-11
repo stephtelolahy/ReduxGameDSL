@@ -71,7 +71,7 @@ private extension CardEffect {
         case let .requireEffect(playReqs, effect):
             return EffectRequire(playReqs: playReqs, effect: effect)
 
-        case .none:
+        case .nothing:
             return EffectNone()
         }
     }

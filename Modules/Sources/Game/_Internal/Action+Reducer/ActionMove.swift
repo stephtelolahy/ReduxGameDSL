@@ -34,7 +34,7 @@ struct ActionMove: GameReducerProtocol {
             if case let .selectable(pIds) = resolvedTarget {
                 var state = state
                 let options = pIds.reduce(into: [String: GameAction]()) {
-                    $0[$1] = .play(actor: actor, card: card, target: $1)
+                    $0[$1] = .playImmediate(actor: actor, card: card, target: $1)
                 }
                 let childAction = GameAction.chooseOne(chooser: actor, options: options)
                 state.queue.insert(childAction, at: 0)
@@ -45,9 +45,9 @@ struct ActionMove: GameReducerProtocol {
         let action: GameAction
         let actorObj = state.player(actor)
         if actorObj.hand.contains(card) {
-            action = .play(actor: actor, card: card)
+            action = .playImmediate(actor: actor, card: card)
         } else {
-            action = .spell(actor: actor, card: card)
+            action = .playAbility(actor: actor, card: card)
         }
 
         // queue play action

@@ -102,17 +102,17 @@ public enum CardList {
     }
 
     static let barrel = Card(.barrel, type: .equipment) {
-        CardEffect.none
+        CardEffect.nothing
             .triggered(.onPlay)
     }
 
     static let dynamite = Card(.dynamite, type: .equipment) {
-        CardEffect.none
+        CardEffect.nothing
             .triggered(.onPlay)
     }
 
     static let jail = Card(.jail, type: .handicap) {
-        CardEffect.none
+        CardEffect.nothing
             .target(.selectAny)
             .triggered(.onPlay)
     }

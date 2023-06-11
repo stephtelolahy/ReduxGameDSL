@@ -12,16 +12,16 @@ public indirect enum GameAction: Codable, Equatable {
     // MARK: - Renderable actions
     
     /// Play a brown card, discard immediately
-    case play(actor: String, card: String, target: String? = nil)
+    case playImmediate(actor: String, card: String, target: String? = nil)
 
     /// Invoke  an ability
-    case spell(actor: String, card: String)
+    case playAbility(actor: String, card: String)
 
     /// Play an equipment card
-    case equip(actor: String, card: String)
+    case playEquipment(actor: String, card: String)
 
     /// Play an handicap card
-    case handicap(actor: String, card: String, target: String)
+    case playHandicap(actor: String, card: String, target: String)
 
     /// Restore player's health, limited to maxHealth
     case heal(player: String, value: Int)

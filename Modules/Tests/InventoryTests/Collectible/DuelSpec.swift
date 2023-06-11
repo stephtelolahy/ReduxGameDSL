@@ -43,11 +43,11 @@ final class DuelSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .play(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .play(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
+                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
+                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
-                        .success(.play(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .groupActions([
                                 .discard(player: "p2", card: "bang-2"),
@@ -70,11 +70,11 @@ final class DuelSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .play(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .play(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
+                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
+                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
-                        .success(.play(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .groupActions([
                                 .discard(player: "p2", card: "bang-2"),

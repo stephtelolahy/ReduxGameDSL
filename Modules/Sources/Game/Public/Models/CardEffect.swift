@@ -60,5 +60,5 @@ public indirect enum CardEffect: Codable, Equatable {
     case requireEffect(playReqs: [PlayReq], effect: Self)
 
     /// Do nothing
-    case none
+    case nothing
 }

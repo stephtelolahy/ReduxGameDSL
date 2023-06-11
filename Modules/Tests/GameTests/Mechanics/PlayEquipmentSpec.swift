@@ -26,7 +26,7 @@ final class PlayEquipmentSpec: QuickSpec {
                 }
 
                 // When
-                let action = GameAction.equip(actor: "p1", card: "c1")
+                let action = GameAction.playEquipment(actor: "p1", card: "c1")
                 let result = sut.reduce(state: state, action: action)
 
                 // Then

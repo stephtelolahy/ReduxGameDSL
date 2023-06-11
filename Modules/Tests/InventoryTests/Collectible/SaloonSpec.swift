@@ -37,7 +37,7 @@ final class SaloonSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.play(actor: "p1", card: .saloon)),
+                    expect(result) == [.success(.playImmediate(actor: "p1", card: .saloon)),
                                        .success(.heal(player: "p2", value: 1)),
                                        .success(.heal(player: "p3", value: 1))]
                 }

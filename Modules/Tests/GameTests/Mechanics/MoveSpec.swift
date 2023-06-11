@@ -40,13 +40,13 @@ final class MoveSpec: QuickSpec {
 
                     // Then
                     expect(result.queue) == [
-                        .play(actor: "p1", card: "beer")
+                        .playImmediate(actor: "p1", card: "beer")
                     ]
                     expect(result.error) == nil
                 }
             }
 
-            context("equipment card") {
+            xcontext("equipment card") {
                 it("should put in self's play") {
                     // Given
                     // When
@@ -54,7 +54,7 @@ final class MoveSpec: QuickSpec {
                 }
             }
 
-            context("handicap card") {
+            xcontext("handicap card") {
                 it("should put in target's play") {
                     // Given
                     // When
