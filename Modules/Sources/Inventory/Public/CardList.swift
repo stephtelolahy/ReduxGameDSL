@@ -101,14 +101,12 @@ public enum CardList {
             .triggered(.onPlay)
     }
 
-    // TODO: describe equipement card
-    static let barrel = Card(.barrel) {
+    static let barrel = Card(.barrel, type: .equipment) {
         CardEffect.none
             .triggered(.onPlay)
     }
 
-    // TODO: describe handicap card
-    static let jail = Card(.jail) {
+    static let jail = Card(.jail, type: .handicap) {
         CardEffect.none
             .target(.selectAny)
             .triggered(.onPlay)

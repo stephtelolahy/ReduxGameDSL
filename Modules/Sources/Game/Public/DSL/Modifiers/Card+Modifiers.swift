@@ -9,8 +9,13 @@ import Foundation
 
 public extension Card {
     
-    init(_ name: String, @CardActionBuilder content: () -> [CardAction] = { [] }) {
+    init(
+        _ name: String,
+        type: CardType = .immediate,
+        @CardActionBuilder content: () -> [CardAction] = { [] }
+    ) {
         self.name = name
+        self.type = type
         self.actions = content().toDictionary()
     }
 }
