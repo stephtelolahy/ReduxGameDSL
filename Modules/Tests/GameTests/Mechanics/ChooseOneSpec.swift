@@ -19,6 +19,7 @@ final class ChooseOneSpec: QuickSpec {
                 .target(.actor)
                 .triggered(.onPlay)
         }
+        let cardRef = ["beer": beer]
 
         describe("chooseOne") {
             beforeEach {
@@ -36,7 +37,7 @@ final class ChooseOneSpec: QuickSpec {
                     "c1": .discard(player: "p1", card: "beer-1"),
                     "c2": .discard(player: "p1", card: "beer-2")
                 ])
-                .cardRef(["beer": beer])
+                .cardRef(cardRef)
             }
 
             context("when dispatching waited action") {

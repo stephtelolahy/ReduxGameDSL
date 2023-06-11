@@ -19,6 +19,7 @@ final class PlayImmediateSpec: QuickSpec {
                 .target(.actor)
                 .triggered(.onPlay)
         }
+        let cardRef = ["beer": beer]
 
         describe("playing immediate card") {
             context("card playable") {
@@ -33,8 +34,8 @@ final class PlayImmediateSpec: QuickSpec {
                         .attribute(.health, 1)
                         .attribute(.maxHealth, 3)
                     }
-                    .cardRef(["beer": beer])
-                    
+                    .cardRef(cardRef)
+
                     // When
                     action = GameAction.play(actor: "p1", card: "beer")
                     result = sut.reduce(state: state, action: action)

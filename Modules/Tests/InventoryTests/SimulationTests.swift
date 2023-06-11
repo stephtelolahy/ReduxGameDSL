@@ -21,7 +21,7 @@ final class SimulationTests: XCTestCase {
             .discardCardsOnEliminated,
             .nextTurnOnEliminated
         ]
-        let figures = (1...2).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
+        let figures = (1...7).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
         let deck = Setup.createDeck(cardSets: CardSets.bang)
         
         let game = Setup.createGame(figures: figures,

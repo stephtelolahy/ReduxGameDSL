@@ -8,23 +8,44 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
-// TODO: move to game mechanics tests
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
+        let beer = Card("beer") {
+            CardEffect.heal(1)
+                .target(.actor)
+                .require {
+                    PlayReq.isPlayersAtLeast(3)
+                }
+                .triggered(.onPlay)
+        }
+        let saloon = Card("saloon") {
+            CardEffect.heal(1)
+                .target(.damaged)
+                .triggered(.onPlay)
+        }
+        let gatling = Card("gatling") {
+            CardEffect.damage(1)
+                .target(.others)
+                .triggered(.onPlay)
+        }
+        let cardRef = [
+            "beer": beer,
+            "saloon": saloon,
+            "gatling": gatling
+        ]
 
         describe("activating card") {
             context("game idle") {
                 it("should emit current turn's active card") {
                     // Given
-                    let state = createGame {
+                    let state = GameState {
                         Player("p1") {
                             Hand {
-                                String.beer
-                                String.saloon
-                                String.gatling
+                                "beer"
+                                "saloon"
+                                "gatling"
                             }
                         }
                         .attribute(.health, 2)
@@ -32,6 +53,7 @@ final class ActiveCardsSpec: QuickSpec {
                         Player("p2")
                     }
                     .turn("p1")
+                    .cardRef(cardRef)
 
                     // When
                     let action = GameAction.groupActions([])
@@ -40,7 +62,10 @@ final class ActiveCardsSpec: QuickSpec {
                     // Then
                     expect(result.event) == nil
                     expect(result.error) == nil
-                    expect(result.active) == ActiveCards(player: "p1", cards: [.saloon, .gatling])
+                    expect(result.active) == ActiveCards(player: "p1", cards: [
+                        "saloon",
+                        "gatling"
+                    ])
                 }
             }
         }

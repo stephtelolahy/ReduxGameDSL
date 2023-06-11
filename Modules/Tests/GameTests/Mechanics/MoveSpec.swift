@@ -12,16 +12,17 @@ import Game
 final class MoveSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
+        let beer = Card("beer") {
+            CardEffect.heal(1)
+                .target(.actor)
+                .triggered(.onPlay)
+        }
+        let cardRef = ["beer": beer]
 
         describe("move") {
             context("brown card") {
                 it("should discard immediately") {
                     // Given
-                    let beer = Card("beer") {
-                        CardEffect.heal(1)
-                            .target(.actor)
-                            .triggered(.onPlay)
-                    }
                     let state = GameState {
                         Player("p1") {
                             Hand {
@@ -31,7 +32,7 @@ final class MoveSpec: QuickSpec {
                         .attribute(.health, 1)
                         .attribute(.maxHealth, 3)
                     }
-                    .cardRef(["beer": beer])
+                    .cardRef(cardRef)
 
                     // When
                     let action = GameAction.move(actor: "p1", card: "beer")
