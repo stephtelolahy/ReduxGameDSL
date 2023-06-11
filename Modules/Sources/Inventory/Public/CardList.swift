@@ -106,6 +106,11 @@ public enum CardList {
             .triggered(.onPlay)
     }
 
+    static let dynamite = Card(.dynamite, type: .equipment) {
+        CardEffect.none
+            .triggered(.onPlay)
+    }
+
     static let jail = Card(.jail, type: .handicap) {
         CardEffect.none
             .target(.selectAny)
@@ -169,6 +174,7 @@ public enum CardList {
         indians
         duel
         barrel
+        dynamite
         jail
         endTurn
         drawOnSetTurn
