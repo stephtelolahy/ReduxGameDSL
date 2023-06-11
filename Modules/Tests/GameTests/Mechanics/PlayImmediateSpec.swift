@@ -1,5 +1,5 @@
 //
-//  PlaySpec.swift
+//  PlayImmediateSpec.swift
 //
 //
 //  Created by Hugues Telolahy on 08/04/2023.
@@ -9,7 +9,7 @@ import Game
 import Quick
 import Nimble
 
-final class PlaySpec: QuickSpec {
+final class PlayImmediateSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         var action: GameAction!
@@ -20,8 +20,8 @@ final class PlaySpec: QuickSpec {
                 .triggered(.onPlay)
         }
 
-        describe("play") {
-            context("hand card") {
+        describe("playing immediate card") {
+            context("card playable") {
                 beforeEach {
                     // Given
                     let state = GameState {

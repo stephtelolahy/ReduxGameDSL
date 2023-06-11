@@ -1,5 +1,5 @@
 //
-//  HandicapSpec.swift
+//  PlayHandicapSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 11/06/2023.
@@ -9,11 +9,11 @@ import Quick
 import Nimble
 import Game
 
-final class HandicapSpec: QuickSpec {
+final class PlayHandicapSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
 
-        describe("handicap card") {
+        describe("playing handicap card") {
             it("should put card in target's inplay") {
                 // Given
                 let state = GameState {

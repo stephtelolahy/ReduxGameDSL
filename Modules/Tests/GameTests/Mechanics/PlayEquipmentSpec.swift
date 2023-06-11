@@ -1,5 +1,5 @@
 //
-//  EquipSpec.swift
+//  PlayEquipmentSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/06/2023.
@@ -9,11 +9,11 @@ import Quick
 import Nimble
 import Game
 
-final class EquipSpec: QuickSpec {
+final class PlayEquipmentSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
 
-        describe("equiping a card") {
+        describe("playing equipment a card") {
             it("should put card in play") {
                 // Given
                 let state = GameState {
