@@ -17,9 +17,14 @@ public indirect enum GameAction: Codable, Equatable {
     /// Invoke  an ability
     case spell(actor: String, card: String)
 
-    /// Equip with a card
+    /// Play an equipment card
     case equip(actor: String, card: String)
-    
+
+    /// Play an handicap card
+    case handicap(actor: String, card: String, target: String)
+
+    // MARK: - Renderable actions
+
     /// Restore player's health, limited to maxHealth
     case heal(player: String, value: Int)
 
@@ -48,7 +53,7 @@ public indirect enum GameAction: Codable, Equatable {
     case eliminate(String)
 
     /// Ask a player to choose an action
-    case chooseOne(chooser: String, options: [String: GameAction])
+    case chooseOne(chooser: String, options: [String: Self])
 
     // MARK: - Invisible actions
 
