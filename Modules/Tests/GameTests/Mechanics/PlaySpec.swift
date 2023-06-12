@@ -19,7 +19,7 @@ final class PlaySpec: QuickSpec {
         }
         let cardRef = ["beer": beer]
 
-        describe("move") {
+        describe("playing") {
             context("not playable card") {
                 it("should throw error") {
                     // Given
@@ -40,7 +40,7 @@ final class PlaySpec: QuickSpec {
                 }
             }
 
-            context("brown card") {
+            context("immediate card") {
                 it("should discard immediately") {
                     // Given
                     let state = GameState {
