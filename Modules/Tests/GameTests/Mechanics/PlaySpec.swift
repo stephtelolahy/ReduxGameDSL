@@ -89,8 +89,28 @@ final class PlaySpec: QuickSpec {
             xcontext("handicap card") {
                 it("should put in target's play") {
                     // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                .jail
+                            }
+                        }
+                        Player("p2")
+                        Player("p3")
+                    }
+                    .cardRef(CardList.all)
+
                     // When
+                    let action = GameAction.play(actor: "p1", card: .jail)
+                    let result = sut.reduce(state: state, action: action)
+
                     // Then
+                    expect(result.queue) == [
+                        .chooseOne(chooser: "p1", options: [
+                            "p3": .playHandicap(actor: "p1", card: .jail, target: "p3"),
+                            "p2": .playHandicap(actor: "p1", card: .jail, target: "p2")])
+                    ]
+                    expect(result.error) == nil
                 }
             }
         }
