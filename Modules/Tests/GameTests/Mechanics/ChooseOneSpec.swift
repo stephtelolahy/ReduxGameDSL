@@ -14,13 +14,7 @@ final class ChooseOneSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         var state: GameState!
-        let beer = Card("beer") {
-            CardEffect.heal(1)
-                .target(.actor)
-                .triggered(.onPlay)
-        }
-        let cardRef = ["beer": beer]
-
+        
         describe("chooseOne") {
             beforeEach {
                 state = GameState {
@@ -37,7 +31,7 @@ final class ChooseOneSpec: QuickSpec {
                     "c1": .discard(player: "p1", card: "beer-1"),
                     "c2": .discard(player: "p1", card: "beer-2")
                 ])
-                .cardRef(cardRef)
+                .cardRef(CardList.all)
             }
 
             context("when dispatching waited action") {

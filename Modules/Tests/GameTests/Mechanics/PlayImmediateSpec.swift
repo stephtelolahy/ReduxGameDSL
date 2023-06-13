@@ -14,12 +14,6 @@ final class PlayImmediateSpec: QuickSpec {
         let sut = GameReducer()
         var action: GameAction!
         var result: GameState!
-        let beer = Card("beer") {
-            CardEffect.heal(1)
-                .target(.actor)
-                .triggered(.onPlay)
-        }
-        let cardRef = ["beer": beer]
 
         describe("playing immediate card") {
             beforeEach {
@@ -27,38 +21,38 @@ final class PlayImmediateSpec: QuickSpec {
                 let state = GameState {
                     Player("p1") {
                         Hand {
-                            "beer"
+                            .beer
                         }
                     }
                     .attribute(.health, 1)
                     .attribute(.maxHealth, 3)
                 }
-                    .cardRef(cardRef)
+                .cardRef(CardList.all)
 
                 // When
-                action = GameAction.playImmediate(actor: "p1", card: "beer")
+                action = GameAction.playImmediate(actor: "p1", card: .beer)
                 result = sut.reduce(state: state, action: action)
             }
 
             it("should discard immediately") {
                 // Then
                 expect(result.player("p1").hand.cards).to(beEmpty())
-                expect(result.discard.top) == "beer"
+                expect(result.discard.top) == .beer
             }
 
             it("should emit event") {
                 // Then
-                expect(result.event) == .playImmediate(actor: "p1", card: "beer")
+                expect(result.event) == .playImmediate(actor: "p1", card: .beer)
             }
 
             it("should increment counter") {
                 // Then
-                expect(result.playCounter["beer"]) == 1
+                expect(result.playCounter[.beer]) == 1
             }
 
             it("should queue side effects") {
                 // Then
-                let ctx: EffectContext = [.actor: "p1", .card: "beer"]
+                let ctx: EffectContext = [.actor: "p1", .card: .beer]
                 expect(result.queue) == [
                     .resolve(.heal(1).target(.actor), ctx: ctx)
                 ]

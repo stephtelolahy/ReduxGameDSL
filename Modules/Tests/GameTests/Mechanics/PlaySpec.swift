@@ -12,12 +12,6 @@ import Game
 final class PlaySpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        let beer = Card("beer") {
-            CardEffect.heal(1)
-                .target(.actor)
-                .triggered(.onPlay)
-        }
-        let cardRef = ["beer": beer]
 
         describe("playing") {
             context("not playable card") {
@@ -46,21 +40,23 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "beer"
+                                .beer
                             }
                         }
                         .attribute(.health, 1)
                         .attribute(.maxHealth, 3)
+                        Player("p2")
+                        Player("p3")
                     }
-                    .cardRef(cardRef)
+                    .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "beer")
+                    let action = GameAction.play(actor: "p1", card: .beer)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.queue) == [
-                        .playImmediate(actor: "p1", card: "beer")
+                        .playImmediate(actor: "p1", card: .beer)
                     ]
                     expect(result.error) == nil
                 }
