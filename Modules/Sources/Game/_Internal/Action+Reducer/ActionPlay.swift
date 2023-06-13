@@ -13,19 +13,16 @@ struct ActionPlay: GameReducerProtocol {
         // verify action
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              var sideEffect = cardObj.actions[.onPlay] else {
+              let playAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
 
         let ctx: EffectContext = [.actor: actor, .card: card]
 
         // verify requirements
-        if case let .requireEffect(playReqs, childEffect) = sideEffect {
-            for playReq in playReqs {
-                try playReq.match(state: state, ctx: ctx)
-            }
-
-            sideEffect = childEffect
+        let sideEffect = playAction.effect
+        for playReq in playAction.playReqs {
+            try playReq.match(state: state, ctx: ctx)
         }
 
         // resolve target

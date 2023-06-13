@@ -12,16 +12,14 @@ struct ActionPlayAbility: GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              var sideEffect = cardObj.actions[.onPlay] else {
+              let playAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
 
         let ctx: EffectContext = [.actor: actor, .card: card]
 
-        if case let .requireEffect(_, childEffect) = sideEffect {
-            sideEffect = childEffect
-        }
-
+        let sideEffect = playAction.effect
+        
         var state = state
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1

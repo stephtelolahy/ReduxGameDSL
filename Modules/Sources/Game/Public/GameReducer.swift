@@ -124,7 +124,7 @@ private extension GameReducer {
             return false
         }
         
-        guard cardObj.actions[.onPlay] != nil else {
+        guard cardObj.actions.contains(where: { $0.eventReq == .onPlay }) else {
             return false
         }
         
@@ -142,10 +142,11 @@ private extension GameReducer {
             return nil
         }
         
-        for (eventReq, sideEffect) in cardObj.actions {
+        for action in cardObj.actions {
             do {
-                let eventMatched = try eventReq.match(state: state, ctx: ctx)
+                let eventMatched = try action.eventReq.match(state: state, ctx: ctx)
                 if eventMatched {
+                    let sideEffect = action.effect
                     let gameAction = GameAction.resolve(sideEffect, ctx: ctx)
                     try gameAction.validate(state: state)
 

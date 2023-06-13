@@ -13,10 +13,10 @@ public enum CardList {
     static let beer = Card(.beer) {
         CardEffect.heal(1)
             .target(.actor)
+            .triggered(.onPlay)
             .require {
                 PlayReq.isPlayersAtLeast(3)
             }
-            .triggered(.onPlay)
     }
 
     static let saloon = Card(.saloon) {
@@ -69,10 +69,10 @@ public enum CardList {
             .card(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.selectReachable)
+            .triggered(.onPlay)
             .require {
                 PlayReq.isTimesPerTurn(1)
             }
-            .triggered(.onPlay)
     }
 
     static let missed = Card(.missed)
@@ -147,10 +147,10 @@ public enum CardList {
     static let nextTurnOnEliminated = Card(.nextTurnOnEliminated) {
         CardEffect.setTurn
             .target(.next)
+            .triggered(.onEliminated)
             .require {
                 PlayReq.isCurrentTurn
             }
-            .triggered(.onEliminated)
     }
 
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {

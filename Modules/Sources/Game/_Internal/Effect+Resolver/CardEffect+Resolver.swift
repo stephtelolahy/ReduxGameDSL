@@ -67,10 +67,7 @@ private extension CardEffect {
 
         case let .challengeEffect(challenger, effect, otherwise):
             return EffectChallenge(challenger: challenger, effect: effect, otherwise: otherwise)
-
-        case let .requireEffect(playReqs, effect):
-            return EffectRequire(playReqs: playReqs, effect: effect)
-
+            
         case .nothing:
             return EffectNone()
         }

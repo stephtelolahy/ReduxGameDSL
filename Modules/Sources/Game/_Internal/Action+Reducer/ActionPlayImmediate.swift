@@ -13,17 +13,15 @@ struct ActionPlayImmediate: GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName],
-              var sideEffect = cardObj.actions[.onPlay] else {
+              let playAction = cardObj.actions.first(where: { $0.eventReq == .onPlay }) else {
             throw GameError.cardNotPlayable(card)
         }
 
         var ctx: EffectContext = [.actor: actor, .card: card]
         ctx[.target] = target
 
-        if case let .requireEffect(_, childEffect) = sideEffect {
-            sideEffect = childEffect
-        }
-
+        var sideEffect = playAction.effect
+        
         if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case .selectable = resolvedTarget {

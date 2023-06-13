@@ -6,11 +6,14 @@
 //
 
 /// Describing card action
-public struct CardAction {
+public struct CardAction: Codable, Equatable {
 
     /// Describing when card action is triggered
     let eventReq: EventReq
 
     /// The side effect
     let effect: CardEffect
+    
+    /// Play requirements
+    let playReqs: [PlayReq]
 }

@@ -11,9 +11,8 @@ public struct Card: Codable, Equatable {
     /// The manner a card is played
     public let type: CardType
 
-    // TODO: action = eventReq+playReqs+efect
     /// Actions that can be performed with the card
-    public let actions: [EventReq: CardEffect]
+    public let actions: [CardAction]
 }
 
 /// Decsribing the manner a card is played
