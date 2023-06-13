@@ -20,17 +20,17 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "missed"
+                                .missed
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.playImmediate(actor: "p1", card: "missed")
+                    let action = GameAction.playImmediate(actor: "p1", card: .missed)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardNotPlayable("missed")
+                    expect(result.error) == .cardNotPlayable(.missed)
                 }
             }
 
@@ -62,11 +62,27 @@ final class PlaySpec: QuickSpec {
                 }
             }
 
-            xcontext("equipment card") {
+            context("equipment card") {
                 it("should put in self's play") {
                     // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                .dynamite
+                            }
+                        }
+                    }
+                    .cardRef(CardList.all)
+
                     // When
+                    let action = GameAction.play(actor: "p1", card: .dynamite)
+                    let result = sut.reduce(state: state, action: action)
+
                     // Then
+                    expect(result.queue) == [
+                        .playEquipment(actor: "p1", card: .dynamite)
+                    ]
+                    expect(result.error) == nil
                 }
             }
 

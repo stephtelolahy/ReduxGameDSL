@@ -12,7 +12,6 @@ import Nimble
 final class PlayImmediateSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-        var action: GameAction!
         var result: GameState!
 
         describe("playing immediate card") {
@@ -30,7 +29,7 @@ final class PlayImmediateSpec: QuickSpec {
                 .cardRef(CardList.all)
 
                 // When
-                action = GameAction.playImmediate(actor: "p1", card: .beer)
+                let action = GameAction.playImmediate(actor: "p1", card: .beer)
                 result = sut.reduce(state: state, action: action)
             }
 

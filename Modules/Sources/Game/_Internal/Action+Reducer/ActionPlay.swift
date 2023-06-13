@@ -44,12 +44,22 @@ struct ActionPlay: GameReducerProtocol {
 
         let action: GameAction
         let actorObj = state.player(actor)
-        if actorObj.hand.contains(card) {
-            action = .playImmediate(actor: actor, card: card)
-        } else {
-            action = .playAbility(actor: actor, card: card)
+        
+        switch cardObj.type {
+        case .equipment:
+            action = .playEquipment(actor: actor, card: card)
+            
+        case .handicap:
+            fatalError(.unexpected)
+            
+        case .immediate:
+            if actorObj.hand.contains(card) {
+                action = .playImmediate(actor: actor, card: card)
+            } else {
+                action = .playAbility(actor: actor, card: card)
+            }
         }
-
+        
         // queue play action
         var state = state
         state.queue.insert(action, at: 0)
