@@ -31,7 +31,18 @@ struct ActionPlay: GameReducerProtocol {
             if case let .selectable(pIds) = resolvedTarget {
                 var state = state
                 let options = pIds.reduce(into: [String: GameAction]()) {
-                    $0[$1] = .playImmediate(actor: actor, card: card, target: $1)
+                    let action: GameAction
+                    switch cardObj.type {
+                    case .immediate:
+                        action = .playImmediate(actor: actor, card: card, target: $1)
+                    case .handicap:
+                        action = .playHandicap(actor: actor, card: card, target: $1)
+                        
+                    default:
+                        fatalError(.unexpected)
+                    }
+                    
+                    $0[$1] = action
                 }
                 let childAction = GameAction.chooseOne(chooser: actor, options: options)
                 state.queue.insert(childAction, at: 0)

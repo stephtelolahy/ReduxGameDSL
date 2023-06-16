@@ -86,7 +86,7 @@ final class PlaySpec: QuickSpec {
                 }
             }
 
-            xcontext("handicap card") {
+            context("handicap card") {
                 it("should put in target's play") {
                     // Given
                     let state = GameState {
