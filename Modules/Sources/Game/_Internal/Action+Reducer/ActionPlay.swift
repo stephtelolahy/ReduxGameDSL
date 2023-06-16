@@ -37,7 +37,6 @@ struct ActionPlay: GameReducerProtocol {
                         action = .playImmediate(actor: actor, card: card, target: $1)
                     case .handicap:
                         action = .playHandicap(actor: actor, card: card, target: $1)
-                        
                     default:
                         fatalError(.unexpected)
                     }
@@ -51,16 +50,13 @@ struct ActionPlay: GameReducerProtocol {
         }
 
         let action: GameAction
-        let actorObj = state.player(actor)
-        
         switch cardObj.type {
         case .equipment:
             action = .playEquipment(actor: actor, card: card)
-            
         case .handicap:
             fatalError(.unexpected)
-            
         case .immediate:
+            let actorObj = state.player(actor)
             if actorObj.hand.contains(card) {
                 action = .playImmediate(actor: actor, card: card)
             } else {
