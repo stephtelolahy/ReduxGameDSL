@@ -4,7 +4,6 @@
 //
 //  Created by Hugues Telolahy on 12/04/2023.
 //
-import Game
 
 public enum CardList {
 

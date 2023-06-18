@@ -5,6 +5,7 @@
 //  Created by Hugues Telolahy on 30/04/2023.
 //
 
+/// Effect that can be applied to a player or a group of players
 public indirect enum CardEffect: Codable, Equatable {
 
     // MARK: - Actions
@@ -48,6 +49,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case targetEffect(target: PlayerArg, effect: Self)
 
     /// Apply an effect with some card
+    @available(*, deprecated, message: "set on effect directly")
     case cardEffect(card: CardArg, chooser: PlayerArg?, effect: Self)
 
     /// Try an effect. If cannot, then apply some effect

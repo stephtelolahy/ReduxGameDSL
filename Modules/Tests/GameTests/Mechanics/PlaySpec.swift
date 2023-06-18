@@ -10,6 +10,7 @@ import Nimble
 import Game
 
 final class PlaySpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         let sut = GameReducer()
 
