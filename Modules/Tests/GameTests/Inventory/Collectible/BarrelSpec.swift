@@ -11,8 +11,8 @@ import Game
 
 final class BarrelSpec: QuickSpec {
     override func spec() {
-        xdescribe("playing barrel") {
-            it("should put in play") {
+        describe("playing barrel") {
+            it("should equip") {
                 // Given
                 let state = createGame {
                     Player("p1") {
@@ -28,6 +28,12 @@ final class BarrelSpec: QuickSpec {
 
                 // Then
                 expect(result) == [.success(.playEquipment(actor: "p1", card: .barrel))]
+            }
+        }
+        
+        xdescribe("triggering barrel") {
+            it("should counter bang effect") {
+                
             }
         }
     }

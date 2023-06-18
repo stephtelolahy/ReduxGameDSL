@@ -160,12 +160,13 @@ private extension GameReducer {
     }
 
     func updateGameOver(state: GameState) -> GameState {
-        if let winner = state.winner() {
-            var state = state
-            state.isOver = GameOver(winner: winner)
-            return state
+        guard case .eliminate = state.event,
+           let winner = state.winner() else {
+               return state
         }
-
+        
+        var state = state
+        state.isOver = GameOver(winner: winner)
         return state
     }
 }
