@@ -43,20 +43,20 @@ final class PlayEquipmentSpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "c1"
-                                "c2"
+                                "c-1"
+                            }
+                            InPlay {
+                                "c-2"
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.playEquipment(actor: "p1", card: "c1")
+                    let action = GameAction.playEquipment(actor: "p1", card: "c-1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.player("p1").hand.cards) == ["c2"]
-                    expect(result.player("p1").inPlay.cards) == ["c1"]
-                    expect(result.discard.count) == 0
+                    expect(result.error) == GameError.alreadyHavingSameCardInPlay("c")
                 }
             }
         }
