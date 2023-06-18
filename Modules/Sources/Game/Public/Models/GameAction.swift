@@ -52,6 +52,12 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Ask a player to choose an action
     case chooseOne(chooser: String, options: [String: Self])
+    
+    /// Set player attribute
+    case setAttribute(player: String, attribute: AttributeKey, value: Int)
+    
+    /// Increment player attribute
+    case incAttribute(player: String, attribute: AttributeKey, value: Int)
 
     // MARK: - Invisible actions
 

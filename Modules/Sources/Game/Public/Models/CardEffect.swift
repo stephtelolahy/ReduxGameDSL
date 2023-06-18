@@ -36,6 +36,12 @@ public indirect enum CardEffect: Codable, Equatable {
 
     /// Eliminate a player from the game
     case eliminate
+    
+    /// Set player attribute
+    case setAttribute(AttributeKey, value: Int)
+    
+    /// Increment player attribute
+    case incAttribute(AttributeKey, value: Int)
 
     // MARK: - Operators
 
