@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class SaloonSpec: QuickSpec {
     override func spec() {
@@ -33,11 +32,11 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .saloon)
+                    let action = GameAction.play(actor: "p1", card: .saloon)
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.play(actor: "p1", card: .saloon)),
+                    expect(result) == [.success(.playImmediate(actor: "p1", card: .saloon)),
                                        .success(.heal(player: "p2", value: 1)),
                                        .success(.heal(player: "p3", value: 1))]
                 }
@@ -60,7 +59,7 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .saloon)
+                    let action = GameAction.play(actor: "p1", card: .saloon)
                     let result = self.awaitAction(action, state: state)
                     
                     // Then

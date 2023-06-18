@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class CatBalouSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -26,7 +25,7 @@ final class CatBalouSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: .catBalou)
+                    let action = GameAction.play(actor: "p1", card: .catBalou)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -52,15 +51,15 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(actor: "p1", card: .catBalou)
                         let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .catBalou, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21")
                             ])),
@@ -87,15 +86,15 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(actor: "p1", card: .catBalou)
                         let result = self.awaitAction(action, choices: ["p2", "c22"], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .catBalou, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 "c21": .discard(player: "p2", card: "c21"),
                                 "c22": .discard(player: "p2", card: "c22")
@@ -126,15 +125,15 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(actor: "p1", card: .catBalou)
                         let result = self.awaitAction(action, choices: ["p2", "c23"], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .catBalou, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .catBalou, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .catBalou, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .catBalou, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .discard(player: "p2", card: "c21"),
                                 "c22": .discard(player: "p2", card: "c22"),

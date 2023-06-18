@@ -1,5 +1,5 @@
 //
-//  StagecoachSpec.swift
+//  WellsFargoSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 10/04/2023.
@@ -8,32 +8,33 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
-final class StagecoachSpec: QuickSpec {
+final class WellsFargoSpec: QuickSpec {
     override func spec() {
-        describe("playing stagecoach") {
-            it("should draw 2 cards") {
+        describe("playing wellsFargo") {
+            it("should draw 3 cards") {
                 // Given
                 let state = createGame {
                     Player("p1") {
                         Hand {
-                            .stagecoach
+                            .wellsFargo
                         }
                     }
                     Player("p2")
                     Deck {
                         "c1"
                         "c2"
+                        "c3"
                     }
                 }
                 
                 // When
-                let action = GameAction.move(actor: "p1", card: .stagecoach)
+                let action = GameAction.play(actor: "p1", card: .wellsFargo)
                 let result = self.awaitAction(action, state: state)
                 
                 // Then
-                expect(result) == [.success(.play(actor: "p1", card: .stagecoach)),
+                expect(result) == [.success(.playImmediate(actor: "p1", card: .wellsFargo)),
+                                   .success(.draw(player: "p1")),
                                    .success(.draw(player: "p1")),
                                    .success(.draw(player: "p1"))]
             }

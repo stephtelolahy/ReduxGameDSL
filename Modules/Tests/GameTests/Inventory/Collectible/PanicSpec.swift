@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class PanicSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -27,7 +26,7 @@ final class PanicSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: .panic)
+                    let action = GameAction.play(actor: "p1", card: .panic)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -53,15 +52,15 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .panic)
+                        let action = GameAction.play(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .steal(player: "p1", target: "p2", card: "c21")
                             ])),
@@ -88,15 +87,15 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .panic)
+                        let action = GameAction.play(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, choices: ["p2", "c22"], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 "c21": .steal(player: "p1", target: "p2", card: "c21"),
                                 "c22": .steal(player: "p1", target: "p2", card: "c22")
@@ -127,15 +126,15 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.move(actor: "p1", card: .panic)
+                        let action = GameAction.play(actor: "p1", card: .panic)
                         let result = self.awaitAction(action, choices: ["p2", "c23"], state: state)
                         
                         // Then
                         expect(result) == [
                             .success(.chooseOne(chooser: "p1", options: [
-                                "p2": .play(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
                             ])),
-                            .success(.play(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
                             .success(.chooseOne(chooser: "p1", options: [
                                 .randomHand: .steal(player: "p1", target: "p2", card: "c21"),
                                 "c22": .steal(player: "p1", target: "p2", card: "c22"),

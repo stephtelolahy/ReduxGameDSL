@@ -23,7 +23,7 @@ let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, action i
     }
     
     if let chooseOne = state.chooseOne {
-        print("🎲 chooseOne: \(chooseOne.options.keys.joined(separator: ", "))")
+        print("🎲 option: \(chooseOne.options.keys.joined(separator: ", "))")
     }
     
     return Empty().eraseToAnyPublisher()

@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class DuelSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -37,17 +36,17 @@ final class DuelSpec: QuickSpec {
             context("passing") {
                 it("should damage") {
                     // When
-                    let action = GameAction.move(actor: "p1", card: .duel)
+                    let action = GameAction.play(actor: "p1", card: .duel)
                     let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .play(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .play(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
+                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
+                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
-                        .success(.play(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .groupActions([
                                 .discard(player: "p2", card: "bang-2"),
@@ -64,17 +63,17 @@ final class DuelSpec: QuickSpec {
             context("discarding bang") {
                 it("should damage actor") {
                     // When
-                    let action = GameAction.move(actor: "p1", card: .duel)
+                    let action = GameAction.play(actor: "p1", card: .duel)
                     let result = self.awaitAction(action, choices: ["p2", "bang-2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .play(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .play(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
+                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
+                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
-                        .success(.play(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .groupActions([
                                 .discard(player: "p2", card: "bang-2"),

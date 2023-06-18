@@ -8,17 +8,15 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
-
         describe("activating card") {
             context("game idle") {
                 it("should emit current turn's active card") {
                     // Given
-                    let state = createGame {
+                    let state = GameState {
                         Player("p1") {
                             Hand {
                                 String.beer
@@ -31,6 +29,7 @@ final class ActiveCardsSpec: QuickSpec {
                         Player("p2")
                     }
                     .turn("p1")
+                    .cardRef(CardList.all)
 
                     // When
                     let action = GameAction.groupActions([])
@@ -39,7 +38,10 @@ final class ActiveCardsSpec: QuickSpec {
                     // Then
                     expect(result.event) == nil
                     expect(result.error) == nil
-                    expect(result.active) == ActiveCards(player: "p1", cards: [.saloon, .gatling])
+                    expect(result.active) == ActiveCards(player: "p1", cards: [
+                        .saloon,
+                        .gatling
+                    ])
                 }
             }
         }

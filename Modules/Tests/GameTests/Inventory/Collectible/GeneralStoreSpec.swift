@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class GeneralStoreSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -33,12 +32,12 @@ final class GeneralStoreSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .generalStore)
+                    let action = GameAction.play(actor: "p1", card: .generalStore)
                     let result = self.awaitAction(action, choices: ["c1", "c2"], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .generalStore)),
+                        .success(.playImmediate(actor: "p1", card: .generalStore)),
                         .success(.drawToArena),
                         .success(.drawToArena),
                         .success(.drawToArena),
@@ -75,12 +74,12 @@ final class GeneralStoreSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .generalStore)
+                    let action = GameAction.play(actor: "p1", card: .generalStore)
                     let result = self.awaitAction(action, choices: ["c1"], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .generalStore)),
+                        .success(.playImmediate(actor: "p1", card: .generalStore)),
                         .success(.drawToArena),
                         .success(.drawToArena),
                         .success(.chooseOne(chooser: "p1", options: [

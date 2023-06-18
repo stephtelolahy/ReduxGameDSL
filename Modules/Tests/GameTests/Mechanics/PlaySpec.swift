@@ -2,86 +2,116 @@
 //  PlaySpec.swift
 //
 //
-//  Created by Hugues Telolahy on 08/04/2023.
+//  Created by Hugues Telolahy on 11/06/2023.
 //
 
-import Game
 import Quick
 import Nimble
+import Game
 
 final class PlaySpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         let sut = GameReducer()
-        var action: GameAction!
-        var result: GameState!
-        let beer = Card("beer") {
-            CardEffect.heal(1)
-                .target(.actor)
-                .triggered(.onPlay)
-        }
 
-        describe("play") {
-            context("hand card") {
-                beforeEach {
-                    // Given
-                    let state = GameState {
-                        Player("p1") {
-                            Hand {
-                                "beer"
-                            }
-                        }
-                        .attribute(.health, 1)
-                        .attribute(.maxHealth, 3)
-                    }
-                    .cardRef(["beer": beer])
-                    
-                    // When
-                    action = GameAction.play(actor: "p1", card: "beer")
-                    result = sut.reduce(state: state, action: action)
-                }
-
-                it("should discard immediately") {
-                    // Then
-                    expect(result.player("p1").hand.cards).to(beEmpty())
-                    expect(result.discard.top) == "beer"
-                }
-
-                it("should emit event") {
-                    // Then
-                    expect(result.event) == .play(actor: "p1", card: "beer")
-                }
-
-                it("should increment counter") {
-                    // Then
-                    expect(result.playCounter["beer"]) == 1
-                }
-
-                it("should queue side effects") {
-                    // Then
-                    let ctx: EffectContext = [.actor: "p1", .card: "beer"]
-                    expect(result.queue) == [
-                        .resolve(.heal(1).target(.actor), ctx: ctx)
-                    ]
-                }
-            }
-
+        describe("playing") {
             context("not playable card") {
                 it("should throw error") {
                     // Given
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                "missed"
+                                .missed
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: "missed")
+                    let action = GameAction.playImmediate(actor: "p1", card: .missed)
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardNotPlayable("missed")
+                    expect(result.error) == .cardNotPlayable(.missed)
+                }
+            }
+
+            context("immediate card") {
+                it("should discard immediately") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                .beer
+                            }
+                        }
+                        .attribute(.health, 1)
+                        .attribute(.maxHealth, 3)
+                        Player("p2")
+                        Player("p3")
+                    }
+                    .cardRef(CardList.all)
+
+                    // When
+                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.queue) == [
+                        .playImmediate(actor: "p1", card: .beer)
+                    ]
+                    expect(result.error) == nil
+                }
+            }
+
+            context("equipment card") {
+                it("should put in self's play") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                .dynamite
+                            }
+                        }
+                    }
+                    .cardRef(CardList.all)
+
+                    // When
+                    let action = GameAction.play(actor: "p1", card: .dynamite)
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.queue) == [
+                        .playEquipment(actor: "p1", card: .dynamite)
+                    ]
+                    expect(result.error) == nil
+                }
+            }
+
+            context("handicap card") {
+                it("should put in target's play") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                .jail
+                            }
+                        }
+                        Player("p2")
+                        Player("p3")
+                    }
+                    .cardRef(CardList.all)
+
+                    // When
+                    let action = GameAction.play(actor: "p1", card: .jail)
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.queue) == [
+                        .chooseOne(chooser: "p1", options: [
+                            "p3": .playHandicap(actor: "p1", card: .jail, target: "p3"),
+                            "p2": .playHandicap(actor: "p1", card: .jail, target: "p2")])
+                    ]
+                    expect(result.error) == nil
                 }
             }
         }

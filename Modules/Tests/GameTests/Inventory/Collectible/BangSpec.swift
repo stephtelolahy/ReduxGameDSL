@@ -8,7 +8,6 @@
 import Game
 import Quick
 import Nimble
-import Inventory
 
 final class BangSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
@@ -28,7 +27,7 @@ final class BangSpec: QuickSpec {
                         .counters([.bang: 1])
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .bang)
+                    let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
@@ -51,7 +50,7 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: .bang)
+                    let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -76,15 +75,15 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: .bang)
+                    let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, choices: ["p2", .missed], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .bang, target: "p2")
+                            "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
                         ])),
-                        .success(.play(actor: "p1", card: .bang, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             .missed: .discard(player: "p2", card: .missed),
                             .pass: .damage(player: "p2", value: 1)
@@ -107,15 +106,15 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.move(actor: "p1", card: .bang)
+                    let action = GameAction.play(actor: "p1", card: .bang)
                     let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(chooser: "p1", options: [
-                            "p2": .play(actor: "p1", card: .bang, target: "p2")
+                            "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
                         ])),
-                        .success(.play(actor: "p1", card: .bang, target: "p2")),
+                        .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             .pass: .damage(player: "p2", value: 1)
                         ])),

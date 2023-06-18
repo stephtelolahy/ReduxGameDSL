@@ -8,7 +8,6 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
 final class DiscardCardsOnEliminatedSpec: QuickSpec {
     override func spec() {

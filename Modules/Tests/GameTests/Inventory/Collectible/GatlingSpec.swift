@@ -1,5 +1,5 @@
 //
-//  IndiansSpec.swift
+//  GatlingSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 22/04/2023.
@@ -8,24 +8,22 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
-final class IndiansSpec: QuickSpec {
+final class GatlingSpec: QuickSpec {
     override func spec() {
-        describe("playing Indians") {
+        describe("playing gatling") {
             context("three players") {
                 it("should allow each player to counter or pass") {
                     // Given
                     let state = createGame {
                         Player("p1") {
                             Hand {
-                                .indians
+                                .gatling
                             }
                         }
                         Player("p2") {
                             Hand {
-                                String.bang
-                                String.missed
+                                .missed
                             }
                         }
                         
@@ -33,17 +31,17 @@ final class IndiansSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .indians)
-                    let result = self.awaitAction(action, choices: [.bang, .pass], state: state)
+                    let action = GameAction.play(actor: "p1", card: .gatling)
+                    let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .indians)),
+                        .success(.playImmediate(actor: "p1", card: .gatling)),
                         .success(.chooseOne(chooser: "p2", options: [
-                            .bang: .discard(player: "p2", card: .bang),
+                            .missed: .discard(player: "p2", card: .missed),
                             .pass: .damage(player: "p2", value: 1)
                         ])),
-                        .success(.discard(player: "p2", card: .bang)),
+                        .success(.discard(player: "p2", card: .missed)),
                         .success(.chooseOne(chooser: "p3", options: [
                             .pass: .damage(player: "p3", value: 1)
                         ])),
@@ -58,28 +56,28 @@ final class IndiansSpec: QuickSpec {
                     let state = createGame {
                         Player("p1") {
                             Hand {
-                                .indians
+                                .gatling
                             }
                         }
                         Player("p2") {
                             Hand {
-                                .bang
+                                .missed
                             }
                         }
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .indians)
-                    let result = self.awaitAction(action, choices: [.bang], state: state)
+                    let action = GameAction.play(actor: "p1", card: .gatling)
+                    let result = self.awaitAction(action, choices: [.missed], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .indians)),
+                        .success(.playImmediate(actor: "p1", card: .gatling)),
                         .success(.chooseOne(chooser: "p2", options: [
-                            .bang: .discard(player: "p2", card: .bang),
+                            .missed: .discard(player: "p2", card: .missed),
                             .pass: .damage(player: "p2", value: 1)
                         ])),
-                        .success(.discard(player: "p2", card: .bang))
+                        .success(.discard(player: "p2", card: .missed))
                     ]
                 }
             }

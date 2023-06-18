@@ -1,6 +1,6 @@
 //
 //  ChooseOneSpec.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 11/04/2023.
 //
@@ -14,30 +14,30 @@ final class ChooseOneSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         var state: GameState!
-        let beer = Card("beer") {
-            CardEffect.heal(1)
-                .target(.actor)
-                .triggered(.onPlay)
-        }
-
+        
         describe("chooseOne") {
             beforeEach {
                 state = GameState {
-                    Player("p1")
-                        .attribute(.health, 1)
-                        .attribute(.maxHealth, 3)
+                    Player("p1") {
+                        Hand {
+                            "beer-1"
+                            "beer-2"
+                        }
+                    }
+                    .attribute(.health, 1)
+                    .attribute(.maxHealth, 3)
                 }
                 .waiting("p1", options: [
-                    "c1": .play(actor: "p1", card: "beer-1"),
-                    "c2": .play(actor: "p1", card: "beer-2")
+                    "c1": .discard(player: "p1", card: "beer-1"),
+                    "c2": .discard(player: "p1", card: "beer-2")
                 ])
-                .cardRef(["beer": beer])
+                .cardRef(CardList.all)
             }
 
             context("when dispatching waited action") {
                 it("should remove waiting state") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: "beer-1")
+                    let action = GameAction.discard(player: "p1", card: "beer-1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

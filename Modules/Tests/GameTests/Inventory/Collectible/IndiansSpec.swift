@@ -1,5 +1,5 @@
 //
-//  GatlingSpec.swift
+//  IndiansSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 22/04/2023.
@@ -8,23 +8,23 @@
 import Quick
 import Nimble
 import Game
-import Inventory
 
-final class GatlingSpec: QuickSpec {
+final class IndiansSpec: QuickSpec {
     override func spec() {
-        describe("playing gatling") {
+        describe("playing Indians") {
             context("three players") {
                 it("should allow each player to counter or pass") {
                     // Given
                     let state = createGame {
                         Player("p1") {
                             Hand {
-                                .gatling
+                                .indians
                             }
                         }
                         Player("p2") {
                             Hand {
-                                .missed
+                                String.bang
+                                String.missed
                             }
                         }
                         
@@ -32,17 +32,17 @@ final class GatlingSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .gatling)
-                    let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
+                    let action = GameAction.play(actor: "p1", card: .indians)
+                    let result = self.awaitAction(action, choices: [.bang, .pass], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .gatling)),
+                        .success(.playImmediate(actor: "p1", card: .indians)),
                         .success(.chooseOne(chooser: "p2", options: [
-                            .missed: .discard(player: "p2", card: .missed),
+                            .bang: .discard(player: "p2", card: .bang),
                             .pass: .damage(player: "p2", value: 1)
                         ])),
-                        .success(.discard(player: "p2", card: .missed)),
+                        .success(.discard(player: "p2", card: .bang)),
                         .success(.chooseOne(chooser: "p3", options: [
                             .pass: .damage(player: "p3", value: 1)
                         ])),
@@ -57,28 +57,28 @@ final class GatlingSpec: QuickSpec {
                     let state = createGame {
                         Player("p1") {
                             Hand {
-                                .gatling
+                                .indians
                             }
                         }
                         Player("p2") {
                             Hand {
-                                .missed
+                                .bang
                             }
                         }
                     }
                     
                     // When
-                    let action = GameAction.move(actor: "p1", card: .gatling)
-                    let result = self.awaitAction(action, choices: [.missed], state: state)
+                    let action = GameAction.play(actor: "p1", card: .indians)
+                    let result = self.awaitAction(action, choices: [.bang], state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.play(actor: "p1", card: .gatling)),
+                        .success(.playImmediate(actor: "p1", card: .indians)),
                         .success(.chooseOne(chooser: "p2", options: [
-                            .missed: .discard(player: "p2", card: .missed),
+                            .bang: .discard(player: "p2", card: .bang),
                             .pass: .damage(player: "p2", value: 1)
                         ])),
-                        .success(.discard(player: "p2", card: .missed))
+                        .success(.discard(player: "p2", card: .bang))
                     ]
                 }
             }

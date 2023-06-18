@@ -7,7 +7,6 @@
 
 import XCTest
 import Game
-import Inventory
 import Combine
 
 final class SimulationTests: XCTestCase {
@@ -40,9 +39,9 @@ final class SimulationTests: XCTestCase {
             if let active = state.active {
                 // swiftlint:disable:next force_unwrapping
                 let randomCard = active.cards.randomElement()!
-                let move = GameAction.move(actor: active.player, card: randomCard)
+                let randomAction = GameAction.play(actor: active.player, card: randomCard)
                 DispatchQueue.main.async {
-                    sut.dispatch(move)
+                    sut.dispatch(randomAction)
                 }
             }
             

@@ -4,7 +4,6 @@
 //
 //  Created by Hugues Telolahy on 12/04/2023.
 //
-import Game
 
 public enum CardList {
 
@@ -13,10 +12,10 @@ public enum CardList {
     static let beer = Card(.beer) {
         CardEffect.heal(1)
             .target(.actor)
+            .triggered(.onPlay)
             .require {
                 PlayReq.isPlayersAtLeast(3)
             }
-            .triggered(.onPlay)
     }
 
     static let saloon = Card(.saloon) {
@@ -69,10 +68,10 @@ public enum CardList {
             .card(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.selectReachable)
+            .triggered(.onPlay)
             .require {
                 PlayReq.isTimesPerTurn(1)
             }
-            .triggered(.onPlay)
     }
 
     static let missed = Card(.missed)
@@ -97,6 +96,22 @@ public enum CardList {
         CardEffect.discard
             .card(.selectHandNamed(.bang))
             .challenge(.actor, otherwise: .damage(1))
+            .target(.selectAny)
+            .triggered(.onPlay)
+    }
+
+    static let barrel = Card(.barrel, type: .equipment) {
+        CardEffect.nothing
+            .triggered(.onPlay)
+    }
+
+    static let dynamite = Card(.dynamite, type: .equipment) {
+        CardEffect.nothing
+            .triggered(.onPlay)
+    }
+
+    static let jail = Card(.jail, type: .handicap) {
+        CardEffect.nothing
             .target(.selectAny)
             .triggered(.onPlay)
     }
@@ -131,10 +146,10 @@ public enum CardList {
     static let nextTurnOnEliminated = Card(.nextTurnOnEliminated) {
         CardEffect.setTurn
             .target(.next)
+            .triggered(.onEliminated)
             .require {
                 PlayReq.isCurrentTurn
             }
-            .triggered(.onEliminated)
     }
 
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {
@@ -157,6 +172,9 @@ public enum CardList {
         gatling
         indians
         duel
+        barrel
+        dynamite
+        jail
         endTurn
         drawOnSetTurn
         eliminateOnLooseLastHealth
