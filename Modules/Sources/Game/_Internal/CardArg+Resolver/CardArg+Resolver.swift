@@ -92,7 +92,7 @@ private extension CardArg {
         case .selectHandNamed(let name): return CardSelectHandNamed(name: name)
         case .selectHand: return CardSelectHand()
         case .all: return CardAll()
-        default: fatalError(.unexpected)
+        default: fatalError("unexpected")
         }
     }
 }

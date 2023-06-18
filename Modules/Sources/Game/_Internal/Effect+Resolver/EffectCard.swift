@@ -19,11 +19,11 @@ struct EffectCard: EffectResolverProtocol {
             } else {
                 let output = try chooser.resolve(state: state, ctx: ctx)
                 guard case let .identified(pIds) = output else {
-                    fatalError(.unexpected)
+                    fatalError("unexpected")
                 }
 
                 guard pIds.count == 1 else {
-                    fatalError(.unexpected)
+                    fatalError("unexpected")
                 }
 
                 chooserId = pIds[0]

@@ -26,7 +26,7 @@ struct ActionPlayImmediate: GameReducerProtocol {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case .selectable = resolvedTarget {
                 guard target != nil else {
-                    fatalError("invalid play: missing target")
+                    throw GameError.noPlayer(.target)
                 }
                 sideEffect = childEffect
             }

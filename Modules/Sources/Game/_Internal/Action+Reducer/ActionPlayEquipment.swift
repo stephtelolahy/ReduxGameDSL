@@ -13,7 +13,7 @@ struct ActionPlayEquipment: GameReducerProtocol {
         var state = state
         let actorObj = state.player(actor)
         guard actorObj.hand.contains(card) else {
-            fatalError("invalid equip: missing card")
+            throw GameError.cardNotFound(card)
         }
 
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)

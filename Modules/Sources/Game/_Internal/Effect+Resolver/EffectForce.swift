@@ -14,7 +14,7 @@ struct EffectForce: EffectResolverProtocol {
             let children = try effect.resolve(state: state, ctx: ctx)
 
             guard children.count == 1 else {
-                fatalError(.unexpected)
+                fatalError("unexpected")
             }
 
             let action = children[0]
@@ -28,7 +28,7 @@ struct EffectForce: EffectResolverProtocol {
                 return [.chooseOne(chooser: chooser, options: options)]
 
             default:
-                fatalError(.unexpected)
+                fatalError("unexpected")
             }
         } catch {
             return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]

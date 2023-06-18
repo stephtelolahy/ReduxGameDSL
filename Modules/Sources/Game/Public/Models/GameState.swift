@@ -64,7 +64,7 @@ public extension GameState {
     /// Getting player with given identifier
     func player(_ id: String) -> Player {
         guard let player = players[id] else {
-            fatalError(.playerNotFound(id))
+            fatalError("player not found \(id)")
         }
         return player
     }
