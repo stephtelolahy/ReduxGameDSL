@@ -32,7 +32,7 @@ final class ActiveCardsSpec: QuickSpec {
                     .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.groupActions([])
+                    let action = GameAction.group([])
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

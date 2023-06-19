@@ -26,7 +26,7 @@ struct ActionPlay: GameReducerProtocol {
         }
 
         // resolve target
-        if case let .targetEffect(requiredTarget, _) = sideEffect {
+        if case let .target(requiredTarget, _) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case let .selectable(pIds) = resolvedTarget {
                 var state = state

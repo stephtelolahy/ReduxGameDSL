@@ -65,7 +65,7 @@ private extension GameReducer {
         switch action {
         case .play,
                 .resolve,
-                .groupActions:
+                .group:
             break
 
         default:

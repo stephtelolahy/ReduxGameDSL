@@ -68,5 +68,5 @@ public indirect enum GameAction: Codable, Equatable {
     case resolve(CardEffect, ctx: EffectContext)
 
     /// Dispatch actions sequentially
-    case groupActions([Self])
+    case group([Self])
 }

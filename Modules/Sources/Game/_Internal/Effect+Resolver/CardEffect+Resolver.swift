@@ -50,22 +50,22 @@ private extension CardEffect {
             return EffectBuild { .steal(player: $0.get(.actor), target: $0.get(.target), card: $0.get(.cardSelected)) }
 
             // operation on effect
-        case let .targetEffect(target, effect):
+        case let .target(target, effect):
             return EffectTarget(target: target, effect: effect)
 
         case let .cardEffect(card, chooser, effect):
             return EffectCard(card: card, chooser: chooser, effect: effect)
 
-        case let .groupEffects(effects):
+        case let .group(effects):
             return EffectGroup(effects: effects)
 
-        case let .repeatEffect(times, effect):
+        case let .repeat(times, effect):
             return EffectRepeat(effect: effect, times: times)
 
-        case let .forceEffect(effect, otherwise):
+        case let .force(effect, otherwise):
             return EffectForce(effect: effect, otherwise: otherwise)
 
-        case let .challengeEffect(challenger, effect, otherwise):
+        case let .challenge(challenger, effect, otherwise):
             return EffectChallenge(challenger: challenger, effect: effect, otherwise: otherwise)
             
         default:

@@ -15,9 +15,9 @@ struct EffectChallenge: EffectResolverProtocol {
         
         guard case let .id(challengerId) = challenger else {
             return try challenger.resolve(state: state, ctx: ctx) {
-                CardEffect.challengeEffect(challenger: .id($0),
-                                           effect: effect,
-                                           otherwise: otherwise)
+                CardEffect.challenge(challenger: .id($0),
+                                     effect: effect,
+                                     otherwise: otherwise)
                 .withCtx(ctx)
             }
         }
@@ -32,14 +32,14 @@ struct EffectChallenge: EffectResolverProtocol {
             let action = children[0]
             switch action {
             case let .resolve(childEffect, childCtx):
-                return [CardEffect.challengeEffect(challenger: challenger,
-                                                   effect: childEffect,
-                                                   otherwise: otherwise).withCtx(childCtx)]
+                return [CardEffect.challenge(challenger: challenger,
+                                             effect: childEffect,
+                                             otherwise: otherwise).withCtx(childCtx)]
                 
             case let .chooseOne(chooser, options):
-                let reversedAction = CardEffect.challengeEffect(challenger: .id(target),
-                                                                effect: effect,
-                                                                otherwise: otherwise)
+                let reversedAction = CardEffect.challenge(challenger: .id(target),
+                                                          effect: effect,
+                                                          otherwise: otherwise)
                     .withCtx(ctx.copy([.target: challengerId]))
                 var options = options.mapValues { childAction in
                     GameAction.group {

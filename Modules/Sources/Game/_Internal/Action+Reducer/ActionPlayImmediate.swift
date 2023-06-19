@@ -22,7 +22,7 @@ struct ActionPlayImmediate: GameReducerProtocol {
 
         var sideEffect = playAction.effect
         
-        if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
+        if case let .target(requiredTarget, childEffect) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case .selectable = resolvedTarget {
                 guard target != nil else {
