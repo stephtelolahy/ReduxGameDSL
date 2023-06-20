@@ -37,7 +37,7 @@ final class DrawToArenaSpec: QuickSpec {
             }
 
             context("chosable containing card") {
-                it("should draw top deck and add to arene") {
+                it("should draw top deck and add to arena") {
                     // Given
                     let state = GameState {
                         Deck {

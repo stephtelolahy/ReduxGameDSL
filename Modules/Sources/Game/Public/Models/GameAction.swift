@@ -41,8 +41,11 @@ public indirect enum GameAction: Codable, Equatable {
     /// Draw some cards from arena
     case chooseCard(player: String, card: String)
 
-    /// Draw a card from discard and put to arena
+    /// Draw a card from deck and put to arena
     case drawToArena
+    
+    /// Draw a card from deck and put to discard
+    case drawToDiscard
 
     /// Set turn
     case setTurn(String)
