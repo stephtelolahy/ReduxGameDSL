@@ -41,7 +41,7 @@ private extension CardEffect {
             return EffectBuild { .eliminate($0.get(.target)) }
 
         case .chooseCard:
-            return EffectBuild { .chooseCard(player: $0.get(.target), card: $0.get(.cardSelected)) }
+            return EffectChooseCard()
 
         case let .discard(card, chooser):
             return EffectDiscard(card: card, chooser: chooser)
@@ -52,9 +52,6 @@ private extension CardEffect {
             // operation on effect
         case let .target(target, effect):
             return EffectTarget(target: target, effect: effect)
-
-        case let .cardEffect(card, chooser, effect):
-            return EffectCard(card: card, chooser: chooser, effect: effect)
 
         case let .group(effects):
             return EffectGroup(effects: effects)

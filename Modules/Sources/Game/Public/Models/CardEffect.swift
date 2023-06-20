@@ -56,11 +56,7 @@ public indirect enum CardEffect: Codable, Equatable {
     
     /// Apply an effect to some players
     case target(target: PlayerArg, effect: Self)
-
-    /// Apply an effect with some card
-    @available(*, deprecated, message: "set on effect directly")
-    case cardEffect(card: CardArg, chooser: PlayerArg?, effect: Self)
-
+    
     /// Try an effect. If cannot, then apply some effect
     case force(effect: Self, otherwise: Self)
 

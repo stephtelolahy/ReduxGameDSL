@@ -55,7 +55,6 @@ public enum CardList {
             CardEffect.drawToArena
                 .repeat(.numPlayers)
             CardEffect.chooseCard
-                .card(.selectArena)
                 .target(.all)
         }
         .triggered(.onPlay)
