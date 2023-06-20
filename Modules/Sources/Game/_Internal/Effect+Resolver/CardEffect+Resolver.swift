@@ -46,8 +46,8 @@ private extension CardEffect {
         case let .discard(card, chooser):
             return EffectDiscard(card: card, chooser: chooser)
 
-        case .steal:
-            return EffectBuild { .steal(player: $0.get(.actor), target: $0.get(.target), card: $0.get(.cardSelected)) }
+        case let .steal(card, chooser):
+            return EffectSteal(card: card, chooser: chooser)
 
             // operation on effect
         case let .target(target, effect):
