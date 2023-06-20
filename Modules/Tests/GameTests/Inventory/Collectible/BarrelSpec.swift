@@ -31,7 +31,7 @@ final class BarrelSpec: QuickSpec {
             }
         }
         
-        xdescribe("triggering barrel") {
+        describe("triggering barrel") {
             it("should counter bang effect") {
                 // Given
                 let state = createGame {
@@ -55,7 +55,9 @@ final class BarrelSpec: QuickSpec {
                 let result = self.awaitAction(action, choices: ["p2"], state: state)
 
                 // Then
-                expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2"))]
+                expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
+                                   .success(.drawToDiscard),
+                                   .success(.cancel)]
             }
         }
     }

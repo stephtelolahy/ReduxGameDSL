@@ -61,6 +61,9 @@ public indirect enum GameAction: Codable, Equatable {
     
     /// Increment player attribute
     case incAttribute(player: String, attribute: AttributeKey, value: Int)
+    
+    /// Cancel next queued effect
+    case cancel
 
     // MARK: - Invisible actions
 

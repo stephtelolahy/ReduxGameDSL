@@ -96,6 +96,8 @@ public enum CardList {
     static let barrel = Card(.barrel, type: .equipment) {
         CardEffect.nothing
             .triggered(.onPlay)
+        CardEffect.luck(regex: "♥️", onSuccess: .cancel)
+            .triggered(.onForceDiscardHandNamed(.missed))
     }
 
     static let dynamite = Card(.dynamite, type: .equipment) {
