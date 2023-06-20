@@ -39,8 +39,7 @@ public enum CardList {
     }
 
     static let catBalou = Card(.catBalou) {
-        CardEffect.discard
-            .card(.selectAny, chooser: .actor)
+        CardEffect.discard(.selectAny, chooser: .actor)
             .target(.selectAnyWithCard)
             .triggered(.onPlay)
     }
@@ -64,8 +63,7 @@ public enum CardList {
     }
 
     static let bang = Card(.bang) {
-        CardEffect.discard
-            .card(.selectHandNamed(.missed))
+        CardEffect.discard(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.selectReachable)
             .triggered(.onPlay)
@@ -77,24 +75,21 @@ public enum CardList {
     static let missed = Card(.missed)
 
     static let gatling = Card(.gatling) {
-        CardEffect.discard
-            .card(.selectHandNamed(.missed))
+        CardEffect.discard(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let indians = Card(.indians) {
-        CardEffect.discard
-            .card(.selectHandNamed(.bang))
+        CardEffect.discard(.selectHandNamed(.bang))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let duel = Card(.duel) {
-        CardEffect.discard
-            .card(.selectHandNamed(.bang))
+        CardEffect.discard(.selectHandNamed(.bang))
             .challenge(.actor, otherwise: .damage(1))
             .target(.selectAny)
             .triggered(.onPlay)
@@ -120,8 +115,7 @@ public enum CardList {
 
     static let endTurn = Card(.endTurn) {
         CardEffect.group {
-            CardEffect.discard
-                .card(.selectHand)
+            CardEffect.discard(.selectHand)
                 .target(.actor)
                 .repeat(.excessHand)
             CardEffect.setTurn
@@ -153,8 +147,7 @@ public enum CardList {
     }
 
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {
-        CardEffect.discard
-            .card(.all)
+        CardEffect.discard(.all)
             .target(.actor)
             .triggered(.onEliminated)
     }

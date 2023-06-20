@@ -20,7 +20,8 @@ public indirect enum CardEffect: Codable, Equatable {
     case draw
     
     /// Discard a player's card to discard pile
-    case discard
+    /// When chooser is nil, the card is choosen by target
+    case discard(CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
     case steal
