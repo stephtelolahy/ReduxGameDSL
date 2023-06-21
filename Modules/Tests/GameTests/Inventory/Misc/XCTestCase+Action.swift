@@ -25,16 +25,9 @@ extension XCTestCase {
         let expectation = XCTestExpectation(description: "Awaiting game idle")
         expectation.isInverted = true
         let cancellable = store.$state.dropFirst(1).sink { state in
-            if let event = state.event {
-                switch event {
-                case .play,
-                        .resolve,
-                        .group:
-                    break
-
-                default:
-                    result.append(.success(event))
-                }
+            if let event = state.event,
+               event.isRenderable {
+                result.append(.success(event))
             }
             
             if let error = state.error {
@@ -73,5 +66,19 @@ extension XCTestCase {
         XCTAssertTrue(store.state.chooseOne == nil, "Game must be idle", file: file, line: line)
         
         return result
+    }
+}
+
+private extension GameAction {
+    var isRenderable: Bool {
+        switch self {
+        case .play,
+             .resolve,
+             .group:
+            return false
+
+        default:
+            return true
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 public enum CardSets {
     public static let bang: [String: [String]] = [
-//        .barrel: ["Q♠️", "K♠️"],
+        .barrel: ["Q♠️", "K♠️"],
 //        .dynamite: ["2♥️"],
 //        .jail: ["J♠️", "10♠️", "4♥️"],
 //        .mustang: ["8♥️", "9♥️"],

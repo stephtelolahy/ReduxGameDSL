@@ -9,6 +9,8 @@ import Quick
 import Nimble
 import Game
 
+// TODO: FlipTwoCards_IfHavingAttribute
+
 final class BarrelSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
@@ -33,8 +35,8 @@ final class BarrelSpec: QuickSpec {
         }
         
         describe("triggering barrel") {
-            context("successful") {
-                it("should counter bang effect") {
+            context("flipped card is hearts") {
+                it("should cancel shot") {
                     // Given
                     let state = createGame {
                         Player("p1") {
@@ -63,7 +65,7 @@ final class BarrelSpec: QuickSpec {
                 }
             }
             
-            context("unsuccessful") {
+            context("flipped card is spades") {
                 it("should apply damage") {
                     // Given
                     let state = createGame {
@@ -78,7 +80,7 @@ final class BarrelSpec: QuickSpec {
                             }
                         }
                         Deck {
-                            "c1-Q♣️"
+                            "c1-A♠️"
                         }
                     }
                     
