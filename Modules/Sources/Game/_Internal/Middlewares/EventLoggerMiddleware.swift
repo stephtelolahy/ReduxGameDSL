@@ -7,7 +7,7 @@
 import Redux
 import Combine
 
-let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, action in
+let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     if let event = state.event {
         switch event {
         case .resolve, .play, .group:

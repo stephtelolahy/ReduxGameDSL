@@ -68,6 +68,9 @@ private extension CardEffect {
         case .nothing:
             return EffectNone()
             
+        case let .luck(regex, onSuccess, onFailure):
+            return EffectLuck(regex: regex, onSuccess: onSuccess, onFailure: onFailure)
+            
         default:
             fatalError("unimplemented effect \(self)")
         }

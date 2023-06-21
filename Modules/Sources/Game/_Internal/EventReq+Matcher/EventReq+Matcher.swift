@@ -22,7 +22,7 @@ private extension EventReq {
         case .onLooseLastHealth: return OnLooseLastHealth()
         case .onEliminated: return OnEliminated()
         case .onPlay: return EventReqNeverMatch()
-        case .onForceDiscardHandNamed(let name): return OnForceDiscardHandNamed(cardName: name)
+        case .onForceDiscardHandNamed(let cardName): return OnForceDiscardHandNamed(cardName: cardName)
         }
     }
 }
