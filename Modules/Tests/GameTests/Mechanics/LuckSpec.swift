@@ -1,5 +1,5 @@
 //
-//  DrawToDiscardSpec.swift
+//  LuckSpec.swift
 //
 //
 //  Created by Hugues Stephano TELOLAHY on 20/06/2023.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class DrawToDiscardSpec: QuickSpec {
+final class LuckSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
         
