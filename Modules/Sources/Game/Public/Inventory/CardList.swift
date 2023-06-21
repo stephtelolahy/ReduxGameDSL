@@ -96,7 +96,7 @@ public enum CardList {
     static let barrel = Card(.barrel, type: .equipment) {
         CardEffect.nothing
             .triggered(.onPlay)
-        CardEffect.luck(regex: "♥️", onSuccess: .cancel)
+        CardEffect.luck(regex: .regexSaveByBarrel, onSuccess: .cancel)
             .triggered(.onForceDiscardHandNamed(.missed))
     }
 

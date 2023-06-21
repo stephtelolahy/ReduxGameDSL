@@ -4,23 +4,36 @@
 //
 //  Created by Hugues Stephano TELOLAHY on 22/06/2023.
 //
+import Foundation
 
 struct EffectLuck: EffectResolverProtocol {
     let regex: String
     let onSuccess: CardEffect
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
-        guard let topDeck = state.deck.top else {
+        guard let card = state.deck.top else {
             throw GameError.deckIsEmpty
         }
         
         var result: [GameAction] = [.luck]
         
-        let matched = topDeck.contains(regex)
+        let matched = card.matches(regex: regex)
         if matched {
             result.append(.resolve(onSuccess, ctx: ctx))
         }
         
         return result
+    }
+}
+
+private  extension String {
+    func matches(regex pattern: String) -> Bool {
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return false
+        }
+
+        let string = self
+        let range = NSRange(location: 0, length: string.utf16.count)
+        return regex.firstMatch(in: string, options: [], range: range) != nil
     }
 }

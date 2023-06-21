@@ -10,6 +10,7 @@ import Nimble
 import Game
 
 final class BarrelSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("playing barrel") {
             it("should equip") {
