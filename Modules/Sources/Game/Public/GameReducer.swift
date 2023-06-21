@@ -153,7 +153,7 @@ private extension GameReducer {
 
     func updateGameOver(state: GameState) -> GameState {
         guard case .eliminate = state.event,
-           let winner = state.winner() else {
+           let winner = state.evaluateWinner() else {
                return state
         }
         
