@@ -27,13 +27,13 @@ final class DrawToDiscardSpec: QuickSpec {
                 }
                 
                 // When
-                let action = GameAction.drawToDiscard
+                let action = GameAction.luck
                 let result = sut.reduce(state: state, action: action)
                 
                 // Then
                 expect(result.discard.top) == "c2"
                 expect(result.deck.top) == "c3"
-                expect(result.event) == .drawToDiscard
+                expect(result.event) == .luck
             }
         }
     }

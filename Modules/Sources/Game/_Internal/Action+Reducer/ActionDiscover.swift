@@ -1,11 +1,11 @@
 //
-//  ActionDrawToArena.swift
+//  ActionDiscover.swift
 //  
 //
 //  Created by Hugues Telolahy on 15/04/2023.
 //
 
-struct ActionDrawToArena: GameReducerProtocol {
+struct ActionDiscover: GameReducerProtocol {
     func reduce(state: GameState) throws -> GameState {
         var state = state
         if state.arena == nil {

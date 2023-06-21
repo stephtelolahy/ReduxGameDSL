@@ -56,7 +56,7 @@ final class BarrelSpec: QuickSpec {
 
                 // Then
                 expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
-                                   .success(.drawToDiscard),
+                                   .success(.luck),
                                    .success(.cancel)]
             }
         }

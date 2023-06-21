@@ -86,7 +86,7 @@ private extension GameReducer {
         var triggered: [GameAction] = []
         for actor in players {
             let actorObj = state.player(actor)
-            for card in (actorObj.abilities + state.abilities) {
+            for card in (actorObj.inPlay.cards + actorObj.abilities + state.abilities) {
                 let ctx: EffectContext = [.actor: actor, .card: card]
                 if let effect = triggeredEffect(ctx: ctx, state: state) {
                     let sideEffect = effect.withCtx(ctx)

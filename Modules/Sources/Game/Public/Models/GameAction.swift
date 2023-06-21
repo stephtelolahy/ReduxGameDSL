@@ -42,10 +42,10 @@ public indirect enum GameAction: Codable, Equatable {
     case chooseCard(player: String, card: String)
 
     /// Draw a card from deck and put to arena
-    case drawToArena
+    case discover
     
     /// Draw a card from deck and put to discard
-    case drawToDiscard
+    case luck
 
     /// Set turn
     case setTurn(String)

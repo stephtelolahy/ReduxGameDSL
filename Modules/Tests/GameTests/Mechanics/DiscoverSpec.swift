@@ -1,5 +1,5 @@
 //
-//  DrawToArenaSpec.swift
+//  DiscoverSpec.swift
 //  
 //
 //  Created by Hugues Telolahy on 15/04/2023.
@@ -9,7 +9,7 @@ import Quick
 import Nimble
 import Game
 
-final class DrawToArenaSpec: QuickSpec {
+final class DiscoverSpec: QuickSpec {
     override func spec() {
         let sut = GameReducer()
 
@@ -26,13 +26,13 @@ final class DrawToArenaSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.drawToArena
+                    let action = GameAction.discover
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.arena?.cards) == ["c1"]
                     expect(result.deck.top) == "c2"
-                    expect(result.event) == .drawToArena
+                    expect(result.event) == .discover
                 }
             }
 
@@ -50,13 +50,13 @@ final class DrawToArenaSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.drawToArena
+                    let action = GameAction.discover
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.arena?.cards) == ["c1", "c2"]
                     expect(result.deck.top) == "c3"
-                    expect(result.event) == .drawToArena
+                    expect(result.event) == .discover
                 }
             }
         }

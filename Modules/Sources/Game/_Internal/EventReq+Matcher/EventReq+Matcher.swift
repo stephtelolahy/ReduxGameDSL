@@ -21,7 +21,8 @@ private extension EventReq {
         case .onSetTurn: return OnSetTurn()
         case .onLooseLastHealth: return OnLooseLastHealth()
         case .onEliminated: return OnEliminated()
-        default: return EventReqNeverMatch()
+        case .onPlay: return EventReqNeverMatch()
+        case .onForceDiscardHandNamed(let name): return OnForceDiscardHandNamed(cardName: name)
         }
     }
 }

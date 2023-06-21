@@ -31,8 +31,8 @@ private extension CardEffect {
         case .draw:
             return EffectBuild { .draw(player: $0.get(.target)) }
 
-        case .drawToArena:
-            return EffectBuild { _ in .drawToArena }
+        case .discover:
+            return EffectBuild { _ in .discover }
 
         case .setTurn:
             return EffectBuild { .setTurn($0.get(.target)) }
@@ -65,8 +65,11 @@ private extension CardEffect {
         case let .challenge(challenger, effect, otherwise):
             return EffectChallenge(challenger: challenger, effect: effect, otherwise: otherwise)
             
-        default:
+        case .nothing:
             return EffectNone()
+            
+        default:
+            fatalError("unimplemented effect \(self)")
         }
     }
 }

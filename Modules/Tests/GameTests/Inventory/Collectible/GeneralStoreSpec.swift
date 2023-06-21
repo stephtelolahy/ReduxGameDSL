@@ -38,9 +38,9 @@ final class GeneralStoreSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playImmediate(actor: "p1", card: .generalStore)),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
+                        .success(.discover),
+                        .success(.discover),
+                        .success(.discover),
                         .success(.chooseOne(chooser: "p1", options: [
                             "c1": .chooseCard(player: "p1", card: "c1"),
                             "c2": .chooseCard(player: "p1", card: "c2"),
@@ -80,8 +80,8 @@ final class GeneralStoreSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playImmediate(actor: "p1", card: .generalStore)),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
+                        .success(.discover),
+                        .success(.discover),
                         .success(.chooseOne(chooser: "p1", options: [
                             "c1": .chooseCard(player: "p1", card: "c1"),
                             "c2": .chooseCard(player: "p1", card: "c2")
