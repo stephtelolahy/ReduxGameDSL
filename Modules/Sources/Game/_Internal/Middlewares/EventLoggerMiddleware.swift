@@ -8,10 +8,14 @@ import Redux
 import Combine
 
 let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, action in
-    print("➡️ \(String(describing: action).removingPackageName())")
-    
     if let event = state.event {
-        print("✅ \(String(describing: event).removingPackageName())")
+        switch event {
+        case .resolve, .play, .group:
+            print("➡️ \(String(describing: event).removingPackageName())")
+            
+        default:
+            print("✅ \(String(describing: event).removingPackageName())")
+        }
     }
     
     if let error = state.error {

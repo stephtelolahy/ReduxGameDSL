@@ -26,7 +26,15 @@ extension XCTestCase {
         expectation.isInverted = true
         let cancellable = store.$state.dropFirst(1).sink { state in
             if let event = state.event {
-                result.append(.success(event))
+                switch event {
+                case .play,
+                        .resolve,
+                        .group:
+                    break
+
+                default:
+                    result.append(.success(event))
+                }
             }
             
             if let error = state.error {

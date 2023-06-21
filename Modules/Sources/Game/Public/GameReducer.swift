@@ -62,15 +62,7 @@ private extension GameReducer {
     func executeAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
         state = try action.reduce(state: state)
-        switch action {
-        case .play,
-                .resolve,
-                .group:
-            break
-
-        default:
-            state.event = action
-        }
+        state.event = action
         return state
     }
 
