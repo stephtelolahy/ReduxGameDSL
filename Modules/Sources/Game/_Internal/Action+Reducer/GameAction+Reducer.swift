@@ -39,7 +39,8 @@ private extension GameAction {
         case let .eliminate(player): return ActionEliminate(player: player)
         case let .resolve(effect, ctx): return ActionResolve(effect: effect, ctx: ctx)
         case let .chooseOne(chooser, options): return ActionChooseOne(chooser: chooser, options: options)
-        default: fatalError("unimplemented")
+        case .cancel: return ActionCancel()
+        default: fatalError("unimplemented action \(self)")
         }
     }
 }

@@ -64,7 +64,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case challenge(challenger: PlayerArg, effect: Self, otherwise: Self)
     
     /// Flip over the top card of the deck, then apply effects according to suits and values
-    case luck(regex: String, onSuccess: Self, onFailure: Self? = nil)
+    case luck(regex: String, onSuccess: Self)
     
     /// Cancel next queued effect
     case cancel
