@@ -18,7 +18,7 @@ struct ActionPlayEquipment: GameReducerProtocol {
 
         let cardName = card.extractName()
         guard actorObj.inPlay.cards.allSatisfy({ $0.extractName() != cardName }) else {
-            throw GameError.alreadyHavingSameCardInPlay(cardName)
+            throw GameError.cardAlreadyInPlay(cardName)
         }
 
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)

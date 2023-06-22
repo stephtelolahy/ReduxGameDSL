@@ -26,7 +26,7 @@ public enum GameError: Error, Codable, Equatable {
     case unwaitedAction
 
     /// Already having same card in play
-    case alreadyHavingSameCardInPlay(String)
+    case cardAlreadyInPlay(String)
 
     // MARK: - Matching error
 
