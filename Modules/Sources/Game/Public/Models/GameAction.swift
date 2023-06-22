@@ -41,7 +41,7 @@ public indirect enum GameAction: Codable, Equatable {
     case discard(String, player: String)
 
     /// Draw card from other player
-    case steal(player: String, target: String, card: String)
+    case steal(String, target: String, player: String)
 
     /// Draw some cards from arena
     case chooseCard(player: String, card: String)

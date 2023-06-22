@@ -28,7 +28,7 @@ struct EffectSteal: EffectResolverProtocol {
         }
         
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: owner) {
-            .steal(player: chooserId, target: owner, card: $0)
+            .steal($0, target: owner, player: chooserId)
         }
     }
 }

@@ -28,13 +28,13 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: "p1", target: "p2", card: "c21")
+                    let action = GameAction.steal("c21", target: "p2", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").hand.cards) == ["c22"]
-                    expect(result.event) == .steal(player: "p1", target: "p2", card: "c21")
+                    expect(result.event) == .steal("c21", target: "p2", player: "p1")
                 }
             }
 
@@ -52,13 +52,13 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: "p1", target: "p2", card: "c21")
+                    let action = GameAction.steal("c21", target: "p2", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").inPlay.cards) == ["c22"]
-                    expect(result.event) == .steal(player: "p1", target: "p2", card: "c21")
+                    expect(result.event) == .steal("c21", target: "p2", player: "p1")
                 }
             }
 
@@ -70,7 +70,7 @@ final class StealSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.steal(player: "p1", target: "p1", card: "c2")
+                    let action = GameAction.steal("c2", target: "p1", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

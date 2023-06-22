@@ -49,7 +49,7 @@ final class DuelSpec: QuickSpec {
                         .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .group([
-                                .discard(player: "p2", card: "bang-2"),
+                                .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
@@ -76,16 +76,16 @@ final class DuelSpec: QuickSpec {
                         .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
                             "bang-2": .group([
-                                .discard(player: "p2", card: "bang-2"),
+                                .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
                             .pass: .damage(1, player: "p2")
                         ])),
-                        .success(.discard(player: "p2", card: "bang-2")),
+                        .success(.discard("bang-2", player: "p2")),
                         .success(.chooseOne(chooser: "p1", options: [
                             "bang-1": .group([
-                                .discard(player: "p1", card: "bang-1"),
+                                .discard("bang-1", player: "p1"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p1"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p2"])
                             ]),
