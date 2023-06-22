@@ -130,7 +130,8 @@ private extension GameReducer {
     }
     
     func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
-        guard let cardObj = state.cardRef[ctx.get(.card)] else {
+        let cardName = ctx.get(.card).extractName()
+        guard let cardObj = state.cardRef[cardName] else {
             return nil
         }
         
