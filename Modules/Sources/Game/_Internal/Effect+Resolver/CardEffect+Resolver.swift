@@ -23,7 +23,7 @@ private extension CardEffect {
         switch self {
             // action with context
         case let .heal(value):
-            return EffectBuild { .heal(player: $0.get(.target), value: value) }
+            return EffectBuild { .heal(value, player: $0.get(.target)) }
 
         case let .damage(value):
             return EffectBuild { .damage(player: $0.get(.target), value: value) }

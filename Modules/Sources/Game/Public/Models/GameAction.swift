@@ -8,8 +8,11 @@
 /// Game action
 /// Triggered by user or by the system, that causes any update to the game state
 public indirect enum GameAction: Codable, Equatable {
-
-    // MARK: - Renderable actions
+    
+    // MARK: - Play
+    
+    /// Resolve a play
+    case play(actor: String, card: String)
     
     /// Play a brown card, discard immediately
     case playImmediate(actor: String, card: String, target: String? = nil)
@@ -23,8 +26,10 @@ public indirect enum GameAction: Codable, Equatable {
     /// Play an handicap card
     case playHandicap(actor: String, card: String, target: String)
 
+    // MARK: - Renderable actions
+    
     /// Restore player's health, limited to maxHealth
-    case heal(player: String, value: Int)
+    case heal(Int, player: String)
 
     /// Deals damage to a player, attempting to reduce its Health by the stated amount
     case damage(player: String, value: Int)
@@ -64,11 +69,8 @@ public indirect enum GameAction: Codable, Equatable {
     
     /// Cancel next queued effect
     case cancel
-
+    
     // MARK: - Invisible actions
-
-    /// Resolve a play
-    case play(actor: String, card: String)
 
     /// Resolve an effect
     case resolve(CardEffect, ctx: EffectContext)
