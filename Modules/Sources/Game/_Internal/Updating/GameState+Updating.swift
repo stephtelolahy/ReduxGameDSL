@@ -54,8 +54,7 @@ extension GameState {
         return distance
     }
 
-    /// Compute winner
-    func winner() -> String? {
+    func evaluateWinner() -> String? {
         if playOrder.count == 1 {
             return playOrder[0]
         }

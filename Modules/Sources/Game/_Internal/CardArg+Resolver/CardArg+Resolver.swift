@@ -31,7 +31,7 @@ extension CardArg {
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
-            return [.chooseOne(chooser: chooser, options: options)]
+            return [.chooseOne(player: chooser, options: options)]
         }
     }
 
@@ -92,7 +92,7 @@ private extension CardArg {
         case .selectHandNamed(let name): return CardSelectHandNamed(name: name)
         case .selectHand: return CardSelectHand()
         case .all: return CardAll()
-        default: fatalError(.unexpected)
+        default: fatalError("unexpected")
         }
     }
 }

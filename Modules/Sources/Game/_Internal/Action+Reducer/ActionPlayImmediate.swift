@@ -22,11 +22,11 @@ struct ActionPlayImmediate: GameReducerProtocol {
 
         var sideEffect = playAction.effect
         
-        if case let .targetEffect(requiredTarget, childEffect) = sideEffect {
+        if case let .target(requiredTarget, childEffect) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case .selectable = resolvedTarget {
                 guard target != nil else {
-                    fatalError("invalid play: missing target")
+                    throw GameError.noPlayer(.target)
                 }
                 sideEffect = childEffect
             }
@@ -43,7 +43,7 @@ struct ActionPlayImmediate: GameReducerProtocol {
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
         
-        state.queue.insert(sideEffect.withCtx(ctx), at: 0)
+        state.queue.insert(.resolve(sideEffect, ctx: ctx), at: 0)
         return state
     }
 }

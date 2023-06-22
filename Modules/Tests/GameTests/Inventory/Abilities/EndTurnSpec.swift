@@ -85,12 +85,12 @@ final class EndTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playAbility(actor: "p1", card: .endTurn)),
-                        .success(.chooseOne(chooser: "p1", options: [
-                            "c1": .discard(player: "p1", card: "c1"),
-                            "c2": .discard(player: "p1", card: "c2"),
-                            "c3": .discard(player: "p1", card: "c3")
+                        .success(.chooseOne(player: "p1", options: [
+                            "c1": .discard("c1", player: "p1"),
+                            "c2": .discard("c2", player: "p1"),
+                            "c3": .discard("c3", player: "p1")
                         ])),
-                        .success(.discard(player: "p1", card: "c1")),
+                        .success(.discard("c1", player: "p1")),
                         .success(.setTurn("p2"))
                     ]
                 }
@@ -119,17 +119,17 @@ final class EndTurnSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playAbility(actor: "p1", card: .endTurn)),
-                        .success(.chooseOne(chooser: "p1", options: [
-                            "c1": .discard(player: "p1", card: "c1"),
-                            "c2": .discard(player: "p1", card: "c2"),
-                            "c3": .discard(player: "p1", card: "c3")
+                        .success(.chooseOne(player: "p1", options: [
+                            "c1": .discard("c1", player: "p1"),
+                            "c2": .discard("c2", player: "p1"),
+                            "c3": .discard("c3", player: "p1")
                         ])),
-                        .success(.discard(player: "p1", card: "c1")),
-                        .success(.chooseOne(chooser: "p1", options: [
-                            "c2": .discard(player: "p1", card: "c2"),
-                            "c3": .discard(player: "p1", card: "c3")
+                        .success(.discard("c1", player: "p1")),
+                        .success(.chooseOne(player: "p1", options: [
+                            "c2": .discard("c2", player: "p1"),
+                            "c3": .discard("c3", player: "p1")
                         ])),
-                        .success(.discard(player: "p1", card: "c3")),
+                        .success(.discard("c3", player: "p1")),
                         .success(.setTurn("p2"))
                     ]
                 }

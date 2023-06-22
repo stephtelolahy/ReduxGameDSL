@@ -24,7 +24,7 @@ struct ActionPlayAbility: GameReducerProtocol {
 
         state.playCounter[card] = (state.playCounter[card] ?? 0) + 1
         
-        state.queue.insert(sideEffect.withCtx(ctx), at: 0)
+        state.queue.insert(.resolve(sideEffect, ctx: ctx), at: 0)
         return state
     }
 }

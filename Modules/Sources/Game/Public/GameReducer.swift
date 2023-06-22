@@ -62,15 +62,7 @@ private extension GameReducer {
     func executeAction(action: GameAction, state: GameState) throws -> GameState {
         var state = state
         state = try action.reduce(state: state)
-        switch action {
-        case .play,
-                .resolve,
-                .groupActions:
-            break
-
-        default:
-            state.event = action
-        }
+        state.event = action
         return state
     }
 
@@ -86,11 +78,10 @@ private extension GameReducer {
         var triggered: [GameAction] = []
         for actor in players {
             let actorObj = state.player(actor)
-            for card in (actorObj.abilities + state.abilities) {
+            for card in (actorObj.inPlay.cards + actorObj.abilities + state.abilities) {
                 let ctx: EffectContext = [.actor: actor, .card: card]
                 if let effect = triggeredEffect(ctx: ctx, state: state) {
-                    let sideEffect = effect.withCtx(ctx)
-                    triggered.append(sideEffect)
+                    triggered.append(.resolve(effect, ctx: ctx))
                 }
             }
         }
@@ -138,7 +129,8 @@ private extension GameReducer {
     }
     
     func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
-        guard let cardObj = state.cardRef[ctx.get(.card)] else {
+        let cardName = ctx.get(.card).extractName()
+        guard let cardObj = state.cardRef[cardName] else {
             return nil
         }
         
@@ -160,12 +152,13 @@ private extension GameReducer {
     }
 
     func updateGameOver(state: GameState) -> GameState {
-        if let winner = state.winner() {
-            var state = state
-            state.isOver = GameOver(winner: winner)
-            return state
+        guard case .eliminate = state.event,
+           let winner = state.evaluateWinner() else {
+               return state
         }
-
+        
+        var state = state
+        state.isOver = GameOver(winner: winner)
         return state
     }
 }

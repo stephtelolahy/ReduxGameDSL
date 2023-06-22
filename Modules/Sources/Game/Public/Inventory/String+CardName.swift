@@ -59,3 +59,10 @@ public extension String {
     static let nextTurnOnEliminated = "nextTurnOnEliminated"
     static let discardCardsOnEliminated = "discardCardsOnEliminated"
 }
+
+public extension String {
+    // https://regex101.com/
+    static let regexSaveByBarrel = "♥️"
+    static let regexEscapeFromJail = "♥️"
+    static let regexPassDynamite = "(♥️)|(♦️)|(♣️)|([10|J|Q|K|A]♠️)"
+}

@@ -24,13 +24,13 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.damage(player: "p1", value: 1)
+                    let action = GameAction.damage(1, player: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.damage(player: "p1", value: 1)),
-                        .success(.eliminate("p1"))
+                        .success(.damage(1, player: "p1")),
+                        .success(.eliminate(player: "p1"))
                     ]
                 }
             }
@@ -45,12 +45,12 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
                     .ability(.eliminateOnLooseLastHealth)
 
                     // When
-                    let action = GameAction.damage(player: "p1", value: 1)
+                    let action = GameAction.damage(1, player: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.damage(player: "p1", value: 1))
+                        .success(.damage(1, player: "p1"))
                     ]
                 }
             }

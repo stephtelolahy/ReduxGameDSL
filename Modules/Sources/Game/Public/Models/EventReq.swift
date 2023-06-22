@@ -19,4 +19,7 @@ public enum EventReq: Codable, Equatable {
 
     /// After being eliminated
     case onEliminated
+    
+    /// After being forced to discard hand card named X
+    case onForceDiscardHandNamed(String)
 }

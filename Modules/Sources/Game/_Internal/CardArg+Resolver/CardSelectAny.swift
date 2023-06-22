@@ -13,7 +13,7 @@ struct CardSelectAny: CardArgResolverProtocol {
         owner: String?
     ) -> CardArgOutput {
         guard let owner else {
-            fatalError(.unexpected)
+            fatalError("unexpected")
         }
 
         let playerObj = state.player(owner)

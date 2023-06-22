@@ -14,25 +14,50 @@ final class PlayEquipmentSpec: QuickSpec {
         let sut = GameReducer()
 
         describe("playing equipment a card") {
-            it("should put card in play") {
-                // Given
-                let state = GameState {
-                    Player("p1") {
-                        Hand {
-                            "c1"
-                            "c2"
+            context("not in play") {
+                it("should put card in play") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                "c1"
+                                "c2"
+                            }
                         }
                     }
+
+                    // When
+                    let action = GameAction.playEquipment(actor: "p1", card: "c1")
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.player("p1").hand.cards) == ["c2"]
+                    expect(result.player("p1").inPlay.cards) == ["c1"]
+                    expect(result.discard.count) == 0
                 }
+            }
 
-                // When
-                let action = GameAction.playEquipment(actor: "p1", card: "c1")
-                let result = sut.reduce(state: state, action: action)
+            context("having same card in play") {
+                it("should throw error") {
+                    // Given
+                    let state = GameState {
+                        Player("p1") {
+                            Hand {
+                                "c-1"
+                            }
+                            InPlay {
+                                "c-2"
+                            }
+                        }
+                    }
 
-                // Then
-                expect(result.player("p1").hand.cards) == ["c2"]
-                expect(result.player("p1").inPlay.cards) == ["c1"]
-                expect(result.discard.count) == 0
+                    // When
+                    let action = GameAction.playEquipment(actor: "p1", card: "c-1")
+                    let result = sut.reduce(state: state, action: action)
+
+                    // Then
+                    expect(result.error) == GameError.cardAlreadyInPlay("c")
+                }
             }
         }
     }

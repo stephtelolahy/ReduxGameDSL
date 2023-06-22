@@ -80,15 +80,15 @@ final class BangSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(chooser: "p1", options: [
+                        .success(.chooseOne(player: "p1", options: [
                             "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
                         ])),
                         .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
-                        .success(.chooseOne(chooser: "p2", options: [
-                            .missed: .discard(player: "p2", card: .missed),
-                            .pass: .damage(player: "p2", value: 1)
+                        .success(.chooseOne(player: "p2", options: [
+                            .missed: .discard(.missed, player: "p2"),
+                            .pass: .damage(1, player: "p2")
                         ])),
-                        .success(.discard(player: "p2", card: .missed))
+                        .success(.discard(.missed, player: "p2"))
                     ]
                 }
             }
@@ -111,14 +111,14 @@ final class BangSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(chooser: "p1", options: [
+                        .success(.chooseOne(player: "p1", options: [
                             "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
                         ])),
                         .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
-                        .success(.chooseOne(chooser: "p2", options: [
-                            .pass: .damage(player: "p2", value: 1)
+                        .success(.chooseOne(player: "p2", options: [
+                            .pass: .damage(1, player: "p2")
                         ])),
-                        .success(.damage(player: "p2", value: 1))
+                        .success(.damage(1, player: "p2"))
                     ]
                 }
             }

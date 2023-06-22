@@ -20,7 +20,7 @@ extension PlayerArg {
             let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
             }
-            return [.chooseOne(chooser: ctx.get(.actor), options: options)]
+            return [.chooseOne(player: ctx.get(.actor), options: options)]
         }
     }
     
@@ -70,7 +70,7 @@ private extension PlayerArg {
         case .damaged: return PlayerDamaged()
         case .all: return PlayerAll()
         case .others: return PlayerOthers()
-        default: fatalError(.unexpected)
+        default: fatalError("unexpected")
         }
     }
 }

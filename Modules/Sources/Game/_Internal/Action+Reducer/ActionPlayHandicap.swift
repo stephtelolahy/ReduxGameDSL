@@ -14,7 +14,7 @@ struct ActionPlayHandicap: GameReducerProtocol {
         var state = state
         let actorObj = state.player(actor)
         guard actorObj.hand.contains(card) else {
-            fatalError("invalid handicap: missing card")
+            throw GameError.cardNotFound(card)
         }
 
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)

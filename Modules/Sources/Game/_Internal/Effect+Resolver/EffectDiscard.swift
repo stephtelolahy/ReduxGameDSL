@@ -1,15 +1,14 @@
 //
-//  EffectCard.swift
+//  EffectDiscard.swift
 //  
 //
-//  Created by Hugues Telolahy on 03/06/2023.
+//  Created by Hugues Stephano TELOLAHY on 20/06/2023.
 //
 
-struct EffectCard: EffectResolverProtocol {
+struct EffectDiscard: EffectResolverProtocol {
     let card: CardArg
     let chooser: PlayerArg?
-    let effect: CardEffect
-
+    
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         let owner = ctx.get(.target)
         var chooserId = owner
@@ -19,11 +18,11 @@ struct EffectCard: EffectResolverProtocol {
             } else {
                 let output = try chooser.resolve(state: state, ctx: ctx)
                 guard case let .identified(pIds) = output else {
-                    fatalError(.unexpected)
+                    fatalError("unexpected")
                 }
 
                 guard pIds.count == 1 else {
-                    fatalError(.unexpected)
+                    fatalError("unexpected")
                 }
 
                 chooserId = pIds[0]
@@ -31,7 +30,7 @@ struct EffectCard: EffectResolverProtocol {
         }
 
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: owner) {
-            .resolve(effect, ctx: ctx.copy([.cardSelected: $0]))
+            .discard($0, player: owner)
         }
     }
 }

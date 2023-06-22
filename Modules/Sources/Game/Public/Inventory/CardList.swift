@@ -39,33 +39,29 @@ public enum CardList {
     }
 
     static let catBalou = Card(.catBalou) {
-        CardEffect.discard
-            .card(.selectAny, chooser: .actor)
+        CardEffect.discard(.selectAny, chooser: .actor)
             .target(.selectAnyWithCard)
             .triggered(.onPlay)
     }
 
     static let panic = Card(.panic) {
-        CardEffect.steal
-            .card(.selectAny, chooser: .actor)
+        CardEffect.steal(.selectAny, chooser: .actor)
             .target(.selectAtRangeWithCard(1))
             .triggered(.onPlay)
     }
 
     static let generalStore = Card(.generalStore) {
         CardEffect.group {
-            CardEffect.drawToArena
+            CardEffect.discover
                 .repeat(.numPlayers)
             CardEffect.chooseCard
-                .card(.selectArena)
                 .target(.all)
         }
         .triggered(.onPlay)
     }
 
     static let bang = Card(.bang) {
-        CardEffect.discard
-            .card(.selectHandNamed(.missed))
+        CardEffect.discard(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.selectReachable)
             .triggered(.onPlay)
@@ -77,24 +73,21 @@ public enum CardList {
     static let missed = Card(.missed)
 
     static let gatling = Card(.gatling) {
-        CardEffect.discard
-            .card(.selectHandNamed(.missed))
+        CardEffect.discard(.selectHandNamed(.missed))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let indians = Card(.indians) {
-        CardEffect.discard
-            .card(.selectHandNamed(.bang))
+        CardEffect.discard(.selectHandNamed(.bang))
             .otherwise(.damage(1))
             .target(.others)
             .triggered(.onPlay)
     }
 
     static let duel = Card(.duel) {
-        CardEffect.discard
-            .card(.selectHandNamed(.bang))
+        CardEffect.discard(.selectHandNamed(.bang))
             .challenge(.actor, otherwise: .damage(1))
             .target(.selectAny)
             .triggered(.onPlay)
@@ -103,6 +96,8 @@ public enum CardList {
     static let barrel = Card(.barrel, type: .equipment) {
         CardEffect.nothing
             .triggered(.onPlay)
+        CardEffect.luck(.regexSaveByBarrel, onSuccess: .cancel)
+            .triggered(.onForceDiscardHandNamed(.missed))
     }
 
     static let dynamite = Card(.dynamite, type: .equipment) {
@@ -120,8 +115,7 @@ public enum CardList {
 
     static let endTurn = Card(.endTurn) {
         CardEffect.group {
-            CardEffect.discard
-                .card(.selectHand)
+            CardEffect.discard(.selectHand)
                 .target(.actor)
                 .repeat(.excessHand)
             CardEffect.setTurn
@@ -153,8 +147,7 @@ public enum CardList {
     }
 
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {
-        CardEffect.discard
-            .card(.all)
+        CardEffect.discard(.all)
             .target(.actor)
             .triggered(.onEliminated)
     }

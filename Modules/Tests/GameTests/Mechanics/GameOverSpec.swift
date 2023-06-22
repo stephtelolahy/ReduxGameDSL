@@ -23,7 +23,7 @@ final class GameOverSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.eliminate("p2")
+                    let action = GameAction.eliminate(player: "p2")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -41,7 +41,7 @@ final class GameOverSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.eliminate("p3")
+                    let action = GameAction.eliminate(player: "p3")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

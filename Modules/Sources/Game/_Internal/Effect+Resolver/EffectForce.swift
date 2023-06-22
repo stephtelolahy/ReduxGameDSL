@@ -14,24 +14,25 @@ struct EffectForce: EffectResolverProtocol {
             let children = try effect.resolve(state: state, ctx: ctx)
 
             guard children.count == 1 else {
-                fatalError(.unexpected)
+                fatalError("unexpected")
             }
 
             let action = children[0]
             switch action {
             case let .resolve(childEffect, childCtx):
-                return [CardEffect.forceEffect(effect: childEffect, otherwise: otherwise).withCtx(childCtx)]
+                return [.resolve(.force(childEffect, otherwise: otherwise), ctx: childCtx)]
 
             case let .chooseOne(chooser, options):
                 var options = options
-                options[.pass] = otherwise.withCtx(ctx)
-                return [.chooseOne(chooser: chooser, options: options)]
+                options[.pass] = .resolve(otherwise, ctx: ctx)
+                return [.chooseOne(player: chooser, options: options)]
 
             default:
-                fatalError(.unexpected)
+                fatalError("unexpected")
             }
         } catch {
-            return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(player: ctx.get(.target),
+                               options: [.pass: .resolve(otherwise, ctx: ctx)])]
         }
     }
 }

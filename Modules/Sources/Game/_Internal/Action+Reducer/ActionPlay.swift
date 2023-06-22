@@ -9,6 +9,7 @@ struct ActionPlay: GameReducerProtocol {
     let actor: String
     let card: String
 
+    // swiftlint:disable:next cyclomatic_complexity
     func reduce(state: GameState) throws -> GameState {
         // verify action
         let cardName = card.extractName()
@@ -26,7 +27,7 @@ struct ActionPlay: GameReducerProtocol {
         }
 
         // resolve target
-        if case let .targetEffect(requiredTarget, _) = sideEffect {
+        if case let .target(requiredTarget, _) = sideEffect {
             let resolvedTarget = try requiredTarget.resolve(state: state, ctx: ctx)
             if case let .selectable(pIds) = resolvedTarget {
                 var state = state
@@ -38,12 +39,12 @@ struct ActionPlay: GameReducerProtocol {
                     case .handicap:
                         action = .playHandicap(actor: actor, card: card, target: $1)
                     default:
-                        fatalError(.unexpected)
+                        fatalError("unexpected")
                     }
                     
                     $0[$1] = action
                 }
-                let childAction = GameAction.chooseOne(chooser: actor, options: options)
+                let childAction = GameAction.chooseOne(player: actor, options: options)
                 state.queue.insert(childAction, at: 0)
                 return state
             }
@@ -54,7 +55,7 @@ struct ActionPlay: GameReducerProtocol {
         case .equipment:
             action = .playEquipment(actor: actor, card: card)
         case .handicap:
-            fatalError(.unexpected)
+            fatalError("unexpected")
         case .immediate:
             let actorObj = state.player(actor)
             if actorObj.hand.contains(card) {

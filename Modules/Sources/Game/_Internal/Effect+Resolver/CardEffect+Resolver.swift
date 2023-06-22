@@ -23,53 +23,59 @@ private extension CardEffect {
         switch self {
             // action with context
         case let .heal(value):
-            return EffectBuild { .heal(player: $0.get(.target), value: value) }
+            return EffectBuild { .heal(value, player: $0.get(.target)) }
 
         case let .damage(value):
-            return EffectBuild { .damage(player: $0.get(.target), value: value) }
+            return EffectBuild { .damage(value, player: $0.get(.target)) }
 
         case .draw:
             return EffectBuild { .draw(player: $0.get(.target)) }
 
-        case .drawToArena:
-            return EffectBuild { _ in .drawToArena }
+        case .discover:
+            return EffectBuild { _ in .discover }
 
         case .setTurn:
             return EffectBuild { .setTurn($0.get(.target)) }
 
         case .eliminate:
-            return EffectBuild { .eliminate($0.get(.target)) }
+            return EffectBuild { .eliminate(player: $0.get(.target)) }
 
         case .chooseCard:
-            return EffectBuild { .chooseCard(player: $0.get(.target), card: $0.get(.cardSelected)) }
+            return EffectChooseCard()
 
-        case .discard:
-            return EffectBuild { .discard(player: $0.get(.target), card: $0.get(.cardSelected)) }
+        case let .discard(card, chooser):
+            return EffectDiscard(card: card, chooser: chooser)
 
-        case .steal:
-            return EffectBuild { .steal(player: $0.get(.actor), target: $0.get(.target), card: $0.get(.cardSelected)) }
+        case let .steal(card, chooser):
+            return EffectSteal(card: card, chooser: chooser)
 
             // operation on effect
-        case let .targetEffect(target, effect):
+        case let .target(target, effect):
             return EffectTarget(target: target, effect: effect)
 
-        case let .cardEffect(card, chooser, effect):
-            return EffectCard(card: card, chooser: chooser, effect: effect)
-
-        case let .groupEffects(effects):
+        case let .group(effects):
             return EffectGroup(effects: effects)
 
-        case let .repeatEffect(times, effect):
+        case let .repeat(times, effect):
             return EffectRepeat(effect: effect, times: times)
 
-        case let .forceEffect(effect, otherwise):
+        case let .force(effect, otherwise):
             return EffectForce(effect: effect, otherwise: otherwise)
 
-        case let .challengeEffect(challenger, effect, otherwise):
+        case let .challenge(challenger, effect, otherwise):
             return EffectChallenge(challenger: challenger, effect: effect, otherwise: otherwise)
             
         case .nothing:
             return EffectNone()
+            
+        case let .luck(regex, onSuccess):
+            return EffectLuck(regex: regex, onSuccess: onSuccess)
+            
+        case .cancel:
+            return EffectBuild { _ in .cancel }
+            
+        default:
+            fatalError("unimplemented effect \(self)")
         }
     }
 }
@@ -104,6 +110,6 @@ private extension GameAction {
                 }
             }
         }
-        return .chooseOne(chooser: chooser, options: options)
+        return .chooseOne(player: chooser, options: options)
     }
 }

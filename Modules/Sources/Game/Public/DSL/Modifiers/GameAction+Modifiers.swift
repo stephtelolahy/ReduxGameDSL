@@ -7,6 +7,6 @@
 
 public extension GameAction {
     static func group(@GameActionBuilder content: () -> [Self]) -> Self {
-        .groupActions(content())
+        .group(content())
     }
 }

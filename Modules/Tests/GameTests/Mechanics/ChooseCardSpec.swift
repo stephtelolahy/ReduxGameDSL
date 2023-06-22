@@ -26,11 +26,11 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: "p1", card: "c1")
+                        let action = GameAction.chooseCard("c1", player: "p1")
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .chooseCard(player: "p1", card: "c1")
+                        expect(result.event) == .chooseCard("c1", player: "p1")
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.arena?.cards) == ["c2"]
                     }
@@ -47,11 +47,11 @@ final class ChooseCardSpec: QuickSpec {
                         }
 
                         // When
-                        let action = GameAction.chooseCard(player: "p1", card: "c1")
+                        let action = GameAction.chooseCard("c1", player: "p1")
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .chooseCard(player: "p1", card: "c1")
+                        expect(result.event) == .chooseCard("c1", player: "p1")
                         expect(result.player("p1").hand.cards) == ["c1"]
                         expect(result.arena) == nil
                     }

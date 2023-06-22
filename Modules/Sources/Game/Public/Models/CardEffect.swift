@@ -20,43 +20,54 @@ public indirect enum CardEffect: Codable, Equatable {
     case draw
     
     /// Discard a player's card to discard pile
-    case discard
+    /// When chooser is the player that chooses card
+    /// By default `ctx.target`
+    case discard(CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
-    case steal
+    /// When chooser is the player that steals cards
+    case steal(CardArg, chooser: PlayerArg)
     
     /// Choose some cards from arena
     case chooseCard
     
     /// Draw a card from deck and put to arena
-    case drawToArena
+    case discover
     
     /// Set attribute turn
     case setTurn
 
     /// Eliminate a player from the game
     case eliminate
+    
+    /// Set player attribute
+    case setAttribute(AttributeKey, value: Int)
+    
+    /// Increment player attribute
+    case incAttribute(AttributeKey, value: Int)
 
     // MARK: - Operators
 
     /// Repeat an effect
-    case repeatEffect(times: NumArg, effect: Self)
+    case `repeat`(NumArg, effect: Self)
     
     /// Dispatch effects sequentially
-    case groupEffects([Self])
+    case group([Self])
     
     /// Apply an effect to some players
-    case targetEffect(target: PlayerArg, effect: Self)
-
-    /// Apply an effect with some card
-    @available(*, deprecated, message: "set on effect directly")
-    case cardEffect(card: CardArg, chooser: PlayerArg?, effect: Self)
-
+    case target(PlayerArg, effect: Self)
+    
     /// Try an effect. If cannot, then apply some effect
-    case forceEffect(effect: Self, otherwise: Self)
+    case force(Self, otherwise: Self)
 
     /// Force two players to perform an effect repeatedly. If cannot, then apply some effect
-    case challengeEffect(challenger: PlayerArg, effect: Self, otherwise: Self)
+    case challenge(PlayerArg, effect: Self, otherwise: Self)
+    
+    /// Flip over the top card of the deck, then apply effects according to suits and values
+    case luck(String, onSuccess: Self)
+    
+    /// Cancel next queued effect
+    case cancel
 
     /// Do nothing
     case nothing

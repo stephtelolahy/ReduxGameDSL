@@ -38,21 +38,21 @@ final class GeneralStoreSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playImmediate(actor: "p1", card: .generalStore)),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
-                        .success(.chooseOne(chooser: "p1", options: [
-                            "c1": .chooseCard(player: "p1", card: "c1"),
-                            "c2": .chooseCard(player: "p1", card: "c2"),
-                            "c3": .chooseCard(player: "p1", card: "c3")
+                        .success(.discover),
+                        .success(.discover),
+                        .success(.discover),
+                        .success(.chooseOne(player: "p1", options: [
+                            "c1": .chooseCard("c1", player: "p1"),
+                            "c2": .chooseCard("c2", player: "p1"),
+                            "c3": .chooseCard("c3", player: "p1")
                         ])),
-                        .success(.chooseCard(player: "p1", card: "c1")),
-                        .success(.chooseOne(chooser: "p2", options: [
-                            "c2": .chooseCard(player: "p2", card: "c2"),
-                            "c3": .chooseCard(player: "p2", card: "c3")
+                        .success(.chooseCard("c1", player: "p1")),
+                        .success(.chooseOne(player: "p2", options: [
+                            "c2": .chooseCard("c2", player: "p2"),
+                            "c3": .chooseCard("c3", player: "p2")
                         ])),
-                        .success(.chooseCard(player: "p2", card: "c2")),
-                        .success(.chooseCard(player: "p3", card: "c3"))
+                        .success(.chooseCard("c2", player: "p2")),
+                        .success(.chooseCard("c3", player: "p3"))
                     ]
                 }
             }
@@ -80,14 +80,14 @@ final class GeneralStoreSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.playImmediate(actor: "p1", card: .generalStore)),
-                        .success(.drawToArena),
-                        .success(.drawToArena),
-                        .success(.chooseOne(chooser: "p1", options: [
-                            "c1": .chooseCard(player: "p1", card: "c1"),
-                            "c2": .chooseCard(player: "p1", card: "c2")
+                        .success(.discover),
+                        .success(.discover),
+                        .success(.chooseOne(player: "p1", options: [
+                            "c1": .chooseCard("c1", player: "p1"),
+                            "c2": .chooseCard("c2", player: "p1")
                         ])),
-                        .success(.chooseCard(player: "p1", card: "c1")),
-                        .success(.chooseCard(player: "p2", card: "c2"))
+                        .success(.chooseCard("c1", player: "p1")),
+                        .success(.chooseCard("c2", player: "p2"))
                     ]
                 }
             }

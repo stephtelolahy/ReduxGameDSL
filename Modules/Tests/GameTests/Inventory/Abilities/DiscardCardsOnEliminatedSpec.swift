@@ -1,6 +1,6 @@
 //
 //  DiscardCardsOnEliminatedSpec.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 18/05/2023.
 //
@@ -26,16 +26,16 @@ final class DiscardCardsOnEliminatedSpec: QuickSpec {
                         }
                     }
                     .ability(.discardCardsOnEliminated)
-
+                    
                     // When
-                    let action = GameAction.eliminate("p1")
+                    let action = GameAction.eliminate(player: "p1")
                     let result = self.awaitAction(action, state: state)
-
+                    
                     // Then
                     expect(result) == [
-                        .success(.eliminate("p1")),
-                        .success(.discard(player: "p1", card: "c2")),
-                        .success(.discard(player: "p1", card: "c1"))
+                        .success(.eliminate(player: "p1")),
+                        .success(.discard("c2", player: "p1")),
+                        .success(.discard("c1", player: "p1"))
                     ]
                 }
             }
