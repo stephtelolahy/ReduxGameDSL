@@ -1,9 +1,11 @@
 //
-//  ContextKey.swift
-//  
+//  EffectContext.swift
+//
 //
 //  Created by Hugues Telolahy on 09/04/2023.
 //
+
+public typealias EffectContext = [ContextKey: String]
 
 /// Context data associated to an effect
 public enum ContextKey: String, Codable, CodingKeyRepresentable {
@@ -17,5 +19,3 @@ public enum ContextKey: String, Codable, CodingKeyRepresentable {
     /// selected target
     case target
 }
-
-public typealias EffectContext = [ContextKey: String]

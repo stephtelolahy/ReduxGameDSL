@@ -107,7 +107,7 @@ final class PlaySpec: QuickSpec {
 
                     // Then
                     expect(result.queue) == [
-                        .chooseOne(chooser: "p1", options: [
+                        .chooseOne(player: "p1", options: [
                             "p3": .playHandicap(actor: "p1", card: .jail, target: "p3"),
                             "p2": .playHandicap(actor: "p1", card: .jail, target: "p2")])
                     ]

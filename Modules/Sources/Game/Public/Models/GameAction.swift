@@ -59,7 +59,7 @@ public indirect enum GameAction: Codable, Equatable {
     case eliminate(player: String)
 
     /// Ask a player to choose an action
-    case chooseOne(chooser: String, options: [String: Self])
+    case chooseOne(player: String, options: [String: Self])
     
     /// Set player attribute
     case setAttribute(AttributeKey, value: Int, player: String)

@@ -44,7 +44,7 @@ struct ActionPlay: GameReducerProtocol {
                     
                     $0[$1] = action
                 }
-                let childAction = GameAction.chooseOne(chooser: actor, options: options)
+                let childAction = GameAction.chooseOne(player: actor, options: options)
                 state.queue.insert(childAction, at: 0)
                 return state
             }

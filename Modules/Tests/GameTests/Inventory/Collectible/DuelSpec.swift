@@ -41,13 +41,13 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(chooser: "p1", options: [
+                        .success(.chooseOne(player: "p1", options: [
                             "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
                             "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
                             "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
                         .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
-                        .success(.chooseOne(chooser: "p2", options: [
+                        .success(.chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
@@ -68,13 +68,13 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(chooser: "p1", options: [
+                        .success(.chooseOne(player: "p1", options: [
                             "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
                             "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
                             "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
                         ])),
                         .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
-                        .success(.chooseOne(chooser: "p2", options: [
+                        .success(.chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
@@ -83,7 +83,7 @@ final class DuelSpec: QuickSpec {
                             .pass: .damage(1, player: "p2")
                         ])),
                         .success(.discard("bang-2", player: "p2")),
-                        .success(.chooseOne(chooser: "p1", options: [
+                        .success(.chooseOne(player: "p1", options: [
                             "bang-1": .group([
                                 .discard("bang-1", player: "p1"),
                                 // swiftlint:disable:next line_length

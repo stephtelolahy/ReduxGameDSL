@@ -110,6 +110,6 @@ private extension GameAction {
                 }
             }
         }
-        return .chooseOne(chooser: chooser, options: options)
+        return .chooseOne(player: chooser, options: options)
     }
 }
