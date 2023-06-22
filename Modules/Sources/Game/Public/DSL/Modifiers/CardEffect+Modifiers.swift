@@ -7,23 +7,23 @@
 
 public extension CardEffect {
     func `repeat`(_ times: NumArg) -> Self {
-        .repeat(times: times, effect: self)
+        .repeat(times, effect: self)
     }
     
     func `repeat`(_ times: Int) -> Self {
-        .repeat(times: .exact(times), effect: self)
+        .repeat(.exact(times), effect: self)
     }
     
     func target(_ target: PlayerArg) -> Self {
-        .target(target: target, effect: self)
+        .target(target, effect: self)
     }
     
     func otherwise(_ effect: Self) -> Self {
-        .force(effect: self, otherwise: effect)
+        .force(self, otherwise: effect)
     }
-    
+
     func challenge(_ challenger: PlayerArg, otherwise: Self) -> Self {
-        .challenge(challenger: challenger, effect: self, otherwise: otherwise)
+        .challenge(challenger, effect: self, otherwise: otherwise)
     }
 
     static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {

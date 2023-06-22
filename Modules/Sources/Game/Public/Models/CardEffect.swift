@@ -49,22 +49,22 @@ public indirect enum CardEffect: Codable, Equatable {
     // MARK: - Operators
 
     /// Repeat an effect
-    case `repeat`(times: NumArg, effect: Self)
+    case `repeat`(NumArg, effect: Self)
     
     /// Dispatch effects sequentially
     case group([Self])
     
     /// Apply an effect to some players
-    case target(target: PlayerArg, effect: Self)
+    case target(PlayerArg, effect: Self)
     
     /// Try an effect. If cannot, then apply some effect
-    case force(effect: Self, otherwise: Self)
+    case force(Self, otherwise: Self)
 
     /// Force two players to perform an effect repeatedly. If cannot, then apply some effect
-    case challenge(challenger: PlayerArg, effect: Self, otherwise: Self)
+    case challenge(PlayerArg, effect: Self, otherwise: Self)
     
     /// Flip over the top card of the deck, then apply effects according to suits and values
-    case luck(regex: String, onSuccess: Self)
+    case luck(String, onSuccess: Self)
     
     /// Cancel next queued effect
     case cancel
