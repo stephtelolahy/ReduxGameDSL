@@ -26,7 +26,7 @@ private extension CardEffect {
             return EffectBuild { .heal(value, player: $0.get(.target)) }
 
         case let .damage(value):
-            return EffectBuild { .damage(player: $0.get(.target), value: value) }
+            return EffectBuild { .damage(value, player: $0.get(.target)) }
 
         case .draw:
             return EffectBuild { .draw(player: $0.get(.target)) }

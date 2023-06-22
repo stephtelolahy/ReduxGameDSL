@@ -53,9 +53,9 @@ final class DuelSpec: QuickSpec {
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
-                            .pass: .damage(player: "p2", value: 1)
+                            .pass: .damage(1, player: "p2")
                         ])),
-                        .success(.damage(player: "p2", value: 1))
+                        .success(.damage(1, player: "p2"))
                     ]
                 }
             }
@@ -80,7 +80,7 @@ final class DuelSpec: QuickSpec {
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
-                            .pass: .damage(player: "p2", value: 1)
+                            .pass: .damage(1, player: "p2")
                         ])),
                         .success(.discard(player: "p2", card: "bang-2")),
                         .success(.chooseOne(chooser: "p1", options: [
@@ -89,9 +89,9 @@ final class DuelSpec: QuickSpec {
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p1"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p2"])
                             ]),
-                            .pass: .damage(player: "p1", value: 1)
+                            .pass: .damage(1, player: "p1")
                         ])),
-                        .success(.damage(player: "p1", value: 1))
+                        .success(.damage(1, player: "p1"))
                     ]
                 }
             }

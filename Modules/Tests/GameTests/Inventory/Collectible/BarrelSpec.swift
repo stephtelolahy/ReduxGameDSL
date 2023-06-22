@@ -92,9 +92,9 @@ final class BarrelSpec: QuickSpec {
                     expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
                                        .success(.luck),
                                        .success(.chooseOne(chooser: "p2", options: [
-                                        .pass: .damage(player: "p2", value: 1)
+                                        .pass: .damage(1, player: "p2")
                                        ])),
-                                       .success(.damage(player: "p2", value: 1))]
+                                       .success(.damage(1, player: "p2"))]
                 }
             }
         }
