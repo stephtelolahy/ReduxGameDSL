@@ -33,7 +33,7 @@ private extension GameAction {
         case let .steal(card, target, player): return ActionSteal(player: player, target: target, card: card)
         case .discover: return ActionDiscover()
         case .luck: return ActionLuck()
-        case let .chooseCard(player, card): return ActionChooseCard(player: player, card: card)
+        case let .chooseCard(card, player): return ActionChooseCard(player: player, card: card)
         case let .group(actions): return ActionGroup(children: actions)
         case let .setTurn(player): return ActionSetTurn(player: player)
         case let .eliminate(player): return ActionEliminate(player: player)

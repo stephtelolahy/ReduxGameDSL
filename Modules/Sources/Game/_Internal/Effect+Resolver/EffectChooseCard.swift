@@ -10,7 +10,7 @@ struct EffectChooseCard: EffectResolverProtocol {
         let chooserId = ctx.get(.target)
         let card = CardArg.selectArena
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: nil) {
-            .chooseCard(player: chooserId, card: $0)
+            .chooseCard($0, player: chooserId)
         }
     }
 }
