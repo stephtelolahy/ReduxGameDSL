@@ -1,6 +1,6 @@
 //
 //  EffectChallenge.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 13/05/2023.
 //
@@ -15,10 +15,10 @@ struct EffectChallenge: EffectResolverProtocol {
         
         guard case let .id(challengerId) = challenger else {
             return try challenger.resolve(state: state, ctx: ctx) {
-                CardEffect.challenge(.id($0),
-                                     effect: effect,
-                                     otherwise: otherwise)
-                .withCtx(ctx)
+                .resolve(.challenge(.id($0),
+                                    effect: effect,
+                                    otherwise: otherwise),
+                         ctx: ctx)
             }
         }
         
@@ -32,29 +32,31 @@ struct EffectChallenge: EffectResolverProtocol {
             let action = children[0]
             switch action {
             case let .resolve(childEffect, childCtx):
-                return [CardEffect.challenge(challenger,
-                                             effect: childEffect,
-                                             otherwise: otherwise).withCtx(childCtx)]
+                return [.resolve(.challenge(challenger,
+                                            effect: childEffect,
+                                            otherwise: otherwise),
+                                 ctx: childCtx)]
                 
             case let .chooseOne(chooser, options):
-                let reversedAction = CardEffect.challenge(.id(target),
-                                                          effect: effect,
-                                                          otherwise: otherwise)
-                    .withCtx(ctx.copy([.target: challengerId]))
+                let reversedAction = GameAction.resolve(.challenge(.id(target),
+                                                                   effect: effect,
+                                                                   otherwise: otherwise),
+                                                        ctx: ctx.copy([.target: challengerId]))
                 var options = options.mapValues { childAction in
                     GameAction.group {
                         childAction
                         reversedAction
                     }
                 }
-                options[.pass] = otherwise.withCtx(ctx)
+                options[.pass] = .resolve(otherwise, ctx: ctx)
                 return [.chooseOne(chooser: chooser, options: options)]
                 
             default:
                 fatalError("unexpected")
             }
         } catch {
-            return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(chooser: ctx.get(.target),
+                               options: [.pass: .resolve(otherwise, ctx: ctx)])]
         }
     }
 }

@@ -25,24 +25,18 @@ public extension CardEffect {
     func challenge(_ challenger: PlayerArg, otherwise: Self) -> Self {
         .challenge(challenger, effect: self, otherwise: otherwise)
     }
-
-    static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
-        .group(content())
-    }
     
     func triggered(_ eventReq: EventReq) -> CardAction {
         .init(eventReq: eventReq, effect: self, playReqs: [])
+    }
+    
+    static func group(@CardEffectsBuilder content: () -> [Self]) -> Self {
+        .group(content())
     }
 }
 
 extension CardAction {
     func require(@PlayReqBuilder playReqs: () -> [PlayReq]) -> Self {
         .init(eventReq: eventReq, effect: effect, playReqs: playReqs())
-    }
-}
-
-extension CardEffect {
-    func withCtx(_ ctx: EffectContext) -> GameAction {
-        .resolve(self, ctx: ctx)
     }
 }

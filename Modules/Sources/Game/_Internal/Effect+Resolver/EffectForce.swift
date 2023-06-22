@@ -20,18 +20,19 @@ struct EffectForce: EffectResolverProtocol {
             let action = children[0]
             switch action {
             case let .resolve(childEffect, childCtx):
-                return [CardEffect.force(childEffect, otherwise: otherwise).withCtx(childCtx)]
+                return [.resolve(.force(childEffect, otherwise: otherwise), ctx: childCtx)]
 
             case let .chooseOne(chooser, options):
                 var options = options
-                options[.pass] = otherwise.withCtx(ctx)
+                options[.pass] = .resolve(otherwise, ctx: ctx)
                 return [.chooseOne(chooser: chooser, options: options)]
 
             default:
                 fatalError("unexpected")
             }
         } catch {
-            return [.chooseOne(chooser: ctx.get(.target), options: [.pass: otherwise.withCtx(ctx)])]
+            return [.chooseOne(chooser: ctx.get(.target),
+                               options: [.pass: .resolve(otherwise, ctx: ctx)])]
         }
     }
 }
