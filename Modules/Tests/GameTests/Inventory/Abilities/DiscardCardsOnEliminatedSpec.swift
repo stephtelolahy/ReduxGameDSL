@@ -28,12 +28,12 @@ final class DiscardCardsOnEliminatedSpec: QuickSpec {
                     .ability(.discardCardsOnEliminated)
                     
                     // When
-                    let action = GameAction.eliminate("p1")
+                    let action = GameAction.eliminate(player: "p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
                     expect(result) == [
-                        .success(.eliminate("p1")),
+                        .success(.eliminate(player: "p1")),
                         .success(.discard("c2", player: "p1")),
                         .success(.discard("c1", player: "p1"))
                     ]

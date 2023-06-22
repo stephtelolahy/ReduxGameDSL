@@ -38,7 +38,7 @@ private extension CardEffect {
             return EffectBuild { .setTurn($0.get(.target)) }
 
         case .eliminate:
-            return EffectBuild { .eliminate($0.get(.target)) }
+            return EffectBuild { .eliminate(player: $0.get(.target)) }
 
         case .chooseCard:
             return EffectChooseCard()

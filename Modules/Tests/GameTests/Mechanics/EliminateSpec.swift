@@ -22,12 +22,12 @@ final class EliminateSpec: QuickSpec {
                 }
 
                 // When
-                let action = GameAction.eliminate("p1")
+                let action = GameAction.eliminate(player: "p1")
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
                 expect(result.playOrder) == ["p2"]
-                expect(result.event) == .eliminate("p1")
+                expect(result.event) == .eliminate(player: "p1")
             }
         }
     }

@@ -24,12 +24,12 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
                     .turn("p3")
 
                     // When
-                    let action = GameAction.eliminate("p3")
+                    let action = GameAction.eliminate(player: "p3")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.eliminate("p3")),
+                        .success(.eliminate(player: "p3")),
                         .success(.setTurn("p1"))
                     ]
                 }
@@ -60,12 +60,12 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
                     .turn("p1")
 
                     // When
-                    let action = GameAction.eliminate("p1")
+                    let action = GameAction.eliminate(player: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
                     expect(result) == [
-                        .success(.eliminate("p1")),
+                        .success(.eliminate(player: "p1")),
                         .success(.discard("c12", player: "p1")),
                         .success(.discard("c11", player: "p1")),
                         .success(.setTurn("p2")),

@@ -56,16 +56,16 @@ public indirect enum GameAction: Codable, Equatable {
     case setTurn(String)
 
     /// Eliminate
-    case eliminate(String)
+    case eliminate(player: String)
 
     /// Ask a player to choose an action
     case chooseOne(chooser: String, options: [String: Self])
     
     /// Set player attribute
-    case setAttribute(player: String, attribute: AttributeKey, value: Int)
+    case setAttribute(AttributeKey, value: Int, player: String)
     
     /// Increment player attribute
-    case incAttribute(player: String, attribute: AttributeKey, value: Int)
+    case incAttribute(AttributeKey, value: Int, player: String)
     
     /// Cancel next queued effect
     case cancel
