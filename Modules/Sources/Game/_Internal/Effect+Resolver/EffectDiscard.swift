@@ -30,7 +30,7 @@ struct EffectDiscard: EffectResolverProtocol {
         }
 
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: owner) {
-            .discard(player: owner, card: $0)
+            .discard($0, player: owner)
         }
     }
 }

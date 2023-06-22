@@ -28,8 +28,8 @@ final class ChooseOneSpec: QuickSpec {
                     .attribute(.maxHealth, 3)
                 }
                 .waiting("p1", options: [
-                    "c1": .discard(player: "p1", card: "beer-1"),
-                    "c2": .discard(player: "p1", card: "beer-2")
+                    "c1": .discard("beer-1", player: "p1"),
+                    "c2": .discard("beer-2", player: "p1")
                 ])
                 .cardRef(CardList.all)
             }
@@ -37,7 +37,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching waited action") {
                 it("should remove waiting state") {
                     // When
-                    let action = GameAction.discard(player: "p1", card: "beer-1")
+                    let action = GameAction.discard("beer-1", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

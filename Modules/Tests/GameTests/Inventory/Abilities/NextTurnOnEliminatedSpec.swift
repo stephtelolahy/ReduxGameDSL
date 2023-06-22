@@ -66,8 +66,8 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
                     // Then
                     expect(result) == [
                         .success(.eliminate("p1")),
-                        .success(.discard(player: "p1", card: "c12")),
-                        .success(.discard(player: "p1", card: "c11")),
+                        .success(.discard("c12", player: "p1")),
+                        .success(.discard("c11", player: "p1")),
                         .success(.setTurn("p2")),
                         .success(.draw(player: "p2")),
                         .success(.draw(player: "p2"))

@@ -85,10 +85,10 @@ final class BangSpec: QuickSpec {
                         ])),
                         .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
                         .success(.chooseOne(chooser: "p2", options: [
-                            .missed: .discard(player: "p2", card: .missed),
+                            .missed: .discard(.missed, player: "p2"),
                             .pass: .damage(1, player: "p2")
                         ])),
-                        .success(.discard(player: "p2", card: .missed))
+                        .success(.discard(.missed, player: "p2"))
                     ]
                 }
             }
