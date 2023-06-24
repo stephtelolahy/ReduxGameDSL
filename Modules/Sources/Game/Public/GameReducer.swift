@@ -20,10 +20,10 @@ public struct GameReducer: ReducerProtocol {
         state.error = nil
 
         do {
-            state = try prepareAction(action: action, state: state)
-            state = try executeAction(action: action, state: state)
-            state = postExecuteAction(action: action, state: state)
-            state = updateGameOver(state: state)
+            state = try prepare(action: action, state: state)
+            state = try action.reduce(state: state)
+            state.event = action
+            state = postExecute(action: action, state: state)
         } catch {
             state.error = error as? GameError
         }
@@ -34,7 +34,7 @@ public struct GameReducer: ReducerProtocol {
 
 private extension GameReducer {
 
-    func prepareAction(action: GameAction, state: GameState) throws -> GameState {
+    func prepare(action: GameAction, state: GameState) throws -> GameState {
         var state = state
 
         if let chooseOne = state.chooseOne {
@@ -59,17 +59,15 @@ private extension GameReducer {
         return state
     }
 
-    func executeAction(action: GameAction, state: GameState) throws -> GameState {
+    func postExecute(action: GameAction, state: GameState) -> State {
         var state = state
-        state = try action.reduce(state: state)
-        state.event = action
+        queueTriggered(action: action, state: &state)
+        emitActiveCards(state: &state)
+        updateGameOver(state: &state)
         return state
     }
-
-    func postExecuteAction(action: GameAction, state: GameState) -> State {
-        var state = state
-
-        // Queue triggered effects
+    
+    func queueTriggered(action: GameAction, state: inout GameState) {
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
             players.append(justEliminated)
@@ -86,8 +84,9 @@ private extension GameReducer {
             }
         }
         state.queue.insert(contentsOf: triggered, at: 0)
-
-        // Emit active cards
+    }
+    
+    func emitActiveCards(state: inout GameState) {
         if state.queue.isEmpty,
            state.isOver == nil,
            state.chooseOne == nil,
@@ -105,8 +104,6 @@ private extension GameReducer {
                 state.active = ActiveCards(player: actor, cards: activeCards)
             }
         }
-        
-        return state
     }
     
     func isPlayable(ctx: EffectContext, state: GameState) -> Bool {
@@ -151,15 +148,11 @@ private extension GameReducer {
         return nil
     }
 
-    func updateGameOver(state: GameState) -> GameState {
-        guard case .eliminate = state.event,
-           let winner = state.evaluateWinner() else {
-               return state
+    func updateGameOver(state: inout GameState) {
+        if case .eliminate = state.event,
+           let winner = state.evaluateWinner() {
+            state.isOver = GameOver(winner: winner)
         }
-        
-        var state = state
-        state.isOver = GameOver(winner: winner)
-        return state
     }
 }
 
