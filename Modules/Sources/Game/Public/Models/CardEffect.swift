@@ -25,10 +25,11 @@ public indirect enum CardEffect: Codable, Equatable {
     case discard(CardArg, chooser: PlayerArg? = nil)
     
     /// Draw card from other player
-    /// When chooser is the player that steals cards
+    /// When chooser is the player that chooses and steals cards
     case steal(CardArg, chooser: PlayerArg)
     
     /// Choose some cards from arena
+    /// When chooser is `ctx.target`
     case chooseCard
     
     /// Draw a card from deck and put to arena
@@ -64,7 +65,7 @@ public indirect enum CardEffect: Codable, Equatable {
     case challenge(PlayerArg, effect: Self, otherwise: Self)
     
     /// Flip over the top card of the deck, then apply effects according to suits and values
-    case luck(String, onSuccess: Self)
+    case luck(String, onSuccess: Self, onFailure: Self? = nil)
     
     /// Cancel next queued effect
     case cancel

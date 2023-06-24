@@ -9,13 +9,8 @@ import Combine
 
 let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     if let event = state.event {
-        switch event {
-        case .resolve, .play, .group:
-            print("➡️ \(String(describing: event).removingPackageName())")
-            
-        default:
-            print("✅ \(String(describing: event).removingPackageName())")
-        }
+        let flag = event.isRenderable ? "✅" : "➡️"
+        print("\(flag) \(String(describing: event).removingPackageName())")
     }
     
     if let error = state.error {

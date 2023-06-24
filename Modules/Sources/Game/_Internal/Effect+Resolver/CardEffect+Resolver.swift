@@ -68,8 +68,8 @@ private extension CardEffect {
         case .nothing:
             return EffectNone()
             
-        case let .luck(regex, onSuccess):
-            return EffectLuck(regex: regex, onSuccess: onSuccess)
+        case let .luck(regex, onSuccess, onFailure):
+            return EffectLuck(regex: regex, onSuccess: onSuccess, onFailure: onFailure)
             
         case .cancel:
             return EffectBuild { _ in .cancel }

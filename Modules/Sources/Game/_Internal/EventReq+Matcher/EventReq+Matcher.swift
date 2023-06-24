@@ -23,6 +23,7 @@ private extension EventReq {
         case .onEliminated: return OnEliminated()
         case .onPlay: return EventReqNeverMatch()
         case .onForceDiscardHandNamed(let cardName): return OnForceDiscardHandNamed(cardName: cardName)
+        default: fatalError("No matcher found for \(self)")
         }
     }
 }

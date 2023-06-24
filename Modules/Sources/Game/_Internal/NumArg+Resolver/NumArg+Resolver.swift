@@ -22,6 +22,7 @@ private extension NumArg {
         case .numPlayers: return NumPlayers()
         case .excessHand: return NumExcessHand()
         case .playerAttr(let key): return NumPlayerAttr(key: key)
+        default: fatalError("No resolver found for \(self)")
         }
     }
 }
