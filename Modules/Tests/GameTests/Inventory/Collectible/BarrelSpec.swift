@@ -26,7 +26,7 @@ final class BarrelSpec: QuickSpec {
                 }
                 
                 // When
-                let action = GameAction.play(actor: "p1", card: .barrel)
+                let action = GameAction.play(.barrel, actor: "p1")
                 let result = self.awaitAction(action, state: state)
                 
                 // Then

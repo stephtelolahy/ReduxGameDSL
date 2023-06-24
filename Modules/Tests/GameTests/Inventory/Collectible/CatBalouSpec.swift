@@ -25,7 +25,7 @@ final class CatBalouSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .catBalou)
+                    let action = GameAction.play(.catBalou, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -51,7 +51,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(.catBalou, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
@@ -86,7 +86,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(.catBalou, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", "c22"], state: state)
                         
                         // Then
@@ -125,7 +125,7 @@ final class CatBalouSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .catBalou)
+                        let action = GameAction.play(.catBalou, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", "c23"], state: state)
                         
                         // Then

@@ -1,6 +1,6 @@
 //
 //  GameAction+Reducer.swift
-//  
+//
 //
 //  Created by Hugues Telolahy on 03/06/2023.
 //
@@ -21,7 +21,7 @@ private extension GameAction {
     // swiftlint:disable:next cyclomatic_complexity
     func reducer() -> GameReducerProtocol {
         switch self {
-        case let .play(actor, card):
+        case let .play(card, actor):
             return ActionPlay(actor: actor, card: card)
         case let .playImmediate(actor, card, target):
             return ActionPlayImmediate(actor: actor, card: card, target: target)

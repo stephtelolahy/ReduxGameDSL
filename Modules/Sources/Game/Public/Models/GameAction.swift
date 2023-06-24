@@ -12,7 +12,7 @@ public indirect enum GameAction: Codable, Equatable {
     // MARK: - Play
     
     /// Resolve a play
-    case play(actor: String, card: String)
+    case play(String, actor: String)
     
     /// Play a brown card, discard immediately
     case playImmediate(actor: String, card: String, target: String? = nil)

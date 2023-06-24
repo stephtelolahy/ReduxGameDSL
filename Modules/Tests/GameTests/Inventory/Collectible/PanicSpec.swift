@@ -26,7 +26,7 @@ final class PanicSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .panic)
+                    let action = GameAction.play(.panic, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -52,7 +52,7 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .panic)
+                        let action = GameAction.play(.panic, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", .randomHand], state: state)
                         
                         // Then
@@ -87,7 +87,7 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .panic)
+                        let action = GameAction.play(.panic, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", "c22"], state: state)
                         
                         // Then
@@ -126,7 +126,7 @@ final class PanicSpec: QuickSpec {
                         }
                         
                         // When
-                        let action = GameAction.play(actor: "p1", card: .panic)
+                        let action = GameAction.play(.panic, actor: "p1")
                         let result = self.awaitAction(action, choices: ["p2", "c23"], state: state)
                         
                         // Then

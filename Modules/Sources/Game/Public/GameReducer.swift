@@ -117,7 +117,7 @@ private extension GameReducer {
         }
         
         do {
-            let action = GameAction.play(actor: ctx.get(.actor), card: ctx.get(.card))
+            let action = GameAction.play(ctx.get(.card), actor: ctx.get(.actor))
             try action.validate(state: state)
             return true
         } catch {

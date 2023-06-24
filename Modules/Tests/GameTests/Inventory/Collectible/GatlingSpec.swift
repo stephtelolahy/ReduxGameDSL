@@ -31,7 +31,7 @@ final class GatlingSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .gatling)
+                    let action = GameAction.play(.gatling, actor: "p1")
                     let result = self.awaitAction(action, choices: [.missed, .pass], state: state)
                     
                     // Then
@@ -67,7 +67,7 @@ final class GatlingSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .gatling)
+                    let action = GameAction.play(.gatling, actor: "p1")
                     let result = self.awaitAction(action, choices: [.missed], state: state)
                     
                     // Then

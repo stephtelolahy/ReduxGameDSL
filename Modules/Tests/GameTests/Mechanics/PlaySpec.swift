@@ -52,7 +52,7 @@ final class PlaySpec: QuickSpec {
                     .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -76,7 +76,7 @@ final class PlaySpec: QuickSpec {
                     .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .dynamite)
+                    let action = GameAction.play(.dynamite, actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -102,7 +102,7 @@ final class PlaySpec: QuickSpec {
                     .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .jail)
+                    let action = GameAction.play(.jail, actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

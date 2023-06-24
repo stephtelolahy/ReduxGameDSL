@@ -28,7 +28,7 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -53,7 +53,7 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -76,7 +76,7 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then

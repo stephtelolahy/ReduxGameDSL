@@ -29,7 +29,7 @@ final class WellsFargoSpec: QuickSpec {
                 }
                 
                 // When
-                let action = GameAction.play(actor: "p1", card: .wellsFargo)
+                let action = GameAction.play(.wellsFargo, actor: "p1")
                 let result = self.awaitAction(action, state: state)
                 
                 // Then

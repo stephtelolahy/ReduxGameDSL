@@ -39,7 +39,7 @@ final class SimulationTests: XCTestCase {
             if let active = state.active {
                 // swiftlint:disable:next force_unwrapping
                 let randomCard = active.cards.randomElement()!
-                let randomAction = GameAction.play(actor: active.player, card: randomCard)
+                let randomAction = GameAction.play(randomCard, actor: active.player)
                 DispatchQueue.main.async {
                     sut.dispatch(randomAction)
                 }
