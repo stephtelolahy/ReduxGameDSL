@@ -25,7 +25,6 @@ private extension PlayReq {
         case let .isTimesPerTurn(maxTimes): return IsTimesPerTurn(maxTimes: maxTimes)
         case .isCurrentTurn: return IsCurrentTurn()
         default: fatalError("No matcher found for \(self)")
-
         }
     }
 }
