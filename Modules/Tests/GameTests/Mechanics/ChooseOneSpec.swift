@@ -49,7 +49,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching non waited action") {
                 it("should throw error") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: "c3")
+                    let action = GameAction.play("c3", actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then

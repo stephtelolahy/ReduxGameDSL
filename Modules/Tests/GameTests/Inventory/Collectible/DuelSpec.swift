@@ -36,17 +36,17 @@ final class DuelSpec: QuickSpec {
             context("passing") {
                 it("should damage") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: .duel)
+                    let action = GameAction.play(.duel, actor: "p1")
                     let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(player: "p1", options: [
-                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(.duel, target: "p2", actor: "p1"),
+                            "p3": .playImmediate(.duel, target: "p3", actor: "p1"),
+                            "p4": .playImmediate(.duel, target: "p4", actor: "p1")
                         ])),
-                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(.duel, target: "p2", actor: "p1")),
                         .success(.chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),
@@ -63,17 +63,17 @@ final class DuelSpec: QuickSpec {
             context("discarding bang") {
                 it("should damage actor") {
                     // When
-                    let action = GameAction.play(actor: "p1", card: .duel)
+                    let action = GameAction.play(.duel, actor: "p1")
                     let result = self.awaitAction(action, choices: ["p2", "bang-2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(player: "p1", options: [
-                            "p2": .playImmediate(actor: "p1", card: .duel, target: "p2"),
-                            "p3": .playImmediate(actor: "p1", card: .duel, target: "p3"),
-                            "p4": .playImmediate(actor: "p1", card: .duel, target: "p4")
+                            "p2": .playImmediate(.duel, target: "p2", actor: "p1"),
+                            "p3": .playImmediate(.duel, target: "p3", actor: "p1"),
+                            "p4": .playImmediate(.duel, target: "p4", actor: "p1")
                         ])),
-                        .success(.playImmediate(actor: "p1", card: .duel, target: "p2")),
+                        .success(.playImmediate(.duel, target: "p2", actor: "p1")),
                         .success(.chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),

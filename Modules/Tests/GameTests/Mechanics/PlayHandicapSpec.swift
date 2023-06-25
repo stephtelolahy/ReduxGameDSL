@@ -27,7 +27,7 @@ final class PlayHandicapSpec: QuickSpec {
                 }
 
                 // When
-                let action = GameAction.playHandicap(actor: "p1", card: "c1", target: "p2")
+                let action = GameAction.playHandicap("c1", target: "p2", actor: "p1")
                 let result = sut.reduce(state: state, action: action)
 
                 // Then

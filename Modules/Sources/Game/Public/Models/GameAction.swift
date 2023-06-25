@@ -12,19 +12,19 @@ public indirect enum GameAction: Codable, Equatable {
     // MARK: - Play
     
     /// Resolve a play
-    case play(actor: String, card: String)
+    case play(String, actor: String)
     
     /// Play a brown card, discard immediately
-    case playImmediate(actor: String, card: String, target: String? = nil)
+    case playImmediate(String, target: String? = nil, actor: String)
 
     /// Invoke  an ability
-    case playAbility(actor: String, card: String)
+    case playAbility(String, actor: String)
 
     /// Play an equipment card
-    case playEquipment(actor: String, card: String)
+    case playEquipment(String, actor: String)
 
     /// Play an handicap card
-    case playHandicap(actor: String, card: String, target: String)
+    case playHandicap(String, target: String, actor: String)
 
     // MARK: - Renderable actions
     
@@ -48,9 +48,6 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Draw a card from deck and put to arena
     case discover
-    
-    /// Draw a card from deck and put to discard
-    case luck
 
     /// Set turn
     case setTurn(String)
@@ -58,17 +55,20 @@ public indirect enum GameAction: Codable, Equatable {
     /// Eliminate
     case eliminate(player: String)
 
-    /// Ask a player to choose an action
-    case chooseOne(player: String, options: [String: Self])
-    
     /// Set player attribute
     case setAttribute(AttributeKey, value: Int, player: String)
     
     /// Increment player attribute
     case incAttribute(AttributeKey, value: Int, player: String)
-    
+
+    /// Draw a card from deck and put to discard
+    case luck
+
     /// Cancel next queued effect
     case cancel
+
+    /// Ask a choice
+    case chooseOne(player: String, options: [String: Self])
     
     // MARK: - Invisible actions
 

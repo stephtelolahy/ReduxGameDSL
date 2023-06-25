@@ -28,11 +28,11 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.success(.playImmediate(actor: "p1", card: .beer)),
+                    expect(result) == [.success(.playImmediate(.beer, actor: "p1")),
                                        .success(.heal(1, player: "p1"))]
                 }
             }
@@ -53,7 +53,7 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -76,7 +76,7 @@ final class BeerSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .beer)
+                    let action = GameAction.play(.beer, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then

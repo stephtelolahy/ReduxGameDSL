@@ -9,6 +9,7 @@ import Foundation
 struct EffectLuck: EffectResolverProtocol {
     let regex: String
     let onSuccess: CardEffect
+    let onFailure: CardEffect?
     
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         guard let card = state.deck.top else {

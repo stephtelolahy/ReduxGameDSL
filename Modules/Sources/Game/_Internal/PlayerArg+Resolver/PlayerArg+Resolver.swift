@@ -70,7 +70,7 @@ private extension PlayerArg {
         case .damaged: return PlayerDamaged()
         case .all: return PlayerAll()
         case .others: return PlayerOthers()
-        default: fatalError("unexpected")
+        default: fatalError("No resolver found for \(self)")
         }
     }
 }

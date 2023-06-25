@@ -27,7 +27,7 @@ final class BangSpec: QuickSpec {
                         .counters([.bang: 1])
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
+                    let action = GameAction.play(.bang, actor: "p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
@@ -50,7 +50,7 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
+                    let action = GameAction.play(.bang, actor: "p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
@@ -75,15 +75,15 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
+                    let action = GameAction.play(.bang, actor: "p1")
                     let result = self.awaitAction(action, choices: ["p2", .missed], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(player: "p1", options: [
-                            "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
+                            "p2": .playImmediate(.bang, target: "p2", actor: "p1")
                         ])),
-                        .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
+                        .success(.playImmediate(.bang, target: "p2", actor: "p1")),
                         .success(.chooseOne(player: "p2", options: [
                             .missed: .discard(.missed, player: "p2"),
                             .pass: .damage(1, player: "p2")
@@ -106,15 +106,15 @@ final class BangSpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.play(actor: "p1", card: .bang)
+                    let action = GameAction.play(.bang, actor: "p1")
                     let result = self.awaitAction(action, choices: ["p2", .pass], state: state)
 
                     // Then
                     expect(result) == [
                         .success(.chooseOne(player: "p1", options: [
-                            "p2": .playImmediate(actor: "p1", card: .bang, target: "p2")
+                            "p2": .playImmediate(.bang, target: "p2", actor: "p1")
                         ])),
-                        .success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
+                        .success(.playImmediate(.bang, target: "p2", actor: "p1")),
                         .success(.chooseOne(player: "p2", options: [
                             .pass: .damage(1, player: "p2")
                         ])),

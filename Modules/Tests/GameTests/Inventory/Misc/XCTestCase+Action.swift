@@ -68,17 +68,3 @@ extension XCTestCase {
         return result
     }
 }
-
-private extension GameAction {
-    var isRenderable: Bool {
-        switch self {
-        case .play,
-             .resolve,
-             .group:
-            return false
-
-        default:
-            return true
-        }
-    }
-}

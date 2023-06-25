@@ -32,11 +32,11 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .saloon)
+                    let action = GameAction.play(.saloon, actor: "p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.playImmediate(actor: "p1", card: .saloon)),
+                    expect(result) == [.success(.playImmediate(.saloon, actor: "p1")),
                                        .success(.heal(1, player: "p2")),
                                        .success(.heal(1, player: "p3"))]
                 }
@@ -59,7 +59,7 @@ final class SaloonSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.play(actor: "p1", card: .saloon)
+                    let action = GameAction.play(.saloon, actor: "p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
