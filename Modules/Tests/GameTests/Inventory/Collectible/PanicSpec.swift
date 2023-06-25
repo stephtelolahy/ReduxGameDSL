@@ -58,9 +58,9 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.chooseOne(player: "p1", options: [
-                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(.panic, target: "p2", actor: "p1")
                             ])),
-                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(.panic, target: "p2", actor: "p1")),
                             .success(.chooseOne(player: "p1", options: [
                                 .randomHand: .steal("c21", target: "p2", player: "p1")
                             ])),
@@ -93,9 +93,9 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.chooseOne(player: "p1", options: [
-                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(.panic, target: "p2", actor: "p1")
                             ])),
-                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(.panic, target: "p2", actor: "p1")),
                             .success(.chooseOne(player: "p1", options: [
                                 "c21": .steal("c21", target: "p2", player: "p1"),
                                 "c22": .steal("c22", target: "p2", player: "p1")
@@ -132,9 +132,9 @@ final class PanicSpec: QuickSpec {
                         // Then
                         expect(result) == [
                             .success(.chooseOne(player: "p1", options: [
-                                "p2": .playImmediate(actor: "p1", card: .panic, target: "p2")
+                                "p2": .playImmediate(.panic, target: "p2", actor: "p1")
                             ])),
-                            .success(.playImmediate(actor: "p1", card: .panic, target: "p2")),
+                            .success(.playImmediate(.panic, target: "p2", actor: "p1")),
                             .success(.chooseOne(player: "p1", options: [
                                 .randomHand: .steal("c21", target: "p2", player: "p1"),
                                 "c22": .steal("c22", target: "p2", player: "p1"),

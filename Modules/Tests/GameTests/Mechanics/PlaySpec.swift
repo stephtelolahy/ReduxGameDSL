@@ -27,7 +27,7 @@ final class PlaySpec: QuickSpec {
                     }
 
                     // When
-                    let action = GameAction.playImmediate(actor: "p1", card: .missed)
+                    let action = GameAction.playImmediate(.missed, actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -57,7 +57,7 @@ final class PlaySpec: QuickSpec {
 
                     // Then
                     expect(result.queue) == [
-                        .playImmediate(actor: "p1", card: .beer)
+                        .playImmediate(.beer, actor: "p1")
                     ]
                     expect(result.error) == nil
                 }
@@ -81,7 +81,7 @@ final class PlaySpec: QuickSpec {
 
                     // Then
                     expect(result.queue) == [
-                        .playEquipment(actor: "p1", card: .dynamite)
+                        .playEquipment(.dynamite, actor: "p1")
                     ]
                     expect(result.error) == nil
                 }
@@ -108,8 +108,8 @@ final class PlaySpec: QuickSpec {
                     // Then
                     expect(result.queue) == [
                         .chooseOne(player: "p1", options: [
-                            "p3": .playHandicap(actor: "p1", card: .jail, target: "p3"),
-                            "p2": .playHandicap(actor: "p1", card: .jail, target: "p2")])
+                            "p3": .playHandicap(.jail, target: "p3", actor: "p1"),
+                            "p2": .playHandicap(.jail, target: "p2", actor: "p1")])
                     ]
                     expect(result.error) == nil
                 }

@@ -23,13 +23,13 @@ private extension GameAction {
         switch self {
         case let .play(card, actor):
             return ActionPlay(actor: actor, card: card)
-        case let .playImmediate(actor, card, target):
+        case let .playImmediate(card, target, actor):
             return ActionPlayImmediate(actor: actor, card: card, target: target)
-        case let .playAbility(actor, card):
+        case let .playAbility(card, actor):
             return ActionPlayAbility(actor: actor, card: card)
-        case let .playEquipment(actor, card):
+        case let .playEquipment(card, actor):
             return ActionPlayEquipment(actor: actor, card: card)
-        case let .playHandicap(actor, card, target):
+        case let .playHandicap(card, target, actor):
             return ActionPlayHandicap(actor: actor, card: card, target: target)
         case let .heal(value, player):
             return ActionHeal(player: player, value: value)

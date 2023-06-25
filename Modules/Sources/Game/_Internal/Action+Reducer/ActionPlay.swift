@@ -35,9 +35,9 @@ struct ActionPlay: GameReducerProtocol {
                     let action: GameAction
                     switch cardObj.type {
                     case .immediate:
-                        action = .playImmediate(actor: actor, card: card, target: $1)
+                        action = .playImmediate(card, target: $1, actor: actor)
                     case .handicap:
-                        action = .playHandicap(actor: actor, card: card, target: $1)
+                        action = .playHandicap(card, target: $1, actor: actor)
                     default:
                         fatalError("unexpected")
                     }
@@ -53,15 +53,15 @@ struct ActionPlay: GameReducerProtocol {
         let action: GameAction
         switch cardObj.type {
         case .equipment:
-            action = .playEquipment(actor: actor, card: card)
+            action = .playEquipment(card, actor: actor)
         case .handicap:
             fatalError("unexpected")
         case .immediate:
             let actorObj = state.player(actor)
             if actorObj.hand.contains(card) {
-                action = .playImmediate(actor: actor, card: card)
+                action = .playImmediate(card, actor: actor)
             } else {
-                action = .playAbility(actor: actor, card: card)
+                action = .playAbility(card, actor: actor)
             }
         }
         

@@ -29,7 +29,7 @@ final class PlayImmediateSpec: QuickSpec {
                 .cardRef(CardList.all)
 
                 // When
-                let action = GameAction.playImmediate(actor: "p1", card: .beer)
+                let action = GameAction.playImmediate(.beer, actor: "p1")
                 result = sut.reduce(state: state, action: action)
             }
 
@@ -41,7 +41,7 @@ final class PlayImmediateSpec: QuickSpec {
 
             it("should emit event") {
                 // Then
-                expect(result.event) == .playImmediate(actor: "p1", card: .beer)
+                expect(result.event) == .playImmediate(.beer, actor: "p1")
             }
 
             it("should increment counter") {

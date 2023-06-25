@@ -30,7 +30,7 @@ final class BarrelSpec: QuickSpec {
                 let result = self.awaitAction(action, state: state)
                 
                 // Then
-                expect(result) == [.success(.playEquipment(actor: "p1", card: .barrel))]
+                expect(result) == [.success(.playEquipment(.barrel, actor: "p1"))]
             }
         }
         
@@ -55,11 +55,11 @@ final class BarrelSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.playImmediate(actor: "p1", card: .bang, target: "p2")
+                    let action = GameAction.playImmediate(.bang, target: "p2", actor: "p1")
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
+                    expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
                                        .success(.luck),
                                        .success(.cancel)]
                 }
@@ -85,11 +85,11 @@ final class BarrelSpec: QuickSpec {
                     }
                     
                     // When
-                    let action = GameAction.playImmediate(actor: "p1", card: .bang, target: "p2")
+                    let action = GameAction.playImmediate(.bang, target: "p2", actor: "p1")
                     let result = self.awaitAction(action, choices: [.pass], state: state)
                     
                     // Then
-                    expect(result) == [.success(.playImmediate(actor: "p1", card: .bang, target: "p2")),
+                    expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
                                        .success(.luck),
                                        .success(.chooseOne(player: "p2", options: [
                                         .pass: .damage(1, player: "p2")
