@@ -9,8 +9,6 @@ import Quick
 import Nimble
 import Game
 
-// TODO: FlipTwoCards_IfHavingAttribute
-
 final class BarrelSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
