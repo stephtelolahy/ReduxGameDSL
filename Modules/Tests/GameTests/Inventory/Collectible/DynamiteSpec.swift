@@ -67,34 +67,72 @@ final class DynamiteSpec: QuickSpec {
             }
             
             context("flipped card is spades") {
-                it("should apply damage") {
-                    // Given
-                    let state = createGame {
-                        Player("p1") {
-                            InPlay {
-                                .dynamite
+                context("not lethal") {
+                    it("should apply damage") {
+                        // Given
+                        let state = createGame {
+                            Player("p1") {
+                                InPlay {
+                                    .dynamite
+                                }
+                            }
+                            .attribute(.health, 4)
+                            Deck {
+                                "c1-8♠️"
+                                "c2"
+                                "c2"
                             }
                         }
-                        .attribute(.health, 4)
-                        .attribute(.maxHealth, 4)
-                        Deck {
-                            "c1-8♠️"
-                            "c2"
-                            "c2"
-                        }
+                        .ability(.drawOnSetTurn)
+                        
+                        // When
+                        let action = GameAction.setTurn("p1")
+                        let result = self.awaitAction(action, state: state)
+                        
+                        // Then
+                        expect(result) == [.success(.setTurn("p1")),
+                                           .success(.luck),
+                                           .success(.damage(3, player: "p1")),
+                                           .success(.draw(player: "p1")),
+                                           .success(.draw(player: "p1"))]
                     }
-                    .ability(.drawOnSetTurn)
-                    
-                    // When
-                    let action = GameAction.setTurn("p1")
-                    let result = self.awaitAction(action, state: state)
-                    
-                    // Then
-                    expect(result) == [.success(.setTurn("p1")),
-                                       .success(.luck),
-                                       .success(.damage(3, player: "p1")),
-                                       .success(.draw(player: "p1")),
-                                       .success(.draw(player: "p1"))]
+                }
+                
+                context("lethal") {
+                    it("should eliminate") {
+                        // Given
+                        let state = createGame {
+                            Player("p1") {
+                                InPlay {
+                                    .dynamite
+                                }
+                            }
+                            .attribute(.health, 3)
+                            Player("p2")
+                            Player("p3")
+                            Deck {
+                                "c1-8♠️"
+                                "c2"
+                                "c2"
+                            }
+                        }
+                        .ability(.eliminateOnLooseLastHealth)
+                        .ability(.nextTurnOnEliminated)
+                        .ability(.drawOnSetTurn)
+                        
+                        // When
+                        let action = GameAction.setTurn("p1")
+                        let result = self.awaitAction(action, state: state)
+                        
+                        // Then
+                        expect(result) == [.success(.setTurn("p1")),
+                                           .success(.luck),
+                                           .success(.damage(3, player: "p1")),
+                                           .success(.eliminate(player: "p1")),
+                                           .success(.setTurn("p2")),
+                                           .success(.draw(player: "p2")),
+                                           .success(.draw(player: "p2"))]
+                    }
                 }
             }
         }
