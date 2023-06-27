@@ -48,6 +48,9 @@ private extension CardEffect {
 
         case let .steal(card, chooser):
             return EffectSteal(card: card, chooser: chooser)
+            
+        case let .passInplay(card, owner):
+            return EffectPassInPlay(card: card, owner: owner)
 
             // operation on effect
         case let .target(target, effect):
