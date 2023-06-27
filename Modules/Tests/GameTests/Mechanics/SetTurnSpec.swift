@@ -25,8 +25,8 @@ final class SetTurnSpec: QuickSpec {
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
+                expect(result.event) == action
                 expect(result.turn) == "p1"
-                expect(result.event) == .setTurn("p1")
                 expect(result.playCounter).to(beEmpty())
             }
         }

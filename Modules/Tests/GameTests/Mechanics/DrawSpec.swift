@@ -52,7 +52,7 @@ final class DrawSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
-                        expect(result.event) == .draw(player: "p1")
+                        expect(result.event) == action
                         expect(result.deck.top) == nil
                         expect(result.discard.top) == "c1"
                         expect(result.player("p1").hand.cards) == ["c2"]

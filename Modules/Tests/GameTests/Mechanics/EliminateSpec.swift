@@ -26,8 +26,8 @@ final class EliminateSpec: QuickSpec {
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
+                expect(result.event) == action
                 expect(result.playOrder) == ["p2"]
-                expect(result.event) == .eliminate(player: "p1")
             }
         }
     }

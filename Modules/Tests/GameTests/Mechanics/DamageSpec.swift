@@ -30,8 +30,8 @@ final class DamageSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
+                    expect(result.event) == action
                     expect(result.player("p1").attributes[.health]) == 1
-                    expect(result.event) == .damage(1, player: "p1")
                 }
             }
 

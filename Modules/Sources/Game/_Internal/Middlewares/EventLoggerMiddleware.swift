@@ -10,11 +10,11 @@ import Combine
 let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     if let event = state.event {
         let flag = event.isRenderable ? "✅" : "➡️"
-        print("\(flag) \(String(describing: event).removingPackageName())")
+        print("\(flag) \(event.loggerDescription)")
     }
     
     if let error = state.error {
-        print("❌ \(String(describing: error).removingPackageName())")
+        print("❌ \(error.loggerDescription)")
     }
     
     if let active = state.active {
@@ -26,6 +26,18 @@ let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     }
     
     return Empty().eraseToAnyPublisher()
+}
+
+public extension GameAction {
+    var loggerDescription: String {
+        String(describing: self).removingPackageName()
+    }
+}
+
+public extension GameError {
+    var loggerDescription: String {
+        String(describing: self).removingPackageName()
+    }
 }
 
 private extension String {
