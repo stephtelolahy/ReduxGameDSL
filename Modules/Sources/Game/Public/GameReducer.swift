@@ -61,25 +61,24 @@ private extension GameReducer {
 
     func postExecute(action: GameAction, state: GameState) -> State {
         var state = state
-        queueTriggered(action: action, state: &state)
+        queueTriggered(state: &state)
         emitActiveCards(state: &state)
         updateGameOver(state: &state)
         return state
     }
     
-    func queueTriggered(action: GameAction, state: inout GameState) {
+    func queueTriggered(state: inout GameState) {
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
             players.append(justEliminated)
         }
-
+        
         var triggered: [GameAction] = []
         for actor in players {
             let actorObj = state.player(actor)
             for card in (actorObj.inPlay.cards + actorObj.abilities + state.abilities) {
-                let ctx: EffectContext = [.actor: actor, .card: card]
-                if let effect = triggeredEffect(ctx: ctx, state: state) {
-                    triggered.append(.resolve(effect, ctx: ctx))
+                if let triggeredAction = triggeredAction(by: card, actor: actor, state: state) {
+                    triggered.append(triggeredAction)
                 }
             }
         }
@@ -93,11 +92,9 @@ private extension GameReducer {
            let actor = state.turn,
            let actorObj = state.players[actor] {
             var activeCards: [String] = []
-            for card in (actorObj.hand.cards + actorObj.abilities + state.abilities) {
-                let ctx: EffectContext = [.actor: actor, .card: card]
-                if isPlayable(ctx: ctx, state: state) {
-                    activeCards.append(card)
-                }
+            for card in (actorObj.hand.cards + actorObj.abilities + state.abilities)
+            where isCardPlayable(card, actor: actor, state: state) {
+                activeCards.append(card)
             }
 
             if activeCards.isNotEmpty {
@@ -106,8 +103,8 @@ private extension GameReducer {
         }
     }
     
-    func isPlayable(ctx: EffectContext, state: GameState) -> Bool {
-        let cardName = ctx.get(.card).extractName()
+    func isCardPlayable(_ card: String, actor: String, state: GameState) -> Bool {
+        let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
             return false
         }
@@ -117,7 +114,7 @@ private extension GameReducer {
         }
         
         do {
-            let action = GameAction.play(ctx.get(.card), actor: ctx.get(.actor))
+            let action = GameAction.play(card, actor: actor)
             try action.validate(state: state)
             return true
         } catch {
@@ -125,21 +122,22 @@ private extension GameReducer {
         }
     }
     
-    func triggeredEffect(ctx: EffectContext, state: GameState) -> CardEffect? {
-        let cardName = ctx.get(.card).extractName()
+    func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
+        let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
             return nil
         }
         
         for action in cardObj.actions {
             do {
+                let ctx: EffectContext = [.actor: actor, .card: card]
                 let eventMatched = try action.eventReq.match(state: state, ctx: ctx)
                 if eventMatched {
                     let sideEffect = action.effect
                     let gameAction = GameAction.resolve(sideEffect, ctx: ctx)
                     try gameAction.validate(state: state)
-
-                    return sideEffect
+                    
+                    return gameAction
                 }
             } catch {
                 return nil
