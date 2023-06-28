@@ -114,6 +114,20 @@ final class GameSpec: QuickSpec {
                     expect(sut.turn) == "p1"
                 }
             }
+
+            context("modified queue") {
+                it("should have queued actions") {
+                    // Given
+                    // When
+                    let sut = GameState()
+                        .queue([.draw(player: "p1")])
+
+                    // Then
+                    expect(sut.queue) == [
+                        .draw(player: "p1")
+                    ]
+                }
+            }
             
             context("initialized with players") {
                 it("should have players") {
