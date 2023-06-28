@@ -6,7 +6,6 @@
 //
 
 extension CardArg {
-    // TODO: chooser, owner: optional with default value nil
     func resolve(
         state: GameState,
         ctx: EffectContext,
