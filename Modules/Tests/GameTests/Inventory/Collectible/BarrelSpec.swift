@@ -99,10 +99,10 @@ final class BarrelSpec: QuickSpec {
             }
             
             xcontext("two flipped cards") {
-                
+                // Given
+                // When
+                // Then
             }
-            
-            
         }
     }
 }

@@ -40,6 +40,23 @@ extension PlayerArg {
         }
         return output
     }
+
+    func resolveAsUniqueId(state: GameState, ctx: EffectContext) throws -> String {
+        if case let .id(pId) = self {
+            return pId
+        } else {
+            let output = try self.resolve(state: state, ctx: ctx)
+            guard case let .identified(pIds) = output else {
+                throw GameError.noPlayer(self)
+            }
+
+            guard pIds.count == 1 else {
+                fatalError("unexpected")
+            }
+
+            return pIds[0]
+        }
+    }
 }
 
 protocol PlayerArgResolverProtocol {

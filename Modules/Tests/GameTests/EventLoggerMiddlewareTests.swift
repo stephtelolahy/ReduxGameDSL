@@ -13,5 +13,4 @@ final class EventLoggerMiddlewareTests: XCTestCase {
     func testRemovingPackageName() {
         XCTAssertEqual(GameAction.cancel.loggerDescription, "cancel")
     }
-
 }
