@@ -17,6 +17,12 @@ struct ActionPlayHandicap: GameReducerProtocol {
             throw GameError.cardNotFound(card)
         }
 
+        let cardName = card.extractName()
+        let targetObj = state.player(target)
+        guard targetObj.inPlay.cards.allSatisfy({ $0.extractName() != cardName }) else {
+            throw GameError.cardAlreadyInPlay(cardName)
+        }
+        
         try state[keyPath: \GameState.players[actor]]?.hand.remove(card)
         state[keyPath: \GameState.players[target]]?.inPlay.add(card)
 
