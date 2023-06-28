@@ -41,6 +41,8 @@ private extension GameAction {
             return ActionDraw(player: player)
         case let .steal(card, target, player):
             return ActionSteal(player: player, target: target, card: card)
+        case let .passInplay(card, target, player):
+            return ActionPassInPlay(card: card, target: target, player: player)
         case .discover:
             return ActionDiscover()
         case .luck:

@@ -21,6 +21,10 @@ struct EffectLuck: EffectResolverProtocol {
         let matched = card.matches(regex: regex)
         if matched {
             result.append(.resolve(onSuccess, ctx: ctx))
+        } else {
+            if let onFailure {
+                result.append(.resolve(onFailure, ctx: ctx))
+            }
         }
         
         return result

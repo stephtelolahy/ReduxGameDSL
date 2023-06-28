@@ -103,6 +103,10 @@ public enum CardList {
     static let dynamite = Card(.dynamite, type: .equipment) {
         CardEffect.nothing
             .triggered(.onPlay)
+        CardEffect.luck(.regexPassDynamite,
+                        onSuccess: .passInplay(.played, owner: .actor).target(.next),
+                        onFailure: .damage(3).target(.actor))
+            .triggered(.onSetTurn)
     }
 
     static let jail = Card(.jail, type: .handicap) {

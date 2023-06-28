@@ -33,8 +33,8 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
+                        expect(result.event) == action
                         expect(result.player("p1").attributes[.health]) == 3
-                        expect(result.event) == .heal(1, player: "p1")
                     }
                 }
 
@@ -45,8 +45,8 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
+                        expect(result.event) == action
                         expect(result.player("p1").attributes[.health]) == 4
-                        expect(result.event) == .heal(2, player: "p1")
                     }
                 }
 
@@ -57,8 +57,8 @@ final class HealSpec: QuickSpec {
                         let result = sut.reduce(state: state, action: action)
 
                         // Then
+                        expect(result.event) == action
                         expect(result.player("p1").attributes[.health]) == 4
-                        expect(result.event) == .heal(3, player: "p1")
                     }
                 }
             }

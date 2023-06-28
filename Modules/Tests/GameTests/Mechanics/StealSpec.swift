@@ -32,9 +32,9 @@ final class StealSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
+                    expect(result.event) == action
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").hand.cards) == ["c22"]
-                    expect(result.event) == .steal("c21", target: "p2", player: "p1")
                 }
             }
 
@@ -56,9 +56,9 @@ final class StealSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
+                    expect(result.event) == action
                     expect(result.player("p1").hand.cards) == ["c21"]
                     expect(result.player("p2").inPlay.cards) == ["c22"]
-                    expect(result.event) == .steal("c21", target: "p2", player: "p1")
                 }
             }
 

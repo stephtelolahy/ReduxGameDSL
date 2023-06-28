@@ -13,20 +13,7 @@ struct EffectDiscard: EffectResolverProtocol {
         let owner = ctx.get(.target)
         var chooserId = owner
         if let chooser {
-            if case let .id(cId) = chooser {
-                chooserId = cId
-            } else {
-                let output = try chooser.resolve(state: state, ctx: ctx)
-                guard case let .identified(pIds) = output else {
-                    fatalError("unexpected")
-                }
-
-                guard pIds.count == 1 else {
-                    fatalError("unexpected")
-                }
-
-                chooserId = pIds[0]
-            }
+            chooserId = try chooser.resolveAsUniqueId(state: state, ctx: ctx)
         }
 
         return try card.resolve(state: state, ctx: ctx, chooser: chooserId, owner: owner) {

@@ -38,6 +38,10 @@ public extension GameState {
     func ability(_ value: String) -> Self {
         copy { $0.abilities.append(value) }
     }
+
+    func queue(_ value: [GameAction]) -> Self {
+        copy { $0.queue = value }
+    }
 }
 
 private extension GameState {

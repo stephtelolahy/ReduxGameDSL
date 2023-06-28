@@ -26,8 +26,27 @@ final class EliminateSpec: QuickSpec {
                 let result = sut.reduce(state: state, action: action)
 
                 // Then
+                expect(result.event) == action
                 expect(result.playOrder) == ["p2"]
-                expect(result.event) == .eliminate(player: "p1")
+            }
+
+            it("should remove queued effects") {
+                // Given
+                let state = GameState {
+                    Player("p1")
+                    Player("p2")
+                }
+                .queue([
+                    .resolve(.draw, ctx: [.actor: "p1"])
+                ])
+
+                // When
+                let action = GameAction.eliminate(player: "p1")
+                let result = sut.reduce(state: state, action: action)
+
+                // Then
+                expect(result.event) == action
+                expect(result.queue).to(beEmpty())
             }
         }
     }

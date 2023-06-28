@@ -31,9 +31,9 @@ final class LuckSpec: QuickSpec {
                 let result = sut.reduce(state: state, action: action)
                 
                 // Then
+                expect(result.event) == action
                 expect(result.discard.top) == "c2"
                 expect(result.deck.top) == "c3"
-                expect(result.event) == .luck
             }
         }
     }

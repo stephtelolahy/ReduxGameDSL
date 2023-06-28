@@ -28,6 +28,9 @@ public indirect enum CardEffect: Codable, Equatable {
     /// When chooser is the player that chooses and steals cards
     case steal(CardArg, chooser: PlayerArg)
     
+    /// Pass inPlay card to another player
+    case passInplay(CardArg, owner: PlayerArg)
+    
     /// Choose some cards from arena
     /// When chooser is `ctx.target`
     case chooseCard

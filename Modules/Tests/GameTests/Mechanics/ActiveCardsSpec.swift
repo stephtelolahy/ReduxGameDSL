@@ -36,7 +36,7 @@ final class ActiveCardsSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.event) == .group([])
+                    expect(result.event) == action
                     expect(result.error) == nil
                     expect(result.active) == ActiveCards(player: "p1", cards: [
                         .saloon,

@@ -87,12 +87,20 @@ extension Array where Element == String {
 private extension CardArg {
     func resolver() -> CardArgResolverProtocol {
         switch self {
-        case .selectAny: return CardSelectAny()
-        case .selectArena: return CardSelectArena()
-        case .selectHandNamed(let name): return CardSelectHandNamed(name: name)
-        case .selectHand: return CardSelectHand()
-        case .all: return CardAll()
-        default: fatalError("No resolver found for \(self)")
+        case .selectAny:
+            return CardSelectAny()
+        case .selectArena:
+            return CardSelectArena()
+        case .selectHandNamed(let name):
+            return CardSelectHandNamed(name: name)
+        case .selectHand:
+            return CardSelectHand()
+        case .all:
+            return CardAll()
+        case .played:
+            return CardPlayed()
+        default:
+            fatalError("No resolver found for \(self)")
         }
     }
 }
