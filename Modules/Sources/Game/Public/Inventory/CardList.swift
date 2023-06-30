@@ -113,6 +113,10 @@ public enum CardList {
         CardEffect.nothing
             .target(.selectAny)
             .triggered(.onPlay)
+        CardEffect.luck(.regexEscapeFromJail,
+                        onSuccess: .discard(.played).target(.actor),
+                        onFailure: .group([.discard(.played).target(.actor), .setTurn.target(.next)]))
+        .triggered(.onSetTurn)
     }
     
     // MARK: - Abilities

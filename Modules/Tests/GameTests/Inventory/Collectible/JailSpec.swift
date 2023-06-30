@@ -38,34 +38,35 @@ final class JailSpec: QuickSpec {
             }
         }
         
-        xdescribe("triggering jail") {
+        describe("triggering jail") {
             context("flipped card is hearts") {
-                it("should scape from jail and start turn normally") {
+                it("should scape from jail") {
                     // Given
                     let state = createGame {
                         Player("p1") {
-                            Hand {
-                                .bang
-                            }
-                        }
-                        Player("p2") {
                             InPlay {
-                                .barrel
+                                .jail
                             }
                         }
+                        Player("p2")
                         Deck {
                             "c1-2♥️"
+                            "c2"
+                            "c3"
                         }
                     }
+                        .ability(.drawOnSetTurn)
 
                     // When
-                    let action = GameAction.playImmediate(.bang, target: "p2", actor: "p1")
+                    let action = GameAction.setTurn("p1")
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
+                    expect(result) == [.success(.setTurn("p1")),
                                        .success(.luck),
-                                       .success(.cancel)]
+                                       .success(.discard(.jail, player: "p1")),
+                                       .success(.draw(player: "p1")),
+                                       .success(.draw(player: "p1"))]
                 }
             }
 
@@ -74,34 +75,34 @@ final class JailSpec: QuickSpec {
                     // Given
                     let state = createGame {
                         Player("p1") {
-                            Hand {
-                                .bang
-                            }
-                        }
-                        Player("p2") {
                             InPlay {
-                                .barrel
+                                .jail
                             }
                         }
+                        Player("p2")
                         Deck {
                             "c1-A♠️"
+                            "c2"
+                            "c3"
+                            "c4"
+                            "c5"
                         }
                     }
+                        .ability(.drawOnSetTurn)
 
                     // When
-                    let action = GameAction.playImmediate(.bang, target: "p2", actor: "p1")
-                    let result = self.awaitAction(action, choices: [.pass], state: state)
+                    let action = GameAction.setTurn("p1")
+                    let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
+                    expect(result) == [.success(.setTurn("p1")),
                                        .success(.luck),
-                                       .success(.chooseOne(player: "p2", options: [
-                                        .pass: .damage(1, player: "p2")
-                                       ])),
-                                       .success(.damage(1, player: "p2"))]
+                                       .success(.discard(.jail, player: "p1")),
+                                       .success(.setTurn("p2")),
+                                       .success(.draw(player: "p2")),
+                                       .success(.draw(player: "p2"))]
                 }
             }
         }
     }
 }
-
