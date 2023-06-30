@@ -31,7 +31,7 @@ final class BangSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Assert
-                    expect(result) == [.failure(.noReq(.isTimesPerTurn(1)))]
+                    expect(result) == [.error(.noReq(.isTimesPerTurn(1)))]
                 }
             }
 
@@ -54,7 +54,7 @@ final class BangSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.noPlayer(.selectReachable))]
+                    expect(result) == [.error(.noPlayer(.selectReachable))]
                 }
             }
 
@@ -80,15 +80,15 @@ final class BangSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(player: "p1", options: [
+                        .chooseOne(player: "p1", options: [
                             "p2": .playImmediate(.bang, target: "p2", actor: "p1")
-                        ])),
-                        .success(.playImmediate(.bang, target: "p2", actor: "p1")),
-                        .success(.chooseOne(player: "p2", options: [
+                        ]),
+                        .playImmediate(.bang, target: "p2", actor: "p1"),
+                        .chooseOne(player: "p2", options: [
                             .missed: .discard(.missed, player: "p2"),
                             .pass: .damage(1, player: "p2")
-                        ])),
-                        .success(.discard(.missed, player: "p2"))
+                        ]),
+                        .discard(.missed, player: "p2")
                     ]
                 }
             }
@@ -111,14 +111,14 @@ final class BangSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(player: "p1", options: [
+                        .chooseOne(player: "p1", options: [
                             "p2": .playImmediate(.bang, target: "p2", actor: "p1")
-                        ])),
-                        .success(.playImmediate(.bang, target: "p2", actor: "p1")),
-                        .success(.chooseOne(player: "p2", options: [
+                        ]),
+                        .playImmediate(.bang, target: "p2", actor: "p1"),
+                        .chooseOne(player: "p2", options: [
                             .pass: .damage(1, player: "p2")
-                        ])),
-                        .success(.damage(1, player: "p2"))
+                        ]),
+                        .damage(1, player: "p2")
                     ]
                 }
             }

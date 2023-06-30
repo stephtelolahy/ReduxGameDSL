@@ -178,8 +178,7 @@ public extension GameAction {
         switch self {
         case .play,
              .resolve,
-             .group,
-             .error:
+             .group:
             return false
 
         default:

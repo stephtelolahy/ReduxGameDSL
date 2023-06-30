@@ -33,9 +33,9 @@ final class DiscardCardsOnEliminatedSpec: QuickSpec {
                     
                     // Then
                     expect(result) == [
-                        .success(.eliminate(player: "p1")),
-                        .success(.discard("c2", player: "p1")),
-                        .success(.discard("c1", player: "p1"))
+                        .eliminate(player: "p1"),
+                        .discard("c2", player: "p1"),
+                        .discard("c1", player: "p1")
                     ]
                 }
             }

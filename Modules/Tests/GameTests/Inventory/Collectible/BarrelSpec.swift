@@ -28,7 +28,7 @@ final class BarrelSpec: QuickSpec {
                 let result = self.awaitAction(action, state: state)
                 
                 // Then
-                expect(result) == [.success(.playEquipment(.barrel, actor: "p1"))]
+                expect(result) == [.playEquipment(.barrel, actor: "p1")]
             }
         }
         
@@ -58,9 +58,11 @@ final class BarrelSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
-                                           .success(.luck),
-                                           .success(.cancel)]
+                        expect(result) == [
+                            .playImmediate(.bang, target: "p2", actor: "p1"),
+                            .luck,
+                            .cancel
+                        ]
                     }
                 }
                 
@@ -88,12 +90,14 @@ final class BarrelSpec: QuickSpec {
                         let result = self.awaitAction(action, choices: [.pass], state: state)
                         
                         // Then
-                        expect(result) == [.success(.playImmediate(.bang, target: "p2", actor: "p1")),
-                                           .success(.luck),
-                                           .success(.chooseOne(player: "p2", options: [
-                                            .pass: .damage(1, player: "p2")
-                                           ])),
-                                           .success(.damage(1, player: "p2"))]
+                        expect(result) == [
+                            .playImmediate(.bang, target: "p2", actor: "p1"),
+                            .luck,
+                            .chooseOne(player: "p2", options: [
+                                .pass: .damage(1, player: "p2")
+                            ]),
+                            .damage(1, player: "p2")
+                        ]
                     }
                 }
             }

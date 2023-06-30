@@ -29,8 +29,8 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: "p1")),
-                        .success(.eliminate(player: "p1"))
+                        .damage(1, player: "p1"),
+                        .eliminate(player: "p1")
                     ]
                 }
             }
@@ -50,7 +50,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.damage(1, player: "p1"))
+                        .damage(1, player: "p1")
                     ]
                 }
             }

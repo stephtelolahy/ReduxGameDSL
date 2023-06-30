@@ -29,8 +29,8 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.eliminate(player: "p3")),
-                        .success(.setTurn("p1"))
+                        .eliminate(player: "p3"),
+                        .setTurn("p1")
                     ]
                 }
             }
@@ -65,12 +65,12 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.eliminate(player: "p1")),
-                        .success(.discard("c12", player: "p1")),
-                        .success(.discard("c11", player: "p1")),
-                        .success(.setTurn("p2")),
-                        .success(.draw(player: "p2")),
-                        .success(.draw(player: "p2"))
+                        .eliminate(player: "p1"),
+                        .discard("c12", player: "p1"),
+                        .discard("c11", player: "p1"),
+                        .setTurn("p2"),
+                        .draw(player: "p2"),
+                        .draw(player: "p2")
                     ]
                 }
             }

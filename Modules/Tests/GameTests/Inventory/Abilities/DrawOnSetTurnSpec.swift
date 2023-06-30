@@ -31,9 +31,9 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     
                     // Then
                     expect(result) == [
-                        .success(.setTurn("p1")),
-                        .success(.draw(player: "p1")),
-                        .success(.draw(player: "p1"))
+                        .setTurn("p1"),
+                        .draw(player: "p1"),
+                        .draw(player: "p1")
                     ]
                 }
             }
@@ -59,10 +59,10 @@ final class DrawOnSetTurnSpec: QuickSpec {
                     
                     // Then
                     expect(result) == [
-                        .success(.setTurn("p1")),
-                        .success(.draw(player: "p1")),
-                        .success(.draw(player: "p1")),
-                        .success(.draw(player: "p1"))
+                        .setTurn("p1"),
+                        .draw(player: "p1"),
+                        .draw(player: "p1"),
+                        .draw(player: "p1")
                     ]
                 }
             }
