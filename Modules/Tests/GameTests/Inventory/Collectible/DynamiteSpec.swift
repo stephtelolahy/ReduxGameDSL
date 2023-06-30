@@ -93,6 +93,7 @@ final class DynamiteSpec: QuickSpec {
                         expect(result) == [.success(.setTurn("p1")),
                                            .success(.luck),
                                            .success(.damage(3, player: "p1")),
+                                           .success(.discard("dynamite", player: "p1")),
                                            .success(.draw(player: "p1")),
                                            .success(.draw(player: "p1"))]
                     }
