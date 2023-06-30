@@ -30,8 +30,10 @@ final class JailSpec: QuickSpec {
                 
                 // Then
                 expect(result) == [
-                    .success(.playEquipment(.barrel, actor: "p1")),
-                    .su
+                    .success(.chooseOne(player: "p1", options: [
+                        "p2": .playHandicap(.jail, target: "p2", actor: "p1")
+                    ])),
+                    .success(.playHandicap(.jail, target: "p2", actor: "p1"))
                 ]
             }
         }

@@ -68,7 +68,7 @@ final class DynamiteSpec: QuickSpec {
             
             context("flipped card is spades") {
                 context("not lethal") {
-                    it("should apply damage") {
+                    it("should apply damage and discard card") {
                         // Given
                         let state = createGame {
                             Player("p1") {
@@ -126,6 +126,7 @@ final class DynamiteSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
+                        // TODO: discard all cards on eliminated, before starting next turn
                         expect(result) == [.success(.setTurn("p1")),
                                            .success(.luck),
                                            .success(.damage(3, player: "p1")),
