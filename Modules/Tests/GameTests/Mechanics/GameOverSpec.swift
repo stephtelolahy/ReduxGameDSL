@@ -62,7 +62,6 @@ final class GameOverSpec: QuickSpec {
 
                 // Then
                 expect(result.event) == nil
-                expect(result.error) == nil
             }
         }
     }

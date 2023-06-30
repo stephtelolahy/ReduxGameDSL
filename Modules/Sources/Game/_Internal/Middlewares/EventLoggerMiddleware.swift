@@ -9,12 +9,13 @@ import Combine
 
 let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     if let event = state.event {
-        let flag = event.isRenderable ? "✅" : "➡️"
-        print("\(flag) \(event.loggerDescription)")
-    }
-    
-    if let error = state.error {
-        print("❌ \(error.loggerDescription)")
+        let flag: String
+        if case let .error(error) = event {
+            print("❌ \(error.loggerDescription)")
+        } else {
+            let flag = event.isRenderable ? "✅" : "➡️"
+            print("\(flag) \(event.loggerDescription)")
+        }
     }
     
     if let active = state.active {

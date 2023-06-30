@@ -56,7 +56,7 @@ final class PlayEquipmentSpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == GameError.cardAlreadyInPlay("c")
+                    expect(result.event) == .error(.cardAlreadyInPlay("c"))
                 }
             }
         }

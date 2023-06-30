@@ -29,11 +29,7 @@ extension XCTestCase {
                event.isRenderable {
                 result.append(.success(event))
             }
-            
-            if let error = state.error {
-                result.append(.failure(error))
-            }
-            
+
             if let chooseOne = state.chooseOne {
                 guard !choices.isEmpty else {
                     XCTFail("Expected a choice between \(chooseOne.options.keys)", file: file, line: line)

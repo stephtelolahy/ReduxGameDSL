@@ -37,7 +37,6 @@ final class ActiveCardsSpec: QuickSpec {
 
                     // Then
                     expect(result.event) == action
-                    expect(result.error) == nil
                     expect(result.active) == ActiveCards(player: "p1", cards: [
                         .saloon,
                         .gatling

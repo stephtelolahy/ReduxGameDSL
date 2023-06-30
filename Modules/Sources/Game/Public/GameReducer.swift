@@ -17,7 +17,6 @@ public struct GameReducer: ReducerProtocol {
 
         var state = state
         state.event = nil
-        state.error = nil
 
         do {
             state = try prepare(action: action, state: state)
@@ -25,7 +24,9 @@ public struct GameReducer: ReducerProtocol {
             state.event = action
             state = postExecute(action: action, state: state)
         } catch {
-            state.error = error as? GameError
+            if let gameError = error as? GameError {
+                state.event = .error(gameError)
+            }
         }
 
         return state
@@ -177,7 +178,8 @@ public extension GameAction {
         switch self {
         case .play,
              .resolve,
-             .group:
+             .group,
+             .error:
             return false
 
         default:
