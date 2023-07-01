@@ -59,6 +59,8 @@ private extension GameAction {
             return ActionResolve(effect: effect, ctx: ctx)
         case let .chooseOne(player, options):
             return ActionChooseOne(chooser: player, options: options)
+        case let .activateCard(player, cards):
+            return ActionActivateCard(player: player, cards: cards)
         case .cancel:
             return ActionCancel()
         default:

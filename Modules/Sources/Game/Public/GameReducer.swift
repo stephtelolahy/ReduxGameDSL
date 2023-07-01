@@ -90,6 +90,7 @@ private extension GameReducer {
         if state.queue.isEmpty,
            state.isOver == nil,
            state.chooseOne == nil,
+           state.event?.isActiveCard != true,
            let actor = state.turn,
            let actorObj = state.players[actor] {
             var activeCards: [String] = []
@@ -99,7 +100,7 @@ private extension GameReducer {
             }
 
             if activeCards.isNotEmpty {
-                state.active = ActiveCards(player: actor, cards: activeCards)
+                state.queue.insert(.activateCard(player: actor, cards: activeCards), at: 0)
             }
         }
     }
@@ -183,6 +184,15 @@ public extension GameAction {
 
         default:
             return true
+        }
+    }
+
+    var isActiveCard: Bool {
+        switch self {
+        case .activateCard:
+            return true
+        default:
+            return false
         }
     }
 }

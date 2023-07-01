@@ -37,10 +37,12 @@ final class ActiveCardsSpec: QuickSpec {
 
                     // Then
                     expect(result.event) == action
-                    expect(result.active) == ActiveCards(player: "p1", cards: [
-                        .saloon,
-                        .gatling
-                    ])
+                    expect(result.queue) == [
+                        .activateCard(player: "p1", cards: [
+                            .saloon,
+                            .gatling
+                        ])
+                    ]
                 }
             }
         }
