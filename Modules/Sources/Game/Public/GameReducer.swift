@@ -63,7 +63,6 @@ private extension GameReducer {
     func postExecute(action: GameAction, state: GameState) -> State {
         var state = state
         queueTriggered(state: &state)
-        emitActiveCards(state: &state)
         updateGameOver(state: &state)
         return state
     }
@@ -85,45 +84,7 @@ private extension GameReducer {
         }
         state.queue.insert(contentsOf: triggered, at: 0)
     }
-    
-    func emitActiveCards(state: inout GameState) {
-        if state.queue.isEmpty,
-           state.isOver == nil,
-           state.chooseOne == nil,
-           state.event?.isActiveCard != true,
-           let actor = state.turn,
-           let actorObj = state.players[actor] {
-            var activeCards: [String] = []
-            for card in (actorObj.hand.cards + actorObj.abilities + state.abilities)
-            where isCardPlayable(card, actor: actor, state: state) {
-                activeCards.append(card)
-            }
 
-            if activeCards.isNotEmpty {
-                state.queue.insert(.activateCard(player: actor, cards: activeCards), at: 0)
-            }
-        }
-    }
-    
-    func isCardPlayable(_ card: String, actor: String, state: GameState) -> Bool {
-        let cardName = card.extractName()
-        guard let cardObj = state.cardRef[cardName] else {
-            return false
-        }
-        
-        guard cardObj.actions.contains(where: { $0.eventReq == .onPlay }) else {
-            return false
-        }
-        
-        do {
-            let action = GameAction.play(card, actor: actor)
-            try action.validate(state: state)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
     func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
@@ -156,7 +117,7 @@ private extension GameReducer {
     }
 }
 
-private extension GameAction {
+extension GameAction {
     func validate(state: GameState) throws {
         var state = try reduce(state: state)
         if state.queue.isNotEmpty {
@@ -184,15 +145,6 @@ public extension GameAction {
 
         default:
             return true
-        }
-    }
-
-    var isActiveCard: Bool {
-        switch self {
-        case .activateCard:
-            return true
-        default:
-            return false
         }
     }
 }
