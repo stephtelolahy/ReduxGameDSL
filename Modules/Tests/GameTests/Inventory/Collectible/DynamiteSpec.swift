@@ -29,7 +29,7 @@ final class DynamiteSpec: QuickSpec {
                 
                 // Then
                 expect(result) == [
-                    .success(.playEquipment(.dynamite, actor: "p1"))
+                    .playEquipment(.dynamite, actor: "p1")
                 ]
             }
         }
@@ -58,17 +58,17 @@ final class DynamiteSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.setTurn("p1")),
-                                       .success(.luck),
-                                       .success(.passInplay(.dynamite, target: "p2", player: "p1")),
-                                       .success(.draw(player: "p1")),
-                                       .success(.draw(player: "p1"))]
+                    expect(result) == [.setTurn("p1"),
+                                       .luck,
+                                       .passInplay(.dynamite, target: "p2", player: "p1"),
+                                       .draw(player: "p1"),
+                                       .draw(player: "p1")]
                 }
             }
             
             context("flipped card is spades") {
                 context("not lethal") {
-                    it("should apply damage") {
+                    it("should apply damage and discard card") {
                         // Given
                         let state = createGame {
                             Player("p1") {
@@ -90,11 +90,12 @@ final class DynamiteSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.success(.setTurn("p1")),
-                                           .success(.luck),
-                                           .success(.damage(3, player: "p1")),
-                                           .success(.draw(player: "p1")),
-                                           .success(.draw(player: "p1"))]
+                        expect(result) == [.setTurn("p1"),
+                                           .luck,
+                                           .damage(3, player: "p1"),
+                                           .discard("dynamite", player: "p1"),
+                                           .draw(player: "p1"),
+                                           .draw(player: "p1")]
                     }
                 }
                 
@@ -119,19 +120,20 @@ final class DynamiteSpec: QuickSpec {
                         .ability(.eliminateOnLooseLastHealth)
                         .ability(.nextTurnOnEliminated)
                         .ability(.drawOnSetTurn)
+                        // TODO: discard all cards on eliminated
                         
                         // When
                         let action = GameAction.setTurn("p1")
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        expect(result) == [.success(.setTurn("p1")),
-                                           .success(.luck),
-                                           .success(.damage(3, player: "p1")),
-                                           .success(.eliminate(player: "p1")),
-                                           .success(.setTurn("p2")),
-                                           .success(.draw(player: "p2")),
-                                           .success(.draw(player: "p2"))]
+                        expect(result) == [.setTurn("p1"),
+                                           .luck,
+                                           .damage(3, player: "p1"),
+                                           .eliminate(player: "p1"),
+                                           .setTurn("p2"),
+                                           .draw(player: "p2"),
+                                           .draw(player: "p2")]
                     }
                 }
             }

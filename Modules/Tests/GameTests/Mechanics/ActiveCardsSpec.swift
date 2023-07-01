@@ -7,7 +7,7 @@
 
 import Quick
 import Nimble
-import Game
+@testable import Game
 
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {
@@ -32,13 +32,10 @@ final class ActiveCardsSpec: QuickSpec {
                     .cardRef(CardList.all)
 
                     // When
-                    let action = GameAction.group([])
-                    let result = sut.reduce(state: state, action: action)
+                    let result = state.evaluateActive()
 
                     // Then
-                    expect(result.event) == action
-                    expect(result.error) == nil
-                    expect(result.active) == ActiveCards(player: "p1", cards: [
+                    expect(result) == .activateCard(player: "p1", cards: [
                         .saloon,
                         .gatling
                     ])

@@ -32,8 +32,8 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.success(.playImmediate(.beer, actor: "p1")),
-                                       .success(.heal(1, player: "p1"))]
+                    expect(result) == [.playImmediate(.beer, actor: "p1"),
+                                       .heal(1, player: "p1")]
                 }
             }
 
@@ -57,7 +57,7 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.playerAlreadyMaxHealth("p1"))]
+                    expect(result) == [.error(.playerAlreadyMaxHealth("p1"))]
                 }
             }
 
@@ -80,7 +80,7 @@ final class BeerSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == [.failure(.noReq(.isPlayersAtLeast(3)))]
+                    expect(result) == [.error(.noReq(.isPlayersAtLeast(3)))]
                 }
             }
         }

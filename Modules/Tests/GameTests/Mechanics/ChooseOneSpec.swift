@@ -42,7 +42,7 @@ final class ChooseOneSpec: QuickSpec {
 
                     // Then
                     expect(result.chooseOne) == nil
-                    expect(result.error) == nil
+                    expect(result.event) == action
                 }
             }
 
@@ -54,7 +54,7 @@ final class ChooseOneSpec: QuickSpec {
 
                     // Then
                     expect(result.chooseOne) != nil
-                    expect(result.error) == .unwaitedAction
+                    expect(result.event) == .error(.unwaitedAction)
                 }
             }
         }

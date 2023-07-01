@@ -9,22 +9,14 @@ import Combine
 
 let eventLoggerMiddleware: Middleware<GameState, GameAction> = { state, _ in
     if let event = state.event {
-        let flag = event.isRenderable ? "✅" : "➡️"
-        print("\(flag) \(event.loggerDescription)")
+        if case let .error(error) = event {
+            print("❌ \(error.loggerDescription)")
+        } else if event.isRenderable {
+            print("✅ \(event.loggerDescription)")
+        } else {
+            print("➡️ \(event.loggerDescription)")
+        }
     }
-    
-    if let error = state.error {
-        print("❌ \(error.loggerDescription)")
-    }
-    
-    if let active = state.active {
-        print("🎲 active: \(active.cards.joined(separator: ", "))")
-    }
-    
-    if let chooseOne = state.chooseOne {
-        print("🎲 chooseOne: \(chooseOne.options.keys.joined(separator: ", "))")
-    }
-    
     return Empty().eraseToAnyPublisher()
 }
 

@@ -68,11 +68,14 @@ public indirect enum GameAction: Codable, Equatable {
     case luck
 
     /// Cancel next queued effect
-    case cancel
+    case cancel(CancelArg)
 
-    /// Ask a choice
+    /// Expose a choice
     case chooseOne(player: String, options: [String: Self])
-    
+
+    /// Expose active cards
+    case activateCard(player: String, cards: [String])
+
     // MARK: - Invisible actions
 
     /// Resolve an effect
@@ -80,4 +83,9 @@ public indirect enum GameAction: Codable, Equatable {
 
     /// Dispatch actions sequentially
     case group([Self])
+
+    // MARK: - Not action
+
+    /// Occured error
+    case error(GameError)
 }

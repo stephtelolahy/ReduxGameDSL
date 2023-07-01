@@ -28,8 +28,8 @@ final class EndTurnSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.playAbility(.endTurn, actor: "p1")),
-                        .success(.setTurn("p2"))
+                        .playAbility(.endTurn, actor: "p1"),
+                        .setTurn("p2")
                     ]
                 }
             }
@@ -56,8 +56,8 @@ final class EndTurnSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.playAbility(.endTurn, actor: "p1")),
-                        .success(.setTurn("p2"))
+                        .playAbility(.endTurn, actor: "p1"),
+                        .setTurn("p2")
                     ]
                 }
             }
@@ -84,14 +84,14 @@ final class EndTurnSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.playAbility(.endTurn, actor: "p1")),
-                        .success(.chooseOne(player: "p1", options: [
+                        .playAbility(.endTurn, actor: "p1"),
+                        .chooseOne(player: "p1", options: [
                             "c1": .discard("c1", player: "p1"),
                             "c2": .discard("c2", player: "p1"),
                             "c3": .discard("c3", player: "p1")
-                        ])),
-                        .success(.discard("c1", player: "p1")),
-                        .success(.setTurn("p2"))
+                        ]),
+                        .discard("c1", player: "p1"),
+                        .setTurn("p2")
                     ]
                 }
             }
@@ -118,19 +118,19 @@ final class EndTurnSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.playAbility(.endTurn, actor: "p1")),
-                        .success(.chooseOne(player: "p1", options: [
+                        .playAbility(.endTurn, actor: "p1"),
+                        .chooseOne(player: "p1", options: [
                             "c1": .discard("c1", player: "p1"),
                             "c2": .discard("c2", player: "p1"),
                             "c3": .discard("c3", player: "p1")
-                        ])),
-                        .success(.discard("c1", player: "p1")),
-                        .success(.chooseOne(player: "p1", options: [
+                        ]),
+                        .discard("c1", player: "p1"),
+                        .chooseOne(player: "p1", options: [
                             "c2": .discard("c2", player: "p1"),
                             "c3": .discard("c3", player: "p1")
-                        ])),
-                        .success(.discard("c3", player: "p1")),
-                        .success(.setTurn("p2"))
+                        ]),
+                        .discard("c3", player: "p1"),
+                        .setTurn("p2")
                     ]
                 }
             }

@@ -36,9 +36,9 @@ final class SaloonSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.success(.playImmediate(.saloon, actor: "p1")),
-                                       .success(.heal(1, player: "p2")),
-                                       .success(.heal(1, player: "p3"))]
+                    expect(result) == [.playImmediate(.saloon, actor: "p1"),
+                                       .heal(1, player: "p2"),
+                                       .heal(1, player: "p3")]
                 }
             }
             
@@ -63,7 +63,7 @@ final class SaloonSpec: QuickSpec {
                     let result = self.awaitAction(action, state: state)
                     
                     // Then
-                    expect(result) == [.failure(.noPlayer(.damaged))]
+                    expect(result) == [.error(.noPlayer(.damaged))]
                 }
             }
         }

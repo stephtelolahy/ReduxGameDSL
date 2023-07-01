@@ -41,21 +41,21 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(player: "p1", options: [
+                        .chooseOne(player: "p1", options: [
                             "p2": .playImmediate(.duel, target: "p2", actor: "p1"),
                             "p3": .playImmediate(.duel, target: "p3", actor: "p1"),
                             "p4": .playImmediate(.duel, target: "p4", actor: "p1")
-                        ])),
-                        .success(.playImmediate(.duel, target: "p2", actor: "p1")),
-                        .success(.chooseOne(player: "p2", options: [
+                        ]),
+                        .playImmediate(.duel, target: "p2", actor: "p1"),
+                        .chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
                             .pass: .damage(1, player: "p2")
-                        ])),
-                        .success(.damage(1, player: "p2"))
+                        ]),
+                        .damage(1, player: "p2")
                     ]
                 }
             }
@@ -68,30 +68,30 @@ final class DuelSpec: QuickSpec {
 
                     // Then
                     expect(result) == [
-                        .success(.chooseOne(player: "p1", options: [
+                        .chooseOne(player: "p1", options: [
                             "p2": .playImmediate(.duel, target: "p2", actor: "p1"),
                             "p3": .playImmediate(.duel, target: "p3", actor: "p1"),
                             "p4": .playImmediate(.duel, target: "p4", actor: "p1")
-                        ])),
-                        .success(.playImmediate(.duel, target: "p2", actor: "p1")),
-                        .success(.chooseOne(player: "p2", options: [
+                        ]),
+                        .playImmediate(.duel, target: "p2", actor: "p1"),
+                        .chooseOne(player: "p2", options: [
                             "bang-2": .group([
                                 .discard("bang-2", player: "p2"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p2"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p1"])
                             ]),
                             .pass: .damage(1, player: "p2")
-                        ])),
-                        .success(.discard("bang-2", player: "p2")),
-                        .success(.chooseOne(player: "p1", options: [
+                        ]),
+                        .discard("bang-2", player: "p2"),
+                        .chooseOne(player: "p1", options: [
                             "bang-1": .group([
                                 .discard("bang-1", player: "p1"),
                                 // swiftlint:disable:next line_length
                                 .resolve(.challenge(.id("p1"), effect: .discard(.selectHandNamed(.bang)), otherwise: .damage(1)), ctx: [.actor: "p1", .card: .duel, .target: "p2"])
                             ]),
                             .pass: .damage(1, player: "p1")
-                        ])),
-                        .success(.damage(1, player: "p1"))
+                        ]),
+                        .damage(1, player: "p1")
                     ]
                 }
             }

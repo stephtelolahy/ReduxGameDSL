@@ -31,7 +31,7 @@ final class PlaySpec: QuickSpec {
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.error) == .cardNotPlayable(.missed)
+                    expect(result.event) == .error(.cardNotPlayable(.missed))
                 }
             }
 
@@ -59,7 +59,7 @@ final class PlaySpec: QuickSpec {
                     expect(result.queue) == [
                         .playImmediate(.beer, actor: "p1")
                     ]
-                    expect(result.error) == nil
+                    expect(result.event) == action
                 }
             }
 
@@ -83,7 +83,7 @@ final class PlaySpec: QuickSpec {
                     expect(result.queue) == [
                         .playEquipment(.dynamite, actor: "p1")
                     ]
-                    expect(result.error) == nil
+                    expect(result.event) == action
                 }
             }
 
@@ -111,7 +111,7 @@ final class PlaySpec: QuickSpec {
                             "p3": .playHandicap(.jail, target: "p3", actor: "p1"),
                             "p2": .playHandicap(.jail, target: "p2", actor: "p1")])
                     ]
-                    expect(result.error) == nil
+                    expect(result.event) == action
                 }
             }
         }

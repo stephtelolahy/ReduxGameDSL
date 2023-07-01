@@ -18,22 +18,18 @@ extension XCTestCase {
         timeout: TimeInterval = 0.5,
         file: StaticString = #file,
         line: UInt = #line
-    ) -> [Result<GameAction, GameError>] {
+    ) -> [GameAction] {
         let store = createGameStore(initial: state)
         var choices = choices
-        var result: [Result<GameAction, GameError>] = []
+        var events: [GameAction] = []
         let expectation = XCTestExpectation(description: "Awaiting game idle")
         expectation.isInverted = true
         let cancellable = store.$state.dropFirst(1).sink { state in
             if let event = state.event,
                event.isRenderable {
-                result.append(.success(event))
+                events.append(event)
             }
-            
-            if let error = state.error {
-                result.append(.failure(error))
-            }
-            
+
             if let chooseOne = state.chooseOne {
                 guard !choices.isEmpty else {
                     XCTFail("Expected a choice between \(chooseOne.options.keys)", file: file, line: line)
@@ -65,6 +61,6 @@ extension XCTestCase {
         XCTAssertTrue(store.state.queue.isEmpty, "Game must be idle", file: file, line: line)
         XCTAssertTrue(store.state.chooseOne == nil, "Game must be idle", file: file, line: line)
         
-        return result
+        return events
     }
 }

@@ -38,11 +38,8 @@ public struct GameState: GameElement, Codable, Equatable {
     /// Is Game over
     public var isOver: GameOver?
 
-    /// Completed event
+    /// Last occured event
     public var event: GameAction?
-    
-    /// Thrown error
-    public var error: GameError?
     
     /// Pending action
     public var chooseOne: ChooseOne?
