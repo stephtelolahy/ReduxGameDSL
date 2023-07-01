@@ -16,7 +16,6 @@ public struct GameReducer: ReducerProtocol {
         }
 
         var state = state
-        state.event = nil
 
         do {
             state = try prepare(action: action, state: state)

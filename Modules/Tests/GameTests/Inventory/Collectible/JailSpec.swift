@@ -70,7 +70,7 @@ final class JailSpec: QuickSpec {
                 }
             }
 
-            xcontext("flipped card is spades") {
+            context("flipped card is spades") {
                 it("should skip turn") {
                     // Given
                     let state = createGame {
@@ -97,6 +97,7 @@ final class JailSpec: QuickSpec {
                     // Then
                     expect(result) == [.setTurn("p1"),
                                        .luck,
+                                       .cancel(.startTurn),
                                        .discard(.jail, player: "p1"),
                                        .setTurn("p2"),
                                        .draw(player: "p2"),

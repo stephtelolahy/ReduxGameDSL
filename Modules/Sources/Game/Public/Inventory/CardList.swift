@@ -96,7 +96,7 @@ public enum CardList {
     static let barrel = Card(.barrel, type: .equipment) {
         CardEffect.nothing
             .triggered(.onPlay)
-        CardEffect.luck(.regexSaveByBarrel, onSuccess: .cancel)
+        CardEffect.luck(.regexSaveByBarrel, onSuccess: .cancel(.next))
             .triggered(.onForceDiscardHandNamed(.missed))
     }
     
@@ -105,7 +105,10 @@ public enum CardList {
             .triggered(.onPlay)
         CardEffect.luck(.regexPassDynamite,
                         onSuccess: .passInplay(.played, owner: .actor).target(.next),
-                        onFailure: .group([.damage(3).target(.actor), .discard(.played).target(.actor)]))
+                        onFailure: .group([
+                            .damage(3).target(.actor),
+                            .discard(.played).target(.actor)
+                        ]))
         .triggered(.onSetTurn)
     }
     
@@ -115,7 +118,11 @@ public enum CardList {
             .triggered(.onPlay)
         CardEffect.luck(.regexEscapeFromJail,
                         onSuccess: .discard(.played).target(.actor),
-                        onFailure: .group([.discard(.played).target(.actor), .setTurn.target(.next)]))
+                        onFailure: .group([
+                            .cancel(.startTurn),
+                            .discard(.played).target(.actor),
+                            .setTurn.target(.next)
+                        ]))
         .triggered(.onSetTurn)
     }
     

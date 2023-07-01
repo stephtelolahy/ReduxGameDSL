@@ -61,8 +61,8 @@ private extension GameAction {
             return ActionChooseOne(chooser: player, options: options)
         case let .activateCard(player, cards):
             return ActionActivateCard(player: player, cards: cards)
-        case .cancel:
-            return ActionCancel()
+        case let .cancel(arg):
+            return ActionCancel(arg: arg)
         default:
             fatalError("unimplemented action \(self)")
         }

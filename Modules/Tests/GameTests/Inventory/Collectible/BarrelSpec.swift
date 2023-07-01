@@ -61,7 +61,7 @@ final class BarrelSpec: QuickSpec {
                         expect(result) == [
                             .playImmediate(.bang, target: "p2", actor: "p1"),
                             .luck,
-                            .cancel
+                            .cancel(.next)
                         ]
                     }
                 }

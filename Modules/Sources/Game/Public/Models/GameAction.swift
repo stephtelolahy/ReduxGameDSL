@@ -68,7 +68,7 @@ public indirect enum GameAction: Codable, Equatable {
     case luck
 
     /// Cancel next queued effect
-    case cancel
+    case cancel(CancelArg)
 
     /// Expose a choice
     case chooseOne(player: String, options: [String: Self])
