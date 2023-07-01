@@ -9,13 +9,21 @@ import Combine
 
 /// Dispatching queued side effects
 let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
-    guard state.isOver == nil,
-          state.chooseOne == nil,
-          state.queue.isNotEmpty else {
-        return Empty()
-            .eraseToAnyPublisher()
+    guard let action = state.evaluateNextAction() else {
+        return Empty().eraseToAnyPublisher()
     }
     
-    return Just(state.queue[0])
-        .eraseToAnyPublisher()
+    return Just(action).eraseToAnyPublisher()
+}
+
+private extension GameState {
+    func evaluateNextAction() -> GameAction? {
+        guard isOver == nil,
+              chooseOne == nil,
+              queue.isNotEmpty else {
+            return nil
+        }
+
+        return queue[0]
+    }
 }
