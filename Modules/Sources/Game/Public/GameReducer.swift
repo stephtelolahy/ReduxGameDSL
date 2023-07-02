@@ -62,7 +62,6 @@ private extension GameReducer {
     func postExecute(action: GameAction, state: GameState) -> State {
         var state = state
         queueTriggered(state: &state)
-        updateGameOver(state: &state)
         return state
     }
     
@@ -87,6 +86,7 @@ private extension GameReducer {
     func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
+            // TODO: fatalError cardRef not found
             return nil
         }
         
@@ -107,13 +107,6 @@ private extension GameReducer {
         }
         return nil
     }
-
-    func updateGameOver(state: inout GameState) {
-        if case .eliminate = state.event,
-           let winner = state.evaluateWinner() {
-            state.isOver = GameOver(winner: winner)
-        }
-    }
 }
 
 extension GameAction {
@@ -132,7 +125,7 @@ extension GameAction {
             }
         }
     }
-    
+
     var isRenderable: Bool {
         switch self {
         case .play,

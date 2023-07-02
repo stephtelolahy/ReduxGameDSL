@@ -11,7 +11,6 @@ import Nimble
 
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {
-        let sut = GameReducer()
         describe("activating card") {
             context("game idle") {
                 it("should emit current turn's active card") {

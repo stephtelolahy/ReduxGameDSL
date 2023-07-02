@@ -76,6 +76,9 @@ public indirect enum GameAction: Codable, Equatable {
     /// Expose active cards
     case activateCard(player: String, cards: [String])
 
+    /// End game
+    case setGameOver(winner: String)
+
     // MARK: - Invisible actions
 
     /// Resolve an effect

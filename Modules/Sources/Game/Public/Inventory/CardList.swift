@@ -166,6 +166,11 @@ public enum CardList {
             .target(.actor)
             .triggered(.onEliminated)
     }
+
+    static let gameOverOnEliminated = Card(.gameOverOnEliminated) {
+        CardEffect.evaluateGameOver
+            .triggered(.onEliminated)
+    }
     
     public static let all: [String: Card] = createCards {
         beer
@@ -188,6 +193,7 @@ public enum CardList {
         eliminateOnLooseLastHealth
         nextTurnOnEliminated
         discardCardsOnEliminated
+        gameOverOnEliminated
     }
     
     private static func createCards(@CardBuilder _ content: () -> [Card]) -> [String: Card] {

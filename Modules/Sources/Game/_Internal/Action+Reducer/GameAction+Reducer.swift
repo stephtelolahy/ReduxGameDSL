@@ -63,6 +63,8 @@ private extension GameAction {
             return ActionActivateCard(player: player, cards: cards)
         case let .cancel(arg):
             return ActionCancel(arg: arg)
+        case let .setGameOver(winner):
+            return ActionSetGameOver(winner: winner)
         default:
             fatalError("unimplemented action \(self)")
         }
