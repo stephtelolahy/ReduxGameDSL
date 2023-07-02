@@ -60,12 +60,8 @@ private extension GameReducer {
     }
 
     func postExecute(action: GameAction, state: GameState) -> State {
+        // Queue triggered effects
         var state = state
-        queueTriggered(state: &state)
-        return state
-    }
-    
-    func queueTriggered(state: inout GameState) {
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
             players.append(justEliminated)
@@ -81,13 +77,14 @@ private extension GameReducer {
             }
         }
         state.queue.insert(contentsOf: triggered, at: 0)
+        return state
     }
 
     func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
-            // TODO: fatalError cardRef not found
             return nil
+//            fatalError("No cardRef founf for \(cardName)")
         }
         
         for action in cardObj.actions {
@@ -123,18 +120,6 @@ extension GameAction {
             default:
                 try nextAction.validate(state: state)
             }
-        }
-    }
-
-    var isRenderable: Bool {
-        switch self {
-        case .play,
-             .resolve,
-             .group:
-            return false
-
-        default:
-            return true
         }
     }
 }
