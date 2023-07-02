@@ -120,7 +120,6 @@ final class DynamiteSpec: QuickSpec {
                         .ability(.eliminateOnLooseLastHealth)
                         .ability(.nextTurnOnEliminated)
                         .ability(.drawOnSetTurn)
-                        // TODO: discard all cards on eliminated
                         
                         // When
                         let action = GameAction.setTurn("p1")

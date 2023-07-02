@@ -132,9 +132,7 @@ extension GameAction {
             }
         }
     }
-}
-
-public extension GameAction {
+    
     var isRenderable: Bool {
         switch self {
         case .play,
