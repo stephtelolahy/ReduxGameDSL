@@ -21,7 +21,7 @@ public struct GameReducer: ReducerProtocol {
             state = try prepare(action: action, state: state)
             state = try action.reduce(state: state)
             state.event = action
-            state = postExecute(action: action, state: state)
+            state = queueTriggered(action: action, state: state)
         } catch {
             if let gameError = error as? GameError {
                 state.event = .error(gameError)
@@ -48,25 +48,24 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
-        // validate play
         if case .play = action {
             _ = try action.validate(state: state)
         }
-        
-        // remove active
-        state.active = nil
+
+        if let active = state.active {
+            guard case let .play(card, actor) = action,
+                  active.player == actor,
+                  active.cards.contains(card) else {
+                throw GameError.unwaitedAction
+            }
+            state.active = nil
+        }
 
         return state
     }
 
-    func postExecute(action: GameAction, state: GameState) -> State {
+    func queueTriggered(action: GameAction, state: GameState) -> GameState {
         var state = state
-        queueTriggered(state: &state)
-        updateGameOver(state: &state)
-        return state
-    }
-    
-    func queueTriggered(state: inout GameState) {
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
             players.append(justEliminated)
@@ -82,11 +81,13 @@ private extension GameReducer {
             }
         }
         state.queue.insert(contentsOf: triggered, at: 0)
+        return state
     }
 
     func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
+            #warning("No cardRef matching")
             return nil
         }
         
@@ -107,13 +108,6 @@ private extension GameReducer {
         }
         return nil
     }
-
-    func updateGameOver(state: inout GameState) {
-        if case .eliminate = state.event,
-           let winner = state.evaluateWinner() {
-            state.isOver = GameOver(winner: winner)
-        }
-    }
 }
 
 extension GameAction {
@@ -130,20 +124,6 @@ extension GameAction {
             default:
                 try nextAction.validate(state: state)
             }
-        }
-    }
-}
-
-public extension GameAction {
-    var isRenderable: Bool {
-        switch self {
-        case .play,
-             .resolve,
-             .group:
-            return false
-
-        default:
-            return true
         }
     }
 }

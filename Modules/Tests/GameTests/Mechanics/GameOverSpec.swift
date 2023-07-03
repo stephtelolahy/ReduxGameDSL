@@ -17,24 +17,28 @@ final class GameOverSpec: QuickSpec {
             context("one player last") {
                 it("should be over") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1")
                         Player("p2")
                     }
+                    .ability(.gameOverOnEliminated)
 
                     // When
                     let action = GameAction.eliminate(player: "p2")
-                    let result = sut.reduce(state: state, action: action)
+                    let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result.isOver) == GameOver(winner: "p1")
+                    expect(result) == [
+                        .eliminate(player: "p2"),
+                        .setGameOver(winner: "p1")
+                    ]
                 }
             }
 
             context("two player") {
                 it("should not be over") {
                     // Given
-                    let state = GameState {
+                    let state = createGame {
                         Player("p1")
                         Player("p2")
                         Player("p3")
@@ -42,10 +46,12 @@ final class GameOverSpec: QuickSpec {
 
                     // When
                     let action = GameAction.eliminate(player: "p3")
-                    let result = sut.reduce(state: state, action: action)
+                    let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result.isOver) == nil
+                    expect(result) == [
+                        .eliminate(player: "p3")
+                    ]
                 }
             }
         }

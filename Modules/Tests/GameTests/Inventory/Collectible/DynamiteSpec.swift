@@ -117,20 +117,22 @@ final class DynamiteSpec: QuickSpec {
                                 "c2"
                             }
                         }
-                        .ability(.eliminateOnLooseLastHealth)
-                        .ability(.nextTurnOnEliminated)
                         .ability(.drawOnSetTurn)
-                        // TODO: discard all cards on eliminated
+                        .ability(.eliminateOnLooseLastHealth)
+                        .ability(.discardCardsOnEliminated)
+                        .ability(.nextTurnOnEliminated)
                         
                         // When
                         let action = GameAction.setTurn("p1")
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
+                        // TODO: should discard all cards
                         expect(result) == [.setTurn("p1"),
                                            .luck,
                                            .damage(3, player: "p1"),
                                            .eliminate(player: "p1"),
+                                           .discard("dynamite", player: "p1"),
                                            .setTurn("p2"),
                                            .draw(player: "p2"),
                                            .draw(player: "p2")]

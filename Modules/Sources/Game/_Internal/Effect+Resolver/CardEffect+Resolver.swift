@@ -76,6 +76,9 @@ private extension CardEffect {
             
         case let .cancel(arg):
             return EffectBuild { _ in .cancel(arg) }
+
+        case .evaluateGameOver:
+            return EffectEvaluateGameOver()
             
         default:
             fatalError("unimplemented effect \(self)")

@@ -50,6 +50,9 @@ public indirect enum CardEffect: Codable, Equatable {
     /// Increment player attribute
     case incAttribute(AttributeKey, value: Int)
 
+    /// Evaluate gameOver
+    case evaluateGameOver
+
     // MARK: - Operators
 
     /// Repeat an effect

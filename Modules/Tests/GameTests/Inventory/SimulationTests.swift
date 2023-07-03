@@ -17,6 +17,7 @@ final class SimulationTests: XCTestCase {
             .endTurn,
             .drawOnSetTurn,
             .eliminateOnLooseLastHealth,
+            .gameOverOnEliminated,
             .discardCardsOnEliminated,
             .nextTurnOnEliminated
         ]

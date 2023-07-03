@@ -16,10 +16,9 @@ struct ActionCancel: GameReducerProtocol {
             state.queue.remove(at: 0)
 
         case .startTurn:
-            guard let index = state.queue.firstIndex(where: { $0.isStartTurnEffect() }) else {
-                return state
+            if let index = state.queue.firstIndex(where: { $0.isStartTurnEffect() }) {
+                state.queue.remove(at: index)
             }
-            state.queue.remove(at: index)
         }
 
         return state
