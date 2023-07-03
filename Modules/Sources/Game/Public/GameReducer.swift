@@ -21,7 +21,7 @@ public struct GameReducer: ReducerProtocol {
             state = try prepare(action: action, state: state)
             state = try action.reduce(state: state)
             state.event = action
-            state = postExecute(action: action, state: state)
+            state = queueTriggered(action: action, state: state)
         } catch {
             if let gameError = error as? GameError {
                 state.event = .error(gameError)
@@ -48,19 +48,23 @@ private extension GameReducer {
             state.queue.removeFirst()
         }
 
-        // validate play
         if case .play = action {
             _ = try action.validate(state: state)
         }
-        
-        // remove active
-        state.active = nil
+
+        if let active = state.active {
+            guard case let .play(card, actor) = action,
+                  active.player == actor,
+                  active.cards.contains(card) else {
+                throw GameError.unwaitedAction
+            }
+            state.active = nil
+        }
 
         return state
     }
 
-    func postExecute(action: GameAction, state: GameState) -> State {
-        // Queue triggered effects
+    func queueTriggered(action: GameAction, state: GameState) -> GameState {
         var state = state
         var players = state.playOrder
         if case let .eliminate(justEliminated) = state.event {
@@ -83,8 +87,8 @@ private extension GameReducer {
     func triggeredAction(by card: String, actor: String, state: GameState) -> GameAction? {
         let cardName = card.extractName()
         guard let cardObj = state.cardRef[cardName] else {
+            #warning("No cardRef matching")
             return nil
-//            fatalError("No cardRef founf for \(cardName)")
         }
         
         for action in cardObj.actions {

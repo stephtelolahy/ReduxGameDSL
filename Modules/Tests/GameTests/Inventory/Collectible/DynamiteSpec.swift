@@ -117,9 +117,10 @@ final class DynamiteSpec: QuickSpec {
                                 "c2"
                             }
                         }
-                        .ability(.eliminateOnLooseLastHealth)
-                        .ability(.nextTurnOnEliminated)
                         .ability(.drawOnSetTurn)
+                        .ability(.eliminateOnLooseLastHealth)
+                        .ability(.discardCardsOnEliminated)
+                        .ability(.nextTurnOnEliminated)
                         
                         // When
                         let action = GameAction.setTurn("p1")
@@ -131,6 +132,7 @@ final class DynamiteSpec: QuickSpec {
                                            .luck,
                                            .damage(3, player: "p1"),
                                            .eliminate(player: "p1"),
+                                           .discard("dynamite", player: "p1"),
                                            .setTurn("p2"),
                                            .draw(player: "p2"),
                                            .draw(player: "p2")]
