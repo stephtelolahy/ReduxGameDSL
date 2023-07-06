@@ -152,7 +152,7 @@ public enum CardList {
         CardEffect.setTurn
             .target(.next)
             .triggered(.onEliminated)
-            .require(.isCurrentTurn)
+            .require(.isYourTurn)
     }
     
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {

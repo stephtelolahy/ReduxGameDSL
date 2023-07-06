@@ -25,7 +25,7 @@ private extension PlayReq {
             return IsPlayersAtLeast(minCount: minCount)
         case let .isTimesPerTurn(maxTimes):
             return IsTimesPerTurn(maxTimes: maxTimes)
-        case .isCurrentTurn:
+        case .isYourTurn:
             return IsCurrentTurn()
         default:
             fatalError("No matcher found for \(self)")

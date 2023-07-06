@@ -15,5 +15,5 @@ public enum PlayReq: Codable, Equatable {
     case isTimesPerTurn(Int)
 
     /// Is actor the current turn
-    case isCurrentTurn
+    case isYourTurn
 }
