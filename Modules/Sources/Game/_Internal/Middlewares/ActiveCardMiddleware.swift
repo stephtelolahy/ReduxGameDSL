@@ -22,7 +22,7 @@ extension GameState {
         guard queue.isEmpty,
               isOver == nil,
               chooseOne == nil,
-              event?.isActiveCard != true,
+              !lastEventIsActiveCard,
               let actor = turn else {
             return nil
         }
@@ -60,9 +60,9 @@ extension GameState {
     }
 }
 
-private extension GameAction {
-    var isActiveCard: Bool {
-        switch self {
+private extension GameState {
+    var lastEventIsActiveCard: Bool {
+        switch event {
         case .activateCard:
             return true
         default:
