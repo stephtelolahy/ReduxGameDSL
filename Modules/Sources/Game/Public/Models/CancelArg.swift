@@ -12,5 +12,6 @@ public enum CancelArg: String, Codable, Equatable {
     case next
 
     /// startTurn effect
+    // TODO: cancel effect where player card is
     case startTurn
 }
