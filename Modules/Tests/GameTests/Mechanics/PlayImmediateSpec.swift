@@ -17,7 +17,7 @@ final class PlayImmediateSpec: QuickSpec {
         describe("playing immediate card") {
             beforeEach {
                 // Given
-                let state = GameState {
+                let state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             .beer
@@ -26,7 +26,6 @@ final class PlayImmediateSpec: QuickSpec {
                     .attribute(.health, 1)
                     .attribute(.maxHealth, 3)
                 }
-                .cardRef(CardList.all)
 
                 // When
                 let action = GameAction.playImmediate(.beer, actor: "p1")

@@ -15,7 +15,7 @@ final class JailSpec: QuickSpec {
         describe("playing jail") {
             it("should handicap") {
                 // Given
-                let state = createGame {
+                let state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             .jail
@@ -42,7 +42,7 @@ final class JailSpec: QuickSpec {
             context("flipped card is hearts") {
                 it("should scape from jail") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             InPlay {
                                 .jail
@@ -73,7 +73,7 @@ final class JailSpec: QuickSpec {
             context("flipped card is spades") {
                 it("should skip turn") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             InPlay {
                                 .jail

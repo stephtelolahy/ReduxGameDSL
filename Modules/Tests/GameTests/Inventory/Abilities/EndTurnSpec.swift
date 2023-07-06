@@ -16,7 +16,7 @@ final class EndTurnSpec: QuickSpec {
             context("no excess cards") {
                 it("should discard nothing") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                         Player("p2")
                     }
@@ -37,7 +37,7 @@ final class EndTurnSpec: QuickSpec {
             context("custom hand limit") {
                 it("should discard nothing") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 "c1"
@@ -65,7 +65,7 @@ final class EndTurnSpec: QuickSpec {
             context("having one excess card") {
                 it("should discard a hand card") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 "c1"
@@ -99,7 +99,7 @@ final class EndTurnSpec: QuickSpec {
             context("having 2 excess cards") {
                 it("should discard 2 hand cards") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 "c1"

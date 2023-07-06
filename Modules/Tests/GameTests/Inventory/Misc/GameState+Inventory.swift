@@ -7,7 +7,7 @@
 
 import Game
 
-func createGame(@GameAttributeBuilder components: () -> [GameAttribute]) -> GameState {
+func createGameWithCardRef(@GameAttributeBuilder components: () -> [GameAttribute]) -> GameState {
     .init(components: components)
     .cardRef(CardList.all)
 }

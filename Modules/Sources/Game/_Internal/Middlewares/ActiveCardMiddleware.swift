@@ -23,12 +23,12 @@ extension GameState {
               isOver == nil,
               chooseOne == nil,
               event?.isActiveCard != true,
-              let actor = turn,
-              let actorObj = players[actor] else {
+              let actor = turn else {
             return nil
         }
 
         var activeCards: [String] = []
+        let actorObj = player(actor)
         for card in (actorObj.hand.cards + actorObj.abilities + abilities)
         where isCardPlayable(card, actor: actor) {
             activeCards.append(card)

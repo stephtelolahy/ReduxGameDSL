@@ -15,7 +15,7 @@ final class DynamiteSpec: QuickSpec {
         describe("playing dynamite") {
             it("should target") {
                 // Given
-                let state = createGame {
+                let state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             .dynamite
@@ -38,7 +38,7 @@ final class DynamiteSpec: QuickSpec {
             context("flipped card is hearts") {
                 it("should pass inPlay") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             InPlay {
                                 .dynamite
@@ -70,7 +70,7 @@ final class DynamiteSpec: QuickSpec {
                 context("not lethal") {
                     it("should apply damage and discard card") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 InPlay {
                                     .dynamite
@@ -102,7 +102,7 @@ final class DynamiteSpec: QuickSpec {
                 context("lethal") {
                     it("should eliminate") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 InPlay {
                                     .dynamite

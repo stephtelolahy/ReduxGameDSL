@@ -18,12 +18,18 @@ protocol EventReqMatcherProtocol {
 private extension EventReq {
     func matcher() -> EventReqMatcherProtocol {
         switch self {
-        case .onSetTurn: return OnSetTurn()
-        case .onLooseLastHealth: return OnLooseLastHealth()
-        case .onEliminated: return OnEliminated()
-        case .onPlay: return EventReqNeverMatch()
-        case .onForceDiscardHandNamed(let cardName): return OnForceDiscardHandNamed(cardName: cardName)
-        default: fatalError("No matcher found for \(self)")
+        case .onSetTurn:
+            return OnSetTurn()
+        case .onLooseLastHealth:
+            return OnLooseLastHealth()
+        case .onEliminated:
+            return OnEliminated()
+        case .onPlay:
+            return EventReqNeverMatch()
+        case .onForceDiscardHandNamed(let cardName):
+            return OnForceDiscardHandNamed(cardName: cardName)
+        default:
+            fatalError("No matcher found for \(self)")
         }
     }
 }

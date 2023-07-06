@@ -15,7 +15,7 @@ final class ActiveCardsSpec: QuickSpec {
             context("game idle") {
                 it("should emit current turn's active card") {
                     // Given
-                    let state = GameState {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 String.beer
@@ -28,16 +28,15 @@ final class ActiveCardsSpec: QuickSpec {
                         Player("p2")
                     }
                     .turn("p1")
-                    .cardRef(CardList.all)
 
                     // When
-                    let result = state.evaluateActive()
+                    let action = GameAction.group([])
+                    let result = self.awaitAction(action, state: state)
 
                     // Then
-                    expect(result) == .activateCard(player: "p1", cards: [
-                        .saloon,
-                        .gatling
-                    ])
+                    expect(result) == [
+                        .activateCard(player: "p1", cards: [.saloon, .gatling])
+                    ]
                 }
             }
         }

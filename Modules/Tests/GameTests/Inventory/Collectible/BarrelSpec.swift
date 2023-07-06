@@ -15,7 +15,7 @@ final class BarrelSpec: QuickSpec {
         describe("playing barrel") {
             it("should equip") {
                 // Given
-                let state = createGame {
+                let state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             .barrel
@@ -37,7 +37,7 @@ final class BarrelSpec: QuickSpec {
                 context("flipped card is hearts") {
                     it("should cancel shot") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 Hand {
                                     .bang
@@ -69,7 +69,7 @@ final class BarrelSpec: QuickSpec {
                 context("flipped card is spades") {
                     it("should apply damage") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 Hand {
                                     .bang
