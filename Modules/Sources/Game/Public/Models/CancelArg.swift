@@ -6,11 +6,11 @@
 //
 
 /// Cancel action argument
-public enum CancelArg: String, Codable, Equatable {
+public enum CancelArg: Codable, Equatable {
 
     /// Next queued action
     case next
 
-    /// startTurn effect
-    case startTurn
+    /// Effect of given card
+    case effectOfCardNamed(String)
 }

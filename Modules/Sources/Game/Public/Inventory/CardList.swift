@@ -13,9 +13,7 @@ public enum CardList {
         CardEffect.heal(1)
             .target(.actor)
             .triggered(.onPlay)
-            .require {
-                PlayReq.isPlayersAtLeast(3)
-            }
+            .require(.isPlayersAtLeast(3))
     }
     
     static let saloon = Card(.saloon) {
@@ -65,9 +63,7 @@ public enum CardList {
             .otherwise(.damage(1))
             .target(.selectReachable)
             .triggered(.onPlay)
-            .require {
-                PlayReq.isTimesPerTurn(1)
-            }
+            .require(.isTimesPerTurn(1))
     }
     
     static let missed = Card(.missed)
@@ -119,7 +115,7 @@ public enum CardList {
         CardEffect.luck(.regexEscapeFromJail,
                         onSuccess: .discard(.played).target(.actor),
                         onFailure: .group([
-                            .cancel(.startTurn),
+                            .cancel(.effectOfCardNamed(.drawOnSetTurn)),
                             .discard(.played).target(.actor),
                             .setTurn.target(.next)
                         ]))
@@ -156,9 +152,7 @@ public enum CardList {
         CardEffect.setTurn
             .target(.next)
             .triggered(.onEliminated)
-            .require {
-                PlayReq.isCurrentTurn
-            }
+            .require(.isYourTurn)
     }
     
     static let discardCardsOnEliminated = Card(.discardCardsOnEliminated) {

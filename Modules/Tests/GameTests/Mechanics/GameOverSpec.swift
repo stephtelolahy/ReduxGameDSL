@@ -17,7 +17,7 @@ final class GameOverSpec: QuickSpec {
             context("one player last") {
                 it("should be over") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                         Player("p2")
                     }
@@ -38,7 +38,7 @@ final class GameOverSpec: QuickSpec {
             context("two player") {
                 it("should not be over") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                         Player("p2")
                         Player("p3")

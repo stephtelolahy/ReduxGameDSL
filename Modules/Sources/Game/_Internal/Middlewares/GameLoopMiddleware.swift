@@ -18,9 +18,10 @@ let gameLoopMiddleware: Middleware<GameState, GameAction> = { state, _ in
 
 private extension GameState {
     func evaluateNextAction() -> GameAction? {
-        guard isOver == nil,
+        guard queue.isNotEmpty,
+              isOver == nil,
               chooseOne == nil,
-              queue.isNotEmpty else {
+              active == nil else {
             return nil
         }
 

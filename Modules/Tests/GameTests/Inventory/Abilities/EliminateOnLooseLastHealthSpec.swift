@@ -16,7 +16,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
             context("loosing last health") {
                 it("should be eliminated") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                             .attribute(.health, 1)
                         Player("p2")
@@ -38,7 +38,7 @@ final class EliminateOnLooseLastHealthSpec: QuickSpec {
             context("loosing non last health") {
                 it("should remain active") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                             .attribute(.health, 2)
                     }

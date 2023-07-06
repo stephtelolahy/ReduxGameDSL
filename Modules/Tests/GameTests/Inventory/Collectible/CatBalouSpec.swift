@@ -16,7 +16,7 @@ final class CatBalouSpec: QuickSpec {
             context("no player allowed") {
                 it("should throw error") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .catBalou
@@ -37,7 +37,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having hand cards") {
                     it("should choose one random hand card") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -71,7 +71,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having inPlay cards") {
                     it("should choose one inPlay card") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 Hand {
                                     .catBalou
@@ -107,7 +107,7 @@ final class CatBalouSpec: QuickSpec {
                 context("having hand and inPlay cards") {
                     it("should choose one inPlay or random hand card") {
                         // Given
-                        let state = createGame {
+                        let state = createGameWithCardRef {
                             Player("p1") {
                                 Hand {
                                     .catBalou

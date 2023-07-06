@@ -15,7 +15,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
             context("a player with 2 initial cards") {
                 it("should draw 2 cards") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                         Player("p2")
                         Deck {
@@ -41,7 +41,7 @@ final class DrawOnSetTurnSpec: QuickSpec {
             context("a player with 3 initial cards") {
                 it("should draw 3 cards") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                             .attribute(.starTurnCards, 3)
                         Player("p2")

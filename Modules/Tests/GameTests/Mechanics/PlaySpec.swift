@@ -38,7 +38,7 @@ final class PlaySpec: QuickSpec {
             context("immediate card") {
                 it("should discard immediately") {
                     // Given
-                    let state = GameState {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .beer
@@ -49,7 +49,6 @@ final class PlaySpec: QuickSpec {
                         Player("p2")
                         Player("p3")
                     }
-                    .cardRef(CardList.all)
 
                     // When
                     let action = GameAction.play(.beer, actor: "p1")
@@ -66,14 +65,13 @@ final class PlaySpec: QuickSpec {
             context("equipment card") {
                 it("should put in self's play") {
                     // Given
-                    let state = GameState {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .dynamite
                             }
                         }
                     }
-                    .cardRef(CardList.all)
 
                     // When
                     let action = GameAction.play(.dynamite, actor: "p1")
@@ -90,7 +88,7 @@ final class PlaySpec: QuickSpec {
             context("handicap card") {
                 it("should put in target's play") {
                     // Given
-                    let state = GameState {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .jail
@@ -99,7 +97,6 @@ final class PlaySpec: QuickSpec {
                         Player("p2")
                         Player("p3")
                     }
-                    .cardRef(CardList.all)
 
                     // When
                     let action = GameAction.play(.jail, actor: "p1")

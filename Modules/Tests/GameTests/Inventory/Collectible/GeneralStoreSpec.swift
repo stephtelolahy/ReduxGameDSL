@@ -16,7 +16,7 @@ final class GeneralStoreSpec: QuickSpec {
             context("three players") {
                 it("should allow each player to choose a card") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .generalStore
@@ -60,7 +60,7 @@ final class GeneralStoreSpec: QuickSpec {
             context("two players") {
                 it("should allow each player to choose a card") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 .generalStore

@@ -15,7 +15,7 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
             context("current turn") {
                 it("should next turn") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1")
                         Player("p2")
                         Player("p3")
@@ -38,7 +38,7 @@ final class NextTurnOnEliminatedSpec: QuickSpec {
             context("current turn and having cards") {
                 it("should successively discard cards, set next turn, next player draw cards") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 "c11"

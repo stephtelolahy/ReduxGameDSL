@@ -15,7 +15,7 @@ final class DiscardCardsOnEliminatedSpec: QuickSpec {
             context("having cards") {
                 it("should discard cards") {
                     // Given
-                    let state = createGame {
+                    let state = createGameWithCardRef {
                         Player("p1") {
                             Hand {
                                 "c1"

@@ -23,9 +23,10 @@ public struct GameReducer: ReducerProtocol {
             state.event = action
             state = queueTriggered(action: action, state: state)
         } catch {
-            if let gameError = error as? GameError {
-                state.event = .error(gameError)
+            guard let gameError = error as? GameError else {
+                fatalError("Invalid error type")
             }
+            state.event = .error(gameError)
         }
 
         return state

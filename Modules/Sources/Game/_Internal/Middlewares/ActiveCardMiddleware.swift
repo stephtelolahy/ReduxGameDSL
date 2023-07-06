@@ -22,13 +22,13 @@ extension GameState {
         guard queue.isEmpty,
               isOver == nil,
               chooseOne == nil,
-              event?.isActiveCard != true,
-              let actor = turn,
-              let actorObj = players[actor] else {
+              !lastEventIsActiveCard,
+              let actor = turn else {
             return nil
         }
 
         var activeCards: [String] = []
+        let actorObj = player(actor)
         for card in (actorObj.hand.cards + actorObj.abilities + abilities)
         where isCardPlayable(card, actor: actor) {
             activeCards.append(card)
@@ -60,9 +60,9 @@ extension GameState {
     }
 }
 
-private extension GameAction {
-    var isActiveCard: Bool {
-        switch self {
+private extension GameState {
+    var lastEventIsActiveCard: Bool {
+        switch event {
         case .activateCard:
             return true
         default:

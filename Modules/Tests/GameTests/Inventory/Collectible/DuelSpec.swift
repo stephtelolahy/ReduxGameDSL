@@ -16,7 +16,7 @@ final class DuelSpec: QuickSpec {
 
         describe("playing Duel") {
             beforeEach {
-                state = createGame {
+                state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             .duel

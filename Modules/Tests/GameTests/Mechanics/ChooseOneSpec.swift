@@ -17,7 +17,7 @@ final class ChooseOneSpec: QuickSpec {
         
         describe("chooseOne") {
             beforeEach {
-                state = GameState {
+                state = createGameWithCardRef {
                     Player("p1") {
                         Hand {
                             "beer-1"
@@ -31,7 +31,6 @@ final class ChooseOneSpec: QuickSpec {
                     "c1": .discard("beer-1", player: "p1"),
                     "c2": .discard("beer-2", player: "p1")
                 ])
-                .cardRef(CardList.all)
             }
 
             context("when dispatching waited action") {
