@@ -15,8 +15,8 @@ struct ActionCancel: GameReducerProtocol {
         case .next:
             state.queue.remove(at: 0)
 
-        case .startTurn:
-            if let index = state.queue.firstIndex(where: { $0.isStartTurnEffect() }) {
+        case let .effectOfCardNamed(cardName):
+            if let index = state.queue.firstIndex(where: { $0.isEffectOfCardNamed(cardName) }) {
                 state.queue.remove(at: index)
             }
         }
@@ -26,12 +26,12 @@ struct ActionCancel: GameReducerProtocol {
 }
 
 private extension GameAction {
-    func isStartTurnEffect() -> Bool {
+    func isEffectOfCardNamed(_ cardName: String) -> Bool {
         guard case let .resolve(_, ctx) = self,
-              ctx.get(.card) == .drawOnSetTurn else {
+              ctx.get(.card) == cardName else {
             return false
         }
-
+        
         return true
     }
 }
