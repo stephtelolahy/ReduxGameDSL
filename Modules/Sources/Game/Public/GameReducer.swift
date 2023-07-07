@@ -122,6 +122,8 @@ extension GameAction {
                     try firstAction.validate(state: state)
                 }
 
+                // TODO: maybe should validate other options because you may ask to choose a player that will fail the  effect
+
             default:
                 try nextAction.validate(state: state)
             }
