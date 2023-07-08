@@ -38,6 +38,7 @@ extension PlayerArg {
         guard pIds.isNotEmpty else {
             throw GameError.noPlayer(self)
         }
+
         return output
     }
 

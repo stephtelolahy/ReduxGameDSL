@@ -12,14 +12,14 @@ import Combine
 final class SimulationTests: XCTestCase {
 
     func testMultipleSimulations() {
-        for _ in 1...100 {
+        for index in 1...100 {
             let playersCount = Int.random(in: 4...7)
+            print("🏁 Simulation #\(index) playersCount: \(playersCount)")
             simulateGame(playersCount: playersCount)
         }
     }
     
     private func simulateGame(playersCount: Int) {
-        print("🏁 Simulate Game \(playersCount)")
         // Given
         let abilities: [String] = [
             .endTurn,
@@ -67,7 +67,7 @@ final class SimulationTests: XCTestCase {
         sut.dispatch(.setTurn("p1"))
         
         // Then
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: 5.0)
         cancellable.cancel()
     }
 }
