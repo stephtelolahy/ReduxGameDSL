@@ -110,21 +110,3 @@ private extension GameReducer {
         return nil
     }
 }
-
-extension GameAction {
-    func validate(state: GameState) throws {
-        var state = try reduce(state: state)
-        if state.queue.isNotEmpty {
-            let nextAction = state.queue.remove(at: 0)
-            switch nextAction {
-            case let .chooseOne(_, options):
-                for (_, option) in options {
-                    try option.validate(state: state)
-                }
-                
-            default:
-                try nextAction.validate(state: state)
-            }
-        }
-    }
-}

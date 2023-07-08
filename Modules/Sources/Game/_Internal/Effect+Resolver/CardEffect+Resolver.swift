@@ -9,7 +9,6 @@ extension CardEffect {
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         try resolver()
             .resolve(state: state, ctx: ctx)
-            .validateChooseOne(state: state)
     }
 }
 
@@ -82,41 +81,5 @@ private extension CardEffect {
         default:
             fatalError("unimplemented effect \(self)")
         }
-    }
-}
-
-private extension Array where Element == GameAction {
-    func validateChooseOne(state: GameState) throws -> Self {
-        guard self.count == 1,
-              case .chooseOne(let chooser, var options) = self[0] else {
-            return self
-        }
-
-        var keysToRemove: [String] = []
-        for (key, action) in options {
-            do {
-                try action.validate(state: state)
-                if case let .resolve(effect, ctx) = action {
-                    let childActions = try effect
-                        .resolver()
-                        .resolve(state: state, ctx: ctx)
-                    if childActions.count == 1 {
-                        options[key] = childActions[0]
-                    }
-                }
-            } catch {
-                print("!!! ignored option \(action) due to error \(error)")
-                keysToRemove.append(key)
-                continue
-            }
-        }
-
-        for key in keysToRemove {
-            options.removeValue(forKey: key)
-        }
-
-        assert(!options.isEmpty, "expected non empty actions")
-
-        return [.chooseOne(player: chooser, options: options)]
     }
 }

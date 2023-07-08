@@ -31,7 +31,8 @@ extension CardArg {
             let options = cIdOptions.reduce(into: [String: GameAction]()) {
                 $0[$1.label] = copy($1.id)
             }
-            return [.chooseOne(player: chooser, options: options)]
+            let chooseOne = try GameAction.validChooseOne(chooser: chooser, options: options, state: state)
+            return [chooseOne]
         }
     }
 
