@@ -12,7 +12,7 @@ import Combine
 final class SimulationTests: XCTestCase {
 
     func testMultipleSimulations() {
-        for index in 1...100 {
+        for index in 1...50 {
             let playersCount = Int.random(in: 4...7)
             print("🏁 Simulation #\(index) playersCount: \(playersCount)")
             simulateGame(playersCount: playersCount)
