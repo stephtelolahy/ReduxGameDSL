@@ -13,11 +13,7 @@ extension GameAction {
             switch nextAction {
             case let .chooseOne(_, options):
                 for (_, option) in options {
-                    do {
-                        try option.validate(state: state)
-                    } catch {
-                        assert(false, "!!! invalid chooseOne option \(option) due to error \(error)")
-                    }
+                    try option.validate(state: state)
                 }
 
             default:
@@ -38,7 +34,7 @@ extension GameAction {
             do {
                 try action.validate(state: state)
             } catch {
-                print("!!! ignored option \(action) due to error \(error)")
+                print("!!! invalidate option \(action) due to error \(error)")
                 continue
             }
 
@@ -55,9 +51,7 @@ extension GameAction {
         guard !validOptions.isEmpty else {
             throw GameError.noValidOption
         }
-
-        assert(!validOptions.isEmpty, "expected non empty actions")
-
+        
         return .chooseOne(player: chooser, options: validOptions)
     }
 }
