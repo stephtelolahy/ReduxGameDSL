@@ -43,23 +43,17 @@ private extension GameReducer {
                 throw GameError.unwaitedAction
             }
             state.chooseOne = nil
-        }
-
-        if state.queue.first == action {
-            state.queue.removeFirst()
-        }
-
-        if case .play = action {
-            _ = try action.validate(state: state)
-        }
-
-        if let active = state.active {
+        } else if let active = state.active {
             guard case let .play(card, actor) = action,
                   active.player == actor,
                   active.cards.contains(card) else {
                 throw GameError.unwaitedAction
             }
             state.active = nil
+        } else if state.queue.first == action {
+            state.queue.removeFirst()
+        } else if case .play = action {
+            _ = try action.validate(state: state)
         }
 
         return state
