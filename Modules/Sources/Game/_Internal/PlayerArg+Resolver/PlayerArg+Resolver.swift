@@ -73,17 +73,12 @@ enum PlayerArgOutput {
 }
 
 private extension PlayerArg {
-    // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
         case .actor:
             return PlayerActor()
         case .target:
             return PlayerTarget()
-        case .selectAnyWithCard:
-            return PlayerSelectAnyWithCard()
-        case .selectAtRangeWithCard(let distance):
-            return PlayerSelectAtRangeWithCard(distance: distance)
         case .selectReachable:
             return PlayerSelectReachable()
         case .selectAt(let distance):
