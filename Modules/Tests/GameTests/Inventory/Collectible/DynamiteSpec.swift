@@ -127,7 +127,6 @@ final class DynamiteSpec: QuickSpec {
                         let result = self.awaitAction(action, state: state)
                         
                         // Then
-                        // TODO: should discard all cards
                         expect(result) == [.setTurn("p1"),
                                            .luck,
                                            .damage(3, player: "p1"),
