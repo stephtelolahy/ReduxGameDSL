@@ -34,6 +34,6 @@ struct PlayerView_Previews: PreviewProvider {
 
 extension PlayerViewModel {
     var image: Image {
-        Image(name)
+        Image(name, bundle: Bundle.module)
     }
 }
