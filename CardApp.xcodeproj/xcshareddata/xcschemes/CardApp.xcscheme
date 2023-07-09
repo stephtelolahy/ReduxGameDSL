@@ -39,13 +39,6 @@
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Inventory"
-            BuildableName = "Inventory"
-            BlueprintName = "Inventory"
-            ReferencedContainer = "container:Modules">
-         </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
             BlueprintIdentifier = "Redux"
             BuildableName = "Redux"
             BlueprintName = "Redux"
@@ -56,6 +49,13 @@
             BlueprintIdentifier = "UI"
             BuildableName = "UI"
             BlueprintName = "UI"
+            ReferencedContainer = "container:Modules">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Inventory"
+            BuildableName = "Inventory"
+            BlueprintName = "Inventory"
             ReferencedContainer = "container:Modules">
          </BuildableReference>
       </CodeCoverageTargets>

@@ -21,42 +21,43 @@ final class PlaySpec: QuickSpec {
                     let state = GameState {
                         Player("p1") {
                             Hand {
-                                .missed
+                                "c1"
                             }
                         }
                     }
 
                     // When
-                    let action = GameAction.playImmediate(.missed, actor: "p1")
+                    let action = GameAction.play("c1", actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
-                    expect(result.event) == .error(.cardNotPlayable(.missed))
+                    expect(result.event) == .error(.cardNotPlayable("c1"))
                 }
             }
 
             context("immediate card") {
                 it("should discard immediately") {
                     // Given
-                    let state = createGameWithCardRef {
+                    let card1 = Card("c1") {
+                        CardEffect.nothing
+                            .triggered(.onPlay)
+                    }
+                    let state = GameState {
                         Player("p1") {
                             Hand {
-                                .beer
+                                "c1"
                             }
                         }
-                        .attribute(.health, 1)
-                        .attribute(.maxHealth, 3)
-                        Player("p2")
-                        Player("p3")
                     }
+                    .cardRef(["c1": card1])
 
                     // When
-                    let action = GameAction.play(.beer, actor: "p1")
+                    let action = GameAction.play("c1", actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.queue) == [
-                        .playImmediate(.beer, actor: "p1")
+                        .playImmediate("c1", actor: "p1")
                     ]
                     expect(result.event) == action
                 }
@@ -65,21 +66,26 @@ final class PlaySpec: QuickSpec {
             context("equipment card") {
                 it("should put in self's play") {
                     // Given
-                    let state = createGameWithCardRef {
+                    let card1 = Card("c1", type: .equipment) {
+                        CardEffect.nothing
+                            .triggered(.onPlay)
+                    }
+                    let state = GameState {
                         Player("p1") {
                             Hand {
-                                .dynamite
+                                "c1"
                             }
                         }
                     }
+                    .cardRef(["c1": card1])
 
                     // When
-                    let action = GameAction.play(.dynamite, actor: "p1")
+                    let action = GameAction.play("c1", actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.queue) == [
-                        .playEquipment(.dynamite, actor: "p1")
+                        .playEquipment("c1", actor: "p1")
                     ]
                     expect(result.event) == action
                 }
@@ -88,25 +94,31 @@ final class PlaySpec: QuickSpec {
             context("handicap card") {
                 it("should put in target's play") {
                     // Given
-                    let state = createGameWithCardRef {
+                    let card1 = Card("c1", type: .handicap) {
+                        CardEffect.nothing
+                            .target(.selectAny)
+                            .triggered(.onPlay)
+                    }
+                    let state = GameState {
                         Player("p1") {
                             Hand {
-                                .jail
+                                "c1"
                             }
                         }
                         Player("p2")
                         Player("p3")
                     }
+                        .cardRef(["c1": card1])
 
                     // When
-                    let action = GameAction.play(.jail, actor: "p1")
+                    let action = GameAction.play("c1", actor: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
                     expect(result.queue) == [
                         .chooseOne(player: "p1", options: [
-                            "p3": .playHandicap(.jail, target: "p3", actor: "p1"),
-                            "p2": .playHandicap(.jail, target: "p2", actor: "p1")])
+                            "p3": .playHandicap("c1", target: "p3", actor: "p1"),
+                            "p2": .playHandicap("c1", target: "p2", actor: "p1")])
                     ]
                     expect(result.event) == action
                 }
