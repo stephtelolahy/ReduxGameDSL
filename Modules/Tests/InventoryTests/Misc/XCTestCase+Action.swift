@@ -5,7 +5,7 @@
 //  Created by Hugues Telolahy on 08/04/2023.
 //
 
-@testable import Game
+import Game
 import XCTest
 import Redux
 

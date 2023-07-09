@@ -17,26 +17,25 @@ final class ChooseOneSpec: QuickSpec {
         
         describe("chooseOne") {
             beforeEach {
-                state = createGameWithCardRef {
+                state = GameState {
                     Player("p1") {
                         Hand {
-                            "beer-1"
-                            "beer-2"
+                            "c1"
+                            "c2"
+                            "c3"
                         }
                     }
-                    .attribute(.health, 1)
-                    .attribute(.maxHealth, 3)
                 }
                 .waiting("p1", options: [
-                    "c1": .discard("beer-1", player: "p1"),
-                    "c2": .discard("beer-2", player: "p1")
+                    "c1": .discard("c1", player: "p1"),
+                    "c2": .discard("c2", player: "p1")
                 ])
             }
 
             context("when dispatching waited action") {
                 it("should remove waiting state") {
                     // When
-                    let action = GameAction.discard("beer-1", player: "p1")
+                    let action = GameAction.discard("c1", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
@@ -48,7 +47,7 @@ final class ChooseOneSpec: QuickSpec {
             context("when dispatching non waited action") {
                 it("should throw error") {
                     // When
-                    let action = GameAction.play("c3", actor: "p1")
+                    let action = GameAction.discard("c3", player: "p1")
                     let result = sut.reduce(state: state, action: action)
 
                     // Then
