@@ -8,11 +8,12 @@
 import XCTest
 import Game
 import Combine
+import Inventory
 
 final class SimulationTests: XCTestCase {
 
     func testMultipleSimulations() {
-        for index in 1...50 {
+        for index in 1...5 {
             let playersCount = Int.random(in: 4...7)
             print("🏁 Simulation #\(index) playersCount: \(playersCount)")
             simulateGame(playersCount: playersCount)

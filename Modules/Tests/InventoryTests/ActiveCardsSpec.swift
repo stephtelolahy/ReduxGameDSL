@@ -7,7 +7,8 @@
 
 import Quick
 import Nimble
-@testable import Game
+import Game
+import Inventory
 
 final class ActiveCardsSpec: QuickSpec {
     override func spec() {

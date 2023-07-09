@@ -90,6 +90,16 @@
                ReferencedContainer = "container:Modules">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "InventoryTests"
+               BuildableName = "InventoryTests"
+               BlueprintName = "InventoryTests"
+               ReferencedContainer = "container:Modules">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

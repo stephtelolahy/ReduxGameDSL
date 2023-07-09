@@ -6,6 +6,7 @@
 //
 
 import Game
+import Inventory
 
 func createGameWithCardRef(@GameAttributeBuilder components: () -> [GameAttribute]) -> GameState {
     .init(components: components)

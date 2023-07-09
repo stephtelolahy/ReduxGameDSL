@@ -35,7 +35,7 @@ public extension CardEffect {
     }
 }
 
-extension CardAction {
+public extension CardAction {
     func require(_ playReqs: PlayReq...) -> Self {
         .init(eventReq: eventReq, effect: effect, playReqs: playReqs)
     }

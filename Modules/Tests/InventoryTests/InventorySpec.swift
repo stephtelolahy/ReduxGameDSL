@@ -5,9 +5,9 @@
 //  Created by Hugues Telolahy on 04/04/2023.
 //
 import Foundation
-import Game
 import Quick
 import Nimble
+import Inventory
 
 final class InventorySpec: QuickSpec {
     override func spec() {

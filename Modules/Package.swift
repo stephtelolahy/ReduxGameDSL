@@ -13,6 +13,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(name: "Redux", targets: ["Redux"]),
         .library(name: "Game", targets: ["Game"]),
+        .library(name: "Inventory", targets: ["Inventory"]),
         .library(name: "UI", targets: ["UI"])
     ],
     dependencies: [
@@ -44,6 +45,21 @@ let package = Package(
             name: "GameTests",
             dependencies: [
                 "Game",
+                "Quick",
+                "Nimble"
+            ]),
+        .target(
+            name: "Inventory",
+            dependencies: [
+                "Game"
+            ],
+            plugins: [
+                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+            ]),
+        .testTarget(
+            name: "InventoryTests",
+            dependencies: [
+                "Inventory",
                 "Quick",
                 "Nimble"
             ]),
