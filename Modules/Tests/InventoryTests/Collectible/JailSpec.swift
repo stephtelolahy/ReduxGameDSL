@@ -36,6 +36,8 @@ final class JailSpec: QuickSpec {
                     .playHandicap(.jail, target: "p2", actor: "p1")
                 ]
             }
+
+            // TODO: cannot play jail against sheriff
         }
         
         describe("triggering jail") {
