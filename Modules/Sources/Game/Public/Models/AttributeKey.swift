@@ -6,6 +6,8 @@
 //
 
 /// Game element attributes
+public typealias Attributes = [AttributeKey: Int]
+
 public enum AttributeKey: String, Codable, CodingKeyRepresentable {
 
     /// Max health
@@ -33,11 +35,6 @@ public enum AttributeKey: String, Codable, CodingKeyRepresentable {
     /// Number of flipped cards on a draw, default: 1
     case flippedCards
 
-    /// Number of 'missed' required to cancel your bang, default: 1
-    case bangsCancelable
-
     /// Number of bangs per turn, default: 1
     case bangsPerTurn
 }
-
-public typealias Attributes = [AttributeKey: Int]

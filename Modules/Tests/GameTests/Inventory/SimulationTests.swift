@@ -10,8 +10,16 @@ import Game
 import Combine
 
 final class SimulationTests: XCTestCase {
+
+    func testMultipleSimulations() {
+        for index in 1...50 {
+            let playersCount = Int.random(in: 4...7)
+            print("🏁 Simulation #\(index) playersCount: \(playersCount)")
+            simulateGame(playersCount: playersCount)
+        }
+    }
     
-    func testSimulateGame() {
+    private func simulateGame(playersCount: Int) {
         // Given
         let abilities: [String] = [
             .endTurn,
@@ -21,7 +29,7 @@ final class SimulationTests: XCTestCase {
             .discardCardsOnEliminated,
             .nextTurnOnEliminated
         ]
-        let figures = (1...7).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
+        let figures = (1...playersCount).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
         let deck = Setup.createDeck(cardSets: CardSets.bang)
         
         let game = Setup.createGame(figures: figures,
@@ -59,7 +67,7 @@ final class SimulationTests: XCTestCase {
         sut.dispatch(.setTurn("p1"))
         
         // Then
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: 5.0)
         cancellable.cancel()
     }
 }

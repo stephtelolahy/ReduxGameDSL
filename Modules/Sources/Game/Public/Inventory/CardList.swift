@@ -38,13 +38,13 @@ public enum CardList {
     
     static let catBalou = Card(.catBalou) {
         CardEffect.discard(.selectAny, chooser: .actor)
-            .target(.selectAnyWithCard)
+            .target(.selectAny)
             .triggered(.onPlay)
     }
     
     static let panic = Card(.panic) {
         CardEffect.steal(.selectAny, chooser: .actor)
-            .target(.selectAtRangeWithCard(1))
+            .target(.selectAt(1))
             .triggered(.onPlay)
     }
     

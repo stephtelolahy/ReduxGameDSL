@@ -20,7 +20,10 @@ extension PlayerArg {
             let options = pIds.reduce(into: [String: GameAction]()) {
                 $0[$1] = copy($1)
             }
-            return [.chooseOne(player: ctx.get(.actor), options: options)]
+            let chooseOne = try GameAction.validChooseOne(chooser: ctx.get(.actor),
+                                                          options: options,
+                                                          state: state)
+            return [chooseOne]
         }
     }
     
@@ -30,17 +33,18 @@ extension PlayerArg {
         switch output {
         case let .identified(identifiers):
             pIds = identifiers
-
+            
         case let .selectable(options):
             pIds = options
         }
-
+        
         guard pIds.isNotEmpty else {
             throw GameError.noPlayer(self)
         }
+        
         return output
     }
-
+    
     func resolveAsUniqueId(state: GameState, ctx: EffectContext) throws -> String {
         if case let .id(pId) = self {
             return pId
@@ -49,11 +53,11 @@ extension PlayerArg {
             guard case let .identified(pIds) = output else {
                 throw GameError.noPlayer(self)
             }
-
+            
             guard pIds.count == 1 else {
                 fatalError("unexpected")
             }
-
+            
             return pIds[0]
         }
     }
@@ -73,17 +77,12 @@ enum PlayerArgOutput {
 }
 
 private extension PlayerArg {
-    // swiftlint:disable:next cyclomatic_complexity
     func resolver() -> PlayerArgResolverProtocol {
         switch self {
         case .actor:
             return PlayerActor()
         case .target:
             return PlayerTarget()
-        case .selectAnyWithCard:
-            return PlayerSelectAnyWithCard()
-        case .selectAtRangeWithCard(let distance):
-            return PlayerSelectAtRangeWithCard(distance: distance)
         case .selectReachable:
             return PlayerSelectReachable()
         case .selectAt(let distance):

@@ -9,7 +9,6 @@ extension CardEffect {
     func resolve(state: GameState, ctx: EffectContext) throws -> [GameAction] {
         try resolver()
             .resolve(state: state, ctx: ctx)
-            .simplifyChooseOne(state: state)
     }
 }
 
@@ -82,39 +81,5 @@ private extension CardEffect {
         default:
             fatalError("unimplemented effect \(self)")
         }
-    }
-}
-
-private extension Array where Element == GameAction {
-    func simplifyChooseOne(state: GameState) throws -> Self {
-        guard self.count == 1 else {
-            return self
-        }
-        
-        guard let simplified = try self[0].simplifyChooseOne(state: state) else {
-            return self
-        }
-        
-        return [simplified]
-    }
-}
-
-private extension GameAction {
-    func simplifyChooseOne(state: GameState) throws -> GameAction? {
-        guard case .chooseOne(let chooser, var options) = self else {
-            return nil
-        }
-        
-        for (key, value) in options {
-            if case let .resolve(optionEffect, optionCtx) = value {
-                let resolvedAction = try optionEffect
-                    .resolver()
-                    .resolve(state: state, ctx: optionCtx)
-                if resolvedAction.count == 1 {
-                    options[key] = resolvedAction[0]
-                }
-            }
-        }
-        return .chooseOne(player: chooser, options: options)
     }
 }

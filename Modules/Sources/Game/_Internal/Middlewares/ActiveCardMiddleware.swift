@@ -50,11 +50,12 @@ extension GameState {
             return false
         }
 
+        let action = GameAction.play(card, actor: actor)
         do {
-            let action = GameAction.play(card, actor: actor)
             try action.validate(state: self)
             return true
         } catch {
+            print("!!! invalidate \(action) reason: \(error)")
             return false
         }
     }
