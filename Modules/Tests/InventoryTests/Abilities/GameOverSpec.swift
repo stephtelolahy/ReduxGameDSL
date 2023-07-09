@@ -11,8 +11,6 @@ import Game
 
 final class GameOverSpec: QuickSpec {
     override func spec() {
-        let sut = GameReducer()
-
         describe("a game") {
             context("one player last") {
                 it("should be over") {
@@ -64,10 +62,10 @@ final class GameOverSpec: QuickSpec {
 
                 // When
                 let action = GameAction.play("c1", actor: "p1")
-                let result = sut.reduce(state: state, action: action)
+                let result = self.awaitAction(action, state: state)
 
                 // Then
-                expect(result.event) == nil
+                expect(result).to(beEmpty())
             }
         }
     }

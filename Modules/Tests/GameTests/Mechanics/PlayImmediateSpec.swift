@@ -17,40 +17,46 @@ final class PlayImmediateSpec: QuickSpec {
         describe("playing immediate card") {
             beforeEach {
                 // Given
-                let state = createGameWithCardRef {
+                let beer = Card("beer") {
+                    CardEffect.heal(1)
+                        .target(.actor)
+                        .triggered(.onPlay)
+                }
+                let state = GameState {
                     Player("p1") {
                         Hand {
-                            .beer
+                            "beer"
                         }
                     }
                     .attribute(.health, 1)
                     .attribute(.maxHealth, 3)
                 }
+                    .cardRef(["beer": beer])
 
                 // When
-                let action = GameAction.playImmediate(.beer, actor: "p1")
+                let action = GameAction.playImmediate("beer", actor: "p1")
                 result = sut.reduce(state: state, action: action)
             }
 
             it("should discard immediately") {
                 // Then
                 expect(result.player("p1").hand.cards).to(beEmpty())
-                expect(result.discard.top) == .beer
+                expect(result.discard.top) == "beer"
             }
 
             it("should emit event") {
                 // Then
-                expect(result.event) == .playImmediate(.beer, actor: "p1")
+                expect(result.event) == .playImmediate("beer", actor: "p1")
             }
 
             it("should increment counter") {
                 // Then
-                expect(result.playCounter[.beer]) == 1
+                expect(result.playCounter["beer"]) == 1
             }
 
             it("should queue side effects") {
                 // Then
-                let ctx: EffectContext = [.actor: "p1", .card: .beer]
+                let ctx: EffectContext = [.actor: "p1", .card: "beer"]
                 expect(result.queue) == [
                     .resolve(.heal(1).target(.actor), ctx: ctx)
                 ]
