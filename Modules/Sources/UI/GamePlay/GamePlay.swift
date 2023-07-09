@@ -13,6 +13,9 @@ public struct GamePlay: ReducerProtocol {
         var game: GameState?
         var controlled: String?
         var message: String = String()
+
+        // TODO: use single source of truth
+        var players: [PlayerViewModel] = []
     }
 
     public enum Action: Codable, Equatable {

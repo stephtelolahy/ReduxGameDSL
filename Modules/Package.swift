@@ -69,6 +69,9 @@ let package = Package(
                 "Redux",
                 "Game"
             ],
+            resources: [
+                .process("Resources")
+            ],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]),

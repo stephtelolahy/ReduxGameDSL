@@ -29,7 +29,13 @@ struct GamePlayView: View {
                 .foregroundColor(.accentColor)
             }
             .padding()
-            Spacer()
+            List {
+                Section {
+                    ForEach(state.players) { player in
+                        PlayerView(player: player)
+                    }
+                }
+            }
             Text("Message: \(state.message)")
                 .font(.subheadline)
                 .foregroundColor(.accentColor)

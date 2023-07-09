@@ -17,7 +17,7 @@ struct HomeView: View {
             Spacer()
             
             Image(systemName: "gamecontroller")
-                .font(.system(size: 120))
+                .font(.largeTitle)
             Button("New Game") {
                 withAnimation {
                     store.dispatch(.showScreen(.game))
