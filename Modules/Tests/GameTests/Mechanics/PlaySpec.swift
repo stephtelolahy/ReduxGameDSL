@@ -108,7 +108,7 @@ final class PlaySpec: QuickSpec {
                         Player("p2")
                         Player("p3")
                     }
-                        .cardRef(["c1": card1])
+                    .cardRef(["c1": card1])
 
                     // When
                     let action = GameAction.play("c1", actor: "p1")
