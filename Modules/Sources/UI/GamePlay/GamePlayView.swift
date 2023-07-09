@@ -12,7 +12,10 @@ struct GamePlayView: View {
     @EnvironmentObject private var store: Store<AppState, Action>
 
     private var state: GamePlay.State {
-        .init()
+        guard let lastScreen = store.state.screens.last, case let .game(state) = lastScreen else {
+            fatalError("missing GamePlay.State")
+        }
+        return state
     }
 
     var body: some View {
@@ -53,6 +56,23 @@ struct GamePlayView: View {
 
 #if DEBUG
 struct GameView_Previews: PreviewProvider {
+    private static var previewStore: Store<AppState, Action> = {
+        let state = GamePlay.State(
+            game: nil,
+            controlled: nil,
+            players: [
+                PlayerViewModel(id: "turtlerock1", name: "turtlerock"),
+                PlayerViewModel(id: "turtlerock2", name: "turtlerock")
+            ]
+        )
+
+        return Store<AppState, Action>(
+            initial: AppState(screens: [.game(state)]),
+            reducer: { state, _ in state },
+            middlewares: []
+        )
+    }()
+
     static var previews: some View {
         GamePlayView()
             .environmentObject(previewStore)

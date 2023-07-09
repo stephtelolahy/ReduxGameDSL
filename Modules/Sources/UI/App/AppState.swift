@@ -39,7 +39,12 @@ public extension AppState {
             screens = [.home(.init())]
 
         case .showScreen(.game):
-            screens += [.game(.init())]
+            screens += [.game(.init(
+                game: nil,
+                controlled: nil,
+                message: "Hello",
+                players: []
+            ))]
 
         default:
             break

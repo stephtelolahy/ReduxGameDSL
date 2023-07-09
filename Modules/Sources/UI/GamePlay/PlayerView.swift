@@ -32,7 +32,7 @@ struct PlayerView_Previews: PreviewProvider {
     }
 }
 
-extension PlayerViewModel {
+private extension PlayerViewModel {
     var image: Image {
         Image(name, bundle: Bundle.module)
     }
