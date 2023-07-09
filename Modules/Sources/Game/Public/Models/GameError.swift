@@ -39,6 +39,6 @@ public enum GameError: Error, Codable, Equatable {
     /// Not matching requirement
     case noReq(PlayReq)
 
-    /// No valid option for chooseOne
+    /// No valid chooseOne option
     case noValidOption
 }
