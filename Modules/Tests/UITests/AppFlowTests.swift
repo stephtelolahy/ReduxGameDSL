@@ -9,6 +9,12 @@ import Redux
 import XCTest
 
 final class AppFlowTests: XCTestCase {
+
+    private func createAppStore(initial: AppState) -> Store<AppState, Action> {
+        Store(initial: initial,
+              reducer: AppState.reducer,
+              middlewares: [])
+    }
     
     func test_App_WhenInitialized_ShouldShowSplashScreen() {
         // Given
