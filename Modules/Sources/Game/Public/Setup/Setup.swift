@@ -11,13 +11,14 @@ public enum Setup {
         abilities: [String],
         deck: [String]
     ) -> GameState {
-        let figures = figures.shuffled()
+        let figures = figures
         var deck = deck.shuffled()
         let players: [Player] = figures.map { figure in
             let identifier = figure.name
             let health = figure.bullets
             let hand: [String] = Array(1...health).map { _ in deck.removeFirst() }
             var player = Player(identifier)
+            player.name = figure.name
             player.hand = CardLocation(cards: hand, visibility: identifier)
             player.attributes[.maxHealth] = health
             player.attributes[.health] = health

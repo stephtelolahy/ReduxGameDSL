@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Game
 
 struct PlayerView: View {
-    let player: PlayerViewModel
+    let player: Player
 
     var body: some View {
         HStack {
@@ -24,7 +25,8 @@ struct PlayerView: View {
 
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        let player = PlayerViewModel(id: "turtlerock", name: "turtlerock")
+        let player = Player("p1")
+            .name("bartCassidy")
         Group {
             PlayerView(player: player)
         }
@@ -32,7 +34,7 @@ struct PlayerView_Previews: PreviewProvider {
     }
 }
 
-private extension PlayerViewModel {
+private extension Player {
     var image: Image {
         Image(name, bundle: Bundle.module)
     }

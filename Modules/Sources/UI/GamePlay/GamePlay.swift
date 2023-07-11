@@ -10,12 +10,10 @@ import Game
 public struct GamePlay: ReducerProtocol {
 
     public struct State: Codable, Equatable {
-        var game: GameState?
+        var game: GameState
+        var players: [Player]
         var controlled: String?
         var message: String = String()
-
-        // TODO: use single source of truth
-        var players: [PlayerViewModel] = []
     }
 
     public enum Action: Codable, Equatable {

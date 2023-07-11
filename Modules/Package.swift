@@ -67,7 +67,8 @@ let package = Package(
             name: "UI",
             dependencies: [
                 "Redux",
-                "Game"
+                "Game",
+                "Inventory"
             ],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")

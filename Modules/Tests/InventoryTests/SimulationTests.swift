@@ -22,21 +22,7 @@ final class SimulationTests: XCTestCase {
     
     private func simulateGame(playersCount: Int) {
         // Given
-        let abilities: [String] = [
-            .endTurn,
-            .drawOnSetTurn,
-            .eliminateOnLooseLastHealth,
-            .gameOverOnEliminated,
-            .discardCardsOnEliminated,
-            .nextTurnOnEliminated
-        ]
-        let figures = (1...playersCount).map { Figure(name: "p\($0)", bullets: 4, abilities: []) }
-        let deck = Setup.createDeck(cardSets: CardSets.bang)
-        
-        let game = Setup.createGame(figures: figures,
-                                    abilities: abilities,
-                                    deck: deck)
-            .cardRef(CardList.all)
+        let game = Inventory.createGame(playersCount: playersCount)
         
         let sut = createGameStore(initial: game)
         
@@ -65,7 +51,8 @@ final class SimulationTests: XCTestCase {
         }
         
         // When
-        sut.dispatch(.setTurn("p1"))
+        let sheriff = game.playOrder[0]
+        sut.dispatch(.setTurn(sheriff))
         
         // Then
         wait(for: [expectation], timeout: 5.0)
