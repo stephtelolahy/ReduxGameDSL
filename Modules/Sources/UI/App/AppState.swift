@@ -42,10 +42,7 @@ public extension AppState {
 
         case .showScreen(.game):
             let game = Inventory.createGame(playersCount: 5)
-            screens += [.game(.init(
-                game: game,
-                players: game.playOrder.map { game.player($0) }
-            ))]
+            screens += [.game(game.toGamePlayState())]
 
         default:
             break
@@ -68,5 +65,11 @@ public extension AppState {
         default:
             return state
         }
+    }
+}
+
+private extension GameState {
+    func toGamePlayState() -> GamePlay.State {
+        .init(players: playOrder.map { player($0) })
     }
 }

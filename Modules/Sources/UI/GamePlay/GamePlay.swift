@@ -10,7 +10,6 @@ import Game
 public struct GamePlay: ReducerProtocol {
 
     public struct State: Codable, Equatable {
-        var game: GameState
         var players: [Player]
         var controlled: String?
         var message: String = String()

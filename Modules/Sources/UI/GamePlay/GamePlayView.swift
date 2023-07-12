@@ -12,9 +12,10 @@ import Game
 struct GamePlayView: View {
     @EnvironmentObject private var store: Store<AppState, Action>
 
-    private var state: GamePlay.State? {
-        guard let lastScreen = store.state.screens.last, case let .game(state) = lastScreen else {
-            return nil
+    private var state: GamePlay.State {
+        guard let lastScreen = store.state.screens.last,
+                case let .game(state) = lastScreen else {
+            fatalError("missing state")
         }
         return state
     }
@@ -35,13 +36,12 @@ struct GamePlayView: View {
             .padding()
             List {
                 Section {
-                    #warning("user better syntax")
-                    ForEach(state?.players ?? []) { player in
+                    ForEach(state.players) { player in
                         PlayerView(player: player)
                     }
                 }
             }
-            Text("Message: \(state?.message ?? "")")
+            Text("Message: \(state.message)")
                 .font(.subheadline)
                 .foregroundColor(.accentColor)
                 .padding()
@@ -60,7 +60,6 @@ struct GamePlayView: View {
 struct GameView_Previews: PreviewProvider {
     private static var previewStore: Store<AppState, Action> = {
         let state = GamePlay.State(
-            game: GameState(),
             players: [
                 Player("p1").name("willyTheKid"),
                 Player("p2").name("bartCassidy")

@@ -11,7 +11,7 @@ public struct Figure {
     public let bullets: Int
     public let abilities: [String]
 
-    public init(name: String, bullets: Int, abilities: [String]) {
+    public init(name: String, bullets: Int, abilities: [String] = []) {
         self.name = name
         self.bullets = bullets
         self.abilities = abilities
