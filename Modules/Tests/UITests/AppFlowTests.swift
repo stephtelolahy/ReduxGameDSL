@@ -7,8 +7,15 @@
 @testable import UI
 import Redux
 import XCTest
+import Game
 
 final class AppFlowTests: XCTestCase {
+
+    private func createAppStore(initial: AppState) -> Store<AppState, Action> {
+        Store(initial: initial,
+              reducer: AppState.reducer,
+              middlewares: [])
+    }
     
     func test_App_WhenInitialized_ShouldShowSplashScreen() {
         // Given
@@ -30,7 +37,7 @@ final class AppFlowTests: XCTestCase {
         XCTAssertEqual(sut.state.screens, [.home(.init())])
     }
     
-    func test_App_WhenStartedGame_ShouldShowGameScreen() {
+    func test_App_WhenStartedGame_ShouldShowGameScreen() throws {
         // Given
         let sut = createAppStore(initial: AppState(screens: [.home(.init())]))
         
@@ -38,19 +45,24 @@ final class AppFlowTests: XCTestCase {
         sut.dispatch(.showScreen(.game))
         
         // Then
-        XCTAssertEqual(sut.state.screens, [.home(.init()),
-                                           .game(.init())])
+        guard case .game = sut.state.screens.last else {
+            XCTFail("Invalid last screen")
+            return
+        }
     }
     
-    func test_App_WhenFinishedGame_ShouldBackToHomeScreen() {
+    func test_App_WhenFinishedGame_ShouldBackToHomeScreen() throws {
         // Given
         let sut = createAppStore(initial: AppState(screens: [.home(.init()),
-                                                             .game(.init())]))
+                                                             .game(.init(players: []))]))
         
         // When
         sut.dispatch(.dismissScreen(.game))
         
         // Then
-        XCTAssertEqual(sut.state.screens, [.home(.init())])
+        guard case .home = sut.state.screens.last else {
+            XCTFail("Invalid last screen")
+            return
+        }
     }
 }

@@ -1,5 +1,7 @@
 import Foundation
 import Redux
+import Game
+import Inventory
 
 public struct AppState: Codable, Equatable {
     let screens: [ScreenState]
@@ -39,7 +41,8 @@ public extension AppState {
             screens = [.home(.init())]
 
         case .showScreen(.game):
-            screens += [.game(.init())]
+            let game = Inventory.createGame(playersCount: 5)
+            screens += [.game(game.toGamePlayState())]
 
         default:
             break
@@ -62,5 +65,11 @@ public extension AppState {
         default:
             return state
         }
+    }
+}
+
+private extension GameState {
+    func toGamePlayState() -> GamePlay.State {
+        .init(players: playOrder.map { player($0) })
     }
 }

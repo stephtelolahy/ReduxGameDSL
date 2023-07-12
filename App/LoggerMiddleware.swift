@@ -7,11 +7,10 @@
 
 import Combine
 import Redux
+import UI
 
 public let loggerMiddleware: Middleware<AppState, Action> = { state, action in
-    let stateDescription = "\(state)".replacingOccurrences(of: "CardApp.", with: "")
-    let actionDescription = "\(action)".replacingOccurrences(of: "CardApp.", with: "")
-    print("➡️ \(actionDescription)\n✅ \(stateDescription)\n")
+    print("➡️ \(action)\n✅ \(state)\n")
 
     return Empty().eraseToAnyPublisher()
 }
