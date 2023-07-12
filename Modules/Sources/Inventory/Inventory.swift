@@ -16,29 +16,24 @@ public enum Inventory {
             .discardCardsOnEliminated,
             .nextTurnOnEliminated
         ]
-        #warning("define a set of figures with attributes")
-        let figureNames: [String] = [
-            .willyTheKid,
-            .roseDoolan,
-            .paulRegret,
-            .jourdonnais,
-            .slabTheKiller,
-            .luckyDuke,
-            .calamityJanet,
-            .bartCassidy,
-            .elGringo,
-            .suzyLafayette,
-            .vultureSam,
-            .sidKetchum,
-            .blackJack,
-            .kitCarlson,
-            .jesseJones,
-            .pedroRamirez
+        let allFigures: [Figure] = [
+            .init(name: .willyTheKid, bullets: 4, abilities: []),
+            .init(name: .roseDoolan, bullets: 4, abilities: []),
+            .init(name: .paulRegret, bullets: 4, abilities: []),
+            .init(name: .jourdonnais, bullets: 4, abilities: []),
+            .init(name: .slabTheKiller, bullets: 4, abilities: []),
+            .init(name: .luckyDuke, bullets: 4, abilities: []),
+            .init(name: .calamityJanet, bullets: 4, abilities: []),
+            .init(name: .bartCassidy, bullets: 4, abilities: []),
+            .init(name: .elGringo, bullets: 4, abilities: []),
+            .init(name: .suzyLafayette, bullets: 4, abilities: []),
+            .init(name: .vultureSam, bullets: 4, abilities: []),
+            .init(name: .sidKetchum, bullets: 4, abilities: []),
+            .init(name: .blackJack, bullets: 4, abilities: []),
+            .init(name: .kitCarlson, bullets: 4, abilities: []),
+            .init(name: .jesseJones, bullets: 4, abilities: []),
+            .init(name: .pedroRamirez, bullets: 4, abilities: [])
         ]
-
-        let allFigures = figureNames
-            .map { Figure(name: $0, bullets: 4, abilities: []) }
-
         let figures = Array(allFigures.shuffled().prefix(playersCount))
         let deck = Setup.createDeck(cardSets: CardSets.bang)
         
